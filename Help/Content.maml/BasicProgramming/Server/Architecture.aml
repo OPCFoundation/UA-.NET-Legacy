@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="ff342fec-a506-41b9-8b4c-6b131504caf9" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      </para>
+    </introduction>
+    <section>
+      <title>
+      Model
+    </title>
+      <content>
+        <para>
+        The classes in the Server Library are shown in Figure 1.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Figure">1 – Server Library Classes</caption>
+          <image placement="center" xlink:href="0fc5dede-0ec3-4972-9af7-90e7495af99c" />
+        </mediaLink>
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

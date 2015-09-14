@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="b7cc31e3-cf8f-4410-905f-f067aa1351e6" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      </para>
+    </introduction>
+    <relatedSections>
+      <content>
+        <para>
+          <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" />
+        </para>
+      </content>
+    </relatedSections>
+  </developerConceptualDocument>
+</topic>

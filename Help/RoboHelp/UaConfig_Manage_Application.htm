@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Manage Application</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>UA Configuration Tool - Manage Application Tab</h1>
+<p>The [Manage Application[ tab provides options for administering the 
+ trust certificates for the application specified in the <span style="font-weight: bold;">Application 
+ to Manage</span> field.</p>
+<p class="Picture"><img src="image3.gif" alt="" style="border: none;" border="0" /></p>
+<h2>Application to Manage</h2>
+<p>This is the same option as that described in <a href="UaConfig_Manage_Security.htm">Manage 
+ Security</a>.</p>
+<h2>View Application Certificate</h2>
+<p>You can view the contents of your application certificate by clicking 
+ on the <span style="font-weight: bold;">View application certificate</span><span> 
+ button:</span></p>
+<p class="Picture"><img src="image17.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Import Application Certificate</h2>
+<p>You can click the <span style="font-weight: bold;">Import application 
+ certificate</span><span> to</span> assign an existing application certificate 
+ to the currently selected application. Simply locate the file from the 
+ resulting file dialog.</p>
+<h2>Create Application Certificate</h2>
+<p>You can create a new application certificate by clicking the <span style="font-weight: bold;">Create 
+ application certificate</span><span> button.</span></p>
+<p class="Picture"><img src="image18.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3>Field Descriptions</h3>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.041%;" />
+	<col style="width: 76.959%;" />
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Store Type</p></td>
+		<td><?rh-placeholder type="snippet" ref="StoreType" ?></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Store Path</p></td>
+		<td><?rh-placeholder type="snippet" ref="StorePath" ?></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">CA Key File</p></td>
+		<td><p>The key file for the certificate authority.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">CA Password</p></td>
+		<td><p>The password required to access the &quot;CA Key File&quot;.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Application 
+		 Name</p></td>
+		<td><?rh-placeholder type="snippet" ref="AppName" ?></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Organization</p></td>
+		<td><p>The organization.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Application 
+		 Uri</p></td>
+		<td><p>URI representing the application.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Subject Name</p></td>
+		<td><p>Subject name applicable to the application.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Domains</p></td>
+		<td><p>Any specific domain(s) that apply to this application (use 
+		 ';' separator)</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Key Size</p></td>
+		<td><p>Size of the encryption key. The larger the size, the more 
+		 complex the algorithm and overhead consumed.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Lifetime</p></td>
+		<td><p>Expiration of the certificate, in months.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Key Format</p></td>
+		<td><p>The format of the certificate file. Use PEM for maximum 
+		 portability.</p></td>
+	</tr>
+</table>
+<h2>Assign Application Certificate</h2>
+<p>Click on <span style="font-weight: bold;">Assign application certificate</span><span> 
+ t</span>o assign an existing certificate that is already within the certificate 
+ repository.</p>
+<p class="Picture"><img src="image19.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Simply select a certificate from the list and then click OK.</p>
+<h2>Assign Certificate Trust List</h2>
+<p>If you have multiple certificate trust lists then you can use the <span 
+	 style="font-weight: bold;">Assign certificate trust list</span><span> 
+ to assign a specific trust list to your application. Simply select the 
+ certificate repository from the dialog: </span></p>
+<p class="Picture"><img src="image20.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Manage Application Permissions</h2>
+<p>To overcome file security permissions you can click the <span style="font-weight: bold;">Manage 
+ application permissions</span><span> button and use the dialog to configure 
+ the rights needed by the application. Simply click on the </span><span 
+	 style="font-weight: bold;">Change application permissions.</span></p>
+<p class="Picture"><img src="image21.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Manage Firewall Access</h2>
+<p>You can click the <span style="font-weight: bold;">Manage firewall access</span><span> 
+ button to easily </span>open and/or close Windows Firewall ports that 
+ are specific to OPC UA applications.</p>
+<p class="Picture"><img src="image22.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>See also:</p>
+<ul type="disc">
+	<li><p><a href="UaConfig_Manage_Security.htm">Manage Security</a> Tab.</p></li>
+	<li><p><a href="UaConfig_Manage_Application.htm">Manage Application</a> 
+	 Tab.</p></li>
+</ul>
+</body>
+</html>

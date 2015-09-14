@@ -1,0 +1,62 @@
+﻿<html>
+<head>
+<title> WebHelp Navigation Mini-bar </title>
+
+<meta name="generator" content="Adobe RoboHelp 9" />
+<meta name="description" content="WebHelp 5.50" />
+<style>
+<!--
+body {margin:0;}
+-->
+</style>
+<script type="text/javascript" language="javascript" src="xmlreadhelper.js"></script>
+<script language="javascript" src="whver.js"></script>
+<script language="javascript1.2" src="whutils.js"></script>
+<script language="javascript1.2" src="whmsg.js"></script>
+<script language="javascript1.2" src="whproxy.js"></script>
+<script language="javascript1.2" src="whmozemu.js"></script>
+<script language="javascript1.2" src="whtbar.js"></script>
+</head>
+<body marginheight="0"  marginwidth="0"  bgcolor="#99ccff"     scroll="no">
+<script language="javascript1.2">
+<!--
+if (window.gbWhTBar)
+{
+	setButtonFont("avprev","Microsoft Sans Serif","8pt","Black","Normal","Normal","none");
+setButtonFont("avnext","Microsoft Sans Serif","8pt","Black","Normal","Normal","none");
+setButtonFont("rolesel","Microsoft Sans Serif","8pt","Black","Normal","Normal","none");
+setButtonFont("synctoc","Microsoft Sans Serif","8pt","Black","Normal","Normal","none");
+setButtonFont("hide2","Microsoft Sans Serif","8pt","Black","Normal","Normal","none");
+
+	gsIPrev = "wht_prev.gif";
+	gsIPrevD = "wht_prev_g.gif";
+	gsINext = "wht_next.gif";
+	gsINextD = "wht_next_g.gif";
+	gsISync = "wht_sync.gif";
+	gsIHide = "wht_hide.gif";
+	setBackgroundcolor("#99ccff");
+	
+	
+	addButton("avprev",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
+addButton("avnext",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
+addButton("rolesel",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
+addButton("synctoc",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
+addButton("hide2",BTN_TEXT|BTN_IMG,"","","","","",0,0,"","","","","","");
+
+	addButton("blankblock");
+	writeStyle(true);
+	ReSortMinibarButtons();
+	writeToolBar();
+}
+else
+	document.location.reload();
+
+if (window.gbNav6)
+{
+	var oMsg=new whMessage(WH_MSG_RELOADNS6,this, 1,null);
+	SendMessage(oMsg);
+}
+//-->
+</script>
+</body>
+</html>

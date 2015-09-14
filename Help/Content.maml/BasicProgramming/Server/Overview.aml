@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="da7cccbf-51f7-4d61-8c45-b2864e4e94f3" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The Server toolkit provided by the libraries implements the features which are common to all UA servers. It is designed to be extensible and allow the integration of data and events from many different sources.
+    </para>
+      <para>
+      To provide a production server using the libraries the developers have to implement the following functionality:
+    </para>
+      <list class="bullet">
+        <listItem>
+          <para>
+          Exposes one or more endpoints, each of which exposes one or more service operations using selected platform environment.
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Security environment; (authentication, authorization, certificates maintenance, security policies and modes )
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Configuration maintenance;
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Connections handling (endpoints management, protocols, ..).
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Address space and namespaces management.
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Underlying real-time process interoperability (read and write data, communication infrastructure management).
+        </para>
+        </listItem>
+      </list>
+      <para>
+        <link xlink:href="b2904933-4f91-4c7c-a7bd-789e4a405861" /> provides an introductory understanding of the steps required to implement theise functions using the libraries API.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

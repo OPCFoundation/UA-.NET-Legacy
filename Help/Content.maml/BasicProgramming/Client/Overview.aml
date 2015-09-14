@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="72b6da39-6864-49fc-bfdd-736d859b428a" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The Client library is designed to facilitate client development by handling the standard tasks which all clients need to do. The tasks include:
+    </para>
+      <list class="bullet">
+        <listItem>
+          <para>
+          sending the session keep alive requests
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          managing the publish pipeline
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          keeping track of the current status for subscription and monitored items
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          managing a client side node cache
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          processing and caching incoming data change and event notifications
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          saving and restoring the session state including the subscriptions and monitored items
+        </para>
+        </listItem>
+      </list>
+      <para>
+      The classes in the Client library are shown in Figure 1.
+    </para>
+      <mediaLink>
+        <caption placement="after" lead="Figure">1 – Classes in the Client Toolkit API</caption>
+        <image placement="center" xlink:href="cd65c7c1-2bed-40e1-b826-3acf2b227c4d" />
+      </mediaLink>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

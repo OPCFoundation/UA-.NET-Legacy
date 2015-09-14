@@ -1,0 +1,1024 @@
+UA SDK 1.00.231.1 Readme
+January 4, 2009
+
+ 
+
+Overview
+
+
+The UA SDK is a set of interfaces, libraries and executables that allow developers to quickly create UA applications with the .NET programming environment. The SDK includes:
+
+ 
+
+    * Implementations of the XML Web Services and UA Native Binary stack profiles;
+    * Server and Client development toolkits;
+    * Sample Applications;
+    * A wrapper for COM-DA Servers (DA 2.05a, DA3.00 and AE1.1);
+    * A proxy for COM-DA and COM-AE clients (DA 2.05a and AE1.1);
+    * Local Discovery Server;
+    * Configuration Tool
+
+ 
+
+The sample applications are available with source code. The stack and development toolkits are available only as binaries.
+
+ 
+
+Release Notes
+
+Build 231.1 incorporates updates to the UA diagnostics information model (now completely implemented).
+
+ 
+
+This release of the SDK supports the release candidates for Part 4 and Part 6.
+
+ 
+
+The release candidates for Part 4 and Part 6 are available on the UA SharePoint Collaboration Site.
+
+ 
+
+Users should use Mantis to report any issues/bugs. This will also allow users to find issues identified by others.
+
+ 
+
+Copyright and License Information
+
+ 
+
+The redistributables and source code are covered by the general OPC Foundation license agreement which can be found here.
+
+ 
+
+This license agreement will be replaced by one specific to the UA SDK before the SDK released.
+
+ 
+
+This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit. (http://www.openssl.org/)
+
+Release Process
+
+This release introduces a new release process which is designed to balance the needs of different developers in different stages of development. The different stages are described in the following table:
+
+ 
+
+Snapshot
+	
+
+Snapshot builds are only minimally tested and are used to give developers quick access to new features and bug fixes. There may be backward compatibility issues and some features may be broken. Developers should not migrate to a snapshot build unless they need the feature and/or bug fixes.
+
+Testing
+	
+
+Testing builds are put through basic tests to ensure that nothing is broken but have not been tested for backward compatibility. All Stable and Final builds are posted first as Testing builds which gives developers a chance to check for issues which can be corrected quickly. Any changes will incorporated into a new revision and posted immediately. If no issues come up the last revision of a Testing build will be re-labeled as Stable or Final. Developers are encouraged to look at Testing builds and see if there are issues. Developers should not migrate to Testing builds unless they absolutely need the functionality or are participating in the testing process.
+
+Stable
+	
+
+Stable builds are put through basic tests to ensure that nothing is broken but have not been tested for backward compatibility. Stable builds are posted to give vendors a chance to verify that it works with existing products. Vendors who have products under development should migrate to stable builds as quickly as possible. If a vendor is already distributing products they may wish to use the sample applications to test for compatibility problems.
+
+Final
+	
+
+Final builds are stable builds that have been verified by one or more vendors. Patches required to fix issues discovered while testing the stable build are applied but no other features are added. Vendors who have products under development should migrate to stable builds as quickly as possible.
+
+ 
+
+Each build is assigned a unique build number that may be qualified with a revision number. The revision number indicates that patches were applied to a build.
+
+Patches may be created to fix critical issues in final builds even if a newer build is available. Vendors will need to upgrade to the newest version if they need fixes for stable or snapshot builds.
+
+ 
+
+All files posted to the website or SharePoint will have the build stage and build number in the file name. For example:
+
+OPC UA SDK 1.00 Redistributable APIs MergeModule (x86) [222.0 Stable].zip
+
+ 
+
+The major version of the SDK always matches the major version of the latest specification that it supports. The minor version is incremented each time new features are added after release.
+
+If a previously posted build needs to be patched the revision number will be incremented. For example, 218.1 is a patch applied to 218.0.
+
+Installers
+
+The SDK is now distributed in a number of different packages which are described in the table below:
+
+ 
+
+OPC UA SDK 1.00 Redistributables MergeModule (x86)
+	
+
+Installs the UA Local Discovery Server and the UA Configuration Tool
+The UA  Local Discovery Server is installed as a Windows Service that starts automatically on startup starts automatically on startup
+The executables are placed in $(CommonFilesFolder)\OPC Foundation\UA\
+
+ 
+
+Setting the UA_COM_INTEROP property installs the assemblies used by the COM wrappers and proxies.
+The executables are placed in $(CommonFilesFolder)\OPC Foundation\UA\v1.0\Bin\OPC Foundation\UA
+
+The COM client applications will need access to OpcUaComDllHost process which is registered as a COM EXE server.
+
+ 
+
+Setting the UA_DOTNET_SDK property installs all files required to build applications that use the .NET version of the stack.
+Assemblies and documentation are placed in $(ProgramFilesFolder)\Reference Assemblies\OPC Foundation\UA\v1.0
+
+ 
+
+Setting the UA_ANSIC_SDK property installs all files required to build applications that use the ANSI C version of the stack.
+Headers and libraries are placed in $(CommonFilesFolder)\OPC Foundation\UA\v1.0
+
+ 
+
+Setting the UA_OPENSSL_SDK installs all files required to build applications that use the OpenSSL library used by the ANSI C stack.
+Headers and libraries are placed in $(CommonFilesFolder)\OPC Foundation\UA\v1.0
+
+Only the DLL version of the OpenSSL libraries are installed.
+
+OPC UA SDK 1.00 Redistributables Setup (x86)
+	
+
+Installs all of the redistributable files
+
+It prompts the user to choose which components are installed.
+
+OPC UA SDK 1.00 Sample Binaries Setup (x86)
+	
+
+Installs the binaries for the sample applications.
+
+OPC UA SDK 1.00 Sample Source Code Setup (x86)
+	
+
+Installs the source code for all of the samples.
+
+ 
+
+Current API Status
+
+ 
+
+There are a number of different APIs embedded within the SDK which are in different states of development.
+
+ 
+
+Each of these APIs has a different development status:
+
+ 
+
+Development
+	
+
+The associated specification is not released and the feature set is not complete. Changes to APIs in this state are quite likely.
+
+Testing
+	
+
+The feature set is complete and basic functional tests have been completed. Changes to APIs in this state are possible (due to bugs or refactoring).
+
+Beta
+	
+
+The feature set is complete and more exhaustive testing has started. Changes to APIs in this state only happen if absolutely necessary.
+
+Released
+	
+
+Testing is complete. Changes to APIs in this state will not happen (i.e. new interfaces/subclasses are created).
+
+ 
+
+The Server SDK APIs sets and their current status are:
+
+ 
+
+IServer/IServerEndpoint
+	
+
+Beta
+
+StandardServer/IServerInternal
+	
+
+Beta
+
+Session
+	
+
+Beta
+
+NodeManager
+	
+
+Beta
+
+NodeSource/BaseEvent
+	
+
+Testing
+
+Subscription/MonitoredItem
+	
+
+Beta
+
+Alarms/Conditions/State Machine
+	
+
+Development
+
+Historian
+	
+
+Development
+
+ApplicationConfiguration
+	
+
+Testing
+
+Configuration Tool Interface
+	
+
+Development
+
+ 
+
+The Client SDK APIs sets and their current status are:
+
+ 
+
+ClientBase/IChannel
+	
+
+Beta
+
+Session
+	
+
+Beta
+
+Subscription
+	
+
+Beta
+
+Condition and Events
+	
+
+Development
+
+ApplicationConfiguration
+	
+
+Testing
+
+Configuration Tool Interface
+	
+
+Development
+
+ 
+
+Known Issues
+
+ 
+
+IIS hosted servers have not been tested.
+
+Read/Write services do not implement the IndexRange parameter for multi-dimensional arrays and ByteStrings.
+
+The Alarms and Conditions specification is a long way from release and the code reflects that.
+
+The Query service is not implemented.
+
+The information model for the state machines has changed an needs to be incorporated into the codebase;
+
+The EventManager does not provide the table of subscribed fields as described in the overview document;
+
+The AE proxy does not work properly.
+
+Summary of Changes in Build 231
+
+1) Added a DiagnosticsNodeManager to the StandardServer - this uses the new ModelDesigner output to implement the UA Diagnostics Information Model.
+
+2) Depreciated the CoreNodeManager - it is now a surrogate of the DiagnosticsNodeManager which is responsible for managing the built-in nodes. The CoreNodeManager still manages all nodes in NamespaceIndex 1. Future releases will merge the two NodeManagers together but preserve the API and behavoir.
+
+3) The API to the Server Diagnostics object has changed (IServerInternal.Diagnostics has been replaced by IServerInternal.ServerDiagnostics and the caller must acquire the lock on the ServerDiagnostics object before accessing it).
+
+4) The API to the Session Diagnostics object has changed (Session.Diagnostics has been replaced by Session.SessionDiagnostics and the caller must acquire the lock on the Session.DiagnosticsLock object before accessing it).
+
+Summary of Changes in Build 230
+
+1) Refactored the Core Library to facilitate porting to platforms like Silverlight. The Schema library has been merged into the Core library.
+
+2) Improved and expanded samples (add custom node manager and custom monitored item examples).
+
+3) Replaced TimeZone/DaylightSavingTime properties with LocalTime
+
+3) Changed the GeneratesAuditEvent reference to AlwaysGeneratesEvent
+
+4) Added NodeState classes to the Core library. These are base types for the output of the ModelDesigner
+
+5) Updated Server.MonitoredItem class to allow the creation of custom MonitoredItems (examples included)
+
+6) Updated Server.Subscription class to fix timing problems and improve performance.
+
+7) ConfigurationTool now prompts users for admin rights on systems with UAC active.
+
+8) Default certificate peer store is now "UA Applications" instead of "My"
+
+Summary of Changes in Build 224
+
+1) Incorporated Application Configuration File editing feature back into the Configuration Tool
+
+2) Replaced the MonitoredItem class with the IMonitoredItem interface. This is a breaking change for servers that implement their own NodeManager, however, it will allow implementers to replace the default MonitoredItem with their own implementation which is optimized for their application.
+
+3) Replaced the StoreName/StorePath elements in configuration files with StoreType/StorePath. This is a non-breaking change but obsolete warnings will be produced. This change will allow future versions to support non-windows certificate stores.
+
+Summary of Changes in Build 223
+
+1) Build environment ported to VS2008
+
+2) Merge modules merged into one module.
+
+3) Trace facility now supports filtering for different message types.
+
+4) Servers now monitor their application configuration file and automatically load changes to security or trace settings (other changes are ignored).
+The supported flags are documented in the SampleClient configuration file.
+
+5) A throughput problem when using HTTP has been fixed. The fix requires that all client processes set the System.Net.ServicePointManager.DefaultConnectionLimit to a number larger than the total number of simultaneous requests that the client needs to send. This should be at least 2 times the maximum number of subscriptions. The sample applications set this value to 25.
+
+Summary of Changes in Build 222
+
+1) Changed ApplicationConfiguration.ParseExtension(Type) into a template function ApplicationConfiguration.ParseExtension()
+
+2) ExtensionFactory.GetXmlName() now supports collection classes with the CollectionDataContractAttribute
+
+3) Added AE Wrapper to the Opc.Ua.ComInterop library.
+
+4) Added Utils.SilentDispose helper function.
+
+5) Added support for IDisposeable to all managers in the Server SDK.
+
+6) Server now reports the server-side stack traced when a fault occurs in debug mode
+
+7) Added DiagnosticsMasks to the IMonitoredItem interface.
+
+8) SamplingGroups are now restricted to single Session.
+
+9) Removed DefaultOperationContext from IServerInternal
+
+10) Added DataLock to ILocalNode interface.
+
+11) Updated C# and ANSI C (binary and XML) decoders to skip unread bytes at the end of extension objects.
+
+12) Added OpcUa_EncodeableTypeTable_AddUnknownTypeMapping and OpcUa_EncodeableObject_ParseExtension functions to the ANSI C stack to support applications that need to deal with unexpected subtypes of well known data types.
+
+13) Merged the C++ Opc.Ua.Security library into Opc.Ua.Core which means the SDK will run in 64-bit executables.
+
+14) Removed the GetEffectiveIdentity/GetPrincipalForIdentity methods from the IServerInternal interface. Developers are now expected to provide the effective identity when validating the user credentials. Applications can do this by handling the ImpersonateUser event exposed by the SessionManager.
+
+15) Added CreateSecurityTokenResolver and SetWindowsUser static helper methods to UserIdentity.
+
+16) Moved the user token validation code from the SessionManager to the SampleServer. The SessionManager will accept all valid tokens if the application does not handle the ImpersonateUser event.
+
+17) Added the TranslationInfo and ITranslationManager interface. Updated ResourceManager to use it. Default ResourceManager now allows applications to manually load translations. ITranslationObject created but not used by the CoreNodeManager yet.
+
+Summary of Changes in Build 218
+
+1) Renamed EventNotification to EventNotificationList; Added HistoryEventFieldList with ClientHandlep>
+
+1) Renamed EventNotification to EventNotificationList; Added HistoryEventFieldList with ClientHandle
+
+2) Changed DiagnosticInfo.NamespaceURI to DiagnosticInfo.NamespaceUri in XML Schema/WSDLWSDL
+
+3) Changed StatusCode.Code from a xs:string to an xs:unsignedInt in the XML Schema/WSDL
+
+4) Fixed problem writing values with data types that are subtypes of built in types
+
+5) Optimized the reference tables used by the CoreNodeManager
+
+6) UA Certification Tool has been renamed to UA Configuration Tool. A command line version is available as well.
+
+6) Added COM proxy configuration capabilities into7) XML serialization behavoir for NodeId and Variant classes changed slightly
+
+8) The ServiceMessageContext provided to the Channel or Host is now used during XML serialization instead of ServiceMessageContext.GlobalContext
+
+9) Numerous bug fixes and enhancements added to the ANSI C implementation of UA Secure Conversation
+
+10) Added ArrayDimensions to the Argument structure
+
+11) Fixed timing problems during publishing in both the Client and Server SDK
+
+Summary of Changes in Build 215
+
+1) Added command line version fo the configuration tool.
+
+2) Configuration file can now be in any directory (installed in All Users\Application Data by default now)
+
+Summary of Changes in Build 212
+
+1) Updated information model to reflect latest version of Part 5;ct latest version of Part 5;
+
+2) Fixed various small issues that came up during the plug fest;
+
+3) Fixed problems with the message sequence numbers during keep alive;
+
+Summary of Changes in Build 211
+
+1) Fixed threading problems within the C# UA TCP implementation;
+
+2) Completed DA 2.05a CTT testing for the UA-COM proxy server;
+
+3) Added support for environment variable strings in file paths placed in configuration files;
+
+4) Incorporated changes to the information model based on reviews of Part 3 and Part 5;
+
+5) Added publish request limit to the server;
+
+6) Removed dedicated publish threads in client SDK and tested recovery after network interruption;
+
+Installation
+
+ 
+
+The SDK requires the .NET 3.0 SP1 runtime. It should run on any Microsoft operating system that supports the .NET 3.0 runtime.
+
+ 
+
+The Binaries installer requires that the OPC Core Components Redistributable be installed first. Note that this package is installed by many OPC applications.
+
+ 
+
+The SDK will install on Vista, however, the UAC (User Access Control) must be turned off to install the application certificates.
+
+ 
+
+If the SDK installer does not run on Vista then you must turn on IIS6 compatibility mode. You form the 'Turn windows features on or off' dialog and check the IIS6 Management components.
+
+ 
+
+The SDK also requires that IIS be installed. If IIS is installed after installing the .NET runtime then it may be necessary to run the following command in a command shell:
+
+ 
+
+%SystemRoot%\Microsoft.NET\Framework\v2.0.50727\aspnet_regiis.exe r
+
+ 
+
+Building the sample applications requires the Windows SDK for Vista.
+
+ 
+
+Developers using Visual Studio 2005 should install Service Pack 1.
+
+The SDK is distributed as a ZIP file that contains a program called setup.exe and an MSI file. On Vista you must unzip the files into their own directory and run the setup.exe. Trying to run the MSI directly will not work.
+
+Using the COM-DA and COM-AE wrappers require the OPC Core Components Redistributables. These can be downloaded from the OPC Foundation website here.
+
+ 
+
+The Sample applications are configured to connect to the sample COM-DA and COM-AE servers if they are installed on a machine.
+
+ 
+
+Configuration
+
+There is an MMC plug-in that allows computer administrators to browse the certificate store and manage the certificates in it. It can be launched with the following steps:
+
+ 
+
+1)       Run mmc.exe
+
+2)       Click Files | Add/Remove Snap In
+
+3)       Click Add...
+
+4)       Select Certificates and click Add
+
+5)       Select Computer account and click Next.
+
+6)       Select Local computer and click Next
+
+7)       Click Close
+
+8)       Click OK
+
+ 
+
+If the installer ran successfully there should be UA certificates in the Personal folder.
+
+  
+
+Sample Applications
+
+ 
+
+There are two sample applications bundled with the SDK:
+
+ 
+
+"UA Sample Client" is a UA client spplication with a GUI. It also is a host for a UA server which is completely seperate from the GUI application.
+
+"UA Sample Server" is a standalone UA server application without a GUI. It may be run as a Windows Service.
+
+ 
+
+The applications can be launched from "OPC Foundation | UA SDK 1.00" directory in the Programs menu.
+
+ 
+
+The UA Sample Server application can also be hosted inside IIS. The installer creates and a virtual directory for the IIS hosted server here: http://localhost/UASampleService/Service.svc
+
+ 
+
+Clicking on that link should display an ASP .NET test page in a web browser.
+
+ 
+
+If the ASP .NET test page does not appear it is a problem with your ASP .NET configuration. This page may help.
+
+ 
+
+Running the Local Discovery Server 
+
+ 
+
+The Local Discovery Server (LDS) is installed as a Windows Service that starts automatically. This process is used by the client applications to discover servers running on a machine. Note that, unlike COM, UA servers must be started before a client can see them in the LDS or connect to them. (aside, the sample binaries installer installs the Sample Server as a Windows Service and starts it automatically.
+
+ 
+
+If the LDS is not running after installing the binaries then an error likely occurred. The installer log file is called 'Opc.Ua.ConfigurationTool.log.txt' is created in the $(MyDocuments) folder.
+
+Selecting a Server
+
+The UA Sample Client can connect to any of the sample servers. When this application is launched a drop down menu with several URL appears. The URLs of the sample servers are:
+
+ 
+
+UA Sample Client
+	
+
+http://localhost:61211/UA/SampleClient
+
+UA Sample Server
+	
+
+http://localhost:51211/UA/SampleServer
+
+IIS Hosted Server
+	
+
+http://localhost/UASampleService/Service.svc
+
+ 
+
+Note that you must manually start the UA Sample Server application before you can connect to it. If the UA Sample Server application is running an OPC icon should be visible in the tray of the task bar. Right clicking on this icon will allow you to stop the application.
+
+ 
+
+You connect to a server by selecting it in the drop down and click on the Connect button.
+
+ 
+
+You will also see additional text after the URL that indicates what security and/or message encoding is being used. Servers may support multiple endpoints with different security settings. These endpoints can be found by clicking on the '<Browse..>' option and clicking on the 'Discover' button when the endpoints for a server are in view.
+
+ 
+
+Choosing an Endpoint
+
+ 
+
+Any valid URL can be typed into the address bar. However, the client assumes that the discovery endpoint for the server can be constructed by appending '/discovery' to the end of the URL typed in. The client will not be able to connect if the server does not have a discovery endpoint at that address. It is possible to manually enter the Discovery URLs for the endpoint by selecting <Browse..> in the drop down menu.
+
+ 
+
+After the Connect button is clicked the client calls the GetEndpoints service on the discovery endpoint for the server.
+
+ 
+
+Selecting an endpoint URL starting with http: will use XML Web Services for communication. Selecting a URL starting with opc.tcp will use UA Native Binary for communication. Note that the current release of the UA Native Binary stack profile does not implement security even though the user interface claims it is being used.
+
+ 
+
+The XML Web Services stack profile allows clients to use either pure XML messages or UA binary encoded messages. The setting can be changed in the configuration for the endpoint. The <Browse..> entry in the dropdown allows you to edit the EndpointDescription and EndpointConfiguration.
+
+ 
+
+The <Browse...> will allow you to browse servers on the network using the LDS.
+
+ 
+
+Creating a Session
+
+ 
+
+The Open Session dialog appears after clicking 'Connect'. This dialog allows you specify a name for the session and the clients user credentials. The authentication modes depend on the endpoint. Only options available for the current endpoint are available.
+
+ 
+
+The name of the session is only used as the name of the node containing the diagnostic information for the session in the server address space.
+
+ 
+
+The user name/password may be left blank. If a user name is specified then it must be a valid windows account on the server machine.
+
+ 
+
+Click OK to connect to server.
+
+ 
+
+At this point data will appear in the controls.
+
+ 
+
+The Session Panel is on the left and it displays the active sessions and any subscriptions that they have.
+
+ 
+
+The Browse Panel is on the right and it displays the Object instances in the server address space.
+
+ 
+
+The Notification Panel is at the bottom and it displays the contents of Publish responses returned from the server.
+
+ 
+
+Browsing the Server Address Space
+
+ 
+
+The client browses the Objects folder immediately after creating a session and displays the results in the right hand panel. The top level nodes are:
+
+ 
+
+Server
+	
+
+Diagnostics information specified in Part 5
+
+Data
+	
+
+Simulation nodes which are part of the UA Server reference implementation.
+
+Vendors
+	
+
+Contains metadata describing equipment vendors used in the Boiler example.
+
+BoilerArea
+	
+
+An alarm area containing the sample Boilers
+
+Area1
+	
+
+Another alarm area containing the sample Boilers
+
+Boiler1
+	
+
+A sample Boiler.
+
+Boiler2
+	
+
+A second instance of the sample Boiler.
+
+ 
+
+The Boiler example is described in detail in the presentations from the UA DevCon. The overview slide can be found here. The nodes that appear in the address space for each boiler are here.
+
+ 
+
+Clicking on the plus sign next to any of these nodes with cause the client to issue a Browse request and display the results as children of the node. By default, the client only follows forward hierarchical references.
+
+ 
+
+Right clicking on any node will bring up a context menu. The actions in this menu do the following:
+
+ 
+
+Browse Options.
+	
+
+Displays dialog that sets the options passed to the Browse request.
+
+Show References
+	
+
+Adds nodes representing the references into the tree.
+
+View Attributes
+	
+
+Displays the values of all attributes and properties for the node.
+
+Refresh
+	
+
+Re-issues the Browse request with the current options.
+
+ 
+
+It is also possible to open a new browse window by right clicking on the session in the left hand panel. The menu that appears provides a number of choices for a starting node. Selecting All will display all nodes in the address space.
+
+ 
+
+Changing the Browse Options
+
+ 
+
+The UA address space is a full mesh network, however, such a network is difficult to render in a typical two dimensional user interface. For that reason, the sample client uses filters passed to the Browse request to limit the information displayed in any given view. The user can change these filters by following these steps:
+
+ 
+
+Right click on any node and select Show References. This will add an extra node into the tree control that displays the reference type for the reference between two nodes.
+
+ 
+
+Right click on the Boiler1 node in the address space and select Browse Options.
+
+ 
+
+Set the Reference Type to References. This tells the server to return all references from the node being browsed.
+
+ 
+
+The client will re-issue the Browse request when the OK button is pressed. The tree control should now display a child folder called HasTypeDefinition. In that folder there should be a node called BoilerType.
+
+ 
+
+Before changing the browse options the only references displayed were subtypes of the Hierarchical References reference type. In this case, the only references from Boiler1 that met these criteria were the HasComponent references.
+
+ 
+
+Using Views
+
+ 
+
+Server defined Views offer a way to browse a sub-set of the address space that the server feels is useful to some clients. The sample servers provide a single view called BoilerView. This view can be browsed by right-clicking on the session in the left-hand tree and selecting Browse | Server Defined Views | BoilerView
+
+ 
+
+The BoilerView displays the sample boilers and their components. References to the type model do not appear in this view.
+
+ 
+
+Reading Data
+
+ 
+
+Reading data can be done in a number of ways. The simplest approach uses the View Attributes option that is available in the context menu when browsing the address space. If the node is a Variable that allows read access then the Read option will appear in the context menu.
+
+ 
+
+The node Area1/ Boiler1/LC1001/Measurement is readable. Find it and click Read. This should display the Read dialog. Clicking the Read button will send the request and display the results.
+
+ 
+
+You can add more nodes to the request by right-clicking in the top panel of the Read dialog. The Select Nodes option brings up the Select Node dialog. Note that double clicking on a node in a tree control simply expands or collapses the tree. If you wish to select a node you must right-click and click on the Select Item or Select Children options.
+
+ 
+
+It is also possible to access the Read dialog from the Session Panel.
+
+ 
+
+Writing Data
+
+ 
+
+Writing can also be done from the Browse Panel. Selecting any Variable that allows write access will cause the Write option to appear in the context menu.
+
+ 
+
+The node Area1/ Boiler1/LC1001/SetPoint is writable. Find it and click Write. This should display the Write dialog. Clicking the Write button will send the request and display the results.
+
+ 
+
+Double clicking on a value in the Write dialog will allow you to change it.
+
+ 
+
+It is also possible to access the Write dialog from the Session Panel.
+
+ 
+
+Creating Subscriptions
+
+ 
+
+It is possible to create new subscriptions by right-clicking on a session in the Session Panel. This will bring up the Subscription Parameters dialog. Clicking OK brings up an empty Subscription.
+
+ 
+
+At this point notification messages should start to appear in the Notifications Panel. These are the keep alive messages for the subscription and tell the client and server that communication is still functional even if there are notifications available.
+
+ 
+
+You can monitored items to the subscription by choosing the Add Items in the main menu. The node Area1/ Boiler1' produces events so try adding it to the subscription. After about 20 seconds the first event notification should appear in the Subscription window.
+
+ 
+
+It is possible to alter the fields returned in the event notification by selecting a monitored item and clicking the Set Filter command from the context menu.
+
+ 
+
+Try adding the children of Area1/ Boiler1/CC1001 to the subscription. These are all variables and they should change each time the subscription publish interval expires.
+
+ 
+
+Calling Methods
+
+ 
+
+Each instance of the sample boilers has a method called SetSimulationMode. It can be called by right-clicking on the method node and selecting the Call option. This brings up the call dialog which displays the input and output parameters for the method.
+
+ 
+
+Double-clicking on an input parameter will allow you to change its value. You must specify a valid value for every parameter in this example.
+
+ 
+
+Try setting the RequestedMode to False this will stop the simulation. You can verify that the simulation has stopped by reading or subscribing to variables for the same boiler. They do not change when the simulation is nor running.
+
+ 
+
+Configuring the COM Wrapper
+
+ 
+
+The app.config file for each of the sample applications contains a configuration section called Opc.Ua.SampleServer. The section has the following elements which control the wrapper:
+
+ 
+
+NamespaceUri
+	
+
+The URI for the namespace used by the wrapper.
+
+BrowseName
+	
+
+The browse name of the folder that contains the wrapped server address space.
+
+Url
+	
+
+The URL of the COM server.
+
+SeperatorChars
+	
+
+Specifies the separator characters that the server uses for its item ids. This field is not required and is only used to improve performance when it is possible to extract the browse name from an item id.
+
+ 
+
+Note that the COM server must be accessible to the server process. This is a particular concern when running the IIS hosted version of the server which runs using the ASPNET account.
+
+ 
+
+Configuring the COM Proxy
+
+ 
+
+The Opc.Ua.ConfigTool application is used to create COM servers that COM clients can connect to. The COM server stores all of the information required to connect to a UA server in the registry.
+
+ 
+
+The Opc.Ua.ConfigurationTool application includes a wizard that will allow administrators to browse for servers using the Local Discovery Server, select an endpoint and then create a new COM server.
+
+ 
+
+This application can also be used as a command line utility.
+
+ 
+
+When a COM client connects to a UA server via the proxy it launches the OpcUaComDllHost.exe process. This is a local COM server written in C++ that wraps the Opc.Ua.ComInterop DLL. The host process is required because .NET does not support EXE COM servers.
+
+ 
+
+By default, errors connecting to the UA server are written to the OpcUaComDllHost.log.txt file in the same directory as the executable.
+
+ 
+
+Using Conditions
+
+ 
+
+The subscription window has a menu option called 'Conditions' that will display all of the condition events captured by the subscription filters. Subscribing to the 'Boiler1' object will display 4 active conditions: a generic Condition, a Dialog Condition, an Acknowledgeable Condition and a Level Alarm. The methods available to for each condition are shown in the context menu.
+
+ 
+
+The LevelAlarm can be controlled by writing to the Area1/ Boiler1/LC1001/SetPoint node. Valid values are between 0 and 10. Alarms will go off if the value is <=3 or >=7.
+
+ 
+
+Contributors
+
+ 
+
+The OPC Foundation would like to acknowledge the contributions made by the following companies towards the development of this deliverable.
+
+ 
+
+Christian Zugfil, Matthias Damm
+
+ascolab
+
+http://www.ascolab.com
+
+ 
+
+Stefan-Helmut Leitner
+
+ABB
+
+http://www.abb.com
+
+ 
+
+Alisher Maksumov
+
+OSIsoft
+
+http://www.osisoft.com
+
+ 
+
+Jan Burian, Rudolf Griessl
+
+Iconics, Inc.
+
+http://www.iconics.com
+
+ 
+
+John Hoffman
+
+TimeKeeping Systems Inc
+
+http://www.guard1.com
+
+ 
+
+Nathan Pocock
+
+Software Toolbox, Inc.
+
+http://www.softwaretoolbox.com
+
+ 
+
+Krishna Bandaru
+
+Tata Consulting Services Ltd.
+
+http://www.tcs.com
+
+ 
+
+Mark Timperley
+
+Invensys
+
+http://www.invensys.com
+
+ 
+
+Alexander Gdalevich
+
+Cognex Corporation
+
+http://www.cognex.com
+
+ 
+
+Craig McMurtry
+
+Microsoft Corporation
+
+http://www.microsoft.com
+
+ 
+
+Yo Funaki
+
+Yokogawa
+
+http://www.yokogawa.com
+
+ 
+
+Jrg Allmendinger
+
+Allmendinger
+
+http://www.allmendinger.de.allmendinger.de 

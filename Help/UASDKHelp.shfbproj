@@ -1,0 +1,253 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <!-- The configuration and platform will be used to determine which
+         assemblies to include from solution and project documentation
+         sources -->
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{d95f9227-2822-4877-ae1e-658f54400a53}</ProjectGuid>
+    <SHFBSchemaVersion>1.9.3.0</SHFBSchemaVersion>
+    <!-- AssemblyName, Name, and RootNamespace are not used by SHFB but Visual
+         Studio adds them anyway -->
+    <AssemblyName>Documentation</AssemblyName>
+    <RootNamespace>Documentation</RootNamespace>
+    <Name>Documentation</Name>
+    <!-- SHFB properties -->
+    <OutputPath>.\Help\</OutputPath>
+    <HtmlHelpName>OPCUASampleLibrariesHelp</HtmlHelpName>
+    <ProjectSummary>&amp;lt%3bH1&amp;gt%3b&amp;lt%3bstrong&amp;gt%3bSample Libraries UA Development&amp;lt%3b/strong&amp;gt%3b&amp;lt%3b/H1&amp;gt%3b
+&amp;lt%3bh2&amp;gt%3bUser Manual&amp;lt%3b/h2&amp;gt%3b</ProjectSummary>
+    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter</MissingTags>
+    <VisibleItems>InheritedMembers, InheritedFrameworkMembers, Protected, SealedProtected</VisibleItems>
+    <HtmlHelp1xCompilerPath>
+    </HtmlHelp1xCompilerPath>
+    <HtmlHelp2xCompilerPath>
+    </HtmlHelp2xCompilerPath>
+    <SandcastlePath>
+    </SandcastlePath>
+    <WorkingPath>
+    </WorkingPath>
+    <BuildLogFile>
+    </BuildLogFile>
+    <HelpFileFormat>HtmlHelp1</HelpFileFormat>
+    <FrameworkVersion>.NET 3.0</FrameworkVersion>
+    <Preliminary>True</Preliminary>
+    <HelpTitle>OPC UA Sample Libraries</HelpTitle>
+    <CopyrightHref>http://www.opcfoundation.org/Default.aspx</CopyrightHref>
+    <CopyrightText>Copyright \xA9 2009, OPC Foundation, All rights reserved</CopyrightText>
+    <FeedbackEMailAddress>Send comments on this topic</FeedbackEMailAddress>
+    <FeedbackEMailLinkText>UAcomments%40opcfoundation.org</FeedbackEMailLinkText>
+    <HeaderText>Rel. 1.00.250.0</HeaderText>
+    <PresentationStyle>vs2005</PresentationStyle>
+    <NamingMethod>MemberName</NamingMethod>
+    <DocumentationSources>
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Client.dll" />
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Client.xml" />
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Configuration.dll" />
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Configuration.XML" />
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Core.dll" />
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Core.XML" />
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Server.dll" />
+      <DocumentationSource sourceFile="Content.dll\Opc.Ua.Server.xml" />
+    </DocumentationSources>
+    <NamespaceSummaries>
+      <NamespaceSummaryItem name="(global)" isDocumented="False" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Bindings" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Client" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Configuration" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Schema" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Schema.Binary" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Schema.Xml" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Server" isDocumented="True" xmlns="" />
+      <NamespaceSummaryItem name="Opc.Ua.Test" isDocumented="True" xmlns="" />
+    </NamespaceSummaries>
+    <PlugInConfigurations>
+    </PlugInConfigurations>
+  </PropertyGroup>
+  <!-- There are no properties for these two groups but they need to appear in
+       order for Visual Studio to perform the build. -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Content.html\" />
+    <Folder Include="Content.html\.svn\" />
+    <Folder Include="Content.maml\" />
+    <Folder Include="Content.maml\Weclome\" />
+    <Folder Include="Content.maml\ConceptualOverview\" />
+    <Folder Include="Content.maml\HowTo\" />
+    <Folder Include="Content.maml\BasicProgramming\Server\" />
+    <Folder Include="Content.maml\BasicProgramming\Client\" />
+    <Folder Include="Content.maml\BasicProgramming\" />
+    <Folder Include="Content.maml\DCOMInteroperability\" />
+    <Folder Include="Content.maml\Samples\" />
+    <Folder Include="Content.maml\Deliverables\" />
+    <Folder Include="Content.maml\Tools\" />
+    <Folder Include="Graphics\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content.html\.svn\all-wcprops" />
+    <None Include="Content.html\.svn\entries" />
+    <None Include="Content.html\.svn\format" />
+    <None Include="Content.maml\Welcome.aml" />
+    <None Include="Content.maml\Weclome\Contributors.aml" />
+    <None Include="Content.maml\ConceptualOverview\Introduction.aml" />
+    <None Include="Content.maml\ConceptualOverview\Overview.aml" />
+    <None Include="Content.maml\ConceptualOverview\ClientsServersAndDiscoveryServers.aml" />
+    <None Include="Content.maml\ConceptualOverview\WebServices.aml" />
+    <None Include="Content.maml\ConceptualOverview\Protocols.aml" />
+    <None Include="Content.maml\ConceptualOverview\WCFProgrammingModel.aml" />
+    <None Include="Content.maml\ConceptualOverview\CandCPlusPlusImplemetaion.aml" />
+    <None Include="Content.maml\ConceptualOverview\Java.aml" />
+    <None Include="Content.maml\ConceptualOverview\Security.aml" />
+    <None Include="Content.maml\ConceptualOverview\General References.aml" />
+    <None Include="Content.maml\ConceptualOverview\Glossary.aml" />
+    <None Include="Content.maml\GettingStartedTutorial.aml" />
+    <None Include="Content.maml\HowTo\ConnectingServer.aml" />
+    <None Include="Content.maml\HowTo\DesigningAddressSpace.aml" />
+    <None Include="Content.maml\HowTo\ImplementingAddressSpace.aml" />
+    <None Include="Content.maml\HowTo\AccessProcesData.aml" />
+    <None Include="Content.maml\HowTo\SubscribingData.aml" />
+    <None Include="Content.maml\HowTo\Methods.aml" />
+    <None Include="Content.maml\HowTo\Subscribing2Events.ppt.aml" />
+    <None Include="Content.maml\BasicProgramming .aml" />
+    <None Include="Content.maml\BasicProgramming\Server\Overview.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\Architecture.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\StandardServer.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\ServerInternal.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\MasterNodeManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\CoreNodeManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\INodeManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\SessionManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\Session.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\SubscriptionManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\Subscription.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\MonitoredItem.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\EventManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\ResourceManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\SamplingGroupManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Server\RequestManager.aml" />
+    <None Include="Content.maml\BasicProgramming\Client\Overview.aml" />
+    <None Include="Content.maml\BasicProgramming\Client\Sessions.aml" />
+    <None Include="Content.maml\BasicProgramming\Client\Subscriptions .aml" />
+    <None Include="Content.maml\BasicProgramming\Client\MonitoredItems.aml" />
+    <None Include="Content.maml\BasicProgramming\ConfiguringDCOM .aml" />
+    <None Include="Content.maml\FeatureDetails .aml" />
+    <None Include="Content.maml\Stack.aml" />
+    <None Include="Content.maml\Client.aml" />
+    <None Include="Content.maml\ServerToolkit.aml" />
+    <None Include="Content.maml\GuidelinesAndBestPractices.aml" />
+    <None Include="Content.maml\DCOMInteroperability.aml" />
+    <None Include="Content.maml\DCOMInteroperability\DAWrapper.aml" />
+    <None Include="Content.maml\DCOMInteroperability\DAProxy.aml" />
+    <None Include="Content.maml\DCOMInteroperability\AEWrapper.aml" />
+    <None Include="Content.maml\DCOMInteroperability\AEProxy.aml" />
+    <None Include="Content.maml\DCOMInteroperability\HDAWrapper.aml" />
+    <None Include="Content.maml\DCOMInteroperability\HDAProxy.aml" />
+    <None Include="Content.maml\Samples .aml" />
+    <None Include="Content.maml\Samples\Overview.aml" />
+    <None Include="Content.maml\Samples\GettingStarted .aml" />
+    <None Include="Content.maml\Samples\HowToManagetheCertificates .aml" />
+    <None Include="Content.maml\Samples\SampleServer.aml" />
+    <None Include="Content.maml\Samples\SampleClient.aml" />
+    <None Include="Content.maml\Samples\ServerTestClient.aml" />
+    <None Include="Content.maml\Deliverables.aml" />
+    <None Include="Content.maml\SystemRequirements .aml" />
+    <None Include="Content.maml\Deliverables\Installation.aml" />
+    <None Include="Content.maml\Tools.aml" />
+    <None Include="Content.maml\Tools\Opc_Ua_ConfigTool.aml" />
+    <None Include="Content.maml\Tools\UA Model Designer.aml" />
+    <None Include="Content.maml\ReleaseNotes.aml" />
+    <None Include="Content.maml\LicenseAgreement.aml" />
+    <None Include="Content.maml\FeedbackAndCommunity.aml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Tokens Include="UASDKHelp.tokens" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\ClassesintheClientStackAPI.JPG">
+      <ImageId>8888b15a-cd72-4031-861b-a8d0478b9907</ImageId>
+      <AlternateText>Classes in the Client Stack API</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\ClassesintheClientToolkitAPI.JPG">
+      <ImageId>cd65c7c1-2bed-40e1-b826-3acf2b227c4d</ImageId>
+      <AlternateText>Classes in the Client Toolkit API</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\ClassesintheServerStackAPI.JPG">
+      <ImageId>80853188-58f6-476c-8a66-e1828e0e60e5</ImageId>
+      <AlternateText>Classes in the Server Stack API</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\InteractionsbetweenUAApplicationsbuiltwiththeSDK.JPG">
+      <ImageId>a9d536b4-673f-446d-a728-7e3105c70645</ImageId>
+      <AlternateText>Interactions between UA Applications built with the SDK</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\InterfacesintheClientStackAPI.JPG">
+      <ImageId>5394fb55-f2f7-403c-9c5e-0cf5c3ca5a52</ImageId>
+      <AlternateText>Interfaces in the Client Stack API</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\InterfacestoObjectswithinaNodeTable.JPG">
+      <ImageId>0f6ebae9-de55-42b9-8990-bb70b432c855</ImageId>
+      <AlternateText>Interfaces to Objects within a NodeTable</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\OpenSessionFlowDiagram.JPG">
+      <ImageId>46f6408a-a441-41f3-b6da-0012a0bf51c3</ImageId>
+      <AlternateText>Open Session Flow Diagram</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\PublishingStateMachine.JPG">
+      <ImageId>84e63cec-a272-4ce4-9380-9a4238e247d1</ImageId>
+      <AlternateText>Publishing State Machine</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\ServerSDKClasses.JPG">
+      <ImageId>0fc5dede-0ec3-4972-9af7-90e7495af99c</ImageId>
+      <AlternateText>Server SDK Classes</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\SoftwareInterfacesintheUASDK.JPG">
+      <ImageId>85f951d9-63f7-4b57-a6d3-527997c12f0e</ImageId>
+      <AlternateText>Software Interfaces in the UA SDK</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\TheRelationshipbetweenUAApplications.JPG">
+      <ImageId>f29d1edc-5c40-4c6d-9c21-a64408d05fab</ImageId>
+      <AlternateText>The Relationship between UA Applications</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\TheWCFProgrammingModel.JPG">
+      <ImageId>0616eb1c-9469-4a1a-b77e-0e62484937d8</ImageId>
+      <AlternateText>The WCF Programming Model</AlternateText>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ContentLayout Include="UASDKHelp.content" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Interop.NetFwTypeLib">
+      <HintPath>Content.dll\Interop.NetFwTypeLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <!-- Import the SHFB build targets -->
+  <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
+</Project>

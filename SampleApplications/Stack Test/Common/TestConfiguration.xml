@@ -1,0 +1,6 @@
+﻿<TestConfiguration xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+  <TestFilePath>TestCases.xml</TestFilePath>
+  <RandomFilePath>Random.bin</RandomFilePath>
+  <RandomDataStepSize>7</RandomDataStepSize>
+  <LogFilePath>TestLog.xml</LogFilePath>
+</TestConfiguration>

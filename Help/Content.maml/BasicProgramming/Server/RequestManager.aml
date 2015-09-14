@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="07f3f1c2-edf4-44d4-a02c-8b983ee354d1" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The RequestManager keeps track of all outstanding requests and allows Clients to cancel them.
+    </para>
+      <para>
+      Components which do any processing that could take a long time must periodically check to see if the  request has been cancelled.
+    </para>
+      <para>
+      The RequestManager is called by the <link xlink:href="f74b06ee-f5bc-495c-9dc0-99fcfe0feac0" /> whenever a request is received from the Client. If the request completes normally the  <link xlink:href="f74b06ee-f5bc-495c-9dc0-99fcfe0feac0" /> informs the RequestManager.  The request is cancelled by the RequestManager if the client calls the Cancel service or if the period specified by the TimeoutHint elapses. The <link xlink:href="f74b06ee-f5bc-495c-9dc0-99fcfe0feac0" /> will also cancel requests if the <link xlink:href="86045f38-67d2-4225-9921-dea3ca73a43b" /> is closed.
+    </para>
+      <para>
+      Components can check whether a request has been cancelled by checking the OperationStatus property of the <codeEntityReference>T:Opc.Ua.Server.OperationContext</codeEntityReference> for the request. They can also subscribe to the <codeEntityReference>E:Opc.Ua.Server.RequestManager.RequestCancelled</codeEntityReference> event provided by the RequestManager.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

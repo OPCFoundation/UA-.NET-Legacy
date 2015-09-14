@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="1ee451e3-d932-4404-8973-4f6ba8fe1de8" revisionNumber="1">
+  <developerReferenceWithoutSyntaxDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <summary>
+      <para>This license agreement will be replaced by one specific to the UA Sample Libraries before the release.</para>
+    </summary>
+    <introduction>
+      <para>
+      The redistributables and source code are covered by the general OPC Foundation license agreement which can be found
+      <externalLink><linkText>here</linkText><linkAlternateText>The Following agreement applies to all UA Specifications:</linkAlternateText><linkUri>http://www.opcfoundation.org/LicenseAgreement.aspx</linkUri></externalLink>
+      .
+    </para>
+      <para>
+      Users should use
+      <externalLink><linkText>Mantis</linkText><linkAlternateText>https://www.opcfoundation.org/mantis/main_page.php</linkAlternateText><linkUri>https://www.opcfoundation.org/mantis/main_page.php</linkUri></externalLink>
+      to report any issues/bugs. This will also allow users to find issues identified by others.
+    </para>
+    </introduction>
+    <relatedTopics>
+      <externalLink>
+        <linkText>Mantis</linkText>
+        <linkAlternateText>https://www.opcfoundation.org/mantis/main_page.php</linkAlternateText>
+        <linkUri>https://www.opcfoundation.org/mantis/main_page.php</linkUri>
+      </externalLink>
+    </relatedTopics>
+  </developerReferenceWithoutSyntaxDocument>
+</topic>

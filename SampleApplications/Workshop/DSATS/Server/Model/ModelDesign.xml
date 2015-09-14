@@ -1,0 +1,282 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<opc:ModelDesign
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:opc="http://opcfoundation.org/UA/ModelDesign.xsd"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+	xmlns="http://opcfoundation.org/DSATSDemo"
+  TargetNamespace="http://opcfoundation.org/DSATSDemo"
+>
+  <opc:Namespaces>
+    <opc:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</opc:Namespace>
+    <opc:Namespace Name="DsatsDemo" Prefix="DsatsDemo">http://opcfoundation.org/DSATSDemo</opc:Namespace>
+  </opc:Namespaces>
+
+  <opc:ObjectType SymbolicName="PhaseType"></opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="LockStateMachineType" BaseType="ua:FiniteStateMachineType">
+    <opc:Children>
+
+      <opc:Object SymbolicName="Unlocked" TypeDefinition="ua:StateType" ModellingRule="None" />
+      <opc:Object SymbolicName="Locked" TypeDefinition="ua:StateType" ModellingRule="None" />
+      <opc:Object SymbolicName="WaitingForApproval" TypeDefinition="ua:StateType" ModellingRule="None" />
+
+      <opc:Object SymbolicName="UnlockedToLocked" TypeDefinition="ua:TransitionType" ModellingRule="None">
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>ua:FromState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_Unlocked</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference>
+            <opc:ReferenceType>ua:ToState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_Locked</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference IsOneWay="true">
+            <opc:ReferenceType>ua:HasEffect</opc:ReferenceType>
+            <opc:TargetId>LockConditionType</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+
+      <opc:Object SymbolicName="UnlockedToWaitingForApproval" TypeDefinition="ua:TransitionType" ModellingRule="None">
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>ua:FromState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_Unlocked</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference>
+            <opc:ReferenceType>ua:ToState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_WaitingForApproval</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference IsOneWay="true">
+            <opc:ReferenceType>ua:HasEffect</opc:ReferenceType>
+            <opc:TargetId>LockConditionType</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+
+      <opc:Object SymbolicName="LockedToUnlocked" TypeDefinition="ua:TransitionType" ModellingRule="None">
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>ua:FromState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_Locked</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference>
+            <opc:ReferenceType>ua:ToState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_Unlocked</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference IsOneWay="true">
+            <opc:ReferenceType>ua:HasEffect</opc:ReferenceType>
+            <opc:TargetId>LockConditionType</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+
+      <opc:Object SymbolicName="WaitingForApprovalToUnlocked" TypeDefinition="ua:TransitionType" ModellingRule="None">
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>ua:FromState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_WaitingForApproval</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference>
+            <opc:ReferenceType>ua:ToState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_Unlocked</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference IsOneWay="true">
+            <opc:ReferenceType>ua:HasEffect</opc:ReferenceType>
+            <opc:TargetId>LockConditionType</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+
+      <opc:Object SymbolicName="WaitingForApprovalToLocked" TypeDefinition="ua:TransitionType" ModellingRule="None">
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>ua:FromState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_WaitingForApproval</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference>
+            <opc:ReferenceType>ua:ToState</opc:ReferenceType>
+            <opc:TargetId>LockStateMachineType_Locked</opc:TargetId>
+          </opc:Reference>
+          <opc:Reference IsOneWay="true">
+            <opc:ReferenceType>ua:HasEffect</opc:ReferenceType>
+            <opc:TargetId>LockConditionType</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+    </opc:Children>
+  </opc:ObjectType>
+  
+  <opc:ObjectType SymbolicName="LockConditionType" BaseType="ua:ConditionType">
+    <opc:Children>
+      <opc:Property SymbolicName="SessionId" DataType="ua:NodeId"></opc:Property>
+      <opc:Property SymbolicName="ClientUserId" DataType="ua:String"></opc:Property>
+      <opc:Property SymbolicName="SubjectName" DataType="ua:String"></opc:Property>
+
+      <opc:Variable SymbolicName="EnabledState">
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>ua:HasTrueSubState</opc:ReferenceType>
+            <opc:TargetId>LockConditionType_LockState</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Variable>
+
+      <opc:Object SymbolicName="LockState" TypeDefinition="LockStateMachineType" ModellingRule="Mandatory">
+        <opc:Children>
+          <opc:Variable SymbolicName="CurrentState" AccessLevel="ReadWrite"></opc:Variable>
+          <opc:Variable SymbolicName="LastTransition" TypeDefinition="ua:FiniteTransitionVariableType" ModellingRule="Optional">
+            <opc:Children>
+              <opc:Property SymbolicName="TransitionTime" DataType="ua:UtcTime" ModellingRule="Optional" />
+            </opc:Children>
+          </opc:Variable>
+        </opc:Children>
+      </opc:Object>
+
+      <opc:Property SymbolicName="LockStateAsString" DataType="ua:String" AccessLevel="ReadWrite" />
+      
+      <opc:Method SymbolicName="Request"></opc:Method>
+      <opc:Method SymbolicName="Release"></opc:Method>
+      <opc:Method SymbolicName="Approve"></opc:Method>
+      
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="AssetInfoFolderType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Property SymbolicName="Manufacturer" DataType="ua:String"></opc:Property>
+      <opc:Property SymbolicName="ModelNumber" DataType="ua:String"></opc:Property>
+      <opc:Property SymbolicName="SerialNumber" DataType="ua:String"></opc:Property>
+    </opc:Children>
+  </opc:ObjectType>
+  
+  <opc:ObjectType SymbolicName="ToolType">
+    <opc:Children>
+      <opc:Property SymbolicName="Enabled" DataType="ua:Boolean"></opc:Property>
+      <opc:Property SymbolicName="DeviceReady" DataType="ua:Boolean"></opc:Property>
+      <opc:Property SymbolicName="LocalControl" DataType="ua:Boolean"></opc:Property>
+      <opc:Property SymbolicName="WatchdogCounter" DataType="ua:UInt32"  AccessLevel="ReadWrite"></opc:Property>
+      <opc:Property SymbolicName="ActiveLockId" DataType="ua:String" AccessLevel="ReadWrite"></opc:Property>
+      <opc:Object SymbolicName="AssetInfo" TypeDefinition="AssetInfoFolderType"></opc:Object>      
+      <opc:Object SymbolicName="Measurements" TypeDefinition="ua:FolderType"></opc:Object>
+      <opc:Object SymbolicName="SetPoints" TypeDefinition="ua:FolderType"></opc:Object>
+      <opc:Object SymbolicName="Limits" TypeDefinition="ua:FolderType"></opc:Object>
+      <opc:Object SymbolicName="OperationalLimits" TypeDefinition="ua:FolderType"></opc:Object>
+      <opc:Object SymbolicName="AccessRules" TypeDefinition="ua:FolderType"></opc:Object>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ReferenceType SymbolicName="HasPhase" BaseType="ua:NonHierarchicalReferences">
+    <opc:InverseName>IsPhaseOf</opc:InverseName>
+  </opc:ReferenceType>
+
+  <opc:ReferenceType SymbolicName="HasLock" BaseType="ua:NonHierarchicalReferences">
+    <opc:InverseName>IsLockFor</opc:InverseName>
+  </opc:ReferenceType>
+  
+  <opc:ObjectType SymbolicName="AccessRuleType"></opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="TopDriveMeasurementsFolderType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Variable SymbolicName="RPM" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+      <opc:Variable SymbolicName="Torque" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+      <opc:Variable SymbolicName="Amperes" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+      <opc:Variable SymbolicName="BrakeStatus" DataType="ua:Boolean" TypeDefinition="ua:TwoStateDiscreteType"></opc:Variable>
+      <opc:Variable SymbolicName="Orientation" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+      <opc:Variable SymbolicName="IsRotatingClockwise" DataType="ua:Boolean" TypeDefinition="ua:TwoStateDiscreteType"></opc:Variable>
+    </opc:Children>
+  </opc:ObjectType>
+  
+  <opc:ObjectType SymbolicName="TopDriveSetPointsFolderType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Variable SymbolicName="RPM" DataType="ua:Float" TypeDefinition="ua:AnalogItemType" AccessLevel="ReadWrite"></opc:Variable>
+      <opc:Variable SymbolicName="Torque" DataType="ua:Float" TypeDefinition="ua:AnalogItemType" AccessLevel="ReadWrite"></opc:Variable>
+    </opc:Children>
+  </opc:ObjectType>
+  
+  <opc:ObjectType SymbolicName="TopDriveOperationalLimitsFolderType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Variable SymbolicName="MaxRPM" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+      <opc:Variable SymbolicName="MinRPM" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+      <opc:Variable SymbolicName="MaxTorque" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+      <opc:Variable SymbolicName="MinTorque" DataType="ua:Float" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="TopDriveType" BaseType="ToolType">
+    <opc:Children>
+      <opc:Object SymbolicName="Measurements" TypeDefinition="TopDriveMeasurementsFolderType"></opc:Object>
+      <opc:Object SymbolicName="SetPoints" TypeDefinition="TopDriveSetPointsFolderType"></opc:Object>
+      <opc:Object SymbolicName="OperationalLimits" TypeDefinition="TopDriveOperationalLimitsFolderType"></opc:Object>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="MudPumpMeasurementsFolderType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Variable SymbolicName="SPM" DataType="ua:Double" TypeDefinition="ua:AnalogItemType"></opc:Variable>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="MudPumpSetPointsFolderType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Variable SymbolicName="SPM" DataType="ua:Double" TypeDefinition="ua:AnalogItemType" AccessLevel="ReadWrite"></opc:Variable>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="MudPumpType" BaseType="ToolType">
+    <opc:Children>
+      <opc:Object SymbolicName="Measurements" TypeDefinition="MudPumpMeasurementsFolderType"></opc:Object>
+      <opc:Object SymbolicName="SetPoints" TypeDefinition="MudPumpSetPointsFolderType"></opc:Object>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:Method SymbolicName="ChangePhaseMethodType">
+    <opc:InputArguments>
+      <opc:Argument Name="PhaseId" DataType="ua:NodeId" ValueRank="Scalar">
+        <opc:Description>The NodeId of the target Phase.</opc:Description>
+      </opc:Argument>
+    </opc:InputArguments>
+  </opc:Method>
+      
+  <opc:ObjectType SymbolicName="RigType">
+    <opc:Children>
+      <opc:Method SymbolicName="ChangePhase" TypeDefinition="ChangePhaseMethodType"></opc:Method>
+      <opc:Property SymbolicName="ChangePhaseWithString" DataType="ua:String" AccessLevel="ReadWrite" />
+      <opc:Variable SymbolicName="CurrentPhase" DataType="ua:NodeId"></opc:Variable>
+      <opc:Object SymbolicName="Phases" TypeDefinition="ua:FolderType">
+        <opc:References>
+          <opc:Reference IsInverse="true">
+            <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+            <opc:TargetId>RigType</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+      <opc:Object SymbolicName="Locks" TypeDefinition="ua:FolderType">
+        <opc:References>
+            <opc:Reference IsInverse="true">
+            <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+            <opc:TargetId>RigType</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+      <opc:Object SymbolicName="TopDrive" TypeDefinition="TopDriveType"></opc:Object>
+      <opc:Object SymbolicName="MudPumps" TypeDefinition="ua:FolderType"></opc:Object>
+    </opc:Children>
+  </opc:ObjectType>
+  
+  <opc:Object SymbolicName="Rig" TypeDefinition="RigType">
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:Organizes</opc:ReferenceType>
+        <opc:TargetId>ua:ObjectsFolder</opc:TargetId>
+      </opc:Reference>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+        <opc:TargetId>ua:Server</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:Object>
+
+</opc:ModelDesign>

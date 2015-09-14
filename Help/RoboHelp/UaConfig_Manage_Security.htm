@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Manage Security</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>UA Configuration Tool - Manage Security Tab</h1>
+<p>The [Manage Security] tab provides options for managing a specific application 
+ as identified in the <span style="font-weight: bold;">Application to Manage</span>&#160;field.</p>
+<p class="Picture"><img src="image2.gif" alt="" style="border: none;" border="0" /></p>
+<h2>Application to Manage</h2>
+<p style="margin-left: 0px;">The application shown in the <span style="font-weight: bold;">Application 
+ to Manage</span> field will be modified when using any of the options 
+ contained within this tab. To choose an application, simply click on the 
+ drop-down list:</p>
+<h3><a name="Adding_an_Application"></a>Adding an Application</h3>
+<p>Click the <span style="font-weight: bold;">Find</span> button to locate 
+ another OPC UA application that is built using the .NET API. Once you 
+ have selected your executable you can then configure the application: 
+ </p>
+<p class="Picture"><img src="image8.gif" alt="" style="border: none;" border="0" /></p>
+<h3>Field Descriptions</h3>
+<table class="BasicGrid" style="border-collapse: separate; border-collapse: separate;" 
+		 cellspacing="0" width="100%" border="1">
+	<col style="width: 23.041%;" />
+	<col style="width: 76.959%;" />
+	<tr class="t1Row">
+		<td><p style="text-align: center; font-weight: bold;">Application 
+		 Name</p></td>
+		<td><?rh-placeholder type="snippet" ref="AppName" ?></td>
+	</tr>
+	<tr class="t2Row">
+		<td><p style="text-align: center; font-weight: bold;">Executable 
+		 File</p></td>
+		<td><p>Complete path of the executable.</p></td>
+	</tr>
+	<tr class="t1Row">
+		<td><p style="text-align: center; font-weight: bold;">Configuration 
+		 File</p></td>
+		<td><p><span style="font-weight: normal;">Complete path of the 
+		 configuration file.</span></p></td>
+	</tr>
+	<tr class="t2Row">
+		<td><p style="text-align: center; font-weight: bold;">Certificate</p></td>
+		<td><p>Complete path of the certificate.</p></td>
+	</tr>
+	<tr class="t1Row">
+		<td><p style="text-align: center; font-weight: bold;">Trust List</p></td>
+		<td><p><span style="font-weight: normal;">Complete path of the 
+		 certificate repository trust list.</span></p></td>
+	</tr>
+</table>
+<h2><a name="Trust_Another_Application"></a>Trust Another Application</h2>
+<p>You can very quickly and easily enable application trusts by clicking 
+ the <span style="font-weight: bold;">Trust another application</span> 
+ button. This requires that the other application is also configured within 
+ this tool. You can simply choose from the list of available (configured) 
+ applications and click OK:</p>
+<p class="Picture"><img src="image9.gif" alt="" style="border: none;" border="0" /></p>
+<h2><a name="View_Trusted_Certificates"></a>View Trusted Certificates</h2>
+<p>To view the certificates that are trusted by the currently selected 
+ application, simply click on the <span style="font-weight: bold;">View 
+ trusted certificates</span><span> button.</span></p>
+<p class="Picture"><img src="image16.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3>Field Descriptions</h3>
+<table class="BasicGrid" style="border-collapse: separate; border-collapse: separate;" 
+		 cellspacing="0" width="100%" border="1">
+	<col style="width: 23.041%;" />
+	<col style="width: 76.959%;" />
+	<tr class="t1Row">
+		<td><p style="font-weight: bold;">Store Type</p></td>
+		<td><?rh-placeholder type="snippet" ref="StoreType" ?></td>
+	</tr>
+	<tr class="t2Row">
+		<td><p style="font-weight: bold;">Store Path</p></td>
+		<td><?rh-placeholder type="snippet" ref="StorePath" ?></td>
+	</tr>
+	<tr class="t1Row">
+		<td><p style="font-weight: bold;"><span style="font-weight: bold;">Filters:</span></p></td>
+		<td><?rh-placeholder type="snippet" ref="CertificateFilters" ?></td>
+	</tr>
+</table>
+<h2><a name="Select_Certificate_to_Trust"></a>Select Certificate to Trust</h2>
+<p>If an application certificate already exists within the certificate 
+ repository, then clicking <span style="font-weight: bold;">Select certificate 
+ to trust</span> will open the repository viewer enabling you to select 
+ the certificate you wish to trust and then clicking OK: </p>
+<p class="Picture"><img src="image10.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2><a name="Import_Certificate_to_Trust"></a>Import Certificate to Trust</h2>
+<p>To add an application certificate to the repository for the first time 
+ you will simply click on the <span style="font-weight: bold;">Import certificate 
+ to trust</span><span> button and then locate the certificate from the 
+ file dialog.</span></p>
+<h2><a name="Import_List_of_Certificates_to_Trust"></a>Import List of Certificates 
+ to Trust</h2>
+<p>You can configure the currently selected application to inherit a repository 
+ of trusted certificates, essentially copying the trust-list of another 
+ application. Simply click on <span style="font-weight: bold;">Import list 
+ of certificates to trust</span> and then select the certificate repository 
+ to copy from the following dialog:</p>
+<p class="Picture"><img src="image15.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3>Field Descriptions</h3>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.041%;" />
+	<col style="width: 76.959%;" />
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Directory</p></td>
+		<td><?rh-placeholder type="snippet" ref="StoreType" ?></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Store Path</p></td>
+		<td><?rh-placeholder type="snippet" ref="StorePath" ?></td>
+	</tr>
+</table>
+<h2><a name="Delete_All_Trusted_Certificates"></a>Delete All Trusted Certificates</h2>
+<p>The <span style="font-weight: bold;">Delete all trusted certificates 
+ </span>button is used to reset an application back to an un-trusted state; 
+ meaning that it will not trust any other UA applications. You will be 
+ prompted to validate this request:</p>
+<p class="Picture"><img src="image11.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2><a name="Register_with_Discovery_Server"></a>Register with Discovery 
+ Server</h2>
+<p>You can quickly and easily register the selected application with the 
+ <?rh-udv_start name="UaDiscoSvr" ?>UA Discovery Server<?rh-udv_end ?> 
+ by clicking the <span style="font-weight: bold;">Register with Discovery 
+ Server</span> button. A confirmation dialog will be displayed: </p>
+<p class="Picture"><img src="image12.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2><a name="Export_Application_Certificate"></a>Export Application Certificate</h2>
+<p>You can save your application certificate to a file for easy portability 
+ (via USB, network, email etc.) by clicking the <span style="font-weight: bold;">Export 
+ application certificate</span> button. A save file dialog allows you to 
+ specify the filename and location:</p>
+<p class="Picture"><img src="image14.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>See also:</p>
+<ul type="disc">
+	<li><p><a href="UaConfig_Manage_Security.htm">Manage Security</a> Tab.</p></li>
+</ul>
+</body>
+</html>

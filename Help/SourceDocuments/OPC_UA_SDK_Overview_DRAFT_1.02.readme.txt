@@ -1,0 +1,6 @@
+OPC_UA_SDK_Overview_DRAFT_1.02 (changes):
+- most of changes marked in 1.01 are accepted (comments are not removed)
+- WSDL definition in 4.1 is slightly modified
+- In 5.4 one of sentences is marked as not clear
+- In table 14: DaWrapperConfiguration Class: BrowseName exists twice but missing are: DefaultSamplingRates, MaxQueueSize are missing
+

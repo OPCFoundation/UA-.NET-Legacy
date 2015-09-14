@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="e8b4b906-ed8d-437e-9597-fea6e43cf14c" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The Subscription class stores the client-side state for a Subscription with a Server. It maintains two sets of properties: the values requested when the Subscription is/was created and the current values based on the revised values returned by the Server.
+    </para>
+      <para>
+      The Subscription object is designed for batch operations. This means the subscription parameters and the <link xlink:href="331faee3-04bf-448a-80ef-d7deeb9cdce0" /> can be updated several times but the changes to the Subscription on the Server do not happen until the <codeEntityReference>M:Opc.Ua.Client.Subscription.ApplyChanges</codeEntityReference> method is called. After the changes are complete the StateChange event is reported with a bit mask indicating what was updated.
+    </para>
+      <para>
+      When a Subscription is created it must start sending Publish requests. It starts off the process by telling the Session object to send one or more requests to prime the pump. The number of requests is controlled by the PipelineDepth property and the default is one. Applications use longer pipeline depths to compensate for high network latencies because once the pipeline is filled the Server will be able to return a steady stream of notifications.
+    </para>
+      <para>
+      Once the Subscription has primed the pump the Session object keeps it going by sending a new Publish whenever it receives a successful response. If an error occurs the Session raises a <codeEntityReference>E:Opc.Ua.Client.Session.PublishError</codeEntityReference>  event and does not send another Publish.
+    </para>
+      <para>
+      If everything is working properly the Session should be calling the <codeEntityReference>M:Opc.Ua.Client.Subscription.SaveMessageInCache(System.Collections.Generic.IList{System.UInt32},Opc.Ua.NotificationMessage,System.Collections.Generic.IList{System.String})</codeEntityReference> method at least once per keep alive interval. If a <codeEntityReference>P:Opc.Ua.Client.NotificationEventArgs.NotificationMessage</codeEntityReference> does not arrive it means there are network problems, bugs in the Server or high priority Subscriptions are taking precedence. The keep alive timer is designed to detect these problems and to automatically send additional Publish requests. When the keep alive timer expires it checks the time elapsed since the last notification message. If publishing appears to have stopped the <codeEntityReference> P:Opc.Ua.Client.Subscription.PublishingStopped</codeEntityReference> property will be true and the Subscription will raise a PublishStateChanged event and send another Publish request. Client applications must assume that any cache data values are out of date when they receive the PublishStateChanged  event (e.g. the <codeEntityReference>T:Opc.Ua.StatusCode</codeEntityReference> should be set to UncertainLastKnownValue). However, client applications do not need to do anything else since the interruption may be temporary. It is up to the client application to decide when to give up on a Session and to try again with a new Session. The publishing state machine implemented by the Subscription/Session is shown in Figure 1.
+    </para>
+      <mediaLink>
+        <caption placement="after" lead="Figure">1 – Publishing State Machine</caption>
+        <image placement="center" xlink:href="84e63cec-a272-4ce4-9380-9a4238e247d1" />
+      </mediaLink>
+      <para>
+      The Subscription object checks for missing sequence numbers when it receives a <codeEntityReference>P:Opc.Ua.Client.NotificationEventArgs.NotificationMessage</codeEntityReference> If there is a gap it starts a timer that will call <codeEntityReference>M:Opc.Ua.Client.Subscription.Republish(System.UInt32)</codeEntityReference> in 1s if the gap still exists. This delay is necessary because the multi-threaded stack on the client side may process responses out of order even if they are received in order.
+    </para>
+      <para>
+      The Subscription maintains a cache of messages received. The size of this cache is controlled by the <codeEntityReference>P:Opc.Ua.Client.Subscription.MaxMessageCount</codeEntityReference> property. When a new message is received the Subscription adds it to the cache and removes any extras. It then extracts the notifications and pushes them to the <link xlink:href="331faee3-04bf-448a-80ef-d7deeb9cdce0" /> identified by the <codeEntityReference>P:Opc.Ua.Client.MonitoredItem.ClientHandle</codeEntityReference> in the notification.
+    </para>
+      <para>
+      The Subscription is designed for multi-threaded operation because the <codeEntityReference>M:Opc.Ua.Server.Subscription.Publish(Opc.Ua.Server.OperationContext,Opc.Ua.UInt32Collection@,System.Boolean@)</codeEntityReference> requests may arrive on any thread. However, data which is accessed while processing an incoming message is protected with a separate synchronization lock from data that is used while updating the Subscription parameters. This means notifications can continue to arrive while network operations to update the Subscription state on the server are in progress. However, no more than one operation to update the Subscription state can proceed at one time. Closing the Session will interrupt any outstanding operations. Any synchronization locks held by the subscription are released before any events are raised.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="9c26f561-87d8-4596-a982-55600f39d853" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The ResourceManager is responsible for providing localized versions of any strings returned to the Client. Any component can use this to look up a localized string during request processing.
+    </para>
+      <para>
+      A component that needs to translate a string passes a unique identifier for the string, the default translation and the preferred locales to the ResourceManager which then checks for the best translation and returns the result. If no translation exists the ResourceManager uses the default translation provided by the caller.
+    </para>
+      <para>
+      The ResourceManager also provides a lookup method that allows the caller to specify a set of arguments that are passed to the String.Format method after the best translation is found. This method requires that the translation to be a valid format string. If a format exception occurs it will return the unformatted string.
+    </para>
+      <para>
+      Note that the locales passed to the ResourceManager must be include the region identifier (e.g. the 'US' in 'en-US'). Omitting will result in an error that returns the unformatted string.
+    </para>
+      <para>
+      The default ResourceManager implementation uses an in-memory table to look up translations. The server must populate this table when it is initialized. Developers that wish to use different sources, such as a resource file or database, must create a sub-class.
+    </para>
+      <para>
+      NodeManagers and other components can create their own instance of the ResourceManager or use an entirely different mechanism. It is the responsibility of the source of any <codeEntityReference>T:Opc.Ua.LocalizedText</codeEntityReference>   value to ensure it is correctly translated. If the source of a <codeEntityReference>T:Opc.Ua.LocalizedText</codeEntityReference>  value does not have access to the preferred locales selected by the Client then it can provide the default translation and set the <codeEntityReference>P:Opc.Ua.LocalizedText.TranslationInfo</codeEntityReference> property of the <codeEntityReference>T:Opc.Ua.LocalizedText</codeEntityReference>  object. A <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" /> will use this property to look up the correct translation for any data value or event field if it recognizes the value as a <codeEntityReference>T:Opc.Ua.LocalizedText</codeEntityReference>  or a structure containing <codeEntityReference>T:Opc.Ua.LocalizedText</codeEntityReference>.
+    </para>
+      <para>
+      The <codeEntityReference>T:Opc.Ua.ITranslatableObject</codeEntityReference>  is an interface defined in the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> .  Objects that implement it will be automatically translated by <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" />.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="68600a35-6bbd-43be-9b8f-94d19629937f" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <summary>
+      <para>The OPC Foundation would like to acknowledge the contributions made by the following companies towards the development of this deliverable.</para>
+    </summary>
+    <introduction>
+      <table>
+        <row>
+          <entry>
+            <para>Christian Zugfil, Matthias Damm</para>
+          </entry>
+          <entry>
+            <para>ascolab</para>
+          </entry>
+          <entry>
+            <para>http://www.ascolab.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Stefan-Helmut Leitner</para>
+          </entry>
+          <entry>
+            <para>ABB</para>
+          </entry>
+          <entry>
+            <para>http://www.abb.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Alisher Maksumov</para>
+          </entry>
+          <entry>
+            <para>OSIsoft</para>
+          </entry>
+          <entry>
+            <para>http://www.osisoft.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Jan Burian, Rudolf Griessl</para>
+          </entry>
+          <entry>
+            <para>Iconics, Inc.</para>
+          </entry>
+          <entry>
+            <para>http://www.iconics.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>John Hoffman</para>
+          </entry>
+          <entry>
+            <para>TimeKeeping Systems Inc</para>
+          </entry>
+          <entry>
+            <para>http://www.guard1.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Nathan Pocock</para>
+          </entry>
+          <entry>
+            <para>Software Toolbox, Inc.</para>
+          </entry>
+          <entry>
+            <para>http://www.softwaretoolbox.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Krishna Bandaru</para>
+          </entry>
+          <entry>
+            <para>Tata Consulting Services Ltd.</para>
+          </entry>
+          <entry>
+            <para>http://www.tcs.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Mark Timperley</para>
+          </entry>
+          <entry>
+            <para>Invensys</para>
+          </entry>
+          <entry>
+            <para>http://www.invensys.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Alexander Gdalevich</para>
+          </entry>
+          <entry>
+            <para>Cognex Corporation</para>
+          </entry>
+          <entry>
+            <para>http://www.cognex.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Craig McMurtry</para>
+          </entry>
+          <entry>
+            <para>Microsoft Corporation</para>
+          </entry>
+          <entry>
+            <para>http://www.microsoft.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Yo Funaki</para>
+          </entry>
+          <entry>
+            <para>Yokogawa</para>
+          </entry>
+          <entry>
+            <para>http://www.yokogawa.com</para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>Jrg Allmendinger</para>
+          </entry>
+          <entry>
+            <para>Allmendinger</para>
+          </entry>
+          <entry>
+            <para>http://www.allmendinger.de.allmendinger.de</para>
+          </entry>
+        </row>
+      </table>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

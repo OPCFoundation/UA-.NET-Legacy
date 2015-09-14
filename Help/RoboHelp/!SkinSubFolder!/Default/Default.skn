@@ -1,0 +1,286 @@
+<?xml version="1.0"?>
+<sqwebskin version="1.2">
+	<summary>
+		<skinname>Default</skinname>
+		<defaulttab>Contents</defaulttab>
+		<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:normal font-style:normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal</font>
+		<color></color>
+	</summary>
+	<panesummary>
+		<![CDATA[
+<frameset rows="32,*" >
+<frame name="Custom Toolbar Pane" noresize="yes" scrolling="no" id="3" />
+<frameset cols="220,*" frameborder="1" borderspace="0" >
+<frameset rows="24,*" >
+<frame name="MiniBar Pane" marginwidth="-1" scrolling="no" id="6" />
+<frame name="Navigation Pane" id="2" />
+</frameset>
+<frame name="Topic Pane" frameborder="1" borderspace="1" bordercolor="Gray" marginwidth="-1" marginheight="-1" id="4" />
+</frameset>
+</frameset>
+]]>
+	</panesummary>
+	<frameset rows="32,*">
+		<frame name="Custom Toolbar Pane" noresize="yes" scrolling="no" id="3"/>
+		<frameset cols="220,*" frameborder="1" borderspace="0">
+			<frameset rows="24,*">
+				<frame name="MiniBar Pane" marginwidth="-1" scrolling="no" id="6"/>
+				<frame name="Navigation Pane" id="2"/>
+			</frameset>
+			<frame name="Topic Pane" frameborder="1" borderspace="1" bordercolor="Gray" marginwidth="-1" marginheight="-1" id="4"/>
+		</frameset>
+	</frameset>
+	<pane name="Custom Toolbar Pane">
+		<image></image>
+		<color>background:#99ccff</color>
+		<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		<btnselected>
+			<color>background:#639ace</color>
+			<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+		</btnselected>
+		<alignment>left</alignment>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-content" id="1">
+			<name>Contents</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-index" id="2">
+			<name>Index</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-search" id="3">
+			<name>Search</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-glossary" id="4">
+			<name>Glossary</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-websearch" id="5">
+			<name>WebSearch</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="Form Mode" type="built-in-form" id="6">
+			<name>Search Input</name>
+			<image></image>
+			<color></color>
+			<textbox width="20"/>
+			<title>
+				<text></text>
+			</title>
+			<button mode="default graphic mode">
+			</button>
+		</toolbaritem>
+		<toolbaritem mode="Logo Mode" type="built-in-logo" id="7">
+			<name>About</name>
+			<image></image>
+			<author>Adobe</author>
+			<email></email>
+			<description></description>
+			<companyinformation>
+				<image></image>
+				<name>Adobe</name>
+				<copyright>Copyright &#169; 2009, Adobe Systems Incorporated</copyright>
+				<homepage>http://www.adobe.com</homepage>
+			</companyinformation>
+			<titleinformation>
+				<image></image>
+			</titleinformation>
+		</toolbaritem>
+	</pane>
+	<pane name="MiniBar Pane">
+		<image></image>
+		<color>background:#99ccff</color>
+		<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		<btnselected>
+			<color>background:#639ace</color>
+			<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:White</font>
+		</btnselected>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-previous" id="8">
+			<name>Previous</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-next" id="9">
+			<name>Next</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-rolesel" id="12">
+			<name>ContentCategoryList</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-synctoc" id="10">
+			<name>Sync TOC</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-hide" id="11">
+			<name>Hide</name>
+			<text>::??DefaultWebSkinText??::</text>
+			<color></color>
+			<image></image>
+			<icontype>default</icontype>
+			<selected>
+				<color></color>
+				<image></image>
+				<icontype>default</icontype>
+			</selected>
+			<style>100</style>
+		</toolbaritem>
+	</pane>
+	<pane name="Navigation Pane">
+		<image></image>
+		<color></color>
+		<label>
+			<image></image>
+			<color></color>
+		</label>
+		<subpane name="Contents">
+			<image></image>
+			<color>background:White alink:Silver hover-color:Navy</color>
+			<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+		</subpane>
+		<subpane name="Index">
+			<image></image>
+			<color>background:White alink:Silver hover-color:Navy</color>
+			<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+			<inputbox>
+				<image></image>
+				<color>background:White</color>
+				<textbox width="0"/>
+				<title>
+					<text>::??DefaultWebSkinText??::</text>
+					<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Navy</font>
+				</title>
+				<button mode="none">
+				</button>
+			</inputbox>
+		</subpane>
+		<subpane name="Search">
+			<image></image>
+			<color>background:White alink:Silver hover-color:Navy</color>
+			<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+			<inputbox>
+				<image></image>
+				<color>background:White</color>
+				<textbox width="0"/>
+				<title>
+					<text>::??DefaultWebSkinText??::</text>
+					<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Navy</font>
+				</title>
+				<button mode="default graphic mode">
+				</button>
+			</inputbox>
+		</subpane>
+		<subpane name="Glossary">
+			<image></image>
+			<color>background:White alink:Silver hover-color:Navy</color>
+			<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Black</font>
+			<definitiontext>
+				<text>::??DefaultWebSkinText??::</text>
+				<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Navy</font>
+				<color>background:White</color>
+				<image></image>
+			</definitiontext>
+			<definition>
+				<text>::??DefaultWebSkinText??::</text>
+				<color></color>
+				<image></image>
+			</definition>
+			<termtext>
+				<text>::??DefaultWebSkinText??::</text>
+				<font>font-family:"Microsoft Sans Serif" font-size:8pt font-weight:Normal font-style:Normal text-decoration:none font-sizeadjust:none font-stretch:normal font-variant:normal font-color:Navy</font>
+				<color>background:White</color>
+				<image></image>
+			</termtext>
+			<term>
+				<text>::??DefaultWebSkinText??::</text>
+				<color></color>
+				<image></image>
+			</term>
+		</subpane>
+	</pane>
+	<pane name="Topic Pane">
+		<in-topic-navbar>
+			<alignment>none</alignment>
+		</in-topic-navbar>
+	</pane>
+</sqwebskin>

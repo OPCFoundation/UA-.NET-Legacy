@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{15014A4F-617F-436E-AC23-3048BA20D428}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Opc.Ua.Configuration</RootNamespace>
+    <AssemblyName>Opc.Ua.ConfigurationTool</AssemblyName>
+    <ApplicationIcon>App.ico</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\Bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.ActiveDs, Version=1.0.0.0, Culture=neutral, PublicKeyToken=22186a540fc0b044, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\extern\Interop.ActiveDs.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.NetFwTypeLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=22186a540fc0b044, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\extern\Interop.NetFwTypeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.ComInterop, Version=1.1.334.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bin\extern\Opc.Ua.ComInterop.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountAccessRights.cs" />
+    <Compile Include="AccountAccessRightsListCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AccountAccessRightsListCtrl.Designer.cs">
+      <DependentUpon>AccountAccessRightsListCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccessRuleListDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AccessRuleListDlg.Designer.cs">
+      <DependentUpon>AccessRuleListDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateSslBindingDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateSslBindingDlg.Designer.cs">
+      <DependentUpon>CreateSslBindingDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageSslBindingsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageSslBindingsDlg.Designer.cs">
+      <DependentUpon>ManageSslBindingsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateSslCertificateDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateSslCertificateDlg.Designer.cs">
+      <DependentUpon>CreateSslCertificateDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditComServerDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditComServerDlg.Designer.cs">
+      <DependentUpon>EditComServerDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordDlg.Designer.cs">
+      <DependentUpon>PasswordDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewPortDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewPortDlg.Designer.cs">
+      <DependentUpon>NewPortDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FirewallAccessDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FirewallAccessDlg.Designer.cs">
+      <DependentUpon>FirewallAccessDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectApplicationDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectApplicationDlg.Designer.cs">
+      <DependentUpon>SelectApplicationDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManagedApplicationCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ManagedApplicationCtrl.Designer.cs">
+      <DependentUpon>ManagedApplicationCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageWrappedComServersDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageWrappedComServersDlg.Designer.cs">
+      <DependentUpon>ManageWrappedComServersDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateAuthorityDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateAuthorityDlg.Designer.cs">
+      <DependentUpon>CreateAuthorityDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManagedApplicationDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagedApplicationDlg.Designer.cs">
+      <DependentUpon>ManagedApplicationDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ObjectPicker\ComInterop.cs" />
+    <Compile Include="ObjectPicker\DirectoryObject.cs" />
+    <Compile Include="ObjectPicker\DirectoryObjectPickerDialog.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ObjectPicker\Locations.cs" />
+    <Compile Include="ObjectPicker\NameTranslator.cs" />
+    <Compile Include="ObjectPicker\ObjectTypes.cs" />
+    <Compile Include="ObjectPicker\PInvoke.cs" />
+    <Compile Include="ObjectPicker\StructsFlags.cs" />
+    <Compile Include="NewEndpointDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewEndpointDlg.Designer.cs">
+      <DependentUpon>NewEndpointDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SelectComServerDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectComServerDlg.Designer.cs">
+      <DependentUpon>SelectComServerDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ManageAccessRulesDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManageAccessRulesDlg.Designer.cs">
+      <DependentUpon>ManageAccessRulesDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CreateCertificateDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateCertificateDlg.Designer.cs">
+      <DependentUpon>CreateCertificateDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AccessRuleListCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="AccessRuleListCtrl.Designer.cs">
+      <DependentUpon>AccessRuleListCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CertificateToolConfiguration.cs" />
+    <Compile Include="ObjectPicker\AccessRuleDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ObjectPicker\AccessRuleDlg.Designer.cs">
+      <DependentUpon>AccessRuleDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HttpAccessRulelListCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="HttpAccessRulelListCtrl.Designer.cs">
+      <DependentUpon>HttpAccessRulelListCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyVersionInfo.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAddControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserAddControl.Designer.cs">
+      <DependentUpon>UserAddControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserAddForm.Designer.cs">
+      <DependentUpon>UserAddForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserNameControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserNameControl.Designer.cs">
+      <DependentUpon>UserNameControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserNameListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserNameListForm.Designer.cs">
+      <DependentUpon>UserNameListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserPasswordChangeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserPasswordChangeForm.Designer.cs">
+      <DependentUpon>UserPasswordChangeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserPasswordControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserPasswordControl.Designer.cs">
+      <DependentUpon>UserPasswordControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="AccountAccessRightsListCtrl.resx">
+      <DependentUpon>AccountAccessRightsListCtrl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccessRuleListDlg.resx">
+      <DependentUpon>AccessRuleListDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateSslBindingDlg.resx">
+      <DependentUpon>CreateSslBindingDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageSslBindingsDlg.resx">
+      <DependentUpon>ManageSslBindingsDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateSslCertificateDlg.resx">
+      <DependentUpon>CreateSslCertificateDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditComServerDlg.resx">
+      <DependentUpon>EditComServerDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswordDlg.resx">
+      <DependentUpon>PasswordDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewPortDlg.resx">
+      <DependentUpon>NewPortDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirewallAccessDlg.resx">
+      <DependentUpon>FirewallAccessDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectApplicationDlg.resx">
+      <DependentUpon>SelectApplicationDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagedApplicationCtrl.resx">
+      <DependentUpon>ManagedApplicationCtrl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageWrappedComServersDlg.resx">
+      <DependentUpon>ManageWrappedComServersDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateAuthorityDlg.resx">
+      <DependentUpon>CreateAuthorityDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagedApplicationDlg.resx">
+      <DependentUpon>ManagedApplicationDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewEndpointDlg.resx">
+      <DependentUpon>NewEndpointDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SelectComServerDlg.resx">
+      <DependentUpon>SelectComServerDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManageAccessRulesDlg.resx">
+      <DependentUpon>ManageAccessRulesDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateCertificateDlg.resx">
+      <DependentUpon>CreateCertificateDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AccessRuleListCtrl.resx">
+      <DependentUpon>AccessRuleListCtrl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ObjectPicker\AccessRuleDlg.resx">
+      <DependentUpon>AccessRuleDlg.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HttpAccessRulelListCtrl.resx">
+      <DependentUpon>HttpAccessRulelListCtrl.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Content Include="App.config" />
+    <Content Include="App.ico" />
+    <Content Include="ObjectPicker\Licence.txt" />
+    <Content Include="Opc.Ua.ConfigurationTool.Config.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="app.manifest" />
+    <Content Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </Content>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="UserAddControl.resx">
+      <DependentUpon>UserAddControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserAddForm.resx">
+      <DependentUpon>UserAddForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserNameControl.resx">
+      <DependentUpon>UserNameControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserNameListForm.resx">
+      <DependentUpon>UserNameListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserPasswordChangeForm.resx">
+      <DependentUpon>UserPasswordChangeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserPasswordControl.resx">
+      <DependentUpon>UserPasswordControl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SampleApplications\SampleLibraries\Client\UA Client Library.csproj">
+      <Project>{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}</Project>
+      <Name>UA Client Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SampleApplications\SampleLibraries\Configuration\UA Configuration Library.csproj">
+      <Project>{8AB4CB8E-E216-425D-B600-350D0B6B59CD}</Project>
+      <Name>UA Configuration Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SampleApplications\SampleLibraries\Controls\UA Client Controls.csproj">
+      <Project>{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}</Project>
+      <Name>UA Client Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Stack\Core\UA Core Library.csproj">
+      <Project>{7543AFCB-F5AF-44AF-83C9-23164474C1E9}</Project>
+      <Name>UA Core Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="4" minorversion="0">
+	<variablesets/>
+	<variables>
+		<variable>
+			<name>ProductName</name>
+			<value>Unified Architecture Technology Samples</value>
+		</variable>
+		<variable>
+			<name>CompanyName</name>
+			<value>OPC Foundation</value>
+		</variable>
+		<variable>
+			<name>TechnologyName</name>
+			<value>Unified Architecture</value>
+		</variable>
+		<variable>
+			<name>ProductVersion</name>
+			<value>Build 331</value>
+		</variable>
+		<variable>
+			<name>UaCfgTool</name>
+			<value>Configuration Tool</value>
+		</variable>
+		<variable>
+			<name>UaDiscoSvr</name>
+			<value>UA Discovery Server</value>
+		</variable>
+		<variable>
+			<name>UaSpec13</name>
+			<value>UA Specifications Part 13 - Aggregates (http://www.opcfoundation.org/ua/part13)</value>
+		</variable>
+		<variable>
+			<name>UaSpec11</name>
+			<value>UA Specifications Part 11 - Historical Access (http://www.opcfoundation.org/ua/part11)</value>
+		</variable>
+		<variable>
+			<name>UaSpec12</name>
+			<value>UA Specifications Part 12 - Discovery (http://www.opcfoundation.org/ua/part12)</value>
+		</variable>
+		<variable>
+			<name>opcf-ua-sdk</name>
+			<value>UA .NET API</value>
+		</variable>
+		<variable>
+			<name>genSvr</name>
+			<value>Generic UA Server</value>
+		</variable>
+		<variable>
+			<name>genClt</name>
+			<value>Generic UA Client</value>
+		</variable>
+		<variable>
+			<name>UaSpec01</name>
+			<value>UA Specifications Part 1 - Concepts (http://www.opcfoundation.org/ua/part1)</value>
+		</variable>
+		<variable>
+			<name>UaSpec04</name>
+			<value>UA Specifications Part 4 - Services (http://www.opcfoundation.org/ua/part4)</value>
+		</variable>
+		<variable>
+			<name>UaSpec08</name>
+			<value>UA Specifications Part 8 - Data Access (http://www.opcfoundation.org/ua/part8)</value>
+		</variable>
+		<variable>
+			<name>UaSpec09</name>
+			<value>UA Specifications Part 9 - Alarms and Conditions (http://www.opcfoundation.org/ua/part9)</value>
+		</variable>
+		<variable>
+			<name>UaSpec02</name>
+			<value>UA Specifications Part 2 - Security Model (http://www.opcfoundation.org/ua/part2)</value>
+		</variable>
+		<variable>
+			<name>UaSpec03</name>
+			<value>UA Specifications Part 3 - Address Space Model (http://www.opcfoundation.org/ua/part3)</value>
+		</variable>
+		<variable>
+			<name>UaSpec05</name>
+			<value>UA Specifications Part 5 - Information Model (http://www.opcfoundation.org/ua/part5)</value>
+		</variable>
+		<variable>
+			<name>UaSpec06</name>
+			<value>UA Specifications Part 6 - Mappings (http://www.opcfoundation.org/ua/part6)</value>
+		</variable>
+		<variable>
+			<name>UaSpec07</name>
+			<value>UA Specifications Part 7 - Profiles (http://www.opcfoundation.org/ua/part7)</value>
+		</variable>
+		<variable>
+			<name>UaSpec10</name>
+			<value>UA Specifications Part 10 - Programs (http://www.opcfoundation.org/ua/part10)</value>
+		</variable>
+		<variable>
+			<name>ctt-short</name>
+			<value>UA CTT</value>
+		</variable>
+		<variable>
+			<name>ctt-long</name>
+			<value>UA CTT (Compliance Test Tool)</value>
+		</variable>
+		<variable>
+			<name>vsnet</name>
+			<value>Visual Studio .NET 2008</value>
+		</variable>
+	</variables>
+</rhpml>

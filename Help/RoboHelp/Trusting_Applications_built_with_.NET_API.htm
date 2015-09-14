@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Trusting Applications built with .NET API</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Trusting Applications built with <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?></h1>
+<p>In this tutorial we will only use the applications supplied by the <?rh-udv_start 
+	 name="CompanyName" ?>OPC Foundation<?rh-udv_end ?>.</p>
+<p>By default, all applications installed by this package trust each other. 
+ We will begin our tutorial by isolating one application and removing it 
+ from the trust-list. Once we have seen the effects of this, we will add 
+ the application back into the trust list.</p>
+<h2>Step 1 - Removing an Application from the Trust List</h2>
+<p>In this tutorial we will use isolate the <a href="DAClientOverview.htm">Data 
+ Access Client</a> by removing it from the trust-list, thus preventing 
+ it from making a connection to any of the UA Servers installed within 
+ this package.</p>
+<h3>First: Removing the Application</h3>
+<p>Launch the <a href="DAServerOverview.htm">DA Server</a> and <a href="DAClientOverview.htm">DA 
+ Client</a> applications and make sure a connection can be established. 
+ Then shutdown the DA Server, leaving the DA Client running.</p>
+<ol type="1">
+	<li><p><a href="Launching_the_Configuration_Tool.htm">Launch the Configuration 
+	 Tool</a> and select any application.</p></li>
+	<li><p>Click on the <a href="UaConfig_Manage_Security.htm">Manage Security</a> 
+	 tab (if not already selected).</p></li>
+	<li><p>Click on the <a href="UaConfig_Manage_Security.htm#View_Trusted_Certificates">View_Trusted_Certificates</a> 
+	 button.</p></li>
+	<li><p>The &quot;Manage Certificates in Certificate Store&quot; dialog 
+	 will open:</p></li>
+	<ol type="1">
+		<li><p>Select &quot;Quickstart DataAccess Client&quot; in the list 
+		 and then right-click on it.</p></li>
+		<li><p>Choose &quot;Delete&quot; from the context-menu.</p></li>
+		<li><p>You will be prompted to verify the request; click the &quot;Yes&quot; 
+		 button.</p></li>
+		<li><p>Click the &quot;Cancel&quot; button to close the dialog.</p></li>
+	</ol>
+</ol>
+<h3>Second: Testing the Connection</h3>
+<ol type="1">
+	<li><p>Launch the <a href="DAServerOverview.htm">DA Server</a> .</p></li>
+	<li><p>In the DA Client you will click the &quot;Connect&quot; button 
+	 (make sure the &quot;Use Security&quot; checkbox is checked).</p></li>
+	<li><p>The connection will fail and the following error shown:<br />
+	<img src="error-badSecureChannelClosed.PNG" alt="" style="border: none;" 
+		 border="0" /></p></li>
+</ol>
+<p>Note: If you clear the &quot;Use Security&quot; box the connection will 
+ succeed.</p>
+<h2>Step 2 - Trusting an Application</h2>
+<p>There are 2 ways that you can configure trusting an application:</p>
+<ol type="1">
+	<li><p>Attempt the connection while expecting it to fail. You then 
+	 move the certificate from the untrusted store to the trusted store. 
+	 <span style="font-weight: bold;">Easiest method!</span></p></li>
+	<li><p>Export the certificate from the first application, and then 
+	 import into the trust list of the other application.</p></li>
+</ol>
+<p>In this tutorial we will use idea #1 above.</p>
+<ol type="1">
+	<li><p><a href="Launching_the_Configuration_Tool.htm">Launch the Configuration 
+	 Tool</a>, then activate the <a href="UaConfig_Manage_Security.htm">Manage 
+	 Security</a> tab, and then click the &quot;Select Certificate to Trust...&quot; 
+	 button.</p></li>
+	<li><p>The &quot;Manage Certificates in Certificate Store&quot; dialog 
+	 will display a list of certificates in the &quot;MachineDefault&quot; 
+	 store. We need to change the &quot;Store Path&quot; to show the &quot;RejectedCertificates&quot;:<br />
+	<img src="rejectedCertificatesStore.PNG" title="RejectedCertificate store" 
+		 alt="RejectedCertificate store" style="border: none;" border="0" /></p></li>
+	<li><p>Within the list you will select &quot;Quickstart Data Access 
+	 Client&quot; and click the &quot;OK&quot; button.</p></li>
+	<li><p>You will see a message that the certificate is now trusted. 
+	 However, the certificate is also still <span style="font-style: italic;">not 
+	 trusted</span>.</p></li>
+	<li><p>Repeat steps 2 and 3 (above) and this time you will select the 
+	 &quot;Quickstart Data Access Client&quot; by right-clicking on it 
+	 and choosing &quot;Delete&quot; from the context-menu; you will need 
+	 to confirm the request.</p></li>
+	<li><p>Click the &quot;Cancel&quot; button to close the &quot;Manage 
+	 Certificates in Certificate Store&quot; dialog.</p></li>
+	<li><p>Minimize the <?rh-udv_start name="UaCfgTool" ?>Configuration Tool<?rh-udv_end ?>.</p></li>
+	<li><p>In the DA Client, check the &quot;Use Security&quot; box and 
+	 then click the &quot;Connect&quot; button.</p></li>
+</ol>
+<p>The connection between the Client and Server should be established.</p>
+<h2>Summary</h2>
+<p>In this example we saw how you can remove an application from a trust-list, 
+ and how to add it to the trust list. We focussed on the Client only. In 
+ the real world you will need to make sure that the Server trusts the Client 
+ (as we did here) and also that the Client trust the Server, which you 
+ can do by following the same steps as described above.</p>
+<h2>Something to Consider...</h2>
+<p>The <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?> 
+ <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?> sample 
+ applications are configured to use a shared/common certificate repository. 
+ Therefore, when we removed the Data Access Client from the certificate 
+ list we also prevented this client from connecting to any Server that 
+ is configured to use this repository.</p>
+<p>When developing your own applications you may decide to separate trust-lists 
+ on a per-application basis.</p>
+<h2>See Also</h2>
+<ul type="disc">
+	<li><p><a href="Trusting_Applications_built_from_other_Frameworks.htm">Trusting 
+	 Applications built from other Frameworks</a></p></li>
+</ul>
+</body>
+</html>

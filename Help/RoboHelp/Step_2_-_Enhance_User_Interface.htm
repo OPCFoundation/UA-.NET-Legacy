@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 2 - Enhance User Interface</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Client Development Tutorial</h1>
+<h2>Step 2 - Enhancing the User Interface</h2>
+<p>In this section we will simply add a new menu item to the &quot;Server&quot; 
+ menu called &quot;Subscribe&quot; available at the top of the window. 
+ This option will subscribe to the selected node and will display the value 
+ changes in a new window.</p>
+<p>This step is a continuation from <a href="Step_1_-_New_ProjectClient.htm">Step 
+ 1 - New Project</a>.</p>
+<h3>Creating the New Window</h3>
+<ol type="1">
+	<li><p>Right-click on the project and choose &quot;Add -&gt; Windows 
+	 Form&quot; from the menu.</p></li>
+	<li><p>Name the window &quot;SubscriptionOutput&quot;.</p></li>
+	<li><p>The window designer will appear and we will now add a label 
+	 to the form that will occupy the entire window space: </p></li>
+	<ol type="1">
+		<li><p>From the <?rh-udv_start name="vsnet" ?>Visual Studio .NET 2008<?rh-udv_end ?> 
+		 &quot;Common Controls&quot; toolbox double-click the <span style="font-weight: bold;">Label</span> 
+		 control, which will add it to the form.</p></li>
+		<li><p>Select the new label by clicking on it once.</p></li>
+		<li><p>In the property-grid you will:</p></li>
+		<ol type="1">
+			<li><p>Select the <span style="font-weight: bold;">Dock</span> 
+			 property and specify the value as <span style="font-weight: bold;">Fill</span>. 
+			 </p></li>
+			<li><p>Change the <span style="font-weight: bold;">AutoSize</span> 
+			 property to <span style="font-weight: bold;">False</span>.</p></li>
+			<li><p><span>Change the </span><span style="font-weight: bold;">Modifiers</span><span> 
+			 property to </span><span style="font-weight: bold;">Protected 
+			 Internal</span><span>.</span></p></li>
+		</ol>
+		<li><p>Our form is now ready for use.</p></li>
+	</ol>
+</ol>
+<h3>Modifying the Menu</h3>
+<ol type="1">
+	<li><p>Double-click on <span style="font-weight: bold;">MainForm.cs</span><span>&#160;to 
+	 launch the window designer.</span></p></li>
+	<li><p><span>At the top of the window you will see the main application 
+	 menu, click on the </span><span style="font-weight: bold;">Server</span><span> 
+	 menu and the options will appear below it.</span></p></li>
+	<li><p>In the bottom box (which shows &quot;Type Here&quot;) type in 
+	 the name &quot;Subscribe&quot;.</p></li>
+</ol>
+<p>Next, <a href="Step_3_-_Setup_Subscription.htm">Step 3 - Setup Subscription</a>.</p>
+</body>
+</html>

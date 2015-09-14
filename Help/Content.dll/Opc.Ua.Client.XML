@@ -1,0 +1,2082 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Opc.Ua.Client</name>
+    </assembly>
+    <members>
+        <member name="T:Opc.Ua.Client.MonitoredItemStatus">
+            <summary>
+            The current status of monitored item.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemStatus.#ctor">
+            <summary>
+            Creates a empty object.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemStatus.SetMonitoringMode(Opc.Ua.MonitoringMode)">
+            <summary>
+            Updates the monitoring mode.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemStatus.SetResolvePathResult(Opc.Ua.BrowsePathResult,Opc.Ua.ServiceResult)">
+            <summary>
+            Updates the object with the results of a translate browse paths request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemStatus.SetCreateResult(Opc.Ua.MonitoredItemCreateRequest,Opc.Ua.MonitoredItemCreateResult,Opc.Ua.ServiceResult)">
+            <summary>
+            Updates the object with the results of a create monitored item request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemStatus.SetModifyResult(Opc.Ua.MonitoredItemModifyRequest,Opc.Ua.MonitoredItemModifyResult,Opc.Ua.ServiceResult)">
+            <summary>
+            Updates the object with the results of a modify monitored item request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemStatus.SetDeleteResult(Opc.Ua.ServiceResult)">
+            <summary>
+            Updates the object with the results of a delete item request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemStatus.SetError(Opc.Ua.ServiceResult)">
+            <summary>
+            Sets the error state for the monitored item status.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.Id">
+            <summary>
+            The identifier assigned by the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.Created">
+            <summary>
+            Whether the item has been created on the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.Error">
+            <summary>
+            Any error condition associated with the monitored item.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.NodeId">
+            <summary>
+            The node id being monitored.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.AttributeId">
+            <summary>
+            The attribute being monitored.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.IndexRange">
+            <summary>
+            The range of array indexes to being monitored.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.DataEncoding">
+            <summary>
+            The encoding to use when returning notifications.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.MonitoringMode">
+            <summary>
+            The monitoring mode.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.ClientHandle">
+            <summary>
+            The identifier assigned by the client.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.SamplingInterval">
+            <summary>
+            The sampling interval.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.Filter">
+            <summary>
+            The filter to use to select values to return.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.QueueSize">
+            <summary>
+            The length of the queue used to buffer values.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemStatus.DiscardOldest">
+            <summary>
+            Whether to discard the oldest entries in the queue when it is full.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.NodeCache">
+            <summary>
+            A client side cache of the server's type model.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.#ctor(Opc.Ua.Client.Session)">
+            <summary>
+            Initializes the object with default values.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.Exists(Opc.Ua.ExpandedNodeId)">
+            <summary cref="M:Opc.Ua.INodeTable.Exists(Opc.Ua.ExpandedNodeId)"/>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.Find(Opc.Ua.ExpandedNodeId)">
+            <summary cref="M:Opc.Ua.INodeTable.Find(Opc.Ua.ExpandedNodeId)"/>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.Find(Opc.Ua.ExpandedNodeId,Opc.Ua.NodeId,System.Boolean,System.Boolean,Opc.Ua.QualifiedName)">
+            <summary cref="M:Opc.Ua.INodeTable.Find(Opc.Ua.ExpandedNodeId,Opc.Ua.NodeId,System.Boolean,System.Boolean,Opc.Ua.QualifiedName)"/>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.Find(Opc.Ua.ExpandedNodeId,Opc.Ua.NodeId,System.Boolean,System.Boolean)">
+            <summary cref="M:Opc.Ua.INodeTable.Find(Opc.Ua.ExpandedNodeId,Opc.Ua.NodeId,System.Boolean,System.Boolean)"/>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.IsKnown(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Determines whether a node id is a known type id.
+            </summary>
+            <param name="typeId">The type extended identifier.</param>
+            <returns>
+            	<c>true</c> if the specified type id is known; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.IsKnown(Opc.Ua.NodeId)">
+            <summary>
+            Determines whether a node id is a known type id.
+            </summary>
+            <param name="typeId">The type identifier.</param>
+            <returns>
+            	<c>true</c> if the specified type id is known; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindSuperType(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Returns the immediate supertype for the type.
+            </summary>
+            <param name="typeId">The extended type identifier.</param>
+            <returns>
+            A type identifier of the <paramref name="typeId "/>
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindSuperType(Opc.Ua.NodeId)">
+            <summary>
+            Returns the immediate supertype for the type.
+            </summary>
+            <param name="typeId">The type identifier.</param>
+            <returns>
+            The immediate supertype idnetyfier for <paramref name="typeId"/>
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindSubTypes(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Returns the immediate subtypes for the type.
+            </summary>
+            <param name="typeId">The extended type identifier.</param>
+            <returns>
+            List of type identifiers for <paramref name="typeId"/>
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.IsTypeOf(Opc.Ua.ExpandedNodeId,Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Determines whether a type is a subtype of another type.
+            </summary>
+            <param name="subTypeId">The subtype identifier.</param>
+            <param name="superTypeId">The supertype identifier.</param>
+            <returns>
+            	<c>true</c> if <paramref name="superTypeId"/> is supertype of <paramref name="subTypeId"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.IsTypeOf(Opc.Ua.NodeId,Opc.Ua.NodeId)">
+            <summary>
+            Determines whether a type is a subtype of another type.
+            </summary>
+            <param name="subTypeId">The subtype identifier.</param>
+            <param name="superTypeId">The supertype identyfier.</param>
+            <returns>
+            	<c>true</c> if <paramref name="superTypeId"/> is supertype of <paramref name="subTypeId"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindReferenceTypeName(Opc.Ua.NodeId)">
+            <summary>
+            Returns the qualified name for the reference type id.
+            </summary>
+            <param name="referenceTypeId">The reference type</param>
+            <returns>
+            A name qualified with a namespace for the reference <paramref name="referenceTypeId"/>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindReferenceType(Opc.Ua.QualifiedName)">
+            <summary>
+            Returns the node identifier for the reference type with the specified browse name.
+            </summary>
+            <param name="browseName">Browse name of the reference.</param>
+            <returns>
+            The identifier for the <paramref name="browseName"/>
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.IsEncodingOf(Opc.Ua.ExpandedNodeId,Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Checks if the identifier <paramref name="encodingId"/> represents a that provides encodings
+            for the <paramref name="datatypeId "/>.
+            </summary>
+            <param name="encodingId">The id the encoding node .</param>
+            <param name="datatypeId">The id of the DataType node.</param>
+            <returns>
+            	<c>true</c> if <paramref name="encodingId"/> is encoding of the <paramref name="datatypeId"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.IsEncodingFor(Opc.Ua.NodeId,Opc.Ua.ExtensionObject)">
+            <summary>
+            Determines if the value contained in an extension object <paramref name="value"/> matches the expected data type.
+            </summary>
+            <param name="expectedTypeId">The identifier of the expected type .</param>
+            <param name="value">The value.</param>
+            <returns>
+            	<c>true</c> if the value contained in an extension object <paramref name="value"/> matches the
+            expected data type; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.IsEncodingFor(Opc.Ua.NodeId,System.Object)">
+            <summary>
+            Determines if the value is an encoding of the <paramref name="value"/>
+            </summary>
+            <param name="expectedTypeId">The expected type id.</param>
+            <param name="value">The value.</param>
+            <returns>
+            	<c>true</c> the value is an encoding of the <paramref name="value"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindDataTypeId(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Returns the data type for the specified encoding.
+            </summary>
+            <param name="encodingId">The encoding id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindDataTypeId(Opc.Ua.NodeId)">
+            <summary>
+            Returns the data type for the specified encoding.
+            </summary>
+            <param name="encodingId">The encoding id.</param>
+            <returns>
+            The data type for the <paramref name="encodingId"/>
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.LoadUaDefinedTypes(Opc.Ua.ISystemContext)">
+            <summary>
+            Loads the UA defined types into the cache.
+            </summary>
+            <param name="context">The context.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.Clear">
+            <summary>
+            Removes all nodes from the cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FetchNode(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Fetches a node from the server and updates the cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FetchSuperTypes(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Adds the supertypes of the node to the cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.FindReferences(Opc.Ua.ExpandedNodeId,Opc.Ua.NodeId,System.Boolean,System.Boolean)">
+            <summary>
+            Returns the references of the specified node that meet the criteria specified.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.GetDisplayText(Opc.Ua.INode)">
+            <summary>
+            Returns a display name for a node.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.GetDisplayText(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Returns a display name for a node.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.GetDisplayText(Opc.Ua.ReferenceDescription)">
+            <summary>
+            Returns a display name for the target of a reference.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NodeCache.BuildBrowsePath(Opc.Ua.ILocalNode,System.Collections.Generic.IList{Opc.Ua.QualifiedName})">
+            <summary>
+            Builds the relative path from a type to a node.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.NodeCache.NamespaceUris">
+            <summary cref="P:Opc.Ua.INodeTable.NamespaceUris"/>
+        </member>
+        <member name="P:Opc.Ua.Client.NodeCache.ServerUris">
+            <summary cref="P:Opc.Ua.INodeTable.ServerUris"/>
+        </member>
+        <member name="P:Opc.Ua.Client.NodeCache.TypeTree">
+            <summary cref="P:Opc.Ua.INodeTable.TypeTree"/>
+        </member>
+        <member name="T:Opc.Ua.Client.Browser">
+            <summary>
+            Stores the options to use for a browse operation.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Browser.#ctor">
+            <summary>
+            Creates an unattached instance of a browser.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Browser.#ctor(Opc.Ua.Client.Session)">
+            <summary>
+            Creates new instance of a browser and attaches it to a session.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Browser.#ctor(Opc.Ua.Client.Browser)">
+            <summary>
+            Creates a copy of a browser.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Browser.Initialize">
+            <summary>
+            Sets all private fields to default values.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Browser.Browse(Opc.Ua.NodeId)">
+            <summary>
+            Browses the specified node.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Browser.CheckBrowserState">
+            <summary>
+            Checks the state of the browser.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Browser.BrowseNext(System.Byte[]@,System.Boolean)">
+            <summary>
+            Fetches the next batch of references.
+            </summary>
+            <param name="continuationPoint">The continuation point.</param>
+            <param name="cancel">if set to <c>true</c> the browse operation is cancelled.</param>
+            <returns>The next batch of references</returns>
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.Session">
+            <summary>
+            The session that the browse is attached to.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.View">
+            <summary>
+            The view to use for the browse operation.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.MaxReferencesReturned">
+            <summary>
+            The maximum number of refrences to return in a single browse operation.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.BrowseDirection">
+            <summary>
+            The direction to browse.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.ReferenceTypeId">
+            <summary>
+            The reference type to follow.
+            </summary>        
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.IncludeSubtypes">
+            <summary>
+            Whether subtypes of the reference type should be included.
+            </summary>   
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.NodeClassMask">
+            <summary>
+            The classes of the target nodes.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.ResultMask">
+            <summary>
+            The results to return.
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Client.Browser.MoreReferences">
+            <summary>
+            Raised when a browse operation halted because of a continuation point.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Browser.ContinueUntilDone">
+            <summary>
+            Whether subsequent continuation points should be processed automatically.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.BrowserEventArgs">
+            <summary>
+            The event arguments provided a browse operation returns a continuation point.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.BrowserEventArgs.#ctor(Opc.Ua.ReferenceDescriptionCollection)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.BrowserEventArgs.Cancel">
+            <summary>
+            Whether the browse operation should be cancelled.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.BrowserEventArgs.ContinueUntilDone">
+            <summary>
+            Whether subsequent continuation points should be processed automatically.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.BrowserEventArgs.References">
+            <summary>
+            The references that have been fetched so far.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.BrowserEventHandler">
+            <summary>
+            A delegate used to received browser events.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.DataDictionary">
+            <summary>
+            A class that holds the configuration for a UA service.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.#ctor(Opc.Ua.Client.Session)">
+            <summary>
+            The default constructor.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.Initialize">
+            <summary>
+            Sets private members to default values.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.Load(Opc.Ua.ReferenceDescription)">
+            <summary>
+            Loads the dictionary idetified by the node id.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.Contains(Opc.Ua.NodeId)">
+            <summary>
+            Returns true if the dictionary contains the data type description;
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.GetSchema(Opc.Ua.NodeId)">
+            <summary>
+            Returns the schema for the specified type (returns the entire dictionary if null).
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.GetTypeSystem(Opc.Ua.NodeId)">
+            <summary>
+            Retrieves the type system for the dictionary.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.ReadDataTypes(Opc.Ua.NodeId)">
+            <summary>
+            Retrieves the data types in the dictionary.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.ReadDictionary(Opc.Ua.NodeId)">
+            <summary>
+            Reads the contents of a data dictionary.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.DataDictionary.Validate(System.Byte[])">
+            <summary>
+            Validates the type dictionary.
+            </summary>
+            <param name="dictionary"></param>
+        </member>
+        <member name="P:Opc.Ua.Client.DataDictionary.DictionaryId">
+            <summary>
+            The node id for the dictionary.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.DataDictionary.Name">
+            <summary>
+            The display name for the dictionary.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.DataDictionary.TypeSystemId">
+            <summary>
+            The node id for the type system.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.DataDictionary.TypeSystemName">
+            <summary>
+            The display name for the type system.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.Session">
+            <summary>
+            Manages a session with a server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.#ctor(Opc.Ua.ISessionChannel,Opc.Ua.ApplicationConfiguration,Opc.Ua.ConfiguredEndpoint)">
+            <summary>
+            Constructs a new instance of the session.
+            </summary>
+            <param name="channel">The channel used to communicate with the server.</param>
+            <param name="configuration">The configuration for the client application.</param>
+            <param name="endpoint">The endpoint use to initialize the channel.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.#ctor(Opc.Ua.ITransportChannel,Opc.Ua.ApplicationConfiguration,Opc.Ua.ConfiguredEndpoint,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Constructs a new instance of the session.
+            </summary>
+            <param name="channel">The channel used to communicate with the server.</param>
+            <param name="configuration">The configuration for the client application.</param>
+            <param name="endpoint">The endpoint use to initialize the channel.</param>
+            <param name="clientCertificate">The certificate to use for the client.</param>
+            <remarks>
+            The application configuration is used to look up the certificate if none is provided.
+            The clientCertificate must have the private key. This will require that the certificate
+            be loaded from a certicate store. Converting a DER encoded blob to a X509Certificate2
+            will not include a private key.
+            </remarks>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.#ctor(Opc.Ua.ITransportChannel,Opc.Ua.Client.Session,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Client.Session"/> class.
+            </summary>
+            <param name="channel">The channel.</param>
+            <param name="template">The template session.</param>
+            <param name="copyEventHandlers">if set to <c>true</c> the event handlers are copied.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Initialize(Opc.Ua.ITransportChannel,Opc.Ua.ApplicationConfiguration,Opc.Ua.ConfiguredEndpoint,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Initializes the channel.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Initialize">
+            <summary>
+            Sets the object members to default values.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Dispose(System.Boolean)">
+            <summary>
+            Closes the session and the underlying channel.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Create(Opc.Ua.ApplicationConfiguration,Opc.Ua.ConfiguredEndpoint,System.Boolean,System.String,System.UInt32,Opc.Ua.IUserIdentity,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Creates a new communication session with a server by invoking the CreateSession service
+            </summary>
+            <param name="configuration">The configuration for the client application.</param>
+            <param name="endpoint">The endpoint for the server.</param>
+            <param name="updateBeforeConnect">If set to <c>true</c> the discovery endpoint is used to update the endpoint description before connecting.</param>
+            <param name="sessionName">The name to assign to the session.</param>
+            <param name="sessionTimeout">The timeout period for the session.</param>
+            <param name="identity">The identity.</param>
+            <param name="preferredLocales">The user identity to associate with the session.</param>
+            <returns>The new session object</returns>
+            <!-- Failed to insert some or all of included XML --><include file="Doc\Session.xml" path="class[@name=&quot;Session&quot;]/method[@name=&quot;Create&quot;]/*"/>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Create(Opc.Ua.ApplicationConfiguration,Opc.Ua.ConfiguredEndpoint,System.Boolean,System.Boolean,System.String,System.UInt32,Opc.Ua.IUserIdentity,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Creates a new communication session with a server by invoking the CreateSession service
+            </summary>
+            <param name="configuration">The configuration for the client application.</param>
+            <param name="endpoint">The endpoint for the server.</param>
+            <param name="updateBeforeConnect">If set to <c>true</c> the discovery endpoint is used to update the endpoint description before connecting.</param>
+            <param name="checkDomain">If set to <c>true</c> then the domain in the certificate must match the endpoint used.</param>
+            <param name="sessionName">The name to assign to the session.</param>
+            <param name="sessionTimeout">The timeout period for the session.</param>
+            <param name="identity">The user identity to associate with the session.</param>
+            <param name="preferredLocales">The preferred locales.</param>
+            <returns>The new session object.</returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Recreate(Opc.Ua.Client.Session)">
+            <summary>
+            Recreates a session based on a specified template.
+            </summary>
+            <param name="template">The Session object to use as template</param>
+            <returns>The new session object.</returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Reconnect">
+            <summary>
+            Reconnects to the server after a network failure.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Save(System.String)">
+            <summary>
+            Saves all the subscriptions of the session.
+            </summary>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Save(System.String,System.Collections.Generic.IEnumerable{Opc.Ua.Client.Subscription})">
+            <summary>
+            Saves a set of subscriptions.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Load(System.String)">
+            <summary>
+            Load the list of subscriptions saved in a file.
+            </summary>
+            <param name="filePath">The file path.</param>
+            <returns>The list of loaded subscritons</returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.FetchNamespaceTables">
+            <summary>
+            Updates the local copy of the server's namespace uri and server uri tables.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.FetchTypeTree(Opc.Ua.ExpandedNodeId)">
+            <summary>
+            Updates the cache with the type and its subtypes.
+            </summary>
+            <remarks>
+            This method can be used to ensure the TypeTree is populated.
+            </remarks>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ReadAvailableEncodings(Opc.Ua.NodeId)">
+            <summary>
+            Returns the available encodings for a node
+            </summary>
+            <param name="variableId">The variable node.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.FindDataDescription(Opc.Ua.NodeId)">
+            <summary>
+            Returns the data description for the encoding.
+            </summary>
+            <param name="encodingId">The encoding Id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.FindDataDictionary(Opc.Ua.NodeId)">
+            <summary>
+             Returns the data dictionary that constains the description.
+            </summary>
+            <param name="descriptionId">The description id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ReadNode(Opc.Ua.NodeId)">
+            <summary>
+            Reads the values for the node attributes and returns a node object.
+            </summary>
+            <param name="nodeId">The nodeId.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ReadValue(Opc.Ua.NodeId)">
+            <summary>
+            Reads the value for a node.
+            </summary>
+            <param name="nodeId">The node Id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ReadValue(Opc.Ua.NodeId,System.Type)">
+            <summary>
+            Reads the value for a node an checks that it is the specified type.
+            </summary>
+            <param name="nodeId">The node id.</param>
+            <param name="expectedType">The expected type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.FetchReferences(Opc.Ua.NodeId)">
+            <summary>
+            Fetches all references for the specified node.
+            </summary>
+            <param name="nodeId">The node id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Open(System.String,Opc.Ua.IUserIdentity)">
+            <summary>
+            Establishes a session with the server.
+            </summary>
+            <param name="sessionName">The name to assign to the session.</param>
+            <param name="identity">The user identity.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Open(System.String,System.UInt32,Opc.Ua.IUserIdentity,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Establishes a session with the server.
+            </summary>
+            <param name="sessionName">The name to assign to the session.</param>
+            <param name="sessionTimeout">The session timeout.</param>
+            <param name="identity">The user identity.</param>
+            <param name="preferredLocales">The list of preferred locales.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ChangePreferredLocales(Opc.Ua.StringCollection)">
+            <summary>
+            Updates the preferred locales used for the session.
+            </summary>
+            <param name="preferredLocales">The preferred locales.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.UpdateSession(Opc.Ua.IUserIdentity,Opc.Ua.StringCollection)">
+            <summary>
+            Updates the user identity and/or locales used for the session.
+            </summary>
+            <param name="identity">The user identity.</param>
+            <param name="preferredLocales">The preferred locales.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.FindComponentIds(Opc.Ua.NodeId,System.Collections.Generic.IList{System.String},Opc.Ua.NodeIdCollection@,System.Collections.Generic.List{Opc.Ua.ServiceResult}@)">
+            <summary>
+            Finds the NodeIds for the components for an instance.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ReadValues(System.Collections.Generic.IList{Opc.Ua.NodeId},System.Collections.Generic.IList{System.Type},System.Collections.Generic.List{System.Object}@,System.Collections.Generic.List{Opc.Ua.ServiceResult}@)">
+            <summary>
+            Reads the values for a set of variables.
+            </summary>
+            <param name="variableIds">The variable ids.</param>
+            <param name="expectedTypes">The expected types.</param>
+            <param name="values">The list of returned values.</param>
+            <param name="errors">The list of returned errors.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ReadDisplayName(System.Collections.Generic.IList{Opc.Ua.NodeId},System.Collections.Generic.List{System.String}@,System.Collections.Generic.List{Opc.Ua.ServiceResult}@)">
+            <summary>
+            Reads the display name for a set of Nodes.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Close">
+            <summary>
+            Disconnects from the server and frees any network resources.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Close(System.Int32)">
+            <summary>
+            Disconnects from the server and frees any network resources with the specified timeout.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.AddSubscription(Opc.Ua.Client.Subscription)">
+            <summary>
+            Adds a subscription to the session.
+            </summary>
+            <param name="subscription">The subscription to add.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.RemoveSubscription(Opc.Ua.Client.Subscription)">
+            <summary>
+            Removes a subscription from the session.
+            </summary>
+            <param name="subscription">The subscription to remove.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.RemoveSubscriptions(System.Collections.Generic.IEnumerable{Opc.Ua.Client.Subscription})">
+            <summary>
+            Removes a list of subscriptions from the sessiont.
+            </summary>
+            <param name="subscriptions">The list of subscriptions to remove.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Browse(Opc.Ua.RequestHeader,Opc.Ua.ViewDescription,Opc.Ua.NodeId,System.UInt32,Opc.Ua.BrowseDirection,Opc.Ua.NodeId,System.Boolean,System.UInt32,System.Byte[]@,Opc.Ua.ReferenceDescriptionCollection@)">
+            <summary>
+            Invokes the Browse service.
+            </summary>
+            <param name="requestHeader">The request header.</param>
+            <param name="view">The view to browse.</param>
+            <param name="nodeToBrowse">The node to browse.</param>
+            <param name="maxResultsToReturn">The maximum number of returned values.</param>
+            <param name="browseDirection">The browse direction.</param>
+            <param name="referenceTypeId">The reference type id.</param>
+            <param name="includeSubtypes">If set to <c>true</c> the subtypes of the ReferenceType will be included in the browse.</param>
+            <param name="nodeClassMask">The node class mask.</param>
+            <param name="continuationPoint">The continuation point.</param>
+            <param name="references">The list of node references.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.BeginBrowse(Opc.Ua.RequestHeader,Opc.Ua.ViewDescription,Opc.Ua.NodeId,System.UInt32,Opc.Ua.BrowseDirection,Opc.Ua.NodeId,System.Boolean,System.UInt32,System.AsyncCallback,System.Object)">
+            <summary>
+            Begins an asynchronous invocation of the Browse service.
+            </summary>
+            <param name="requestHeader">The request header.</param>
+            <param name="view">The view to browse.</param>
+            <param name="nodeToBrowse">The node to browse.</param>
+            <param name="maxResultsToReturn">The maximum number of returned values..</param>
+            <param name="browseDirection">The browse direction.</param>
+            <param name="referenceTypeId">The reference type id.</param>
+            <param name="includeSubtypes">If set to <c>true</c> the subtypes of the ReferenceType will be included in the browse.</param>
+            <param name="nodeClassMask">The node class mask.</param>
+            <param name="callback">The callback.</param>
+            <param name="asyncState"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.EndBrowse(System.IAsyncResult,System.Byte[]@,Opc.Ua.ReferenceDescriptionCollection@)">
+            <summary>
+            Finishes an asynchronous invocation of the Browse service.
+            </summary>
+            <param name="result">The result.</param>
+            <param name="continuationPoint">The continuation point.</param>
+            <param name="references">The list of node references.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.BrowseNext(Opc.Ua.RequestHeader,System.Boolean,System.Byte[],System.Byte[]@,Opc.Ua.ReferenceDescriptionCollection@)">
+            <summary>
+            Invokes the BrowseNext service.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.BeginBrowseNext(Opc.Ua.RequestHeader,System.Boolean,System.Byte[],System.AsyncCallback,System.Object)">
+            <summary>
+            Begins an asynchronous invocation of the BrowseNext service.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.EndBrowseNext(System.IAsyncResult,System.Byte[]@,Opc.Ua.ReferenceDescriptionCollection@)">
+            <summary>
+            Finishes an asynchronous invocation of the BrowseNext service.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Call(Opc.Ua.NodeId,Opc.Ua.NodeId,System.Object[])">
+            <summary>
+            Calls the specified method and returns the output arguments.
+            </summary>
+            <param name="objectId">The NodeId of the object that provides the method.</param>
+            <param name="methodId">The NodeId of the method to call.</param>
+            <param name="args">The input arguments.</param>
+            <returns>The list of output argument values.</returns>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.GetSoftwareCertificates">
+            <summary>
+            Returns the software certificates assigned to the application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnApplicationCertificateError(System.Byte[],Opc.Ua.ServiceResult)">
+            <summary>
+            Handles an error when validating the application instance certificate provided by the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnSoftwareCertificateError(Opc.Ua.SignedSoftwareCertificate,Opc.Ua.ServiceResult)">
+            <summary>
+            Handles an error when validating software certificates provided by the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ValidateSoftwareCertificates(System.Collections.Generic.List{Opc.Ua.SoftwareCertificate})">
+            <summary>
+            Inspects the software certificates provided by the server. 
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.StartKeepAliveTimer">
+            <summary>
+            Starts a timer to check that the connection to the server is still available.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.RemoveRequest(System.IAsyncResult,System.UInt32,System.UInt32)">
+            <summary>
+            Removes a completed async request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.AsyncRequestStarted(System.IAsyncResult,System.UInt32,System.UInt32)">
+            <summary>
+            Adds a new async request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.AsyncRequestCompleted(System.IAsyncResult,System.UInt32,System.UInt32)">
+            <summary>
+            Removes a completed async request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnKeepAlive(System.Object)">
+            <summary>
+            Sends a keep alive by reading from the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnKeepAliveComplete(System.IAsyncResult)">
+            <summary>
+            Checks if a notification has arrived. Sends a publish if it has not.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnKeepAlive(Opc.Ua.ServerState,System.DateTime)">
+            <summary>
+            Called when the server returns a keep alive response.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnKeepAliveError(Opc.Ua.ServiceResult)">
+            <summary>
+            Called when a error occurs during a keep alive.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.BeginPublish(System.Int32)">
+            <summary>
+            Sends an additional publish request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnPublishComplete(System.IAsyncResult)">
+            <summary>
+            Completes an asynchronous publish operation.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.Republish(System.UInt32,System.UInt32)">
+            <summary>
+            Sends a republish request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.ProcessPublishResponse(Opc.Ua.ResponseHeader,System.UInt32,Opc.Ua.UInt32Collection,System.Boolean,Opc.Ua.NotificationMessage)">
+            <summary>
+            Processes the response from a publish request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Session.OnRaisePublishNotification(System.Object)">
+            <summary>
+            Raises an event indicating that publish has returned a notification.
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Client.Session.KeepAlive">
+            <summary>
+            Raised when a keep alive arrives from the server or an error is detected.
+            </summary>
+            <remarks>
+            Once a session is created a timer will periodically read the server state and current time.
+            If this read operation succeeds this event will be raised each time the keep alive period elapses.
+            If an error is detected (KeepAliveStopped == true) then this event will be raised as well.
+            </remarks>
+        </member>
+        <member name="E:Opc.Ua.Client.Session.Notification">
+            <summary>
+            Raised when a notification message arrives in a publish response.
+            </summary>
+            <remarks>
+            All publish requests are managed by the Session object. When a response arrives it is
+            validated and passed to the appropriate Subscription object and this event is raised.
+            </remarks>
+        </member>
+        <member name="E:Opc.Ua.Client.Session.PublishError">
+            <summary>
+            Raised when an exception occurs while processing a publish response.
+            </summary>
+            <remarks>
+            Exceptions in a publish response are not necessarily fatal and the Session will 
+            attempt to recover by issuing Republish requests if missing messages are detected.
+            That said, timeout errors may be a symptom of a OperationTimeout that is too short
+            when compared to the shortest PublishingInterval/KeepAliveCount amount the current
+            Subscriptions. The OperationTimeout should be twice the minimum value for
+            PublishingInterval*KeepAliveCount.
+            </remarks>
+        </member>
+        <member name="E:Opc.Ua.Client.Session.SubscriptionsChanged">
+            <summary>
+            Raised when a subscription is added or removed
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Client.Session.SessionClosing">
+            <summary>
+            Raised to indicate the session is closing.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.ConfiguredEndpoint">
+            <summary>
+            Gets the endpoint used to connect to the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.SessionName">
+            <summary>
+            Gets the name assigned to the session.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.SessionTimeout">
+            <summary>
+            Gets the period for wich the server will maintain the session if there is no communication from the client.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.Handle">
+            <summary>
+            Gets the local handle assigned to the session
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.Identity">
+            <summary>
+            Gets the user identity currently used for the session.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.IdentityHistory">
+            <summary>
+            Gets a list of user identities that can be used to connect to the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.NamespaceUris">
+            <summary>
+            Gets the table of namespace uris known to the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.ServerUris">
+            <summary>
+            Gest the table of remote server uris known to the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.SystemContext">
+            <summary>
+            Gets the system context for use with the session.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.Factory">
+            <summary>
+            Gets the factory used to create encodeable objects that the server understands.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.TypeTree">
+            <summary>
+            Gets the cache of the server's type tree.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.NodeCache">
+            <summary>
+            Gets the cache of nodes fetched from the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.FilterContext">
+            <summary>
+            Gets the context to use for filter operations.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.PreferredLocales">
+            <summary>
+            Gets the locales that the server should use when returning localized text.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.Subscriptions">
+            <summary>
+            Gets the subscriptions owned by the session.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.SubscriptionCount">
+            <summary>
+            Gets the number of subscriptions owned by the session.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.DefaultSubscription">
+            <summary>
+            Gets or Sets the default subscription for the session.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.KeepAliveInterval">
+            <summary>
+            Gets or Sets how frequently the server is pinged to see if communication is still working.
+            </summary>
+            <remarks>
+            This interval controls how much time elaspes before a communication error is detected.
+            If everything is ok the KeepAlive event will be raised each time this period elapses.
+            </remarks>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.KeepAliveStopped">
+            <summary>
+            Returns true if the session is not receiving keep alives.
+            </summary>
+            <remarks>
+            Set to true if the server does not respond for 2 times the KeepAliveInterval.
+            Set to false is communication recovers.
+            </remarks>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.LastKeepAliveTime">
+            <summary>
+            Gets the time of the last keep alive.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.OutstandingRequestCount">
+            <summary>
+            Gets the number of outstanding publish or keep alive requests.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.DefunctRequestCount">
+            <summary>
+            Gets the number of outstanding publish or keep alive requests which appear to hung.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Session.GoodPublishRequestCount">
+            <summary>
+            Gets the number of good outstanding publish requests.
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Client.Session.RenewUserIdentity">
+            <summary>
+            Raised before a reconnect operation completes.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.Session.RenewUserIdentityEventHandler">
+            <summary>
+            Used to handle renews of user identity tokens before reconnect.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.KeepAliveEventArgs">
+            <summary>
+            The event arguments provided when a keep alive response arrives.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.KeepAliveEventArgs.#ctor(Opc.Ua.ServiceResult,Opc.Ua.ServerState,System.DateTime)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.KeepAliveEventArgs.Status">
+            <summary>
+            Gets the status associated with the keep alive operation.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.KeepAliveEventArgs.CurrentState">
+            <summary>
+            Gets the current server state.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.KeepAliveEventArgs.CurrentTime">
+            <summary>
+            Gets the current server time.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.KeepAliveEventArgs.CancelKeepAlive">
+            <summary>
+            Gets or sets a flag indicating whether the session should send another keep alive.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.KeepAliveEventHandler">
+            <summary>
+            The delegate used to receive keep alive notifications.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.NotificationEventArgs">
+            <summary>
+            Represents the event arguments provided when a new notification message arrives.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.NotificationEventArgs.#ctor(Opc.Ua.Client.Subscription,Opc.Ua.NotificationMessage,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.NotificationEventArgs.Subscription">
+            <summary>
+            Gets the subscription that the notification applies to.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.NotificationEventArgs.NotificationMessage">
+            <summary>
+            Gets the notification message.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.NotificationEventArgs.StringTable">
+            <summary>
+            Gets the string table returned with the notification message.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.NotificationEventHandler">
+            <summary>
+            The delegate used to receive publish notifications.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.PublishErrorEventArgs">
+            <summary>
+            Represents the event arguments provided when a publish error occurs.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.PublishErrorEventArgs.#ctor(Opc.Ua.ServiceResult)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.PublishErrorEventArgs.#ctor(Opc.Ua.ServiceResult,System.UInt32,System.UInt32)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.PublishErrorEventArgs.Status">
+            <summary>
+            Gets the status associated with the keep alive operation.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.PublishErrorEventArgs.SubscriptionId">
+            <summary>
+            Gets the subscription with the message that could not be republished.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.PublishErrorEventArgs.SequenceNumber">
+            <summary>
+            Gets the sequence number for the message that could not be republished.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.PublishErrorEventHandler">
+            <summary>
+            The delegate used to receive pubish error notifications.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.MonitoredItem">
+            <summary>
+            A monitored item.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Client.MonitoredItem"/> class.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.#ctor(System.UInt32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Client.MonitoredItem"/> class.
+            </summary>
+            <param name="clientHandle">The client handle. The caller must ensure it uniquely identifies the monitored item.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.#ctor(Opc.Ua.Client.MonitoredItem)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Client.MonitoredItem"/> class.
+            </summary>
+            <param name="template">The template used to specify the monitoring parameters.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.#ctor(Opc.Ua.Client.MonitoredItem,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Client.MonitoredItem"/> class.
+            </summary>
+            <param name="template">The template used to specify the monitoring parameters.</param>
+            <param name="copyEventHandlers">if set to <c>true</c> the event handlers are copied.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.Initialize(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Called by the .NET framework during deserialization.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.Initialize">
+            <summary>
+            Sets the private members to default values.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.DequeueValues">
+            <summary>
+            Read all values in the cache queue.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.DequeueEvents">
+            <summary>
+            Read all events in the cache queue.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.SaveValueInCache(Opc.Ua.IEncodeable)">
+            <summary>
+            Saves a data change or event in the cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.Clone">
+            <summary>
+            Creates a deep copy of the object.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.SetError(Opc.Ua.ServiceResult)">
+            <summary>
+            Sets the error status for the monitored item.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.SetResolvePathResult(Opc.Ua.BrowsePathResult,System.Int32,Opc.Ua.DiagnosticInfoCollection,Opc.Ua.ResponseHeader)">
+            <summary>
+            Updates the object with the results of a translate browse path request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.SetCreateResult(Opc.Ua.MonitoredItemCreateRequest,Opc.Ua.MonitoredItemCreateResult,System.Int32,Opc.Ua.DiagnosticInfoCollection,Opc.Ua.ResponseHeader)">
+            <summary>
+            Updates the object with the results of a create monitored item request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.SetModifyResult(Opc.Ua.MonitoredItemModifyRequest,Opc.Ua.MonitoredItemModifyResult,System.Int32,Opc.Ua.DiagnosticInfoCollection,Opc.Ua.ResponseHeader)">
+            <summary>
+            Updates the object with the results of a modify monitored item request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.SetDeleteResult(Opc.Ua.StatusCode,System.Int32,Opc.Ua.DiagnosticInfoCollection,Opc.Ua.ResponseHeader)">
+            <summary>
+            Updates the object with the results of a modify monitored item request.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetFieldName(System.Int32)">
+            <summary>
+            Returns the field name the specified SelectClause in the EventFilter.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetFieldValue(Opc.Ua.EventFieldList,Opc.Ua.NodeId,System.String,System.UInt32)">
+            <summary>
+            Returns value of the field name containing the event type.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetFieldValue(Opc.Ua.EventFieldList,Opc.Ua.NodeId,Opc.Ua.QualifiedName)">
+            <summary>
+            Returns value of the field name containing the event type.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetFieldValue(Opc.Ua.EventFieldList,Opc.Ua.NodeId,System.Collections.Generic.IList{Opc.Ua.QualifiedName},System.UInt32)">
+            <summary>
+            Returns value of the field name containing the event type.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetEventType(Opc.Ua.EventFieldList)">
+            <summary>
+            Returns value of the field name containing the event type.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetEventTime(Opc.Ua.EventFieldList)">
+            <summary>
+            Returns value of the field name containing the event type.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetServiceResult(Opc.Ua.IEncodeable)">
+            <summary>
+            The service result for a data change notification.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.GetServiceResult(Opc.Ua.IEncodeable,System.Int32)">
+            <summary>
+            The service result for a field in an notification (the field must contain a Status object).
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.ValidateFilter(Opc.Ua.NodeClass,Opc.Ua.MonitoringFilter)">
+            <summary>
+            Throws an exception if the flter cannot be used with the node class.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItem.UseDefaultEventFilter">
+            <summary>
+            Sets the default event filter.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.DisplayName">
+            <summary>
+            A display name for the monitored item.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.StartNodeId">
+            <summary>
+            The start node for the browse path that identifies the node to monitor.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.RelativePath">
+            <summary>
+            The relative path from the browse path to the node to monitor.
+            </summary>
+            <remarks>
+            A null or empty string specifies that the start node id should be monitored.
+            </remarks>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.NodeClass">
+            <summary>
+            The node class of the node being monitored (affects the type of filter available).
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.AttributeId">
+            <summary>
+            The attribute to monitor.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.IndexRange">
+            <summary>
+            The range of array indexes to monitor.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.Encoding">
+            <summary>
+            The encoding to use when returning notifications.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.MonitoringMode">
+            <summary>
+            The monitoring mode.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.SamplingInterval">
+            <summary>
+            The sampling interval.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.Filter">
+            <summary>
+            The filter to use to select values to return.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.QueueSize">
+            <summary>
+            The length of the queue used to buffer values.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.DiscardOldest">
+            <summary>
+            Whether to discard the oldest entries in the queue when it is full.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.Subscription">
+            <summary>
+            The subscription that owns the monitored item.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.Handle">
+            <summary>
+            A local handle assigned to the monitored item.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.Created">
+            <summary>
+            Whether the item has been created on the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.ClientHandle">
+            <summary>
+            The identifier assigned by the client.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.ResolvedNodeId">
+            <summary>
+            The node id to monitor after applying any relative path.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.AttributesModified">
+            <summary>
+            Whether the monitoring attributes have been modified since the item was created.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.Status">
+            <summary>
+            The status associated with the monitored item.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.CacheQueueSize">
+            <summary>
+            Returns the queue size used by the cache.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.LastValue">
+            <summary>
+            The last value or event recieved from the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItem.LastMessage">
+            <summary>
+            The last message containing a notification for the item.
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Client.MonitoredItem.Notification">
+            <summary>
+            Raised when a new notification arrives.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.MonitoredItemNotificationEventArgs">
+            <summary>
+            The event arguments provided when a new notification message arrives.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemNotificationEventArgs.#ctor(Opc.Ua.IEncodeable)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemNotificationEventArgs.NotificationValue">
+            <summary>
+            The new notification.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.MonitoredItemNotificationEventHandler">
+            <summary>
+            The delegate used to receive monitored item value notifications.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.MonitoredItemDataCache">
+            <summary>
+            An item in the cache
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemDataCache.#ctor(System.Int32)">
+            <summary>
+            Constructs a cache for a monitored item.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemDataCache.Publish">
+            <summary>
+            Returns all values in the queue.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemDataCache.OnNotification(Opc.Ua.MonitoredItemNotification)">
+            <summary>
+            Saves a notification in the cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemDataCache.SetQueueSize(System.Int32)">
+            <summary>
+            Changes the queue size.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemDataCache.QueueSize">
+            <summary>
+            The size of the queue to maintain.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemDataCache.LastValue">
+            <summary>
+            The last value received from the server.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.MonitoredItemEventCache">
+            <summary>
+            Saves the events received from the srever.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemEventCache.#ctor(System.Int32)">
+            <summary>
+            Constructs a cache for a monitored item.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemEventCache.Publish">
+            <summary>
+            Returns all events in the queue.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemEventCache.OnNotification(Opc.Ua.EventFieldList)">
+            <summary>
+            Saves a notification in the cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.MonitoredItemEventCache.SetQueueSize(System.Int32)">
+            <summary>
+            Changes the queue size.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemEventCache.QueueSize">
+            <summary>
+            The size of the queue to maintain.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.MonitoredItemEventCache.LastEvent">
+            <summary>
+            The last event received.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.NamespaceDoc">
+             <summary>
+             The <b>Opc.Ua.Client</b> namespace defines classes which can be used to implement a UA client.
+             These classes manage client side state information, provide higher level abstractions for UA 
+             tasks such as managing sessions/subscriptions and saving/restoring connection information for 
+             later use.
+             </summary>
+            <exclude/>
+        </member>
+        <member name="T:AssemblyVersionInfo">
+            <summary>
+            Defines string constants for SDK version information.
+            </summary>
+        </member>
+        <member name="F:AssemblyVersionInfo.Copyright">
+            <summary>
+            The current copy right notice.
+            </summary>
+        </member>
+        <member name="F:AssemblyVersionInfo.CurrentVersion">
+            <summary>
+            The current build version.
+            </summary>
+        </member>
+        <member name="F:AssemblyVersionInfo.CurrentFileVersion">
+            <summary>
+            The current build file version.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.Subscription">
+            <summary>
+            A subscription
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.#ctor">
+            <summary>
+            Creates a empty object.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.#ctor(Opc.Ua.Client.Subscription)">
+            <summary>
+            Initializes the subscription from a template.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.#ctor(Opc.Ua.Client.Subscription,System.Boolean)">
+            <summary>
+            Initializes the subscription from a template.
+            </summary>
+            <param name="template">The template.</param>
+            <param name="copyEventHandlers">if set to <c>true</c> the event handlers are copied.</param>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Initialize(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Called by the .NET framework during deserialization.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Initialize">
+            <summary>
+            Sets the private members to default values.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Dispose">
+            <summary>
+            Frees any unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Dispose(System.Boolean)">
+            <summary>
+            An overrideable version of the Dispose.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.ChangesCompleted">
+            <summary>
+            Sends a notification that the state of the subscription has changed.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.AdjustCounts(System.UInt32@,System.UInt32@)">
+            <summary>
+            Ensures sensible values for the counts.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Create">
+            <summary>
+            Creates a subscription on the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.StartKeepAliveTimer">
+            <summary>
+            Starts a timer to ensure publish requests are sent frequently enough to detect network interruptions.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.OnKeepAlive(System.Object)">
+            <summary>
+            Checks if a notification has arrived. Sends a publish if it has not.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.TraceState(System.String)">
+            <summary>
+            Dumps the current state of the session queue.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Delete(System.Boolean)">
+            <summary>
+            Deletes a subscription on the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Modify">
+            <summary>
+            Modifies a subscription on the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.SetPublishingMode(System.Boolean)">
+            <summary>
+            Changes the publishing enabled state for the subscription.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.Republish(System.UInt32)">
+            <summary>
+            Republishes the specified notification message.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.ApplyChanges">
+            <summary>
+            Applies any changes to the subscription items.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.ResolveItemNodeIds">
+            <summary>
+            Resolves all relative paths to nodes on the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.CreateItems">
+            <summary>
+            Creates all items that have not already been created.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.ModifyItems">
+            <summary>
+            Modies all items that have been changed.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.DeleteItems">
+            <summary>
+            Deletes all items that have been marked for deletion.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.SetMonitoringMode(Opc.Ua.MonitoringMode,System.Collections.Generic.IList{Opc.Ua.Client.MonitoredItem})">
+            <summary>
+            Deletes all items that have been marked for deletion.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.SaveMessageInCache(System.Collections.Generic.IList{System.UInt32},Opc.Ua.NotificationMessage,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Adds the notification message to internal cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.OnMessageRecieved(System.Object)">
+            <summary>
+            Processes the incoming messages.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.AddItem(Opc.Ua.Client.MonitoredItem)">
+            <summary>
+            Adds an item to the subscription.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.AddItems(System.Collections.Generic.IEnumerable{Opc.Ua.Client.MonitoredItem})">
+            <summary>
+            Adds an item to the subscription.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.RemoveItem(Opc.Ua.Client.MonitoredItem)">
+            <summary>
+            Removes an item from the subscription.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.RemoveItems(System.Collections.Generic.IEnumerable{Opc.Ua.Client.MonitoredItem})">
+            <summary>
+            Removes an item from the subscription.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.FindItemByClientHandle(System.UInt32)">
+            <summary>
+            Returns the monitored item identified by the client handle.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.ConditionRefresh">
+            <summary>
+            Tells the server to refresh all conditions being monitored by the subscription.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.VerifySubscriptionState(System.Boolean)">
+            <summary>
+            Throws an exception if the subscription is not in the correct state.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.SaveDataChange(Opc.Ua.NotificationMessage,Opc.Ua.DataChangeNotification,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Saves a data change in the monitored item cache.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.Subscription.SaveEvents(Opc.Ua.NotificationMessage,Opc.Ua.EventNotificationList,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Saves events in the monitored item cache.
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Client.Subscription.StateChanged">
+            <summary>
+            Raised to indicate that the state of the subscription has changed.
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Client.Subscription.PublishStatusChanged">
+            <summary>
+            Raised to indicate the publishing state for the subscription has stopped or resumed (see PublishingStopped property).
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.DisplayName">
+            <summary>
+            A display name for the subscription.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.PublishingInterval">
+            <summary>
+            The publishing interval.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.KeepAliveCount">
+            <summary>
+            The keep alive count.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.LifetimeCount">
+            <summary>
+            The maximum number of notifications per publish request.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.MaxNotificationsPerPublish">
+            <summary>
+            The maximum number of notifications per publish request.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.PublishingEnabled">
+            <summary>
+            Whether publishing is enabled.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.Priority">
+            <summary>
+            The priority assigned to subscription.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.TimestampsToReturn">
+            <summary>
+            The timestamps to return with the notification messages.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.MaxMessageCount">
+            <summary>
+            The maximum number of messages to keep in the internal cache.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.DefaultItem">
+            <summary>
+            The default monitored item.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.MinLifetimeInterval">
+            <summary>
+            The minimum lifetime for subscriptions in milliseconds.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.DisableMonitoredItemCache">
+            <summary>
+            Gets or sets a value indicating whether the notifications are cached within the monitored items.
+            </summary>
+            <value>
+            	<c>true</c> if monitored item cache is disabled; otherwise, <c>false</c>.
+            </value>
+            <remarks>
+            Applications must process the Session.Notication event if this is set to true.
+            This flag improves performance by eliminating the processing involved in updating the cache.
+            </remarks>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.FastDataChangeCallback">
+            <summary>
+            Gets or sets the fast data change callback.
+            </summary>
+            <value>The fast data change callback.</value>
+            <remarks>
+            Only one callback is allowed at a time but it is more efficient to call than an event.
+            </remarks>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.FastEventCallback">
+            <summary>
+            Gets or sets the fast event callback.
+            </summary>
+            <value>The fast event callback.</value>
+            <remarks>
+            Only one callback is allowed at a time but it is more efficient to call than an event.
+            </remarks>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.MonitoredItems">
+            <summary>
+            The items to monitor.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.SavedMonitoredItems">
+            <summary>
+            Allows the list of monitored items to be saved/restored when the object is serialized.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.ChangesPending">
+            <summary>
+            Returns true if the subscription has changes that need to be applied.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.MonitoredItemCount">
+            <summary>
+            Returns the number of monitored items.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.Session">
+            <summary>
+            The session that owns the subscription item.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.Handle">
+            <summary>
+            A local handle assigned to the subscription
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.Id">
+            <summary>
+            The unique identifier assigned by the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.Created">
+            <summary>
+            Whether the subscription has been created on the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.CurrentPublishingInterval">
+            <summary>
+            The current publishing interval.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.CurrentKeepAliveCount">
+            <summary>
+            The current keep alive count.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.CurrentLifetimeCount">
+            <summary>
+            The current lifetime count.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.CurrentPublishingEnabled">
+            <summary>
+            Whether publishing is currently enabled.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.CurrentPriority">
+            <summary>
+            The priority assigned to subscription when it was created.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.PublishTime">
+            <summary>
+            The when that the last notification received was published.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.LastNotificationTime">
+            <summary>
+            The when that the last notification was received.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.SequenceNumber">
+            <summary>
+            The sequence number assigned to the last notification message.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.NotificationCount">
+            <summary>
+            The number of notifications contained in the last notification message.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.LastNotification">
+            <summary>
+            The last notification received from the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.Notifications">
+            <summary>
+            The cached notifications.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.AvailableSequenceNumbers">
+            <summary>
+            The sequence numbers that are available for republish requests.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.Subscription.PublishingStopped">
+            <summary>
+            Returns true if the subscription is not receiving publishes.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.Subscription.IncomingMessage">
+            <summary>
+            A message received from the server cached until is processed or discarded.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.SubscriptionChangeMask">
+            <summary>
+            Flags indicating what has changed in a subscription.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.None">
+            <summary>
+            The subscription has not changed.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.Created">
+            <summary>
+            The subscription was created on the server.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.Deleted">
+            <summary>
+            The subscription was deleted on the server.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.Modified">
+            <summary>
+            The subscription was modified on the server.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.ItemsAdded">
+            <summary>
+            Monitored items were added to the subscription (but not created on the server) 
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.ItemsRemoved">
+            <summary>
+            Monitored items were removed to the subscription (but not deleted on the server) 
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.ItemsCreated">
+            <summary>
+            Monitored items were created on the server.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.ItemsDeleted">
+            <summary>
+            Monitored items were deleted on the server.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Client.SubscriptionChangeMask.ItemsModified">
+            <summary>
+            Monitored items were modified on the server.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.FastDataChangeNotificationEventHandler">
+            <summary>
+            The delegate used to receive data change notifications via a direct function call instead of a .NET Event.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.FastEventNotificationEventHandler">
+            <summary>
+            The delegate used to receive event notifications via a direct function call instead of a .NET Event.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.SubscriptionStateChangedEventArgs">
+            <summary>
+            The event arguments provided when the state of a subscription changes.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SubscriptionStateChangedEventArgs.#ctor(Opc.Ua.Client.SubscriptionChangeMask)">
+            <summary>
+            Creates a new instance.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.SubscriptionStateChangedEventArgs.Status">
+            <summary>
+            The changes that have affected the subscription.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.SubscriptionStateChangedEventHandler">
+            <summary>
+            The delegate used to receive subscription state change notifications.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Client.SubscriptionCollection">
+            <summary>
+            A collection of subscriptions.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SubscriptionCollection.#ctor">
+            <summary>
+            Initializes an empty collection.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SubscriptionCollection.#ctor(System.Collections.Generic.IEnumerable{Opc.Ua.Client.Subscription})">
+            <summary>
+            Initializes the collection from another collection.
+            </summary>
+            <param name="collection">The existing collection to use as the basis of creating this collection</param>
+        </member>
+        <member name="M:Opc.Ua.Client.SubscriptionCollection.#ctor(System.Int32)">
+            <summary>
+            Initializes the collection with the specified capacity.
+            </summary>
+            <param name="capacity">The max. capacity of the collection</param>
+        </member>
+        <member name="T:Opc.Ua.Client.SessionReconnectHandler">
+            <summary>
+            Attempts to reconnect to the server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SessionReconnectHandler.Dispose">
+            <summary>
+            Frees any unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SessionReconnectHandler.Dispose(System.Boolean)">
+            <summary>
+            An overrideable version of the Dispose.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SessionReconnectHandler.BeginReconnect(Opc.Ua.Client.Session,System.Int32,System.EventHandler)">
+            <summary>
+            Begins the reconnect process.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SessionReconnectHandler.OnReconnect(System.Object)">
+            <summary>
+            Called when the reconnect timer expires.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Client.SessionReconnectHandler.DoReconnect">
+            <summary>
+            Reconnects to the server.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Client.SessionReconnectHandler.Session">
+            <summary>
+            Gets the session managed by the handler.
+            </summary>
+            <value>The session.</value>
+        </member>
+    </members>
+</doc>

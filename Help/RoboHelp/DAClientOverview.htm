@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>DAClientOverview</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Data Access Client Overview</h1>
+<p>A light-weight OPC UA DA Client that provides minimal capabilities and 
+ merely demonstrates the simple data-acquisition from an OPC UA DA Server.</p>
+<h2><a name="gui"></a>User Interface</h2>
+<p class="Picture"><img src="image81.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Screen Elements</h2>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.705%;" />
+	<col style="width: 76.295%;" />
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Menus</span></p></td>
+		<td style="vertical-align: Top;"><ul type="disc">
+			<li><p><span style="font-weight: bold;">File</span></p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Exit:</span> Quit 
+				 the application</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Server</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Discover</span>: 
+				 Invokes the &quot;<a href="UaGenericClientDiscovery.htm">Discover 
+				 Servers</a>&quot; dialog.</p></li>
+				<li><p><span style="font-weight: bold;">Connect</span>: 
+				 Connects to the selected endpoint. The same as the &quot;Connect&quot; 
+				 button.</p></li>
+				<li><p><span style="font-weight: bold;">Disconnect</span>: 
+				 Disconnects a current connection.</p></li>
+				<li><p><span style="font-weight: bold;">Select Locale</span>: 
+				 Opens the &quot;Select Locale&quot; dialog where you can 
+				 choose &quot;US-EN&quot;.</p></li>
+				<li><p><span style="font-weight: bold;">Set User</span>: 
+				 not implemented.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">View</span>: not implemented</p></li>
+			<li><p><span style="font-weight: bold;">Monitored Items</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Load</span>: not 
+				 implemented</p></li>
+				<li><p><span style="font-weight: bold;">Save</span>: not 
+				 implemented</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Help</span>: </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Contents</span>: 
+				 Launches this help file.</p></li>
+			</ul>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Banner</span></p></td>
+		<td style="vertical-align: Top;"><p>Shows the OPC Foundation logo 
+		 and a [clickable] link to the website, shows the application name 
+		 in large text, and shows the Certification logo with a link for 
+		 more information online.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Endpoint Bar</span> (below banner)</p></td>
+		<td style="vertical-align: Top;"><p><img src="image38.gif" alt="" 
+												 style="border: none;" 
+												 border="0" /></p>
+		<p>There are 3 key areas in the endpoint bar: </p>
+		<ul type="disc">
+			<li><p><span style="font-weight: bold;">Endpoint Url</span><span>: 
+			 the endpoint URL (of a Server) to connect to.</span></p></li>
+			<li><p><span style="font-weight: bold;">Use Security</span><span>: 
+			 (checkbox) if checked will use a secure session, if unchecked 
+			 then will use a raw/insecure session.</span></p></li>
+			<li><p><span style="font-weight: bold;">Connect button</span><span>:</span> 
+			 clicking this will attempt to connect to the specified endpoint.</p></li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Address Space Navigation</span> (left)</p></td>
+		<td style="vertical-align: Top;"><p>A simple node browser that 
+		 allows you to navigate the UA Server's address space, behaving 
+		 much like a file and folder browser (such as Windows Explorer):</p>
+		<p><img src="image37.gif" alt="" style="border: none;" border="0" /></p>
+		<p>A context menu for this control exists and is described below.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Data Value Display</span> (right)</p></td>
+		<td style="vertical-align: Top;"><p>A simple display of the attributes 
+		 for the currently selected Node (in the <span style="font-style: italic;">address 
+		 space navigation</span><span>): </span></p>
+		<p><span><img src="image39.gif" alt="" style="border: none;" border="0" /></span></p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Event Notifications</span> (bottom)</p></td>
+		<td style="vertical-align: Top;"><p>A simple log output of events 
+		 that received by the client: </p>
+		<p class="Picture"><img src="image40.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+		<p>A context-sensitive menu exists for this control and is described 
+		 below.</p></td>
+	</tr>
+</table>
+<h2>Address Space Navigation Context Menu</h2>
+<p class="Picture"><img src="image82.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h4>Monitor</h4>
+<p>Adds the selected item to the current subscription. The subscription 
+ is created automatically. The item's changes are shown in the &quot;Event 
+ Notifications&quot; area.</p>
+<h4>Write</h4>
+<p class="Picture"><img src="image83.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Specify a new value and press OK.</p>
+<h4>Read History...</h4>
+<p>The &quot;Read History&quot; option will only work when the selected 
+ node is historizing.</p>
+<h2>Event Notifications Context Menu</h2>
+<p class="Picture"><img src="image84.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h4>Delete</h4>
+<p>Remove the currently selected node(s) from the subscription.</p>
+<h4>Write</h4>
+<p class="Picture"><img src="image83.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Specify a new value and press OK.</p>
+<h4>Monitoring Mode</h4>
+<p>Three options exist to control the sampling mode of the currently selected 
+ node(s): </p>
+<ul type="disc">
+	<li><p>Disabled</p></li>
+	<li><p>Sampling</p></li>
+	<li><p>Reporting</p></li>
+</ul>
+<p>These options are described in <a href="http://www.opcfoundation.org/ua/part4"><?rh-udv_start 
+	 name="UaSpec04" ?>UA Specifications Part 4 - Services (http://www.opcfoundation.org/ua/part4)<?rh-udv_end ?></a>.</p>
+<h4>Sampling Interval</h4>
+<p>Four options are available enabling you to specify the sampling interval 
+ for the currently selected node(s): </p>
+<ul type="disc">
+	<li><p>fast as possible</p></li>
+	<li><p>1000ms</p></li>
+	<li><p>2500ms</p></li>
+	<li><p>5000ms</p></li>
+</ul>
+<h4>Deadband</h4>
+<p>Three options exist here:</p>
+<ul type="disc">
+	<li><p>None: Disables deadband</p></li>
+	<li><p>Absolute: a menu providing these options: </p></li>
+	<ul type="disc">
+		<li><p>5</p></li>
+		<li><p>10</p></li>
+		<li><p>25</p></li>
+	</ul>
+	<li><p>Percent: a menu providing these options.</p></li>
+	<ul type="disc">
+		<li><p>1%</p></li>
+		<li><p>5%</p></li>
+		<li><p>10% </p></li>
+	</ul>
+</ul>
+<p><span style="font-weight: bold;">Absolute</span> deadband is described 
+ in <a href="http://www.opcfoundation.org/ua/part4"><?rh-udv_start name="UaSpec04" ?>UA Specifications Part 4 - Services (http://www.opcfoundation.org/ua/part4)<?rh-udv_end ?></a>.</p>
+<p><span style="font-weight: bold;">Percent</span> deadband is described 
+ in <a href="http://www.opcfoundation.org/ua/part8"><?rh-udv_start name="UaSpec08" ?>UA Specifications Part 8 - Data Access (http://www.opcfoundation.org/ua/part8)<?rh-udv_end ?></a>.</p>
+</body>
+</html>

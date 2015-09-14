@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<opc:ModelDesign
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:opc="http://opcfoundation.org/UA/ModelDesign.xsd"
+	xmlns:ua="http://opcfoundation.org/UA/"
+	xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+	xmlns="http://tempuri.org/UA/FileSystem/"
+	TargetNamespace="http://tempuri.org/UA/FileSystem/"
+>
+  <opc:Namespaces>
+    <opc:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</opc:Namespace>
+    <opc:Namespace Name="FileSystem" Prefix="FileSystem">http://tempuri.org/UA/FileSystem/</opc:Namespace>
+  </opc:Namespaces>
+
+  <opc:ObjectType SymbolicName="ControllerEventType" BaseType="ua:BaseEventType">
+    <opc:Description>A generic controller</opc:Description>
+    <opc:Children>
+      <opc:Property SymbolicName="Temperature" DataType="ua:Double"></opc:Property>
+      <opc:Property SymbolicName="State" DataType="ua:Int32" AccessLevel="ReadWrite" />
+    </opc:Children>
+  </opc:ObjectType>
+  
+  <opc:Method SymbolicName="CreateControllerMethodType" ModellingRule="Mandatory">
+    <opc:InputArguments>
+      <opc:Argument Name="Name" DataType="ua:String">
+        <opc:Description>The name of the controller to create.</opc:Description>
+      </opc:Argument>
+    </opc:InputArguments>
+    <opc:OutputArguments>
+      <opc:Argument Name="NodeId" DataType="ua:NodeId">
+        <opc:Description>The NodeId for the controller that was created</opc:Description>
+      </opc:Argument>
+    </opc:OutputArguments>
+  </opc:Method>
+
+  <opc:ObjectType SymbolicName="AreaType" BaseType="ua:FolderType">
+    <opc:Description>An area containing controllers or other areas.</opc:Description>
+    <opc:Children>
+      <opc:Property SymbolicName="LastUpdateTime" DataType="ua:DateTime"></opc:Property>
+      <opc:Method SymbolicName="CreateController" TypeDefinition="CreateControllerMethodType"></opc:Method>
+    </opc:Children>
+  </opc:ObjectType>
+  
+  <opc:ObjectType SymbolicName="ControllerType" BaseType="ua:BaseObjectType">
+    <opc:Description>A generic controller</opc:Description>
+    <opc:Children>
+      <opc:Variable SymbolicName="Temperature" TypeDefinition="ua:AnalogItemType" DataType="ua:Double">
+        <opc:Children>
+          <opc:Property SymbolicName="ua:EURange">
+            <opc:DefaultValue>
+              <uax:ExtensionObject>
+                <uax:TypeId>
+                  <uax:Identifier>i=885</uax:Identifier>
+                </uax:TypeId>
+                <uax:Body>
+                  <uax:Range>
+                    <uax:Low>-30</uax:Low>
+                    <uax:High>40</uax:High>
+                  </uax:Range>
+                </uax:Body>
+              </uax:ExtensionObject>
+            </opc:DefaultValue>
+          </opc:Property>
+          <opc:Property SymbolicName="ua:EngineeringUnits">
+            <opc:DefaultValue>
+              <uax:ExtensionObject>
+                <uax:TypeId>
+                  <uax:Identifier>i=888</uax:Identifier>
+                </uax:TypeId>
+                <uax:Body>
+                  <uax:EUInformation>
+                    <uax:NamespaceUri>http://tempuri.org/UA/FileSystem/</uax:NamespaceUri>
+                    <uax:UnitId>1</uax:UnitId>
+                    <uax:DisplayName>
+                      <uax:Text>C</uax:Text>
+                    </uax:DisplayName>
+                    <uax:Description>
+                      <uax:Text>Centigrade</uax:Text>
+                    </uax:Description>
+                  </uax:EUInformation>
+                </uax:Body>
+              </uax:ExtensionObject>
+            </opc:DefaultValue>
+          </opc:Property>
+        </opc:Children>
+      </opc:Variable>
+      <opc:Variable SymbolicName="TemperatureSetPoint" TypeDefinition="ua:AnalogItemType" DataType="ua:Double" AccessLevel="ReadWrite"></opc:Variable>
+      <opc:Variable SymbolicName="State" DataType="ua:Int32" />
+      <opc:Variable SymbolicName="PowerConsumption" TypeDefinition="ua:DataItemType" DataType="ua:Double" />
+      <opc:Method SymbolicName="Start" ModellingRule="Mandatory" />
+      <opc:Method SymbolicName="Stop" ModellingRule="Mandatory" />
+    </opc:Children>
+    <opc:References>
+      <opc:Reference>
+        <opc:ReferenceType>ua:GeneratesEvent</opc:ReferenceType>
+        <opc:TargetId>ControllerEventType</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="FurnaceControllerType" BaseType="ControllerType">
+    <opc:Description>A controller for a furance</opc:Description>
+    <opc:Children>
+      <opc:Variable SymbolicName="State" DataType="ua:Int32">
+        <opc:Children>
+          <opc:Property SymbolicName="ua:EnumStrings">
+            <opc:DefaultValue>
+              <uax:ListOfLocalizedText>
+                <uax:LocalizedText>
+                  <uax:Text>Heating</uax:Text>
+                </uax:LocalizedText>
+                <uax:LocalizedText>
+                  <uax:Text>Off</uax:Text>
+                </uax:LocalizedText>
+              </uax:ListOfLocalizedText>
+            </opc:DefaultValue>
+          </opc:Property>
+        </opc:Children>
+      </opc:Variable>
+      <opc:Variable SymbolicName="GasFlow" TypeDefinition="ua:DataItemType" DataType="ua:Double" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="AirConditionerControllerType" BaseType="ControllerType">
+    <opc:Description>A controller for an air conditioner</opc:Description>
+    <opc:Children>
+      <opc:Variable SymbolicName="State" DataType="ua:Int32">
+        <opc:Children>
+          <opc:Property SymbolicName="ua:EnumStrings">
+            <opc:DefaultValue>
+              <uax:ListOfLocalizedText>
+                <uax:LocalizedText>
+                  <uax:Text>Cooling</uax:Text>
+                </uax:LocalizedText>
+                <uax:LocalizedText>
+                  <uax:Text>Off</uax:Text>
+                </uax:LocalizedText>
+              </uax:ListOfLocalizedText>
+            </opc:DefaultValue>
+          </opc:Property>
+        </opc:Children>
+      </opc:Variable>
+      <opc:Variable SymbolicName="Humidity" TypeDefinition="ua:AnalogItemType" DataType="ua:Double"></opc:Variable>
+      <opc:Variable SymbolicName="HumiditySetPoint" TypeDefinition="ua:AnalogItemType" DataType="ua:Double" AccessLevel="ReadWrite" />
+    </opc:Children>
+  </opc:ObjectType>
+
+</opc:ModelDesign>

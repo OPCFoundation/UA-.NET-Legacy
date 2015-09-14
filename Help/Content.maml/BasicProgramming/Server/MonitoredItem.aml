@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="2c2f66bf-9b6e-48db-af48-bc293fd622a5" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      A MonitoredItem stores information about a Node being monitored by a <link xlink:href="d0e49081-31b5-48c8-b6b8-510ddced982d" /> .  It manages a queue of events or data changes which are filled by the NodeManager that owns the Node being monitored.
+    </para>
+      <para>
+      The MonitoredItem is a thread safe object that is accessed by the NodeManager and the <link xlink:href="d0e49081-31b5-48c8-b6b8-510ddced982d" />. The NodeManager pushes data or events into the MonitoredItem and the <link xlink:href="d0e49081-31b5-48c8-b6b8-510ddced982d" /> pulls them out. The monitoring filter specified by the Client may be implemented by the NodeManager or applied by the MonitoredItem.
+    </para>
+      <para>
+      The MonitoredItem does not assume the NodeManager is sampling the item at the rate specified by the client. If multiple data changes arrive during a single sampling interval then only the latest is kept. This is true even when queuing is turned on. NodeManagers that support sampling at rates faster than 20ms need to use a high resolution close to set the timestamps.  Failing to do so may result in lost samples.
+    </para>
+      <para>
+      When queuing data changes the NodeManager must provide a <codeEntityReference>T:Opc.Ua.DataValue</codeEntityReference>  and a <codeEntityReference>T:Opc.Ua.ServiceResult</codeEntityReference> . The <codeEntityReference>T:Opc.Ua.ServiceResult</codeEntityReference>  contains any diagnostic information requested by the Client. Note that the NodeManager must provide diagnostic strings specified by the MonitoredItem for each <codeEntityReference>T:Opc.Ua.ServiceResult</codeEntityReference> . It can pre-filter the strings by checking the MonitoredItem DiagnosticsMasks property or it can provide all strings and let the MonitoredItem do the filtering.
+    </para>
+      <para>
+      When queuing events the event source must provide an event object that implements the <codeEntityReference>T:Opc.Ua.IFilterTarget</codeEntityReference>  interface. This will allow the MonitoredItem to apply the EventFilter and to select only the fields that were requested. The <link xlink:href="aec1e94b-9fde-467a-af15-d7152eb7f850" /> maintains a table of all event fields that are current subscribed to. The event source does not need to provide values for fields that are not in this list.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

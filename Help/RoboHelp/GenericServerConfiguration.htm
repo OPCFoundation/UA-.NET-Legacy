@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>GenericServerConfiguration</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>UA Generic Server Configuration</h1>
+<p>There are many features built into the .NET Stack that can be activated/deactivated 
+ by modifying the applications configuration file (app.config) within any 
+ standard text editor such as Windows Notepad.</p>
+<p>Select areas of the configuration file will be presented below.</p>
+<ul type="disc">
+	<li><p>Tracing &amp; Diagnostics</p></li>
+	<li><p>Endpoint Configuration</p></li>
+	<li><p>Security Support Configuration</p></li>
+	<li><p>Application Certificate</p></li>
+	<li><p>Certificate Repository</p></li>
+</ul>
+<h2>Tracing / Diagnostics</h2>
+<p>Tracing capabilities will log the internal activities of the UA Server. 
+ You can enable/disable tracing and also the amount of detail you desire. 
+ The following text-block is taken from the configuration file and also 
+ contains documentation: </p>
+<p class="Picture"><img src="image42.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Endpoint Configuration</h2>
+<p>You can specify the exact endpoint URLs that the UA Server will accept 
+ connections on. You can also enable/disable endpoints. The following text-block 
+ is taken from the configuration file and also contains documentation: 
+ </p>
+<p class="Picture"><img src="image43.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Security Support Configuration</h2>
+<p>You can configure the rules for security also, such as: </p>
+<ul type="disc">
+	<li class="p">Enabling/disabling secure connections.</li>
+	<li class="p">Enabling/disabling anonymous user connections.</li>
+	<li class="p">Specifying the levels of security required (128, 256bit 
+	 encryption etc.)</li>
+	<li class="p">Specifying the UserIdentityTokens supported, such as 
+	 Anonymous, LoginPassword, or UserCertificate etc.</li>
+</ul>
+<p>The following text-block is taken from the configuration file and also 
+ contains documentation: </p>
+<p class="Picture"><img src="image48.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>also: </p>
+<p class="Picture"><img src="image47.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Application Certificate</h2>
+<p>When an application is installed it should automatically generate its 
+ own application certificate. However, you can specify the certificate 
+ directly via the configuration file: </p>
+<p class="Picture"><img src="image45.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Certificate Repository</h2>
+<p>You can specify the certificate repository via the configuration:</p>
+<p class="Picture"><img src="image46.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Other Configuration Settings</h2>
+<p>Many, many more configuration parameters are available within the configuration 
+ file. The scope and capabilities of those other parameters are not documented.</p>
+<h2>Applying the New Configuration Settings</h2>
+<p>When you save the changes to your configuration file you MUST restart 
+ the application for the settings to take effect.</p>
+<p><span style="font-weight: bold;">Tip</span>: <span style="font-style: italic;">backup 
+ the configuration file prior to making modifications. A corrupt configuration 
+ file can lead to application instability and even application crashes.</span></p>
+</body>
+</html>

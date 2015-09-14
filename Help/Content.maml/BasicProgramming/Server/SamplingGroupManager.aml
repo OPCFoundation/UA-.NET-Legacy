@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="c36e459e-43d9-4267-ae63-6cb68f21e4a8" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The SamplingGroupManager is responsible for managing a set of <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> that need to be periodically sampled. It maintains a set of sampling groups for one of a finite set of sampling intervals that it has been configured to support.
+    </para>
+      <para>
+      NodeManagers that do not need any special processing for their <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> can delegate management of them to an instance of SamplingGroupManager. When a <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" /> is created for a Node the NodeManager must indicate whether it is sampled or exception based. If it is sampled the SamplingGroupManager will periodically call the Read method on the NodeManager to sample the values. The SamplingGroupManager will also sample the first value for exception based items but after that the NodeManager must push the new values directly into the <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" />.
+    </para>
+      <para>
+      When a SamplingGroupManager is created it must be given a set of supported sampling rates. The sampling rates are specified as a list of SamplingRateGroups ordered from fastest to slowest. Each SamplingRateGroup specifies the first sampling interval in the group, the difference between each interval in the group and the number of intervals in the group. For example, a SamplingRateGroup that starts with 100ms, has a 50ms increment and 4 values specifies that the SamplingGroupManager supports sampling at 100ms, 150ms, 200ms or 250ms.
+    </para>
+      <para>
+      The SamplingGroupManager is used by the <link xlink:href="47e2cbdc-0485-4e19-99aa-99657350cee9" />. The supported SamplingRateGroups are specified in the <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference> .
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

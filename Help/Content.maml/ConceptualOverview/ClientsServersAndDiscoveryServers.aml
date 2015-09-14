@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="09c1e07e-30e8-411c-bdcb-9c8d71e8d962" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      There are three types of UA applications: Clients, Server and Discovery Servers. Server applications provide access the data and events produced by an underlying real-time process,  Discovery Servers provide information about Servers that are available on a network and Clients recognize available servers using discovery servers and consume the data and events provided by Servers. Some UA applications will be a Client and a Server. The relationships between the different types of applications are illustrated in Figure 1.
+    </para>
+      <mediaLink>
+        <caption placement="after" lead="Figure">1 – The Relationship between UA Applications</caption>
+        <image placement="center" xlink:href="f29d1edc-5c40-4c6d-9c21-a64408d05fab" />
+      </mediaLink>
+      <para>
+      The libraries provide the interfaces and classes that allow developers to create any of the mentioned above types of UA Applications.
+    </para>
+      <para>
+      The package also includes an implementation of the UA Local Discovery Server (LDS) which allows Clients to discover Servers running on the same host as the LDS. Servers can register themselves with the LDS using APIs defined in the library. Developers may also create their own Discovery Servers which have knowledge of the machines and/or servers on the network.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

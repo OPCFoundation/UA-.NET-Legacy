@@ -1,0 +1,586 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<opc:ModelDesign
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:opc="http://opcfoundation.org/UA/ModelDesign.xsd"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+	xmlns="http://opcfoundation.org/UA/Sample/"
+  TargetNamespace="http://opcfoundation.org/UA/Sample/"
+>
+  <opc:Namespaces>
+    <opc:Namespace Name="OpcUa" Prefix="Opc.Ua" InternalPrefix="Opc.Ua.Server" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</opc:Namespace>
+    <opc:Namespace Name="Sample" Prefix="Opc.Ua.Sample">http://opcfoundation.org/UA/Sample/</opc:Namespace>
+  </opc:Namespaces>
+
+  <opc:ReferenceType SymbolicName="FlowTo" BaseType="ua:NonHierarchicalReferences">
+    <opc:Description>A reference that indicates a flow between two objects.</opc:Description>
+    <opc:InverseName>FlowFrom</opc:InverseName>
+  </opc:ReferenceType>
+
+  <opc:ReferenceType SymbolicName="HotFlowTo" BaseType="FlowTo">
+    <opc:Description>A reference that indicates a high temperature flow between two objects.</opc:Description>
+    <opc:InverseName>HotFlowFrom</opc:InverseName>
+  </opc:ReferenceType>
+
+  <opc:ReferenceType SymbolicName="SignalTo" BaseType="ua:NonHierarchicalReferences">
+    <opc:Description>A reference that indicates an electrical signal between two variables.</opc:Description>
+    <opc:InverseName>SignalFrom</opc:InverseName>
+  </opc:ReferenceType>
+
+  <opc:ReferenceType SymbolicName="HasVendor" BaseType="ua:NonHierarchicalReferences">
+    <opc:Description>Specified the vendor for a peice of equipment.</opc:Description>
+    <opc:InverseName>VendorFor</opc:InverseName>
+  </opc:ReferenceType>
+
+  <opc:ObjectType SymbolicName="GenericControllerType" BaseType="ua:BaseObjectType">
+    <opc:Description>A generic PID controller</opc:Description>
+    <opc:Children>
+      <opc:Property SymbolicName="Measurement" DataType="ua:Double" />
+      <opc:Property SymbolicName="SetPoint" DataType="ua:Double" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Property SymbolicName="ControlOut" DataType="ua:Double" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="GenericSensorType" BaseType="ua:BaseObjectType">
+    <opc:Description>A generic sensor that read a process value.</opc:Description>
+    <opc:Children>
+      <opc:Variable SymbolicName="Output" DataType="ua:Double" TypeDefinition="ua:AnalogItemType">
+      </opc:Variable>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="GenericActuatorType" BaseType="ua:BaseObjectType">
+    <opc:Description>Represents a piece of equipment that causes some action to occur.</opc:Description>
+    <opc:Children>
+      <opc:Variable SymbolicName="Input" DataType="ua:Double" TypeDefinition="ua:AnalogItemType" AccessLevel="Write" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="CustomControllerType" BaseType="ua:BaseObjectType">
+    <opc:Description>A custom PID controller with 3 inputs</opc:Description>
+    <opc:Children>
+      <opc:Property SymbolicName="Input1" DataType="ua:Double" AccessLevel="Write" />
+      <opc:Property SymbolicName="Input2" DataType="ua:Double" AccessLevel="Write" />
+      <opc:Property SymbolicName="Input3" DataType="ua:Double" AccessLevel="Write" />
+      <opc:Property SymbolicName="ControlOut" DataType="ua:Double" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="ValveType" BaseType="GenericActuatorType">
+    <opc:Description>An actuator that controls the flow through a pipe.</opc:Description>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="LevelControllerType" BaseType="GenericControllerType">
+    <opc:Description>A controller for the level of a fluid in a drum.</opc:Description>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="FlowControllerType" BaseType="GenericControllerType">
+    <opc:Description>A controller for the flow of a fluid through a pipe.</opc:Description>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="LevelIndicatorType" BaseType="GenericSensorType">
+    <opc:Description>A sensor that reports the level of a liquid in a tank.</opc:Description>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="FlowTransmitterType" BaseType="GenericSensorType">
+    <opc:Description>A sensor that reports the flow of a liquid through a pipe.</opc:Description>
+  </opc:ObjectType>                                                              
+
+  <opc:ObjectType SymbolicName="AcmeFlowTransmitterType" BaseType="FlowTransmitterType">
+    <opc:Description>A flow transmitter manufactured by Wile E. Coyote Enterprises.</opc:Description>
+    <opc:Children>
+      <opc:Property SymbolicName="SerialNumber" DataType="ua:String">
+        <opc:DefaultValue>
+          <uax:String>0000000</uax:String>
+        </opc:DefaultValue>
+      </opc:Property>
+      <opc:Property SymbolicName="Documentation" DataType="ua:LocalizedText" ModellingRule="MandatoryShared">
+        <opc:DefaultValue>
+          <uax:LocalizedText>
+            <uax:Locale>en</uax:Locale>
+              <uax:Text>This documentation appears to be a recipe on how to cook road runners...</uax:Text>
+          </uax:LocalizedText>
+        </opc:DefaultValue>
+      </opc:Property>
+      <opc:Property SymbolicName="CalibrationParameters" DataType="ua:Double" ValueRank="Array" ModellingRule="Optional" />
+      <opc:Method SymbolicName="Calibrate" ModellingRule="Mandatory">
+        <opc:InputArguments>
+          <opc:Argument Name="ScanRate" DataType="ua:Double">
+            <opc:Description>How frequently to scan values when calibrating.</opc:Description>
+          </opc:Argument>
+          <opc:Argument Name="Duration" DataType="ua:Double">
+            <opc:Description>The duration of the calibration cycle in seconds.</opc:Description>
+          </opc:Argument>
+        </opc:InputArguments>
+        <opc:OutputArguments>
+          <opc:Argument Name="Report" DataType="ua:String">
+            <opc:Description>A text report containing the calibration parameters.</opc:Description>
+          </opc:Argument>
+        </opc:OutputArguments>
+      </opc:Method>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:Method SymbolicName="CreateInstance">
+    <opc:Description>Creates an instance of an object or variable.</opc:Description>
+    <opc:InputArguments>
+      <opc:Argument Name="ParentId" DataType="ua:NodeId">
+        <opc:Description>The parent of the new instance.</opc:Description>
+      </opc:Argument>
+      <opc:Argument Name="ReferenceTypeId" DataType="ua:NodeId">
+        <opc:Description>The reference from the parent to the new instance.</opc:Description>
+      </opc:Argument>
+      <opc:Argument Name="BrowseName" DataType="ua:QualifiedName">
+        <opc:Description>The browse name for the new instance.</opc:Description>
+      </opc:Argument>
+    </opc:InputArguments>
+    <opc:OutputArguments>
+      <opc:Argument Name="InstanceId" DataType="ua:NodeId">
+        <opc:Description>The identifier assigned to the new instance.</opc:Description>
+      </opc:Argument>
+    </opc:OutputArguments>
+  </opc:Method>
+
+  <opc:ObjectType SymbolicName="BoilerInputPipeType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Object SymbolicName="FlowTransmitter1" TypeDefinition="FlowTransmitterType" SupportsEvents="true">
+        <opc:BrowseName>FTX001</opc:BrowseName>
+      </opc:Object>
+      <opc:Object SymbolicName="Valve" TypeDefinition="ValveType" SupportsEvents="true">
+        <opc:BrowseName>ValveX001</opc:BrowseName>
+      </opc:Object>
+    </opc:Children>
+    <opc:References>
+      <opc:Reference>
+        <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+        <opc:TargetId>BoilerInputPipeType_FlowTransmitter1</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="BoilerDrumType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Object SymbolicName="LevelIndicator" TypeDefinition="LevelIndicatorType" SupportsEvents="true">
+        <opc:BrowseName>LIX001</opc:BrowseName>
+      </opc:Object>
+    </opc:Children>
+    <opc:References>
+      <opc:Reference>
+        <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+        <opc:TargetId>BoilerDrumType_LevelIndicator</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="BoilerOutputPipeType" BaseType="ua:FolderType">
+    <opc:Children>
+      <opc:Object SymbolicName="FlowTransmitter2" TypeDefinition="FlowTransmitterType" SupportsEvents="true">
+        <opc:BrowseName>FTX002</opc:BrowseName>
+      </opc:Object>
+    </opc:Children>
+    <opc:References>
+      <opc:Reference>
+        <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+        <opc:TargetId>BoilerOutputPipeType_FlowTransmitter2</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="BoilerType" BaseType="ua:BaseObjectType">
+    <opc:Description>A boiler used to produce stream.</opc:Description>
+    <opc:Children>
+      <opc:Object SymbolicName="InputPipe" TypeDefinition="BoilerInputPipeType" SupportsEvents="true">
+        <opc:BrowseName>PipeX001</opc:BrowseName>
+        <opc:Children>
+          <opc:Object SymbolicName="FlowTransmitter1">
+            <opc:BrowseName>FTX001</opc:BrowseName>
+            <opc:Children>
+              <opc:Variable SymbolicName="Output" />
+            </opc:Children>
+          </opc:Object>
+          <opc:Object SymbolicName="Valve">
+            <opc:BrowseName>ValveX001</opc:BrowseName>
+            <opc:Children>
+              <opc:Variable SymbolicName="Input" />
+            </opc:Children>
+          </opc:Object>
+        </opc:Children>
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>FlowTo</opc:ReferenceType>
+            <opc:TargetId>BoilerType_Drum</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+      <opc:Object SymbolicName="Drum" TypeDefinition="BoilerDrumType" SupportsEvents="true">
+        <opc:BrowseName>DrumX001</opc:BrowseName>
+        <opc:Children>
+          <opc:Object SymbolicName="LevelIndicator">
+            <opc:BrowseName>LIX001</opc:BrowseName>
+            <opc:Children>
+              <opc:Variable Declaration="GenericSensorType_Output" />
+            </opc:Children>
+          </opc:Object>
+        </opc:Children>
+        <opc:References>
+          <opc:Reference>
+            <opc:ReferenceType>HotFlowTo</opc:ReferenceType>
+            <opc:TargetId>BoilerType_OutputPipe</opc:TargetId>
+          </opc:Reference>
+        </opc:References>
+      </opc:Object>
+      <opc:Object SymbolicName="OutputPipe" TypeDefinition="BoilerOutputPipeType" SupportsEvents="true">
+        <opc:BrowseName>PipeX002</opc:BrowseName>
+        <opc:Children>
+          <opc:Object SymbolicName="FlowTransmitter2">
+            <opc:BrowseName>FTX002</opc:BrowseName>
+            <opc:Children>
+              <opc:Variable SymbolicName="Output" />
+            </opc:Children>
+          </opc:Object>
+        </opc:Children>
+      </opc:Object>
+      <opc:Object SymbolicName="FlowController" TypeDefinition="FlowControllerType">
+        <opc:BrowseName>FCX001</opc:BrowseName>
+        <opc:Children>
+          <opc:Property SymbolicName="Measurement">
+            <opc:References>
+              <opc:Reference IsInverse="true">
+                <opc:ReferenceType>SignalTo</opc:ReferenceType>
+                <opc:TargetId>BoilerType_InputPipe_FlowTransmitter1_Output</opc:TargetId>
+              </opc:Reference>
+            </opc:References>
+          </opc:Property>
+          <opc:Property SymbolicName="SetPoint" />
+          <opc:Property SymbolicName="ControlOut">
+            <opc:References>
+              <opc:Reference>
+                <opc:ReferenceType>SignalTo</opc:ReferenceType>
+                <opc:TargetId>BoilerType_InputPipe_Valve_Input</opc:TargetId>
+              </opc:Reference>
+            </opc:References>
+          </opc:Property>
+        </opc:Children>
+      </opc:Object>
+      <opc:Object SymbolicName="LevelController" TypeDefinition="LevelControllerType">
+        <opc:BrowseName>LCX001</opc:BrowseName>
+        <opc:Children>
+          <opc:Property SymbolicName="Measurement">
+            <opc:References>
+              <opc:Reference IsInverse="true">
+                <opc:ReferenceType>SignalTo</opc:ReferenceType>
+                <opc:TargetId>BoilerType_Drum_LevelIndicator_Output</opc:TargetId>
+              </opc:Reference>
+            </opc:References>
+          </opc:Property>
+          <opc:Property SymbolicName="SetPoint" />
+          <opc:Property SymbolicName="ControlOut">
+            <opc:References>
+              <opc:Reference>
+                <opc:ReferenceType>SignalTo</opc:ReferenceType>
+                <opc:TargetId>BoilerType_CustomController_Input1</opc:TargetId>
+              </opc:Reference>
+            </opc:References>            
+          </opc:Property>
+        </opc:Children>
+      </opc:Object>
+      <opc:Object SymbolicName="CustomController" TypeDefinition="CustomControllerType">
+        <opc:BrowseName>CCX001</opc:BrowseName>
+        <opc:Children>
+          <opc:Property SymbolicName="Input1" />
+          <opc:Property SymbolicName="Input2">
+            <opc:References>
+              <opc:Reference IsInverse="true">
+                <opc:ReferenceType>SignalTo</opc:ReferenceType>
+                <opc:TargetId>BoilerType_InputPipe_FlowTransmitter1_Output</opc:TargetId>
+              </opc:Reference>
+            </opc:References>
+          </opc:Property>
+          <opc:Property SymbolicName="Input3">
+            <opc:References>
+              <opc:Reference IsInverse="true">
+                <opc:ReferenceType>SignalTo</opc:ReferenceType>
+                <opc:TargetId>BoilerType_OutputPipe_FlowTransmitter2_Output</opc:TargetId>
+              </opc:Reference>
+            </opc:References>
+          </opc:Property>
+          <opc:Property SymbolicName="ControlOut">
+            <opc:References>
+              <opc:Reference>
+                <opc:ReferenceType>SignalTo</opc:ReferenceType>
+                <opc:TargetId>BoilerType_FlowController_SetPoint</opc:TargetId>
+              </opc:Reference>
+            </opc:References>
+          </opc:Property>
+        </opc:Children>
+      </opc:Object>
+      <opc:Method SymbolicName="CreateBoiler" TypeDefinition="CreateInstance" ModellingRule="None">
+        <opc:BrowseName>CreateBoiler</opc:BrowseName>
+      </opc:Method>
+    </opc:Children>
+    <opc:References>
+      <opc:Reference>
+        <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+        <opc:TargetId>BoilerType_InputPipe</opc:TargetId>
+      </opc:Reference>
+      <opc:Reference>
+        <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+        <opc:TargetId>BoilerType_Drum</opc:TargetId>
+      </opc:Reference>
+      <opc:Reference>
+        <opc:ReferenceType>ua:HasNotifier</opc:ReferenceType>
+        <opc:TargetId>BoilerType_OutputPipe</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="MaintenanceEventType" BaseType="ua:BaseEventType">
+    <opc:Children>
+      <opc:Property SymbolicName="MustCompleteByDate" DataType="ua:DateTime">
+        <opc:Description>When the maintenence must be completed.</opc:Description>
+      </opc:Property>
+      <opc:Property SymbolicName="IsScheduled" DataType="ua:Boolean">
+        <opc:Description>True if the required maintenence is regularily scheduled.</opc:Description>
+      </opc:Property>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="Maintenance2EventType" BaseType="MaintenanceEventType">
+    <opc:Children>
+      <opc:Property SymbolicName="WorkorderId" DataType="ua:String">
+        <opc:Description>The identifier for the work order.</opc:Description>
+      </opc:Property>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:DataType SymbolicName="AddressDataType" BaseType="ua:Structure">
+    <opc:Fields>
+      <opc:Field Name="Street1" DataType="ua:String" />
+      <opc:Field Name="Street2" DataType="ua:String" />
+      <opc:Field Name="City" DataType="ua:String" />
+      <opc:Field Name="Country" DataType="ua:String" />
+      <opc:Field Name="ProvinceState" DataType="ua:String" />
+      <opc:Field Name="PostalCode" DataType="ua:String" />
+    </opc:Fields>
+  </opc:DataType>
+
+  <opc:VariableType SymbolicName="AddressType" BaseType="ua:BaseDataVariableType" DataType="AddressDataType">
+    <opc:Description>A single address.</opc:Description>
+  </opc:VariableType>
+
+  <opc:Object SymbolicName="Samples" BaseType="ua:FolderType">
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:Organizes</opc:ReferenceType>
+        <opc:TargetId>ua:ObjectsFolder</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:Object>
+
+  <opc:ObjectType SymbolicName="VendorType" BaseType="ua:BaseObjectType">
+    <opc:Description>A vendor described in the ERP system.</opc:Description>
+    <opc:Children>
+      <opc:Property SymbolicName="CompanyName" DataType="ua:String">
+        <opc:Description>The name of the company.</opc:Description>
+      </opc:Property>
+      <opc:Object SymbolicName="Locations" TypeDefinition="ua:FolderType">
+        <opc:Description>The locations for the company.</opc:Description>
+      </opc:Object>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:Object SymbolicName="Boiler1" TypeDefinition="BoilerType" SupportsEvents="true">
+    <opc:Description>A standard boiler</opc:Description>
+    <opc:Children>
+      <opc:Object SymbolicName="InputPipe">
+        <opc:BrowseName>PipeX001</opc:BrowseName>
+        <opc:Children>
+          <opc:Object SymbolicName="FlowTransmitter1">
+            <opc:BrowseName>FTX001</opc:BrowseName>             
+          </opc:Object>
+        </opc:Children>
+      </opc:Object>      
+    </opc:Children>
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:Organizes</opc:ReferenceType>
+        <opc:TargetId>Samples</opc:TargetId>
+      </opc:Reference>      
+    </opc:References>
+  </opc:Object>
+
+  <opc:Method SymbolicName="GenerateValuesMethodType" ModellingRule="Mandatory">
+    <opc:InputArguments>
+      <opc:Argument Name="Iterations" DataType="ua:UInt32">
+        <opc:Description>The number of new values to generate.</opc:Description>
+      </opc:Argument>
+    </opc:InputArguments>
+  </opc:Method>
+
+  <opc:ObjectType SymbolicName="GenerateValuesEventType" BaseType="ua:BaseEventType">
+    <opc:Children>
+      <opc:Property SymbolicName="Iterations" DataType="ua:UInt32" ModellingRule="Mandatory" />
+      <opc:Property SymbolicName="NewValueCount" DataType="ua:UInt32" ModellingRule="Mandatory" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:ObjectType SymbolicName="TestDataObjectType" BaseType="ua:BaseObjectType">
+    <opc:Children>
+      <opc:Property SymbolicName="SimulationActive" DataType="ua:Boolean" ModellingRule="Mandatory">
+        <opc:Description>If true the server will produce new values for each monitored variable.</opc:Description>
+      </opc:Property>
+      <opc:Method SymbolicName="GenerateValues" TypeDefinition="GenerateValuesMethodType" ModellingRule="Mandatory"></opc:Method>
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:DataType SymbolicName="ScalarValueDataType" BaseType="ua:Structure">
+    <opc:Fields>
+      <opc:Field Name="BooleanValue" DataType="ua:Boolean" />
+      <opc:Field Name="SByteValue" DataType="ua:SByte" />
+      <opc:Field Name="ByteValue" DataType="ua:Byte" />
+      <opc:Field Name="Int16Value" DataType="ua:Int16" />
+      <opc:Field Name="UInt16Value" DataType="ua:UInt16" />
+      <opc:Field Name="Int32Value" DataType="ua:Int32" />
+      <opc:Field Name="UInt32Value" DataType="ua:UInt32" />
+      <opc:Field Name="Int64Value" DataType="ua:Int64" />
+      <opc:Field Name="UInt64Value" DataType="ua:UInt64" />
+      <opc:Field Name="FloatValue" DataType="ua:Float" />
+      <opc:Field Name="DoubleValue" DataType="ua:Double" />
+      <opc:Field Name="StringValue" DataType="ua:String" />
+      <opc:Field Name="DateTimeValue" DataType="ua:DateTime" />
+      <opc:Field Name="GuidValue" DataType="ua:Guid" />
+      <opc:Field Name="ByteStringValue" DataType="ua:ByteString" />
+      <opc:Field Name="XmlElementValue" DataType="ua:XmlElement" />
+      <opc:Field Name="NodeIdValue" DataType="ua:NodeId" />
+      <opc:Field Name="ExpandedNodeIdValue" DataType="ua:ExpandedNodeId" />
+      <opc:Field Name="QualifiedNameValue" DataType="ua:QualifiedName" />
+      <opc:Field Name="LocalizedTextValue" DataType="ua:LocalizedText" />
+      <opc:Field Name="StatusCodeValue" DataType="ua:StatusCode" />
+      <opc:Field Name="VariantValue" DataType="ua:BaseDataType" />
+      <opc:Field Name="StructureValue" DataType="ua:Structure" />
+    </opc:Fields>
+  </opc:DataType>
+
+  <opc:ObjectType SymbolicName="ScalarValueObjectType" BaseType="TestDataObjectType">
+    <opc:Children>
+      <opc:Variable SymbolicName="BooleanValue" DataType="ua:Boolean" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="SByteValue" DataType="ua:SByte" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="ByteValue" DataType="ua:Byte" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="Int16Value" DataType="ua:Int16" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="UInt16Value" DataType="ua:UInt16" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="Int32Value" DataType="ua:Int32" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="UInt32Value" DataType="ua:UInt32" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="Int64Value" DataType="ua:Int64" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="UInt64Value" DataType="ua:UInt64" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="FloatValue" DataType="ua:Float" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="DoubleValue" DataType="ua:Double" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="StringValue" DataType="ua:String" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="DateTimeValue" DataType="ua:DateTime" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="GuidValue" DataType="ua:Guid" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="ByteStringValue" DataType="ua:ByteString" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="XmlElementValue" DataType="ua:XmlElement" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="NodeIdValue" DataType="ua:NodeId" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="ExpandedNodeIdValue" DataType="ua:ExpandedNodeId" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="QualifiedNameValue" DataType="ua:QualifiedName" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="LocalizedTextValue" DataType="ua:LocalizedText" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="StatusCodeValue" DataType="ua:StatusCode" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="VariantValue" DataType="ua:BaseDataType" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Variable SymbolicName="StructureValue" DataType="ua:Structure" ModellingRule="Mandatory" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:DataType SymbolicName="ArrayValueDataType" BaseType="ua:Structure">
+    <opc:Fields>
+      <opc:Field Name="BooleanValue" DataType="ua:Boolean" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="SByteValue" DataType="ua:SByte" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="ByteValue" DataType="ua:Byte" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="Int16Value" DataType="ua:Int16" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="UInt16Value" DataType="ua:UInt16" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="Int32Value" DataType="ua:Int32" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="UInt32Value" DataType="ua:UInt32" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="Int64Value" DataType="ua:Int64" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="UInt64Value" DataType="ua:UInt64" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="FloatValue" DataType="ua:Float" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="DoubleValue" DataType="ua:Double" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="StringValue" DataType="ua:String" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="DateTimeValue" DataType="ua:DateTime" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="GuidValue" DataType="ua:Guid" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="ByteStringValue" DataType="ua:ByteString" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="XmlElementValue" DataType="ua:XmlElement" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="NodeIdValue" DataType="ua:NodeId" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="ExpandedNodeIdValue" DataType="ua:ExpandedNodeId" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="QualifiedNameValue" DataType="ua:QualifiedName" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="LocalizedTextValue" DataType="ua:LocalizedText" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="StatusCodeValue" DataType="ua:StatusCode" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="VariantValue" DataType="ua:BaseDataType" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+      <opc:Field Name="StructureValue" DataType="ua:Structure" ValueRank="Array" AccessLevel="ReadWrite" MinimumSamplingInterval="1" />
+    </opc:Fields>
+  </opc:DataType>
+
+  <opc:ObjectType SymbolicName="ArrayValueObjectType" BaseType="TestDataObjectType">
+    <opc:Children>
+      <opc:Variable SymbolicName="BooleanValue" DataType="ua:Boolean" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="SByteValue" DataType="ua:SByte" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="ByteValue" DataType="ua:Byte" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="Int16Value" DataType="ua:Int16" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="UInt16Value" DataType="ua:UInt16" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="Int32Value" DataType="ua:Int32" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="UInt32Value" DataType="ua:UInt32" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="Int64Value" DataType="ua:Int64" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="UInt64Value" DataType="ua:UInt64" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="FloatValue" DataType="ua:Float" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="DoubleValue" DataType="ua:Double" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="StringValue" DataType="ua:String" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="DateTimeValue" DataType="ua:DateTime" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="GuidValue" DataType="ua:Guid" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="ByteStringValue" DataType="ua:ByteString" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="XmlElementValue" DataType="ua:XmlElement" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="NodeIdValue" DataType="ua:NodeId" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="ExpandedNodeIdValue" DataType="ua:ExpandedNodeId" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="QualifiedNameValue" DataType="ua:QualifiedName" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="LocalizedTextValue" DataType="ua:LocalizedText" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="StatusCodeValue" DataType="ua:StatusCode" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="VariantValue" DataType="ua:BaseDataType" ValueRank="Array" ModellingRule="Mandatory" />
+      <opc:Variable SymbolicName="StructureValue" DataType="ua:Structure" ValueRank="Array" ModellingRule="Mandatory" />
+    </opc:Children>
+  </opc:ObjectType>
+
+  <opc:Object SymbolicName="Data" TypeDefinition="ua:FolderType" SupportsEvents="true">
+    <opc:Children>
+      <opc:Object SymbolicName="Static" TypeDefinition="ua:FolderType" SupportsEvents="true">
+        <opc:Children>
+          <opc:Object SymbolicName="Scalar" TypeDefinition="ScalarValueObjectType" ModellingRule="Mandatory"/>
+          <opc:Object SymbolicName="Array" TypeDefinition="ArrayValueObjectType" ModellingRule="Mandatory"/>
+        </opc:Children>
+      </opc:Object>
+    </opc:Children>
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:Organizes</opc:ReferenceType>
+        <opc:TargetId>Samples</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:Object>
+
+  <opc:Dictionary SymbolicId="Dictionary_XmlSchema" EncodingName="ua:DefaultXml" TypeDefinition="ua:DataTypeDictionaryType">
+    <opc:BrowseName>Opc.Ua.Sample</opc:BrowseName>
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:HasComponent</opc:ReferenceType>
+        <opc:TargetId>ua:XmlSchema_TypeSystem</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:Dictionary>
+
+  <opc:Dictionary SymbolicId="Dictionary_BinarySchema" EncodingName="ua:DefaultBinary" TypeDefinition="ua:DataTypeDictionaryType">
+    <opc:BrowseName>Opc.Ua.Sample</opc:BrowseName>
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:HasComponent</opc:ReferenceType>
+        <opc:TargetId>ua:OPCBinarySchema_TypeSystem</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:Dictionary>
+
+</opc:ModelDesign>

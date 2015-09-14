@@ -1,0 +1,26 @@
+﻿<ListOfApplicationDescription xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+  <ApplicationDescription>
+    <ServerType>Standard_0</ServerType>
+    <ServerUri>urn:uri:12885813-8bc6-497a-bc24-5d936eb2f32b</ServerUri>
+    <ServerName>
+      <Text>UASampleServer</Text>
+    </ServerName>
+    <DiscoveryUrls>
+      <String>http://localhost:5000/UA/SampleServer/discovery</String>
+      <String>opc.tcp://localhost:5001/UA/SampleServer</String>
+      <String>http://localhost:5000/TKS/TKSOPCServer/discovery</String>
+      <String>opc.tcp://localhost:5001/TKS/TKSOPCServer</String>
+    </DiscoveryUrls>
+  </ApplicationDescription>
+  <ApplicationDescription>
+    <ServerType>Standard_0</ServerType>
+    <ServerUri>urn:uri:12885813-8bc6-497a-bc24-5d936eb2f32b</ServerUri>
+    <ServerName>
+      <Text>TKSOPCServer</Text>
+    </ServerName>
+    <DiscoveryUrls>
+      <String>http://localhost:5000/TKS/TKSOPCServer/discovery</String>
+      <String>opc.tcp://localhost:5001/TKS/TKSOPCServer</String>
+    </DiscoveryUrls>
+  </ApplicationDescription>
+</ListOfApplicationDescription>

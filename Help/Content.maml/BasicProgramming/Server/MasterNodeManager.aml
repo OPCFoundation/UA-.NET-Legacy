@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="fd9286b2-c3f8-42f0-9895-73ec31f76c77" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The MasterNodeManager implements all services that access Nodes in the Server’s address space. This includes the NodeManagement, View, Attribute, Query, Method and <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" /> Service Sets.
+    </para>
+      <para>
+      The MasterNodeManager contains one or more NodeManagers which are each responsible for a portion of the Server’s address space. The <link xlink:href="47e2cbdc-0485-4e19-99aa-99657350cee9" /> is the standard NodeManager which handles all of the UA defined nodes. The other NodeManagers are defined by the developer. The UA COM Wrappers are implemented as NodeManagers.
+    </para>
+      <para>
+      The  MasterNodeManager must have an efficient way to determine which Node belongs to which NodeManager. The exact mapping is up to the application developer, however, the recommended approach would assign each <codeEntityReference>P:Opc.Ua.NodeId.NamespaceIndex</codeEntityReference> to a single NodeManager.  NodeManagers can implement arbitrary mappings with the GetManagerHandle method provided by each NodeManager.
+    </para>
+      <para>
+      All of the Services that operate on Nodes specify a list of operations that identify a target Node. The Nodes accessed in each call are likely managed by different NodeManagers. The MasterNodeManager handles this by following a consistent design pattern:
+    </para>
+      <list class="bullet">
+        <listItem>
+          <para>
+          The result lists are allocated;
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Each operation is validated (i.e. parameter values are checked).
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          If an error occurs it is saved and the operation is marked as ‘Processed’.
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          If any valid operations remain each NodeManager is called with the entire set of operations.
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Each NodeManager processes the operations for Nodes that it owns and marks them as ‘Processed’
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          Any unprocessed operations are given an BadNodeIdUnknown error and marked as ‘Processed’
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          All ServiceResults are converted to StatusCode + DiagnosticInfo values;
+        </para>
+        </listItem>
+      </list>
+      <para>
+      Each operation has an input parameter defined by the specification. These parameters have an additional property called Processed which indicates that a NodeManager must ignore the operation.
+    </para>
+      <para>
+      The MasterNodeManager does not maintain any locks when it calls the NodeManager. Developers of NodeManagers should follow the same pattern if completing the operation requires any type of blocking call.
+    </para>
+      <para>
+      The MasterNodeManager always calls the NodeManagers in the order that they were added to the MasterNodeManager.
+    </para>
+      <para>
+      When the Server is initialized the MasterNodeManager tells each NodeManager to create its address space and return any references to Nodes in other NodeManagers. Most NodeManager implementations will return a reference from well known Nodes such as the Objects Folder to the root Nodes in their address spaces.
+    </para>
+      <para>
+      The MasterNodeManager provides methods that allow other components to add and remove references between Nodes in different NodeManagers. Developers must use caution when using these methods because deadlocks may occur if two NodeManagers attempt to update each other at the same time. The same issue exists if a NodeManager uses the GetManagerHandle method to access another NodeManager directly.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

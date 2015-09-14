@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic id="e61fae2a-bbaa-468a-9254-3ccd236715f4" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <summary>
+      <para>
+      This section contains release motes and summary of changes.
+    </para>
+    </summary>
+    <introduction>
+    </introduction>
+    <section>
+      <title>Release Process</title>
+      <content>
+        <para>This section introduces a release process which is designed to balance the needs of different developers in different stages of development.</para>
+        <table>
+          <title>The different stages are described in the following table:</title>
+          <row>
+            <entry>
+              <para>Snapshot</para>
+            </entry>
+            <entry>
+              <para>Snapshot builds are only minimally tested and are used to give developers quick access to new features and bug fixes. There may be backward compatibility issues and some features may be broken. Developers should not migrate to a snapshot build unless they need the feature and/or bug fixes.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Testing</para>
+            </entry>
+            <entry>
+              <para>
+            Testing builds are put through basic tests to ensure that nothing is broken but have not been tested for backward compatibility. All Stable and Final builds are posted first as Testing builds which gives developers a chance to check for issues which can be corrected quickly. Any changes will incorporated into a new revision and posted immediately. If no issues come up the last revision of a Testing build will be re-labeled as Stable or Final. Developers are encouraged to look at Testing builds and see if there are issues. Developers should not migrate to Testing builds unless they absolutely need the functionality or are participating in the testing process.
+          </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Stable</para>
+            </entry>
+            <entry>
+              <para>
+            Stable builds are put through basic tests to ensure that nothing is broken but have not been tested for backward compatibility. Stable builds are posted to give vendors a chance to verify that it works with existing products. Vendors who have products under development should migrate to stable builds as quickly as possible. If a vendor is already distributing products they may wish to use the sample applications to test for compatibility problems.
+          </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Final</para>
+            </entry>
+            <entry>
+              <para>
+            Final builds are stable builds that have been verified by one or more vendors. Patches required to fix issues discovered while testing the stable build are applied but no other features are added. Vendors who have products under development should migrate to stable builds as quickly as possible.
+          </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+      Each build is assigned a unique build number that may be qualified with a revision number. The revision number indicates that patches were applied to a build.
+    </para>
+        <para>
+      Patches may be created to fix critical issues in final builds even if a newer build is available. Vendors will need to upgrade to the newest version if they need fixes for stable or snapshot builds.
+    </para>
+        <para>
+      All files posted to the website or SharePoint will have the build stage and build number in the file name. For example:
+    </para>
+        <para>
+      OPC UA SDK 1.00 Redistributable APIs MergeModule (x86) [222.0 Stable].zip
+    </para>
+        <para>
+      The major version of the SDK always matches the major version of the latest specification that it supports. The minor version is incremented each time new features are added after release.
+    </para>
+        <para>
+      If a previously posted build needs to be patched the revision number will be incremented. For example, 218.1 is a patch applied to 218.0.
+    </para>
+      </content>
+    </section>
+    <section>
+      <title>Release Notes</title>
+      <content>
+        <para>Current release of the SDK supports the release candidates for Part 4 and Part 6.</para>
+        <table>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>Part</para>
+              </entry>
+              <entry>
+                <para>Release</para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>Paqrt 4</para>
+            </entry>
+            <entry>
+              <para>OPC UA Part 4 - Services RC 1.01.30 Specification</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Part 6</para>
+            </entry>
+            <entry>
+              <para>OPC UA Part 6 - Mappings RC 1.00.08 Specification</para>
+            </entry>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section>
+      <title>Current API Status</title>
+      <content>
+        <para>
+        There are a number of different APIs embedded within the SDK which are in different states of development.
+      </para>
+        <para>
+        </para>
+        <table>
+          <title>Each of these APIs has a different development status:</title>
+          <row>
+            <entry>
+              <para>Development</para>
+            </entry>
+            <entry>
+              <para>The associated specification is not released and the feature set is not complete. Changes to APIs in this state are quite likely.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Testing</para>
+            </entry>
+            <entry>
+              <para>The feature set is complete and basic functional tests have been completed. Changes to APIs in this state are possible (due to bugs or refactoring).</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Beta</para>
+            </entry>
+            <entry>
+              <para>The feature set is complete and more exhaustive testing has started. Changes to APIs in this state only happen if absolutely necessary.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Released</para>
+            </entry>
+            <entry>
+              <para>Testing is complete. Changes to APIs in this state will not happen (i.e. new interfaces/subclasses are created).</para>
+            </entry>
+          </row>
+        </table>
+        <table>
+          <title>The Server SDK APIs sets and their current status are:</title>
+          <row>
+            <entry>
+              <para>IServer/IServerEndpoint</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>StandardServer/IServerInternal</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Session</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>NodeManager</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>NodeSource/BaseEvent</para>
+            </entry>
+            <entry>
+              <para>Testing</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Subscription/MonitoredItem</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Alarms/Conditions/State Machine</para>
+            </entry>
+            <entry>
+              <para>Development</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Historian</para>
+            </entry>
+            <entry>
+              <para>Development</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>ApplicationConfiguration</para>
+            </entry>
+            <entry>
+              <para>Testing</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Configuration Tool Interface</para>
+            </entry>
+            <entry>
+              <para>Development</para>
+            </entry>
+          </row>
+        </table>
+        <table>
+          <title>The Client SDK APIs sets and their current status are:</title>
+          <row>
+            <entry>
+              <para>ClientBase/IChannel</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Session</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Subscription</para>
+            </entry>
+            <entry>
+              <para>Beta</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Condition and Events</para>
+            </entry>
+            <entry>
+              <para>Development</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>ApplicationConfiguration</para>
+            </entry>
+            <entry>
+              <para>Testing</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Configuration Tool Interface</para>
+            </entry>
+            <entry>
+              <para>Development</para>
+            </entry>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section>
+      <title>Known Issues</title>
+      <content>
+        <list class="bullet">
+          <listItem>
+            <para>IIS hosted servers have not been tested.</para>
+          </listItem>
+          <listItem>
+            <para>Read/Write services do not implement the IndexRange parameter for multi-dimensional arrays and ByteStrings.</para>
+          </listItem>
+          <listItem>
+            <para>The Alarms and Conditions specification is a long way from release and the code reflects that.</para>
+          </listItem>
+          <listItem>
+            <para>The Query service is not implemented.</para>
+          </listItem>
+          <listItem>
+            <para>The information model for the state machines has changed an needs to be incorporated into the codebase;</para>
+          </listItem>
+          <listItem>
+            <para>The EventManager does not provide the table of subscribed fields as described in the overview document;</para>
+          </listItem>
+          <listItem>
+            <para>The CoreNodeManager does not automatically translate objects that implement ITranslateableObject</para>
+          </listItem>
+          <listItem>
+            <para>The AE proxy does not work properly.</para>
+          </listItem>
+        </list>
+      </content>
+    </section>
+    <section address="Section1">
+      <title>Summary of Changes</title>
+      <content>
+        <para>
+        </para>
+      </content>
+      <sections>
+        <section>
+          <title>
+          1.00.230.1 December 6, 2008
+        </title>
+          <content>
+            <para>
+            Build 230.1 fixes incorrect node identifiers and a bad log file path that could cause the install to fail on some systems.
+          </para>
+            <para>
+            In addition to a number of bug fixes this release include more examples of custom node managers and an new version of the ModelDesigner which produces classes that can be used in the development of custom NodeManagers.
+          </para>
+            <para>
+            The old classes output by the ModelDesigner are still supported and the ModelDesigner schema did not change.
+          </para>
+            <para>
+            This release of the SDK supports the release candidates for Part 4 and Part 6.
+          </para>
+          </content>
+        </section>
+        <section>
+          <title>
+          Build 224
+        </title>
+          <content>
+            <list class="ordered">
+              <listItem>
+                <para>Incorporated Application Configuration File editing feature back into the Configuration Tool</para>
+              </listItem>
+              <listItem>
+                <para>Replaced the MonitoredItem class with the IMonitoredItem interface. This is a breaking change for servers that implement their own NodeManager, however, it will allow implementers to replace the default MonitoredItem with their own implementation which is optimized for their application.</para>
+              </listItem>
+              <listItem>
+                <para>Replaced the StoreName/StorePath elements in configuration files with StoreType/StorePath. This is a non-breaking change but obsolete warnings will be produced. This change will allow future versions to support non-windows certificate stores.</para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+        <section>
+          <title>Build 223</title>
+          <content>
+            <list class="ordered">
+              <listItem>
+                <para>Build environment ported to VS2008</para>
+              </listItem>
+              <listItem>
+                <para>Merge modules merged into one module.</para>
+              </listItem>
+              <listItem>
+                <para>Trace facility now supports filtering for different message types.</para>
+              </listItem>
+              <listItem>
+                <para>Servers now monitor their application configuration file and automatically load changes to security or trace settings (other changes are ignored).</para>
+              </listItem>
+              <listItem>
+                <para>The supported flags are documented in the SampleClient configuration file.</para>
+              </listItem>
+              <listItem>
+                <para>A throughput problem when using HTTP has been fixed. The fix requires that all client processes set the System.Net.ServicePointManager.DefaultConnectionLimit to a number larger than the total number of simultaneous requests that the client needs to send. This should be at least 2 times the maximum number of subscriptions. The sample applications set this value to 25.</para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+        <section>
+          <title>Build 222</title>
+          <content>
+            <list class="ordered">
+              <listItem>
+                <para>
+                Changed ApplicationConfiguration.ParseExtension(Type) into a template function ApplicationConfiguration.ParseExtension()
+              </para>
+              </listItem>
+              <listItem>
+                <para>
+                2) ExtensionFactory.GetXmlName() now supports collection classes with the CollectionDataContractAttribute
+              </para>
+              </listItem>
+              <listItem>
+                <para>Added AE Wrapper to the Opc.Ua.ComInterop library.</para>
+              </listItem>
+              <listItem>
+                <para>Added Utils.SilentDispose helper function.</para>
+              </listItem>
+              <listItem>
+                <para>Added support for IDisposeable to all managers in the Server SDK.</para>
+              </listItem>
+              <listItem>
+                <para>Server now reports the server-side stack traced when a fault occurs in debug mode</para>
+              </listItem>
+              <listItem>
+                <para>Added DiagnosticsMasks to the IMonitoredItem interface.</para>
+              </listItem>
+              <listItem>
+                <para>SamplingGroups are now restricted to single Session.</para>
+              </listItem>
+              <listItem>
+                <para>Removed DefaultOperationContext from IServerInternal</para>
+              </listItem>
+              <listItem>
+                <para>Added DataLock to ILocalNode interface.</para>
+              </listItem>
+              <listItem>
+                <para>Updated C# and ANSI C (binary and XML) decoders to skip unread bytes at the end of extension objects.</para>
+              </listItem>
+              <listItem>
+                <para>Added OpcUa_EncodeableTypeTable_AddUnknownTypeMapping and OpcUa_EncodeableObject_ParseExtension functions to the ANSI C stack to support applications that need to deal with unexpected subtypes of well known data types.</para>
+              </listItem>
+              <listItem>
+                <para>Merged the C++ Opc.Ua.Security library into Opc.Ua.Core which means the SDK will run in 64-bit executables.</para>
+              </listItem>
+              <listItem>
+                <para>Removed the GetEffectiveIdentity/GetPrincipalForIdentity methods from the IServerInternal interface. Developers are now expected to provide the effective identity when validating the user credentials. Applications can do this by handling the ImpersonateUser event exposed by the SessionManager.</para>
+              </listItem>
+              <listItem>
+                <para>
+                Added CreateSecurityTokenResolver and SetWindowsUser static helper methods to UserIdentity.
+              </para>
+              </listItem>
+              <listItem>
+                <para>Moved the user token validation code from the SessionManager to the SampleServer. The SessionManager will accept all valid tokens if the application does not handle the ImpersonateUser event.</para>
+              </listItem>
+              <listItem>
+                <para>Added the TranslationInfo and ITranslationManager interface. Updated ResourceManager to use it. Default ResourceManager now allows applications to manually load translations. ITranslationObject created but not used by the CoreNodeManager yet.</para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+        <section>
+          <title>
+          Build 218
+        </title>
+          <content>
+            <list class="ordered">
+              <listItem>
+                <para>Renamed EventNotification to EventNotificationList; Added HistoryEventFieldList with ClientHandlep.</para>
+              </listItem>
+              <listItem>
+                <para>Renamed EventNotification to EventNotificationList; Added HistoryEventFieldList with ClientHandle</para>
+              </listItem>
+              <listItem>
+                <para>Changed DiagnosticInfo.NamespaceURI to DiagnosticInfo.NamespaceUri in XML Schema/WSDLWSDL</para>
+              </listItem>
+              <listItem>
+                <para>Changed StatusCode.Code from a xs:string to an xs:unsignedInt in the XML Schema/WSDL</para>
+              </listItem>
+              <listItem>
+                <para>Fixed problem writing values with data types that are subtypes of built in types</para>
+              </listItem>
+              <listItem>
+                <para>Optimized the reference tables used by the CoreNodeManager</para>
+              </listItem>
+              <listItem>
+                <para>UA Certification Tool has been renamed to UA Configuration Tool. A command line version is available as well.</para>
+              </listItem>
+              <listItem>
+                <para>Added COM proxy configuration capabilities into7) XML serialization behavoir for <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference> and Variant classes changed slightly</para>
+              </listItem>
+              <listItem>
+                <para>The ServiceMessageContext provided to the Channel or Host is now used during XML serialization instead of ServiceMessageContext.GlobalContext</para>
+              </listItem>
+              <listItem>
+                <para>Numerous bug fixes and enhancements added to the ANSI C implementation of UA Secure Conversation</para>
+              </listItem>
+              <listItem>
+                <para>Added ArrayDimensions to the Argument structure</para>
+              </listItem>
+              <listItem>
+                <para>
+                Fixed timing problems during publishing in both the Client and Server SDK
+              </para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+        <section>
+          <title> Build 215</title>
+          <content>
+            <list class="ordered">
+              <listItem>
+                <para>Added command line version fo the configuration tool.</para>
+              </listItem>
+              <listItem>
+                <para>Configuration file can now be in any directory (installed in All Users\Application Data by default now)</para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+        <section>
+          <title>
+          Build 211
+        </title>
+          <content>
+            <list class="ordered">
+              <listItem>
+                <para>Fixed threading problems within the C# UA TCP implementation;</para>
+              </listItem>
+              <listItem>
+                <para>Completed DA 2.05a CTT testing for the UA-COM proxy server;</para>
+              </listItem>
+              <listItem>
+                <para>Added support for environment variable strings in file paths placed in configuration files;</para>
+              </listItem>
+              <listItem>
+                <para>Incorporated changes to the information model based on reviews of Part 3 and Part 5;</para>
+              </listItem>
+              <listItem>
+                <para>Added publish request limit to the server;</para>
+              </listItem>
+              <listItem>
+                <para>Removed dedicated publish threads in client SDK and tested recovery after network interruption;</para>
+              </listItem>
+            </list>
+          </content>
+        </section>
+      </sections>
+    </section>
+    <relatedTopics>
+      <link xlink:href="e4770c52-52d9-40e0-b25a-a92facdeb112" />
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

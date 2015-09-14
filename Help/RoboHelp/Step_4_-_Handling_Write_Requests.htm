@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 4 - Handling Write Requests</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Server Development Tutorial</h1>
+<h2>Step 4 - Dealing with Writes from Clients</h2>
+<p>in this section you will see where to handle write requests from clients. 
+ This is especially useful for when you need to send the values (provided 
+ by the client) to a downstream system such as a PLC/Controller, or other 
+ sub-system.</p>
+<p>This step is a continuation from <a href="Step_3_-_Reading_Values.htm">Step 
+ 3 - Reading Values</a>.</p>
+<ol type="1">
+	<li><p>All nodes are maintained within the address space by the <?rh-udv_start 
+	 name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?> automatically. Just 
+	 as in the last example (step 3) we will assume that our &quot;MyNode&quot; 
+	 is in <span style="font-family: 'Courier New', monospace;">variables[1]</span> 
+	 position.</p></li>
+	<li><p>Add the following line of code, which will attach to the OnsimpleWriteValue 
+	 event handler for this specific node: <br />
+	<span style="font-family: 'Courier New', monospace;">variables[1].OnSimpleWriteValue=new 
+	 NodeValuesimpleEventHandler(OnWriteMyNode);</span></p></li>
+	<li><p>The function &quot;<span style="font-weight: bold;">OnWriteMyNode</span>&quot; 
+	 does not yet exist, so scroll to the bottom of the source code file 
+	 and add the following code:<br />
+	<span style="font-family: 'Courier New', monospace;">private ServiceResult 
+	 OnWriteMyNode( ISystemContext context, NodeState node, ref object 
+	 value )<br />
+	{<br />
+	&#160;&#160;&#160;System.Windows.Forms.MessageBox.Show( &quot;Received 
+	 '&quot; + value.toString() + &quot;'.&quot; )<br />
+	&#160;&#160;&#160;return ServiceResult.Good;<br />
+	}</span></p></li>
+</ol>
+<p>Upon writing to this node a modal popup window will display a message 
+ and show the value you wrote. While it is not an optimal solution it does 
+ demonstrate the technology.</p>
+<p>You could define a single write function (event handler) that is used 
+ globally by all nodes within your application, or you could create different 
+ handlers for different nodes. You have many options available to you.</p>
+<p>In the <a href="Step_5_-_Testing_Server.htm">next step we will test</a> 
+ our newly developed server.</p>
+</body>
+</html>

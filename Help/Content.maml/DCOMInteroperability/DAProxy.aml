@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="3bf9ccc3-11b8-493c-bda2-c637120625eb" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>The DA Proxy is a COM server that implements the DA 2.05 and DA 3.00 specifications. It is implemented in .NET and uses the UA Client Library, however, it is hosted by a C++ COM EXE server. The host process is necessary to ensure compliance because of limitations imposed by the .NET COM Interoperability layer. </para>
+      <para>
+      When a COM client creates an instance of the proxy, the proxy uses the CLSID to look up a <codeEntityReference>T:Opc.Ua.ConfiguredEndpoint</codeEntityReference>  structure stored in the registry. The <codeEntityReference>T:Opc.Ua.ConfiguredEndpoint</codeEntityReference>  tells the proxy how to connect to the UA Server. The DA Proxy can be configured to use multiple servers by creating multiple pseudo-COM servers which have unique CLSIDs and ProgIds but reference the same COM executable. The UA Configuration Tool allows administrators to create these pseudo-COM servers.
+    </para>
+      <para>
+      The  <codeEntityReference>T:Opc.Ua.ConfiguredEndpoint</codeEntityReference>  is placed in the key HKEY_CLASSES_ROOT\CLSID\<![CDATA[<clsid>]]> \Endpoint  where <![CDATA[<clsid>]]>  is the CLSID of the pseudo-server formatted using the standard registry notation. The default value for the key is a REG_BINARY value containing the  <codeEntityReference>T:Opc.Ua.ConfiguredEndpoint</codeEntityReference>  serialized a UTF-8 encoded XML document.
+    </para>
+      <para>
+      All pseudo-COM servers are placed in a COM Component Category called “OPC UA COM Pseudo Server”. GUID for this category is “899A3076-F94E-4695-9DF8-0ED25B02BDBA”.
+    </para>
+      <para>
+      When the COM client creates an instance of the COM proxy the host process calls the Load method on the Server. This method loads the endpoint information from the registry and connects to the server. If an error occurs the COM proxy will use the discovery endpoint to refresh the EndpointDescription. If that fails it will still allow the COM server in the failed state.
+    </para>
+      <para>
+      The DA proxy ignores all Nodes that cannot be found by following hierarchical references from the Objects Folder. It also ignores all nodes other than Object, Variable and View Nodes. Object and View Nodes are treated as DA Branches and Data Variables become DA items. Property Variables are also mapped to DA Items, however, there are a few UA Properties that have special mappings which are described in Table 1. The table also describes the mapping for UA Attributes. UA Attributes which do not have a mapping defined are not available.
+    </para>
+      <table>
+        <title>
+        Table 1 – UA Property/Attribute to COM DA Property Mappings
+      </title>
+        <tableHeader>
+          <row>
+            <entry>
+              <para>UA Property/Attribute</para>
+            </entry>
+            <entry>
+              <para>Mapping</para>
+            </entry>
+          </row>
+        </tableHeader>
+        <row>
+          <entry>
+            <para>
+            Description
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Item Description property
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            UserAccessLevel
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Access Level property.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            MinimumSamplingInterval
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Scan Rate property.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Data Type and ValueRank
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The DataType property.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            EURange
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The High EU and Low EU Properties. EU Type is set to Analog.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            EngineeringUnits
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The EU Units property.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            EnumStrings
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The EU Info property. EU Type is set to Enumerated.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            InstrumentRange
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The High IR and Low IR Properties
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            TrueState
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Close Label property.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            FalseState
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Open Label property.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            TimeZone and DaylightSavingTime
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Time Zone property.
+          </para>
+          </entry>
+        </row>
+      </table>
+      <para>
+      Many UA Built-in Types have exactly equivalent Data Types in COM. Built-in Types such as NodeIds which have no COM equivalent in COM are mapped to VT_BSTR. ByteString values are mapped to ‘VT_UI1 | VT_ARRAY’. ExtensionObjects are mapped to VT_BSTR or ‘VT_UI1 | VT_ARRAY’ depending on the format of the body. UA defined Structure Types are mapped to VT_BSTR values containing the structure serialized as an XML element. Enumerations are mapped to VT_I4.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

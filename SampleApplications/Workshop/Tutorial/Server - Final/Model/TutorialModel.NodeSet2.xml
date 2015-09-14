@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <Aliases>
+    <Alias Alias="Boolean">i=1</Alias>
+    <Alias Alias="SByte">i=2</Alias>
+    <Alias Alias="Byte">i=3</Alias>
+    <Alias Alias="Int16">i=4</Alias>
+    <Alias Alias="UInt16">i=5</Alias>
+    <Alias Alias="Int32">i=6</Alias>
+    <Alias Alias="UInt32">i=7</Alias>
+    <Alias Alias="Int64">i=8</Alias>
+    <Alias Alias="UInt64">i=9</Alias>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="Double">i=11</Alias>
+    <Alias Alias="DateTime">i=13</Alias>
+    <Alias Alias="String">i=12</Alias>
+    <Alias Alias="ByteString">i=15</Alias>
+    <Alias Alias="Guid">i=14</Alias>
+    <Alias Alias="XmlElement">i=16</Alias>
+    <Alias Alias="NodeId">i=17</Alias>
+    <Alias Alias="ExpandedNodeId">i=18</Alias>
+    <Alias Alias="QualifiedName">i=20</Alias>
+    <Alias Alias="LocalizedText">i=21</Alias>
+    <Alias Alias="StatusCode">i=19</Alias>
+    <Alias Alias="Structure">i=22</Alias>
+    <Alias Alias="Number">i=26</Alias>
+    <Alias Alias="Integer">i=27</Alias>
+    <Alias Alias="UInteger">i=28</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+    <Alias Alias="HasProperty">i=46</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasEventSource">i=36</Alias>
+    <Alias Alias="HasNotifier">i=48</Alias>
+    <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasModellingRule">i=37</Alias>
+    <Alias Alias="HasEncoding">i=38</Alias>
+    <Alias Alias="HasDescription">i=39</Alias>
+  </Aliases>
+  <UADataType NodeId="ns=1;i=198" BrowseName="1:CalibrationDataType">
+    <DisplayName>CalibrationDataType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsInverse="true">i=22</Reference>
+    </References>
+  </UADataType>
+  <UAReferenceType NodeId="ns=1;i=2" BrowseName="1:SignalTo">
+    <DisplayName>SignalTo</DisplayName>
+    <Description>A reference that indicates an electrical signal between two variables.</Description>
+    <References>
+      <Reference ReferenceType="HasSubtype" IsInverse="true">i=32</Reference>
+    </References>
+    <InverseName>SignalFrom</InverseName>
+  </UAReferenceType>
+  <UAObjectType NodeId="ns=1;i=7" BrowseName="1:GenericSensorType">
+    <DisplayName>GenericSensorType</DisplayName>
+    <Description>A generic sensor that read a process value.</Description>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=8</Reference>
+      <Reference ReferenceType="HasSubtype" IsInverse="true">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="ns=1;i=8" BrowseName="1:Output" DataType="Double">
+    <DisplayName>Output</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=11</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=2368</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=7</Reference>
+    </References>
+    <Value>
+      <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=11" BrowseName="EURange" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=8</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="ns=1;i=14" BrowseName="1:GenericActuatorType">
+    <DisplayName>GenericActuatorType</DisplayName>
+    <Description>Represents a piece of equipment that causes some action to occur.</Description>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=15</Reference>
+      <Reference ReferenceType="HasSubtype" IsInverse="true">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="ns=1;i=15" BrowseName="1:Input" DataType="Double" AccessLevel="2" UserAccessLevel="2">
+    <DisplayName>Input</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=18</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=2368</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=14</Reference>
+    </References>
+    <Value>
+      <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=18" BrowseName="EURange" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=15</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="ns=1;i=199" BrowseName="1:PipeType">
+    <DisplayName>PipeType</DisplayName>
+    <Description>A pipe with a flow transmitter and valve attached.</Description>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=200</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=207</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=245</Reference>
+      <Reference ReferenceType="HasSubtype" IsInverse="true">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAObject NodeId="ns=1;i=200" BrowseName="1:FlowTransmitter" EventNotifier="1">
+    <DisplayName>FlowTransmitter</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=201</Reference>
+      <Reference ReferenceType="HasTypeDefinition">ns=1;i=7</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=199</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=201" BrowseName="1:Output" DataType="Double">
+    <DisplayName>Output</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=204</Reference>
+      <Reference ReferenceType="ns=1;i=2" IsInverse="true">ns=1;i=208</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=200</Reference>
+    </References>
+    <Value>
+      <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=204" BrowseName="EURange" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=201</Reference>
+    </References>
+  </UAVariable>
+  <UAObject NodeId="ns=1;i=207" BrowseName="1:Valve" EventNotifier="1">
+    <DisplayName>Valve</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=208</Reference>
+      <Reference ReferenceType="HasTypeDefinition">ns=1;i=14</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=199</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=208" BrowseName="1:Input" DataType="Double" AccessLevel="2" UserAccessLevel="2">
+    <DisplayName>Input</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=211</Reference>
+      <Reference ReferenceType="ns=1;i=2">ns=1;i=201</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=207</Reference>
+    </References>
+    <Value>
+      <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=211" BrowseName="EURange" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=208</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=245" BrowseName="1:Calibration" DataType="ns=1;i=198">
+    <DisplayName>Calibration</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=199</Reference>
+    </References>
+    <Value>
+      <ExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <TypeId>
+          <Identifier>ns=1;i=231</Identifier>
+        </TypeId>
+        <Body>
+          <CalibrationDataType xmlns="http://somecompany.com/TutorialModel">
+            <Offset>1</Offset>
+            <Period>1</Period>
+          </CalibrationDataType>
+        </Body>
+      </ExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=1;i=215" BrowseName="1:Pipe #1" EventNotifier="1">
+    <DisplayName>Pipe #1</DisplayName>
+    <Description>A pipe with a flow transmitter and valve attached.</Description>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=216</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=223</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=246</Reference>
+      <Reference ReferenceType="Organizes" IsInverse="true">i=85</Reference>
+      <Reference ReferenceType="HasTypeDefinition">ns=1;i=199</Reference>
+    </References>
+  </UAObject>
+  <UAObject NodeId="ns=1;i=216" BrowseName="1:FlowTransmitter" EventNotifier="1">
+    <DisplayName>FlowTransmitter</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=217</Reference>
+      <Reference ReferenceType="HasTypeDefinition">ns=1;i=7</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=215</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=217" BrowseName="1:Output" DataType="Double">
+    <DisplayName>Output</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=220</Reference>
+      <Reference ReferenceType="ns=1;i=2" IsInverse="true">ns=1;i=224</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=216</Reference>
+    </References>
+    <Value>
+      <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=220" BrowseName="EURange" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=217</Reference>
+    </References>
+  </UAVariable>
+  <UAObject NodeId="ns=1;i=223" BrowseName="1:Valve" EventNotifier="1">
+    <DisplayName>Valve</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=224</Reference>
+      <Reference ReferenceType="HasTypeDefinition">ns=1;i=14</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=215</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=224" BrowseName="1:Input" DataType="Double" AccessLevel="2" UserAccessLevel="2">
+    <DisplayName>Input</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=227</Reference>
+      <Reference ReferenceType="ns=1;i=2">ns=1;i=217</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=223</Reference>
+    </References>
+    <Value>
+      <Double xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">0</Double>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=227" BrowseName="EURange" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=224</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=246" BrowseName="1:Calibration" DataType="ns=1;i=198">
+    <DisplayName>Calibration</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=215</Reference>
+    </References>
+    <Value>
+      <ExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <TypeId>
+          <Identifier>ns=1;i=231</Identifier>
+        </TypeId>
+        <Body>
+          <CalibrationDataType xmlns="http://somecompany.com/TutorialModel">
+            <Offset>1</Offset>
+            <Period>1</Period>
+          </CalibrationDataType>
+        </Body>
+      </ExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=1;i=231" BrowseName="Default XML">
+    <DisplayName>Default XML</DisplayName>
+    <References>
+      <Reference ReferenceType="HasEncoding" IsInverse="true">ns=1;i=198</Reference>
+      <Reference ReferenceType="HasDescription">ns=1;i=235</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=232" BrowseName="1:TutorialModel" DataType="ByteString">
+    <DisplayName>TutorialModel</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=234</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=235</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">i=92</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=234" BrowseName="NamespaceUri" DataType="String">
+    <DisplayName>NamespaceUri</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=232</Reference>
+    </References>
+    <Value>
+      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">http://somecompany.com/TutorialModel</String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=235" BrowseName="1:CalibrationDataType" DataType="String">
+    <DisplayName>CalibrationDataType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=232</Reference>
+    </References>
+    <Value>
+      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">//xs:element[@name='CalibrationDataType']</String>
+    </Value>
+  </UAVariable>
+  <UAObject NodeId="ns=1;i=238" BrowseName="Default Binary">
+    <DisplayName>Default Binary</DisplayName>
+    <References>
+      <Reference ReferenceType="HasEncoding" IsInverse="true">ns=1;i=198</Reference>
+      <Reference ReferenceType="HasDescription">ns=1;i=242</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=76</Reference>
+    </References>
+  </UAObject>
+  <UAVariable NodeId="ns=1;i=239" BrowseName="1:TutorialModel" DataType="ByteString">
+    <DisplayName>TutorialModel</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=241</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=242</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">i=93</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=72</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=241" BrowseName="NamespaceUri" DataType="String">
+    <DisplayName>NamespaceUri</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasProperty" IsInverse="true">ns=1;i=239</Reference>
+    </References>
+    <Value>
+      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">http://somecompany.com/TutorialModel</String>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=242" BrowseName="1:CalibrationDataType" DataType="String">
+    <DisplayName>CalibrationDataType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=69</Reference>
+      <Reference ReferenceType="HasComponent" IsInverse="true">ns=1;i=239</Reference>
+    </References>
+    <Value>
+      <String xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">CalibrationDataType</String>
+    </Value>
+  </UAVariable>
+</UANodeSet>

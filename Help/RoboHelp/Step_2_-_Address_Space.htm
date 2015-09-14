@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 2 - Address Space</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Server Development Tutorial</h1>
+<h2>Step 2 - Creating an Address Space</h2>
+<p>In this section you will create your own address within the server, 
+ by defining the Node/folder structure, the access-rights for each node, 
+ and how the data for each node will be provided.</p>
+<p>This step is a continuation of <a href="Step_1_-_New_Project.htm">Step 
+ 1 - New Project</a>.</p>
+<ol type="1">
+	<li><p>Within your new project you will double-click the file <span 
+	 style="font-weight: bold;">ReferenceNodeManager.cs</span>.</p></li>
+	<li><p>By default, the source code is opened with all <span style="font-style: italic;">regions</span> 
+	 collapsed by default, expand the <span style="font-weight: bold;">INodeManager 
+	 Members</span> <span style="font-style: italic;">region</span>.</p></li>
+	<li><p>Locate the <span style="font-weight: bold;">CreateAddressSpace</span> 
+	 method and expand it to view the source code.<br />
+	This particular function is quite large and therefore contains <span 
+	 style="font-style: italic;">sub-regions</span> within it, to make 
+	 the code easier to navigate.</p></li>
+	<li><p>Using the code that you can see, simply modify the address to 
+	 meet your needs.</p></li>
+</ol>
+<p>Keep in mind that the address space is created during application startup, 
+ but you can modify it at any time!</p>
+<h2>Creating Your Own Node Structure</h2>
+<p>We will create one new node, in one new folder that we will create below 
+ the root node as shown here:</p>
+<p>Root -&gt; MyFolder -&gt; MyNode</p>
+<ol type="1">
+	<li><p>Go to line #135 which should be an empty line just above &quot;FolderState 
+	 folder1 = &quot; and create a new folder definition:<br />
+	<span style="font-family: 'Courier New', monospace;">FolderState myFolder 
+	 = CreateFolder( root, &quot;/MyFolder&quot;, &quot;MyFolder&quot; 
+	 );</span></p></li>
+	<li><p>We will now create our Node. But, there are MANY different types 
+	 of node that you can create. We will create a simple &quot;Variable&quot; 
+	 type node, although you are encouraged to explore (within the code) 
+	 the other types that are available: <br />
+	<span style="font-family: 'Courier New', monospace;">variables.Add(CreateVariable(myFolder,&quot;/MyFolder/MyNode&quot;,&quot;MyNode&quot;,BuiltInType.Int32,ValueRanks.Scalar));</span></p></li>
+	<li><p>You can change the name and data-type in the above line of code. 
+	 Simply navigate to the &quot;CreateVariable&quot; function for details 
+	 on how it creates and defines the node.</p></li>
+</ol>
+<p>You have just seen how to create a simple folder and node. Next, we 
+ will look at how you can update the values of the nodes within your address 
+ space. Go to <a href="Step_3_-_Reading_Values.htm">Step 3 - Reading Values</a>.</p>
+</body>
+</html>

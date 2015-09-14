@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="utf-8"?>
+<index version="1.0">
+	<properties>
+	</properties>
+	<item name="HTTPS">
+		<section name="HTTPS Connectivity" link="HTTPS_Connectivity.htm">
+		</section>
+	</item>
+	<item name="How it works">
+	</item>
+	<item name="Application, starting">
+	</item>
+	<item name="Starting the application">
+	</item>
+	<item name="Error Messages">
+		<item name="3300">
+		</item>
+		<item name="2035">
+		</item>
+		<item name="1010">
+		</item>
+		<item name="1001">
+		</item>
+	</item>
+	<item name="1001">
+	</item>
+	<item name="1010">
+	</item>
+	<item name="2035">
+	</item>
+	<item name="3300">
+	</item>
+	<item name="Configuration Tool">
+	</item>
+	<item name="Certificates">
+		<section name="UA Configuration Tool" link="UA_Configuration_Tool.htm">
+		</section>
+		<section name="GenericServerConfiguration" link="GenericServerConfiguration.htm">
+		</section>
+		<section name="Trusting Applications built from other Frameworks" link="Trusting_Applications_built_from_other_Frameworks.htm">
+		</section>
+		<section name="Certificate Generator" link="Certificate_Generator.htm">
+		</section>
+	</item>
+	<item name="Certificate Authority">
+		<section name="UA Configuration Tool" link="UA_Configuration_Tool.htm">
+		</section>
+		<section name="Certificate Generator" link="Certificate_Generator.htm">
+		</section>
+	</item>
+	<item name="Getting Started">
+		<section name="Getting Started" link="Getting_Started.htm">
+		</section>
+		<section name="Welcome" link="Welcome.htm">
+		</section>
+		<section name="Step 1 - New ProjectClient" link="Step_1_-_New_ProjectClient.htm">
+		</section>
+	</item>
+	<item name="Connect">
+		<section name="Getting Started" link="Getting_Started.htm">
+		</section>
+	</item>
+	<item name="Browsing">
+		<section name="Getting Started" link="Getting_Started.htm">
+		</section>
+		<section name="Address Space Navigation" link="Address_Space_Navigation.htm">
+		</section>
+	</item>
+	<item name="Reading">
+		<section name="Getting Started" link="Getting_Started.htm">
+		</section>
+		<section name="Address Space Navigation" link="Address_Space_Navigation.htm">
+		</section>
+		<section name="Reading Nodes" link="Reading_Nodes.htm">
+		</section>
+	</item>
+	<item name="Writing">
+		<section name="Getting Started" link="Getting_Started.htm">
+		</section>
+		<section name="Address Space Navigation" link="Address_Space_Navigation.htm">
+		</section>
+		<section name="Writing to Nodes" link="Writing_to_Nodes.htm">
+		</section>
+	</item>
+	<item name="Subscribing">
+		<section name="Getting Started" link="Getting_Started.htm">
+		</section>
+		<section name="Address Space Navigation" link="Address_Space_Navigation.htm">
+		</section>
+		<section name="Subscriptions" link="Subscriptions.htm">
+		</section>
+		<section name="Step 3 - Setup Subscription" link="Step_3_-_Setup_Subscription.htm">
+		</section>
+	</item>
+	<item name="Sample Applications">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Configuration Utility">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Discovery Server">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Generic UA Client">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Generic UA Server">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Data Access Server">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Data Access Client">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Historical Access Data Server">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Historical Access Data Client">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Historical Access Events Server">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Historical Access Events Client">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Alarm Conditions Client">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="Alarm Conditions Server">
+		<section name="Overview" link="Overview.htm">
+		</section>
+	</item>
+	<item name="License Agreement">
+		<section name="License Agreement" link="License_Agreement.htm">
+		</section>
+	</item>
+	<item name="About">
+		<section name="About TechnologyName" link="About_TechnologyName.htm">
+		</section>
+		<section name="About the OPC Foundation" link="The_Information_Screen.htm">
+		</section>
+	</item>
+	<item name="Unified Architecture">
+		<section name="About TechnologyName" link="About_TechnologyName.htm">
+		</section>
+	</item>
+	<item name="UA">
+		<section name="About TechnologyName" link="About_TechnologyName.htm">
+		</section>
+	</item>
+	<item name="OPC Foundation">
+		<section name="About the OPC Foundation" link="The_Information_Screen.htm">
+		</section>
+	</item>
+	<item name="Welcome">
+		<section name="Welcome" link="Welcome.htm">
+		</section>
+	</item>
+	<item name="Overview">
+		<section name="Welcome" link="Welcome.htm">
+		</section>
+		<section name="UA Sample Client" link="UA_Sample_Client.htm">
+		</section>
+		<section name="Data Access Overview" link="Data_Access_Overview.htm">
+		</section>
+		<section name="DAServerOverview" link="DAServerOverview.htm">
+		</section>
+		<section name="DAClientOverview" link="DAClientOverview.htm">
+		</section>
+		<section name="Historical Access Overview" link="Historical_Access_Overview.htm">
+		</section>
+		<section name="HAClientOverview" link="HAClientOverview.htm">
+		</section>
+		<section name="HAEventsClientOverview" link="HAEventsClientOverview.htm">
+		</section>
+		<section name="HAEventsServerOverview" link="HAEventsServerOverview.htm">
+		</section>
+		<section name="ACClientOverview" link="ACClientOverview.htm">
+		</section>
+		<section name="ACServerOverview" link="ACServerOverview.htm">
+		</section>
+		<section name="Alarms &amp; Conditions Overview" link="Alarms_&amp;amp;_Conditions_Overview.htm">
+		</section>
+		<section name="Overview_referenceServer" link="Overview_referenceServer.htm">
+		</section>
+		<section name="Overview - Reference Client" link="Overview_-_Reference_Client.htm">
+		</section>
+		<section name="OverviewSecuringApplications" link="OverviewSecuringApplications.htm">
+		</section>
+		<section name="UA to COM Interoperability Overview" link="ComIop_Overview.htm">
+		</section>
+		<section name="Server Development" link="Server_Development.htm">
+		</section>
+		<section name="Client Development" link="Client_Development.htm">
+		</section>
+		<section name="Useful Components" link="Useful_Components.htm">
+		</section>
+	</item>
+	<item name="Securing Applications">
+		<section name="Welcome" link="Welcome.htm">
+		</section>
+		<section name="OverviewSecuringApplications" link="OverviewSecuringApplications.htm">
+		</section>
+	</item>
+	<item name="Troubleshooting">
+		<section name="Welcome" link="Welcome.htm">
+		</section>
+		<section name="Troubleshooting" link="Troubleshooting.htm">
+		</section>
+	</item>
+	<item name="UA Configuration Tool">
+		<section name="HTTP Access Rules" link="UaConfig_HTTP_Access_Rules.htm">
+		</section>
+		<section name="Manage COM Interop" link="UaConfig_Manage_COM_Interop.htm">
+		</section>
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+		<section name="Launching the Configuration Tool" link="Launching_the_Configuration_Tool.htm">
+		</section>
+		<section name="UA Configuration Tool" link="UA_Configuration_Tool.htm">
+		</section>
+	</item>
+	<item name="HTTP Access Rules">
+		<section name="HTTP Access Rules" link="UaConfig_HTTP_Access_Rules.htm">
+		</section>
+	</item>
+	<item name="COM Interoperability">
+		<section name="Manage COM Interop" link="UaConfig_Manage_COM_Interop.htm">
+		</section>
+		<section name="Starting / Stopping the Service" link="Starting___Stopping_the_Service.htm">
+		</section>
+		<section name="UA to COM Interoperability Overview" link="ComIop_Overview.htm">
+		</section>
+	</item>
+	<item name="Wrap UA Server">
+		<section name="Manage COM Interop" link="UaConfig_Manage_COM_Interop.htm">
+		</section>
+	</item>
+	<item name="Wrap COM Server">
+		<section name="Manage COM Interop" link="UaConfig_Manage_COM_Interop.htm">
+		</section>
+	</item>
+	<item name="Manage Certificates">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="View Certificates">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="Certificate Authority, Create">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="Issue Certificates">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="Export Private Key">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="Import Certificate to Store">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="Issue SSL/TLS Certificate">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="Bind SSL/TLS Certificate">
+		<section name="Manage Certificates" link="UaConfig_Manage_Certificates.htm">
+		</section>
+	</item>
+	<item name="View Application Certificate">
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+	</item>
+	<item name="Import Application Certificate">
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+	</item>
+	<item name="Create Application Certificate">
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+	</item>
+	<item name="Assign Application Certificate">
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+	</item>
+	<item name="assign Certificate Trust List">
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+	</item>
+	<item name="Manage Application Permissions">
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+	</item>
+	<item name="Manage Firewall Access">
+		<section name="Manage Application" link="UaConfig_Manage_Application.htm">
+		</section>
+	</item>
+	<item name="UA Configuration Tools">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="Trust Another Application">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="View Trusted Certificates">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="Select Certificate to Trust...">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="Import Certificate to Trust...">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="Delete all Trusted Certificates">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="Register with Discovery Server">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="Export Application Certificate">
+		<section name="Manage Security" link="UaConfig_Manage_Security.htm">
+		</section>
+	</item>
+	<item name="Launching">
+		<section name="Launching the Configuration Tool" link="Launching_the_Configuration_Tool.htm">
+		</section>
+	</item>
+	<item name="Local Discovery Server">
+		<section name="Local Discovery Server (LDS)" link="Local_Discovery_Server_(LDS).htm">
+		</section>
+	</item>
+	<item name="Starting, Stopping, Restarting">
+		<section name="Local Discovery Server (LDS)" link="Local_Discovery_Server_(LDS).htm">
+		</section>
+	</item>
+	<item name="Generic Server">
+		<section name="UA Sample Server" link="UA_Sample_Server.htm">
+		</section>
+		<section name="GenericServerConfiguration" link="GenericServerConfiguration.htm">
+		</section>
+	</item>
+	<item name="User Interface">
+		<section name="UA Sample Server" link="UA_Sample_Server.htm">
+		</section>
+		<section name="UA Sample Client" link="UA_Sample_Client.htm">
+		</section>
+		<section name="DAServerOverview" link="DAServerOverview.htm">
+		</section>
+		<section name="DAClientOverview" link="DAClientOverview.htm">
+		</section>
+		<section name="HaServerOverview" link="HaServerOverview.htm">
+		</section>
+		<section name="HAClientOverview" link="HAClientOverview.htm">
+		</section>
+		<section name="HAEventsClientOverview" link="HAEventsClientOverview.htm">
+		</section>
+		<section name="HAEventsServerOverview" link="HAEventsServerOverview.htm">
+		</section>
+		<section name="ACClientOverview" link="ACClientOverview.htm">
+		</section>
+		<section name="ACServerOverview" link="ACServerOverview.htm">
+		</section>
+		<section name="Step 2 - Enhance User Interface" link="Step_2_-_Enhance_User_Interface.htm">
+		</section>
+	</item>
+	<item name="Configuration">
+		<section name="GenericServerConfiguration" link="GenericServerConfiguration.htm">
+		</section>
+		<section name="GenericClientConfiguration" link="GenericClientConfiguration.htm">
+		</section>
+		<section name="DAServerConfiguration" link="DAServerConfiguration.htm">
+		</section>
+		<section name="DAClientConfiguration" link="DAClientConfiguration.htm">
+		</section>
+		<section name="HADataServer_Configuration" link="HADataServer_Configuration.htm">
+		</section>
+		<section name="HADataClient_Configuration" link="HADataClient_Configuration.htm">
+		</section>
+		<section name="HAEventsClient_Configuration" link="HAEventsClient_Configuration.htm">
+		</section>
+		<section name="HAEventsServer_Configuration" link="HAEventsServer_Configuration.htm">
+		</section>
+		<section name="ACClient_Configuration" link="ACClient_Configuration.htm">
+		</section>
+		<section name="ACServer_Configuration" link="ACServer_Configuration.htm">
+		</section>
+	</item>
+	<item name="Tracing and Diagnostics">
+		<section name="GenericServerConfiguration" link="GenericServerConfiguration.htm">
+		</section>
+	</item>
+	<item name="Endpoint Configuration">
+		<section name="GenericServerConfiguration" link="GenericServerConfiguration.htm">
+		</section>
+	</item>
+	<item name="Security Configuration">
+		<section name="GenericServerConfiguration" link="GenericServerConfiguration.htm">
+		</section>
+	</item>
+	<item name="Generic Client">
+		<section name="UA Sample Client" link="UA_Sample_Client.htm">
+		</section>
+		<section name="Address Space Navigation" link="Address_Space_Navigation.htm">
+		</section>
+		<section name="Reading Nodes" link="Reading_Nodes.htm">
+		</section>
+		<section name="Writing to Nodes" link="Writing_to_Nodes.htm">
+		</section>
+		<section name="Subscriptions" link="Subscriptions.htm">
+		</section>
+		<section name="UA Discovery" link="UaGenericClientDiscovery.htm">
+		</section>
+		<section name="GenericClientConfiguration" link="GenericClientConfiguration.htm">
+		</section>
+	</item>
+	<item name="Discovery">
+		<section name="UA Discovery" link="UaGenericClientDiscovery.htm">
+		</section>
+	</item>
+	<item name="Find Servers">
+		<section name="UA Discovery" link="UaGenericClientDiscovery.htm">
+		</section>
+	</item>
+	<item name="DA">
+		<section name="Data Access Overview" link="Data_Access_Overview.htm">
+		</section>
+	</item>
+	<item name="Data Access">
+		<section name="Data Access Overview" link="Data_Access_Overview.htm">
+		</section>
+	</item>
+	<item name="DA Server">
+		<section name="DAServerOverview" link="DAServerOverview.htm">
+		</section>
+		<section name="DAServerConfiguration" link="DAServerConfiguration.htm">
+		</section>
+	</item>
+	<item name="DA Client">
+		<section name="DAClientOverview" link="DAClientOverview.htm">
+		</section>
+		<section name="DAClientConfiguration" link="DAClientConfiguration.htm">
+		</section>
+	</item>
+	<item name="HA">
+		<section name="Historical Access Overview" link="Historical_Access_Overview.htm">
+		</section>
+	</item>
+	<item name="Historical Access">
+		<section name="Historical Access Overview" link="Historical_Access_Overview.htm">
+		</section>
+	</item>
+	<item name="Historical Access Data">
+		<section name="Historical Access Overview" link="Historical_Access_Overview.htm">
+		</section>
+	</item>
+	<item name="Historical Access Events">
+		<section name="Historical Access Overview" link="Historical_Access_Overview.htm">
+		</section>
+	</item>
+	<item name="HA Data Server">
+		<section name="HaServerOverview" link="HaServerOverview.htm">
+		</section>
+		<section name="HADataServer_Configuration" link="HADataServer_Configuration.htm">
+		</section>
+	</item>
+	<item name="HA Data Client">
+		<section name="HAClientOverview" link="HAClientOverview.htm">
+		</section>
+		<section name="HaData_Client_Aggregates" link="HaData_Client_Aggregates.htm">
+		</section>
+		<section name="HADataClient_Configuration" link="HADataClient_Configuration.htm">
+		</section>
+	</item>
+	<item name="Aggregates">
+		<section name="HaData_Client_Aggregates" link="HaData_Client_Aggregates.htm">
+		</section>
+	</item>
+	<item name="HA Events Client">
+		<section name="HAEventsClientOverview" link="HAEventsClientOverview.htm">
+		</section>
+		<section name="HAEventsClient_Configuration" link="HAEventsClient_Configuration.htm">
+		</section>
+	</item>
+	<item name="HA Events Server">
+		<section name="HAEventsServerOverview" link="HAEventsServerOverview.htm">
+		</section>
+		<section name="HAEventsServer_Configuration" link="HAEventsServer_Configuration.htm">
+		</section>
+	</item>
+	<item name="AC Client">
+		<section name="ACClient_Configuration" link="ACClient_Configuration.htm">
+		</section>
+		<section name="ACClientOverview" link="ACClientOverview.htm">
+		</section>
+	</item>
+	<item name="AC Server">
+		<section name="ACServer_Configuration" link="ACServer_Configuration.htm">
+		</section>
+		<section name="ACServerOverview" link="ACServerOverview.htm">
+		</section>
+	</item>
+	<item name="AC">
+		<section name="Alarms &amp; Conditions Overview" link="Alarms_&amp;amp;_Conditions_Overview.htm">
+		</section>
+	</item>
+	<item name="Alarms and Conditions">
+		<section name="Alarms &amp; Conditions Overview" link="Alarms_&amp;amp;_Conditions_Overview.htm">
+		</section>
+	</item>
+	<item name="Reference Server">
+		<section name="Overview_referenceServer" link="Overview_referenceServer.htm">
+		</section>
+	</item>
+	<item name="Reference Client">
+		<section name="Overview - Reference Client" link="Overview_-_Reference_Client.htm">
+		</section>
+	</item>
+	<item name="Security">
+		<section name="OverviewSecuringApplications" link="OverviewSecuringApplications.htm">
+		</section>
+		<section name="Trusting Applications built with .NET API" link="Trusting_Applications_built_with_.NET_API.htm">
+		</section>
+		<section name="Trusting Applications built from other Frameworks" link="Trusting_Applications_built_from_other_Frameworks.htm">
+		</section>
+		<section name="Certificate Generator" link="Certificate_Generator.htm">
+		</section>
+	</item>
+	<item name="Trusting Applications">
+		<section name="OverviewSecuringApplications" link="OverviewSecuringApplications.htm">
+		</section>
+	</item>
+	<item name="Remove Trust">
+		<section name="Trusting Applications built with .NET API" link="Trusting_Applications_built_with_.NET_API.htm">
+		</section>
+	</item>
+	<item name="Add Trust">
+		<section name="Trusting Applications built with .NET API" link="Trusting_Applications_built_with_.NET_API.htm">
+		</section>
+	</item>
+	<item name="Adding Trust">
+		<section name="Trusting Applications built from other Frameworks" link="Trusting_Applications_built_from_other_Frameworks.htm">
+		</section>
+	</item>
+	<item name="Removing Trust">
+		<section name="Trusting Applications built from other Frameworks" link="Trusting_Applications_built_from_other_Frameworks.htm">
+		</section>
+	</item>
+	<item name="Certificate Generator">
+		<section name="Certificate Generator" link="Certificate_Generator.htm">
+		</section>
+	</item>
+	<item name="Revoke">
+		<section name="Certificate Generator" link="Certificate_Generator.htm">
+		</section>
+	</item>
+	<item name="Issue">
+		<section name="Certificate Generator" link="Certificate_Generator.htm">
+		</section>
+	</item>
+	<item name="Generate">
+		<section name="Certificate Generator" link="Certificate_Generator.htm">
+		</section>
+	</item>
+	<item name="COM IOP">
+		<section name="Starting / Stopping the Service" link="Starting___Stopping_the_Service.htm">
+		</section>
+		<section name="UA to COM Interoperability Overview" link="ComIop_Overview.htm">
+		</section>
+	</item>
+	<item name="UA to COM">
+		<section name="Starting / Stopping the Service" link="Starting___Stopping_the_Service.htm">
+		</section>
+		<section name="UA to COM Interoperability Overview" link="ComIop_Overview.htm">
+		</section>
+	</item>
+	<item name="COM to UA">
+		<section name="Starting / Stopping the Service" link="Starting___Stopping_the_Service.htm">
+		</section>
+		<section name="UA to COM Interoperability Overview" link="ComIop_Overview.htm">
+		</section>
+	</item>
+	<item name="Start/Stop Server Wrapper">
+		<section name="Starting / Stopping the Service" link="Starting___Stopping_the_Service.htm">
+		</section>
+	</item>
+	<item name="Development">
+		<section name="Developing UA Applications" link="Developing_UA_Applications.htm">
+		</section>
+		<section name="Step 6 - Deploying Server" link="Step_6_-_Deploying_Server.htm">
+		</section>
+		<section name="Step 5 - Testing Server" link="Step_5_-_Testing_Server.htm">
+		</section>
+		<section name="Step 4 - Handling Write Requests" link="Step_4_-_Handling_Write_Requests.htm">
+		</section>
+		<section name="Step 3 - Reading Values" link="Step_3_-_Reading_Values.htm">
+		</section>
+		<section name="Step 2 - Address Space" link="Step_2_-_Address_Space.htm">
+		</section>
+		<section name="Step 1 - New Project" link="Step_1_-_New_Project.htm">
+		</section>
+		<section name="Server Development" link="Server_Development.htm">
+		</section>
+		<section name="Client Development" link="Client_Development.htm">
+		</section>
+		<section name="Step 1 - New ProjectClient" link="Step_1_-_New_ProjectClient.htm">
+		</section>
+		<section name="Step 2 - Enhance User Interface" link="Step_2_-_Enhance_User_Interface.htm">
+		</section>
+		<section name="Step 3 - Setup Subscription" link="Step_3_-_Setup_Subscription.htm">
+		</section>
+		<section name="Step 4 - Consuming DataChanges" link="Step_4_-_Consuming_DataChanges.htm">
+		</section>
+		<section name="Step 5 - Testing your Client" link="Step_5_-_Testing_your_Client.htm">
+		</section>
+		<section name="Step 6 - Deploying your Client" link="Step_6_-_Deploying_your_Client.htm">
+		</section>
+		<section name="Useful Components" link="Useful_Components.htm">
+		</section>
+	</item>
+	<item name="Development, Client">
+		<section name="Developing UA Applications" link="Developing_UA_Applications.htm">
+		</section>
+		<section name="Client Development" link="Client_Development.htm">
+		</section>
+		<section name="Step 1 - New ProjectClient" link="Step_1_-_New_ProjectClient.htm">
+		</section>
+		<section name="Step 2 - Enhance User Interface" link="Step_2_-_Enhance_User_Interface.htm">
+		</section>
+		<section name="Step 3 - Setup Subscription" link="Step_3_-_Setup_Subscription.htm">
+		</section>
+		<section name="Step 4 - Consuming DataChanges" link="Step_4_-_Consuming_DataChanges.htm">
+		</section>
+		<section name="Step 5 - Testing your Client" link="Step_5_-_Testing_your_Client.htm">
+		</section>
+		<section name="Step 6 - Deploying your Client" link="Step_6_-_Deploying_your_Client.htm">
+		</section>
+		<section name="Useful Components" link="Useful_Components.htm">
+		</section>
+	</item>
+	<item name="Development, Server">
+		<section name="Developing UA Applications" link="Developing_UA_Applications.htm">
+		</section>
+		<section name="Step 6 - Deploying Server" link="Step_6_-_Deploying_Server.htm">
+		</section>
+		<section name="Step 5 - Testing Server" link="Step_5_-_Testing_Server.htm">
+		</section>
+		<section name="Step 4 - Handling Write Requests" link="Step_4_-_Handling_Write_Requests.htm">
+		</section>
+		<section name="Step 3 - Reading Values" link="Step_3_-_Reading_Values.htm">
+		</section>
+		<section name="Step 2 - Address Space" link="Step_2_-_Address_Space.htm">
+		</section>
+		<section name="Step 1 - New Project" link="Step_1_-_New_Project.htm">
+		</section>
+		<section name="Server Development" link="Server_Development.htm">
+		</section>
+	</item>
+	<item name="Tutorial">
+		<section name="Step 6 - Deploying Server" link="Step_6_-_Deploying_Server.htm">
+		</section>
+		<section name="Step 5 - Testing Server" link="Step_5_-_Testing_Server.htm">
+		</section>
+		<section name="Step 4 - Handling Write Requests" link="Step_4_-_Handling_Write_Requests.htm">
+		</section>
+		<section name="Step 3 - Reading Values" link="Step_3_-_Reading_Values.htm">
+		</section>
+		<section name="Step 2 - Address Space" link="Step_2_-_Address_Space.htm">
+		</section>
+		<section name="Step 1 - New Project" link="Step_1_-_New_Project.htm">
+		</section>
+		<section name="Server Development" link="Server_Development.htm">
+		</section>
+		<section name="Client Development" link="Client_Development.htm">
+		</section>
+		<section name="Step 1 - New ProjectClient" link="Step_1_-_New_ProjectClient.htm">
+		</section>
+		<section name="Step 2 - Enhance User Interface" link="Step_2_-_Enhance_User_Interface.htm">
+		</section>
+		<section name="Step 3 - Setup Subscription" link="Step_3_-_Setup_Subscription.htm">
+		</section>
+		<section name="Step 4 - Consuming DataChanges" link="Step_4_-_Consuming_DataChanges.htm">
+		</section>
+		<section name="Step 5 - Testing your Client" link="Step_5_-_Testing_your_Client.htm">
+		</section>
+		<section name="Step 6 - Deploying your Client" link="Step_6_-_Deploying_your_Client.htm">
+		</section>
+		<section name="Useful Components" link="Useful_Components.htm">
+		</section>
+	</item>
+	<item name="Deploy">
+		<section name="Step 6 - Deploying Server" link="Step_6_-_Deploying_Server.htm">
+		</section>
+	</item>
+	<item name="Testing">
+		<section name="Step 5 - Testing Server" link="Step_5_-_Testing_Server.htm">
+		</section>
+		<section name="Step 5 - Testing your Client" link="Step_5_-_Testing_your_Client.htm">
+		</section>
+	</item>
+	<item name="Write, Handling">
+		<section name="Step 4 - Handling Write Requests" link="Step_4_-_Handling_Write_Requests.htm">
+		</section>
+	</item>
+	<item name="Address space">
+		<section name="Step 3 - Reading Values" link="Step_3_-_Reading_Values.htm">
+		</section>
+	</item>
+	<item name="Address-space">
+		<section name="Step 2 - Address Space" link="Step_2_-_Address_Space.htm">
+		</section>
+	</item>
+	<item name="Subscription Handling">
+		<section name="Step 4 - Consuming DataChanges" link="Step_4_-_Consuming_DataChanges.htm">
+		</section>
+	</item>
+	<item name="Deployment">
+		<section name="Step 6 - Deploying your Client" link="Step_6_-_Deploying_your_Client.htm">
+		</section>
+	</item>
+	<item name="Certification">
+		<section name="Certification" link="Certification.htm">
+		</section>
+	</item>
+	<item name="Test Lab">
+		<section name="Certification" link="Certification.htm">
+		</section>
+	</item>
+	<item name="OPC Certification">
+		<section name="Certification" link="Certification.htm">
+		</section>
+	</item>
+	<item name="Certified">
+		<section name="Certification" link="Certification.htm">
+		</section>
+	</item>
+	<item name="Firewall Settings">
+		<section name="Firewall Settings" link="Firewall_Settings.htm">
+		</section>
+	</item>
+	<item name="TCP Ports">
+		<section name="Firewall Settings" link="Firewall_Settings.htm">
+		</section>
+	</item>
+	<item name="Endpoints">
+		<section name="Firewall Settings" link="Firewall_Settings.htm">
+		</section>
+	</item>
+</index>

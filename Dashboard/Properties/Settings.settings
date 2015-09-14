@@ -1,0 +1,177 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WelcomeApplication.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConfigAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">The UA Configuration Tool provides options for managing applications, certificate trusts, and COM/UA interoperability.</Value>
+    </Setting>
+    <Setting Name="ConfigAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UA Configuration Tool</Value>
+    </Setting>
+    <Setting Name="DAServerAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OPC UA DA Server is a light-weight application that provides access to readable/writeble data.</Value>
+    </Setting>
+    <Setting Name="DAServerAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DA Server</Value>
+    </Setting>
+    <Setting Name="DAClientAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OPC UA DA Client is a light-weight application that provides minimal capabilities and merely demonstrates the simple data-acquisition from an OPC UA DA Server.</Value>
+    </Setting>
+    <Setting Name="DAClientAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">DA Client</Value>
+    </Setting>
+    <Setting Name="HADServerAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">This Historical Data Server is a purpose-built application that serves static and/or dynamic historical data to clients.</Value>
+    </Setting>
+    <Setting Name="HADServerAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HA Data Server</Value>
+    </Setting>
+    <Setting Name="HADClientAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">The HA Data Client is a purpose-built application for demonstrating OPC Historical Data.</Value>
+    </Setting>
+    <Setting Name="HADClientAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HA Data Client</Value>
+    </Setting>
+    <Setting Name="HAServerAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">This Historical Events Server is a purpose-built application that serves historical events information to clients.</Value>
+    </Setting>
+    <Setting Name="HAServerAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HE Data Server</Value>
+    </Setting>
+    <Setting Name="HAEClientAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">The Historical Events Client is a purpose-built client that demonstrates the use of Historical Events.</Value>
+    </Setting>
+    <Setting Name="HAEClientAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">HE Data Client</Value>
+    </Setting>
+    <Setting Name="ACServerAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">This Alarms &amp; Conditions Server is a purpose-built application raises alarms and events information to clients</Value>
+    </Setting>
+    <Setting Name="ACServerAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AC Server</Value>
+    </Setting>
+    <Setting Name="ACClientAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Alarms and Condition Client is a purpose-built client for demonstrating OPC UA Alarms &amp; Conditions.</Value>
+    </Setting>
+    <Setting Name="ACClientAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">AC Client</Value>
+    </Setting>
+    <Setting Name="LDSAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Discover Server provides a list of available OPC UA applications to any OPC application that queries it</Value>
+    </Setting>
+    <Setting Name="LDSAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Discovery Server</Value>
+    </Setting>
+    <Setting Name="GenServerAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UA Generic Server combines the features of several server profiles</Value>
+    </Setting>
+    <Setting Name="GenServerAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Generic Server</Value>
+    </Setting>
+    <Setting Name="GenClientAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UA Generic Client combines the features of several client profiles</Value>
+    </Setting>
+    <Setting Name="GenClientAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Generic Client</Value>
+    </Setting>
+    <Setting Name="RefServerAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">The Reference Server is a purpose built server used during the development and testing of the Unified Architecture</Value>
+    </Setting>
+    <Setting Name="RefServerAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Reference Server</Value>
+    </Setting>
+    <Setting Name="RefClientAppDescription" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">The Reference Client is a very light-weight Client that offers minimal functionality. It is a purpose-built Client for connecting directly to the Reference Server to consume data.</Value>
+    </Setting>
+    <Setting Name="RefClientAppName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Reference Client</Value>
+    </Setting>
+    <Setting Name="RefClientHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\overview_-_reference_client.htm</Value>
+    </Setting>
+    <Setting Name="RefServerHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\overview_referenceServer.htm</Value>
+    </Setting>
+    <Setting Name="GenClientHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\ua_sample_client.htm</Value>
+    </Setting>
+    <Setting Name="GenServerHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\ua_sample_server.htm</Value>
+    </Setting>
+    <Setting Name="LDSHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\local_discovery_server_(lds).htm</Value>
+    </Setting>
+    <Setting Name="ACClientHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\acclientoverview.htm</Value>
+    </Setting>
+    <Setting Name="ACServerHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\acserveroverview.htm</Value>
+    </Setting>
+    <Setting Name="HAEClientHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\haeventsclientoverview.htm</Value>
+    </Setting>
+    <Setting Name="HAEServerHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\haeventsserveroverview.htm</Value>
+    </Setting>
+    <Setting Name="HADClientHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\haclientoverview.htm</Value>
+    </Setting>
+    <Setting Name="HADServerHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\haserveroverview.htm</Value>
+    </Setting>
+    <Setting Name="DAClientHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\daclientoverview.htm</Value>
+    </Setting>
+    <Setting Name="DAServerHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\daserveroverview.htm</Value>
+    </Setting>
+    <Setting Name="ConfigHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\ua_configuration_tool.htm</Value>
+    </Setting>
+    <Setting Name="ConfigProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Opc.Ua.ConfigurationTool.exe</Value>
+    </Setting>
+    <Setting Name="DAServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.dataaccessserver.exe</Value>
+    </Setting>
+    <Setting Name="DAClient" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.dataaccessclient.exe</Value>
+    </Setting>
+    <Setting Name="HADServerProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.historicalaccessserver.exe</Value>
+    </Setting>
+    <Setting Name="HADClientProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.historicalaccessclient.exe</Value>
+    </Setting>
+    <Setting Name="HAEServerProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.historicaleventsserver.exe</Value>
+    </Setting>
+    <Setting Name="HAEClientProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.historicaleventsclient.exe</Value>
+    </Setting>
+    <Setting Name="ACServerProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.alarmconditionserver.exe</Value>
+    </Setting>
+    <Setting Name="ACClientProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.alarmconditionclient.exe</Value>
+    </Setting>
+    <Setting Name="GenServerProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OPC.ua.sampleserver.exe</Value>
+    </Setting>
+    <Setting Name="GenClientProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OPC.ua.sampleclient.exe</Value>
+    </Setting>
+    <Setting Name="RefServerProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.referenceserver.exe</Value>
+    </Setting>
+    <Setting Name="RefClientProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">quickstarts.referenceclient.exe</Value>
+    </Setting>
+    <Setting Name="WelcomeHelp" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">webhelp\welcome.htm</Value>
+    </Setting>
+    <Setting Name="LDSProcess" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">OPC.ua.discoveryserver.exe</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

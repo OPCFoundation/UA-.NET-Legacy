@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F5CAC26-AB61-4E71-9FCF-043B95AE0221}"
+	ProjectSection(SolutionItems) = preProject
+		Aggregators.vsmdi = Aggregators.vsmdi
+		Aggregators\LocalTestRun.testrunconfig = Aggregators\LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Aggregators Library", "Aggregators\UA Aggregators Library.csproj", "{81477662-7FDD-487B-83C1-43F9A3F9C2A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "UnitTest\UnitTest.csproj", "{0D5B5E95-09D3-4888-A231-5CA1448033E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stack", "Stack", "{53E2CB82-A373-4B2F-ADB8-128DC3A68950}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "..\..\..\Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{81477662-7FDD-487B-83C1-43F9A3F9C2A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81477662-7FDD-487B-83C1-43F9A3F9C2A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81477662-7FDD-487B-83C1-43F9A3F9C2A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81477662-7FDD-487B-83C1-43F9A3F9C2A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D5B5E95-09D3-4888-A231-5CA1448033E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D5B5E95-09D3-4888-A231-5CA1448033E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D5B5E95-09D3-4888-A231-5CA1448033E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D5B5E95-09D3-4888-A231-5CA1448033E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9} = {53E2CB82-A373-4B2F-ADB8-128DC3A68950}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Aggregators.vsmdi
+	EndGlobalSection
+EndGlobal

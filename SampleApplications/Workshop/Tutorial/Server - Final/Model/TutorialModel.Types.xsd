@@ -1,0 +1,25 @@
+<xs:schema 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd" 
+  xmlns:tns="http://somecompany.com/TutorialModel" 
+  targetNamespace="http://somecompany.com/TutorialModel" 
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" />
+  
+  <xs:complexType name="CalibrationDataType">
+  	<xs:sequence>
+      <xs:element name="Offset" type="xs:double" minOccurs="0" />
+      <xs:element name="Period" type="xs:double" minOccurs="0" />
+  	</xs:sequence>
+  </xs:complexType>
+  <xs:element name="CalibrationDataType" type="tns:CalibrationDataType" />
+
+  <xs:complexType name="ListOfCalibrationDataType">
+    <xs:sequence>
+      <xs:element name="CalibrationDataType" type="tns:CalibrationDataType" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfCalibrationDataType" type="tns:ListOfCalibrationDataType" nillable="true"></xs:element>
+  
+</xs:schema>

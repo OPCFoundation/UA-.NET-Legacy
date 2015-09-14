@@ -1,0 +1,413 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="6c75ce34-3ac0-486a-a74e-4fd4b5d34884" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Work out on the 9.2 Sample Client</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The <application>UA Sample Client</application> can connect to any of the sample servers.
+    </para>
+    </introduction>
+    <!-- Add one or more top-level section elements.  These are collapsible.
+       If using <autoOutline /> tag, add an address attribute to identify
+       it so that it can be jumped to with a hyperlink. -->
+    <section address="Section1">
+      <title>Selecting a Server</title>
+      <content>
+        <para>
+        When this application is launched a drop down menu with several URL appears.
+      </para>
+        <table>
+          <title>The URLs of the sample servers are:</title>
+          <row>
+            <entry>
+              <para>
+                <application>UA Sample Client</application>
+              </para>
+            </entry>
+            <entry>
+              <para> http://localhost:61211/UA/SampleClient</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <application>UA Sample Server</application>
+              </para>
+            </entry>
+            <entry>
+              <para>http://localhost:51211/UA/SampleServer</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>IIS Hosted Server</para>
+            </entry>
+            <entry>
+              <para>http://localhost/UASampleService/Service.svc</para>
+            </entry>
+          </row>
+        </table>
+        <alert>
+          <para>
+          You must manually start the <application>UA Sample Server</application> application before you can connect to it. If the <application>UA Sample Server</application> application is running an OPC icon should be visible in the tray of the task bar. Right clicking on this icon will allow you to stop the application.
+        </para>
+        </alert>
+        <para>
+        You connect to a server by selecting it in the drop down and click on the <userInput>Connect</userInput> button.
+      </para>
+        <para>
+        You will also see additional text after the URL that indicates what security and/or message encoding is being used. Servers may support multiple endpoints with different security settings. These endpoints can be found by clicking on the <userInput>&lt;Browse..&gt;</userInput> option and clicking on the <userInput>Discover</userInput> button when the endpoints for a server are in view.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Choosing an Endpoint</title>
+      <content>
+        <para>
+        Any valid URL can be typed into the address bar. However, the client assumes that the discovery endpoint for the server can be constructed by appending <userInput>/discovery</userInput> to the end of the URL typed in. The client will not be able to connect if the server does not have a discovery endpoint at that address. It is possible to manually enter the Discovery URLs for the endpoint by selecting <userInput>&lt;Browse..&gt;</userInput> in the drop down menu.
+      </para>
+        <para>
+        After the <userInput>Connect</userInput> button is clicked the client calls the <computerOutputInline>GetEndpoints</computerOutputInline> service on the discovery endpoint for the server.
+      </para>
+        <para>
+        Selecting an endpoint URL starting with <userInput>http:</userInput> will use XML Web Services for communication. Selecting a URL starting with <userInput>opc.tcp</userInput> will use UA Native Binary for communication.
+
+      </para>
+        <alert>
+          <para>
+          The current release of the <computerOutputInline>UA Native Binary</computerOutputInline> stack profile does not implement security even though the user interface claims it is being used.
+        </para>
+        </alert>
+        <para>
+        The <computerOutputInline>XML Web Services</computerOutputInline> stack profile allows clients to use either pure XML messages or UA binary encoded messages. The setting can be changed in the configuration for the endpoint. The <userInput>&lt;Browse..&gt;</userInput> entry in the dropdown allows you to edit the <computerOutputInline>EndpointDescription</computerOutputInline> and <computerOutputInline>EndpointConfiguration</computerOutputInline>.
+      </para>
+        <para>
+        The <userInput>&lt;Browse...&gt;</userInput> will allow you to browse servers on the network using the <token>LDS</token>.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Creating a Session</title>
+      <content>
+        <para>
+        The <computerOutputInline>Open Session</computerOutputInline> dialog appears after clicking <userInput>Connect</userInput>. This dialog allows you specify a name for the session and the clients user credentials. The authentication modes depend on the endpoint. Only options available for the current endpoint are available.
+      </para>
+        <para>
+        The name of the session is only used as the name of the node containing the diagnostic information for the session in the server address space.
+      </para>
+        <para>
+        The user name/password may be left blank. If a user name is specified then it must be a valid windows account on the server machine.
+      </para>
+        <para>
+        Click <userInput>OK</userInput> to connect to server.
+      </para>
+        <para>
+        At this point data will appear in the controls.
+      </para>
+        <para>
+        The <computerOutputInline>Session Panel</computerOutputInline> is on the left and it displays the active sessions and any subscriptions that they have.
+      </para>
+        <para>
+        The <computerOutputInline>Browse Panel</computerOutputInline>  is on the right and it displays the Object instances in the server address space.
+      </para>
+        <para>
+        The <computerOutputInline>Notification Panel</computerOutputInline> is at the bottom and it displays the contents of Publish responses returned from the server.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Browsing the Server Address Space</title>
+      <content>
+        <para>
+        The client browses the <computerOutputInline>Objects</computerOutputInline> folder immediately after creating a session and displays the results in the right hand panel.
+      </para>
+        <table>
+          <title>The top level nodes are:</title>
+          <row>
+            <entry>
+              <para>Server</para>
+            </entry>
+            <entry>
+              <para>Diagnostics information specified in Part 5</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Data</para>
+            </entry>
+            <entry>
+              <para>Simulation nodes which are part of the UA Server reference implementation.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Vendors</para>
+            </entry>
+            <entry>
+              <para>Contains metadata describing equipment vendors used in the Boiler example.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>BoilerArea</para>
+            </entry>
+            <entry>
+              <para>An alarm area containing the sample Boilers</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Area1
+            </para>
+            </entry>
+            <entry>
+              <para>Another alarm area containing the sample Boilers</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Boiler1</para>
+            </entry>
+            <entry>
+              <para>A sample Boiler.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Boiler2</para>
+            </entry>
+            <entry>
+              <para> A second instance of the sample Boiler.</para>
+            </entry>
+          </row>
+        </table>
+        <para>
+        The Boiler example is described in detail in the presentations from the UA DevCon. The overview slide can be found here. The nodes that appear in the address space for each boiler are here.
+      </para>
+        <para>
+        Clicking on the plus sign next to any of these nodes with cause the client to issue a <userInput>Browse</userInput> request and display the results as children of the node. By default, the client only follows forward hierarchical references.
+      </para>
+        <para>
+        Right clicking on any node will bring up a context menu.
+      </para>
+        <table>
+          <title>The actions in this menu do the following:</title>
+          <row>
+            <entry>
+              <para>
+                <computerOutputInline>Browse Options</computerOutputInline>
+              </para>
+            </entry>
+            <entry>
+              <para>
+              Displays dialog that sets the options passed to the <userInput>Browse</userInput> request.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Show References</para>
+            </entry>
+            <entry>
+              <para>Adds nodes representing the references into the tree.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+                <computerOutputInline>View Attributes</computerOutputInline>
+              </para>
+            </entry>
+            <entry>
+              <para>Displays the values of all attributes and properties for the node.</para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>Refresh</para>
+            </entry>
+            <entry>
+              <para>
+              Re-issues the <userInput>Browse</userInput> request with the current options.
+            </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+        It is also possible to open a new browse window by right clicking on the session in the left hand panel. The menu that appears provides a number of choices for a starting node. Selecting <userInput>All</userInput> will display all nodes in the address space.
+      </para>
+      </content>
+      <sections>
+        <section>
+          <title>Changing the Browse Options</title>
+          <content>
+            <para>
+            The UA address space is a full mesh network, however, such a network is difficult to render in a typical two dimensional user interface. For that reason, the sample client uses filters passed to the <userInput>Browse</userInput> request to limit the information displayed in any given view.
+          </para>
+            <procedure>
+              <title>The user can change these filters by following these steps:</title>
+              <steps class="ordered">
+                <step>
+                  <content>
+                    <para>
+                    Right click on any node and select <userInput>Show References</userInput>. This will add an extra node into the tree control that displays the reference type for the reference between two nodes.
+                  </para>
+                  </content>
+                </step>
+                <step>
+                  <content>
+                    <para>
+                    Right click on the <userInput>Boiler1</userInput> node in the address space and select <userInput>Browse Options</userInput>.
+                  </para>
+                  </content>
+                </step>
+                <step>
+                  <content>
+                    <para>
+                    Set the <computerOutputInline>Reference Type</computerOutputInline> to <userInput>References</userInput>. This tells the server to return all references from the node being browsed.
+                  
+                </para>
+                  </content>
+                </step>
+              </steps>
+            </procedure>
+            <para>
+            The client will re-issue the <userInput>Browse</userInput> request when the <userInput>OK</userInput> button is pressed. The tree control should now display a child folder called <computerOutputInline>HasTypeDefinition</computerOutputInline>. In that folder there should be a node called  <computerOutputInline>BoilerType</computerOutputInline>.
+          </para>
+            <para>
+            Before changing the browse options the only references displayed were subtypes of the <computerOutputInline>Hierarchical References</computerOutputInline> reference type. In this case, the only references from <computerOutputInline>Boiler1</computerOutputInline> that met these criteria were the <computerOutputInline>HasComponent</computerOutputInline> references.
+          </para>
+          </content>
+        </section>
+      </sections>
+    </section>
+    <section>
+      <title>Using Views</title>
+      <content>
+        <para>
+        Server defined <computerOutputInline>Views</computerOutputInline> offer a way to browse a sub-set of the address space that the server feels is useful to some clients. The sample servers provide a single view called <codeEntityReference>BoilerView</codeEntityReference>. This view can be browsed by right-clicking on the session in the left-hand tree and selecting <userInput>Browse | Server Defined Views | BoilerView </userInput>.
+      </para>
+        <para>
+        The <computerOutputInline>BoilerView</computerOutputInline> displays the sample boilers and their components. References to the type model do not appear in this view.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>
+      Reading Data
+    </title>
+      <content>
+        <para>
+        Reading data can be done in a number of ways. The simplest approach uses the <computerOutputInline>View Attributes</computerOutputInline> option that is available in the context menu when browsing the address space. If the node is a <computerOutputInline>Variable</computerOutputInline> that allows read access then the <userInput>Read</userInput> option will appear in the context menu.
+      </para>
+        <para>
+        The node <userInput>Area1/ Boiler1/LC1001/Measurement</userInput> is readable. Find it and click <userInput>Read</userInput>. This should display the <computerOutputInline>Read</computerOutputInline> dialog. Clicking the <userInput>Read</userInput> button will send the request and display the results.
+      </para>
+        <para>
+        You can add more nodes to the request by right-clicking in the top panel of the Read dialog. The <computerOutputInline>Select Nodes</computerOutputInline> option brings up the <computerOutputInline>Select Node</computerOutputInline> dialog.
+      </para>
+        <alert>
+          <para>
+          Double clicking on a node in a tree control simply expands or collapses the tree. If you wish to select a node you must right-click and click on the <userInput>Select Item</userInput> or <userInput>Select Children</userInput> options.
+        </para>
+        </alert>
+        <para>
+        It is also possible to access the <computerOutputInline>Read</computerOutputInline> dialog from the <computerOutputInline>Session Panel</computerOutputInline>.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Writing Data</title>
+      <content>
+        <para>
+        Writing can also be done from the <computerOutputInline>Browse Panel</computerOutputInline>. Selecting any <userInput>Variable</userInput> that allows write access will cause the <computerOutputInline>Write</computerOutputInline> option to appear in the context menu.
+      </para>
+        <para>
+        The node <userInput>Area1/Boiler1/LC1001/SetPoint</userInput> is writable. Find it and click <userInput>Write</userInput>. This should display the <computerOutputInline>Write</computerOutputInline> dialog. Clicking the <userInput>Write</userInput> button will send the request and display the results.
+      </para>
+        <para>
+        Double clicking on a value in the <computerOutputInline>Write</computerOutputInline> dialog will allow you to change it.
+      </para>
+        <para>
+        It is also possible to access the <userInput>Write</userInput> dialog from the <userInput>Session Panel</userInput>.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Creating Subscriptions</title>
+      <content>
+        <para>
+        It is possible to create new subscriptions by right-clicking on a session in the <computerOutputInline>Session Panel</computerOutputInline>. This will bring up the <computerOutputInline>Subscription Parameters</computerOutputInline> dialog. Clicking <userInput>OK</userInput> brings up an empty <computerOutputInline>Subscription</computerOutputInline>.
+      </para>
+        <para>
+        At this point notification messages should start to appear in the <computerOutputInline>Notifications Panel</computerOutputInline>. These are the keep alive messages for the subscription and tell the client and server that communication is still functional even if there are notifications available.
+      </para>
+        <para>
+        You can monitored items to the subscription by choosing the <userInput>Add Items</userInput> in the main menu. The node <userInput>Area1/Boiler1</userInput> produces events so try adding it to the subscription. After about 20 seconds the first event notification should appear in the Subscription window.
+      </para>
+        <para>
+        It is possible to alter the fields returned in the event notification by selecting a monitored item and clicking the <userInput>Set Filter</userInput> command from the context menu.
+      </para>
+        <para>
+        Try adding the children of <userInput>Area1/Boiler1/CC1001</userInput> to the subscription. These are all variables and they should change each time the subscription publish interval expires.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Calling Methods</title>
+      <content>
+        <para>
+        Each instance of the sample boilers has a method called <computerOutputInline>SetSimulationMode</computerOutputInline>. It can be called by right-clicking on the method node and selecting the <userInput>Call</userInput> option. This brings up the call dialog which displays the input and output parameters for the method.
+      </para>
+        <para>
+        Double-clicking on an input parameter will allow you to change its value. You must specify a valid value for every parameter in this example.
+      </para>
+        <para>
+        Try setting the <computerOutputInline>RequestedMode</computerOutputInline> to False this will stop the simulation. You can verify that the simulation has stopped by reading or subscribing to variables for the same boiler. They do not change when the simulation is nor running.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Using Conditions</title>
+      <content>
+        <para>
+        The subscription window has a menu option called <computerOutputInline>Conditions</computerOutputInline> that will display all of the condition events captured by the subscription filters. Subscribing to the <computerOutputInline>Boiler1</computerOutputInline> object will display 4 active conditions:
+      </para>
+        <list class="ordered">
+          <listItem>
+            <para>
+            a generic <computerOutputInline>Condition</computerOutputInline>,
+          </para>
+          </listItem>
+          <listItem>
+            <para>
+            a <computerOutputInline>Dialog Condition</computerOutputInline>,
+          </para>
+          </listItem>
+          <listItem>
+            <para>
+            an <computerOutputInline>Acknowledgeable Condition</computerOutputInline></para>
+          </listItem>
+          <listItem>
+            <para>
+            and a <computerOutputInline>Level Alarm</computerOutputInline>.
+          </para>
+          </listItem>
+        </list>
+        <para>
+        The methods available to for each condition are shown in the context menu.
+      </para>
+        <para>
+        The <computerOutputInline>LevelAlarm</computerOutputInline> can be controlled by writing to the <userInput>Area1/ Boiler1/LC1001/SetPoint</userInput> node. Valid values are between 0 and 10. Alarms will go off if the value is &lt;=3 or &gt;=7.
+      </para>
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

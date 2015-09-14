@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Historical Access Overview</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Historical Access Overview</h1>
+<p>Historical Access is based on the original OPC HDA specification and 
+ adapted to leverage the full benefits of OPC UA and are defined in <a 
+	 href="http://www.opcfoundation.org/ua/part11"><?rh-udv_start name="UaSpec11" ?>UA Specifications Part 11 - Historical Access (http://www.opcfoundation.org/ua/part11)<?rh-udv_end ?></a>.</p>
+<p>Intended for processing and analyzing data collected from a PLC/controller 
+ and/or OPC DA Server.</p>
+<p>In addition to historical data, the UA version of this specification 
+ introduces the ability to obtain and process historical events information 
+ too.</p>
+<p>This technology provides the following capabilities:</p>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 18.128%;" />
+	<col style="width: 81.872%;" />
+	<tr>
+		<td style="vertical-align: top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Capability</span></p></td>
+		<td style="vertical-align: top;"><span style="font-weight: bold;">Description</span></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: top;"><p style="text-align: center; 
+											 font-weight: bold;">Read</p></td>
+		<td style="vertical-align: top;"><p>Obtain the history of 1...n 
+		 Nodes in a single call. </p>
+		<p>The request can specify numerous parameters such as the start/end 
+		 dates, along with any statistical functions to invoke such as 
+		 the Average, Min, Max, and many, many other <span style="font-style: italic;">Aggregates</span><span>.</span></p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: top;"><p style="text-align: center; 
+											 font-weight: bold;">Update</p></td>
+		<td style="vertical-align: top;"><p>Update the information stored 
+		 in a database for 1...n Nodes in a single call. </p>
+		<p>The request can specify the action, such as delete, update, 
+		 or create new historical records. </p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: top;"><p style="text-align: center; 
+											 font-weight: bold;">Subscription</p></td>
+		<td style="vertical-align: top;"><p>The ability to request a Server 
+		 to monitor Nodes and to send a notification to the Client when 
+		 the value changes. Additional filters can be imposed such that 
+		 the server can use an aggregate such as <span style="font-style: italic;">Average</span><span> 
+		 and notify the client when values change etc.</span></p></td>
+	</tr>
+</table>
+<p>There are many other features of <?rh-udv_start name="TechnologyName" ?>Unified Architecture<?rh-udv_end ?> 
+ that are inherited by the Historical &#160;Access <span style="font-style: italic;">profile</span>.</p>
+<p>There are 4 demonstration applications available:</p>
+<ul type="disc">
+	<li><p>Historical Data</p></li>
+	<ul type="disc">
+		<li><p><a href="DAServerOverview.htm">Historical Data Server - 
+		 Overview</a></p></li>
+		<li><p><a href="DAClientOverview.htm">Historical Data Client - 
+		 Overview</a></p></li>
+	</ul>
+	<li><p>Historical Events</p></li>
+	<ul type="disc">
+		<li><p><a href="HAEventsServerOverview.htm">Historical Events Server 
+		 - Overview</a></p></li>
+		<li><p><a href="HAEventsClientOverview.htm">Historical Events Client 
+		 - Overview</a></p></li>
+	</ul>
+</ul>
+</body>
+</html>

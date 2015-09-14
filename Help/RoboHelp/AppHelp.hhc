@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<toc version="1.0">
+	<properties imagewidth="16" windowstyles="8388610" exwindowstyles="256">
+	</properties>
+	<item name="Welcome" link="Welcome.htm">
+	</item>
+	<item name="About the OPC Foundation" link="The_Information_Screen.htm">
+	</item>
+	<item name="About Unified Architecture" link="About_TechnologyName.htm" variable="TechnologyName,6,20,">
+	</item>
+	<item name="License Agreement" link="License_Agreement.htm">
+	</item>
+	<item name="Overview of Applications" link="Overview.htm">
+	</item>
+	<item name="Getting Started" link="Getting_Started.htm">
+	</item>
+	<item name="Configuration Tools" x-condition="Member">
+		<item name="UA Configuration Tool" x-condition="Member">
+			<item name="Overview" link="UA_Configuration_Tool.htm" x-condition="Member">
+			</item>
+			<item name="Launching the Configuration Tool" link="Launching_the_Configuration_Tool.htm" x-condition="Member">
+			</item>
+			<item name="Manage Security" link="UaConfig_Manage_Security.htm" x-condition="Member">
+			</item>
+			<item name="Manage Application" link="UaConfig_Manage_Application.htm" x-condition="Member">
+			</item>
+			<item name="Manage Certificates" link="UaConfig_Manage_Certificates.htm" x-condition="Member">
+			</item>
+			<item name="Manage COM Interop" link="UaConfig_Manage_COM_Interop.htm" x-condition="Member">
+			</item>
+			<item name="HTTP Access Rules" link="UaConfig_HTTP_Access_Rules.htm" x-condition="Member">
+			</item>
+		</item>
+	</item>
+	<item name="Sample Applications">
+		<item name="Local Discovery Server (LDS)">
+			<item name="Overview" link="Local_Discovery_Server_(LDS).htm">
+			</item>
+		</item>
+		<item name="UA Generic Server" x-condition="Member">
+			<item name="Overview" link="UA_Sample_Server.htm" x-condition="Member">
+			</item>
+			<item name="Configuration" link="GenericServerConfiguration.htm" x-condition="Member">
+			</item>
+		</item>
+		<item name="UA Generic Client" x-condition="Member">
+			<item name="Overview" link="UA_Sample_Client.htm" x-condition="Member">
+			</item>
+			<item name="Address Space Navigation" link="Address_Space_Navigation.htm" x-condition="Member">
+			</item>
+			<item name="Reading Nodes" link="Reading_Nodes.htm" x-condition="Member">
+			</item>
+			<item name="Writing to Nodes" link="Writing_to_Nodes.htm" x-condition="Member">
+			</item>
+			<item name="Subscriptions" link="Subscriptions.htm" x-condition="Member">
+			</item>
+			<item name="Discovery" link="UaGenericClientDiscovery.htm" x-condition="Member">
+			</item>
+			<item name="Configuration" link="GenericClientConfiguration.htm" x-condition="Member">
+			</item>
+		</item>
+	</item>
+	<item name="Technology Samples">
+		<item name="Data Access">
+			<item name="Data Access Overview" link="Data_Access_Overview.htm">
+			</item>
+			<item name="Server">
+				<item name="Overview" link="DAServerOverview.htm">
+				</item>
+				<item name="Configuration" link="DAServerConfiguration.htm" x-condition="Member">
+				</item>
+			</item>
+			<item name="Client">
+				<item name="Overview" link="DAClientOverview.htm">
+				</item>
+				<item name="Configuration" link="DAClientConfiguration.htm" x-condition="Member">
+				</item>
+			</item>
+		</item>
+		<item name="Historical Access">
+			<item name="Historical Access Overview" link="Historical_Access_Overview.htm">
+			</item>
+			<item name="Data">
+				<item name="Server">
+					<item name="Overview" link="HaServerOverview.htm">
+					</item>
+					<item name="Configuration" link="HADataServer_Configuration.htm" x-condition="Member">
+					</item>
+				</item>
+				<item name="Client">
+					<item name="Overview" link="HAClientOverview.htm">
+					</item>
+					<item name="Aggregates" link="HaData_Client_Aggregates.htm">
+					</item>
+					<item name="Configuration" link="HADataClient_Configuration.htm" x-condition="Member">
+					</item>
+				</item>
+			</item>
+			<item name="Events">
+				<item name="Server">
+					<item name="Overview" link="HAEventsServerOverview.htm">
+					</item>
+					<item name="Configuration" link="HAEventsServer_Configuration.htm" x-condition="Member">
+					</item>
+				</item>
+				<item name="Client">
+					<item name="Overview" link="HAEventsClientOverview.htm">
+					</item>
+					<item name="Configuration" link="HAEventsClient_Configuration.htm" x-condition="Member">
+					</item>
+				</item>
+			</item>
+		</item>
+		<item name="Alarms &amp; Conditions">
+			<item name="Alarms &amp; Conditions Overview" link="Alarms_&amp;amp;_Conditions_Overview.htm">
+			</item>
+			<item name="Server">
+				<item name="Overview" link="ACServerOverview.htm">
+				</item>
+				<item name="Configuration" link="ACServer_Configuration.htm" x-condition="Member">
+				</item>
+			</item>
+			<item name="Client">
+				<item name="Overview" link="ACClientOverview.htm">
+				</item>
+				<item name="Configuration" link="ACClient_Configuration.htm" x-condition="Member">
+				</item>
+			</item>
+		</item>
+		<item name="Reference (Compliance)" x-condition="Member">
+			<item name="Server" x-condition="Member">
+				<item name="Overview" link="Overview_referenceServer.htm" x-condition="Member">
+				</item>
+			</item>
+			<item name="Client" x-condition="Member">
+				<item name="Overview" link="Overview_-_Reference_Client.htm" x-condition="Member">
+				</item>
+			</item>
+		</item>
+	</item>
+	<item name="Securing Applications" x-condition="Member">
+		<item name="Overview" link="OverviewSecuringApplications.htm" x-condition="Member">
+		</item>
+		<item name="Trusting Applications built with .NET API" link="Trusting_Applications_built_with_.NET_API.htm" x-condition="Member">
+		</item>
+		<item name="Trusting Applications built from other Frameworks" link="Trusting_Applications_built_from_other_Frameworks.htm" x-condition="Member">
+		</item>
+		<item name="Certificate Generator" link="Certificate_Generator.htm" x-condition="Member">
+		</item>
+		<item name="HTTPS Connectivity" link="HTTPS_Connectivity.htm" x-condition="Member">
+		</item>
+	</item>
+	<item name="COM Interoperability" x-condition="Member">
+		<item name="Overview" link="ComIop_Overview.htm" x-condition="Member">
+		</item>
+		<item name="Starting / Stopping the Service" link="Starting___Stopping_the_Service.htm" x-condition="Member">
+		</item>
+	</item>
+	<item name="Development" x-condition="Member">
+		<item name="Developing UA Applications" link="Developing_UA_Applications.htm" x-condition="Member">
+		</item>
+		<item name="Server" x-condition="Member">
+			<item name="Server Development" link="Server_Development.htm" x-condition="Member">
+			</item>
+			<item name="Step 1 - New Project" link="Step_1_-_New_Project.htm" x-condition="Member">
+			</item>
+			<item name="Step 2 - Address Space" link="Step_2_-_Address_Space.htm" x-condition="Member">
+			</item>
+			<item name="Step 3 - Reading Values" link="Step_3_-_Reading_Values.htm" x-condition="Member">
+			</item>
+			<item name="Step 4 - Handling Write Requests" link="Step_4_-_Handling_Write_Requests.htm" x-condition="Member">
+			</item>
+			<item name="Step 5 - Testing Server" link="Step_5_-_Testing_Server.htm" x-condition="Member">
+			</item>
+			<item name="Step 6 - Deploying Server" link="Step_6_-_Deploying_Server.htm" x-condition="Member">
+			</item>
+		</item>
+		<item name="Client" x-condition="Member">
+			<item name="Client Development" link="Client_Development.htm" x-condition="Member">
+			</item>
+			<item name="Step 1 - New Project" link="Step_1_-_New_ProjectClient.htm" x-condition="Member">
+			</item>
+			<item name="Step 2 - Enhance User Interface" link="Step_2_-_Enhance_User_Interface.htm" x-condition="Member">
+			</item>
+			<item name="Step 3 - Setup Subscription" link="Step_3_-_Setup_Subscription.htm" x-condition="Member">
+			</item>
+			<item name="Step 4 - Consuming DataChanges" link="Step_4_-_Consuming_DataChanges.htm" x-condition="Member">
+			</item>
+			<item name="Step 5 - Testing your Client" link="Step_5_-_Testing_your_Client.htm" x-condition="Member">
+			</item>
+			<item name="Step 6 - Deploying your Client" link="Step_6_-_Deploying_your_Client.htm" x-condition="Member">
+			</item>
+			<item name="Useful Components" link="Useful_Components.htm" x-condition="Member">
+			</item>
+		</item>
+	</item>
+	<item name="Redistributables" x-condition="Member">
+		<item name="Overview" link="Overview_redistributables.htm" x-condition="Member">
+		</item>
+		<item name="Local Discovery Server MergeModule" link="Local_Discovery_Server_MergeModule.htm" x-condition="Member">
+		</item>
+		<item name="COM Interop Components MergeModule" link="COM_Interop_Components_MergeModule.htm" x-condition="Member">
+		</item>
+		<item name="DotNet Stack MergeModule" link="DotNet_Stack_MergeModule.htm" x-condition="Member">
+		</item>
+		<item name="Using Merge Modules" link="Using_Merge_Modules.htm" x-condition="Member">
+		</item>
+	</item>
+	<item name="Reference">
+		<item name="Certification" link="Certification.htm">
+		</item>
+		<item name="Firewall Settings" link="Firewall_Settings.htm">
+		</item>
+		<item name="Troubleshooting" link="Troubleshooting.htm">
+		</item>
+	</item>
+</toc>

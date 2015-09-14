@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="d0e49081-31b5-48c8-b6b8-510ddced982d" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The Subscription object manages the <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> for a Subscription. It constructs NotificationMessages when it is time to publish and maintains a queue of previously sent messages.
+    </para>
+      <para>
+      The <link xlink:href="8dc5073d-f9ad-40f5-94b0-fece5467927e" /> periodically polls the Subscription to determine if the Subscription is ready to publish. When the Subscription is polled it first checks if the publish interval has elapsed since the last poll. If it has it then checks if it was already waiting for a publish. If it was waiting for a publish it checks how long it has been waiting, if the wait time exceeds the lifetime period it then tells the <link xlink:href="8dc5073d-f9ad-40f5-94b0-fece5467927e" /> that it has expired and needs to be cleaned up.
+    </para>
+      <para>
+      If the Subscription is not currently waiting for a publish it will then polls each of its <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> to see if any notifications are queued. If no <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> have notifications queued, the Subscription then checks whether the keep alive period has expired. If Notifications are available or the keep alive period has expired the Subscription tells <link xlink:href="8dc5073d-f9ad-40f5-94b0-fece5467927e" /> that it is ready for a publish.
+    </para>
+      <para>
+      When a publish request is assigned to a Subscription the <link xlink:href="8dc5073d-f9ad-40f5-94b0-fece5467927e" /> calls the Publish method  on the Subscription. The Subscription will then return the next queued unsent message if any exist. If no unsent messages exist, it will read all of the queued notifications from its <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link>. These notifications are packaged into notification messages which are added to the message queue. The number of notifications that can be added to single message is limited by the <codeEntityReference>P:Opc.Ua.Client.Subscription.MaxNotificationsPerPublish</codeEntityReference> parameter for the Subscription. If there are no notifications to send the Subscription constructs an empty keep alive message with the last sequence number. The keep alive messages are not added to the message queue.
+    </para>
+      <para>
+      The Subscription maintains a single queue for sent and unsent messages. When a publish request arrives it includes a list of acknowledgements for the messages received by the client. The Subscription removes the sent messages from the queue when it receives an acknowledgement. If the queue gets to large it will remove the oldest messages even if they have not been  acknowledged. The maximum size of the message queue is controlled by a parameter in the <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>.
+    </para>
+      <para>
+      The Subscription is the container for the <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> but they are actually owned by a NodeManager. The Subscription uses methods on the <link xlink:href="fd9286b2-c3f8-42f0-9895-73ec31f76c77" /> to create, modify or delete monitored items. <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> that monitor data changes are owned by the NodeManager responsible for the Node being monitored.  <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> that monitor events are owned by the <link xlink:href="aec1e94b-9fde-467a-af15-d7152eb7f850" /> . 
+    </para>
+      <para>
+      The Subscription object also manages the diagnostic information associated with the Subscription. When a Subscription is created it creates the Nodes that represent the diagnostic information in the address space. Other components can access the diagnostics via properties on the Subscription object. These Nodes are deleted when the Subscription is deleted.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

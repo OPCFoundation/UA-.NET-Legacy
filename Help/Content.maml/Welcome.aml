@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<topic id="3f5e2816-b392-4d74-b25a-f7db02b0f7d5" revisionNumber="1">
+  <developerSDKTechnologyOverviewOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>The UA Sample Libraries is a set of interfaces, libraries and executables that allow developers to quickly create UA applications with the .NET programming environment. It includes:</para>
+      <list class="bullet">
+        <listItem>
+          <para>Implementations of the XML Web Services and UA Native Binary stack profiles;</para>
+        </listItem>
+        <listItem>
+          <para>Server and Client development toolkits;</para>
+        </listItem>
+        <listItem>
+          <para>Sample Applications;</para>
+        </listItem>
+        <listItem>
+          <para>A wrapper for COM-DA Servers (DA 2.05a, DA3.00 and AE1.1);</para>
+        </listItem>
+        <listItem>
+          <para>A proxy for COM-DA and COM-AE clients (DA 2.05a and AE1.1);</para>
+        </listItem>
+        <listItem>
+          <para>Local Discovery Server;</para>
+        </listItem>
+        <listItem>
+          <para>Configuration Tool</para>
+        </listItem>
+      </list>
+      <para>
+      The sample applications are available with source code. The stack and development toolkits are available only as binaries.
+    </para>
+    </introduction>
+    <inThisSection>
+      <content>
+        <para>This document provides an overview of the UA Sample Libraries. It discusses architecture, components distributed with the libraries and toolkit APIs.</para>
+        <para>The UA Sample Libraries is distributed for different development environments. This document primarily describes the libraries that use the .NET Framework, however, many of the general concepts apply to all versions of the libraries.</para>
+        <para>The reader is expected to be familiar with Microsoft .NET and C# terminology as well as the basic concepts behind the Windows Communication Foundation (WCF).</para>
+        <para>This document does not exhaustively describe every class in the libraries. It is intended to supplement the Visual Studio intellisense documentation and help developers understand how to develop production server, client and DCOM proxy/wrapper.</para>
+      </content>
+    </inThisSection>
+    <relatedSections>
+      <content>
+        <para>
+          <link xlink:href="dc1a280d-ebe7-419d-9ef8-c810d566f109">Introduction</link>
+        </para>
+        <para>
+          <link xlink:href="14136039-f5d7-4c43-a071-1a50a30b06b1">Getting Started Tutorial</link>
+        </para>
+        <para>
+          <link xlink:href="71b43cca-2c40-49f1-9cfb-c25a002877dd">Basic Programming</link>
+        </para>
+        <para>
+          <link xlink:href="b7cc31e3-cf8f-4410-905f-f067aa1351e6">Feature Details</link>
+        </para>
+        <para>
+          <link xlink:href="0aebc7fb-480e-4d05-9d9f-f93865b1e8da">Guidelines and Best Practices</link>
+        </para>
+        <para>
+          <link xlink:href="4b9b08de-c2b0-47c1-9479-c1dfbc0af984">DCOM interoperability</link>
+        </para>
+        <para>
+          <link xlink:href="d4845b05-be93-4767-b5df-cc790e6f105e">Sample Applications</link>
+        </para>
+        <para>
+          <link xlink:href="6bbc555a-d947-4986-8546-4eb740647dbf">Deliverables</link>
+        </para>
+        <para>
+          <link xlink:href="9988c4f3-e217-4049-9e8d-8ee5112ea196">Tools</link>
+        </para>
+        <para>
+          <link xlink:href="e61fae2a-bbaa-468a-9254-3ccd236715f4">Release Notes</link>
+        </para>
+        <para>
+          <link xlink:href="1ee451e3-d932-4404-8973-4f6ba8fe1de8">License agreement</link>
+        </para>
+        <para>
+          <link xlink:href="e4770c52-52d9-40e0-b25a-a92facdeb112">Feedback and Community</link>
+        </para>
+      </content>
+    </relatedSections>
+  </developerSDKTechnologyOverviewOrientationDocument>
+</topic>

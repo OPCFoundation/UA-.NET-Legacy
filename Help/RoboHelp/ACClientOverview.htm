@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>ACClientOverview</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Alarms &amp; Conditions Client Overview</h1>
+<p>This application is purpose-built for demonstrating OPC UA Alarms &amp; 
+ Conditions within a client.</p>
+<h2>User Interface</h2>
+<p class="Picture"><img src="image103.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Screen Elements</h2>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.705%;" />
+	<col style="width: 76.295%;" />
+	<tr>
+		<td style="vertical-align: Top;"><p><span style="font-weight: bold;">Menus</span></p></td>
+		<td style="vertical-align: Top;"><ul type="disc">
+			<li><p><span style="font-weight: bold;">File</span></p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Exit:</span> Quit 
+				 the application</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Server</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Discover</span>: 
+				 See <a href="UaGenericClientDiscovery.htm">UA Discovery</a>.</p></li>
+				<li><p><span style="font-weight: bold;">Connect</span>: 
+				 connect to the currently displayed endpoint.</p></li>
+				<li><p><span style="font-weight: bold;">Disconnect</span>: 
+				 disconnect from a connected server.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Conditions</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">View</span>: See 
+				 <a href="#View_Event_Details">View Event Details</a> (below)</p></li>
+				<li><p><span style="font-weight: bold;">Refresh</span>: 
+				 Refreshes the current display.</p></li>
+				<li><p><span style="font-weight: bold;">Set Area Filter</span>: 
+				 See <a href="#View_Event_Details">View Event Details</a> 
+				 (below).</p></li>
+				<li><p><span style="font-weight: bold;">Condition Type</span>: 
+				 a filter option for specific types of condition. Options 
+				 include: [<span style="font-style: italic;">All/Dialogs/Alarms/Limit 
+				 Alarms/Discrete Alarms</span>]</p></li>
+				<li><p><span style="font-weight: bold;">Minimum Severity</span>: 
+				 a filter option for specific levels of severity. Options 
+				 include: [<span style="font-style: italic;">All/Low/Medium/High</span>]</p></li>
+				<li><p><span style="font-weight: bold;">Enable</span>: 
+				 Not implemented.</p></li>
+				<li><p><span style="font-weight: bold;">Disable</span>: 
+				 Not implemented.</p></li>
+				<li><p><span style="font-weight: bold;">Add Comment</span>: 
+				 See <a href="#Add_Comments">Add Comment</a> (below).</p></li>
+				<li><p><span style="font-weight: bold;">Acknowledge</span>: 
+				 Acknowledges an alarm, and also requests a comment (see 
+				 <a href="#Add_Comments">Add Comment</a> below).</p></li>
+				<li><p><span style="font-weight: bold;">Confirm</span>: 
+				 Confirms an alarm (see <a href="#Add_Comments">Add Comment</a> 
+				 below).</p></li>
+				<li><p><span style="font-weight: bold;">Respond</span>: 
+				 See <a href="#Responding_to_an_Alarm">Responding to an 
+				 Alarm</a> (below).</p></li>
+				<li><p><span style="font-weight: bold;">Shelving</span>: 
+				 Provides options for the shelving of alarms. Options include: 
+				 [<span style="font-style: italic;">Un-shelve/Manually 
+				 Shelve/One-shot Shelve/Timed Shelve</span>]</p></li>
+			</ul>
+			<li><p style="font-weight: bold;">View<span style="font-weight: normal;">:</span></p></li>
+			<ul type="disc">
+				<li><p style="font-weight: bold;">Audit Events<span style="font-weight: normal;">: 
+				 See <a href="#Audit_Events">Audit Events</a> (below).</span></p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Help</span>: </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Contents</span>: 
+				 Opens this help documentation.</p></li>
+			</ul>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p><span style="font-weight: bold;">Banner</span></p></td>
+		<td style="vertical-align: Top;"><p>Shows the OPC Foundation logo 
+		 and a [clickable] link to the website, shows the application name 
+		 in large text, and shows the Certification logo with a link for 
+		 more information online.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p><span style="font-weight: bold;">Endpoint 
+		 Bar</span> (below banner)</p></td>
+		<td style="vertical-align: Top;"><p><img src="image38.gif" alt="" 
+												 style="border: none;" 
+												 border="0" /></p>
+		<p>There are 3 key areas in the endpoint bar: </p>
+		<ul type="disc">
+			<li><p><span style="font-weight: bold;">Endpoint Url</span><span>: 
+			 the endpoint URL (of a Server) to connect to.</span></p></li>
+			<li><p><span style="font-weight: bold;">Use Security</span><span>: 
+			 (checkbox) if checked will use a secure session, if unchecked 
+			 then will use a raw/insecure session.</span></p></li>
+			<li><p><span style="font-weight: bold;">Connect button</span><span>:</span> 
+			 clicking this will attempt to connect to the specified endpoint.</p></li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p><span style="font-weight: bold;">Alarm 
+		 Notifications</span> (bottom)</p></td>
+		<td style="vertical-align: Top;"><p>A simple log output of alarms 
+		 received by the client: </p>
+		<p class="Picture"><img src="image105.gif" alt="" style="border: none;" 
+								 border="0" /></p></td>
+	</tr>
+</table>
+<h3><a name="View_Event_Details"></a>View Event Details</h3>
+<p>The &quot;event details&quot; window is a read-only display showing 
+ the details of the currently selected alarm.</p>
+<p class="Picture"><img src="image106.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3><a name="Set_Area_Filter"></a>Set Area Filter</h3>
+<p>The &quot;select area&quot; dialog allows you to specify a [spatial] 
+ area as a filter criteria, useful for consuming alarms for a specific 
+ location within the plant etc.</p>
+<p class="Picture"><img src="image107.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3><a name="Add_Comments"></a>Add Comments</h3>
+<p>You can add comments to an alarm using this simple dialog: </p>
+<p class="Picture"><img src="image108.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3><a name="Responding_to_an_Alarm"></a>Responding to an Alarm</h3>
+<p>Alarms need to be acted upon. You can <span style="font-style: italic;">respond</span><span> 
+ to an alarm and specify the current state of the situation from this dialog: 
+ </span></p>
+<p class="Picture"><img src="image109.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3><a name="Audit_Events"></a>Audit Events</h3>
+<p>The &quot;audit events&quot; dialog will show audit events as generated 
+ by the server.</p>
+<p class="Picture"><img src="image110.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p><span style="font-weight: bold;">Note</span>: None of the menu items 
+ are implemented.</p>
+<p>&#160;</p>
+</body>
+</html>

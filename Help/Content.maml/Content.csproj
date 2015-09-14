@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2C3AF8D3-91FE-4365-A1EA-4C73ECE71041}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Content</RootNamespace>
+    <AssemblyName>Content</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.NetFwTypeLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=22186a540fc0b044, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Content.dll\Interop.NetFwTypeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.Client, Version=1.0.232.0, Culture=neutral, PublicKeyToken=78aea80f6827b5ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Content.dll\Opc.Ua.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.Configuration, Version=1.0.232.0, Culture=neutral, PublicKeyToken=78aea80f6827b5ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Content.dll\Opc.Ua.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.Core, Version=1.0.232.0, Culture=neutral, PublicKeyToken=78aea80f6827b5ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Content.dll\Opc.Ua.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.Schema, Version=1.0.223.1, Culture=neutral, PublicKeyToken=78aea80f6827b5ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Content.dll\Opc.Ua.Schema.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.Server, Version=1.0.232.0, Culture=neutral, PublicKeyToken=78aea80f6827b5ab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Content.dll\Opc.Ua.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="BasicProgramming .xml" />
+    <Content Include="BasicProgramming\Client\MonitoredItems.xml" />
+    <Content Include="BasicProgramming\Client\Overview.xml" />
+    <Content Include="BasicProgramming\Client\Sessions.xml" />
+    <Content Include="BasicProgramming\Client\Subscriptions .xml" />
+    <Content Include="BasicProgramming\ConfiguringDCOM .xml" />
+    <Content Include="BasicProgramming\Server\Architecture.xml" />
+    <Content Include="BasicProgramming\Server\CoreNodeManager.xml" />
+    <Content Include="BasicProgramming\Server\EventManager.xml" />
+    <Content Include="BasicProgramming\Server\INodeManager.xml" />
+    <Content Include="BasicProgramming\Server\MasterNodeManager.xml" />
+    <Content Include="BasicProgramming\Server\MonitoredItem.xml" />
+    <Content Include="BasicProgramming\Server\Overview.xml" />
+    <Content Include="BasicProgramming\Server\RequestManager.xml" />
+    <Content Include="BasicProgramming\Server\ResourceManager.xml" />
+    <Content Include="BasicProgramming\Server\SamplingGroupManager.xml" />
+    <Content Include="BasicProgramming\Server\ServerInternal.xml" />
+    <Content Include="BasicProgramming\Server\Session.xml" />
+    <Content Include="BasicProgramming\Server\SessionManager.xml" />
+    <Content Include="BasicProgramming\Server\StandardServer.xml" />
+    <Content Include="BasicProgramming\Server\Subscription.xml" />
+    <Content Include="BasicProgramming\Server\SubscriptionManager.xml" />
+    <Content Include="Client.xml" />
+    <Content Include="ConceptualOverview .xml" />
+    <Content Include="ConceptualOverview\CandCPlusPlusImplemetaion.xml" />
+    <Content Include="ConceptualOverview\ClientsServersAndDiscoveryServers.xml" />
+    <Content Include="ConceptualOverview\General References.xml" />
+    <Content Include="ConceptualOverview\Glossary.xml" />
+    <Content Include="ConceptualOverview\Introduction.xml" />
+    <Content Include="ConceptualOverview\Java.xml" />
+    <Content Include="ConceptualOverview\Overview.xml" />
+    <Content Include="ConceptualOverview\Protocols.xml" />
+    <Content Include="ConceptualOverview\Security.xml" />
+    <Content Include="ConceptualOverview\WCFProgrammingModel.xml" />
+    <Content Include="ConceptualOverview\WebServices.xml" />
+    <Content Include="DCOMInteroperability.xml" />
+    <Content Include="DCOMInteroperability\AEProxy.xml" />
+    <Content Include="DCOMInteroperability\AEWrapper.xml" />
+    <Content Include="DCOMInteroperability\DAProxy.xml" />
+    <Content Include="DCOMInteroperability\DAWrapper.xml" />
+    <Content Include="DCOMInteroperability\HDAProxy.xml" />
+    <Content Include="DCOMInteroperability\HDAWrapper.xml" />
+    <Content Include="Deliverables.xml" />
+    <Content Include="Deliverables\Installation.xml" />
+    <Content Include="FeatureDetails .xml" />
+    <Content Include="FeedbackAndCommunity.xml" />
+    <Content Include="GettingStartedTutorial.xml" />
+    <Content Include="GuidelinesAndBestPractices.xml" />
+    <Content Include="HowTo\AccessProcesData.xml" />
+    <Content Include="HowTo\ConnectingServer.xml" />
+    <Content Include="HowTo\DesigningAddressSpace.xml" />
+    <Content Include="HowTo\ImplementingAddressSpace.xml" />
+    <Content Include="HowTo\Methods.xml" />
+    <Content Include="HowTo\Subscribing2Events.ppt.xml" />
+    <Content Include="HowTo\SubscribingData.xml" />
+    <Content Include="LicenseAgreement.xml" />
+    <Content Include="ReleaseNotes.xml" />
+    <Content Include="Samples .xml" />
+    <Content Include="Samples\GettingStarted .xml" />
+    <Content Include="Samples\HowToManagetheCertificates .xml" />
+    <Content Include="Samples\Overview.xml" />
+    <Content Include="Samples\SampleClient.xml" />
+    <Content Include="Samples\SampleServer.xml" />
+    <Content Include="Samples\ServerTestClient.xml" />
+    <Content Include="ServerToolkit.xml" />
+    <Content Include="Stack.xml" />
+    <Content Include="SystemRequirements .xml" />
+    <Content Include="Tools.xml" />
+    <Content Include="Tools\Opc_Ua_ConfigTool.xml" />
+    <Content Include="Weclome\Contributors.xml" />
+    <Content Include="Welcome.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

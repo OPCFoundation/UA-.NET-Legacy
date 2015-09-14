@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<developerGlossaryDocument
+  xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+  <glossary>
+    <title>Optional title</title>
+    <glossaryDiv address="A">
+      <title>A</title>
+      <glossaryEntry>
+        <terms>
+          <term termClass="">1st term</term>
+          <term termClass="">Other term (if any)</term>
+        </terms>
+        <definition>
+          <para>The definition of the term(s)</para>
+        </definition>
+        <relatedEntry relationType="" termId="xyz" />
+      </glossaryEntry>
+    </glossaryDiv>
+  </glossary>
+</developerGlossaryDocument>

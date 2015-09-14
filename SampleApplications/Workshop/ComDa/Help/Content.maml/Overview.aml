@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="b65ff79f-8f78-4713-b71f-ce4defa02281" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <autoOutline />
+    </introduction>
+    <section address="Section1">
+      <title>Overview</title>
+      <content>
+        <para>
+		  This Quickstart includes a UA Server which acts as a COM DA client and a UA Client which is
+		  also a COM DA server. The COM DA components are generic and are designed to operate with any
+		  COM DA application tha tsupports the DA 2.05a specification.
+        </para>
+        <para>
+			The UA Server (called the UA COM Wrapper) provides a NodeManager implementation 
+			that maps the COM DA address space onto the UA information model. The UA Server 
+			can expose multiple COM servers by creating multiple instances of the NodeManager.
+        </para>
+        <para>
+			The UA Client (called the COM UA Proxy) is a COM EXE Server that can be addressed 
+			ith multiple CLSID/ProgIDs. The UA Client uses the CLSID to lookup the information 
+			required to connect to the UA Server. The UA Configuration Tool allows administrators 
+			to create CLSID and configure the UA server associated with it.
+		</para>
+      </content>
+    </section>
+    <section address="Section2">
+      <title>Installation</title>
+      <content>
+        <para>
+        This Quickstart is distributed with an installer that will place the source into the 
+        "%ProgramFiles%\OPC Foundation\UA SDK\v1.0\Quickstarts" directory. 
+        A link to the Visual Studio 2008 solution file can be found in the 
+        Programs Menu under the OPC Foundation folder.
+        </para>
+        <para>
+		The Quickstarts require Visual Studio 2008 with SP1 and the .NET Framework 3.5 SP1.
+		</para>
+        <para>
+		This Quickstart requires that the COM proxy stubs be installed on the machine first. 
+		These components are usually installed along with any commercial OPC product. By default, 
+		the UA COM Wrapper is configured to use the DA sample server which is installed with this 
+		package on the OPC Foundation website.
+		</para>
+        <para>
+        When the COM Data Access Quickstart is installed it places the pre-built binaries in 
+        the target directory and automatically generates application instance certificates. 
+        The COM UA Proxy is a shared COM EXE server so it is installed in the Common Program Files 
+        folder. The installer creates a COM pseudo server (a CLSID/ProgID which is linked to UA Server) 
+        that references the COM Data Access Server that is installed.
+		</para>
+        <para>
+		If everything installs correctly it should be possible to start the COM Data Access Server 
+		from the start menu and the connect to it from any DA client by selecting the 'OpcUa.ComDaQuickstartServer.1' 
+		ProgID. Note that the UA COM Proxy only supports DA 2.05a so it will not appear in the DA Sample Client 
+		dialog unless the filter is set to DA 2.05a (the default is DA3.00). 
+		</para>
+      </content>
+    </section>
+    <section address="Section3">
+      <title>UA COM Wrapper</title>
+      <content>
+        <para>
+		The UA COM Server has an architecture similar to the other Quickstart servers where all 
+		of the application specific functional is encapsulated in a custom Node Manager. 
+		In this case the custom Node Manager is a COM DA client.
+        </para>
+        <para>
+        The mapping from the DA address space to a UA information models is as follows:
+		<list class="bullet">
+		<listItem><para>
+		Branch => FolderType Object
+		</para></listItem>
+		<listItem><para>
+        Item w/ EUType = NoEnum	DataItemType Variable
+		</para></listItem>
+		<listItem><para>
+		Item w/ EUType = Analog	=> AnalogItemType Variable
+		</para></listItem>
+		<listItem><para>
+		Item w/ EUType = Enumurated	=> MultiStateDiscreteType Variable
+		</para></listItem>
+		<listItem><para>
+		Item w/ CloseLabel/OpenLabel => TwoStateDiscreteType Variable
+		</para></listItem>        
+		<listItem><para>
+HighEU/LowEU => EURange Property
+		</para></listItem>
+		<listItem><para>
+HighIR/LowIR => InstrumentRange Property
+		</para></listItem>
+		<listItem><para>
+EUInfo => EnumStrings Property
+		</para></listItem>
+		<listItem><para>
+CloseLabel => TrueState Property
+		</para></listItem>
+		<listItem><para>
+OpenLabel => FalseState Property
+		</para></listItem>
+		<listItem><para>
+TimeZone => TimeZone Property
+		</para></listItem>
+		<listItem><para>
+Description => Description Attribute
+		</para></listItem>
+		<listItem><para>
+EngineeringUnits => EngineeringUnits Property
+		</para></listItem>
+		<listItem><para>
+ScanRate => MinimumSamplingInterval Attribute
+		</para></listItem>
+		<listItem><para>
+AccessRights => AccessLevel/UserAccessLeve Attributes
+		</para></listItem>
+		<listItem><para>
+DataType => DataType/ValueRank Attributes
+		</para></listItem>
+		<listItem><para>
+Vendor Defined Property => UA Property
+		</para></listItem>
+		<listItem><para>
+ServerStatus => ComServerStatusType Object
+		</para></listItem>
+		</list>
+		</para>
+        <para>		
+		The wrapped COM server information is specified with the ComWrapperServerConfiguration 
+		element within the Extensions element of the ApplicationConfiguration file. The 
+		ComWrapperServerConfiguration  contains a ComClientConfiguration for each wrapped 
+		COM server.
+		</para>
+        <para>		
+		The information the ComClientConfiguration is:
+		<list class="bullet">
+		<listItem><para>ServerUrl</para>
+		<para>
+		The COM server ProgID/CLSID specified in URL form. For example:
+		</para>
+		<para>
+		opc.com://localhost/OPCSample.OpcDaServer/{625c49a1-be1c-45d7-9a8a-14bedcf5ce6c}
+		</para>
+		<para>
+		The CLSID is optional.	
+		</para></listItem>
+		<listItem><para>ServerName</para>
+		<para>
+		The name of Root Branch in the UA Address Space.
+		</para></listItem>
+		<listItem><para>SeperatorChars</para>
+		<para>
+		A list of characters that may be used to extract the name of a Branch/Item 
+		from the end of an ItemId. Not all COM server will be able to use this feature 
+		but Browse performance will be much faster if it is possible to use	
+		</para></listItem>
+		</list>
+		</para>
+      </content>
+    </section>
+    <section address="Section4">
+      <title>COM UA Proxy</title>
+      <content>
+        <para>
+        The UA Configuration Tool can be used to create COM pseudo-servers that point to the COM proxy. 
+        The tool allows an administrator to browse for a UA server on the network, select it and 
+        register a CLSID/ProgID that can be accessed by the COM Client.The UA Configuration Tool can 
+        be used to create COM pseudo-servers that point to the COM proxy. The tool allows an administrator 
+        to browse for a UA server on the network, select it and register a CLSID/ProgID that can be
+        accessed by the COM Client.
+        </para>
+        <para>
+		This feature can be accessed by select 'COM servers' tab and then by clicking the right mouse 
+		button to bring up the commands. Selecting New.. will prompt the administrator to create a new psuedo-server.
+        </para>    
+        <para>
+        The COM Proxy only exposes the Nodes which can be found by browsing forward hierarchical references 
+        from the Objects Folder. Method Nodes are ignored and Variable Nodes are mapped onto Items. The 
+        mapping between the different VariableTypes is the same as the mapping defined for the UA COM Wrapper.
+        </para> 
+        <para>
+        The COM Proxy only exposes the Nodes which can be found by browsing forward hierarchical 
+        references from the Objects Folder. Method Nodes are ignored and Variable Nodes are mapped onto Items.
+        The mapping between the different VariableTypes is the same as the mapping defined for the UA COM Wrapper.
+        </para>     
+      </content>
+    </section>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

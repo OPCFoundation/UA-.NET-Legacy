@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="search-keywords" content="client, development, deploy, distribute, redistribute, copy, install, locate" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 6 - Deploying your Client</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Client Development Tutorial</h1>
+<p>Now that you have built your Client you are ready to deploy it.</p>
+<p>You may wish to use InstallShield, ClickOnce Deployment, or a comparable 
+ product when packaging your application for deployment. Ultimately, you 
+ will need the following: </p>
+<table cellspacing="0" width="100%">
+	<col style="width: 50%;" />
+	<col style="width: 50%;" />
+	<tr>
+		<td style="vertical-align: top;"><ul type="disc">
+			<li><p>Interop.NetFwTypeLib.dll</p></li>
+			<li><p>Opc.Ua.Client.dll</p></li>
+			<li><p>Opc.Ua.ClientControls.dll</p></li>
+			<li><p>Opc.Ua.Configuration.dll</p></li>
+			<li><p>Opc.Ua.Core.dll</p></li>
+		</ul></td>
+		<td style="vertical-align: top;"><ul type="disc">
+			<li><p>Opc.Ua.QuickstartsLibrary.dll</p></li>
+			<li><p>Opc.Ua.Server.dll</p></li>
+			<li><p>Opc.Ua.ServerControls.dll</p></li>
+			<li style="font-style: italic;"><p>QuickStarts.MyClient.Config.xml</p></li>
+			<li style="font-style: italic;"><p>Quickstarts.MyClient.exe</p></li>
+		</ul></td>
+	</tr>
+</table>
+<h2>Installation of Application</h2>
+<p>Applications built with the <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?> 
+ inherit an infrastructure to assist with the installation of the product 
+ by simply passing command-line arguments:</p>
+<ul type="disc">
+	<li><p>/<span style="font-weight: bold;">install</span>: installs the 
+	 software by creating an application certificate and registering itself 
+	 with a certificate store and will create a certificate store if one 
+	 does not exist.</p></li>
+	<li><p>/<span style="font-weight: bold;">silent</span>: prevents the 
+	 application user interface from loading.</p></li>
+</ul>
+<h2>Removing an Application</h2>
+<p>The following parameters are the inverse of those previously mentioned:</p>
+<ul type="disc">
+	<li><p><span style="font-weight: bold;">/uninstall</span>: removes 
+	 the application certificate and configuration - but does not remove 
+	 the files from the hard-drive because that is the responsibility of 
+	 your installer software.</p></li>
+</ul>
+<h2>See Also</h2>
+<ul type="disc">
+	<li><p>Configuration of application capabilities as described in <a 
+	 href="GenericServerConfiguration.htm">Generic Server Configuration</a>.</p></li>
+</ul>
+</body>
+</html>

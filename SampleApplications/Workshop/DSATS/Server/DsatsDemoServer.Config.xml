@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd">
+  <ApplicationName>DSATS Demo Server</ApplicationName>
+  <ApplicationUri>urn:localhost:UA:DsatsDemoServer</ApplicationUri>
+  <ProductUri>uri:opcfoundation.org:DsatsDemoServer</ProductUri>
+  <ApplicationType>ClientAndServer_2</ApplicationType>
+  <SecurityConfiguration>
+    <ApplicationCertificate>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\CertificateStores\MachineDefault</StorePath>
+    </ApplicationCertificate>
+    <TrustedIssuerCertificates>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\CertificateStores\UA Certificate Authorities</StorePath>
+      <TrustedCertificates />
+    </TrustedIssuerCertificates>
+    <TrustedPeerCertificates>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\CertificateStores\UA Applications</StorePath>
+      <TrustedCertificates />
+    </TrustedPeerCertificates>
+    <NonceLength>32</NonceLength>
+    <RejectedCertificateStore>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\RejectedCertificates</StorePath>
+    </RejectedCertificateStore>
+    <UserRoleDirectory i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </SecurityConfiguration>
+  <TransportConfigurations>
+  </TransportConfigurations>
+  <TransportQuotas>
+    <OperationTimeout>600000</OperationTimeout>
+    <MaxStringLength>1048576</MaxStringLength>
+    <MaxByteStringLength>1048576</MaxByteStringLength>
+    <MaxArrayLength>65535</MaxArrayLength>
+    <MaxMessageSize>4194304</MaxMessageSize>
+    <MaxBufferSize>65535</MaxBufferSize>
+    <ChannelLifetime>300000</ChannelLifetime>
+    <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+  </TransportQuotas>
+  <ServerConfiguration>
+    <BaseAddresses xmlns:d2p1="http://opcfoundation.org/UA/2008/02/Types.xsd">
+      <d2p1:String>opc.tcp://localhost:61000/DsatsDemoServer</d2p1:String>
+      <d2p1:String>http://localhost:61001/DsatsDemoServer</d2p1:String>
+    </BaseAddresses>
+    <AlternateBaseAddresses xmlns:d2p1="http://opcfoundation.org/UA/2008/02/Types.xsd" />
+    <SecurityPolicies>
+      <ServerSecurityPolicy>
+        <SecurityMode>None_1</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicyUri>
+        <SecurityLevel>0</SecurityLevel>
+      </ServerSecurityPolicy>
+      <ServerSecurityPolicy>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <SecurityLevel>1</SecurityLevel>
+      </ServerSecurityPolicy>
+    </SecurityPolicies>
+    <MinRequestThreadCount>10</MinRequestThreadCount>
+    <MaxRequestThreadCount>100</MaxRequestThreadCount>
+    <MaxQueuedRequestCount>200</MaxQueuedRequestCount>
+    <UserTokenPolicies xmlns:d2p1="http://opcfoundation.org/UA/2008/02/Types.xsd">
+      <d2p1:UserTokenPolicy>
+        <d2p1:PolicyId i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+        <d2p1:TokenType>Anonymous_0</d2p1:TokenType>
+        <d2p1:IssuedTokenType i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+        <d2p1:IssuerEndpointUrl i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+        <d2p1:SecurityPolicyUri i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+      </d2p1:UserTokenPolicy>
+      <d2p1:UserTokenPolicy>
+        <d2p1:PolicyId i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+        <d2p1:TokenType>UserName_1</d2p1:TokenType>
+        <d2p1:IssuedTokenType i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+        <d2p1:IssuerEndpointUrl i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+        <d2p1:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</d2p1:SecurityPolicyUri>
+      </d2p1:UserTokenPolicy>
+    </UserTokenPolicies>
+    <DiagnosticsEnabled>false</DiagnosticsEnabled>
+    <MaxSessionCount>100</MaxSessionCount>
+    <MinSessionTimeout>10000</MinSessionTimeout>
+    <MaxSessionTimeout>3600000</MaxSessionTimeout>
+    <MaxBrowseContinuationPoints>10</MaxBrowseContinuationPoints>
+    <MaxQueryContinuationPoints>10</MaxQueryContinuationPoints>
+    <MaxHistoryContinuationPoints>100</MaxHistoryContinuationPoints>
+    <MaxRequestAge>600000</MaxRequestAge>
+    <MinPublishingInterval>100</MinPublishingInterval>
+    <MaxPublishingInterval>3600000</MaxPublishingInterval>
+    <PublishingResolution>50</PublishingResolution>
+    <MaxSubscriptionLifetime>3600000</MaxSubscriptionLifetime>
+    <MaxMessageQueueSize>10</MaxMessageQueueSize>
+    <MaxNotificationQueueSize>100</MaxNotificationQueueSize>
+    <MaxNotificationsPerPublish>1000</MaxNotificationsPerPublish>
+    <MinMetadataSamplingInterval>1000</MinMetadataSamplingInterval>
+    <AvailableSamplingRates />
+    <MaxRegistrationInterval>30000</MaxRegistrationInterval>
+    <NodeManagerSaveFile i:nil="true" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+    <MinSubscriptionLifetime>10000</MinSubscriptionLifetime>
+    <MaxPublishRequestCount>20</MaxPublishRequestCount>
+    <MaxSubscriptionCount>100</MaxSubscriptionCount>
+    <MaxEventQueueSize>10000</MaxEventQueueSize>
+  </ServerConfiguration>
+  <ClientConfiguration>
+    <DefaultSessionTimeout>60000</DefaultSessionTimeout>
+    <WellKnownDiscoveryUrls>
+      <ua:String>opc.tcp://{0}:4840</ua:String>
+      <ua:String>http://{0}:52601/UADiscovery</ua:String>
+      <ua:String>http://{0}/UADiscovery/Default.svc</ua:String>
+    </WellKnownDiscoveryUrls>
+    <DiscoveryServers>
+    </DiscoveryServers>
+    <MinSubscriptionLifetime>10000</MinSubscriptionLifetime>
+  </ClientConfiguration>
+  <Extensions>
+    <ua:XmlElement>
+      <DsatsDemoServerConfiguration xmlns="http://opcfoundation.org/DSATSDemo">
+        <!--<DataSourceLocation>.\Schema\DataSource.xml</DataSourceLocation>-->
+        <DataSourceLocation>%CommonApplicationData%\OPC Foundation\DSATS\DataSource.xml</DataSourceLocation>
+        <AccessControlFilePath>%CommonApplicationData%\OPC Foundation\DSATS\DsatsDemoAccessControl.txt</AccessControlFilePath>
+        <UseSecurity>false</UseSecurity>
+      </DsatsDemoServerConfiguration>
+    </ua:XmlElement>
+  </Extensions>
+  <TraceConfiguration>
+    <OutputFilePath>%CommonApplicationData%\OPC Foundation\DSATS\Logs\DsatsDemoServer.log.txt</OutputFilePath>
+    <DeleteOnLoad>true</DeleteOnLoad>
+    <!-- Show Only Errors -->
+    <!-- <TraceMasks>1</TraceMasks> -->
+    <!-- Show Only Security and Errors -->
+    <!-- <TraceMasks>513</TraceMasks> -->
+    <!-- Show Only Security, Errors and Trace -->
+    <TraceMasks>515</TraceMasks>
+    <!-- Show Only Security, COM Calls, Errors and Trace -->
+    <!-- <TraceMasks>771</TraceMasks> -->
+    <!-- Show Only Security, Service Calls, Errors and Trace -->
+    <!-- <TraceMasks>523</TraceMasks> -->
+    <!-- Show Only Security, ServiceResultExceptions, Errors and Trace -->
+    <!-- <TraceMasks>519</TraceMasks> -->
+  </TraceConfiguration>
+</ApplicationConfiguration>

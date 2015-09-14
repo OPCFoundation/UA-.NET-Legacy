@@ -1,0 +1,235 @@
+﻿<ConfiguredEndpoint xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+  <DefaultConfiguration>
+    <OperationTimeout>120000</OperationTimeout>
+    <UseBinaryEncoding>true</UseBinaryEncoding>
+    <MaxStringLength>65535</MaxStringLength>
+    <MaxByteStringLength>1048576</MaxByteStringLength>
+    <MaxArrayLength>65535</MaxArrayLength>
+    <MaxMessageSize>4194304</MaxMessageSize>
+    <MaxBufferSize>1048560</MaxBufferSize>
+    <ConnectionLifetime>120000</ConnectionLifetime>
+    <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+  </DefaultConfiguration>
+  <Endpoints>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost:6000/UA/SampleClient</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/SampleClient</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Sample Client</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:6000/UA/SampleClient/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQ/vCP9WtkV45ICEYfh0yKPDAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MDIyMjA4MDk0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwysNefA4ttlf35wVPUSUhKNReM3PwpMw+RqCcIWZuDIgLdXfy0mHSUKrnpLwoCP6IjDsihRO/XyuALTdmZxRE8h8GfOr/aZM76jfLZbchc3f96UxgaKhiz6iWIR4pyNmlPbt7WcWpbct0YGCRXkd5aZQog7hvGDWkFiF9zZS0CcCAwEAAaNmMGQwYgYDVR0BBFswWYAQiTdcG23WG15SMV7x7IRZPqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCTZ7TP3FwZoUY+Q4UjTmX1MAkGBSsOAwIdBQADgYEAvlFvr8NJ0hC4Yy6ubLstdOr2BUVXH51XAGK6luHUlXpLiIXpHIm1Jbg9LOEjwYWDDwA9wYk6ltbc681a7bAc+ATfM/qd77tTroXlON7c5tuXvbOxKs4msgZ/8Fxst0MOk0j+OkxmOJrE11OXkxboL9KXCjZ1YfOldi9OkMjp3w0=</ServerCertificate>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxml</SupportedProfile>
+      </Endpoint>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <UserIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>opc.tcp://localhost:6001/UA/SampleClient</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/SampleClient</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Sample Client</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:6000/UA/SampleClient/discovery</String>
+            <String>opc.tcp://localhost:6001/UA/SampleClient</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQ/vCP9WtkV45ICEYfh0yKPDAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MDIyMjA4MDk0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwysNefA4ttlf35wVPUSUhKNReM3PwpMw+RqCcIWZuDIgLdXfy0mHSUKrnpLwoCP6IjDsihRO/XyuALTdmZxRE8h8GfOr/aZM76jfLZbchc3f96UxgaKhiz6iWIR4pyNmlPbt7WcWpbct0YGCRXkd5aZQog7hvGDWkFiF9zZS0CcCAwEAAaNmMGQwYgYDVR0BBFswWYAQiTdcG23WG15SMV7x7IRZPqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCTZ7TP3FwZoUY+Q4UjTmX1MAkGBSsOAwIdBQADgYEAvlFvr8NJ0hC4Yy6ubLstdOr2BUVXH51XAGK6luHUlXpLiIXpHIm1Jbg9LOEjwYWDDwA9wYk6ltbc681a7bAc+ATfM/qd77tTroXlON7c5tuXvbOxKs4msgZ/8Fxst0MOk0j+OkxmOJrE11OXkxboL9KXCjZ1YfOldi9OkMjp3w0=</ServerCertificate>
+        <SecurityMode>None_1</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/uatcp</SupportedProfile>
+      </Endpoint>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <UserIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost:6000/UA/SampleClient</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/SampleClient</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Sample Client</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:6000/UA/SampleClient/discovery</String>
+            <String>opc.tcp://localhost:6001/UA/SampleClient</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQ/vCP9WtkV45ICEYfh0yKPDAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MDIyMjA4MDk0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwysNefA4ttlf35wVPUSUhKNReM3PwpMw+RqCcIWZuDIgLdXfy0mHSUKrnpLwoCP6IjDsihRO/XyuALTdmZxRE8h8GfOr/aZM76jfLZbchc3f96UxgaKhiz6iWIR4pyNmlPbt7WcWpbct0YGCRXkd5aZQog7hvGDWkFiF9zZS0CcCAwEAAaNmMGQwYgYDVR0BBFswWYAQiTdcG23WG15SMV7x7IRZPqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCTZ7TP3FwZoUY+Q4UjTmX1MAkGBSsOAwIdBQADgYEAvlFvr8NJ0hC4Yy6ubLstdOr2BUVXH51XAGK6luHUlXpLiIXpHIm1Jbg9LOEjwYWDDwA9wYk6ltbc681a7bAc+ATfM/qd77tTroXlON7c5tuXvbOxKs4msgZ/8Fxst0MOk0j+OkxmOJrE11OXkxboL9KXCjZ1YfOldi9OkMjp3w0=</ServerCertificate>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxml</SupportedProfile>
+      </Endpoint>
+      <Configuration>
+        <OperationTimeout>120000</OperationTimeout>
+        <UseBinaryEncoding>false</UseBinaryEncoding>
+        <MaxStringLength>65535</MaxStringLength>
+        <MaxByteStringLength>1048576</MaxByteStringLength>
+        <MaxArrayLength>65535</MaxArrayLength>
+        <MaxMessageSize>1048576</MaxMessageSize>
+        <MaxBufferSize>1048560</MaxBufferSize>
+        <ConnectionLifetime>120000</ConnectionLifetime>
+        <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+      </Configuration>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <UserIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost:5000/UA/SampleServer</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/SampleServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:5000/UA/SampleServer/discovery</String>
+            <String>opc.tcp://localhost:5001/UA/SampleServer</String>
+            <String>net.tcp://localhost:5002/UA/SampleServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQ/vCP9WtkV45ICEYfh0yKPDAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MDIyMjA4MDk0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwysNefA4ttlf35wVPUSUhKNReM3PwpMw+RqCcIWZuDIgLdXfy0mHSUKrnpLwoCP6IjDsihRO/XyuALTdmZxRE8h8GfOr/aZM76jfLZbchc3f96UxgaKhiz6iWIR4pyNmlPbt7WcWpbct0YGCRXkd5aZQog7hvGDWkFiF9zZS0CcCAwEAAaNmMGQwYgYDVR0BBFswWYAQiTdcG23WG15SMV7x7IRZPqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCTZ7TP3FwZoUY+Q4UjTmX1MAkGBSsOAwIdBQADgYEAvlFvr8NJ0hC4Yy6ubLstdOr2BUVXH51XAGK6luHUlXpLiIXpHIm1Jbg9LOEjwYWDDwA9wYk6ltbc681a7bAc+ATfM/qd77tTroXlON7c5tuXvbOxKs4msgZ/8Fxst0MOk0j+OkxmOJrE11OXkxboL9KXCjZ1YfOldi9OkMjp3w0=</ServerCertificate>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxml</SupportedProfile>
+      </Endpoint>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <UserIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>opc.tcp://localhost:5001/UA/SampleServer</EndpointUrl>
+        <Server>
+          <ApplicationUri>opc.tcp://localhost:5001/UA/SampleServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Sample Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>opc.tcp://localhost:5001/UA/SampleServer</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQ/vCP9WtkV45ICEYfh0yKPDAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MDIyMjA4MDk0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwysNefA4ttlf35wVPUSUhKNReM3PwpMw+RqCcIWZuDIgLdXfy0mHSUKrnpLwoCP6IjDsihRO/XyuALTdmZxRE8h8GfOr/aZM76jfLZbchc3f96UxgaKhiz6iWIR4pyNmlPbt7WcWpbct0YGCRXkd5aZQog7hvGDWkFiF9zZS0CcCAwEAAaNmMGQwYgYDVR0BBFswWYAQiTdcG23WG15SMV7x7IRZPqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCTZ7TP3FwZoUY+Q4UjTmX1MAkGBSsOAwIdBQADgYEAvlFvr8NJ0hC4Yy6ubLstdOr2BUVXH51XAGK6luHUlXpLiIXpHIm1Jbg9LOEjwYWDDwA9wYk6ltbc681a7bAc+ATfM/qd77tTroXlON7c5tuXvbOxKs4msgZ/8Fxst0MOk0j+OkxmOJrE11OXkxboL9KXCjZ1YfOldi9OkMjp3w0=</ServerCertificate>
+        <SecurityMode>None_1</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/uatcp</SupportedProfile>
+      </Endpoint>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <UserIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost:5000/UA/SampleServer</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/SampleServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:5000/UA/SampleServer/discovery</String>
+            <String>opc.tcp://localhost:5001/UA/SampleServer</String>
+            <String>net.tcp://localhost:5002/UA/SampleServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQ/vCP9WtkV45ICEYfh0yKPDAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MDIyMjA4MDk0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwysNefA4ttlf35wVPUSUhKNReM3PwpMw+RqCcIWZuDIgLdXfy0mHSUKrnpLwoCP6IjDsihRO/XyuALTdmZxRE8h8GfOr/aZM76jfLZbchc3f96UxgaKhiz6iWIR4pyNmlPbt7WcWpbct0YGCRXkd5aZQog7hvGDWkFiF9zZS0CcCAwEAAaNmMGQwYgYDVR0BBFswWYAQiTdcG23WG15SMV7x7IRZPqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCTZ7TP3FwZoUY+Q4UjTmX1MAkGBSsOAwIdBQADgYEAvlFvr8NJ0hC4Yy6ubLstdOr2BUVXH51XAGK6luHUlXpLiIXpHIm1Jbg9LOEjwYWDDwA9wYk6ltbc681a7bAc+ATfM/qd77tTroXlON7c5tuXvbOxKs4msgZ/8Fxst0MOk0j+OkxmOJrE11OXkxboL9KXCjZ1YfOldi9OkMjp3w0=</ServerCertificate>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxml</SupportedProfile>
+      </Endpoint>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <UserIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost/UASampleService/Service.svc</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UASampleService</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UASampleServer</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost/UASampleService/Service.svc/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQ/vCP9WtkV45ICEYfh0yKPDAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MDIyMjA4MDk0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEAwysNefA4ttlf35wVPUSUhKNReM3PwpMw+RqCcIWZuDIgLdXfy0mHSUKrnpLwoCP6IjDsihRO/XyuALTdmZxRE8h8GfOr/aZM76jfLZbchc3f96UxgaKhiz6iWIR4pyNmlPbt7WcWpbct0YGCRXkd5aZQog7hvGDWkFiF9zZS0CcCAwEAAaNmMGQwYgYDVR0BBFswWYAQiTdcG23WG15SMV7x7IRZPqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCTZ7TP3FwZoUY+Q4UjTmX1MAkGBSsOAwIdBQADgYEAvlFvr8NJ0hC4Yy6ubLstdOr2BUVXH51XAGK6luHUlXpLiIXpHIm1Jbg9LOEjwYWDDwA9wYk6ltbc681a7bAc+ATfM/qd77tTroXlON7c5tuXvbOxKs4msgZ/8Fxst0MOk0j+OkxmOJrE11OXkxboL9KXCjZ1YfOldi9OkMjp3w0=</ServerCertificate>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxml</SupportedProfile>
+      </Endpoint>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <UserIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+  </Endpoints>
+</ConfiguredEndpoint>

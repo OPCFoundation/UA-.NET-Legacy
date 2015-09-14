@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Firewall Settings</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Firewall Settings</h1>
+<p>To enable remote access to the OPC UA Servers you will need to configure 
+ your firewall(s) to permit the applicable TCP ports to pass through. The 
+ following list shows the TCP ports for each application installed within 
+ this package, per endpoint:</p>
+<table style="border: Solid 1px #000000;" cellspacing="0" width="100%">
+	<col style="width: 30%;" />
+	<col />
+	<col style="width: 15%;" />
+	<tr>
+		<td style="border: Solid 1px #000000;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Application Name</span></p></td>
+		<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p><span style="font-weight: bold;">Endpoint</span></p></td>
+		<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">TCP Port</span></p></td>
+	</tr>
+	<tr>
+		<td rowspan="2" style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><a 
+		 href="Local_Discovery_Server_(LDS).htm">Discovery Server</a></p></td>
+		<td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:4840/UADiscovery</p></td>
+		<td style="border-right: Solid 1px #000000;"><p style="text-align: center;">4840</p></td>
+	</tr>
+	<tr>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:4843/UADiscovery</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">4843</p></td>
+	</tr>
+	<tr>
+		<?rh-cbt_start condition="Member" ?><td rowspan="2" style="border-left: Solid 1px #000000; 
+												 border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><?rh-cbt_start condition="Member" ?><p 
+			 style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="Overview_referenceServer.htm">Reference Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:62541/Quickstarts/ReferenceServer</p></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000;"><p 
+			 style="text-align: center;">62541</p></td><?rh-cbt_end ?>
+	</tr>
+	<tr>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:62540/Quickstarts/ReferenceServer</p></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">62540</p></td><?rh-cbt_end ?>
+	</tr>
+	<tr>
+		<td rowspan="2" style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><a 
+		 href="DAServerOverview.htm">Data Access Server</a></p></td>
+		<td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:62547/Quickstarts/DataAccessServer</p></td>
+		<td style="border-right: Solid 1px #000000;"><p style="text-align: center;">62547</p></td>
+	</tr>
+	<tr>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:62546/Quickstarts/DataAccessServer</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">62546</p></td>
+	</tr>
+	<tr>
+		<td rowspan="2" style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><a 
+		 href="ACServerOverview.htm">Alarm &amp; Conditions Server</a></p></td>
+		<td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:62544/Quickstarts/AlarmConditionServer</p></td>
+		<td style="border-right: Solid 1px #000000;"><p style="text-align: center;">62544</p></td>
+	</tr>
+	<tr>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:62543/Quickstarts/AlarmConditionServer</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">62543</p></td>
+	</tr>
+	<tr>
+		<td rowspan="2" style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><a 
+		 href="HaServerOverview.htm">Historical Data Server</a></p></td>
+		<td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:62550/Quickstarts/HistoricalAccessServer</p></td>
+		<td style="border-right: Solid 1px #000000;"><p style="text-align: center;">62550</p></td>
+	</tr>
+	<tr>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:62549/Quickstarts/HistoricalAccessServer</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">62549</p></td>
+	</tr>
+	<tr>
+		<td rowspan="2" style="border-left: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><a 
+		 href="HAEventsServerOverview.htm">Historical Events Server</a></p></td>
+		<td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:62553/Quickstarts/HistoricalEventServer</p></td>
+		<td style="border-right: Solid 1px #000000;"><p style="text-align: center;">62553</p></td>
+	</tr>
+	<tr>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:62552/Quickstarts/HistoricalEventsServer</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">62552</p></td>
+	</tr>
+	<tr>
+		<?rh-cbt_start condition="Member" ?><td rowspan="2" style="border-left: Solid 1px #000000; 
+												 border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><?rh-cbt_start condition="Member" ?><p 
+			 style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="UA_Sample_Server.htm">Generic Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:51210/UA/SampleServer</p></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000;"><p 
+			 style="text-align: center;">51210</p></td><?rh-cbt_end ?>
+	</tr>
+	<tr>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:51211/UA/SampleServer</p></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">51211</p></td><?rh-cbt_end ?>
+	</tr>
+	<tr>
+		<?rh-cbt_start condition="Member" ?><td rowspan="2" style="border-left: Solid 1px #000000; 
+												 border-right: Solid 1px #000000;"><?rh-cbt_start condition="Member" ?><p 
+			 style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="UA_Sample_Client.htm">Generic Client</a><?rh-cbt_end ?><?rh-cbt_start condition="Member" ?><br /><?rh-cbt_end ?>
+		 (acting as a Server)</p><?rh-cbt_end ?></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000;"><p>opc.tcp://&lt;localhost&gt;:61210/UA/SampleClient</p></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000;"><p 
+			 style="text-align: center;">61210</p></td><?rh-cbt_end ?>
+	</tr>
+	<tr>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><p>http://&lt;localhost&gt;:61211/UA/SampleClient</p></td><?rh-cbt_end ?>
+		<?rh-cbt_start condition="Member" ?><td style="border-right: Solid 1px #000000; 
+												 border-bottom: Solid 1px #000000;"><p 
+			 style="text-align: center;">61211</p></td><?rh-cbt_end ?>
+	</tr>
+</table>
+<?rh-cbt_start condition="Member" ?><h2><a name="Changing_Server_Port_Configuration"></a>Changing 
+ Server Port Configuration</h2><?rh-cbt_end ?>
+<?rh-cbt_start condition="Member" ?><p>Each UA Server can be reconfigured 
+ to use an alternate TCP port, and to also activate/deactivate endpoints. 
+ Simply open the applicable configuration file (found in the installation 
+ directory), per the following table:</p><?rh-cbt_end ?>
+<?rh-cbt_start condition="Member" ?><table style="border-collapse: separate; 
+											 border-collapse: separate;" 
+											 cellspacing="0" width="100%" 
+											 border="1">
+	<col style="width: 50%;" />
+	<col style="width: 50%;" />
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Application 
+		 Name</p></td>
+		<td><p style="text-align: center; font-weight: bold;">Configuration 
+		 File Name</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="Local_Discovery_Server_(LDS).htm">Discovery Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Opc.Ua.DiscoveryServer.Config.Xml</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="ACServerOverview.htm">Alarm Condition Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Quickstarts.AlarmConditionServer.Config.Xml</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="DAServerOverview.htm">Data Access Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Quickstarts.DataAccessServer.Config.Xml</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="Overview_referenceServer.htm">Reference Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Quickstarts.ReferenceServer.Config.Xml</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="HaServerOverview.htm">Historical Access Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Quickstarts.HistoricalAccessServer.Config.Xml</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="HAEventsServerOverview.htm">Historical Events Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Quickstarts.HistoricalEventsServer.Config.Xml</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="UA_Sample_Client.htm">Sample Client</a><?rh-cbt_end ?> (acting 
+		 as a server)</p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Opc.Ua.SampleClient.Config.Xml</p></td>
+	</tr>
+	<tr>
+		<td><?rh-cbt_start condition="Member" ?><p style="text-align: center;"><?rh-cbt_start condition="Member" ?><a 
+		 href="UA_Sample_Server.htm">Sample Server</a><?rh-cbt_end ?></p><?rh-cbt_end ?></td>
+		<td><p style="text-align: center;">Opc.Ua.SampleServer.Config.Xml</p></td>
+	</tr>
+</table><?rh-cbt_end ?>
+<?rh-cbt_start condition="Member" ?><p>You will need to restart your UA 
+ Server upon making any changes to a configuration file.</p><?rh-cbt_end ?>
+<?rh-cbt_start condition="Member" ?><h2>See Also</h2><?rh-cbt_end ?>
+<ul type="disc">
+	<?rh-cbt_start condition="Member" ?><li><?rh-cbt_start condition="Member" ?><a 
+	 href="UA_Configuration_Tool.htm">UA Configuration Tool</a><?rh-cbt_end ?></li><?rh-cbt_end ?>
+</ul>
+</body>
+</html>

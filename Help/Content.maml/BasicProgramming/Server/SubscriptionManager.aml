@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="8dc5073d-f9ad-40f5-94b0-fece5467927e" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The SubscriptionManager implements the Services in the <link xlink:href="d0e49081-31b5-48c8-b6b8-510ddced982d" /> and <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" />  Service Sets which includes the <codeEntityReference>M:Opc.Ua.Server.SubscriptionManager.Publish(Opc.Ua.Server.OperationContext,Opc.Ua.SubscriptionAcknowledgementCollection,System.UInt32@,Opc.Ua.UInt32Collection@,System.Boolean@,Opc.Ua.StatusCodeCollection@,Opc.Ua.DiagnosticInfoCollection@)</codeEntityReference>  Service. It maintains a list of active Subscriptions and a queue of waiting <codeEntityReference>M:Opc.Ua.Server.SubscriptionManager.Publish(Opc.Ua.Server.OperationContext,Opc.Ua.SubscriptionAcknowledgementCollection,System.UInt32@,Opc.Ua.UInt32Collection@,System.Boolean@,Opc.Ua.StatusCodeCollection@,Opc.Ua.DiagnosticInfoCollection@)</codeEntityReference>  requests. It is also responsible to removing Subscriptions that have expired because the Client has stopped sending <codeEntityReference>M:Opc.Ua.Server.SubscriptionManager.Publish(Opc.Ua.Server.OperationContext,Opc.Ua.SubscriptionAcknowledgementCollection,System.UInt32@,Opc.Ua.UInt32Collection@,System.Boolean@,Opc.Ua.StatusCodeCollection@,Opc.Ua.DiagnosticInfoCollection@)</codeEntityReference>  requests.
+    </para>
+      <para>
+      The SubscriptionManager manages a timer which periodically checks if each active subscription is ready to publish or if it has expired. If it is ready to publish it will check if there is a publish request waiting. If one exists it will wake up the request thread which will publish the notifications for the <link xlink:href="d0e49081-31b5-48c8-b6b8-510ddced982d" />. If no publish request is waiting, SubscriptionManager adds the <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" /> to the subscription queue.
+    </para>
+      <para>
+      When the SubscriptionManager receives a publish request from the client it will check for any subscriptions in the queue. It first looks for the subscriptions with the highest priority, if all subscriptions have the same priority it processes the first one in the queue. If the subscription queue is empty the SubscriptionManager adds the publish request to the request queue and tells the request thread to wait on an event.
+    </para>
+      <para>
+      The SubscriptionManager always processes requests in the order of that they were received. It uses the TimeoutHint in the RequestHeader to determine if a request is likely to have been abandoned. The SubscriptionManager discards requests if they are older than TimeoutHint.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="aec1e94b-9fde-467a-af15-d7152eb7f850" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The EventManager manages all <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> which monitor events. Any component that needs to report an event must do so by calling methods on the EventManager.
+    </para>
+      <para>
+      The <link xlink:href="fd9286b2-c3f8-42f0-9895-73ec31f76c77" /> checks for event filters whenever a <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" /> is created. If one is found it asks the EventManager to create the <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5" />.  The  <link xlink:href="fd9286b2-c3f8-42f0-9895-73ec31f76c77" />  then follows the <codeEntityReference>F:Opc.Ua.BrowseNames.HasNotifier</codeEntityReference> hierarchy from the Node being monitored and notifies the NodeManager for each Node in the hierarchy that a event subscription exists. If a NodeManager added new Nodes to the hierarchy it must follow the <codeEntityReference>F:Opc.Ua.BrowseNames.HasNotifier</codeEntityReference> hierarchy up to discovery any existing <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link>.
+    </para>
+      <para>
+      When an individual NodeManager reports an event to the EventManager it must provide a list of <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> that are subscribed to the Node which is the source of the Event. The NodeManager must not report the same event more than once even if there are multiple <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link>. Some <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> monitor the Server object which means that all NodeManagers must report all events that occur.
+    </para>
+      <para>
+      Events may contain a large number of fields that may not be of any interest to any client. For that reason that EventManager maintains a table event fields which are currently used by the <link xlink:href="2c2f66bf-9b6e-48db-af48-bc293fd622a5">MonitoredItems</link> that it manages. Event sources that wish to optimize event reporting can use this table to limit the amount of data collected and reported. The EventFiltersChanged event allows sources to receive notifications when this table changes.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

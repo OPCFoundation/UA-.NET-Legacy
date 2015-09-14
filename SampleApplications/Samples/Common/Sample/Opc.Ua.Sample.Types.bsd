@@ -1,0 +1,98 @@
+<opc:TypeDictionary
+  xmlns:opc="http://opcfoundation.org/BinarySchema/"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.bsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:tns="http://opcfoundation.org/UA/Sample/"
+  DefaultByteOrder="LittleEndian"
+  TargetNamespace="http://opcfoundation.org/UA/Sample/"  
+>
+  <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Opc.Ua.BinarySchema.bsd"/>
+  
+  <opc:StructuredType Name="AddressDataType">
+    <!-- Documentation -->
+    <opc:Field Name="Street1" TypeName="opc:String" />
+    <opc:Field Name="Street2" TypeName="opc:String" />
+    <opc:Field Name="City" TypeName="opc:String" />
+    <opc:Field Name="Country" TypeName="opc:String" />
+    <opc:Field Name="ProvinceState" TypeName="opc:String" />
+    <opc:Field Name="PostalCode" TypeName="opc:String" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="ArrayValueDataType">
+    <!-- Documentation -->
+    <opc:Field Name="NoOfBooleanValue" TypeName="opc:Int32" />
+    <opc:Field Name="BooleanValue" TypeName="opc:Boolean" LengthField="NoOfBooleanValue" />
+    <opc:Field Name="NoOfSByteValue" TypeName="opc:Int32" />
+    <opc:Field Name="SByteValue" TypeName="opc:SByte" LengthField="NoOfSByteValue" />
+    <opc:Field Name="NoOfByteValue" TypeName="opc:Int32" />
+    <opc:Field Name="ByteValue" TypeName="opc:Byte" LengthField="NoOfByteValue" />
+    <opc:Field Name="NoOfInt16Value" TypeName="opc:Int32" />
+    <opc:Field Name="Int16Value" TypeName="opc:Int16" LengthField="NoOfInt16Value" />
+    <opc:Field Name="NoOfUInt16Value" TypeName="opc:Int32" />
+    <opc:Field Name="UInt16Value" TypeName="opc:UInt16" LengthField="NoOfUInt16Value" />
+    <opc:Field Name="NoOfInt32Value" TypeName="opc:Int32" />
+    <opc:Field Name="Int32Value" TypeName="opc:Int32" LengthField="NoOfInt32Value" />
+    <opc:Field Name="NoOfUInt32Value" TypeName="opc:Int32" />
+    <opc:Field Name="UInt32Value" TypeName="opc:UInt32" LengthField="NoOfUInt32Value" />
+    <opc:Field Name="NoOfInt64Value" TypeName="opc:Int32" />
+    <opc:Field Name="Int64Value" TypeName="opc:Int64" LengthField="NoOfInt64Value" />
+    <opc:Field Name="NoOfUInt64Value" TypeName="opc:Int32" />
+    <opc:Field Name="UInt64Value" TypeName="opc:UInt64" LengthField="NoOfUInt64Value" />
+    <opc:Field Name="NoOfFloatValue" TypeName="opc:Int32" />
+    <opc:Field Name="FloatValue" TypeName="opc:Float" LengthField="NoOfFloatValue" />
+    <opc:Field Name="NoOfDoubleValue" TypeName="opc:Int32" />
+    <opc:Field Name="DoubleValue" TypeName="opc:Double" LengthField="NoOfDoubleValue" />
+    <opc:Field Name="NoOfStringValue" TypeName="opc:Int32" />
+    <opc:Field Name="StringValue" TypeName="opc:String" LengthField="NoOfStringValue" />
+    <opc:Field Name="NoOfDateTimeValue" TypeName="opc:Int32" />
+    <opc:Field Name="DateTimeValue" TypeName="opc:DateTime" LengthField="NoOfDateTimeValue" />
+    <opc:Field Name="NoOfGuidValue" TypeName="opc:Int32" />
+    <opc:Field Name="GuidValue" TypeName="opc:Guid" LengthField="NoOfGuidValue" />
+    <opc:Field Name="NoOfByteStringValue" TypeName="opc:Int32" />
+    <opc:Field Name="ByteStringValue" TypeName="opc:ByteString" LengthField="NoOfByteStringValue" />
+    <opc:Field Name="NoOfXmlElementValue" TypeName="opc:Int32" />
+    <opc:Field Name="XmlElementValue" TypeName="ua:XmlElement" LengthField="NoOfXmlElementValue" />
+    <opc:Field Name="NoOfNodeIdValue" TypeName="opc:Int32" />
+    <opc:Field Name="NodeIdValue" TypeName="ua:NodeId" LengthField="NoOfNodeIdValue" />
+    <opc:Field Name="NoOfExpandedNodeIdValue" TypeName="opc:Int32" />
+    <opc:Field Name="ExpandedNodeIdValue" TypeName="ua:ExpandedNodeId" LengthField="NoOfExpandedNodeIdValue" />
+    <opc:Field Name="NoOfQualifiedNameValue" TypeName="opc:Int32" />
+    <opc:Field Name="QualifiedNameValue" TypeName="ua:QualifiedName" LengthField="NoOfQualifiedNameValue" />
+    <opc:Field Name="NoOfLocalizedTextValue" TypeName="opc:Int32" />
+    <opc:Field Name="LocalizedTextValue" TypeName="ua:LocalizedText" LengthField="NoOfLocalizedTextValue" />
+    <opc:Field Name="NoOfStatusCodeValue" TypeName="opc:Int32" />
+    <opc:Field Name="StatusCodeValue" TypeName="ua:StatusCode" LengthField="NoOfStatusCodeValue" />
+    <opc:Field Name="NoOfVariantValue" TypeName="opc:Int32" />
+    <opc:Field Name="VariantValue" TypeName="ua:Variant" LengthField="NoOfVariantValue" />
+    <opc:Field Name="NoOfStructureValue" TypeName="opc:Int32" />
+    <opc:Field Name="StructureValue" TypeName="ua:ExtensionObject" LengthField="NoOfStructureValue" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="ScalarValueDataType">
+    <!-- Documentation -->
+    <opc:Field Name="BooleanValue" TypeName="opc:Boolean" />
+    <opc:Field Name="SByteValue" TypeName="opc:SByte" />
+    <opc:Field Name="ByteValue" TypeName="opc:Byte" />
+    <opc:Field Name="Int16Value" TypeName="opc:Int16" />
+    <opc:Field Name="UInt16Value" TypeName="opc:UInt16" />
+    <opc:Field Name="Int32Value" TypeName="opc:Int32" />
+    <opc:Field Name="UInt32Value" TypeName="opc:UInt32" />
+    <opc:Field Name="Int64Value" TypeName="opc:Int64" />
+    <opc:Field Name="UInt64Value" TypeName="opc:UInt64" />
+    <opc:Field Name="FloatValue" TypeName="opc:Float" />
+    <opc:Field Name="DoubleValue" TypeName="opc:Double" />
+    <opc:Field Name="StringValue" TypeName="opc:String" />
+    <opc:Field Name="DateTimeValue" TypeName="opc:DateTime" />
+    <opc:Field Name="GuidValue" TypeName="opc:Guid" />
+    <opc:Field Name="ByteStringValue" TypeName="opc:ByteString" />
+    <opc:Field Name="XmlElementValue" TypeName="ua:XmlElement" />
+    <opc:Field Name="NodeIdValue" TypeName="ua:NodeId" />
+    <opc:Field Name="ExpandedNodeIdValue" TypeName="ua:ExpandedNodeId" />
+    <opc:Field Name="QualifiedNameValue" TypeName="ua:QualifiedName" />
+    <opc:Field Name="LocalizedTextValue" TypeName="ua:LocalizedText" />
+    <opc:Field Name="StatusCodeValue" TypeName="ua:StatusCode" />
+    <opc:Field Name="VariantValue" TypeName="ua:Variant" />
+    <opc:Field Name="StructureValue" TypeName="ua:ExtensionObject" />
+  </opc:StructuredType>
+  
+</opc:TypeDictionary>

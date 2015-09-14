@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>HAEventsClientOverview</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Historical Events Client Overview</h1>
+<p>The Historical Events Client is a purpose-built client that demonstrates 
+ the use of Historical Events as described in <a href="http://www.opcfoundation.org/ua/part11"><?rh-udv_start 
+	 name="UaSpec11" ?>UA Specifications Part 11 - Historical Access (http://www.opcfoundation.org/ua/part11)<?rh-udv_end ?></a>.</p>
+<h2>User Interface</h2>
+<p class="Picture"><img src="image95.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Screen Elements</h2>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.705%;" />
+	<col style="width: 76.295%;" />
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Menus</span></p></td>
+		<td style="vertical-align: Top;"><ul type="disc">
+			<li><p><span style="font-weight: bold;">File</span></p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Exit:</span> Quit 
+				 the application</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Server</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Discover</span>: 
+				 See <a href="UaGenericClientDiscovery.htm">UA Discovery</a>.</p></li>
+				<li><p><span style="font-weight: bold;">Connect</span>: 
+				 Connects to the currently selected endpoint.</p></li>
+				<li><p><span style="font-weight: bold;">Disconnect</span>: 
+				 Disconnects the current connection.</p></li>
+				<li><p><span style="font-weight: bold;">Select Locale</span>: 
+				 For choosing a language; EN-US available only.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Events</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Enable Subscription</span>: 
+				 Enables/disables the subscription.</p></li>
+				<li><p><span style="font-weight: bold;">Select Event Type</span>: 
+				 See <a href="#Select_Event_Type">Select Event Type</a> 
+				 (below).</p></li>
+				<li><p><span style="font-weight: bold;">Select Event Area</span>: 
+				 See <a href="#Select_Event_Area">Select Event Area</a> 
+				 (below).</p></li>
+				<li><p><span style="font-weight: bold;">Modify Event Filter</span>: 
+				 See <a href="#Modify_Event_Filter">Modify Event Filter</a> 
+				 (below).</p></li>
+				<li><p><span style="font-weight: bold;">Edit Event History</span>: 
+				 See <a href="#Edit_Event_History">Edit Event History</a> 
+				 (below).</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Help</span>: </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Contents</span>: 
+				 Launches this help documentation.</p></li>
+			</ul>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Banner</span></p></td>
+		<td style="vertical-align: Top;"><p>Shows the OPC Foundation logo 
+		 and a [clickable] link to the website, shows the application name 
+		 in large text, and shows the Certification logo with a link for 
+		 more information online.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Events Area</span> (center)</p></td>
+		<td style="vertical-align: Top;"><p>The main area of the window 
+		 is a list of events that are occurring within the UA Server, and 
+		 are being delivered to the client.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Endpoint Bar</span> (below banner)</p></td>
+		<td style="vertical-align: Top;"><p class="Picture"><img src="image101.gif" 
+		 alt="" style="border: none;" border="0" /></p>
+		<p>There are 3 key areas in the endpoint bar: </p>
+		<ul type="disc">
+			<li><p><span style="font-weight: bold;">Endpoint Url</span><span>: 
+			 the endpoint URL (of a Server) to connect to.</span></p></li>
+			<li><p><span style="font-weight: bold;">Use Security</span><span>: 
+			 (checkbox) if checked will use a secure session, if unchecked 
+			 then will use a raw/insecure session.</span></p></li>
+			<li><p><span style="font-weight: bold;">Connect button</span><span>:</span> 
+			 clicking this will attempt to connect to the specified endpoint.</p></li>
+		</ul></td>
+	</tr>
+</table>
+<h3><a name="Select_Event_Type"></a>Select Event Type</h3>
+<p>There are many, many different types of event (category) that are defined. 
+ You can elect to filter all event notifications to a specific type of 
+ event using this window.</p>
+<p class="Picture"><img src="image96.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Simply locate the event type (Node) and then click the <span style="font-weight: bold;">OK</span><span> 
+ button.</span></p>
+<h3><a name="Select_Event_Area"></a>Select Event Area</h3>
+<p>You may elect to receive only the event notifications that apply to 
+ a specific area (areas are defined within the UA Server as a means of 
+ organizing events spatially).</p>
+<p class="Picture"><img src="image97.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Simply locate the area (Node) and click the <span style="font-weight: bold;">OK</span> 
+ button.</p>
+<h3><a name="Modify_Event_Filter"></a>Modify Event Filter</h3>
+<p>You can further fine-tune the event filter from this dialog.</p>
+<p class="Picture"><img src="image99.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Simple right-click in the area to reveal the following context menu: 
+ </p>
+<p class="Picture"><img src="image102.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>The context-sensitive menu applies to the currently selected item(s) 
+ within the list: </p>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 24.236%;" />
+	<col style="width: 75.764%;" />
+	<tr>
+		<td><p style="text-align: center;"><span style="font-weight: bold;">Display 
+		 in List View</span></p></td>
+		<td><p>Checked = display the field within the main window event 
+		 area; unchecked = hide.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;"><span style="font-weight: bold;">Filter 
+		 Enabled</span></p></td>
+		<td><p>Checked = selected filter is enabled; unchecked = filter 
+		 is disabled.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;"><span style="font-weight: bold;">Filter 
+		 Operand</span></p></td>
+		<td><p>A sub-menu of logic operators such as: = &lt; &gt; &#160;etc.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Set Filter 
+		 Value</p></td>
+		<td><p>Opens a dialog allowing to manually specify a value for 
+		 the filter.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center;"><span style="font-weight: bold;">Delete 
+		 Field</span></p></td>
+		<td><p>Delete the field from the list. (not recommended)</p></td>
+	</tr>
+</table>
+<p>Click the <span style="font-weight: bold;">OK</span><span> button to 
+ apply the changes.</span></p>
+<h3><a name="Edit_Event_History"></a>Edit Event History</h3>
+<p>From this dialog you can locate events within the historian and then 
+ delete them by using the right-click context-sensitive help menu options.</p>
+<p class="Picture"><img src="image100.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+</body>
+</html>

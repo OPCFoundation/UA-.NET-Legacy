@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="9bfe7feb-3a55-4737-a1c7-63d15f0d77ef" revisionNumber="1">
+  <developerHowToDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      There is an MMC plug-in that allows computer administrators to browse the certificate store and manage the certificates in it. It can be launched with the following steps:
+    </para>
+    </introduction>
+    <!-- Optional procedures followed by optional code example but must have
+       at least one procedure or code example -->
+    <procedure>
+      <title>To Manage the Certificates</title>
+      <steps class="ordered">
+        <step>
+          <content>
+            <para>Run mmc.exe</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Click Files | Add/Remove Snap In</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Click Add...</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Select Certificates and click Add</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Select Computer account and click Next.</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Select Local computer and click Next</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Click Close</para>
+          </content>
+        </step>
+        <step>
+          <content>
+            <para>Click OK</para>
+          </content>
+        </step>
+      </steps>
+    </procedure>
+    <section>
+      <title>Remarks</title>
+      <content>
+        <para>If the installer ran successfully there should be UA certificates in the Personal folder.</para>
+      </content>
+    </section>
+    <!-- <codeExample>Optional code example</codeExample> -->
+    <!-- <buildInstructions>Optional instructions for building a
+       code example.</buildInstructions> -->
+    <!-- <robustProgramming>Optional discussion of error handling and other
+       issues related to writing solid code.</robustProgramming> -->
+    <!-- <security>Optional discussion of security issues.</security> -->
+    <relatedTopics>
+      <!-- One or more of the following:
+         - A local link
+         - An external link
+         - A code entity reference
+
+    <link xlink:href="Other Topic's ID">Link text</link>
+    <externalLink>
+        <linkText>Link text</linkText>
+        <linkAlternateText>Optional alternate link text</linkAlternateText>
+        <linkUri>URI</linkUri>
+    </externalLink>
+    <codeEntityReference>API member ID</codeEntityReference>
+
+    Examples:
+
+    <link xlink:href="00e97994-e9e6-46e0-b420-5be86b2f8278">Some other topic</link>
+
+    <externalLink>
+        <linkText>SHFB on CodePlex</linkText>
+        <linkAlternateText>Go to CodePlex</linkAlternateText>
+        <linkUri>http://www.codeplex.com/SHFB</linkUri>
+    </externalLink>
+
+    <codeEntityReference>T:TestDoc.TestClass</codeEntityReference>
+    <codeEntityReference>P:TestDoc.TestClass.SomeProperty</codeEntityReference>
+    <codeEntityReference>M:TestDoc.TestClass.#ctor</codeEntityReference>
+    <codeEntityReference>M:TestDoc.TestClass.#ctor(System.String,System.Int32)</codeEntityReference>
+    <codeEntityReference>M:TestDoc.TestClass.ToString</codeEntityReference>
+    <codeEntityReference>M:TestDoc.TestClass.FirstMethod</codeEntityReference>
+    <codeEntityReference>M:TestDoc.TestClass.SecondMethod(System.Int32,System.String)</codeEntityReference>
+    -->
+    </relatedTopics>
+  </developerHowToDocument>
+</topic>

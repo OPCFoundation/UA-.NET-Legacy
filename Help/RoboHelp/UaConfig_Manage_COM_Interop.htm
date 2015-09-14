@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Manage COM Interop</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>UA Configuration Tool - Manage COM Interop Tab</h1>
+<p>COM Interoperability provides seamless interoperability between OPC 
+ UA and legacy OPC Classic products by using a Gateway, otherwise known 
+ as the <a href="ComIop_Overview.htm">COM Proxy/Wrapper</a>.</p>
+<p class="Picture"><img src="image5.gif" alt="" style="border: none;" border="0" /></p>
+<p>Any UA and/or COM servers that are &quot;wrapped&quot; will be displayed 
+ in the bottom portion of the dialog.</p>
+<h2><a name="Wrap_a_UA_Server"></a>Wrap a UA Server</h2>
+<p>To enable UA Servers to work with COM Classic Clients you will click 
+ <span style="font-weight: bold;">Wrap a UA Server</span><span> button. 
+ Simply paste the endpoint into the </span><span style="font-weight: bold;">Endpoint 
+ URL </span><span>field, or use the </span><span style="font-weight: bold;">...</span><span> 
+ button to discover the server endpoint.</span></p>
+<p class="Picture"><img src="image31.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3>Discover</h3>
+<p>The discover screen allows you to choose a host and then see the list 
+ of UA Servers that are currently available.</p>
+<p class="Picture"><img src="image32.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Once an endpoint has been entered/selected, you can then complete the 
+ remaining connection settings:</p>
+<p class="Picture"><img src="image33.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Upon clicking the <span style="font-weight: bold;">OK</span><span> button 
+ you will then specify the COM identification, in other words, the name 
+ of the COM Server that will become exposed to the COM Clients</span>:</p>
+<p class="Picture"><img src="image34.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Tip: You can change the Prog Id to something more meaningful, e.g. &quot;UA.MyCompany.MyProduct.Version1&quot;.</p>
+<h2><a name="Wrap_COM_Servers"></a>Wrap COM Servers</h2>
+<p>To enable UA Clients to consume data from a COM Classic DA, HDA, or 
+ A&amp;E Server you must &quot;wrap&quot; the COM server. Upon clicking 
+ the <span style="font-weight: bold;">Wrap COM Servers</span>&#160;button 
+ the following Dialog will show:</p>
+<p class="Picture"><img src="image112.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>From the above screen you can see that 3 COM Classic Servers are currently 
+ being wrapped: 1 x DA, 1 x AE, and 1 x HDA. You can add, edit, and delete 
+ servers.</p>
+<h3>Add</h3>
+<p>Upon clicking the <span style="font-weight: bold;">Add</span> button 
+ you will be able to browse/discover the available OPC Classic Servers 
+ on the local (default) PC. You can change the PC to discover remote servers: 
+ </p>
+<p class="Picture"><img src="image113.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Simple select the COM Server and click <span style="font-weight: bold;">OK</span>.</p>
+<p>The newly wrapped product will be added to the list. Simply click on 
+ it and then <span style="font-weight: bold;">Edit</span>: </p>
+<p class="Picture"><img src="image114.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>You can now specify the name of the newly exposed UA Server. Click <span 
+	 style="font-weight: bold;">OK</span> to complete.</p>
+<p>You will need to <a href="Starting___Stopping_the_Service.htm">restart 
+ the Service</a> for the changes to take effect.</p>
+<p>See also: </p>
+<ul type="disc">
+	<li><p><a href="UaConfig_Manage_Certificates.htm">Manage Certificates</a> 
+	 tab.</p></li>
+	<li><p><a href="UaConfig_HTTP_Access_Rules.htm">HTTP Access Rules</a> 
+	 tab.</p></li>
+</ul>
+</body>
+</html>

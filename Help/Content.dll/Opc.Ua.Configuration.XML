@@ -1,0 +1,1983 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Opc.Ua.Configuration</name>
+    </assembly>
+    <members>
+        <member name="T:Opc.Ua.Configuration.AccountInfo">
+            <summary>
+            Stores information about an account.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountInfo.ReadOnly">
+            <summary>
+            The rights necessary for read access to a file.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountInfo.WriteOnly">
+            <summary>
+            The rights necessary for write access to a file.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountInfo.ReadWrite">
+            <summary>
+            The rights necessary for read/write access to a file.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.ToString">
+            <summary cref="M:System.Object.ToString"/>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.CompareTo(System.Object)">
+            <summary>
+            Compares the obj.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.GetIdentityReference">
+            <summary>
+            Returns the identity reference for the account.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.GetApplicationRights(Opc.Ua.AccessControlType,System.Security.AccessControl.FileSystemRights)">
+            <summary>
+            Returns the application rights implied by the file system rights.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.GetAccessRuleSource(System.IO.FileInfo,System.Security.AccessControl.FileSystemAccessRule)">
+            <summary>
+            Returns the directory that is the source for the specified access rule.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.LookupDomainSid(System.String)">
+            <summary>
+            Queries the SID table for the specified account name.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.LookupAccountSid(System.String)">
+            <summary>
+            Queries the SID table for the specified account name.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.Create(System.String)">
+            <summary>
+            Creates an account info object from an identity name.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.CreateUser(System.String,System.String)">
+            <summary>
+            Creates a new NT user account.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.Query(Opc.Ua.Configuration.AccountFilters)">
+            <summary>
+            Queries the account table for the specified accounts.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.ApplyFilters(Opc.Ua.Configuration.AccountFilters,System.Collections.Generic.IList{Opc.Ua.Configuration.AccountInfo})">
+            <summary>
+            Applies the filters to the accounts.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.AccountInfo.ApplyFilters(Opc.Ua.Configuration.AccountFilters)">
+            <summary>
+            Applies the filters to the account
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountInfo.Name">
+            <summary>
+            The name of the account.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountInfo.Domain">
+            <summary>
+            The domain that the account belongs to.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountInfo.Sid">
+            <summary>
+            The SID for the account.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountInfo.SidType">
+            <summary>
+            The type of SID used by the account.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountInfo.Description">
+            <summary>
+            Thr description for the account.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountInfo.Status">
+            <summary>
+            Thr current status for the account.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.AccountSidType">
+            <summary>
+            The type of SID used by the account.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountSidType.User">
+            <summary>
+            An interactive user account.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountSidType.Group">
+            <summary>
+            An group of users.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountSidType.Domain">
+            <summary>
+            A domain.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountSidType.Alias">
+            <summary>
+            An alias for a group or user.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountSidType.BuiltIn">
+            <summary>
+            Built-in identity principals.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.AccountFilters">
+            <summary>
+            Filters that can be used to restrict the set of accounts returned.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountFilters.Name">
+            <summary>
+            The name of the account (supports the '*' wildcard).
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountFilters.Domain">
+            <summary>
+            The domain that the account belongs to.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.AccountFilters.AccountTypeMask">
+            <summary>
+            The types of accounts.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.AccountTypeMask">
+            <summary>
+            The masks that can be use to filter a list of accounts.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountTypeMask.None">
+            <summary>
+            Mask not specified.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountTypeMask.User">
+            <summary>
+            An interactive user account.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountTypeMask.Group">
+            <summary>
+            An NT user group.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.AccountTypeMask.WellKnownGroup">
+            <summary>
+            Well-known groups.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.WellKnownSids">
+            <summary>
+            The well known NT security identifiers.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.Interactive">
+            <summary>
+            Interactive users.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.AuthenticatedUser">
+            <summary>
+            Authenticated users.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.AnonymousLogon">
+            <summary>
+            Anonymous Logons
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.LocalSystem">
+            <summary>
+            The local system account.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.LocalService">
+            <summary>
+            The local service account.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.NetworkService">
+            <summary>
+            The network service account.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.Administrators">
+            <summary>
+            The administrators group.
+            </summary>     
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.Users">
+            <summary>
+            The users group.
+            </summary>   
+        </member>
+        <member name="F:Opc.Ua.Configuration.WellKnownSids.Guests">
+            <summary>
+            The guests group.
+            </summary>   
+        </member>
+        <member name="T:Opc.Ua.Configuration.ExceptionDlg">
+            <summary>
+            A dialog that displays an exception trace in an HTML page.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ExceptionDlg.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Configuration.ExceptionDlg"/> class.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ExceptionDlg.ReplaceSpecialCharacters(System.String)">
+            <summary>
+            Replaces all special characters in the message.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ExceptionDlg.Show(System.String,System.Exception)">
+            <summary>
+            Displays the exception in a dialog.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ExceptionDlg.ShowDialog(System.String,System.Exception)">
+            <summary>
+            Display the exception in the dialog.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ExceptionDlg.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ExceptionDlg.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ExceptionDlg.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.Service">
+            <summary>
+            Represents a windows service
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.Service.#ctor">
+            <summary>
+            Constructor for <see cref="T:Opc.Ua.Configuration.Service"/>
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.Service.#ctor(System.String)">
+            <summary>
+            Constructor for <see cref="T:Opc.Ua.Configuration.Service"/>
+            </summary>
+            <param name="name">The service name.</param>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.Name">
+            <summary>
+            The service name (Windows identifier for the service)
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.DisplayName">
+            <summary>
+            The service Display name (the friendly name showed by the Windows Service manager). 
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.Caption">
+            <summary>
+            The service caption (usually equals to display name)
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.Path">
+            <summary>
+            The service local path 
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.StartMode">
+            <summary>
+            The service start mode.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.Account">
+            <summary>
+            Account name under which a service runs.
+            Depending on the service type, the account name may be in the form of DomainName\Username
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.Description">
+            <summary>
+            The service description.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.ProcessorAffinity">
+            <summary>
+            The processor affinity for this service.
+            </summary>
+            <remarks>
+            If the system has 2 processor and the service is running on processor 2 the affinity bit mask will be : [true][false]
+            If the system has 2 processor and the service is running on both processors the affinity bit mask will be : [true][true]
+            </remarks>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.AcceptPause">
+            <summary>
+            Indicates whether the service can be paused
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.AcceptStop">
+            <summary>
+            Indicates whether the service can be stopped
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.ProcessId">
+            <summary>
+            The service process. Zero if not running. 
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.Service.Status">
+            <summary>
+            The service status.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.InstalledApplication">
+            <summary>
+            Specifies how to configure an application during installation.
+            </summary>
+            <summary>
+            Specifies how to configure an application during installation.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplication.Load(System.String)">
+            <summary>
+            Loads the application configuration from a configuration section.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplication.Load(System.IO.FileInfo)">
+            <summary>
+            Loads a collection of security applications.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplication.#ctor">
+            <summary>
+            The default constructor.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplication.Initialize(System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Called by the .NET framework during deserialization.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplication.Initialize">
+            <summary>
+            Sets private members to default values.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.UseDefaultCertificateStores">
+            <summary>
+            Whether to use the default stores.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.DeleteCertificatesOnUninstall">
+            <summary>
+            Whether to delete certificates on uninstall.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.ConfigureFirewall">
+            <summary>
+            Whether to configure the firewall.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.SetConfigurationFilePermisions">
+            <summary>
+            Whether to set configuration file permissions.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.SetExecutableFilePermissions">
+            <summary>
+            Whether to set configuration file permissions.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.InstallAsService">
+            <summary>
+            Whether to install as a service.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.ServiceStartMode">
+            <summary>
+            The start mode for the service.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.ServiceUserName">
+            <summary>
+            The user name for the service.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.ServicePassword">
+            <summary>
+            The password for the service.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.ServiceDescription">
+            <summary>
+            A human readable description for the service.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.LocallyRegisterOIDs">
+            <summary>
+            Whether to locally register OIDs (use to work around a windows bug when in a domain).
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.MinimumKeySize">
+            <summary>
+            The minimum key size for the new certificate.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.LifeTimeInMonths">
+            <summary>
+            The lifetime for the new certificate.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.AccessRules">
+            <summary>
+            Who has access to the critical files.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.InstalledApplication.TraceConfiguration">
+            <summary>
+            The trace configuration for the installed process.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ConfigUtils">
+            <summary>
+            Utility functions used by COM applications.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetLogFileDirectory">
+            <summary>
+            Gets the log file directory and ensures it is writeable.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.ProcessCommandLine">
+            <summary>
+            Checks if command line arguments specify configuration commands.
+            </summary>
+            <returns>
+            True if a configuration argument was specified and the arguments were processed. False otherwise.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.ProcessCommandLine(System.String[])">
+            <summary>
+            Checks if arguments specify configuration commands.
+            </summary>
+            <param name="args">The arguments passed to the executable.</param>
+            <returns>True if a configuration argument was specified and the arguments were processed. False otherwise.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.FindFirstElement(System.Xml.XmlElement,System.String,System.String)">
+            <summary>
+            Finds the first child element with the specified name.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.UpdateConfigurationLocation(System.String,System.String)">
+            <summary>
+            Updates the configuration location for the specified 
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.SetDefaults(Opc.Ua.Configuration.InstalledApplication)">
+            <summary>
+            Sets the defaults for all fields.
+            </summary>
+            <param name="application">The application.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.InstallApplication(Opc.Ua.Configuration.InstalledApplication,System.Boolean,System.Boolean)">
+            <summary>
+            Installs a UA application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.CreateCertificateForApplication(Opc.Ua.Configuration.InstalledApplication)">
+            <summary>
+            Creates a new certificate for application.
+            </summary>
+            <param name="application">The application.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.SetCertificatePermissions(Opc.Ua.Security.SecuredApplication,Opc.Ua.CertificateIdentifier,System.Collections.Generic.IList{Opc.Ua.ApplicationAccessRule},System.Boolean)">
+            <summary>
+            Updates the access permissions for the certificate store.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.UninstallApplication(Opc.Ua.Configuration.InstalledApplication)">
+            <summary>
+            Uninstalls a UA application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.RegisterComTypes(System.String)">
+            <summary>
+            Registers the COM types in the specified assembly.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.VerifyCodebase(System.Reflection.Assembly,System.String)">
+            <summary>
+            Checks that the assembly loaded has the expected codebase.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.UnregisterComTypes(System.String)">
+            <summary>
+            Unregisters the COM types in the specified assembly.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetNetFwMgr">
+            <summary>
+            Creates an instance of the NetFwMgr Class
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetNetFwAuthorizedApplication">
+            <summary>
+            Creates an instance of the NetFwAuthorizedApplication Class
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetNetFwOpenPort">
+            <summary>
+            Creates an instance of the NetFwOpenPort Class
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.SetFirewallAccess(Opc.Ua.Security.SecuredApplication,System.String)">
+            <summary>
+            Configures the firewall to allow access to the specified application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.SetFirewallAccess(System.String,System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Configures the firewall to allow access to the specified application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.CheckFirewallAccess(System.String,Opc.Ua.StringCollection)">
+            <summary>
+            Checks if the firewall has been configured.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetFirewallAccess(System.String)">
+            <summary>
+            Returns the firewall access granted to an application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.SetFirewallAccess(System.String,System.Int32[])">
+            <summary>
+            Returns the firewall access granted to an application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.RemoveFirewallAccess(System.Int32[])">
+            <summary>
+            Removes the firewall access granted to the specified ports.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.RemoveFirewallAccess(Opc.Ua.Security.SecuredApplication,System.String)">
+            <summary>
+            Configures the firewall to remove access to the specified application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.RemoveFirewallAccess(System.String,System.Collections.Generic.IList{System.String})">
+            <summary>
+            Configures the firewall to remove access to the specified application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetComputerWorkgroupOrDomain">
+            <summary>
+            Returns the name of the workgroup or domain that the computer belongs to.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.ProgIDFromCLSID(System.Guid)">
+            <summary>
+            Returns the prog id from the clsid.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.CLSIDFromProgID(System.String)">
+            <summary>
+            Returns the prog id from the clsid.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetImplementedCategories(System.Guid)">
+            <summary>
+            Returns the implemented categories for the class.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.EnumClassesInCategory(System.Guid)">
+            <summary>
+            Fetches the classes in the specified category.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CATID_PseudoComServers">
+            <summary>
+            The category identifier for UA servers that are registered as COM servers on a machine.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CLSID_UaComDaProxyServer">
+            <summary>
+            The CLSID for the UA COM DA server host process (note: will be eventually replaced the proxy server).
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CLSID_UaComAeProxyServer">
+            <summary>
+            The CLSID for the UA COM AE server host process (note: will be eventually replaced the proxy server).
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CLSID_UaComHdaProxyServer">
+            <summary>
+            The CLSID for the UA COM HDA server host process (note: will be eventually replaced the proxy server).
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CATID_OPCDAServer20">
+            <summary>
+            COM servers that support the DA 2.0 specification.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CATID_OPCDAServer30">
+            <summary>
+            COM servers that support the DA 3.0 specification.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CATID_OPCAEServer10">
+            <summary>
+            COM servers that support the AE 1.0 specification.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ConfigUtils.CATID_OPCHDAServer10">
+            <summary>
+            COM servers that support the HDA 1.0 specification.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetExecutablePath(System.Guid)">
+            <summary>
+            Returns the location of the COM server executable.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.CreateServer(System.Guid)">
+            <summary>
+            Creates an instance of a COM server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.ReleaseServer(System.Object)">
+            <summary>
+            Releases the server if it is a true COM server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.RegisterClassInCategory(System.Guid,System.Guid)">
+            <summary>
+            Registers the classes in the specified category.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.RegisterClassInCategory(System.Guid,System.Guid,System.String)">
+            <summary>
+            Registers the classes in the specified category.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.UnregisterComServer(System.Guid)">
+            <summary>
+            Removes the registration for a COM server from the registry.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.UnregisterClassInCategory(System.Guid,System.Guid)">
+            <summary>
+            Unregisters the classes in the specified category.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.GetAppIcon">
+            <summary>
+            Gets the application icon.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.LocallyRegisterCertificateOIDs(System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Registers the object ids required to access the certificate.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ConfigUtils.LocallyRegisterCertificateOIDs(System.String[])">
+             <summary>
+             Registers the object ids required to access the certificate.
+             </summary>
+             <remarks>
+             This function is used to work around a bug in .NET which results in long delays while OIDs are looked up in Active Directory.
+             
+             CryptFindOIDInfo is supposed to work like this:
+             
+             1. A table of OID entries is constructed from registry entries with the CRYPT_INSTALL_OID_INFO_BEFORE_FLAG flag.  This table is searched first.
+             2. An internal table of OID entries is then searched. Default OIDs that Microsoft knows about.
+             3. A table of OIDs constructed from the registry entries without the CRYPT_INSTALL_OID_INFO_BEFORE_FLAG flag is then searched.
+             4. Active Directory is searched.        
+            
+             When registering the OID information with CryptRegisterOIDInfo(ptrInfo, 0) and hack the registry this is what will happen:
+             
+             1. Any application that searches for an OID (with the OID flag) will find it at step 2.  The OID will be correct as well as the friendly name since it uses CryptoAPI's internal table.
+             2. Any application that searches for a friendly name (with the friendly name flag) will find it as step 2.  The OID info is good as stated above.
+             3. .NET code which searches for an OID (with the friendly name flag) will find the entry in step 3 because of our hack.
+             4. Any OIDs that isn't found at this point will be searched in the Active Directory.
+             
+             This code needs to be run once for each public key type.
+             </remarks>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ConfigUtils.UserRoleDirectory">
+            <summary>
+            Gets or sets a directory which contains files representing users roles.
+            </summary>
+            <remarks>
+            The write permissions on these files are used to determine which users are allowed to act in the role.
+            </remarks>
+        </member>
+        <member name="T:Opc.Ua.Configuration.InstalledApplicationCollection">
+            <summary>
+            A collection of InstalledApplication objects.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplicationCollection.#ctor">
+            <summary>
+            Initializes the collection with default values.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplicationCollection.#ctor(System.Int32)">
+            <summary>
+            Initializes the collection with an initial capacity.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.InstalledApplicationCollection.#ctor(System.Collections.Generic.IEnumerable{Opc.Ua.Configuration.InstalledApplication})">
+            <summary>
+            Initializes the collection with another collection.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.StartMode">
+            <summary>
+            Start mode of the Windows service
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.StartMode.Boot">
+            <summary>
+            Device driver started by the operating system loader (valid only for driver services).
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.StartMode.System">
+            <summary>
+            Device driver started by the operating system initialization process. This value is valid only for driver services.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.StartMode.Auto">
+            <summary>
+            Service to be started automatically during system startup.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.StartMode.Manual">
+            <summary>
+            Service to be started manually by a call to the StartService method.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.StartMode.Disabled">
+            <summary>
+            Service that can no longer be started.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ServiceStatus">
+            <summary>
+            Represents the service status.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.Stopped">
+            <summary>
+            The service is stopped
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.StartPending">
+            <summary>
+            The service is going to process a start request
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.StopPending">
+            <summary>
+            The service is going to process a stop request
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.Running">
+            <summary>
+            The service started
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.ContinuePending">
+            <summary>
+            The service is going to process a continue request
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.PausePending">
+            <summary>
+            The service is going to process a pause request
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.Paused">
+            <summary>
+            The service is paused
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceStatus.Unknown">
+            <summary>
+            Unknown status
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ServiceAccess">
+            <summary>
+            Access to the service. Before granting the requested access, the
+            system checks the access token of the calling process. 
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.QueryConfig">
+            <summary>
+            Required to call the QueryServiceConfig and 
+            QueryServiceConfig2 functions to query the service configuration.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.ChangeConfig">
+            <summary>
+            Required to call the ChangeServiceConfig or ChangeServiceConfig2 function 
+            to change the service configuration. Because this grants the caller 
+            the right to change the executable file that the system runs, 
+            it should be granted only to administrators.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.QueryStatus">
+            <summary>
+            Required to call the QueryServiceStatusEx function to ask the service 
+            control manager about the status of the service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.EnumerateDependents">
+            <summary>
+            Required to call the EnumDependentServices function to enumerate all 
+            the services dependent on the service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.Start">
+            <summary>
+            Required to call the StartService function to start the service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.Stop">
+            <summary>
+                Required to call the ControlService function to stop the service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.PauseContinue">
+            <summary>
+            Required to call the ControlService function to pause or continue 
+            the service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.Interrogate">
+            <summary>
+            Required to call the EnumDependentServices function to enumerate all
+            the services dependent on the service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.UserDefinedControl">
+            <summary>
+            Required to call the ControlService function to specify a user-defined
+            control code.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.AllAccess">
+            <summary>
+            Includes STANDARD_RIGHTS_REQUIRED in addition to all access rights in this table.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.GenericRead">
+            <summary>
+            Generic read
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.GenericWrite">
+            <summary>
+            Generic Write
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.GenericExecute">
+            <summary>
+            Generic Execute
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.SystemSecurity">
+            <summary>
+            Required to call the QueryServiceObjectSecurity or 
+            SetServiceObjectSecurity function to access the SACL. The proper
+            way to obtain this access is to enable the SE_SECURITY_NAME 
+            privilege in the caller's current access token, open the handle 
+            for ACCESS_SYSTEM_SECURITY access, and then disable the privilege.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.Delete">
+            <summary>
+            Required to call the DeleteService function to delete the service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.ReadControl">
+            <summary>
+            Required to call the QueryServiceObjectSecurity function to query
+            the security descriptor of the service object.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.WriteDac">
+            <summary>
+            Required to call the SetServiceObjectSecurity function to modify
+            the Dacl member of the service object's security descriptor.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceAccess.WriteOwner">
+            <summary>
+            Required to call the SetServiceObjectSecurity function to modify 
+            the Owner and Group members of the service object's security 
+            descriptor.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ServiceType">
+            <summary>
+            Service types.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceType.KernelDriver">
+            <summary>
+            Driver service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceType.FileSystemDriver">
+            <summary>
+            File system driver service.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceType.OwnProcess">
+            <summary>
+            Service that runs in its own process.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceType.ShareProcess">
+            <summary>
+            Service that shares a process with one or more other services.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceType.InteractiveProcess">
+            <summary>
+            The service can interact with the desktop.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ServiceError">
+            <summary>
+            Severity of the error, and action taken, if this service fails 
+            to start.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceError.ErrorIgnore">
+            <summary>
+            The startup program ignores the error and continues the startup
+            operation.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceError.ErrorNormal">
+            <summary>
+            The startup program logs the error in the event log but continues
+            the startup operation.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceError.ErrorSevere">
+            <summary>
+            The startup program logs the error in the event log. If the 
+            last-known-good configuration is being started, the startup 
+            operation continues. Otherwise, the system is restarted with 
+            the last-known-good configuration.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ServiceError.ErrorCritical">
+            <summary>
+            The startup program logs the error in the event log, if possible.
+            If the last-known-good configuration is being started, the startup
+            operation fails. Otherwise, the system is restarted with the 
+            last-known good configuration.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ServiceInstaller">
+            <summary>
+            Provides functionalities to install/uninstall Windows services.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.StartService(System.String)">
+            <summary>
+            Stops the service.
+            </summary>
+            <param name="serviceName">Name of the service.</param>
+            <returns>True if stopped successfully.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.StopService(System.String)">
+            <summary>
+            Stops the service.
+            </summary>
+            <param name="serviceName">Name of the service.</param>
+            <returns>True if stopped successfully.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.SetLogonAsServicePrivilege(System.String)">
+            <summary>
+            Set the Log-On As Service privilege to the given user.
+            </summary>
+            <param name="userName">The account name (domain\name).</param>
+            <returns>True for success; otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.InstallService(System.String,System.String,System.String,System.String,Opc.Ua.Configuration.StartMode,System.Boolean@)">
+            <summary>
+            Installs and optionally starts the service.
+            </summary>
+            <param name="path">The full path of the service exe.</param>
+            <param name="name">The name of the service.</param>
+            <param name="displayName">The display name of the service.</param>
+            <param name="description">The description for the service.</param>
+            <param name="startMode">The service start mode.</param>
+            <param name="start">True to start the service after the installation; otherwise, false. 
+            Once the method returns you can use this parameter to check whether the service is running or not.</param>
+            <returns>True for success. Otherwise, false.</returns> 
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.InstallService(System.String,System.String,System.String,System.String,Opc.Ua.Configuration.StartMode,System.String,System.String,System.Boolean@)">
+            <summary>
+            Installs and optionally starts the service.
+            </summary>
+            <param name="path">The full path of the service exe.</param>
+            <param name="name">The name of the service.</param>
+            <param name="displayName">The display name of the service.</param>
+            <param name="description">The description for the service.</param>
+            <param name="startMode">The service start mode.</param>
+            <param name="userName">The account name. Null to use the default account (LocalSystem).</param>
+            <param name="password">The account password.</param>
+            <param name="start">True to start the service after the installation; otherwise, false. 
+            Once the method returns you can use this parameter to check whether the service is running or not.</param>
+            <returns>True for success. Otherwise, false.</returns> 
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.InstallService(System.String,System.String,System.String,System.String,Opc.Ua.Configuration.StartMode,System.String,System.String,System.Boolean@,System.String[])">
+            <summary>
+            Installs and optionally starts the service.
+            </summary>
+            <param name="path">The full path of the service exe.</param>
+            <param name="name">The name of the service.</param>
+            <param name="displayName">The display name of the service.</param>
+            <param name="description">The description for the service.</param>
+            <param name="startMode">The service start mode.</param>
+            <param name="userName">The account name. Null to use the default account (LocalSystem).</param>
+            <param name="password">The account password.</param>
+            <param name="start">True to start the service after the installation; otherwise, false. 
+            Once the method returns you can use this parameter to check whether the service is running or not.</param>
+            <param name="dependencies">The list of dependencies services. Null if there are no dependencies.</param>
+            <returns>True for success. Otherwise, false.</returns> 
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.UnInstallService(System.String)">
+            <summary>
+            Uninstalls the service with the given name.
+            </summary>
+            <param name="name">The name of the service to uninstall.</param>
+            <returns>True for success. Otherwise, false.</returns> 
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceInstaller.SafeCloseServiceHandle(System.IntPtr)">
+            <summary>
+            Safe close the service hanlde
+            </summary>
+            <param name="handle"></param>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ManagedApplication">
+            <summary>
+            An application that is managed by the configuration tool.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Configuration.ManagedApplication"/> class.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.Load(System.String)">
+            <summary>
+            Loads the specified file path.
+            </summary>
+            <param name="filePath">The file path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.Save(System.String)">
+            <summary>
+            Saves the specified file path.
+            </summary>
+            <param name="filePath">The file path. Uses the original source file path if not provided.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.SetExecutableFile(System.String)">
+            <summary>
+            Sets the executable file.
+            </summary>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.LoadSdkConfigFile">
+            <summary>
+            Tries to loads the SDK config file.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.SetConfigurationFile(System.String)">
+            <summary>
+            Sets the configuration file.
+            </summary>
+            <param name="filePath">The file path.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.Reload">
+            <summary>
+            Reloads the configuration from disk.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.GetApplicationSettings(System.String)">
+            <summary>
+            Gets the application secuirty settings from a file.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ManagedApplication.GetConfigFileFromAppConfig(System.IO.FileInfo)">
+            <summary>
+            Gets the config file location from app config.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.SourceFile">
+            <summary>
+            Gets the source file.
+            </summary>
+            <value>The source file.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.IsSdkCompatible">
+            <summary>
+            Gets a value indicating whether this application is SDK compatible.
+            </summary>
+            <value>
+            	<c>true</c> if this application is SDK compatible; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.Application">
+            <summary>
+            Gets the application.
+            </summary>
+            <value>The application.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.DisplayName">
+            <summary>
+            Gets or sets the display name.
+            </summary>
+            <value>The display name.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.ExecutablePath">
+            <summary>
+            Gets or sets the executable path.
+            </summary>
+            <value>The executable path.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.ConfigurationPath">
+            <summary>
+            Gets or sets the configuration path.
+            </summary>
+            <value>The configuration path.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.Certificate">
+            <summary>
+            Gets or sets the certificate.
+            </summary>
+            <value>The certificate.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.TrustList">
+            <summary>
+            Gets or sets the trust list.
+            </summary>
+            <value>The trust list.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ManagedApplication.BaseAddresses">
+            <summary>
+            Gets or sets the trust list.
+            </summary>
+            <value>The trust list.</value>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ServiceManager">
+            <summary>
+            Provides functionalities to manage Windows services such as Start/Stop service. 
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.StartService(System.String)">
+            <summary>
+            Start the service with the given name.
+            This method returns as soon as the Start method on the service 
+            is called and does not guarantee the running status of the service.
+            You can call this method after stop or pause the service in order to re-start it.
+            </summary>
+            <param name="serviceName">The name of the service</param>
+            <returns>True for success. Otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.StartService(System.String,System.TimeSpan)">
+            <summary>
+            Start the service with the given name and wait until the status of the service is running.
+            If the service status is not running after the given timeout then the service is considered not started.
+            You can call this method after stop or pause the service in order to re-start it.
+            </summary>
+            <param name="serviceName">The name of the service</param>
+            <param name="timeout">The timeout.</param>
+            <returns>True if the service has been started. Otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.StopService(System.String,System.TimeSpan)">
+            <summary>
+            Stop the service with the given name and wait until the service status is stopped.
+            If the service status is not stopped after the given timeout then the service is considered not stopped.
+            </summary>
+            <param name="serviceName">The name of the service</param>
+            <param name="timeout">The timeout.</param>
+            <returns>True if the service has been stopped. Otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.StopService(System.String)">
+            <summary>
+            Stop the service with the given name. This method returns as soon as the Stop method on the service 
+            is called and does not guarantee the stopped status of the service.
+            </summary>
+            <param name="serviceName">The name of the service</param>
+            <returns>True for success. Otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.PauseService(System.String,System.TimeSpan)">
+            <summary>
+            Pause the service with the given name and wait until the service status is paused.
+            If the service status is not paused after the given timeout then the service is considered not paused.
+            </summary>
+            <param name="serviceName">The name of the service</param>
+            <param name="timeout">The timeout.</param>
+            <returns>True if the service has been paused. Otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.PauseService(System.String)">
+            <summary>
+            Pause the service with the given name. This method returns as soon as the Pause method on the service 
+            is called and does not guarantee the paused status of the service.
+            </summary>
+            <param name="serviceName">The name of the service</param>
+            <returns>True for success. Otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetServiceStatus(System.String)">
+            <summary>
+            Gets the status of the service with the given name.
+            </summary>
+            <param name="serviceName">The name of the service.</param>
+            <returns>The <see cref="T:Opc.Ua.Configuration.ServiceStatus"/>.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.IsServiceRunning(System.String)">
+            <summary>
+            Determine whther the service with the given name is running.
+            </summary>
+            <param name="serviceName">The name of the service.</param>
+            <returns>True if the service is running.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.IsServiceStopped(System.String)">
+            <summary>
+            Determine whther the service with the given name is stopped.
+            </summary>
+            <param name="serviceName">The name of the service.</param>
+            <returns>True if the service is stopped.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.IsServicePaused(System.String)">
+            <summary>
+            Determine whther the service with the given name is paused.
+            </summary>
+            <param name="serviceName">The name of the service.</param>
+            <returns>True if the service is paused..</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.SetServiceStartMode(System.String,Opc.Ua.Configuration.StartMode,System.UInt32@)">
+            <summary>
+            Modifies the start mode of a Windows service. 
+            </summary>
+            <param name="serviceName">The service name.</param>
+            <param name="startMode">The new start mode.</param>
+            <param name="retValue">The return value.
+            Return value Description:
+            0 Success
+            1 Not Supported
+            2 Access Denied
+            3 Dependent Services Running
+            4 Invalid Service Control
+            5 Service Cannot Accept Control
+            6 Service Not Active
+            7 ervice Request Timeout
+            8 Unknown Failure
+            9 Path Not Found
+            10 Service Already Running
+            11 Service Database Locked
+            12 Service Dependency Deleted
+            13 Service Dependency Failure
+            14 Service Disabled
+            15 Service Logon Failure
+            16 Service Marked For Deletion
+            17 Service No Thread
+            18 Status Circular Dependency
+            19 Status Duplicate Name
+            20 Status Invalid Name
+            21 Status Invalid Parameter
+            22 Status Invalid Service Account
+            23 Status Service Exists
+            24 Service Already Paused
+            </param>
+            <returns>True if succeded; othrwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetServiceStartMode(System.String)">
+            <summary>
+            Gets the start mode of the service with the given name.
+            </summary>
+            <param name="serviceName">The service name.</param>
+            <returns>The service start mode.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetAllServices">
+            <summary>
+            Gets all installed Windows services.
+            </summary>
+            <returns>The list of intalled <see cref="T:Opc.Ua.Configuration.Service"/>.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetService(System.String)">
+            <summary>
+            Gets the <see cref="T:Opc.Ua.Configuration.Service"/> with the given name.
+            </summary>
+            <param name="serviceName">The service name.</param>
+            <returns>The <see cref="T:Opc.Ua.Configuration.Service"/> identified by the given name.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.ServiceExists(System.String)">
+            <summary>
+            Gets a value whteher the service with the given name is installed.
+            </summary>
+            <param name="serviceName">The service name.</param>
+            <returns>True if the service with the given bname exists; otherwise, false.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.SetServiceProcessorAffinity(System.String,System.Boolean[])">
+            <summary>
+            Set the processor affinity for the service with the given name.
+            </summary>
+            <param name="serviceName">the service name.</param>
+            <param name="affinity">The affinity bitmask.</param>
+            <returns>True for success; otherwise, false.</returns>
+            <remarks>
+            If the system has 2 processor and the service is running on processor 2 the affinity bit mask will be : [true][false]
+            If the system has 2 processor and the service is running on both processors the affinity bit mask will be : [true][true]
+            </remarks>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetProcessorAffinity(System.Int32)">
+            <summary>
+            Gets the processor affinity for the process with the given id.
+            </summary>
+            <param name="processId"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetServiceProcessorAffinity(System.String)">
+            <summary>
+            Gets the affinity for the service with the given name.
+            </summary>
+            <param name="serviceName">the service name.</param>
+            <returns>The affinity bit mask.</returns>
+            <remarks>
+            If the system has 2 processor and the service is running on processor 2 the affinity bit mask will be : [true][false]
+            If the system has 2 processor and the service is running on both processors the affinity bit mask will be : [true][true]
+            </remarks>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetNumberOfProcessors">
+            <summary>
+            Gets the number of physical processors on the system. 
+            </summary>
+            <returns>The number of physical processors</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ServiceManager.GetNumberOfLogicalProcessors">
+            <summary>
+            Gets the number of logical processors on the system. 
+            </summary>
+            <returns>The number of logical processors</returns>
+        </member>
+        <member name="T:Opc.Ua.Configuration.LocalSecurityPolicy">
+            <summary>
+            Allows to add privileges to Local Security Policy.
+            You can use this class to add the LogOn as service privilege to an account.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.LocalSecurityPolicy.#ctor">
+            <summary>
+            Constructor for <see cref="T:Opc.Ua.Configuration.LocalSecurityPolicy"/>
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.LocalSecurityPolicy.#ctor(System.String)">
+            <summary>
+            Constructor for <see cref="T:Opc.Ua.Configuration.LocalSecurityPolicy"/>
+            </summary>
+            <param name="systemName">local system if systemName is null</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.LocalSecurityPolicy.AddPrivilege(System.String,System.String)">
+            <summary>
+            Add privileges for the given account
+            </summary>
+            <param name="account">The account name (domain\userName)</param>
+            <param name="privilege">The name of the privilege to add</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.LocalSecurityPolicy.AddLogonAsServicePrivilege(System.String)">
+            <summary>
+            Add the privilege for the given account to logon as service.
+            </summary>
+            <param name="account">The account name (domain\userName)</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.LocalSecurityPolicy.Dispose">
+            <summary>
+            Release all unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.LocalSecurityPolicy.Finalize">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.HostEnumerator">
+            <summary>
+            Enumerates the hosts available on the network.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.HostEnumerator.#ctor">
+            <summary>
+            Creates the object.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.HostEnumerator.Start(System.String)">
+            <summary>
+            Starts enumerating the hosts.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.HostEnumerator.Stop">
+            <summary>
+            Stops enumerating the hosts.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.HostEnumerator.OnEnumerate(System.Object)">
+            <summary>
+            Enumerates computers on the local network.
+            </summary>
+        </member>
+        <member name="E:Opc.Ua.Configuration.HostEnumerator.HostsDiscovered">
+            <summary>
+            Raised when a batch of hosts has been discovered (called from a background thread).
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.HostEnumeratorEventArgs">
+            <summary>
+            The arguments provided when a batch of hosts is discovered.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.HostEnumeratorEventArgs.#ctor(System.Collections.Generic.IList{System.String})">
+            <summary>
+            Initializes the object with a batch of host names.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.HostEnumeratorEventArgs.Hostnames">
+            <summary>
+            The list of hostnames found.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ApplicationInstance">
+            <summary>
+            A class that install, configures and runs a UA application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Configuration.ApplicationInstance"/> class.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.#ctor(Opc.Ua.ApplicationConfiguration)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Configuration.ApplicationInstance"/> class.
+            </summary>
+            <param name="applicationConfiguration">The application configuration.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.LoadInstallConfigFromFile(System.String)">
+            <summary>
+            Loads the installation configuration from a file.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.LoadInstallConfigFromResource(System.String,System.Reflection.Assembly)">
+            <summary>
+            Loads the installation configuration from an embedded resource.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.LoadInstallConfigFromStream(System.IO.Stream)">
+            <summary>
+            Loads the installation configuration from a stream.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.LoadInstallConfig(System.String)">
+            <summary>
+            Loads the installation configuration.
+            </summary>
+            <param name="configFile">The config file (may be null).</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ProcessCommandLine">
+            <summary>
+            Processes the command line.
+            </summary>
+            <returns>
+            True if the arguments were processed; False otherwise.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ProcessCommandLine(System.Boolean)">
+            <summary>
+            Processes the command line.
+            </summary>
+            <param name="ignoreUnknownArguments">if set to <c>true</c> unknown arguments are ignored.</param>
+            <returns>
+            True if the arguments were processed; False otherwise.
+            </returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ProcessCommandLine(System.Boolean,System.String[])">
+            <summary>
+            Processes the command line.
+            </summary>
+            <returns>True if the arguments were processed; False otherwise.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.StartAsService(Opc.Ua.ServerBase)">
+            <summary>
+            Starts the UA server as a Windows Service.
+            </summary>
+            <param name="server">The server.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.Start(Opc.Ua.ServerBase)">
+            <summary>
+            Starts the UA server.
+            </summary>
+            <param name="server">The server.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.Stop">
+            <summary>
+            Stops the UA server.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.GetArgumentDescriptions">
+            <summary>
+            Gets the descriptions for the supported arguments.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.GetHelpString(Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription[])">
+            <summary>
+            Gets the help string.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ValidateArguments(System.Boolean,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Validates the arguments.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.UpdateAppConfigWithInstallConfig(Opc.Ua.ApplicationConfiguration)">
+            <summary>
+            Updates the application configuration with the values from the installation configuration.
+            </summary>
+            <param name="configuration">The configuration to update.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.Install(System.Boolean,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Installs the service.
+            </summary>
+            <param name="silent">if set to <c>true</c> no dialogs such be displayed.</param>
+            <param name="args">Additional arguments provided on the command line.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.OnBeforeInstallService">
+            <summary>
+            Called immediately before the service is installed.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.Uninstall(System.Boolean,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Uninstalls the service.
+            </summary>
+            <param name="silent">if set to <c>true</c> no dialogs such be displayed.</param>
+            <param name="args">Additional arguments provided on the command line.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ProcessCommand(System.Boolean,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Processes the command.
+            </summary>
+            <param name="silent">if set to <c>true</c> no dialogs such be displayed.</param>
+            <param name="args">Additional arguments provided on the command line.</param>
+            <returns>True if the command was processed.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.LoadAppConfig(System.Boolean,System.String,Opc.Ua.ApplicationType,System.Type,System.Boolean)">
+            <summary>
+            Loads the configuration.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.LoadApplicationConfiguration(System.String,System.Boolean)">
+            <summary>
+            Loads the application configuration.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.LoadApplicationConfiguration(System.Boolean)">
+            <summary>
+            Loads the application configuration.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.CheckApplicationInstanceCertificate(System.Boolean,System.UInt16)">
+            <summary>
+            Checks for a valid application instance certificate.
+            </summary>
+            <param name="silent">if set to <c>true</c> no dialogs will be displayed.</param>
+            <param name="minimumKeySize">Minimum size of the key.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.SetUaValidationForHttps(Opc.Ua.CertificateValidator)">
+            <summary>
+            Uses the UA validation logic for HTTPS certificates.
+            </summary>
+            <param name="validator">The validator.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.HttpsCertificateValidation(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            Remotes the certificate validate.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.CertificateValidator_CertificateValidation(Opc.Ua.CertificateValidator,Opc.Ua.CertificateValidationEventArgs)">
+            <summary>
+            Handles a certificate validation error.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.CheckApplicationInstanceCertificate(Opc.Ua.ApplicationConfiguration,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean,System.UInt16)">
+            <summary>
+            Creates an application instance certificate if one does not already exist.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.CheckDomainsInCertificate(Opc.Ua.ApplicationConfiguration,System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean)">
+            <summary>
+            Checks that the domains in the server addresses match the domains in the certificates.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ConfigureFirewall(Opc.Ua.ApplicationConfiguration,System.Boolean,System.Boolean)">
+            <summary>
+            Configures the firewall.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="silent">if set to <c>true</c> if no dialogs should be displayed.</param>
+            <param name="remove">if set to <c>true</c> if removing permissions.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.CreateApplicationInstanceCertificate(Opc.Ua.ApplicationConfiguration,System.UInt16,System.UInt16)">
+            <summary>
+            Creates the application instance certificate.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="keySize">Size of the key.</param>
+            <param name="lifetimeInMonths">The lifetime in months.</param>
+            <returns>The new certificate</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.DeleteApplicationInstanceCertificate(Opc.Ua.ApplicationConfiguration)">
+            <summary>
+            Deletes an existing application instance certificate.
+            </summary>
+            <param name="configuration">The configuration instance that stores the configurable information for a UA application.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.AddToDiscoveryServerTrustList(System.Security.Cryptography.X509Certificates.X509Certificate2,System.String,System.Collections.Generic.IList{System.Security.Cryptography.X509Certificates.X509Certificate2},Opc.Ua.CertificateStoreIdentifier)">
+            <summary>
+            Adds the application certificate to the discovery server trust list.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.AddApplicationCertificateToStore(Opc.Ua.CertificateStoreIdentifier,System.Security.Cryptography.X509Certificates.X509Certificate2,System.String)">
+            <summary>
+            Adds an application certificate to a store.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.AddIssuerCertificatesToStore(Opc.Ua.CertificateStoreIdentifier,System.Collections.Generic.IList{System.Security.Cryptography.X509Certificates.X509Certificate2})">
+            <summary>
+            Adds an application certificate to a store.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.AddToTrustedStore(Opc.Ua.ApplicationConfiguration,System.Security.Cryptography.X509Certificates.X509Certificate2)">
+            <summary>
+            Adds the certificate to the Trusted Certificate Store
+            </summary>
+            <param name="configuration">The application's configuration which specifies the location of the TrustedStore.</param>
+            <param name="certificate">The certificate to register.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ConfigureHttpAccess(Opc.Ua.ApplicationConfiguration,System.Boolean)">
+            <summary>
+            Configures the HTTP access.
+            </summary>
+            <param name="configuration">The configuration.</param>
+            <param name="remove">if set to <c>true</c> then the HTTP access should be removed.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.GetHttpUrlForAccessRule(System.String)">
+            <summary>
+            Gets the HTTP URL to use for HTTP access rules.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.GetAccessRules">
+            <summary>
+            Gets the access rules to use for the application.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.SetHttpAccessRules(System.String,System.Boolean)">
+            <summary>
+            Sets the HTTP access rules for the URL.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ConfigureFileAccess(Opc.Ua.ApplicationConfiguration)">
+            <summary>
+            Configures access to the executable, the configuration file and the private key.
+            </summary>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.ApplicationName">
+            <summary>
+            Gets or sets the name of the application.
+            </summary>
+            <value>The name of the application.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.ApplicationType">
+            <summary>
+            Gets or sets the type of the application.
+            </summary>
+            <value>The type of the application.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.ConfigSectionName">
+            <summary>
+            Gets or sets the name of the config section containing the path to the application configuration file.
+            </summary>
+            <value>The name of the config section.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.ConfigurationType">
+            <summary>
+            Gets or sets the type of configuration file.
+            </summary>
+            <value>The type of configuration file.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.InstallConfig">
+            <summary>
+            Gets or sets the installation configuration.
+            </summary>
+            <value>The installation configuration.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.Server">
+            <summary>
+            Gets the server.
+            </summary>
+            <value>The server.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.ApplicationConfiguration">
+            <summary>
+            Gets the application configuration used when the Start() method was called.
+            </summary>
+            <value>The application configuration.</value>
+        </member>
+        <member name="P:Opc.Ua.Configuration.ApplicationInstance.NoGdsAgentAdmin">
+            <summary>
+            Gets or sets a flag that indicates whether the application will be set up for management with the GDS agent.
+            </summary>
+            <value>If true the application will not be visible to the GDS local agent after installation.</value>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ApplicationInstance.WindowsService">
+            <summary>
+            Manages the interface between the UA server and the Windows SCM.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.WindowsService.#ctor(Opc.Ua.ServerBase,System.String,Opc.Ua.ApplicationType,System.Type)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Configuration.ApplicationInstance.WindowsService"/> class.
+            </summary>
+            <param name="server">The server.</param>
+            <param name="configSectionName">Name of the config section.</param>
+            <param name="applicationType">Type of the application.</param>
+            <param name="configurationType">Type of the configuration.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.WindowsService.OnStart(System.String[])">
+            <summary>
+            Starts the server in a background thread.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.WindowsService.OnStop">
+            <summary>
+            Stops the server so the service can shutdown.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.WindowsService.OnBackgroundStart(System.Object)">
+            <summary>
+            Runs the service in a background thread.
+            </summary>
+        </member>
+        <member name="T:Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription">
+            <summary>
+            Stores the description of an argument.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription.Name">
+            <summary>
+            The argument name.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription.Description">
+            <summary>
+            The argument description.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription.ValueRequired">
+            <summary>
+            Whether the argument requires a value.
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription.ValueAllowed">
+            <summary>
+            Whether the argument allows a value.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription.#ctor(System.String,System.Boolean,System.Boolean,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Opc.Ua.Configuration.ApplicationInstance.ArgumentDescription"/> class.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="valueRequired">if set to <c>true</c> a value is required.</param>
+            <param name="valueAllowed">if set to <c>true</c> a value is allowed.</param>
+            <param name="description">The description.</param>
+        </member>
+        <member name="T:Opc.Ua.Configuration.PseudoComServer">
+            <summary>
+            A class that describes a Pseudo COM server which 
+            </summary>
+        </member>
+        <member name="F:Opc.Ua.Configuration.PseudoComServer.ComPseudoServersDirectory">
+            <summary>
+            The directory that stores the configuration for the COM psuedo servers.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.Load(System.Guid)">
+            <summary>
+            Loads the endpoint information from the registry.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.GetServerHostClsid(Opc.Ua.ComSpecification)">
+            <summary>
+            Returns the CLSID of the host process to use for the specification.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.Import(System.String)">
+            <summary>
+            Imports the configured endpoints from a collection saved on disk.
+            </summary>
+            <param name="filePath">The file path.</param>
+            <returns>An empty string on success. A list of errors otherwise.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.Delete(System.String)">
+            <summary>
+            Deletes the configured endpoints conatined a collection saved on disk.
+            </summary>
+            <param name="filePath">The file path.</param>
+            <returns>An empty string on success. A list of errors otherwise.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.Export(System.String,System.String[])">
+            <summary>
+            Exports COM endpoint configurations to the specified file.
+            </summary>
+            <param name="filePath">The file path.</param>
+            <param name="progIds">The prog ids. All endpoints are exported if null.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.Save(Opc.Ua.ConfiguredEndpoint)">
+            <summary>
+            Saves the endpoint information in the registry.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.Delete(System.Guid)">
+            <summary>
+            Deletes the pseudoserver from the registry.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.Enumerate">
+            <summary>
+            Returns the UA COM Pseudo-servers registered on the local computer.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.CreateProgIdFromUrl(Opc.Ua.ComSpecification,System.String)">
+            <summary>
+            Creates a ProgId from a URI
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.GetDescription(System.Guid)">
+            <summary>
+            Returns the description 
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.LoadConfiguredEndpoint(System.Guid)">
+            <summary>
+            Reads the UA endpoint information associated the CLSID
+            </summary>
+            <param name="clsid">The CLSID used to activate the COM server.</param>
+            <returns>The endpoint.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.SaveConfiguredEndpoint(System.Guid,Opc.Ua.ConfiguredEndpoint)">
+            <summary>
+            Saves the UA endpoint information associated the CLSID.
+            </summary>
+            <param name="clsid">The CLSID used to activate the COM server.</param>
+            <param name="endpoint">The endpoint.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.DeleteConfiguredEndpointFile(System.Guid)">
+            <summary>
+            Deletes the file containing the configured endpoint.
+            </summary>
+            <param name="clsid">The CLSID.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.LoadConfiguredEndpointFromFile(System.Guid)">
+            <summary>
+            Reads the UA endpoint information associated the CLSID
+            </summary>
+            <param name="clsid">The CLSID used to activate the COM server.</param>
+            <returns>The endpoint.</returns>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.SaveConfiguredEndpointToFile(System.Guid,Opc.Ua.ConfiguredEndpoint)">
+            <summary>
+            Saves the UA endpoint information associated the CLSID.
+            </summary>
+            <param name="clsid">The CLSID used to activate the COM server.</param>
+            <param name="endpoint">The endpoint.</param>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.LoadConfiguredEndpointFromRegistry(System.Guid)">
+            <summary>
+            Reads the ConfiguredEndpoint from the registry.
+            </summary>
+        </member>
+        <member name="M:Opc.Ua.Configuration.PseudoComServer.SaveConfiguredEndpointToRegistry(System.Guid,Opc.Ua.ConfiguredEndpoint)">
+            <summary>
+            Saves the ConfiguredEndpoint from the registry.
+            </summary>
+        </member>
+        <member name="T:AssemblyVersionInfo">
+            <summary>
+            Defines string constants for SDK version information.
+            </summary>
+        </member>
+        <member name="F:AssemblyVersionInfo.Copyright">
+            <summary>
+            The current copy right notice.
+            </summary>
+        </member>
+        <member name="F:AssemblyVersionInfo.CurrentVersion">
+            <summary>
+            The current build version.
+            </summary>
+        </member>
+        <member name="F:AssemblyVersionInfo.CurrentFileVersion">
+            <summary>
+            The current build file version.
+            </summary>
+        </member>
+    </members>
+</doc>

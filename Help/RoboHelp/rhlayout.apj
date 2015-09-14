@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="4" minorversion="0">
+	<layouts>
+		<layout>
+			<name>WebHelpMembers</name>
+			<type>6</type>
+			<id>6</id>
+		</layout>
+		<layout>
+			<name>XML Output</name>
+			<type>16</type>
+			<id>16</id>
+		</layout>
+		<layout>
+			<name>Printed Documentation</name>
+			<type>13</type>
+			<id>13</id>
+		</layout>
+		<layout>
+			<name>Adobe AIR</name>
+			<type>18</type>
+			<id>18</id>
+		</layout>
+		<layout>
+			<name>WebHelp Pro</name>
+			<type>11</type>
+			<id>11</id>
+		</layout>
+		<layout>
+			<name>FlashHelp</name>
+			<type>15</type>
+			<id>15</id>
+		</layout>
+		<layout>
+			<name>Microsoft HTML Help</name>
+			<type>5</type>
+			<id>5</id>
+		</layout>
+		<layout>
+			<name>WebHelpNonMembers</name>
+			<type>6</type>
+			<id>1000</id>
+		</layout>
+		<layout>
+			<name>FlashHelp Pro</name>
+			<type>17</type>
+			<id>17</id>
+		</layout>
+	</layouts>
+</rhpml>

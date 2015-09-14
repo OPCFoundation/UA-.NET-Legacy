@@ -1,0 +1,673 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="49ae7c0f-9864-4ce5-9fb2-b366fa74d79a" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The DA Wrapper is implemented as a custom NodeManager that can be added to any Server implementation that is based on the Server Library. Multiple instances of the wrapper can reside in the same Server address space provided each is given a unique NamespaceUri.
+    </para>
+      <para>
+      Items are mapped onto Variables. The rules for determining the <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  are:
+    </para>
+      <list class="bullet">
+        <listItem>
+          <para>
+          If the EU High and EU Low properties exist then the <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  is <codeEntityReference>T:Opc.Ua.Server.AnalogItemType`1</codeEntityReference> .
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          If the EU Info property exists then the <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  is <codeEntityReference>T:Opc.Ua.Server.MultiStateDiscreteType`1</codeEntityReference></para>
+        </listItem>
+        <listItem>
+          <para>
+          If the Open Label and Close Label properties exist then the <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  is <codeEntityReference>T:Opc.Ua.Server.TwoStateDiscreteType`1</codeEntityReference> .
+        </para>
+        </listItem>
+        <listItem>
+          <para>
+          If none of the above apply then the <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  is <codeEntityReference>T:Opc.Ua.Server.DataItemType`1</codeEntityReference> .
+        </para>
+        </listItem>
+      </list>
+      <para>
+      Any Items that have children use HasComponent references to point to the children.
+    </para>
+      <para>
+      Branches are mapped onto Objects with a <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  of FolderType. Branches  with children use Organizes references to point to the children. The EventNotifier attribute is always None.
+    </para>
+      <para>
+      The mappings between individual DA properties and UA are specified in Table 1.
+    </para>
+      <table>
+        <title>
+        Table 1 – COM DA Properties to UA Mappings
+      </title>
+        <tableHeader>
+          <row>
+            <entry>
+              <para>
+              DA Property
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Mapping
+            </para>
+            </entry>
+          </row>
+        </tableHeader>
+        <row>
+          <entry>
+            <para>
+            Value
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Value attribute for a Variable representing an Item
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Quality
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The StatusCode returned with the Value attribute for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Timestamp
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The <codeEntityReference>P:Opc.Ua.DataValue.ServerTimestamp</codeEntityReference> returned with the Value attribute for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Data Type
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The DataType and ValueRank attributes for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Access Rights
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The AccessLevel and UserAccessLevel attributes for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Scan Rate
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The MinimumSamplingInterval attribute for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            EU Type
+          </para>
+          </entry>
+          <entry>
+            <para>
+            A <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  for a Variable
+          </para>
+            <list class="bullet">
+              <listItem>
+                <para>
+                NoEnum is a <codeEntityReference>T:Opc.Ua.Server.DataItemType`1</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para>
+                Analog is a <codeEntityReference>T:Opc.Ua.Server.AnalogItemType`1</codeEntityReference></para>
+              </listItem>
+              <listItem>
+                <para>
+                Enumerated is a <codeEntityReference>T:Opc.Ua.Server.MultiStateDiscreteType`1</codeEntityReference></para>
+              </listItem>
+            </list>
+            <para>
+            The behaviour is not specified if the EU Type is inconsistent with the DA properties provided for the item.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            EU Info
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The EnumStrings property for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            High EU and Low EU
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The EURange property for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            High IR and Low IR
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The InstrumentRange property for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            EU Units
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The EngineeringUnits property.
+          </para>
+            <para>
+            The NamespaceUri is the same as the NamespaceUri assigned to the COM server.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Description
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The Description attribute for a Node representing a Branch or Item.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Close Label
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The TrueState property for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Open Label
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The FalseState property for a Variable.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Time Zone
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The TimeZone and DaylightSavingTime properties for a Variable
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Custom Properties
+          </para>
+            <para>
+            ID &gt; 5000
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>  is PropertyType.
+          </para>
+            <para>
+            The BrowseName and DisplayName are created from the property Description.
+          </para>
+            <para>
+            The DataType and ValueRank are created from the property  Data Type.
+          </para>
+          </entry>
+        </row>
+      </table>
+      <para>
+      All DA properties are read only values.
+    </para>
+      <para>
+      The COM ‘VT_CY’ data type is mapped to a String. The COM ‘VT_UI1 | VT_ARRAY’  data type is mapped to a ByteString. Other COM data types are mapped to their exact equivalent in UA. Complex data Items are treated as ByteString values and are not mapped to UA structures at this time.
+    </para>
+      <para>
+      The DA wrapper creates multiple COM server instances in order to deal with different user identities or preferred locales.  A Session is assigned to a COM instance the first time it accesses a Node in the address space.  The wrapper does not support COM impersonation but it will use the COM security interface to pass user credentials to the COM server.
+    </para>
+      <para>
+      The DA wrapper defines an ObjectType called DaServerStatusType which is used to expose the fields of the DA ServerStatus structure. Each instance of a DA Wrapper creates a Status object under the its Root folder. The properties of the DaServerStatusType are described in Table 2. The meaning of each property is defined in the COM DA specification.
+    </para>
+      <table>
+        <title>
+        Table 2 – DaServerStatusType Class
+      </title>
+        <tableHeader>
+          <row>
+            <entry>
+              <para>
+              BrowseName
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Reference
+            </para>
+            </entry>
+            <entry>
+              <para>
+              DataType
+            </para>
+            </entry>
+            <entry>
+              <para>
+              TypeDefinition
+            </para>
+            </entry>
+          </row>
+        </tableHeader>
+        <row>
+          <entry>
+            <para>
+            VendorInfo
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            String
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            SoftwareVersion
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            String
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            ServerState
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            String
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            CurrentTime
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            DateTime
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            StartTime
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            DateTime
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            LastUpdateTime
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            DateTime
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            GroupCount
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Int32
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Bandwidth
+          </para>
+          </entry>
+          <entry>
+            <para>
+            HasProperty
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Int32
+          </para>
+          </entry>
+          <entry>
+            <para>
+            PropertyType
+          </para>
+          </entry>
+        </row>
+      </table>
+      <para>
+      The information required to connect to the wrapped COM server is specified by an DaWrapperConfiguration object. This object supports serialization in XML and can be added to the <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference> . Table 3 describes the elements of the DaWrapperConfiguration class.
+    </para>
+      <table>
+        <title>
+        Table 3 – DaWrapperConfiguration Class
+      </title>
+        <tableHeader>
+          <row>
+            <entry>
+              <para>
+              Name
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Type
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Description
+            </para>
+            </entry>
+          </row>
+        </tableHeader>
+        <row>
+          <entry>
+            <para>
+            NamespaceUri
+          </para>
+          </entry>
+          <entry>
+            <para>
+            String
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The URI used to qualify the NodeIds and BrowseNames created by the NodeManager
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            BrowseName
+          </para>
+          </entry>
+          <entry>
+            <para>
+            String
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The BrowseName for the Root folder.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            Url
+          </para>
+          </entry>
+          <entry>
+            <para>
+            String
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The URL for the COM server.
+          </para>
+            <para>
+            Uses the syntax: opc.com://<![CDATA[<machine>]]>//<![CDATA[<progid>]]>//<![CDATA[<clsid>]]>The CLSID is optional if OpcEnum is installed on the machine.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            MinMetadataLifetime		The BrowseName for a DA Item or Branch can only be discovered by browsing the COM server. This parameter specifies the minimum period that must elapse before the wrapper attempts to verify that a BrowseName has not changed.
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Int32
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The BrowseName for a DA Item or Branch can only be discovered by browsing the COM server. This parameter specifies the minimum period that must elapse before the wrapper attempts to verify that a BrowseName has not changed.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            SeperatorChars
+          </para>
+          </entry>
+          <entry>
+            <para>
+            String
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Some DA servers use a ItemId syntax that incorporates the BrowseName. If this value is specified the wrapper will parse the ItemId by looking for the any of the characters starting from the end of the ItemId. Any text after the separator character is assumed to be the BrowseName.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            MinReconnectWait
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Int32
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The minimum time in milliseconds to wait before reconnecting to a failed server.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            MaxReconnectWait
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Int32
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The maximum time in milliseconds to wait before reconnecting to a failed server.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            MaxReconnectAttempts
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Int32
+          </para>
+          </entry>
+          <entry>
+            <para>
+            The maximum number of times to attempt reconnection.
+          </para>
+          </entry>
+        </row>
+      </table>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

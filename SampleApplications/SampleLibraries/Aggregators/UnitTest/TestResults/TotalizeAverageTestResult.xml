@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ha:AggregateTestResultSet
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:ha="http://osisoft.com/UA/Server/PIUAServer/HATestConfiguration.xsd"
+  >
+  <!--TotalizeAverage data with good bouding value, Annex A.6.2, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>62500</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>87500</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData1</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>72826.1</ha:Value> <!--72.5 in OPCUA specificaiton-->
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>83695.7</ha:Value> <!--83.5 in OPCUA specification-->
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData2</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>50000</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>50000</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData3</ha:TestDataName>
+    </ha:AggregateTestResult>
+</ha:AggregateTestResultSet>
+
+
+
+

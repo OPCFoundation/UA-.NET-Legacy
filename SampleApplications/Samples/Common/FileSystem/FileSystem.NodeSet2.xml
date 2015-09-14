@@ -1,0 +1,400 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<UANodeSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" LastModified="2013-01-22T13:39:58.8994099Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  <NamespaceUris>
+    <Uri>http://tempuri.org/UA/FileSystem/</Uri>
+  </NamespaceUris>
+  <Aliases>
+    <Alias Alias="Boolean">i=1</Alias>
+    <Alias Alias="SByte">i=2</Alias>
+    <Alias Alias="Byte">i=3</Alias>
+    <Alias Alias="Int16">i=4</Alias>
+    <Alias Alias="UInt16">i=5</Alias>
+    <Alias Alias="Int32">i=6</Alias>
+    <Alias Alias="UInt32">i=7</Alias>
+    <Alias Alias="Int64">i=8</Alias>
+    <Alias Alias="UInt64">i=9</Alias>
+    <Alias Alias="Float">i=10</Alias>
+    <Alias Alias="Double">i=11</Alias>
+    <Alias Alias="DateTime">i=13</Alias>
+    <Alias Alias="String">i=12</Alias>
+    <Alias Alias="ByteString">i=15</Alias>
+    <Alias Alias="Guid">i=14</Alias>
+    <Alias Alias="XmlElement">i=16</Alias>
+    <Alias Alias="NodeId">i=17</Alias>
+    <Alias Alias="ExpandedNodeId">i=18</Alias>
+    <Alias Alias="QualifiedName">i=20</Alias>
+    <Alias Alias="LocalizedText">i=21</Alias>
+    <Alias Alias="StatusCode">i=19</Alias>
+    <Alias Alias="Structure">i=22</Alias>
+    <Alias Alias="Number">i=26</Alias>
+    <Alias Alias="Integer">i=27</Alias>
+    <Alias Alias="UInteger">i=28</Alias>
+    <Alias Alias="HasComponent">i=47</Alias>
+    <Alias Alias="HasProperty">i=46</Alias>
+    <Alias Alias="Organizes">i=35</Alias>
+    <Alias Alias="HasEventSource">i=36</Alias>
+    <Alias Alias="HasNotifier">i=48</Alias>
+    <Alias Alias="HasSubtype">i=45</Alias>
+    <Alias Alias="HasTypeDefinition">i=40</Alias>
+    <Alias Alias="HasModellingRule">i=37</Alias>
+    <Alias Alias="HasEncoding">i=38</Alias>
+    <Alias Alias="HasDescription">i=39</Alias>
+  </Aliases>
+  <UAObjectType NodeId="ns=1;i=1" BrowseName="1:ControllerEventType">
+    <DisplayName>ControllerEventType</DisplayName>
+    <Description>A generic controller</Description>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=11</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=12</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=2041</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="ns=1;i=11" BrowseName="1:Temperature" ParentNodeId="ns=1;i=1" DataType="Double">
+    <DisplayName>Temperature</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=12" BrowseName="1:State" ParentNodeId="ns=1;i=1" DataType="Int32" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>State</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="ns=1;i=16" BrowseName="1:AreaType">
+    <DisplayName>AreaType</DisplayName>
+    <Description>An area containing controllers or other areas.</Description>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=17</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=18</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=61</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="ns=1;i=17" BrowseName="1:LastUpdateTime" ParentNodeId="ns=1;i=16" DataType="DateTime">
+    <DisplayName>LastUpdateTime</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=16</Reference>
+    </References>
+  </UAVariable>
+  <UAMethod NodeId="ns=1;i=18" BrowseName="1:CreateController" ParentNodeId="ns=1;i=16">
+    <DisplayName>CreateController</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=19</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=20</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=16</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="ns=1;i=19" BrowseName="InputArguments" ParentNodeId="ns=1;i=18" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=18</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>Name</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description>
+                <Locale>
+                </Locale>
+                <Text>The name of the controller to create.</Text>
+              </Description>
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=20" BrowseName="OutputArguments" ParentNodeId="ns=1;i=18" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=18</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>NodeId</Name>
+              <DataType>
+                <Identifier>i=17</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description>
+                <Locale>
+                </Locale>
+                <Text>The NodeId for the controller that was created</Text>
+              </Description>
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAObjectType NodeId="ns=1;i=21" BrowseName="1:ControllerType">
+    <DisplayName>ControllerType</DisplayName>
+    <Description>A generic controller</Description>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=22</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=28</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=34</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=35</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=38</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=39</Reference>
+      <Reference ReferenceType="i=41">ns=1;i=1</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="ns=1;i=22" BrowseName="1:Temperature" ParentNodeId="ns=1;i=21" DataType="Double">
+    <DisplayName>Temperature</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=25</Reference>
+      <Reference ReferenceType="HasProperty">ns=1;i=27</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=2368</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=25" BrowseName="EURange" ParentNodeId="ns=1;i=22" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=22</Reference>
+    </References>
+    <Value>
+      <ExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <TypeId>
+          <Identifier>i=885</Identifier>
+        </TypeId>
+        <Body>
+          <Range>
+            <Low>-30</Low>
+            <High>40</High>
+          </Range>
+        </Body>
+      </ExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=27" BrowseName="EngineeringUnits" ParentNodeId="ns=1;i=22" DataType="i=887">
+    <DisplayName>EngineeringUnits</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=80</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=22</Reference>
+    </References>
+    <Value>
+      <ExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <TypeId>
+          <Identifier>i=888</Identifier>
+        </TypeId>
+        <Body>
+          <EUInformation>
+            <NamespaceUri>http://tempuri.org/UA/FileSystem/</NamespaceUri>
+            <UnitId>1</UnitId>
+            <DisplayName>
+              <Locale p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+              <Text>C</Text>
+            </DisplayName>
+            <Description>
+              <Locale p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+              <Text>Centigrade</Text>
+            </Description>
+          </EUInformation>
+        </Body>
+      </ExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=28" BrowseName="1:TemperatureSetPoint" ParentNodeId="ns=1;i=21" DataType="Double" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>TemperatureSetPoint</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=31</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=2368</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=31" BrowseName="EURange" ParentNodeId="ns=1;i=28" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=28</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=34" BrowseName="1:State" ParentNodeId="ns=1;i=21" DataType="Int32">
+    <DisplayName>State</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=35" BrowseName="1:PowerConsumption" ParentNodeId="ns=1;i=21" DataType="Double">
+    <DisplayName>PowerConsumption</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAVariable>
+  <UAMethod NodeId="ns=1;i=38" BrowseName="1:Start" ParentNodeId="ns=1;i=21">
+    <DisplayName>Start</DisplayName>
+    <References>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAMethod>
+  <UAMethod NodeId="ns=1;i=39" BrowseName="1:Stop" ParentNodeId="ns=1;i=21">
+    <DisplayName>Stop</DisplayName>
+    <References>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAMethod>
+  <UAObjectType NodeId="ns=1;i=40" BrowseName="1:FurnaceControllerType">
+    <DisplayName>FurnaceControllerType</DisplayName>
+    <Description>A controller for a furance</Description>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=53</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=60</Reference>
+      <Reference ReferenceType="i=41">ns=1;i=1</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="ns=1;i=53" BrowseName="1:State" ParentNodeId="ns=1;i=40" DataType="Int32">
+    <DisplayName>State</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=59</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=40</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=59" BrowseName="EnumStrings" ParentNodeId="ns=1;i=53" ValueRank="1">
+    <DisplayName>EnumStrings</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=53</Reference>
+    </References>
+    <Value>
+      <ListOfLocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <LocalizedText>
+          <Locale p3:nil="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+          <Text>Heating</Text>
+        </LocalizedText>
+        <LocalizedText>
+          <Locale p3:nil="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+          <Text>Off</Text>
+        </LocalizedText>
+      </ListOfLocalizedText>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=60" BrowseName="1:GasFlow" ParentNodeId="ns=1;i=40" DataType="Double">
+    <DisplayName>GasFlow</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=2365</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=40</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="ns=1;i=63" BrowseName="1:AirConditionerControllerType">
+    <DisplayName>AirConditionerControllerType</DisplayName>
+    <Description>A controller for an air conditioner</Description>
+    <References>
+      <Reference ReferenceType="HasComponent">ns=1;i=76</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=83</Reference>
+      <Reference ReferenceType="HasComponent">ns=1;i=89</Reference>
+      <Reference ReferenceType="i=41">ns=1;i=1</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=21</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="ns=1;i=76" BrowseName="1:State" ParentNodeId="ns=1;i=63" DataType="Int32">
+    <DisplayName>State</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=82</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=63</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=63</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=82" BrowseName="EnumStrings" ParentNodeId="ns=1;i=76" ValueRank="1">
+    <DisplayName>EnumStrings</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=76</Reference>
+    </References>
+    <Value>
+      <ListOfLocalizedText xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <LocalizedText>
+          <Locale p3:nil="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+          <Text>Cooling</Text>
+        </LocalizedText>
+        <LocalizedText>
+          <Locale p3:nil="true" xmlns:p3="http://www.w3.org/2001/XMLSchema-instance" />
+          <Text>Off</Text>
+        </LocalizedText>
+      </ListOfLocalizedText>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=83" BrowseName="1:Humidity" ParentNodeId="ns=1;i=63" DataType="Double">
+    <DisplayName>Humidity</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=86</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=2368</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=63</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=86" BrowseName="EURange" ParentNodeId="ns=1;i=83" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=83</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=89" BrowseName="1:HumiditySetPoint" ParentNodeId="ns=1;i=63" DataType="Double" AccessLevel="3" UserAccessLevel="3">
+    <DisplayName>HumiditySetPoint</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">ns=1;i=92</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=2368</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=63</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="ns=1;i=92" BrowseName="EURange" ParentNodeId="ns=1;i=89" DataType="i=884">
+    <DisplayName>EURange</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=89</Reference>
+    </References>
+  </UAVariable>
+</UANodeSet>

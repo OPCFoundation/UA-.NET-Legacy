@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Subscriptions</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Managing Subscriptions in the Generic Client</h1>
+<p>The Client allows you to configure 1...n subscriptions. Each subscription 
+ will open in its own &quot;Monitor Subscription&quot; window as shown 
+ and described here.</p>
+<h2>Creating a Subscription</h2>
+<p>There are 2 ways to create a new subscription, both are done via the 
+ main application window:</p>
+<ol type="1">
+	<li><p>Locate a node in the address-space, right-click on it, and then 
+	 choose &quot;New&quot; from the &quot;Subscribe&quot; menu.</p></li>
+	<li><p>Right-click on the session (left side of the main window) and 
+	 choose &quot;New&quot; from the &quot;Subscribe&quot; menu.</p></li>
+</ol>
+<p>The following dialog will open:</p>
+<p class="Picture"><img src="image79.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>The above fields are described in <a href="http://www.opcfoundation.org/ua/part4"><?rh-udv_start 
+	 name="UaSpec04" ?>UA Specifications Part 4 - Services (http://www.opcfoundation.org/ua/part4)<?rh-udv_end ?></a>.</p>
+<h2>Opening the Subscription Dialog</h2>
+<p>When a subscription is created, the &quot;Monitor Subscription&quot; 
+ dialog will automatically open. You can also open the window by locating 
+ the subscription in the main application window by right-clickit and choosing 
+ &quot;Monitor&quot; from the &quot;Subscription&quot; menu.</p>
+<p class="Picture"><img src="image51.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>The Monitor Subscription dialog: </p>
+<p class="Picture"><img src="image73.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Screen Elements</h2>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.705%;" />
+	<col style="width: 76.295%;" />
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Menus</span></p></td>
+		<td style="vertical-align: Top;"><ul type="disc">
+			<li><p><span style="font-weight: bold;">Subscription</span></p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Edit</span>: See 
+				 'Editing a Subscription' below.</p></li>
+				<li><p><span style="font-weight: bold;">Enable Publishing</span>: 
+				 Toggles the enabled state to receive notifications.</p></li>
+				<li><p><span style="font-weight: bold;">Create Monitored 
+				 Items</span>: See 'Create MonitoredItems' below.</p></li>
+				<li><p><span style="font-weight: bold;">Create Monitored 
+				 Items from Type Model</span>: Described below.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Window</span>: </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Monitored Items</span>: 
+				 Shows/Hides the &quot;monitored items&quot; area.</p></li>
+				<li><p><span style="font-weight: bold;">Events</span>: 
+				 Shows/hides the &quot;events&quot; area.</p></li>
+				<li><p><span style="font-weight: bold;">Data Changes</span>: 
+				 Shows/hides the &quot;data changes&quot; area.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Conditions</span>: 
+			 </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Refresh</span>: 
+				 Not implemented.</p></li>
+			</ul>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Node Display</span> (top)</p></td>
+		<td style="vertical-align: Top;"><p class="Picture"><img src="image78.gif" 
+		 alt="" style="border: none;" border="0" /></p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Data Changes </span>(bottom)</p></td>
+		<td style="vertical-align: Top;"><p class="Picture"><img src="image77.gif" 
+		 alt="" style="border: none;" border="0" /></p></td>
+	</tr>
+</table>
+<h4>Editing a Subscription</h4>
+<p>Choose &quot;Edit&quot; from the &quot;Subscription&quot; menu to modify 
+ the subscription parameters.</p>
+<p class="Picture"><img src="image74.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h4>Create Monitored Items</h4>
+<p>Choose &quot;Create Monitored Items&quot; from the &quot;Subscription&quot; 
+ menu to add more items to the subscription.</p>
+<p class="Picture"><img src="image75.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h4>Create Monitored Items from Type Model</h4>
+<p class="Picture"><img src="image76.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+</body>
+</html>

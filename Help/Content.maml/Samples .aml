@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="d4845b05-be93-4767-b5df-cc790e6f105e" revisionNumber="1">
+  <developerOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--<summary>
+    <para>Work out on the 9 Sample Applications</para>
+  </summary>-->
+    <introduction>
+      <para>
+      These samples provide instruction on various aspects of <token>UA Libraries</token>. The samples are grouped so that you can easily locate the samples appropriate to your needs.
+    </para>
+    </introduction>
+    <inThisSection>
+      <content>
+        <para>
+        There are two sample applications bundled with the package:
+      </para>
+        <list class="nobullet">
+          <listItem>
+            <para>
+              <application>UA Sample Client</application> is a UA client spplication with a GUI. It also is a host for a UA server which is completely seperate from the GUI application.
+          </para>
+          </listItem>
+          <listItem>
+            <para>
+              <application>UA Sample Server</application> is a standalone UA server application without a GUI. It may be run as a Windows Service.
+          </para>
+          </listItem>
+        </list>
+        <para>
+        The applications can be launched from <userInput>OPC Foundation\Unified Architecture\1.02\Sample Applications</userInput> directory in the Programs menu.
+      </para>
+        <para>
+        The <application>UA Sample Server</application> application can also be hosted inside <application>IIS</application>. The installer creates a virtual directory for the IIS hosted server here:
+        <externalLink><linkText>http://localhost/UASampleService/Service.svc</linkText><linkAlternateText>display an ASP .NET test page in a web browser</linkAlternateText><linkUri>http://localhost/UASampleService/Service.svc</linkUri></externalLink><userInput></userInput>. Clicking on that link should display an ASP .NET test page in a web browser.
+      </para>
+        <alert>
+          <para>
+          If the ASP .NET test page does not appear it is a problem with your ASP .NET configuration. This page may
+          <externalLink><linkText>help</linkText><linkAlternateText>Service (.svc) File Type Not Recognized</linkAlternateText><linkUri>http://msdn.microsoft.com/en-us/library/ms752241.aspx</linkUri></externalLink>
+          .
+        </para>
+        </alert>
+        <para>
+        </para>
+      </content>
+      <sections>
+        <section>
+          <title>Running the Local Discovery Server</title>
+          <content>
+            <para>
+            The <token>LDS</token> is installed as a Windows Service that starts automatically. This process is used by the client applications to discover servers running on a machine.
+          </para>
+            <alert>
+              <para>
+              Unlike COM, UA servers must be started before a client can see them in the <token>LDS</token> or connect to them. (aside, the sample binaries installer installs the Sample Server as a Windows Service and starts it automatically.
+            </para>
+            </alert>
+            <para>
+            If the <token>LDS</token> is not running after installing the binaries then an error likely occurred. The installer log file is called <userInput>Opc.Ua.ConfigurationTool.log.txt</userInput> is created in the <userInput>$(MyDocuments)</userInput> folder.
+          </para>
+          </content>
+        </section>
+      </sections>
+    </inThisSection>
+    <reference>
+      <content>
+        <para>
+          <externalLink>
+            <linkText>Visual Studio SDK: Service (.svc) File Type Not Recognized</linkText>
+            <linkAlternateText>Service (.svc) File Type Not Recognized</linkAlternateText>
+            <linkUri>http://msdn.microsoft.com/en-us/library/ms752241.aspx</linkUri>
+          </externalLink>
+        </para>
+      </content>
+    </reference>
+    <relatedTopics>
+    </relatedTopics>
+  </developerOrientationDocument>
+</topic>

@@ -1,0 +1,98 @@
+<xs:schema 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd" 
+  xmlns:tns="http://opcfoundation.org/UA/Sample/" 
+  targetNamespace="http://opcfoundation.org/UA/Sample/" 
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" />
+  
+  <xs:complexType name="AddressDataType">
+  	<!-- Documentation -->
+  	<xs:sequence>
+      <xs:element name="Street1" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="Street2" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="City" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="Country" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="ProvinceState" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="PostalCode" type="xs:string" minOccurs="0" nillable="true" />
+  	</xs:sequence>
+  </xs:complexType>
+  <xs:element name="AddressDataType" type="tns:AddressDataType" />
+  <!-- CollectionType -->
+
+  <xs:complexType name="ArrayValueDataType">
+  	<!-- Documentation -->
+  	<xs:sequence>
+      <xs:element name="BooleanValue" type="ua:ListOfBoolean" minOccurs="1" />
+      <xs:element name="SByteValue" type="ua:ListOfSByte" minOccurs="1" />
+      <xs:element name="ByteValue" type="ua:ListOfByte" minOccurs="1" />
+      <xs:element name="Int16Value" type="ua:ListOfInt16" minOccurs="1" />
+      <xs:element name="UInt16Value" type="ua:ListOfUInt16" minOccurs="1" />
+      <xs:element name="Int32Value" type="ua:ListOfInt32" minOccurs="1" />
+      <xs:element name="UInt32Value" type="ua:ListOfUInt32" minOccurs="1" />
+      <xs:element name="Int64Value" type="ua:ListOfInt64" minOccurs="1" />
+      <xs:element name="UInt64Value" type="ua:ListOfUInt64" minOccurs="1" />
+      <xs:element name="FloatValue" type="ua:ListOfFloat" minOccurs="1" />
+      <xs:element name="DoubleValue" type="ua:ListOfDouble" minOccurs="1" />
+      <xs:element name="StringValue" type="ua:ListOfString" minOccurs="0" nillable="true" />
+      <xs:element name="DateTimeValue" type="ua:ListOfDateTime" minOccurs="1" />
+      <xs:element name="GuidValue" type="ua:ListOfGuid" minOccurs="0" />
+      <xs:element name="ByteStringValue" type="ua:ListOfByteString" minOccurs="0" nillable="true" />
+      <xs:element name="XmlElementValue" >
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0" processContents="lax" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NodeIdValue" type="ua:ListOfNodeId" minOccurs="0" nillable="true" />
+      <xs:element name="ExpandedNodeIdValue" type="ua:ListOfExpandedNodeId" minOccurs="0" nillable="true" />
+      <xs:element name="QualifiedNameValue" type="ua:ListOfQualifiedName" minOccurs="0" nillable="true" />
+      <xs:element name="LocalizedTextValue" type="ua:ListOfLocalizedText" minOccurs="0" nillable="true" />
+      <xs:element name="StatusCodeValue" type="ua:ListOfStatusCode" minOccurs="0" />
+      <xs:element name="VariantValue" type="ua:ListOfVariant" minOccurs="1" />
+      <xs:element name="StructureValue" type="ua:ListOfExtensionObject" minOccurs="1" />
+  	</xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayValueDataType" type="tns:ArrayValueDataType" />
+  <!-- CollectionType -->
+
+  <xs:complexType name="ScalarValueDataType">
+  	<!-- Documentation -->
+  	<xs:sequence>
+      <xs:element name="BooleanValue" type="xs:boolean" minOccurs="1" />
+      <xs:element name="SByteValue" type="xs:byte" minOccurs="1" />
+      <xs:element name="ByteValue" type="xs:unsignedByte" minOccurs="1" />
+      <xs:element name="Int16Value" type="xs:short" minOccurs="1" />
+      <xs:element name="UInt16Value" type="xs:unsignedShort" minOccurs="1" />
+      <xs:element name="Int32Value" type="xs:int" minOccurs="1" />
+      <xs:element name="UInt32Value" type="xs:unsignedInt" minOccurs="1" />
+      <xs:element name="Int64Value" type="xs:long" minOccurs="1" />
+      <xs:element name="UInt64Value" type="xs:unsignedLong" minOccurs="1" />
+      <xs:element name="FloatValue" type="xs:float" minOccurs="1" />
+      <xs:element name="DoubleValue" type="xs:double" minOccurs="1" />
+      <xs:element name="StringValue" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="DateTimeValue" type="xs:dateTime" minOccurs="1" />
+      <xs:element name="GuidValue" type="ua:Guid" minOccurs="0" />
+      <xs:element name="ByteStringValue" type="xs:base64Binary" minOccurs="0" nillable="true" />
+      <xs:element name="XmlElementValue" >
+        <xs:complexType>
+          <xs:sequence>
+            <xs:any minOccurs="0" processContents="lax" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="NodeIdValue" type="ua:NodeId" minOccurs="0" nillable="true" />
+      <xs:element name="ExpandedNodeIdValue" type="ua:ExpandedNodeId" minOccurs="0" nillable="true" />
+      <xs:element name="QualifiedNameValue" type="ua:QualifiedName" minOccurs="0" nillable="true" />
+      <xs:element name="LocalizedTextValue" type="ua:LocalizedText" minOccurs="0" nillable="true" />
+      <xs:element name="StatusCodeValue" type="ua:StatusCode" minOccurs="0" />
+      <xs:element name="VariantValue" type="ua:Variant" minOccurs="1" />
+      <xs:element name="StructureValue" type="ua:ExtensionObject" minOccurs="1" />
+  	</xs:sequence>
+  </xs:complexType>
+  <xs:element name="ScalarValueDataType" type="tns:ScalarValueDataType" />
+  <!-- CollectionType -->
+  
+</xs:schema>

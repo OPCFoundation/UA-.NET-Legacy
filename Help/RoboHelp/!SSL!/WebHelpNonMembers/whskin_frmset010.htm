@@ -1,0 +1,51 @@
+﻿
+<html>
+<head>
+</head>
+
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript" src="whutils.js"></script>
+<script type="text/javascript" language="javascript" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" >
+<!--
+if (!window.gbWhVer||!window.gbWhUtil||!window.gbWhMsg)
+	document.location.reload();
+//-->
+</script>
+
+<script type="text/javascript" language="javascript" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript">
+<!--
+if (!window.gbWhProxy)
+	document.location.reload();
+//-->
+</script>
+
+
+<script language="javascript">
+<!--
+var gsPane="";
+var gnType=3;
+
+var oMsgPane = new whMessage(WH_MSG_GETPANETYPE, this, 1, null);
+if (SendMessage(oMsgPane))
+{
+	gsPane = oMsgPane.oParam.sPaneURL;
+	gnType = oMsgPane.oParam.nType;
+}
+var strHTML = "";
+if (gnType == 4)
+{
+	//no navipane at all
+	strHTML += "<frameset border=\"0\" cols=\"100%,*\">";
+	strHTML += "<frame src='whskin_mbars.htm' id='minibar' frameborder='0' border='0' scrolling='no' marginheight='0' title='Mini Toolbar'></frame>";
+	strHTML += "<frame src=\"whskin_blank.htm\" noresize>";
+	strHTML += "</frameset>";
+}
+else
+	strHTML += "<frameset rows=\"24,*\" hostof=\"parent:minibar|navpane!startpage:no\" frameborder=\"0\" border=\"0\"> <frame src=\"whskin_mbars.htm\" id=\"minibar\" frameborder=\"0\" border=\"0\" scrolling=\"no\" marginheight=\"0\" title=\"Mini Toolbar\"></frame> <frame src=\""+gsPane+"\" id=\"navpane\" frameborder=\"0\" border=\"0\" scrolling=\"no\" marginheight=\"0\" marginwidth=\"0\" title=\"Navigator Pane\"></frame></frameset>";
+
+document.write(strHTML);
+//-->
+</script>
+</html>

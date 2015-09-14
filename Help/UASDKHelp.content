@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Topics>
+  <Topic id="3f5e2816-b392-4d74-b25a-f7db02b0f7d5" visible="True" isDefault="true" title="Welcome to the Unified Architecture Sample Libraries" tocTitle="Welcome to the UA Sample Libraries">
+    <Topic id="68600a35-6bbd-43be-9b8f-94d19629937f" visible="False" title="Contributors" tocTitle="Contributors" />
+    <Topic id="dc1a280d-ebe7-419d-9ef8-c810d566f109" visible="True" tocTitle="Introduction">
+      <Topic id="fe59164f-1db4-4cdb-9de3-e50ffbb24548" visible="True" title="Overview" tocTitle="Overview" linkText="Overview" />
+      <Topic id="09c1e07e-30e8-411c-bdcb-9c8d71e8d962" visible="True" title="Clients, Servers and Discovery Servers" tocTitle="Clients, Servers and Discovery Servers" linkText="Clients, Servers and Discovery Servers" />
+      <Topic id="dfc1ea2b-8607-47b2-aa69-0c1d15fb8a79" visible="True" title="Web Services" tocTitle="Web Services" linkText="Web Services">
+        <Topic id="29ba4979-4f31-479f-87af-b206edecd151" visible="False" />
+        <Topic id="47116dd8-00ba-42d0-9097-f26c867fbbf7" visible="True" title="Windows Communication Foundation Implementation" tocTitle="WCF Implementation" />
+        <Topic id="21499a02-1e4a-4d71-a02b-c5b346b77d37" visible="False" title="C/C++ Implementation" tocTitle="C/C++ Implementation" />
+        <Topic id="495a6bbc-36d2-47c6-959e-48767ed9253c" visible="False" title="Java Implementation" tocTitle="Java Implementation" />
+      </Topic>
+      <Topic id="66680e1d-d374-459e-8b00-59afc9ec93d8" visible="False" title="Security" tocTitle="Security" />
+    </Topic>
+    <Topic id="247ac84b-d2dd-456d-82e3-f52134d9a3f4" visible="False" />
+    <Topic id="b9d52b7b-36b2-419d-8ce8-6ba7d34deee5" visible="True" title="Glossary" tocTitle="Glossary" />
+  </Topic>
+  <Topic id="14136039-f5d7-4c43-a071-1a50a30b06b1" visible="False" title="Getting Started Tutorial" tocTitle="Getting Started Tutorial">
+    <Topic id="f2666082-3390-4d36-9ed2-6b8222f6594f" visible="True" title="How To Connect to a Server" tocTitle="How To Connect to a Server" />
+    <Topic id="634e92db-eff2-483c-8905-e8d300de8f94" visible="True" title="How To Design an Address Space" tocTitle="How To Design an Address Space" />
+    <Topic id="61e79b7b-543a-44c4-b276-65c55d74fb97" visible="True" title="How To Implement an Address Space" tocTitle="How To Implement an Address Space" />
+    <Topic id="15d0e46f-40d4-4c64-a710-f3530fbbe31a" visible="True" title="How To Publish Data" tocTitle="How To Publish Data" />
+    <Topic id="4e19aac6-e0f3-4167-bcef-ce1770971560" visible="True" title="How To Subscribe To Data" tocTitle="How To Subscribe To Data" />
+    <Topic id="7ba4d5c1-b959-470e-b10f-dafaf460a3a2" visible="True" title="How To provide methods" tocTitle="How To provide methods" />
+    <Topic id="5f9ca6a4-ba3f-4ea6-806e-3d67bae5acad" visible="True" title="How To Subscribe to Events" tocTitle="How To Subscribe to Events" />
+  </Topic>
+  <Topic id="71b43cca-2c40-49f1-9cfb-c25a002877dd" visible="True" title="Basic Programming " tocTitle="Basic Programming ">
+    <Topic id="f38e712d-1f43-48c1-9d4c-35f66612e431" visible="True" noFile="true" title="Server" tocTitle="Server" linkText="Server">
+      <Topic id="da7cccbf-51f7-4d61-8c45-b2864e4e94f3" visible="True" title="Overview" tocTitle="Overview" linkText="Overview" />
+      <Topic id="ff342fec-a506-41b9-8b4c-6b131504caf9" visible="True" title="Architecture" tocTitle="Architecture" linkText="Architecture" />
+      <Topic id="f74b06ee-f5bc-495c-9dc0-99fcfe0feac0" visible="True" title="StandardServer" tocTitle="StandardServer" linkText="StandardServer" />
+      <Topic id="711d24b1-86ac-4f11-b381-7eed1336ef2c" visible="True" title="Interface IServerInternal" tocTitle="IServerInternal" linkText="IServerInternal" />
+      <Topic id="fd9286b2-c3f8-42f0-9895-73ec31f76c77" visible="True" title="Master Node Manager" tocTitle="Master Node Manager" linkText="Master Node Manager" />
+      <Topic id="47e2cbdc-0485-4e19-99aa-99657350cee9" visible="True" title="CoreNodeManager" tocTitle="CoreNodeManager" linkText="CoreNodeManager" />
+      <Topic id="af755277-f460-4336-8cd6-4e0c450551ea" visible="True" title="INodeManager" tocTitle="INodeManager" linkText="INodeManager" />
+      <Topic id="1e9c70d0-ecd0-4d1c-93b4-9a2c7d1fc9cd" visible="True" title="SessionManager" tocTitle="SessionManager" linkText="SessionManager" />
+      <Topic id="86045f38-67d2-4225-9921-dea3ca73a43b" visible="True" title="Session" tocTitle="Session" linkText="Session" />
+      <Topic id="8dc5073d-f9ad-40f5-94b0-fece5467927e" visible="True" title="SubscriptionManager" tocTitle="SubscriptionManager" linkText="SubscriptionManager" />
+      <Topic id="d0e49081-31b5-48c8-b6b8-510ddced982d" visible="True" title="Subscription" tocTitle="Subscription" linkText="Subscription" />
+      <Topic id="2c2f66bf-9b6e-48db-af48-bc293fd622a5" visible="True" title="MonitoredItem" tocTitle="MonitoredItem" linkText="MonitoredItem" />
+      <Topic id="aec1e94b-9fde-467a-af15-d7152eb7f850" visible="True" title="EventManager" tocTitle="EventManager" linkText="EventManager" />
+      <Topic id="9c26f561-87d8-4596-a982-55600f39d853" visible="True" title="ResourceManager" tocTitle="ResourceManager" linkText="ResourceManager" />
+      <Topic id="c36e459e-43d9-4267-ae63-6cb68f21e4a8" visible="True" title="SamplingGroupManager" tocTitle="SamplingGroupManager" linkText="SamplingGroupManager" />
+      <Topic id="07f3f1c2-edf4-44d4-a02c-8b983ee354d1" visible="True" title="RequestManager" tocTitle="RequestManager" linkText="RequestManager" />
+    </Topic>
+    <Topic id="64acf73e-7b85-4bab-b2ab-698072143de1" visible="True" noFile="true" title="Client" tocTitle="Client">
+      <Topic id="72b6da39-6864-49fc-bfdd-736d859b428a" visible="True" title="Overview" tocTitle="Overview" linkText="Overview" />
+      <Topic id="e296e1dc-e3cf-4085-bd2e-9b52ff068fca" visible="True" title="Sessions" tocTitle="Sessions" linkText="Sessions" />
+      <Topic id="e8b4b906-ed8d-437e-9597-fea6e43cf14c" visible="True" title="Subscriptions" tocTitle="Subscriptions" linkText="Subscriptions" />
+      <Topic id="331faee3-04bf-448a-80ef-d7deeb9cdce0" visible="True" title="MonitoredItem" tocTitle="MonitoredItem" linkText="MonitoredItem" />
+    </Topic>
+    <Topic id="3833b402-a73b-4407-8985-5ff6adea35dd" visible="True" title="Configuring  DCOM" tocTitle="Configuring  DCOM" />
+  </Topic>
+  <Topic id="b7cc31e3-cf8f-4410-905f-f067aa1351e6" visible="True" title="Feature Details" tocTitle="Feature Details">
+    <Topic id="a7bd88ec-112d-4bdc-989a-fd8b352ed695" visible="True" title="Stack" tocTitle="Stack" linkText="Stack" />
+    <Topic id="7cb55945-87ec-42c5-95c7-ddd958075400" visible="False" title="Client.toolkit" tocTitle="Client.toolkit" />
+    <Topic id="c4336d1e-6bb7-47fa-bcdd-5104067b9e13" visible="False" title="Server Toolkit" tocTitle="Server Toolkit" />
+  </Topic>
+  <Topic id="0aebc7fb-480e-4d05-9d9f-f93865b1e8da" visible="False" title="Guidelines and Best Practices " tocTitle="Guidelines and Best Practices " />
+  <Topic id="4b9b08de-c2b0-47c1-9479-c1dfbc0af984" visible="False" title="DCOM interoperability" tocTitle="DCOM interoperability">
+    <Topic id="49ae7c0f-9864-4ce5-9fb2-b366fa74d79a" visible="True" title="DA Wrapper" tocTitle="DA Wrapper" />
+    <Topic id="3bf9ccc3-11b8-493c-bda2-c637120625eb" visible="True" title="DA Proxy" tocTitle="DA Proxy" />
+    <Topic id="b2904933-4f91-4c7c-a7bd-789e4a405861" visible="True" title="AE Wrapper" tocTitle="AE Wrapper" />
+    <Topic id="1ba26f9c-4e75-445e-8bbb-1637a86ac27b" visible="True" title="AE Proxy" tocTitle="AE Proxy" />
+    <Topic id="f565cfb0-0a45-4c6a-b33a-d3339bef5e14" visible="True" title="HDA Wrapper" tocTitle="HDA Wrapper" />
+    <Topic id="e2e45123-0c1c-4377-be3b-d45b6dae3ed7" visible="True" title="HDA Proxy" tocTitle="HDA Proxy" />
+  </Topic>
+  <Topic id="d4845b05-be93-4767-b5df-cc790e6f105e" visible="True" title="Sample Applications" tocTitle="Samples">
+    <Topic id="7521bb6c-4ce5-4e36-95cb-e48de6680806" visible="False" title="Overview" tocTitle="Overview" />
+    <Topic id="289241c2-8381-4d65-8a0a-67420fdf1093" visible="True" title="Getting Started " tocTitle="Getting Started ">
+      <Topic id="9bfe7feb-3a55-4737-a1c7-63d15f0d77ef" visible="True" title="How to Manage the Certificates" tocTitle="How to Manage the Certificates" />
+    </Topic>
+    <Topic id="906317fa-e2d1-42b3-afe2-25ea55cbb822" visible="False" title="Sample Server" tocTitle="Sample Server" />
+    <Topic id="6c75ce34-3ac0-486a-a74e-4fd4b5d34884" visible="True" title="Sample Client" tocTitle="Sample Client" />
+    <Topic id="02c42a32-4d69-473a-807f-0b902e3908d4" visible="False" title="Server Test Client" tocTitle="Server Test Client" />
+  </Topic>
+  <Topic id="6bbc555a-d947-4986-8546-4eb740647dbf" visible="True" title="Software Packages" tocTitle="Software Packages">
+    <Topic id="6aebf5c7-3a25-40ff-b16d-74da56b1ee51" visible="False" title="System Requirements" tocTitle="System Requirements" />
+    <Topic id="d04981ad-0613-4d35-9a61-4426ffc3c164" visible="False" title="Installation" tocTitle="Installation" />
+  </Topic>
+  <Topic id="9988c4f3-e217-4049-9e8d-8ee5112ea196" visible="False" title="Tools" tocTitle="Tools">
+    <Topic id="108fde6b-10b9-4322-a24d-0ac17662e276" visible="True" title="Opc.Ua.ConfigurationTool" tocTitle="Opc.Ua.ConfigurationTool" />
+    <Topic id="9119cda8-aa55-4c57-8ac5-2a667fe88762" visible="True" title="UA Model Designer" tocTitle="UA Model Designer" linkText="UA Model Designer" />
+  </Topic>
+  <Topic id="e61fae2a-bbaa-468a-9254-3ccd236715f4" visible="True" title="Release Notes" tocTitle="Release Notes" />
+  <Topic id="1ee451e3-d932-4404-8973-4f6ba8fe1de8" visible="True" title="Copyright and License Information" tocTitle="Copyright and License" />
+  <Topic id="e4770c52-52d9-40e0-b25a-a92facdeb112" visible="True" title="Feedback and Community" tocTitle="Feedback and Community" />
+</Topics>

@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>UA Sample Client</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>UA Generic Client Overview</h1>
+<p>The generic UA sample client is the original reference implementation 
+ provided by the <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?>. 
+ This particular client is also the most functionally complete client within 
+ this package and provides a significantly richer set of features over 
+ the other clients.</p>
+<h2><a name="Server_Interface"></a>Server Interface</h2>
+<p>This client is also a Server! The default endpoint is: <br />
+opc.tcp://&lt;localhost&gt;:61210/UA/SampleClient </p>
+<p>This server implementation behaves as any normal server should. Clients 
+ connecting to this interface must be trusted, just as with any UA Server.</p>
+<h2><a name="GUI"></a>User Interface</h2>
+<p>The user interface for the Generic UA Client uses a primary window (shown 
+ below) and uses several additional windows (see <a href="Reading_Nodes.htm">Reading 
+ Nodes</a>, <a href="Writing_to_Nodes.htm">Writing Nodes</a>, and <a href="Subscriptions.htm">Subscriptions</a>): 
+ </p>
+<p class="Picture"><img src="image49.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Screen Elements</h2>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.705%;" />
+	<col style="width: 76.295%;" />
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Menus</span></p></td>
+		<td style="vertical-align: Top;"><ul type="disc">
+			<li><p><span style="font-weight: bold;">File</span></p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Load</span><span>: 
+				 loads a previously saved configuration.</span></p></li>
+				<li><p><span style="font-weight: bold;">Save</span><span>: 
+				 saves the current configuration to a file for later retrieval.</span></p></li>
+				<li><p><span style="font-weight: bold;">Save as...</span><span>:</span><span 
+				 style="font-weight: bold;"> </span><span>saves the current 
+				 configuration with a new filename.</span></p></li>
+				<li><p><span style="font-weight: bold;">Exit:</span> Quit 
+				 the application</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Task</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">New Window</span><span>: 
+				 spawns a new user interface window.</span></p></li>
+				<li><p><span style="font-weight: bold;">Stack Test</span>: 
+				 opens a dialog to conduct stack testing. Not documented.</p></li>
+				<li><p><span style="font-weight: bold;">Test 1</span>: 
+				 not implemented.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Discovery</span>: </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Servers</span>: 
+				 see <a href="UaGenericClientDiscovery.htm">Discovery</a></p></li>
+				<li><p><span style="font-weight: bold;">Register now</span>: 
+				 causes this client to register itself with the <a href="Local_Discovery_Server_(LDS).htm">LDS</a>.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Help</span>: </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Contents</span>: 
+				 opens this help file.</p></li>
+			</ul>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Banner</span></p></td>
+		<td style="vertical-align: Top;"><p>Shows the OPC Foundation logo 
+		 and a [clickable] link to the website, shows the application name 
+		 in large text, and shows the Certification logo with a link for 
+		 more information online.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Endpoint Bar</span> (below banner)</p></td>
+		<td style="vertical-align: Top;"><p class="Picture"><img src="image50.gif" 
+		 alt="" style="border: none;" border="0" /></p>
+		<p>There are 2 key areas in the endpoint bar: </p>
+		<ul type="disc">
+			<li><p><span style="font-weight: bold;">Endpoint Url</span><span>: 
+			 the endpoint URL (of a Server) to connect to.</span></p></li>
+			<li><p><span style="font-weight: bold;">Connect button</span>: 
+			 clicking this will attempt to connect to the specified endpoint.</p></li>
+		</ul>
+		<p>Note: Follow this tutorial if you wish to make <a href="HTTPS_Connectivity.htm">HTTPS 
+		 connections</a>.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Session</span> (left)</p></td>
+		<td style="vertical-align: Top;"><p>Displays the current session 
+		 and the currently established subscriptions. See <a href="Subscriptions.htm">Subscriptions</a>.</p>
+		<p class="Picture"><img src="image51.gif" alt="" style="border: none;" 
+								 border="0" /></p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Address Space Navigation</span> (right)</p></td>
+		<td style="vertical-align: Top;"><p>A simple node browser that 
+		 allows you to navigate the UA Server's address space, behaving 
+		 much like a file and folder browser (such as Windows Explorer):</p>
+		<p class="Picture"><img src="image52.gif" alt="" style="border: none;" 
+								 border="0" /></p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Event Notifications</span> (bottom)</p></td>
+		<td style="vertical-align: Top;">A simple log output of events 
+		 that received by the client: 
+		<p class="Picture"><img src="image53.gif" alt="" style="border: none;" 
+								 border="0" /></p></td>
+	</tr>
+</table>
+<h2>Client Functionality</h2>
+<ul type="disc">
+	<li><p><a href="Address_Space_Navigation.htm">Address Space Navigation</a></p></li>
+	<li><p><a href="Reading_Nodes.htm">Reading Nodes</a></p></li>
+	<li><p><a href="Writing_to_Nodes.htm">Writing to Nodes</a></p></li>
+	<li><p><a href="Subscriptions.htm">Subscriptions</a></p></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,236 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Opc.Ua.Sample</RootNamespace>
+    <AssemblyName>Opc.Ua.SampleLibrary</AssemblyName>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>http://localhost/Opc.Ua.SampleLibrary/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkSubset>
+    </TargetFrameworkSubset>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPC Key Pair.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;INCLUDE_SIMULATION,INCLUDE_DESIGNER,USER_AUTHENTICATION,INCLUDE_COM_WRAPPERS,xINCLUDE_Sample</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;INCLUDE_SIMULATION,INCLUDE_DESIGNER,USER_AUTHENTICATION,INCLUDE_COM_WRAPPERS,xINCLUDE_Sample</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Opc.Ua.Client, Version=1.0.238.1, Culture=neutral, PublicKeyToken=22186a540fc0b044, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\Opc.Ua.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.ComInterop, Version=1.0.238.1, Culture=neutral, PublicKeyToken=22186a540fc0b044, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\Opc.Ua.ComInterop.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.Core, Version=1.0.238.1, Culture=neutral, PublicKeyToken=22186a540fc0b044, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\Opc.Ua.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Opc.Ua.Server, Version=1.0.238.1, Culture=neutral, PublicKeyToken=22186a540fc0b044, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Bin\Opc.Ua.Server.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\CustomNodeManager.cs" />
+    <Compile Include="Base\DataChangeMonitoredItem.cs" />
+    <Compile Include="Base\MonitoredItemQueue.cs" />
+    <Compile Include="Base\MonitoredNode.cs" />
+    <Compile Include="Boiler\Boiler.Classes.cs" />
+    <Compile Include="Boiler\Boiler.Constants.cs" />
+    <Compile Include="Boiler\Boiler.DataTypes.cs" />
+    <Compile Include="Boiler\BoilerNodeManager.cs" />
+    <Compile Include="Boiler\BoilerState.cs" />
+    <Compile Include="Boiler\GenericController.cs" />
+    <Compile Include="FileSystem\ControllerState.cs" />
+    <Compile Include="FileSystem\AreaBrowser.cs" />
+    <Compile Include="FileSystem\CsvFile.cs" />
+    <Compile Include="FileSystem\FileSystem.Classes.cs" />
+    <Compile Include="FileSystem\FileSystemMonitor.cs" />
+    <Compile Include="FileSystem\AreaState.cs" />
+    <Compile Include="FileSystem\FileSystemNodeManager.cs" />
+    <Compile Include="MemoryBuffer\MemoryBufferBrowser.cs" />
+    <Compile Include="MemoryBuffer\MemoryBufferState.cs" />
+    <Compile Include="MemoryBuffer\MemoryBufferMonitoredItem.cs" />
+    <Compile Include="MemoryBuffer\MemoryTagState.cs" />
+    <Compile Include="MemoryBuffer\MemoryBuffer.Classes.cs" />
+    <Compile Include="MemoryBuffer\MemoryBufferNodeManager.cs" />
+    <Compile Include="MemoryBuffer\MemoryBufferConfiguration.cs" />
+    <Compile Include="Properties\AssemblyVersionInfo.cs" />
+    <Compile Include="SampleConfiguration.cs">
+      <DependentUpon>SampleConfiguration.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="SampleServer.SampleModel.cs" />
+    <Compile Include="SampleServer.UserAuthentication.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SampleServer.cs" />
+    <Compile Include="Sample\Boiler.cs" />
+    <Compile Include="Sample\GenericController.cs" />
+    <Compile Include="Sample\GenericSensor.cs" />
+    <Compile Include="Sample\ModelDeclarations.cs" />
+    <Compile Include="Sample\ModelImplementation.cs" />
+    <Compile Include="TestData\ArrayValueObjectState.cs" />
+    <Compile Include="TestData\AnalogScalarValueObjectState.cs" />
+    <Compile Include="TestData\AnalogArrayValueObjectState.cs" />
+    <Compile Include="TestData\MethodTestState.cs" />
+    <Compile Include="TestData\TestData.Constants.cs" />
+    <Compile Include="TestData\TestData.DataTypes.cs" />
+    <Compile Include="TestData\UserScalarValueObjectState.cs" />
+    <Compile Include="TestData\UserArrayValueObjectState.cs" />
+    <Compile Include="TestData\IHistoryDataSource.cs" />
+    <Compile Include="TestData\HistoryDataReader.cs" />
+    <Compile Include="TestData\HistoryArchive.cs" />
+    <Compile Include="TestData\TestSystemConditionState.cs" />
+    <Compile Include="TestData\HistoryFile.cs" />
+    <Compile Include="TestData\TestData.Classes.cs" />
+    <Compile Include="TestData\TestDataObjectState.cs" />
+    <Compile Include="TestData\ScalarValueObjectState.cs" />
+    <Compile Include="TestData\TestDataNodeManagerConfiguration.cs" />
+    <Compile Include="TestData\TestDataNodeManager.cs" />
+    <Compile Include="TestData\TestDataSystem.cs" />
+    <Compile Include="UaBasicHttpBinding.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sample\SampleDesign.xml" />
+    <EmbeddedResource Include="Sample\Opc.Ua.Sample.NodeSet.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Boiler\Boiler.Types.bsd" />
+    <EmbeddedResource Include="Boiler\Boiler.Types.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="Boiler\BoilerDesign.csv" />
+    <Content Include="BuildDesign.bat" />
+    <Content Include="Boiler\BoilerDesign.xml" />
+    <Content Include="FileSystem\FileSystemDesign.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MemoryBuffer\MemoryBufferDesign.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\TestDataDesign.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MemoryBuffer\MemoryBufferDesign.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MemoryBuffer\MemoryBuffer.Types.bsd" />
+    <Content Include="MemoryBuffer\MemoryBuffer.Types.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="SampleConfiguration.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="FileSystem\FileSystemDesign.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="FileSystem\FileSystem.Types.bsd" />
+    <EmbeddedResource Include="FileSystem\FileSystem.Types.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="Sample\SampleDesign.csv" />
+    <Content Include="TestData\TestData.Types.bsd" />
+    <Content Include="TestData\TestData.Types.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="TestData\TestDataDesign.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Sample\Opc.Ua.Sample.Types.bsd" />
+    <EmbeddedResource Include="Sample\Opc.Ua.Sample.Types.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Boiler\Boiler.PredefinedNodes.uanodes" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MemoryBuffer\MemoryBuffer.PredefinedNodes.uanodes" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FileSystem\FileSystem.PredefinedNodes.uanodes" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TestData\TestData.PredefinedNodes.uanodes" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="OPC Key Pair.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>cscript ..\..\..\..\Scripts\CopyKeyFile.vbs "$(ProjectDir)" ..\..\..\..\..\</PreBuildEvent>
+  </PropertyGroup>
+</Project>

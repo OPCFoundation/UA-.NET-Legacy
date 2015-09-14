@@ -1,0 +1,1823 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="a7bd88ec-112d-4bdc-989a-fd8b352ed695" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      </para>
+    </introduction>
+    <section>
+      <title>
+      Interfaces and WCF Service Contracts
+    </title>
+      <content>
+        <para>
+        Servers and Discovery Servers implement the Services defined in UASPECPart  4 (Services). Each Service is implemented as a method call on an object supporting an C# interface. The structures and enumerations defined as Service parameters are implemented with C# classes and enumerations.
+      </para>
+        <para>
+        The Services defined in UASPECPart 4 are grouped into three interfaces: ISessionEndpoint, IDiscoveryEndpoint and IRegistrationEndpoint. Each of these interfaces are declared as WCF ServiceContracts. Each of the methods in the interfaces define the WCF OperationContract for a UA Service.  The parameters defined for the Services are declared as WCF DataContracts.
+      </para>
+        <para>
+        All of the interfaces inherit from IEndpointBase which defines the InvokeService OperationContract. All UA Services can be invoked directly with the method of the same name or via the generic InvokeService OperationContract. The parameters passed when using InvokeService method are byte arrays containing the messages encoded with UA Binary encoding. If services are invoked directly by a client the messages are serialized by the current WCF channel. The Stack also provides standard bindings (see <link xlink:href="#WCF_Bindings_and_Behaviors">WCF Bindings and Behaviors</link> ) which can configure the WCF channel to serialize messages using UA Binary and call the InvokeService method in the background. These bindings allow developers to build client applications that only use the standard methods while using configuration settings to switch between the UA Binary and UA XML encoding.
+      </para>
+        <para>
+        The interfaces and the types used by the interfaces are generated automatically using a Code Generator. This ensures that the ServiceContracts exactly implement the official UA WSDL. A WSDL (Web Services Definition Language) (pronounced Wiz-Dill) is a language (W3C standard, based on XML) that is used to describe XML Web Services. Developers may use the tools provided with Visual Studio to generate the interfaces from the WSDL instead of using the versions provided with the library. These interfaces are summarized in Table 1.
+      </para>
+        <table>
+          <title>
+          Table 1 – WCF Service Contracts
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Interface	
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              ISessionEndpoint	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines all methods used to access the data and events exposed by a Server. These methods can only be used after the client has created a Session with the Server. The methods used to create Sessions are also part of this interface.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              IDiscoveryEndpoint
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the methods used to discover Servers and their endpoints. This interface is implemented by Servers and Discovery Servers.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              IRegistrationEndpoint
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the methods use to register a Server with a Discovery Server. This interface is only implemented by Discovery Servers.
+            </para>
+            </entry>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section>
+      <title>
+      WCF Endpoints,  Services and Hosts
+    </title>
+      <content>
+        <para>
+        A WCF Service requires a <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  object which manages the lifetime of the WCF Service instance and calls the appropriate method when a request is received from a Client. This <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  also allows a WCF Service to be hosted in different types of processes including IIS and a Windows Service (a.k.a. an NT Service).
+      </para>
+        <para>
+        A  single <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  object can support multiple protocols, however, it can only support one security policy. For this reason, a single instance of a UA Server or UA Discovery Server may have multiple <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  objects associated with it. The ServerBase class is used to implement an instance of a UA Server or UA Discovery Server. When the UA Server or Discovery Server application is started a single instance of this class is created which then reads its configuration and creates the necessary <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  objects.
+      </para>
+        <para>
+        The library provides two abstract (virtual) subclasses of the ServerBase class which declares skeletons for all of the UA Services which a UA Server or UA Discovery Server may implement (these subclasses are called SessionServerBase and DiscoveryServerBase and are shown in Figure 5).  A BadNotImplemented fault will be returned to any Client that tries to invoke a UA Service if the developer has not provided an implementation. The virtual methods defined by these classes are the Stack API for use by UA Server applications.
+      </para>
+        <para>
+        The WCF Framework requires that the <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>   create instances of a class which implements the ServiceContracts supports by the Server. The <codeEntityReference>T:Opc.Ua.EndpointBase</codeEntityReference>  class is the base class and the SessionEndpoint and DiscoveryEndpoint are the subclasses for use with UA Servers and UA Discovery Servers respectively. These classes implement the WCF ServiceContracts described in Table 1.
+      </para>
+        <alert>
+          <para>
+            <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  implements the host used by the Windows Communication Foundation (WCF) service model programming model. The <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  class is used to configure and expose a service for use by client applications when you are not using Internet Information Services (IIS) or Windows Activation Services (WAS) to expose a service.
+        </para>
+        </alert>
+        <para>
+        The <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  object will create a new instance of an <codeEntityReference>T:Opc.Ua.EndpointBase</codeEntityReference>  object for each WCF channel created by a Client. The <codeEntityReference>T:Opc.Ua.EndpointBase</codeEntityReference>  class also implements the InvokeService method and automatically decodes incoming UA Binary encoded requests and calls the appropriate method on the ServerBase instance. Developers use the SecureChannelContext.Current property to determine what encoding the Client used with a given request.
+      </para>
+        <para>
+        WCF behaviors can be added in the .NET app.config file by referring to the SessionEndpoint or DiscoveryEndpoint classes. It also possible to add additional endpoints that support ServiceContracts unrelated to UA (e.g. IMetadataExchange) by specifying the SessionEndpoint or DiscoveryEndpoint classes as the service implementation.
+      </para>
+        <para>
+        The package provides support for the UA TCP protocol as a custom WCF transport binding element (see <link xlink:href="#WCF_Bindings_and_Behaviors">WCF Bindings and Behaviors</link> ). Unlike other WCF bindings the UA TCP binding does support multiple security policies per instance of <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference> . In these cases, the <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference>  will create instances of the NonHttpSessionEndpoint or NonHttpDiscoveryEndpoint classes.
+      </para>
+        <para>
+        Figure 1 defines the classes used to implement UA Servers.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Figure">1 - Classes in the Server Stack API</caption>
+          <image placement="center" xlink:href="80853188-58f6-476c-8a66-e1828e0e60e5" />
+        </mediaLink>
+      </content>
+    </section>
+    <section address="WCF_Channels_and_Clients">
+      <title>
+      WCF Channels and Clients
+    </title>
+      <content>
+        <para>
+        The package includes a client-side version of the WCF ServiceContracts called ISessionChannel, IDiscoveryChannel and IRegistrationChannel. These interfaces inherit from the WCF ServiceContracts used for the Servers but add prototypes for the asynchronous versions of each operation. The inheritance tree for the interfaces is shown in Figure 2.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Figure">2 – Interfaces in the Client Stack API</caption>
+          <image placement="center" xlink:href="5394fb55-f2f7-403c-9c5e-0cf5c3ca5a52" />
+        </mediaLink>
+        <para>
+          These interfaces are implemented by the SessionChannel, DiscoveryChannel or RegistrationChannel classes which all inherit from the WCF ClientBase<![CDATA[<T>]]> class. These classes are almost identical to the classes that are generated from the UA WSDL using WCF tools.
+      </para>
+        <para>
+        The package also includes a wrapper for the channel classes that do not depend on WCF. The base class for these wrappers is ClientBase and a subtype exists for each possible ServiceContract. The wrappers store state information such as the Session Id and will automatically fill in the Request Header if none is provided in the method call. The relationship between the channel and client classes are shown Figure 3.
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Figure">3 – Classes in the Client Stack API</caption>
+          <image placement="center" xlink:href="8888b15a-cd72-4031-861b-a8d0478b9907" />
+        </mediaLink>
+        <para>
+        Client application developers can use the client classes directly or create subtypes that add additional features. Subtypes make the most sense for class libraries that may be used by many different applications.
+      </para>
+      </content>
+    </section>
+    <section address="WCF_Bindings_and_Behaviors">
+      <title>
+      WCF Bindings and Behaviors
+    </title>
+      <content>
+        <para>
+        WCF Channels and Endpoints require a WCF Binding that specifies the protocol to use plus any configuration or security parameters. Client and server applications cannot communicate with each other if the WCF Bindings do not match.
+      </para>
+        <para>
+        WCF Channels and Endpoints may also have WCF Behaviors which allow the application to insert custom processing steps into the WCF stack. WCF Behaviors are used by the library to add support for the UA Binary encoding and for automatic serialization of extensible parameters and structured data values (see <link xlink:href="#Extension_Objects_and_Encodeable_Objects">Extension Objects and Encodeable Objects</link> ).
+      </para>
+        <para>
+        WCF Bindings provide a large number of configurable parameters which can create interoperability problems especially when communicating with non-WCF applications. For this reason the library defines a number of custom WCF Bindings for different wire protocols. Table 2 describes the available WCF Bindings.
+      </para>
+        <table>
+          <title>
+          Table 2 - WCF Bindings in the UA Stack
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Binding
+              </para>
+              </entry>
+              <entry>
+                <para>
+                URL Scheme
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              UaSoapXmlBinding	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              http
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Uses SOAP/HTTP + WS-SecureConversation + UA XML or UA Binary encodings. Implements the WsHttpXmlOrBinary Transport Profile.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              UaTcpBinding		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              opc.tcp
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Uses UA TCP + UA-SecureConversation + UA Binary encoding. Implements the UaTcpBinary Transport Profile.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              UaSoapXmlOverTcpBinding		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              net.tcp
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Uses SOAP/.NET TCP + WS-SecureConversation + UA XML or UA Binary encodings. Not a supported binding. Provided to demonstrate that developers can use protocols other than ones required by the specifications.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              NativeStackBinding		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              opc.tcp
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Uses UA TCP + UA-SecureConversation + UA Binary encoding. Implements the UaTcpBinary Transport Profile.
+              This is the same as the UaTcpBinding except it uses the ANSI C implementation of the UA TCP protocol. It is used primarily for testing.
+            </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+        The Binding may be passed directly to the Channel objects (See <link xlink:href="#WCF_Channels_and_Clients">WCF Channels and Clients</link> ) when they are created, however, the library also provides a <codeEntityReference> T:Opc.Ua.BindingFactory</codeEntityReference>  mechanism that allows the Channel to create the correct Binding from the current configuration information. Developers should initialize the <codeEntityReference> T:Opc.Ua.BindingFactory</codeEntityReference>  from the application configuration and then pass the <codeEntityReference> T:Opc.Ua.BindingFactory</codeEntityReference>  to the Channel object. The Channel object will then create the Binding that matches the scheme in the URL for the endpoint.
+      </para>
+        <para>
+        Administrators can then specify the mapping between different URL schemes and .NET classes in the application configuration file (See <link xlink:href="#Application_Configuration">Application Configuration</link> ).
+      </para>
+        <para>
+        This mechanism allows new WCF Bindings and protocols to be added to applications after they have been deployed, however, it does not offer the ability to construct an arbitrary WCF Binding in a configuration file. This capability was intentionally left out because minor differences in WCF Bindings can create interoperability problems when applications developed by multiple vendors are deployed in a production environment. That said, administrators may add behaviors to configuration files as they would with any other WCF application.
+      </para>
+        <para>
+        Developers can create new Bindings creating subtypes of the BaseBinding class. The subtypes must define a constructor with the parameters described in Table 3.
+      </para>
+        <table>
+          <title>
+          Table 3 – Custom Binding Constructor Parameters
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Name		
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Type
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              namespaceUris		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              NamespaceTable
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A reference to the Server’s namespace table.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              factory		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              EncodeableFactory
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A reference to a factory capability of encoding/decoding extensible parameters and structured data values
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              configuration	 	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              EndpointConfiguration
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The configuration for Endpoint.
+            </para>
+            </entry>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section>
+      <title>
+      EndpointDescriptions and EndpointConfigurations
+    </title>
+      <content>
+        <para>
+        An EndpointDescription describes an endpoint provided by a UA Server. The object specifies (among other things) the name and URI for the server (which allows endpoints from the same server to be grouped together), the required security policy and security mode, the supported transport profile and the Server’s application instance certificate. The EndpointDescription object is used by the Server to initialize its Endpoints (they are passed to the <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference> (s) when the Server starts). It is also used by the Client to initialize the Channel objects. Clients can use the Discovery Services to fetch the  EndpointDescriptions for a Server before connecting. The EndpointDescription class is described completely in UASPECPart 4.
+      </para>
+        <para>
+        An EndpointConfiguration specifies additional parameters which are used by the WCF stack but do not affect the negotiation of the WCF channel. Table 4 describes the properties of the EndpointConfiguration object.
+      </para>
+        <table>
+          <title>
+          Table 4 – EndpointConfiguration Properties
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Name		
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Type
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              OperationTimeout		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The number of milliseconds to wait for a response from the Server. This value is only used by Clients.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              UseBinaryEncoding		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Boolean
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Encodes messages using the UA Binary encoding when supported by the Endpoint. The TransportProfileUri in the EndpointDescription indicates whether it is supported.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              MaxStringLength		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The maximum length in characters of a single string contained in a message.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              MaxByteStringLength		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The maximum length in bytes of a single byte string contained in a message. This parameter is only completely supported when the UA Binary Encoding is used. If UA XML encoding is used it should be the same as the MaxArrayLength.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              MaxArrayLength		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The maximum length of a single array contained in a message. This value must be large enough to accommodate an entire message when UA Binary is used with the SOAP/HTTP transport.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              MaxMessageSize
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The maximum length in bytes for a single message.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              MaxBufferSize		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The maximum buffer size to use when sending or receiving. Note that the WCF stack will allocate memory blocks of this size so setting this parameter to large values will consume memory and reduce performance. The default value is 65,535.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              SecurityTokenLifetime		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The number of milliseconds before a security token must be renewed.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ChannelLifetime		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The number of milliseconds before a server releases the resources for a broken secure channel. This parameter is only used with the UA TCP transport.
+            </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+        The EndpointConfiguration is used by custom Bindings to initialize the WCF Channel objects.
+      </para>
+        <para>
+        Servers create their EndpointDescription and EndpointConfigurations from the configuration provided by the Administrator. Clients can retrieve the EndpointDescriptions for different Servers using the Discovery Services, however, they may also be provided by the Administrator and/or User. The Client’s EndpointConfiguration are always specified by the Administrator and/or User.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>
+      ConfiguredEndpoints
+    </title>
+      <content>
+        <para>
+        Client applications frequently need to persist information that will allow them to reconnect to a Server. This information includes the EndpointDescription and EndpointConfiguration, however, it could include other information such as the username/password. The ConfiguredEndpoint and ConfiguredEndpointCollection classes allow Clients to persist this kind information. They also provide convenience functions that assist with updating the information using the Discovery Services.
+      </para>
+        <para>
+        The ConfiguredEndpoint defines an Extensions property which allows application developers to save their own configuration information with the endpoint.
+      </para>
+      </content>
+    </section>
+    <section address="Application_Configuration">
+      <title>
+      Application Configuration
+    </title>
+      <content>
+        <para>
+        The stack provides a extensible mechanism for storing the application configuration in an XML file. The class is extensible so developers can add their own configuration information to it. Table 5 describes primary elements of the <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>  class.
+      </para>
+        <table>
+          <title>
+          Table 5 – ApplicationConfiguration Properties
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Name		
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Type
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              ApplicationName		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              String
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A human readable name for the application.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ApplicationUri		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              String
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A globally unique name for the application.
+              This should be a URL with which the machine domain name or IP address as the hostname followed by the vendor/product name followed by an instance identifier.
+              For example:  
+              <externalLink><linkText>http://machine1/OPC/UASampleServer/4853DB1C-776D-4ADA-9188-00CAA737B780</linkText><linkUri>http://machine1/OPC/UASampleServer/4853DB1C-776D-4ADA-9188-00CAA737B780</linkUri></externalLink></para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ProductUri	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              String
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A human readable name for the product.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ApplicationType		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              ApplicationType
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The type of application. Possible values:  Server, Client, ClientAndServer and DiscoveryServer
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              SecurityConfiguration		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              SecurityConfiguration
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The security configuration for the application. Specifies the application instance certificate, list of trusted peers and trusted certificate authorities.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Transport Configurations		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              TransportConfiguration Collection
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the Bindings to used for each transport protocol used by the application.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              TransportQuotas		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              TransportQuotas
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the default limits to use when initializing WCF channels and endpoints.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ServerConfiguration		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              ServerConfiguration
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the configuration for Servers
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ClientConfiguration		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              ClientConfiguration
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the configuration for Clients
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              DiscoveryServerConfiguration	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              DiscoveryServer Configuration
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the configuration for Discovery Servers
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              TraceConfiguration		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              TraceConfiguration
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the location of the Trace file. 
+            </para>
+              <para>
+              Unexpected exceptions that are silently handled are written to the trace file. Developers can add their own trace output  with the Utils.Trace(…) functions.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Extensions		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              XmlElementCollection
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Allows developers to add additional information to the file.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              MessageContext		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              ServiceMessageContext
+            </para>
+            </entry>
+            <entry>
+              <para>
+              The context to use when serializing/deserializing messages. The use of this parameter is discussed in  <link xlink:href="#Extension_Objects_and_Encodeable_Objects">Extension Objects and Encodeable Objects</link></para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              CertificateValidator
+            </para>
+            </entry>
+            <entry>
+              <para>
+              CertificateValidator
+            </para>
+            </entry>
+            <entry>
+              <para>
+              This is the custom certificate validator used by the application.  The use of this parameter is discussed in  <link xlink:href="#Other_Helper_Classes">Other Helper Classes</link> .
+            </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+        The <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>  can be persisted anywhere but the class provides functions that load/save the configuration as an XML file on disk. The location of the XML file can be specified in the app.config file for the application if the ConfigurationLocation is specified as a configuration section.
+      </para>
+        <para>
+        The declaration for the configuration section look like this XML fragment:
+      </para>
+        <code language="xml"><![CDATA[
+        <configSections>
+          <section name="MyApplicationName" type="Opc.Ua.ApplicationConfigurationSection,Opc.Ua.Core" />
+        </configSections>
+        ]]></code>
+        <para>
+        The name may be any text that is unique within the app.config file. The ConfigurationLocation would look like this XML fragment:
+      </para>
+        <code language="xml"><![CDATA[
+                <MyApplicationName>
+          <ConfigurationLocation xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd">
+            <FilePath>%MyDocuments%\Opc.Ua.MyApplicationName.Config.xml</FilePath>
+          </ConfigurationLocation>
+        </MyApplicationName> 
+        ]]></code>
+        <para>
+        The FilePath can be an absolute path or a relative path. If it is a relative path the current directory is searched followed by the directory where the executable resides. The stack also supports prefixes which can be replaced with environment variables. The latter functionality requires a token enclosed by ‘%’ symbols at the start of the message. The stack will first check for a symbol that matches one of the values from the Environment.SpecialFolder enumeration. If not found it will use the environment variable of the same name.
+      </para>
+        <para>
+        Note that the same feature exists for all fields that represent file directory paths in the <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>  object. Developers can use this feature in their own code with the Utils.GetAbsoluteFilePath method.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>
+      Built-in Types and Data Types
+    </title>
+      <content>
+        <para>
+        UA defines a number of built in types. The Stack defines classes or structures for each of these types and provides support for standard interfaces like IComparable, ICloneable and IFormattable.  Table 6 describes built-in types.
+      </para>
+        <table>
+          <title>
+          Table 6 – Built-in Types
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Name		
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Type
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              Boolean		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Boolean
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A two-state logical value (true or false).
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              SByte
+            </para>
+            </entry>
+            <entry>
+              <para>
+              SByte
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between -128 and 127.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Byte		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Byte
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between 0 and 256.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Int16		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int16
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between -32768 and 32767.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              UInt16		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              UInt16
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between 0 and 65535.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Int32		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between – 2147483648 and 2147483647.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              UInt32		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              UInt32
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between 0 and 4294967295.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Int64		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Int64
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between – 9223372036854775808 and 9223372036854775807
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              UInt64		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              UInt64
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An integer value between 0 and 18446744073709551615.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Float		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Single
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An IEEE single precision (32 bit) floating point value.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Double		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Double
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An IEEE double precision (64 bit) floating point value.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              String		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              String
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A sequence of Unicode characters.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              DateTime		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              DateTime
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An instance in time.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Guid		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Structure (Uuid)
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A 16 byte value that can be used as a globally unique identifier.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ByteString
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Byte[]
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A sequence of octets.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              XmlElement		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              XmlElement
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An XML element.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              NodeId		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Class
+            </para>
+            </entry>
+            <entry>
+              <para>
+              An identifier for a node in the address space of an OPC UA server.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ExpandedNodeId		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Class
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A NodeId that allows the namespace URI to be specified instead of an index.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              StatusCode		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Structure
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A numeric identifier for a error or condition that is associated with a value or an operation.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              QualifiedName
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Class
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A name qualified by a namespace.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              LocalizedText		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Class
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Human readable text with an optional locale identifier.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ExtensionObject		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Class
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A structure that contains an application specific data type that may not be recognized by the receiver.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              DataValue		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Class
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A data value with an associated status code and timestamps.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Variant		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Structure
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A union of all of the types specified above.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              DiagnosticInfo		
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Class
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A structure that contains detailed error and diagnostic information associated with a StatusCode.
+            </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+        The <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference>, ExpandedNodeId, QualifiedName and <codeEntityReference>T:Opc.Ua.LocalizedText</codeEntityReference>  classes cannot be modified after construction. This means they can be safely passed around as references without risk of side effects. These types also define a static property called Null which should be used instead of the default constructor.
+      </para>
+        <para>
+        The stack provides an enumeration called BuiltInType that can be used to set up switch statements. The numeric value for each BuiltInType is the same as the <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference> for the corresponding DataType Node.
+      </para>
+        <para>
+        The stack also provides a helper class called <codeEntityReference>T:Opc.Ua.TypeInfo</codeEntityReference> which provides methods to detect the Built-in Type for an object and to convert between types.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>
+      Variants
+    </title>
+      <content>
+        <para>
+        UA Variants are the containers for any attribute values that are exchanged between UA applications. The Variant structure is simply a wrapper for an object but it takes care of converting objects to types that can be serialized on the wire. For example, any class that implements IList will be converted to an array and any class that implements IEncodeable will be converted to an ExtensionObject. The Variant also takes care of converting multidimensional arrays to Matrix objects.
+      </para>
+        <para>
+        The Variant structure also implements the UA XML encoding rules defined in UASPECPart  6.
+      </para>
+      </content>
+    </section>
+    <section address="Extension_Objects_and_Encodeable_Objects">
+      <title>
+      Extension Objects and Encodeable Objects
+    </title>
+      <content>
+        <para>
+        UA ExtensionObjects are containers for structured values that can be defined by the application vendor. These objects have a TypeId which is the <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference> of the DataType Encoding Node and a Body which is a ByteString or an XmlElement depending on the encoding used.
+      </para>
+        <para>
+        Encodeable Objects are any objects that implement the IEncodeableObject interface which allows the Stack to automatically serialize and deserialize types which have been registered with the stack. The EncodeableFactory is a table of Encodeable Objects indexed by the NodeIds for the supported DataType Encodings.
+      </para>
+        <para>
+        The IEncoder and IDecoder interfaces provide an abstraction layer which Encodeable Objects can use to serialize themselves to and from a stream. The stack provides encoder/decoders for all the encodings defined in UASPECPart  6 (UA Binary and UA XML at this time). Developers can implement Encodeable Objects that use other encodings which are embedded in a UA Binary or UA XML stream.
+      </para>
+        <para>
+        Classes that implement IEncodeableObject must provide absolute NodeIds for the binary and XML version of the object. The absolute NodeIds include the NamespaceUri that qualifies the well known <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference>. This NamespaceUri is assigned by the organization that defines the type being implemented.
+      </para>
+        <para>
+        The Stack takes care of converting the NamespaceUri to a <codeEntityReference>P:Opc.Ua.NodeId.NamespaceIndex</codeEntityReference> for use on the wire but this requires that the WCF Channel have access to the table of Namespaces for the Server. This is why the Bindings included in the stack table a NamespaceTable as a parameter. The Bindings included in the stack use custom WCF Behaviors which set the WCF <codeEntityReference>T:Opc.Ua.Server.OperationContext</codeEntityReference> and the ServiceMessageContext.ThreadContext property to ensure the Namespace table is available during message serialization. Developers that create custom Bindings will need to add these behaviors to their Bindings (ServiceMessageContextMessageInspector for UA XML and BinaryEncodingMessageInspector for UA Binary)
+      </para>
+        <para>
+        The <codeEntityReference>T:Opc.Ua.ServiceMessageContext</codeEntityReference>  also provides access to the EncodeableFactory object.
+      </para>
+        <para>
+        Note that developers always have the option of manually serializing an Encodeable Object in a ExtensionObject and they will have to do this if they need to use an encoding that does not match the current wire protocol. For example, a Client using the UA binary encoding may request that structures be returned using the XML encoding. The Server will have to manually encode the objects in this case.
+      </para>
+      </content>
+    </section>
+    <section address="Other_Helper_Classes">
+      <title>
+      Other Helper Classes
+    </title>
+      <content>
+        <para>
+        The stack includes a number of other helper classes which are summarized in Table 7.
+      </para>
+        <table>
+          <title>
+          Table 7 – Stack Helper Classes
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Name	
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              ReferenceTypes	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric ids assigned to well known ReferenceType Nodes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              DataTypes	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric ids assigned to well known DataType Nodes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              VariableTypes	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric ids assigned to well known VariableType Nodes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              ObjectTypes	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric ids assigned to well known ObjectType Nodes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Variables	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric ids assigned to well known Variable Nodes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Objects	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric ids assigned to well known Object Nodes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Methods	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric ids assigned to well known Method Nodes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Namespaces	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the constants for common NamespaceUris.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Profiles	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the constants for the URIs of the Profiles used by the Stack.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              SecurityPolicies	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the constants for the URIs of the SecurityPolicies supported by the Stack.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              Attributes	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric identifier for the UA attributes.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              StatusCodes	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Defines the numeric identifier for the StatusCodes defined by UA.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              RelativePath
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Formats and parses relative paths which use the syntax defined in UASPECPart  4.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              StringTable	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A thread-safe table of strings (used for storing ServerUris and NamespaceUris).
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              NamespaceTable
+            </para>
+            </entry>
+            <entry>
+              <para>
+              A thread-safe table of NamespaceUris (inherits from StringTable).
+            </para>
+            </entry>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section>
+      <title>
+      Certificate Management and Validation
+    </title>
+      <content>
+        <para>
+        The stack provides a number of certificate management functions including a custom <codeEntityReference>T:Opc.Ua.CertificateValidator</codeEntityReference>  that implements the validation rules required by the specification. The <codeEntityReference>T:Opc.Ua.CertificateValidator</codeEntityReference>  is created automatically when the <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>  is loaded. Any WCF channels or endpoints that are created with that <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>  will use it.
+      </para>
+        <para>
+        The <codeEntityReference>T:Opc.Ua.CertificateValidator</codeEntityReference>  uses the trust lists in the <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>  to determine whether a certificate is trusted. A certificate that fails validation is always placed in the Rejected Certificates store. Applications can receive notifications when an invalid certificate is encountered by using the event defined on the <codeEntityReference>T:Opc.Ua.CertificateValidator</codeEntityReference>  class.
+      </para>
+        <para>
+        The Stack also provides the Certificate Identifier class which can be used to specify the location of certificate . The Find() method will look up the certificate based on the criteria specified (SubjectName, Thumbprint or DER Encoded Blob).
+      </para>
+        <para>
+        Each application has a SecurityConfiguration which must be managed carefully by the Administrator since making a mistake could prevent applications from communicating or create security risks.  The elements of the SecurityConfiguration are described in Table 8.
+      </para>
+        <table>
+          <title>
+          Table 8 – SecurityConfiguration
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Name	
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              ApplicationCertificate
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies where the private key for the Application Instance Certificate is located. Private keys should be in the Personal (My) store for the LocalMachine or the CurrentUser. Private keys installed in the LocalMachine store are only accessible to users that have been explicitly granted permissions.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              TrustedIssuerCertificates	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the Certificate Authorities that issue certificates which the application can trust. The structure includes a the location of a Certificate Store and  a list of individual Certificates.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              TrustedPeerCertificates	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies the certificates for other applications which the application can trust. The structure includes a the location of a Certificate Store and a list of individual Certificates.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              InvalidCertificateDirectory	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Specifies where rejected Certificates can be placed for later review by the Admistrator (a.k.a. Rejected Certificates Store)
+            </para>
+            </entry>
+          </row>
+        </table>
+        <para>
+        The Administrator needs to create an application instance certificate when applications are installed, when the ApplicationUri or when the  hostname changes. The Administrator can use the Configuration Tool included in the package or use the tools provided by their Public Key Infrastructure (PKI). If the certificate is changed the Application Configuration needs to be updated.
+      </para>
+        <para>
+        Once the certificate is installed the Administrator needs to ensure that all users who are allowed to access the application have permission to access the Certificate’s private key. This can be also be done with the UA Configuration Tool or it can be done programmatically via the ICertificateStore interface.
+      </para>
+        <para>
+        Sometimes a Certificate will fail validation for non-critical reasons and the Administrator wishes to allow the Certificate anyways (e.g. the certificate has expired). In these situations the Administrator must add the individual Certificate to  either the TrustedIssuerCertificates or TrustedPeerCertificates element and specify the validation flags for the certificate. The supported validation flags are described in Table 9.
+      </para>
+        <table>
+          <title>
+          Table 9 – Certificate Validation Flags
+        </title>
+          <tableHeader>
+            <row>
+              <entry>
+                <para>
+                Name	
+              </para>
+              </entry>
+              <entry>
+                <para>
+                Description
+              </para>
+              </entry>
+            </row>
+          </tableHeader>
+          <row>
+            <entry>
+              <para>
+              SuppressCertificateExpired	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Allows certificates that are expired or not yet valid.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              SuppressHostNameInvalid	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Allows certificates where the hostname does not match the URL. Each server Certificate has the hostnames embedded in the certificate. These hostnames must match the URL being used to connect to the Server.
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              SuppressUseNotAllowed
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Allows certificates where the certificate use was not set correctly.The set of uses required for UA application instance Certificates are specified in [UA UASPECPart  6].
+            </para>
+            </entry>
+          </row>
+          <row>
+            <entry>
+              <para>
+              SuppressRevocationStatusUnknown	
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Allows certificates even if it not possible to check whether they have been revoked by the issuing authority.
+            </para>
+            </entry>
+          </row>
+        </table>
+      </content>
+    </section>
+    <section>
+      <title>
+      UserIdentity and UserIdentityTokens
+    </title>
+      <content>
+        <para>
+        The stack provides the UserIdentity class which convert UA user identity tokens to and from the SecurityTokens used by WCF.  The Stack currently supports UserNameSecurityToken, X509SecurityToken, SamlSecurityToken and any other subtype of SecurityToken which is supported by the WCF WSSecurityTokenSerializer class.
+      </para>
+        <para>
+        The UA specification requires that UserIdentityTokens be encrypted or signed before they are sent to the Server. UserIdentityToken class provides a number of methods that implement these features.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>
+      Nodes, NodeSets and NodeTables
+    </title>
+      <content>
+        <para>
+        The UA stack provides a standard way to serialize a set of Nodes and the References via the NodeSet class. The schema for the individual Node objects is included as part of the standard UA XML Schema. The NodeSet is simply a collection of those Node objects along with the table of Namespace and Server URIs referenced by the Nodes.
+      </para>
+        <para>
+        NodeIds, ExpandedNodeIds and QualifiedNames all contain NamespaceIndexes which represent a URI. The <codeEntityReference>P:Opc.Ua.NodeId.NamespaceIndex</codeEntityReference> assigned to a particular URI will change over time so developers much make sure that the actual URIs strings are saved whenever one of these types is persisted. The NodeSet class provides functions that automatically convert the saved URIs to the indexes currently used by the Server.
+      </para>
+        <para>
+        The <codeEntityReference>T:Opc.Ua.NodeSet</codeEntityReference> will also handle conversions of  Attribute values when the data type of the value is a <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference>, ExpandedNodeId, QualifiedName or Argument. Any other values that contain indexes will have to be fixed manually by the application.
+      </para>
+        <para>
+        The <codeEntityReference>T:Opc.Ua.NodeTable</codeEntityReference> is an in-memory database of Nodes that can be efficiently searched.  It makes use of the interfaces defined in Figure 4 which means developers can create their own objects can be stored in the <codeEntityReference>T:Opc.Ua.NodeTable</codeEntityReference>.  The Node objects serialized as part of the <codeEntityReference>T:Opc.Ua.NodeSet</codeEntityReference> implement these interfaces and can be stored in a NodeTable provide the NamespaceIndexes are updated to match the NamespaceTable used in the NodeTable. These interfaces are also used by the Client Library to create a local cache of Nodes fetched from the Server (see <link xlink:href="e296e1dc-e3cf-4085-bd2e-9b52ff068fca" />).
+      </para>
+        <mediaLink>
+          <caption placement="after" lead="Figure">4 – Interfaces to Objects within a NodeTable</caption>
+          <image placement="center" xlink:href="0f6ebae9-de55-42b9-8990-bb70b432c855" />
+        </mediaLink>
+      </content>
+    </section>
+    <section>
+      <title>
+      ServiceResults, ServiceResultExceptions and DiagnosticInfos
+    </title>
+      <content>
+        <para>
+        The UA specification introduces the concept of a StatusCode with an associated DiagnosticInfo where the DiagnosticInfo contains references to strings contained in a common table. This model is useful for optimizing calls across a network, however, it is cumbersome for programmers. For that reason the Stack provides the <codeEntityReference>T:Opc.Ua.ServiceResult</codeEntityReference>  class which combines a StatusCode with a DiagnosticInfo. The <codeEntityReference>T:Opc.Ua.ServiceResultException</codeEntityReference> is an exception that contains the same information.
+      </para>
+        <para>
+        Support for these classes is built into the Stacks. For example, if an error occurs processing a UA request a application can throw a ServiceResultException. The Stack will trap the exception and return the correct fault required by the protocol being used (i.e. if SOAP/HTTP is being used the Stack will convert it to a SOAP Fault that complies with the UA WSDL). Similarly, the ClientBase classes check for Faults returned by the Server and convert them to <codeEntityReference>T:Opc.Ua.ServiceResultException</codeEntityReference> after looking up all of the strings in the ResponseHeader.
+      </para>
+        <para>
+          <codeEntityReference>T:Opc.Ua.ServiceResult</codeEntityReference>  class can be used by applications while they are processing individual operations. Once all operations are complete the application can convert the <codeEntityReference>T:Opc.Ua.ServiceResult</codeEntityReference>  into the StatusCode and DiagnosticInfo components. The <codeEntityReference>T:Opc.Ua.ServiceResult</codeEntityReference>  class also has helper functions that construct the object from a StatusCode, DiagnosticInfo and a StringTable.
+      </para>
+      </content>
+    </section>
+    <!-- 
+  <section>
+    <title>
+      Events and Filters
+    </title>
+    <content>
+      <para>
+
+      </para>
+    </content>
+  </section>
+
+  
+
+
+  <section>
+    <title>
+      Data Generation
+    </title>
+    <content>
+      <para>
+
+      </para>
+    </content>
+  </section>
+  -->
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="247ac84b-d2dd-456d-82e3-f52134d9a3f4" revisionNumber="1">
+  <developerOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <introduction>
+      <para>
+TBD: add more external references with description.
+    </para>
+    </introduction>
+    <relatedTopics>
+      <!--The OPC UA Specification is organized as a multi-part document. While describing the concepts, this part will refer 
+    to these parts of the specification:
+    -->
+      <externalLink>
+        <linkText address="Part1">Part 1: OPC UA Specification</linkText>
+        <linkAlternateText>Part 1 – Concepts</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part1/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part2">Part 2: OPC UA Specification</linkText>
+        <linkAlternateText>Part 2 – Security Model, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part2/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part3">Part 3: OPC UA Specification</linkText>
+        <linkAlternateText>Part 3 – Address Space Model, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part3/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part4">Part 4: OPC UA Specification</linkText>
+        <linkAlternateText>Part 4 – Services, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part4/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part5">Part 5: OPC UA Specification</linkText>
+        <linkAlternateText>Part 5 – Information Model, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part5/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part6">Part 6: OPC UA Specification</linkText>
+        <linkAlternateText>Part 6 – Mappings, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part6/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part7">Part 7: OPC UA Specification</linkText>
+        <linkAlternateText>Part 7 – Profiles, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part7/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part8">Part 8: OPC UA Specification</linkText>
+        <linkAlternateText>Part 8 – Data Access, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part8/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part9">Part 9: OPC UA Specification</linkText>
+        <linkAlternateText>Part 9 – Alarms and Conditions, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part9/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part10">Part 10: OPC UA Specification</linkText>
+        <linkAlternateText>Part 10 – Programs, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part10/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part11">Part 11: OPC UA Specification</linkText>
+        <linkAlternateText>Part 11 – Historical Access, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part11/</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText address="Part12">Part 12: OPC UA Specification</linkText>
+        <linkAlternateText>Part 12 – Discovery, Version 1.0 or later</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/UA/Part12/</linkUri>
+      </externalLink>
+    </relatedTopics>
+  </developerOrientationDocument>
+</topic>

@@ -1,0 +1,89 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagnostic Client", "Diagnostic Client", "{D2D1FFCA-6E9E-46E2-B33F-9BE31E64E3FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleLibraries", "SampleLibraries", "{7E91DE43-39BB-46B9-9AE7-52F10359EF05}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample Controls", "Sample Controls", "{A69B11A8-5FDD-4D5B-A0E2-C2DCC78CA700}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Diagnostic Client", "Client\UA Diagnostic Client.csproj", "{142B6B84-2B0D-4C23-BE8A-B1D859D3DD10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Diagnostic Controls", "Controls\UA Client Diagnostic Controls.csproj", "{0593CE7A-209F-450B-8569-55AAB3AADFE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Controls", "..\SampleLibraries\Controls\UA Client Controls.csproj", "{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Library", "..\SampleLibraries\Client\UA Client Library.csproj", "{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Controls", "..\Samples\Controls\UA Sample Controls.csproj", "{92AE819B-4938-4502-AC32-67063F9893CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Configuration Library", "..\SampleLibraries\Configuration\UA Configuration Library.csproj", "{8AB4CB8E-E216-425D-B600-350D0B6B59CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Library", "..\SampleLibraries\Server\UA Server Library.csproj", "{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Library", "..\Samples\Common\UA Sample Library.csproj", "{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stack", "Stack", "{C5FE44B3-9AA1-4A16-A3E3-A5D04A898BB8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "..\..\Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{142B6B84-2B0D-4C23-BE8A-B1D859D3DD10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{142B6B84-2B0D-4C23-BE8A-B1D859D3DD10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{142B6B84-2B0D-4C23-BE8A-B1D859D3DD10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{142B6B84-2B0D-4C23-BE8A-B1D859D3DD10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0593CE7A-209F-450B-8569-55AAB3AADFE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0593CE7A-209F-450B-8569-55AAB3AADFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0593CE7A-209F-450B-8569-55AAB3AADFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0593CE7A-209F-450B-8569-55AAB3AADFE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92AE819B-4938-4502-AC32-67063F9893CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92AE819B-4938-4502-AC32-67063F9893CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92AE819B-4938-4502-AC32-67063F9893CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92AE819B-4938-4502-AC32-67063F9893CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{142B6B84-2B0D-4C23-BE8A-B1D859D3DD10} = {D2D1FFCA-6E9E-46E2-B33F-9BE31E64E3FF}
+		{0593CE7A-209F-450B-8569-55AAB3AADFE3} = {D2D1FFCA-6E9E-46E2-B33F-9BE31E64E3FF}
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A} = {7E91DE43-39BB-46B9-9AE7-52F10359EF05}
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90} = {7E91DE43-39BB-46B9-9AE7-52F10359EF05}
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD} = {7E91DE43-39BB-46B9-9AE7-52F10359EF05}
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5} = {7E91DE43-39BB-46B9-9AE7-52F10359EF05}
+		{92AE819B-4938-4502-AC32-67063F9893CD} = {A69B11A8-5FDD-4D5B-A0E2-C2DCC78CA700}
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE} = {A69B11A8-5FDD-4D5B-A0E2-C2DCC78CA700}
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9} = {C5FE44B3-9AA1-4A16-A3E3-A5D04A898BB8}
+	EndGlobalSection
+EndGlobal

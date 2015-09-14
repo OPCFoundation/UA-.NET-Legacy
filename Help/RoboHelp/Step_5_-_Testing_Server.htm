@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 5 - Testing Server</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Server Development Tutorial</h1>
+<p>In this step we will test our server as follows:</p>
+<ul type="disc">
+	<li><p><a href="#Launch_capability">Launch capability</a></p></li>
+	<li><p><a href="#Identification__application_name_and_vendor_name_">Identification</a> 
+	 (application name and vendor name)</p></li>
+	<li><p><a href="#Reading_a_value">Reading a value</a></p></li>
+	<li><p><a href="#Writing_to_a_value">Writing to a value</a></p></li>
+	<li><p><a href="#Compliance_Testing">Compliance Testing</a></p></li>
+</ul>
+<h2><a name="Launch_capability"></a>Launch capability</h2>
+<ol type="1">
+	<li><p>Compile and build your newly developed server.</p></li>
+	<li><p>Right-click on the project and choose &quot;Start new instance&quot; 
+	 from the &quot;Debug&quot; menu.</p></li>
+	<li><p>The application should launch successfully. You may be prompted 
+	 by Windows Firewall to permit traffic to/from this server - you are 
+	 encouraged to allow this behavior.</p></li>
+</ol>
+<h2><a name="Identification__application_name_and_vendor_name_"></a>Identification 
+ (application name and vendor name)</h2>
+<ol type="1">
+	<li><p>Once the application is running you will see the application 
+	 name clearly stated at the top of the window.</p></li>
+	<li><p>Connect a Client to the Server and then navigate to the following 
+	 node within the address space and then read the value:<br />
+	<span style="font-family: 'Courier New', monospace;">Objects -&gt; 
+	 Server -&gt; ServerStatus -&gt; BuildInfo -&gt; ProductName</span></p></li>
+	<li><p>Read the value of the following node:<br />
+	<span style="font-family: 'Courier New', monospace;">Objects -&gt; 
+	 Server -&gt; ServerStatus -&gt; BuildInfo -&gt; ManufacturerName</span></p></li>
+</ol>
+<h2><a name="Reading_a_value"></a>Reading a value</h2>
+<ol type="1">
+	<li><p>Connect a client to the server and then navigate and read the 
+	 following node:<br />
+	<span style="font-family: 'Courier New', monospace;">Objects -&gt; 
+	 CTT -&gt; MyFolder -&gt; MyNode</span>.</p></li>
+</ol>
+<h2><a name="Writing_to_a_value"></a>Writing to a value</h2>
+<ol type="1">
+	<li><p>While connected to the &quot;MyNode&quot; you will elect to 
+	 write a value to the node.</p></li>
+	<li><p>Upon writing to the node, your UA Server will display a modal 
+	 messagebox window to the screen showing you the value you sent. Simply 
+	 dismiss this window.</p></li>
+</ol>
+<h2><a name="Compliance_Testing"></a>Compliance Testing</h2>
+<ol type="1">
+	<li><p>Lastly, but most importantly you need to test your server for 
+	 compliance.</p></li>
+	<li><p>Download and install the latest <a href="http://www.opcfoundation.org/uactt"><?rh-udv_start 
+	 name="ctt-long" ?>UA CTT (Compliance Test Tool)<?rh-udv_end ?></a> 
+	 from the <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?> 
+	 website.</p></li>
+	<li><p>The <?rh-udv_start name="ctt-short" ?>UA CTT<?rh-udv_end ?> 
+	 contains product documentation (similar to this) which describes this 
+	 powerful tool, and also contains tutorials which demonstrate how to 
+	 test a server.</p></li>
+	<li><p>Open the product documentation and navigate to the following 
+	 page:<br />
+	<span style="font-family: 'Courier New', monospace;">Compliance Testing 
+	 -&gt; Server Testing -&gt; Introduction.</span></p></li>
+</ol>
+<p>Next, see <a href="Step_6_-_Deploying_Server.htm">Step 6 - Deploying 
+ Server</a>.</p>
+</body>
+</html>

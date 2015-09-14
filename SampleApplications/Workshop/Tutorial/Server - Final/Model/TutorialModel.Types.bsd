@@ -1,0 +1,16 @@
+<opc:TypeDictionary
+  xmlns:opc="http://opcfoundation.org/BinarySchema/"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.bsd"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:tns="http://somecompany.com/TutorialModel"
+  DefaultByteOrder="LittleEndian"
+  TargetNamespace="http://somecompany.com/TutorialModel"  
+>
+  <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Opc.Ua.BinarySchema.bsd"/>
+  
+  <opc:StructuredType Name="CalibrationDataType">
+    <opc:Field Name="Offset" TypeName="opc:Double" />
+    <opc:Field Name="Period" TypeName="opc:Double" />
+  </opc:StructuredType>
+  
+</opc:TypeDictionary>

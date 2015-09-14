@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sqwebskin version="2.2">
+	<summary>
+		<skinname>Beautiful Vista Flash</skinname>
+		<layout>regular tripane</layout>
+		<navigation-size>223</navigation-size>
+		<volume>100</volume>
+	</summary>
+	<panesummary>
+		<![CDATA[
+<frameset rows="32,*" >
+<frame name="Custom Toolbar Pane" id="3" />
+<frameset rows="30%,*" >
+<frameset rows="24,*" >
+<frame name="MiniBar Pane" id="6" />
+<frame name="Navigation Pane" id="2" />
+</frameset>
+<frame name="Topic Pane" id="4" />
+</frameset>
+</frameset>
+]]>
+	</panesummary>
+	<frameset rows="32,*">
+		<frame name="Custom Toolbar Pane" id="3"/>
+		<frameset rows="30%,*">
+			<frameset rows="24,*">
+				<frame name="MiniBar Pane" id="6"/>
+				<frame name="Navigation Pane" id="2"/>
+			</frameset>
+			<frame name="Topic Pane" id="4"/>
+		</frameset>
+	</frameset>
+	<pane name="Custom Toolbar Pane">
+		<wf>
+			<swf>wf_toolbar.swf</swf>
+			<height>40</height>
+			<color></color>
+			<background-swf>skin_background_tb.swf</background-swf>
+			<tooltip backgroundcolor="White" fontname="_sans" fontsize="10" fontcolor="Black" timeout="4"/>
+			<item-spacing>10</item-spacing>
+		</wf>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-content" id="1">
+			<name>Contents</name>
+			<wf>
+				<swf>skin_button_tb_toc.swf</swf>
+				<color>upcolor:red</color>
+				<navcomponent>Contents</navcomponent>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-index" id="2">
+			<name>Index</name>
+			<wf>
+				<swf>skin_button_tb_index.swf</swf>
+				<navcomponent>Index</navcomponent>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-search" id="3">
+			<name>Search</name>
+			<wf>
+				<swf>skin_button_tb_search.swf</swf>
+				<navcomponent>Search</navcomponent>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-glossary" id="4">
+			<name>Glossary</name>
+			<wf>
+				<swf>skin_button_tb_glossary.swf</swf>
+				<navcomponent>Glossary</navcomponent>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="print-button" id="8">
+			<name>Print</name>
+			<wf>
+				<swf>skin_button_tb_print.swf</swf>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="Form Mode" type="built-in-form" id="6">
+			<name>SearchInput</name>
+			<wf>
+				<swf>skin_textfield.swf</swf>
+				<align>right</align>
+				<navcomponent>Search</navcomponent>
+				<font>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:none font-color:Black</font>
+			</wf>
+		</toolbaritem>
+		<toolbaritem mode="Logo Mode" type="built-in-logo" id="7">
+			<name>Logo/Author</name>
+			<wf>
+				<swf>skin_button_tb_poweredby.swf</swf>
+				<align>right</align>
+				<dialog>skin_aboutbox.swf</dialog>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+	</pane>
+	<pane name="MiniBar Pane">
+		<image></image>
+		<wf>
+			<swf>wf_navbar.swf</swf>
+			<color></color>
+			<background-swf>skin_background_nav.swf</background-swf>
+			<tooltip backgroundcolor="White" fontname="_sans" fontsize="10" fontcolor="Black" timeout="4"/>
+		</wf>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-previous" id="8">
+			<name>Previous</name>
+			<wf>
+				<swf>skin_button_nav_previous.swf</swf>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-next" id="9">
+			<name>Next</name>
+			<wf>
+				<swf>skin_button_nav_next.swf</swf>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-synctoc" id="10">
+			<name>Sync TOC</name>
+			<wf>
+				<swf>skin_button_nav_sync.swf</swf>
+				<align>right</align>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+		<toolbaritem mode="BtnWithIcon Mode" type="built-in-hide" id="11">
+			<name>Hide</name>
+			<wf>
+				<swf>skin_button_nav_close.swf</swf>
+				<align>right</align>
+			</wf>
+			<text>::??DefaultWebSkinText??::</text>
+		</toolbaritem>
+	</pane>
+	<pane name="Navigation Pane">
+		<wf>
+			<background-swf>skin_background_navpane.swf</background-swf>
+		</wf>
+		<subpane name="Scrollbar">
+			<wf>
+				<color></color>
+				<swf>skin_scrollbar.swf</swf>
+			</wf>
+		</subpane>
+		<subpane name="Contents">
+			<wf>
+				<swf>wf_toc.swf</swf>
+				<textnode>skin_textnode.swf</textnode>
+				<visualswf>skin_toc.swf</visualswf>
+				<speed>10</speed>
+				<font>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:none font-color:Black</font>
+				<font-hover>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:underline font-color:#54678D</font-hover>
+				<tooltip backgroundcolor="White" fontname="_sans" fontsize="10" fontcolor="Black" timeout="4"/>
+			</wf>
+		</subpane>
+		<subpane name="Index">
+			<wf>
+				<swf>wf_index.swf</swf>
+				<visualswf>skin_index.swf</visualswf>
+				<inputswf>skin_textfield.swf</inputswf>
+				<textnode>skin_textnode.swf</textnode>
+				<font>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:none font-color:Black</font>
+				<font-hover>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:underline font-color:#54678D</font-hover>
+				<tooltip backgroundcolor="White" fontname="_sans" fontsize="10" fontcolor="Black" timeout="4"/>
+			</wf>
+		</subpane>
+		<subpane name="Search">
+			<wf>
+				<swf>wf_search.swf</swf>
+				<visualswf>skin_search.swf</visualswf>
+				<inputswf>skin_textfield.swf</inputswf>
+				<textnode>skin_textnode.swf</textnode>
+				<font>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:none font-color:Black</font>
+				<font-hover>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:underline font-color:#54678D</font-hover>
+				<tooltip backgroundcolor="White" fontname="_sans" fontsize="10" fontcolor="Black" timeout="4"/>
+			</wf>
+		</subpane>
+		<subpane name="Glossary">
+			<wf>
+				<swf>wf_glossary.swf</swf>
+				<visualswf>skin_glossary.swf</visualswf>
+				<textnode>skin_textnode.swf</textnode>
+				<font>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:none font-color:Black</font>
+				<font-hover>font-family:Arial font-size:12pt font-weight:Normal font-style:Normal text-decoration:underline font-color:#54678D</font-hover>
+				<tooltip backgroundcolor="White" fontname="_sans" fontsize="10" fontcolor="Black" timeout="4"/>
+			</wf>
+		</subpane>
+	</pane>
+	<pane name="Topic Pane">
+		<scrollbar>
+			<color></color>
+		</scrollbar>
+	</pane>
+	<dependencies>
+		<dependency>
+			<filename>skin_aboutbox.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_background_nav.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_background_navpane.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_background_tb.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_nav_close.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_nav_next.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_nav_previous.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_nav_sync.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_tb_glossary.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_tb_index.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_tb_poweredby.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_tb_print.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_tb_search.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_button_tb_toc.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_glossary.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_index.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_scrollbar.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_search.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_textfield.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_textnode.fla</filename>
+		</dependency>
+		<dependency>
+			<filename>skin_toc.fla</filename>
+		</dependency>
+	</dependencies>
+</sqwebskin>

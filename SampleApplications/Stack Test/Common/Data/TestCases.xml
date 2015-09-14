@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    LogDetailLevel - Possible Masks
+    
+    /// Log all errors.
+    Errors = 0x01,
+    
+    /// Log an event when starting the first iteration for a test case.
+    FirstStart = 0x02,
+    
+    /// Log an event when starting the all iterations for a test case.
+    AllsStarts = 0x04,
+
+    /// Log an event after completing the last iteration for a test case.
+    LastEnd = 0x08,
+
+    /// Log an event after completing each iterations for a test case.
+    AllsEnds = 0x10,
+    
+    /// Log first 24 bytes of random data used to create the request/response data.
+    RandomData = 0x20   
+-->
+<TestSequence xmlns="http://opcfoundation.org/UA/Test" HaltOnError="true" LogDetailLevel="11">
+  <!--Serialization Tests Start-->
+  <!--DelayedProcessing -->
+  <!-- SerializerIOP-->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>SerializerDirect</Name>
+    <Seed>15000</Seed>
+    <ResponseSeed>15000</ResponseSeed>
+    <Start>0</Start>
+    <Count>5000</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>1024</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>8</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>AlwaysCheckSizes</Name>
+      <Value>1</Value>
+    </Parameter>
+  </TestCase>
+  <TestCase SkipTest="true">
+    <Name>SerializerDirect</Name>
+    <Seed>8500</Seed>
+    <ResponseSeed>9000</ResponseSeed>
+    <Start>0</Start>
+    <Count>5000</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>1024</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>8</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+  </TestCase>
+  <TestCase SkipTest="true">
+    <Name>SerializerDirectEx</Name>
+    <Seed>34000</Seed>
+    <ResponseSeed>34000</ResponseSeed>
+    <Start>0</Start>
+    <Count>1000</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>1024</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>8</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+  </TestCase>
+  -->
+  <!-- ScalarValues-->
+  <TestCase SkipTest="false">
+    <Name>ScalarValues</Name>
+    <Seed>10000</Seed>
+    <ResponseSeed>10000</ResponseSeed>
+    <Start>0</Start>
+    <Count>1000</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>1024</Value>
+    </Parameter>
+  </TestCase>
+  <!--ArrayValues-->
+  <TestCase SkipTest="false">
+    <Name>ArrayValues</Name>
+    <Seed>2000</Seed>
+    <ResponseSeed>20000</ResponseSeed>
+    <Start>0</Start>
+    <Count>250</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>10</Value>
+    </Parameter>
+  </TestCase>
+  <!--ExtensionObjectValues -->
+  <TestCase SkipTest="false">
+    <Name>ExtensionObjectValues</Name>
+    <Seed>3000</Seed>
+    <ResponseSeed>30000</ResponseSeed>
+    <Start>0</Start>
+    <Count>10000</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+  </TestCase>
+  <TestCase SkipTest="false">
+    <Name>ExtensionObjectValues</Name>
+    <Seed>3000</Seed>
+    <ResponseSeed>30000</ResponseSeed>
+    <Start>0</Start>
+    <Count>250</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>1</Value>
+    </Parameter>
+  </TestCase>
+  <!--BuiltInType -->
+  <TestCase SkipTest="false">
+    <Name>BuiltInTypes</Name>
+    <Seed>4000</Seed>
+    <ResponseSeed>40000</ResponseSeed>
+    <Start>0</Start>
+    <Count>250</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>10</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>3</Value>
+    </Parameter>
+  </TestCase>
+  <!--Serialization Tests End-->
+  <!--Fault Tests Start-->
+  <!-- LargeMessages -->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>LargeMessages</Name>
+    <Seed>1234</Seed>
+    <ResponseSeed>5678</ResponseSeed>
+    <Start>0</Start>
+    <Count>50</Count>
+    <Parameter>
+      <Name>ServerMaxMessageSize</Name>
+      <Value>128000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>ClientMaxMessageSize</Name>
+      <Value>250000</Value>
+    </Parameter>
+  </TestCase>
+  -->
+  <!--ServerFault -->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>ServerFault</Name>
+    <Seed>11000</Seed>
+    <ResponseSeed>110000</ResponseSeed>
+    <Start>0</Start>
+    <Count>100</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>1024</Value>
+    </Parameter>
+  </TestCase>
+  -->
+  <!--ServerTimeout -->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>ServerTimeout</Name>
+    <Seed>12000</Seed>
+    <ResponseSeed>120000</ResponseSeed>
+    <Start>0</Start>
+    <Count>20</Count>
+    <Parameter>
+      <Name>MinTimeout</Name>
+      <Value>2000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxTimeout</Name>
+      <Value>6000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>1024</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxTransportDelay</Name>
+      <Value>1000</Value>
+    </Parameter>
+  </TestCase>
+  -->
+  <!--Fault Tests End-->
+  <!--Protocol Tests Start-->
+  <!--DelayedProcessing -->
+  <!--DelayedProcessing -->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>AutoReconnect</Name>
+    <DisplayText>AutoReconnect - Interrupted Listener</DisplayText>
+    <Seed>9001</Seed>
+    <ResponseSeed>9002</ResponseSeed>
+    <Start>0</Start>
+    <Count>100</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxResponseDelay</Name>
+      <Value>1</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxTransportDelay</Name>
+      <Value>2000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>RequestInterval</Name>
+      <Value>1000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventType</Name>
+      <Value>4</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventFrequency</Name>
+      <Value>10</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxRecoveryTime</Name>
+      <Value>10000</Value>
+    </Parameter>
+  </TestCase>
+  <TestCase SkipTest="true">
+    <Name>AutoReconnect</Name>
+    <DisplayText>AutoReconnect - Corrupt Messages</DisplayText>
+    <Seed>9001</Seed>
+    <ResponseSeed>9002</ResponseSeed>
+    <Start>0</Start>
+    <Count>100</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxResponseDelay</Name>
+      <Value>10000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxTransportDelay</Name>
+      <Value>2000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>RequestInterval</Name>
+      <Value>1000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventType</Name>
+      <Value>1</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventFrequency</Name>
+      <Value>3</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxRecoveryTime</Name>
+      <Value>2000</Value>
+    </Parameter>
+  </TestCase>
+  -->
+  <!--DelayedProcessing -->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>AutoReconnect</Name>
+    <DisplayText>AutoReconnect - Duplicate Sequence Numbers</DisplayText>
+    <Seed>9003</Seed>
+    <ResponseSeed>9004</ResponseSeed>
+    <Start>0</Start>
+    <Count>30</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxResponseDelay</Name>
+      <Value>10000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxTransportDelay</Name>
+      <Value>2000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>RequestInterval</Name>
+      <Value>1000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventType</Name>
+      <Value>2</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventFrequency</Name>
+      <Value>3</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxRecoveryTime</Name>
+      <Value>2000</Value>
+    </Parameter>
+  </TestCase>
+  -->
+  <!--DelayedProcessing -->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>AutoReconnect</Name>
+    <DisplayText>AutoReconnect - Broken Sockets</DisplayText>
+    <Seed>9005</Seed>
+    <ResponseSeed>9006</ResponseSeed>
+    <Start>0</Start>
+    <Count>30</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>256</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxArrayLength</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxDepth</Name>
+      <Value>5</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxResponseDelay</Name>
+      <Value>10000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxTransportDelay</Name>
+      <Value>2000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>RequestInterval</Name>
+      <Value>1000</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventType</Name>
+      <Value>3</Value>
+    </Parameter>
+    <Parameter>
+      <Name>StackEventFrequency</Name>
+      <Value>10</Value>
+    </Parameter>
+    <Parameter>
+      <Name>MaxRecoveryTime</Name>
+      <Value>2000</Value>
+    </Parameter>
+  </TestCase>
+  -->
+  <!--Protocol Tests End-->
+  <!--MultipleChannels-->
+  <!--
+  <TestCase SkipTest="true">
+    <Name>MultipleChannels</Name>
+    <Seed>10000</Seed>
+    <ResponseSeed>100000</ResponseSeed>
+    <Start>0</Start>
+    <Count>100</Count>
+    <Parameter>
+      <Name>MaxStringLength</Name>
+      <Value>1024</Value>
+    </Parameter>
+    <Parameter>
+      <Name>ChannelsPerServer</Name>
+      <Value>20</Value>
+    </Parameter>
+    <Parameter>
+      <Name>ServerDetails</Name>
+      <Value>Server1$opc.tcp://localhost:9001/UA/SampleServer</Value>
+      <Value>Server1$http://localhost:9000/UA/SampleServer</Value>
+    </Parameter>
+  </TestCase>
+  -->
+</TestSequence>

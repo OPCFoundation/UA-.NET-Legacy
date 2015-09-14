@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 1 - New ProjectClient</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Client Development Tutorial</h1>
+<h2>Step 1 - Creating a new ClientProject</h2>
+<p>In this section you will copy an existing project, rename it, add it 
+ to the existing solution, and then rename all resources as appropriate.</p>
+<ol type="1">
+	<li><p>Open <?rh-udv_start name="vsnet" ?>Visual Studio .NET 2008<?rh-udv_end ?> 
+	 and then open the Sample Applications Source Code solution. The default 
+	 installation location will be:<br />
+	<span style="font-family: 'Courier New', monospace;">C:\Program Files\OPC 
+	 Foundation\Unified Architecture Sample Applications\source\SampleApplications.sln</span></p></li>
+	<li><p>We will now duplicate the Reference Client project: </p></li>
+	<ol type="1">
+		<li><p>Now switch to Windows Explorer.</p></li>
+		<li><p>Locate the &quot;Reference Client&quot; project, which is 
+		 in the following default location:<br />
+		<span style="font-family: 'Courier New', monospace;">C:\Program 
+		 Files\OPC Foundation\Unified Architecture Sample Applications\source\workshop\reference</span></p></li>
+		<li><p>Right-click on the &quot;Client&quot; directory and choose 
+		 Copy.</p></li>
+		<li><p>In the same &quot;reference&quot; folder you will Paste.</p></li>
+		<li><p>A duplicate folder called &quot;Client- copy&quot; will 
+		 be created. Rename this folder as appropriate, e.g. MyClient.</p></li>
+		<li><p>Double-click the new folder to open it.</p></li>
+		<li><p>Rename the file &quot;Reference Server.csproj&quot; as appropriate, 
+		 e.g. &quot;MyClient&quot;.<br />
+		Note: this will not rename all resources as necessary.</p></li>
+		<li><p>Switch back to <?rh-udv_start name="vsnet" ?>Visual Studio .NET 2008<?rh-udv_end ?>.</p></li>
+	</ol>
+	<li><p>Within this solution you can Add the project you previously 
+	 copied: </p></li>
+	<ol type="1">
+		<li><p>Right-click on the &quot;ComplianceReference&quot; folder 
+		 that is visible within the Solution Explorer, choose Add Existing 
+		 Project.</p></li>
+		<li><p>Using the navigation window locate, highlight, and select 
+		 the *.csproj that you renamed in step 2.7 above.</p></li>
+		<li><p>The newly added project will be added to the solution and 
+		 visible in the solution explorer.</p></li>
+	</ol>
+	<li><p>Now rename the remaining resources as appropriate: </p></li>
+	<ol type="1">
+		<li><p>Assembly name:</p></li>
+		<ol type="1">
+			<li><p>Open the properties of the newly added project.</p></li>
+			<li><p>Modify the &quot;Assembly name&quot;, e.g. &quot;Quickstarts.MyClient&quot;.</p></li>
+			<li><p>Modify the &quot;Default namespace&quot;, e.g. &quot;Quickstarts.MyClient&quot;.</p></li>
+		</ol>
+		<li><p>Product Renaming:</p></li>
+		<ol type="1">
+			<li><p>Within the current project, conduct a search and replace 
+			 &quot;ReferenceClient&quot; with the intended name, e.g. &quot;MyClient&quot;.</p></li>
+			<li><p>Again, within the same project conduct a search and 
+			 replace &quot;Reference Client&quot; with the intended name, 
+			 e.g. &quot;My Client&quot;.</p></li>
+			<li><p>You may also with to rename the &quot;OPC Foundation&quot; 
+			 branding as your own company, in which case simply search 
+			 and replace &quot;&quot;OPC Foundation&quot; (note the quote 
+			 before OPC) with your company name, e.g. &quot;My Company&quot;.</p></li>
+			<li><p>Rename the configuration file &quot;Quickstarts.ReferenceClient.Config.Xml&quot;, 
+			 e.g. &quot;Quickstarts.MyClient.Config.Xml&quot;.</p></li>
+		</ol>
+		<li><p>Compile the application and run it to make sure that it 
+		 opens and that the application name matches your expectations. 
+		 </p></li>
+		<li><p>If you are an inquisitive person you might try connecting 
+		 a UA Server to your newly created UA Client.</p></li>
+	</ol>
+</ol>
+<p>At this point you have created a clone of the <a href="Overview_-_Reference_Client.htm">Reference 
+ Client</a>.</p>
+<p>Next, <a href="Step_2_-_Enhance_User_Interface.htm">Step 2 - Enhance 
+ User Interface</a>.</p>
+</body>
+</html>

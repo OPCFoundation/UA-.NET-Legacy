@@ -1,0 +1,128 @@
+﻿[Target:WebHelp Pro]
+ResultFileName=!SSL!\WebHelp_Pro\OPCF_UA_TechnologySamples.htm
+SSLayoutType=32
+ServerProjectName=OPCF_UA_TechnologySamples
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Microsoft HTML Help]
+ResultFileName=!SSL!\Microsoft_HTML_Help\OPCF_UA_TechnologySamples.chm
+SSLayoutType=1
+CreateProjectTime=11:14, December 05, 2011
+CreateProjectUser=nathan
+SupportMas_MPJ=1
+ActionID For Generation=1013
+Remove Folder with prompt=1
+ViewFileName=!SSL!\Microsoft_HTML_Help\OPCF_UA_TechnologySamples.chm
+ResultStatus=0
+BuildTimeHi=30275583
+BuildTimeLow=1371285849
+Enable Result Dialog=1
+[Target:FlashHelp]
+ResultFileName=!SSL!\FlashHelp\index.htm
+SSLayoutType=2
+CreateProjectTime=13:52, November 18, 2011
+CreateProjectUser=nathan
+SupportMas_MPJ=1
+ActionID For Generation=1001
+Remove Folder with prompt=1
+ViewFileName=!SSL!\FlashHelp\index.htm
+ResultStatus=0
+BuildTimeHi=30189108
+BuildTimeLow=267406585
+[Target:Printed Documentation]
+ResultFileName=!SSL!\Printed_Documentation\Printed_Documentation.doc
+SSLayoutType=7
+ActionID For Generation=1001
+Remove Folder with prompt=1
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+ViewFileName=!SSL!\Printed_Documentation\Printed_Documentation.doc
+ResultStatus=0
+BuildTimeHi=30186349
+BuildTimeLow=-2024547819
+[Target:XML Output]
+ResultFileName=!SSL!\XML_Output\OPCF_UA_TechnologySamples.xml
+SSLayoutType=8129
+[Target:FlashHelp Pro]
+ResultFileName=!SSL!\FlashHelp_Pro\OPCF_UA_TechnologySamples.htm
+SSLayoutType=2
+ServerProjectName=OPCF_UA_TechnologySamples
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+[Target:Adobe AIR]
+ResultFileName=!SSL!\Adobe_AIR\AdobeAIRApplication\OPCF_UA_TechnologySamples.air
+SSLayoutType=512
+CreateProjectTime=
+CreateProjectUser=
+SupportMas_MPJ=1
+ActionID For Generation=1001
+Remove Folder with prompt=1
+ViewFileName=!SSL!\Adobe_AIR\AdobeAIRApplication\OPCF_UA_TechnologySamples.air
+ResultStatus=2
+LivePreviewStatus=2
+[PreSingleSource]
+Html Help Project=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.hhp
+Table Of Content=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\AppHelp.hhc
+Index=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\AppHelp.hhk
+Topic Index=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\RHTopicKeyword$.hhk
+See Also Index=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.hha
+Browse Sequence=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.brs
+Glossary=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\AppHelp.glo
+Topic Properties=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trs
+Active Folders=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trf
+Baggage Files=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trb
+Skin List=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trk
+Active Layout Names=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trl
+Template Files=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trt
+Project TOC List=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trtocl
+Project Index List=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.tridxl
+Project Glossary List=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trglol
+Project CSS List=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trcss
+Project Variable Set List=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\OPCF_UA_TechnologySamples.trvset
+External URL Settings=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\SearchOptions.xml
+Default Topic=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\About_the_OPC_Foundation.htm
+Build Tags0=27803;Member | Online | Print
+Build Tags=
+Build Expression=
+Language ID=1033
+Language Name=en_US
+Language=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\!Language!\en_US\RoboHHRE.lng
+Stop List=C:\Users\nathan.PANORAMIX\Documents\My RoboHelp Projects\Dashboard\!Language!\en_US\OPCF_UA_TechnologySamples.stp
+[Global Build Tag Expressions]
+Expr_2011:12:13:12:45:23=NOT Member
+[Layout Settings]
+MRULayoutCount=2
+MRULayout0=WebHelpMembers]09/04/13]0
+MRULayout1=WebHelpNonMembers]09/04/13]0
+MRULayout2=WebHelpNonMembers]01/21/13]0
+[Target:WebHelpNonMembers]
+Remove Folder with prompt=1
+ViewFileName=!SSL!\WebHelpNonMembers\index.htm
+SSLayoutType=2
+CreateProjectUser=nathan
+ResultStatus=0
+CreateProjectTime=06:50, September 04, 2013
+ResultFileName=!SSL!\WebHelpNonMembers\index.htm
+Enable Result Dialog=1
+ActionID For Generation=1013
+SupportMas_MPJ=1
+BuildTimeLow=-1150984453
+BuildTimeHi=30321013
+[Target:WebHelpMembers]
+Remove Folder with prompt=1
+ViewFileName=!SSL!\WebHelpMembers\index.htm
+SSLayoutType=2
+CreateProjectUser=nathan
+ResultStatus=0
+CreateProjectTime=06:50, September 04, 2013
+ResultFileName=!SSL!\WebHelpMembers\index.htm
+Enable Result Dialog=1
+ActionID For Generation=1013
+SupportMas_MPJ=1
+BuildTimeLow=-1254577831
+BuildTimeHi=30321013
+[Target:WebHelp]
+SSLayoutType=2

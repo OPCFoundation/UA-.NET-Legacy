@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="e296e1dc-e3cf-4085-bd2e-9b52ff068fca" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The Session class inherits from the SessionClient  which means all of the UA services are accessible as methods on the Session object.
+    </para>
+      <para>
+      The Session object  provides a number of helper methods including an <codeEntityReference>M:Opc.Ua.Client.Session.Open(System.String,Opc.Ua.IUserIdentity)</codeEntityReference> method which Creates and Activate a Session.  The process required when establishing a session with a Server is shown in Figure 1.
+    </para>
+      <mediaLink>
+        <caption placement="after" lead="Figure">1 – Open Session Flow Diagram</caption>
+        <image placement="center" xlink:href="46f6408a-a441-41f3-b6da-0012a0bf51c3" />
+      </mediaLink>
+      <para>
+      In the first step the Client application must choose the EndpointDescription to use. This can be done manually or by using the Discovery Services. In the next step the Client takes the EndpointDescription and uses it to create the Channel object. The Secure Channel is not actually established until the first Service call (CreateSession in this case). In the next step, the Session object is created and the <codeEntityReference>M:Opc.Ua.Client.Session.Open(System.String,Opc.Ua.IUserIdentity)</codeEntityReference> method is called. The <codeEntityReference>M:Opc.Ua.Client.Session.Open(System.String,Opc.Ua.IUserIdentity)</codeEntityReference> method will validate the information provided by the Server and then call ActivateSession with the user identity passed to the method call. If ActivateSession succeeds the client application will be able to call other methods.
+    </para>
+      <para>
+      After activating the session the Session object starts periodically reading the current  state from the Server at a rate specified by the <codeEntityReference>P:Opc.Ua.Client.Session.KeepAliveInterval</codeEntityReference> (default is 5s). Each time a response is received the state and latest timestamp is reported as a <codeEntityReference>E:Opc.Ua.Client.Session.KeepAlive</codeEntityReference> event. If the response does not arrive after 2 KeepAliveIntervals have elapsed a <codeEntityReference>E:Opc.Ua.Client.Session.KeepAlive</codeEntityReference> event with an error is raised. The <codeEntityReference>P:Opc.Ua.Client.Session.KeepAliveStopped</codeEntityReference> property will be set to true. If communication resumes the normal <codeEntityReference>E:Opc.Ua.Client.Session.KeepAlive</codeEntityReference> events will be reported and the <codeEntityReference>P:Opc.Ua.Client.Session.KeepAliveStopped</codeEntityReference> property will go back to false.
+    </para>
+      <para>
+      The client application uses the <codeEntityReference>E:Opc.Ua.Client.Session.KeepAlive</codeEntityReference> event and <codeEntityReference>P:Opc.Ua.Client.Session.KeepAliveStopped</codeEntityReference> property to detect communication problems with the server. In some cases these communication problems will be temporary but while they are going on the client application may choose not to invoke any services because they would likely timeout. If the channel does not come back on its own the client application will execute whatever error recovery logic it has.
+    </para>
+      <para>
+      Client applications need to ensure that the OperationTimeout is not set too low. If a call times out the WCF channel is closed automatically and the client application will need to create a new one . Creating a new channel will take time and require another call to ActivateSession. The <codeEntityReference>P:Opc.Ua.Client.Session.KeepAliveStopped</codeEntityReference> property allows applications to detect failures even if they are using a lonOperationTimeoutg OperationTimeout.
+    </para>
+      <para>
+      The Session object provides a cache that can be used to store Nodes that are accessed frequently. The cache is particularly useful for storing the types defined by the server because the client will often need to check if one type is a subtype of another. The cache can be accessed via the <codeEntityReference>T:Opc.Ua.Client.NodeCache</codeEntityReference> property of the Session object. The type hierarchies stored in the cache can be searched using the <codeEntityReference>P:Opc.Ua.Client.NodeCache.TypeTree</codeEntityReference> property of the <codeEntityReference>T:Opc.Ua.Client.NodeCache</codeEntityReference> or Session object (the both return a reference to the same object).
+    </para>
+      <para>
+      The <codeEntityReference>T:Opc.Ua.Client.NodeCache</codeEntityReference> is populated with the <codeEntityReference>M:Opc.Ua.Client.NodeCache.FetchNode(Opc.Ua.ExpandedNodeId)</codeEntityReference> method which will read all of the attributes for the Node and the fetch all of its references. The <codeEntityReference>M:Opc.Ua.Client.NodeCache.Find(Opc.Ua.ExpandedNodeId)</codeEntityReference> method on the <codeEntityReference>T:Opc.Ua.Client.NodeCache</codeEntityReference> looks for a previously cached version of the Node and calls the <codeEntityReference>M:Opc.Ua.Client.NodeCache.FetchNode(Opc.Ua.ExpandedNodeId)</codeEntityReference> method if it does not exist.
+    </para>
+      <para>
+      Client applications that wish to use the <codeEntityReference>T:Opc.Ua.Client.NodeCache</codeEntityReference> must pre-fetch all the ReferenceType hierarchy supported by the Server by calling <codeEntityReference>M:Opc.Ua.Client.Session.FetchTypeTree(Opc.Ua.ExpandedNodeId)</codeEntityReference> method on the Session object.
+    </para>
+      <para>
+      The Session object is responsible for sending and processing the Publish requests. Client applications can receive notifications whenever a new <codeEntityReference>P:Opc.Ua.Client.NotificationEventArgs.NotificationMessage</codeEntityReference> is received by subscribing to the Publish event. The <codeEntityReference>E:Opc.Ua.Client.Session.PublishError</codeEntityReference> event is raised whenever a Publish response reports an error.
+    </para>
+      <para>
+      The <codeEntityReference>E:Opc.Ua.Client.Session.SubscriptionsChanged</codeEntityReference> event indicates when a Subscription is added or removed.
+    </para>
+      <para>
+      The <codeEntityReference>E:Opc.Ua.Client.Session.SessionClosing</codeEntityReference> event indicates that the Session is about to be closed.
+    </para>
+      <para>
+      Session objects and their Subscriptions can be persisted as an XML element. This element can then be added to a <codeEntityReference> T:Opc.Ua.ConfiguredEndpoint</codeEntityReference> object and added to a <codeEntityReference>T:Opc.Ua.ConfiguredEndpointCollection</codeEntityReference></para>
+      <para>
+      The Session is designed for multi-threaded operation because client application frequently need to make multiple simultaneous calls to the Server. However, calls that update the Session (CreateSession or ActivateSession) state must proceed in order so there is a specific synchronization lock for those operations.  Client applications that use the Session class yet call these Services directly must acquire the StateLock before calling CreateSession or ActivateSession. The Session also maintains a synchronization lock for all data access while processing Publish or <codeEntityReference>E:Opc.Ua.Client.Session.KeepAlive</codeEntityReference> responses. This lock is released before any events are raised.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

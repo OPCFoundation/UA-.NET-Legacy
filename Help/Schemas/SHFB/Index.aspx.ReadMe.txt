@@ -1,0 +1,2 @@
+In Index.aspx two lines have been removed. This lines was responsible for automatic expand help tree.
+File Index.aspx need to be copied to .\Program Files\EWSoftware\SHFB\Web\ (default path for SHFB)

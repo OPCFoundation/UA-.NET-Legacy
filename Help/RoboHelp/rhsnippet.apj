@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="4" minorversion="0">
+	<files>
+		<file>
+			<name>StoreType.hts</name>
+			<comments></comments>
+			<category></category>
+		</file>
+		<file>
+			<name>StorePath.hts</name>
+			<comments></comments>
+			<category></category>
+		</file>
+		<file>
+			<name>CertificateFilters.hts</name>
+			<comments></comments>
+			<category></category>
+		</file>
+		<file>
+			<name>AppName.hts</name>
+			<comments></comments>
+			<category></category>
+		</file>
+	</files>
+</rhpml>

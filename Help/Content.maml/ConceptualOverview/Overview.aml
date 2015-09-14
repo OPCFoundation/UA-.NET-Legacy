@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="fe59164f-1db4-4cdb-9de3-e50ffbb24548" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The UA ample Libraries is a collection of libraries, applications and source code that allow developers to build UA applications. Figure 1 illustrates the interfaces between the UA libraries, the network and the applications.
+    </para>
+      <mediaLink>
+        <caption placement="after" lead="Figure">1 – Software Interfaces in the UA libraries </caption>
+        <image placement="center" xlink:href="85f951d9-63f7-4b57-a6d3-527997c12f0e" />
+      </mediaLink>
+      <para>
+      The <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> API encapsulates the details of the wire protocol behind a set of classes and interfaces. These interfaces implement all of the UA services defined in [UA UASPECPart  4] as method calls. Applications which are built with the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> API do not have any direct dependencies on the wire protocol and support all protocols which are supported by the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" />.
+    </para>
+      <para>
+      Each wire protocol used in UA is a combination of a messaging encoding, a security protocol and a transport protocol. These combinations are called <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> Profiles and they are defined in [UA UASPECPart  7]. The <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> makes use of features provided by the development environment whenever possible (e.g. the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> uses the WS-Secure Conversation implementation which is a part of .NET Framework 3.0).
+    </para>
+      <para>
+      The <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> provides an implementation of the wire protocol(s) plus a variety of helper classes but does not contain any application level code. For this reason the UA Sample Libraries also provides toolkits which implement features which are common to all UA applications. These toolkits are built on top of the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> API and expose a second API (called the Toolkit API). The Toolkit API is designed ease of use and applications which use it will be tightly coupled to the Toolkit. The Toolkit API for the Client is also called the UA Client API. Similarly, the Toolkit API for a Server is called the UA Server API.
+    </para>
+      <para>
+      The COM Proxies and Wrappers are UA Applications built with the Toolkits that use COM interfaces to communicate with existing OPC COM applications. The Proxies are COM Servers that allow COM Clients to communicate with UA Servers. The Wrappers are COM Clients that allow UA Clients to communicate with COM Servers. Note that the COM wrappers/proxies are examples of applications built with the UA libraries and not part of the product itself.
+    </para>
+      <para>
+      Figure 2 illustrates how UA applications built with the libraries interact with each other over a network.
+    </para>
+      <mediaLink>
+        <caption placement="after" lead="Figure">2 –  Interactions between UA Applications built with the libraries</caption>
+        <image placement="center" xlink:href="a9d536b4-673f-446d-a728-7e3105c70645" />
+      </mediaLink>
+      <para>
+      A UA Local Discovery Server (LDS) is a specialized application which allows remote Clients to discover the UA Servers that exist on a single machine.  All UA Servers running on a machine should register with the UA Local Discovery Server using the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> API. The UA Local Discovery Server is a standalone executable that is distributed with the libraries.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

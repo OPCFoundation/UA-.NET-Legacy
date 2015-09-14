@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Manage Certificates</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>UA Configuration Tool - Manage Certificates Tab</h1>
+<p>The [Manage Certificates] tab provides options for administering a certificate 
+ repository, that is a place where certificates are stored for applications/users 
+ that are trusted and/or not trusted.</p>
+<p class="Picture"><img src="image4.gif" alt="" style="border: none;" border="0" /></p>
+<h3>Field Descriptions</h3>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.041%;" />
+	<col style="width: 76.959%;" />
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Store Type</p></td>
+		<td><?rh-placeholder type="snippet" ref="StoreType" ?></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Store Path</p></td>
+		<td><?rh-placeholder type="snippet" ref="StorePath" ?></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">CA Key File</p></td>
+		<td><p>If you have a &quot;Certificate Authority&quot; configured, 
+		 then use the <span style="font-weight: bold;">Browse</span><span> 
+		 button to select the key-file.</span></p></td>
+	</tr>
+</table>
+<h2>View Certificates</h2>
+<p>For viewing the certificates within the currently selected certificate 
+ repository.</p>
+<p class="Picture"><img src="image23.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Create Certificate Authority</h2>
+<p>Creating your own certificate authority is accomplished by clicking 
+ the <span style="font-weight: bold;">Create Certificate Authority</span> 
+ button: </p>
+<p class="Picture"><img src="image24.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>All fields are required.</p>
+<h2>Select and Issue Certificate</h2>
+<p>The rapid re-generation of a new certificate that is based on an existing 
+ certificate can save you time and avoid the need to re-enter similar information. 
+ Clicking the <span style="font-weight: bold;">Select and Issue Certificate</span> 
+ button allows you to choose an existing certificate first, and then to 
+ edit the pre-populated fields as shown:</p>
+<p class="Picture"><img src="image25.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Import and Issue Certificate</h2>
+<p>Simply locate the current/original certificate file first, and the complete 
+ the screen enabling you to modify the contents of the certificate.</p>
+<h2>Export Private Key</h2>
+<p>Click the <span style="font-weight: bold;">Export Private Key</span> 
+ button to select the certificate:</p>
+<p class="Picture"><img src="image26.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>... then use the save dialog to create the new certificate.</p>
+<h2>Import Certificate to Store</h2>
+<p>Simply use the file dialog to locate your existing certificate to import.</p>
+<h2>Import Certificates into Store</h2>
+<p>Select the repository first, which contains the certificates you want 
+ to import (source).</p>
+<p class="Picture"><img src="image27.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Upon clicking the <span style="font-weight: bold;">OK</span><span> button 
+ the certificates will be imported into the currently selected application's 
+ trust list.</span></p>
+<h2>Issue SSL/TLS Certificate</h2>
+<p>Use the following dialog to create a new SSL/TLS certificate.</p>
+<p class="Picture"><img src="image28.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Bind SSL/TLS Certificate</h2>
+<p class="Picture"><img src="image30.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>See also:</p>
+<ul type="disc">
+	<li><p><span><a href="UaConfig_Manage_Application.htm">Manage Application</a> 
+	 tab.</span></p></li>
+	<li><p><a href="UaConfig_Manage_Certificates.htm">Manage Certificates</a> 
+	 tab.</p></li>
+	<li><p><a href="HTTPS_Connectivity.htm">HTTPS Connectivity</a> tutorial.</p></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="289241c2-8381-4d65-8a0a-67420fdf1093" revisionNumber="1">
+  <developerSDKTechnologyOverviewOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>The topics contained in this section are intended to give you quick exposure to the PC UA sample application. Working through this tutorial gives you an introductory understanding of the steps required to use sample server and client applications. The sample server is a construct that exposes a few endpoints.</para>
+    </introduction>
+    <inThisSection>
+      <content>
+        <para>
+          <link xlink:href="9bfe7feb-3a55-4737-a1c7-63d15f0d77ef" />
+        </para>
+        <para>This section describes how to use an MMC plug-in to browse the certificate store and manage the certificates in it.</para>
+      </content>
+    </inThisSection>
+  </developerSDKTechnologyOverviewOrientationDocument>
+</topic>

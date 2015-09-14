@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="topic-check-list" content="Ran Smart Index" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>HAClientOverview</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Historical Data Client Overview</h1>
+<p>The Historical Data Client is a purpose-built client that demonstrates 
+ the use of Historical Data as described in <a href="http://www.opcfoundation.org/ua/part11"><?rh-udv_start 
+	 name="UaSpec11" ?>UA Specifications Part 11 - Historical Access (http://www.opcfoundation.org/ua/part11)<?rh-udv_end ?></a>.</p>
+<h2>User Interface</h2>
+<p class="Picture"><img src="image87.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Screen Elements</h2>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 23.705%;" />
+	<col style="width: 76.295%;" />
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Menus</span></p></td>
+		<td style="vertical-align: Top;"><ul type="disc">
+			<li><p><span style="font-weight: bold;">File</span></p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Exit:</span> Quit 
+				 the application</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Server</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Discover</span>: 
+				 See <a href="UaGenericClientDiscovery.htm">UA Discovery</a>.</p></li>
+				<li><p><span style="font-weight: bold;">Connect</span>: 
+				 Connects to the currently selected endpoint.</p></li>
+				<li><p><span style="font-weight: bold;">Disconnect</span>: 
+				 Disconnects from a Server (if connected).</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Aggregates</span>:</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Enable Subscription</span>: 
+				 Checked means the subscription is active; unchecked will 
+				 disable the subscription.</p></li>
+				<li><p><span style="font-weight: bold;">Select Variable</span>: 
+				 Opens a node browser dialog that will modify the NodeId 
+				 shown in the &quot;Variable&quot; field.</p></li>
+				<li><p><span style="font-weight: bold;">Select Aggregate 
+				 Type</span>: Not implemented.</p></li>
+				<li><p><span style="font-weight: bold;">View Historical 
+				 Configuration</span>: Described below.</p></li>
+				<li><p><span style="font-weight: bold;">Modify Aggregate 
+				 Filter</span>: Not implemented.</p></li>
+			</ul>
+			<li><p><span style="font-weight: bold;">Help</span>: </p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Contents</span>: 
+				 Launches this help documentation.</p></li>
+			</ul>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Banner</span></p></td>
+		<td style="vertical-align: Top;"><p>Shows the OPC Foundation logo 
+		 and a [clickable] link to the website, shows the application name 
+		 in large text, and shows the Certification logo with a link for 
+		 more information online.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Endpoint Bar</span> (below banner)</p></td>
+		<td style="vertical-align: Top;"><p class="Picture"><img src="image38.gif" 
+		 alt="" style="border: none;" border="0" /></p>
+		<p>There are 3 key areas in the endpoint bar: </p>
+		<ul type="disc">
+			<li><p><span style="font-weight: bold;">Endpoint Url</span><span>: 
+			 the endpoint URL (of a Server) to connect to.</span></p></li>
+			<li><p><span style="font-weight: bold;">Use Security</span><span>: 
+			 (checkbox) if checked will use a secure session, if unchecked 
+			 then will use a raw/insecure session.</span></p></li>
+			<li><p><span style="font-weight: bold;">Connect button</span><span>:</span> 
+			 clicking this will attempt to connect to the specified endpoint.</p></li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Settings</span> (left)</p></td>
+		<td style="vertical-align: Top;"><p class="Picture"><img src="image88.gif" 
+		 alt="" style="border: none;" border="0" /></p>
+		<p>The settings allow you to specify the node which you will query 
+		 for history, along with other parameters including the start and 
+		 end times, and any statistical functions (aggregates) such as 
+		 min, max, average etc.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Data Value Display</span> (right)</p></td>
+		<td style="vertical-align: Top;"><p class="Picture"><img src="image89.gif" 
+		 alt="" style="border: none;" border="0" /></p>
+		<p>This area will display the historical data returned by the UA 
+		 Server that it determined matched your search criteria.</p></td>
+	</tr>
+</table>
+<h3>View Historical Configuration</h3>
+<p>The following dialog shows the current configuration in read-only dialog.</p>
+<p class="Picture"><img src="image90.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p><a href="HaData_Client_Aggregates.htm">Using aggregates to query data</a>.</p>
+</body>
+</html>

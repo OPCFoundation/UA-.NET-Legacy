@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationConfiguration
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd"
+>
+  <ApplicationName>UA Server Test</ApplicationName>
+  <ApplicationUri>urn:localhost:OPCFoundation:ServerTestTool</ApplicationUri>
+  <ProductUri>http://opcfoundation.org/UA/ServerTestTool</ProductUri>
+  <ApplicationType>Client_1</ApplicationType>
+  
+  <SecurityConfiguration>
+    <ApplicationCertificate>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\CertificateStores\MachineDefault</StorePath>
+      <SubjectName>UA Server Test</SubjectName>
+    </ApplicationCertificate>
+    <TrustedIssuerCertificates>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\CertificateStores\UA Certificate Authorities</StorePath>
+    </TrustedIssuerCertificates>
+    <TrustedPeerCertificates>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\CertificateStores\UA Applications</StorePath>
+    </TrustedPeerCertificates>
+    <RejectedCertificateStore>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\CertificateStores\RejectedCertificates</StorePath>
+    </RejectedCertificateStore>
+    <AutoAcceptUntrustedCertificates>false</AutoAcceptUntrustedCertificates>
+  </SecurityConfiguration>
+  
+  <TransportQuotas>
+    <OperationTimeout>600000</OperationTimeout>
+    <MaxStringLength>10485760</MaxStringLength>
+    <MaxByteStringLength>4194304</MaxByteStringLength>
+    <MaxArrayLength>655350</MaxArrayLength>
+    <MaxMessageSize>41943040</MaxMessageSize>
+    <MaxBufferSize>65535</MaxBufferSize>
+    <ChannelLifetime>300000</ChannelLifetime>
+    <SecurityTokenLifetime>60000</SecurityTokenLifetime>
+    <!--<SecurityTokenLifetime>86400000</SecurityTokenLifetime>-->
+  </TransportQuotas>
+  
+  <ClientConfiguration>
+    <DefaultSessionTimeout>60000</DefaultSessionTimeout>
+    <WellKnownDiscoveryUrls>
+      <ua:String>opc.tcp://{0}:4840</ua:String>
+      <ua:String>http://{0}:52601/UADiscovery</ua:String>
+      <ua:String>http://{0}/UADiscovery/Default.svc</ua:String>
+    </WellKnownDiscoveryUrls>
+    <DiscoveryServers />
+    <EndpointCacheFilePath>Opc.Ua.ServerTestTool.Endpoints.xml</EndpointCacheFilePath>
+  </ClientConfiguration>
+
+  <Extensions>
+    <ua:XmlElement>
+      <ServerTestConfiguration xmlns="http://opcfoundation.org/UA/SDK/ServerTest/Configuration.xsd">
+        <TestCases>
+          <ServerTestCase>
+            <Name>Session</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>KeepAlive</Name>
+            <Parent>Session</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Reconnect</Name>
+            <Parent>Session</Parent>
+            <Enabled>false</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Browse</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Hierarchical</Name>
+            <Parent>Browse</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>ReferenceType</Name>
+            <Parent>Browse</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>BrowseResultMask</Name>
+            <Parent>Browse</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>NodeClass</Name>
+            <Parent>Browse</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>BrowseNext</Name>
+            <Parent>Browse</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Read</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Attributes</Name>
+            <Parent>Read</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>IndexRanges</Name>
+            <Parent>Read</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>DataEncodings</Name>
+            <Parent>Read</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>ReadWrite</Name>
+            <Parent>Read</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Write</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>RandomValues</Name>
+            <Parent>Write</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>TypeMismatch</Name>
+            <Parent>Write</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Call</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>MethodTest</Name>
+            <Parent>Call</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Errors</Name>
+            <Parent>Call</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>TranslatePath</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>SingleHop</Name>
+            <Parent>TranslatePath</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>MultiHop</Name>
+            <Parent>TranslatePath</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Subscribe</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>KeepAlive</Name>
+            <Parent>Subscribe</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>PublishingInterval</Name>
+            <Parent>Subscribe</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>CreateItems</Name>
+            <Parent>Subscribe</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>MonitoredItem</Name>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>SamplingInterval</Name>
+            <Parent>MonitoredItem</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>ModifySamplingInterval</Name>
+            <Parent>MonitoredItem</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>QueueSize</Name>
+            <Parent>MonitoredItem</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>ModifyQueueSize</Name>
+            <Parent>MonitoredItem</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>Deadband</Name>
+            <Parent>MonitoredItem</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+          <ServerTestCase>
+            <Name>ModifyDeadband</Name>
+            <Parent>MonitoredItem</Parent>
+            <Enabled>true</Enabled>
+          </ServerTestCase>
+        </TestCases>
+        <ConnectToAllEndpoints>false</ConnectToAllEndpoints>
+        <Iterations>1</Iterations>
+      </ServerTestConfiguration>
+    </ua:XmlElement>
+  </Extensions>
+
+  <TraceConfiguration>
+    <OutputFilePath>Logs\Opc.Ua.ServerTestTool.log.txt</OutputFilePath>
+    <DeleteOnLoad>true</DeleteOnLoad>
+    <!-- Show Only Errors -->
+    <!-- <TraceMasks>1</TraceMasks> -->
+    <!-- Show Only Security and Errors -->
+    <TraceMasks>513</TraceMasks>
+    <!-- Show Only Security, Errors and Trace -->
+    <!-- <TraceMasks>515</TraceMasks> -->
+    <!-- Show Only Security, COM Calls, Errors and Trace -->
+    <!-- <TraceMasks>771</TraceMasks> -->
+    <!-- Show Only Security, Service Calls, Errors and Trace -->
+    <!-- <TraceMasks>523</TraceMasks> -->
+    <!-- Show Only Security, ServiceResultExceptions, Errors and Trace -->
+    <!-- <TraceMasks>519</TraceMasks> -->
+  </TraceConfiguration>
+  
+</ApplicationConfiguration>

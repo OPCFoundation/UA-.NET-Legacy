@@ -1,0 +1,73 @@
+<xs:schema
+  xmlns:tns="http://opcfoundation.org/UA/SDK/ServerTest/Configuration.xsd"
+  elementFormDefault="qualified"
+  targetNamespace="http://opcfoundation.org/UA/SDK/ServerTest/Configuration.xsd"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+>
+  <xs:complexType name="ServerTestCase">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1" />
+      <xs:element name="Parent" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Enabled" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Breakpoint" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListOfServerTestCase">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServerTestCase" nillable="true" type="tns:ServerTestCase" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfServerTestCase" nillable="true" type="tns:ListOfServerTestCase" />
+
+  <xs:complexType name="TestNode">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Name" type="xs:string" minOccurs="0" maxOccurs="1" />
+      <xs:element name="Purpose" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListOfTestNode">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TestNode" nillable="true" type="tns:TestNode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfTestNode" nillable="true" type="tns:ListOfTestNode" />
+  
+  <xs:complexType name="ListOfString">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="String" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfString" nillable="true" type="tns:ListOfString" />
+
+  <xs:element name="ServerTestConfiguration">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TestCases" type="tns:ListOfServerTestCase" minOccurs="0" maxOccurs="1" />
+        <xs:element name="ConnectToAllEndpoints" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+        <xs:element name="EndpointSelection" type="tns:EndpointSelection" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Iterations" type="xs:unsignedInt" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Coverage" type="xs:unsignedInt" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Seed" type="xs:int" minOccurs="0" maxOccurs="1" />
+        <xs:element name="BrowseRoots" type="tns:ListOfTestNode" minOccurs="0" maxOccurs="1" />
+        <xs:element name="WriteableVariables" type="tns:ListOfTestNode" minOccurs="0" maxOccurs="1" />
+        <xs:element name="NamespaceUris" type="tns:ListOfString" minOccurs="0" maxOccurs="1" />        
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="EndpointSelection">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Single"></xs:enumeration>
+      <xs:enumeration value="All"></xs:enumeration>
+      <xs:enumeration value="AllEncryptAndSign"></xs:enumeration>
+      <xs:enumeration value="AllSign"></xs:enumeration>
+      <xs:enumeration value="AllNoSecurity"></xs:enumeration>
+      <xs:enumeration value="AllUaTcp"></xs:enumeration>
+      <xs:enumeration value="AllHttpBinary"></xs:enumeration>
+      <xs:enumeration value="AllHttpXml"></xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EndpointSelection" nillable="false" type="tns:EndpointSelection" />
+  
+</xs:schema>

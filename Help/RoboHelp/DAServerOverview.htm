@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>DAServerOverview</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Data Access Server Overview</h1>
+<p>A light-weight OPC Data Access Server that features the core functionality 
+ of an OPC UA Server, but is configured with an address space that demonstrates 
+ the many UA-specific Node types, such as: </p>
+<ul type="disc">
+	<li><p>AnalogType</p></li>
+	<li><p>TwoStateDiscrete</p></li>
+	<li><p>MultiStateDiscrete</p></li>
+</ul>
+<p>This implementation also features the PercentDeadband feature.</p>
+<h2><a name="gui"></a>User Interface</h2>
+<p class="Picture"><img src="image36.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3>Screen Elements</h3>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 25.166%;" />
+	<col style="width: 74.834%;" />
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center; 
+											 font-weight: bold;">Menus</p></td>
+		<td style="vertical-align: Top;"><p>The menus are minimal:</p>
+		<ul type="disc">
+			<li style="font-weight: bold;"><p>File</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Exit</span>: for 
+				 quitting the application.</p></li>
+			</ul>
+			<li style="font-weight: bold;"><p>Help</p></li>
+			<ul type="disc">
+				<li><p><span style="font-weight: bold;">Contents</span>: 
+				 to launch this help documentation.</p></li>
+			</ul>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center; 
+											 font-weight: bold;">Banner</p></td>
+		<td style="vertical-align: Top;"><p>Shows the OPC Foundation logo 
+		 and a [clickable] link to the website, shows the application name 
+		 in large text, and shows the Certification logo with a link for 
+		 more information online.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Server Endpoint URLs</span></p></td>
+		<td style="vertical-align: Top;"><p>A dropdown showing the different 
+		 endpoints that are available. You can simply copy an endpoint 
+		 and then paste it into a UA Client to establish a connection (assuming 
+		 certification validation passes).</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Sessions</span></p></td>
+		<td style="vertical-align: Top;"><p>Displays the number of sessions 
+		 currently &#160;open, and includes additional information for 
+		 identification of the application/user of the session.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center; 
+											 font-weight: bold;">Subscriptions</p></td>
+		<td style="vertical-align: Top;"><p>Displays the number of subscriptions 
+		 currently established, and also includes some statistical information 
+		 about each subscription.</p></td>
+	</tr>
+	<tr>
+		<td style="vertical-align: Top;"><p style="text-align: center; 
+											 font-weight: bold;">Status 
+		 Bar</p></td>
+		<td style="vertical-align: Top;"><p>An &quot;at-a-glance&quot; 
+		 display of the current status (running, shutdown etc.), current 
+		 time, the number of open sessions, established subscriptions, 
+		 and the total number of monitored items.</p></td>
+	</tr>
+</table>
+</body>
+</html>

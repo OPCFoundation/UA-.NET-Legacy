@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Trusting Applications built from other Frameworks</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Trusting Applications built from other Frameworks</h1>
+<p>In this tutorial we will consider an application that is not built upon 
+ the <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?> 
+ <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>. Applications 
+ that are built upon a C++ or JAVA SDK for example, would fall under this 
+ category.</p>
+<h2>Identifying the Tools Available</h2>
+<p>Different applications from different vendors may approach this differently. 
+ This tutorial, while not specific, will provide you with the general guidelines 
+ to help establish a trust.</p>
+<p>Some applications may provide you with a GUI for easy configuration, 
+ whereas others might rely upon standard tools such as the Microsoft Management 
+ Console (MMC) or use the file-system directly such as Windows Explorer.</p>
+<h2>Trusting Applications via Failed Initial Connection Attempt (easier)</h2>
+<p>In this tutorial we will follow how to enable Server (based on <?rh-udv_start 
+	 name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>) to trust a Client 
+ (other framework), and for a Client (other framework) to trust a Server 
+ (based on <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>).</p>
+<table class="AlternateBlueWithHeader" cellspacing="0" width="100%">
+	<col style="width: 50%;" />
+	<col style="width: 50%;" />
+	<tr class="t1st">
+		<td style="border-right-style: Solid; border-bottom-width: 1px; 
+			 border-left-width: 1px; border-top-width: 1px; border-right-width: 4px; 
+			 vertical-align: top;"><p style="font-weight: bold; text-align: center;">Server 
+		 (<?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>) 
+		 trusts a <br />
+		Client (other framework)</p></td>
+		<td style="vertical-align: top;"><p style="font-weight: bold; text-align: center;">Client 
+		 (<?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>) 
+		 trusts a <br />
+		Server (other framework)</p></td>
+	</tr>
+	<tr class="t2Row">
+		<td style="border-right-style: Solid; border-left-width: 1px; border-right-width: 4px; 
+			 vertical-align: top;"><p>The following steps outline how you 
+		 might configure your UA Server (built on the <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>) 
+		 to trust a Client that is based on a different framework.</p>
+		<ol type="1">
+			<li><p>Make a secure connection between the Client and Server, 
+			 expecting the connection to Fail.</p></li>
+			<li><p><a href="Launching_the_Configuration_Tool.htm">Launch 
+			 the Configuration Tool</a>, then activate the <a href="UaConfig_Manage_Security.htm">Manage 
+			 Security</a> tab, and then click the &quot;Select Certificate 
+			 to Trust...&quot; button.</p></li>
+			<li><p>Change the &quot;Store Path&quot; to show the &quot;RejectedCertificates&quot;.</p></li>
+			<li><p>Select the desired application from the list and click 
+			 the &quot;OK&quot; button.</p></li>
+			<li><p>You will see a message that the certificate is now trusted. 
+			 However, the certificate is also still <span style="font-style: italic;">not 
+			 trusted</span>.</p></li>
+			<li><p>Repeat steps 2 and 3 (above) and this time you will 
+			 select the application by right-clicking on it and choosing 
+			 &quot;Delete&quot; from the context-menu; you will need to 
+			 confirm the request.</p></li>
+			<li><p>Click the &quot;Cancel&quot; button to close the &quot;Manage 
+			 Certificates in Certificate Store&quot; dialog.</p></li>
+			<li><p>Minimize the <?rh-udv_start name="UaCfgTool" ?>Configuration Tool<?rh-udv_end ?>.</p></li>
+			<li><p>Try to establish a secure connection from Client to 
+			 the Server.</p></li>
+			<li><p>This time you may be prompted to trust the Server's 
+			 certificate; do trust the Server's certificate!<br />
+			<span style="font-weight: bold; color: #ff0000;">Please refer 
+			 to the Client's documentation for product-specific instructions.</span></p></li>
+		</ol></td>
+		<td style="vertical-align: top;"><p>The following steps outline 
+		 how you might configure your UA Client (built on the <?rh-udv_start 
+		 name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>) to trust a Server 
+		 that is based on a different framework.</p>
+		<ol type="1">
+			<li><p>Make a secure connection between the Client and Server, 
+			 expecting the connection to Fail.</p></li>
+			<li><p>The Server should reject the Client's certificate because 
+			 it is not yet trusted.<br />
+			<span style="font-weight: bold; color: #ff0000;">Please refer 
+			 to the Server's product-specific documentation for trusting 
+			 a Client certificate.</span></p></li>
+			<li><p>Once the Server has been configured to trust the Client's 
+			 certificate then you should attempt to make another secure 
+			 connection.</p></li>
+			<li><p>The Client might prompt you to automatically trust the 
+			 Server's certificate; if so then do trust the Server's certificate.</p></li>
+			<li><p>If the Client rejects the certificate then you can <a 
+			 href="Launching_the_Configuration_Tool.htm">Launch the Configuration 
+			 Tool</a>, then activate the <a href="UaConfig_Manage_Security.htm">Manage 
+			 Security</a> tab, and then click the &quot;Select Certificate 
+			 to Trust...&quot; button.</p></li>
+			<li><p>Change the &quot;Store Path&quot; to show the &quot;RejectedCertificates&quot;. 
+			 Select the desired application from the list and click the 
+			 &quot;OK&quot; button.</p></li>
+			<li><p>Repeat the last step except you will delete the certificate 
+			 from the RejectedCertificates repository.</p></li>
+			<li><p>Try to establish a secure connection from Client to 
+			 the Server.</p></li>
+		</ol></td>
+	</tr>
+</table>
+<h2>See Also</h2>
+<ul type="disc">
+	<li><p><a href="Trusting_Applications_built_with_.NET_API.htm">Trusting 
+	 Applications built with .NET API</a></p></li>
+</ul>
+</body>
+</html>

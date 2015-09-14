@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 3 - Reading Values</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Server Development Tutorial</h1>
+<h2>Step 3 - Providing Data to the Nodes in the Address Space</h2>
+<p>In this section you will see how to update the values of nodes within 
+ your address space.</p>
+<p>This step is a continuation of <a href="Step_2_-_Address_Space.htm">Step 
+ 2 - Address Space</a>.</p>
+<ol type="1">
+	<li><p>All nodes are maintained within the address space by the <?rh-udv_start 
+	 name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?> automatically. We 
+	 will assume that since our &quot;MyNode&quot; (created in <a href="Step_2_-_Address_Space.htm">Step 
+	 2</a>) is the 2nd node within the <span style="font-family: 'Courier New', monospace;">variables</span> 
+	 collection.</p></li>
+	<li><p>Basically, anywhere within your code you can update the value 
+	 of your node. Add the following line of code below your node definition 
+	 (see <a href="Step_2_-_Address_Space.htm">Step 2</a>): <br />
+	<span style="font-family: 'Courier New', monospace;">variables[1].Value 
+	 = (int32)99;</span></p></li>
+</ol>
+<p>Note: we cast the value of 99 to the type In32 because that was the 
+ data-type we previously configured. </p>
+<p>As you can see, updating the value of a node within the address space 
+ is very simple. You could implement a timer function and update nodes 
+ automatically for example. </p>
+<p>Next, we will look at how to respond to client <a href="Step_4_-_Handling_Write_Requests.htm">write 
+ requests</a>.</p>
+</body>
+</html>

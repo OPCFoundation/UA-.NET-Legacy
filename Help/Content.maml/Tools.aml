@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="9988c4f3-e217-4049-9e8d-8ee5112ea196" revisionNumber="1">
+  <developerSDKTechnologyOverviewOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The tools in this section help you develop, configure, and deploy applications by using <token>UA SDK</token>.
+    </para>
+    </introduction>
+    <inThisSection>
+      <content>
+        <para>
+          <link xlink:href="108fde6b-10b9-4322-a24d-0ac17662e276" />
+        </para>
+        <para>
+        The <application>Opc.Ua.ConfigurationTool</application> application is used to create COM servers that COM clients can connect to. The COM server stores all of the information required to connect to a UA server in the registry.
+      </para>
+      </content>
+    </inThisSection>
+    <!-- <reference>Optional reference info</reference> -->
+    <!-- <relatedSections>Optional related sections info</relatedSections> -->
+    <!-- <externalResources>Optional external resources info</externalResources> -->
+  </developerSDKTechnologyOverviewOrientationDocument>
+</topic>

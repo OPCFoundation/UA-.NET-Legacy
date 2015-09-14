@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="71b43cca-2c40-49f1-9cfb-c25a002877dd" revisionNumber="1">
+  <developerSDKTechnologyOverviewOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      This section presents the fundamentals for creating <token>OPCUA</token> applications.
+    </para>
+    </introduction>
+    <inThisSection>
+      <content>
+        <para>
+          <link xlink:href="3833b402-a73b-4407-8985-5ff6adea35dd" />
+        </para>
+        <para>
+        Describes how to configure the COM Wrapper and the COM Proxy
+      </para>
+      </content>
+    </inThisSection>
+    <relatedSections>
+      <content>
+      </content>
+    </relatedSections>
+  </developerSDKTechnologyOverviewOrientationDocument>
+</topic>

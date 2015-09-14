@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Local Discovery Server MergeModule</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Local Discovery Server MergeModule</h1>
+<h2>Overview</h2>
+<p>For installing the <a href="Local_Discovery_Server_(LDS).htm">Local 
+ Discovery Server</a> that is provided by the <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?>.</p>
+<h2>Deployed Components</h2>
+<ul type="disc">
+	<li>Local Discovery Server</li>
+	<li>UA Configuration Tool</li>
+	<li>Configuration files</li>
+</ul>
+<h2>Installation Locations</h2>
+<ul type="disc">
+	<li>Common Files Folder &gt; OPC Foundation &gt; UA &gt; v1.0 &gt; 
+	 Bin: </li>
+	<ul type="disc">
+		<li>crypt32.dll</li>
+		<li>UA Certificate Generator</li>
+		<li>redist.txt</li>
+		<li>rpcrt4.dll</li>
+	</ul>
+	<li>Program Files &gt; OPC Foundation &gt; Unified Architecture &gt; 
+	 Local Discovery Service:</li>
+	<ul type="disc">
+		<li>Endpoints.cache.xml</li>
+		<li>Interop.ActiveDs.dll</li>
+		<li>interop.NetFwTypeLib.dll</li>
+		<li>UA Client Library (<span style="font-style: italic;">Opc.Ua.Client.dll</span><span>)</span></li>
+		<li>UA Client Controls (<span style="font-style: italic;">Opc.Ua.ClientControls.dll</span><span>)</span></li>
+		<li>UA COM Interop Library (<span style="font-style: italic;">Opc.Ua.ComInterop.dll</span><span>)</span></li>
+		<li>UA Configuration Library (<span style="font-style: italic;">Opc.Ua.Configuration.dll</span><span>)</span></li>
+		<li>Opc.Ua.ConfigurationTool.Config.xml</li>
+		<li>UA Core Library (<span style="font-style: italic;">Opc.Ua.Core.dll</span><span>)</span></li>
+		<li>Opc.Ua.DiscoveryServer.Config.xml</li>
+		<li>UA Server Library (<span style="font-style: italic;">Opc.Ua.Server.dll</span><span>)</span></li>
+		<li>UA Configuration Tool</li>
+		<li>UA Discovery Server</li>
+	</ul>
+</ul>
+<h2>Registry Settings</h2>
+<ul type="disc">
+	<li>(none)</li>
+</ul>
+<h2>File Associations</h2>
+<ul type="disc">
+	<li>(none)</li>
+</ul>
+<h2>Shortcuts</h2>
+<ul type="disc">
+	<li>Users Programs &#160;Menu &gt; OPC Foundation &gt; Unified Architecture: 
+	 </li>
+	<ul type="disc">
+		<li>Configuration Tool</li>
+	</ul>
+</ul>
+<h2>Actions</h2>
+<ul type="disc">
+	<li>Installation:</li>
+	<ul type="disc">
+		<li>(none)</li>
+	</ul>
+	<li>Commit:</li>
+	<ul type="disc">
+		<li>Opc.Ua.DiscoveryServer.exe /install /silent</li>
+	</ul>
+	<li>Rollback:</li>
+	<ul type="disc">
+		<li>(none)</li>
+	</ul>
+	<li>Uninstall: </li>
+	<ul type="disc">
+		<li>Opc.Ua.DiscoveryServer.exe /uninstall /silent</li>
+	</ul>
+</ul>
+<h2>Dependencies</h2>
+<ul type="disc">
+	<li>Microsoft_VC90_CRT_x86.msm</li>
+	<li>policy_9_0_Microsoft_VC90_CRT_x86.msm</li>
+</ul>
+<p>See also:</p>
+<ul type="disc">
+	<li><a href="Using_Merge_Modules.htm">Using Merge Modules</a></li>
+</ul>
+</body>
+</html>

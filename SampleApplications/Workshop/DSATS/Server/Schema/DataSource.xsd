@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema
+    targetNamespace="http://opcfoundation.org/DSATSDemo/DataSource.xsd"
+    elementFormDefault="qualified"
+    xmlns="http://opcfoundation.org/DSATSDemo/DataSource.xsd"
+    xmlns:mstns="http://opcfoundation.org/DSATSDemo/DataSource.xsd"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+    xmlns:ns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd" schemaLocation="UANodeSet.xsd"></xs:import>
+  <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" schemaLocation="UAVariant.xsd"></xs:import>
+
+  <xs:element name="DataSource">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="NamespaceUris" type ="ns:UriTable" minOccurs="0"></xs:element>
+        <xs:element name="ServerUris" type ="ns:UriTable" minOccurs="0"></xs:element>
+        <xs:element name="Phase" type="PhaseType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        <xs:element name="Lock" type="LockType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        <xs:element name="Declaration" type="DeclarationType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:complexType name="CertificatePermissionType">
+    <xs:attribute name="Thumbprint" type="xs:string"></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="BaseObject">
+    <xs:sequence>
+      <xs:element name="DisplayName" type="ns:LocalizedText" minOccurs="0" maxOccurs="unbounded"></xs:element>
+      <xs:element name="Description" type="ns:LocalizedText" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+    <xs:attribute name="BrowseName" type="xs:string" use="required"></xs:attribute>
+  </xs:complexType>
+  
+  <xs:complexType name="PhaseType">
+    <xs:complexContent>
+      <xs:extension base="BaseObject"></xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="LockType">
+    <xs:complexContent>
+      <xs:extension base="BaseObject">
+        <xs:sequence>
+          <xs:element name="Permission" type="CertificatePermissionType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:complexType name="DeclarationType">
+    <xs:complexContent>
+      <xs:extension base="BaseObject">
+        <xs:sequence>
+          <xs:element name="AccessRules" type="ListOfAccessRuleType" minOccurs="0"></xs:element>
+          <xs:element name="Sources" type="ListOfSourceType" minOccurs="0"></xs:element>
+        </xs:sequence>
+        <xs:attribute name="Path" type="xs:string" use="required"></xs:attribute>
+        <xs:attribute name="TypeDefinitionId" type="ns:NodeId" use="required"></xs:attribute>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  
+  <xs:complexType name="SourceType">
+    <xs:sequence>
+      <xs:element name="DefaultValue" type="ua:Variant" minOccurs="0"></xs:element>
+      <xs:element name="RemoteId" type="ns:NodeId" minOccurs="0"></xs:element>
+    </xs:sequence>
+    <xs:attribute name="Path" type="xs:string" use="required"></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="ListOfSourceType">
+    <xs:sequence>
+      <xs:element name="Source" type="SourceType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="AccessRuleType">
+    <xs:attribute name="Phase" type="xs:string" use="required"></xs:attribute>
+    <xs:attribute name="Lock" type="xs:string" use="required"></xs:attribute>
+  </xs:complexType>
+
+  <xs:complexType name="ListOfAccessRuleType">
+    <xs:sequence>
+      <xs:element name="AccessRule" type="AccessRuleType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

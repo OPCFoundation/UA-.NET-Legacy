@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="4" minorversion="0">
+	<buildtags>
+		<buildtag>
+			<name>Member</name>
+			<colorref>16711680</colorref>
+			<comments/>
+		</buildtag>
+		<buildtag>
+			<name>Online</name>
+			<colorref>65280</colorref>
+			<comments/>
+		</buildtag>
+		<buildtag>
+			<name>Print</name>
+			<colorref>255</colorref>
+			<comments/>
+		</buildtag>
+	</buildtags>
+</rhpml>

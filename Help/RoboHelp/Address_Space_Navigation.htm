@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Address Space Navigation</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Browsing an Address Space using the Generic Client</h1>
+<p>All OPC Servers provide the ability to navigate their address space. 
+ The feature/functionality built into OPC UA enables users to define very 
+ elaborate and information-rich content that can be consumed by any UA 
+ client. The UA Sample Client contains leverages many of these features 
+ allowing the user to navigate the address space with ease, while maintaining 
+ maximum flexibility in the application of filtering.</p>
+<p>The main Client window allows you to browse the address space with ease 
+ with minimal information available. Simply expand/collapse a node to show/hide 
+ the children beneath it.</p>
+<h2>Context Menu</h2>
+<p>The following context-menu exists for the node browser that occupies 
+ the main area of the application:</p>
+<p class="Picture"><img src="image54.gif" alt="" style="border: none;" 
+						 border="0" /> or <img src="image60.gif" alt="" 
+												 style="border: none;" 
+												 border="0" /> or <img 
+	 src="image61.gif" alt="" style="border: none;" border="0" /></p>
+<h3>Browse Options</h3>
+<p class="Picture"><img src="image55.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>The options in this dialog allow you to precisely tune the exact types 
+ of UA node(s) that you wish to see/exclude when browsing. The specific 
+ fields within this dialog are not described as they are clearly documented 
+ in <a href="http://www.opcfoundation.org/ua/part4"><?rh-udv_start name="UaSpec04" ?>UA Specifications Part 4 - Services (http://www.opcfoundation.org/ua/part4)<?rh-udv_end ?></a>.</p>
+<p>Clicking the <span style="font-weight: bold;">OK</span> button will 
+ immediately activate the filtration.</p>
+<h3>Show References</h3>
+<p class="Picture"><img src="image56.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Toggling this option will change the navigation content to show either 
+ the nodes as they are organized hierarchically, or will display them as 
+ they are organized by reference(s). </p>
+<h3>Browse</h3>
+<p class="Picture"><img src="image57.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>This dialog allows you to quickly see the configuration of a node, such 
+ as the references and any nested properties etc.</p>
+<p>Note: along the top of the dialog you can use the simple navigation 
+ tools to change the view to display the details of a different UA node.</p>
+<h3>View Attributes</h3>
+<p class="Picture"><img src="image58.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>This dialog displays the values for all attributes of the selected node.</p>
+<h3>Read</h3>
+<p>See <a href="Reading_Nodes.htm">Reading Nodes</a>.</p>
+<h3>History Read</h3>
+<p>Active only when history is available on a node. Not documented.</p>
+<h3>Write</h3>
+<p>See <a href="Writing_to_Nodes.htm">Writing to Nodes</a>.</p>
+<h3>History Update</h3>
+<p>Active only when history is available on the node and is marked as having 
+ the ability to receive updates. Not documented.</p>
+<h3>Subscribe</h3>
+<p class="Picture"><img src="image59.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Provides a sub-menu with the <span style="font-weight: bold;">New</span> 
+ option, which will allow you to create a new subscription. See <a href="Subscriptions.htm">Subscriptions</a>.</p>
+<p>As new subscriptions are created, they will be displayed at the bottom 
+ of this context menu, meaning that this menu will grow and shrink as the 
+ number of subscriptions changes.</p>
+<h3>Refresh</h3>
+<p>Resets the browser and re-initiates the browsing by starting at the 
+ root node.</p>
+</body>
+</html>

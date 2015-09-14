@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta name="topic-status" content="Complete" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Local Discovery Server (LDS)</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Local Discovery Server (LDS) Overview</h1>
+<p>The <a href="http://www.opcfoundation.org/ua/part4"><?rh-udv_start name="UaSpec04" ?>UA Specifications Part 4 - Services (http://www.opcfoundation.org/ua/part4)<?rh-udv_end ?></a> 
+ and <a href="http://www.opcfoundation.org/ua/part12"><?rh-udv_start name="UaSpec12" ?>UA Specifications Part 12 - Discovery (http://www.opcfoundation.org/ua/part12)<?rh-udv_end ?></a>&#160;describe 
+ the purpose and operations of a local discovery server. The short explanation 
+ is that this type of server merely provides a list of available OPC UA 
+ applications to any application that queries it; where each application 
+ is running and registering (frequently) with the LDS.</p>
+<p>The LDS that is provided within this package runs as an unattended Windows 
+ background service:</p>
+<p class="Picture"><img src="image35.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h2>Recommendations</h2>
+<ol type="1">
+	<li><p>Allow the <span style="font-weight: bold;">UA Local Discovery 
+	 Server</span> to start <span style="font-weight: bold;">Automatically</span>.</p></li>
+	<li><p>Configure your Firewall to permit <span style="font-weight: bold;">TCP 
+	 port 4840</span> traffic.</p></li>
+</ol>
+</body>
+</html>

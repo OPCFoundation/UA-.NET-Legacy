@@ -1,0 +1,280 @@
+﻿<ConfiguredEndpoint xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+  <KnownHosts />
+  <DefaultConfiguration>
+    <OperationTimeout>120000</OperationTimeout>
+    <UseBinaryEncoding>true</UseBinaryEncoding>
+    <MaxStringLength>1048576</MaxStringLength>
+    <MaxByteStringLength>4194304</MaxByteStringLength>
+    <MaxArrayLength>1048576</MaxArrayLength>
+    <MaxMessageSize>4194304</MaxMessageSize>
+    <MaxBufferSize>65536</MaxBufferSize>
+    <ConnectionLifetime>120000</ConnectionLifetime>
+    <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+  </DefaultConfiguration>
+  <Endpoints>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>opc.tcp://localhost:9001/UA/TestServer</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/TestServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:9000/UA/TestServer/discovery</String>
+            <String>opc.tcp://localhost:9001/UA/TestServer</String>
+            <String>net.tcp://localhost:9002/UA/TestServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQRfqP7zqHaLRMnabhw+VVBTAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MTAyNjE2NTE0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA6B4Ue0sQ048zmcAelK0tKx3uy+bXqCKHUbIV7Mwa/owuH6VyjVKoKmASZm03NMaDxLuoDC5aiEMoig3yscFdv3paeK9ycvQ4Ru8+LGcuU2ZqfX2OPQJzevLhK7InBIjcY9lY014FCdciWvDgru3AIayQGulF4jzUx3pfsR4xQyECAwEAAaNmMGQwYgYDVR0BBFswWYAQiph0PnNLZ7xp6bIQGklRJqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCesFPo+jZjiknxzOMY+EezMAkGBSsOAwIdBQADgYEAwl7/Rgyg/u6fHsWHDIXiQtEVwf4LIHZgef4P233wrjceQ1esrdmSJRJxWy54kascaGdQD14Msd98ETZm4Xx4xldYmnvtal/iNsoJiC5nL1O1pu+kQEx81DmqFrqN9uDQIpbrHNHFHCh58T31gXVcLtu29s7V7AoMdg2ng6w4ehA=</ServerCertificate>
+        <SecurityMode>None_1</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UAProfile/Transport/uatcp-uasc-uabinary</SupportedProfile>
+      </Endpoint>
+      <Configuration>
+        <OperationTimeout>120000</OperationTimeout>
+        <UseBinaryEncoding>true</UseBinaryEncoding>
+        <MaxStringLength>1048576</MaxStringLength>
+        <MaxByteStringLength>4194304</MaxByteStringLength>
+        <MaxArrayLength>1048576</MaxArrayLength>
+        <MaxMessageSize>4194304</MaxMessageSize>
+        <MaxBufferSize>65536</MaxBufferSize>
+        <ConnectionLifetime>120000</ConnectionLifetime>
+        <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+      </Configuration>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <SelectedUserTokenPolicy>0</SelectedUserTokenPolicy>
+      <UserIdentity i:nil="true" />
+      <ComIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>opc.tcp://localhost:9001/UA/TestServer</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/TestServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:9000/UA/TestServer/discovery</String>
+            <String>opc.tcp://localhost:9001/UA/TestServer</String>
+            <String>net.tcp://localhost:9002/UA/TestServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQRfqP7zqHaLRMnabhw+VVBTAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MTAyNjE2NTE0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA6B4Ue0sQ048zmcAelK0tKx3uy+bXqCKHUbIV7Mwa/owuH6VyjVKoKmASZm03NMaDxLuoDC5aiEMoig3yscFdv3paeK9ycvQ4Ru8+LGcuU2ZqfX2OPQJzevLhK7InBIjcY9lY014FCdciWvDgru3AIayQGulF4jzUx3pfsR4xQyECAwEAAaNmMGQwYgYDVR0BBFswWYAQiph0PnNLZ7xp6bIQGklRJqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCesFPo+jZjiknxzOMY+EezMAkGBSsOAwIdBQADgYEAwl7/Rgyg/u6fHsWHDIXiQtEVwf4LIHZgef4P233wrjceQ1esrdmSJRJxWy54kascaGdQD14Msd98ETZm4Xx4xldYmnvtal/iNsoJiC5nL1O1pu+kQEx81DmqFrqN9uDQIpbrHNHFHCh58T31gXVcLtu29s7V7AoMdg2ng6w4ehA=</ServerCertificate>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UAProfile/Transport/uatcp-uasc-uabinary</SupportedProfile>
+      </Endpoint>
+      <Configuration>
+        <OperationTimeout>120000</OperationTimeout>
+        <UseBinaryEncoding>true</UseBinaryEncoding>
+        <MaxStringLength>1048576</MaxStringLength>
+        <MaxByteStringLength>4194304</MaxByteStringLength>
+        <MaxArrayLength>1048576</MaxArrayLength>
+        <MaxMessageSize>4194304</MaxMessageSize>
+        <MaxBufferSize>8196</MaxBufferSize>
+        <ConnectionLifetime>120000</ConnectionLifetime>
+        <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+      </Configuration>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <SelectedUserTokenPolicy>0</SelectedUserTokenPolicy>
+      <UserIdentity i:nil="true" />
+      <ComIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>opc.tcp://localhost:9001/UA/TestServer</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/TestServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:9000/UA/TestServer/discovery</String>
+            <String>opc.tcp://localhost:9001/UA/TestServer</String>
+            <String>net.tcp://localhost:9002/UA/TestServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQRfqP7zqHaLRMnabhw+VVBTAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MTAyNjE2NTE0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA6B4Ue0sQ048zmcAelK0tKx3uy+bXqCKHUbIV7Mwa/owuH6VyjVKoKmASZm03NMaDxLuoDC5aiEMoig3yscFdv3paeK9ycvQ4Ru8+LGcuU2ZqfX2OPQJzevLhK7InBIjcY9lY014FCdciWvDgru3AIayQGulF4jzUx3pfsR4xQyECAwEAAaNmMGQwYgYDVR0BBFswWYAQiph0PnNLZ7xp6bIQGklRJqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCesFPo+jZjiknxzOMY+EezMAkGBSsOAwIdBQADgYEAwl7/Rgyg/u6fHsWHDIXiQtEVwf4LIHZgef4P233wrjceQ1esrdmSJRJxWy54kascaGdQD14Msd98ETZm4Xx4xldYmnvtal/iNsoJiC5nL1O1pu+kQEx81DmqFrqN9uDQIpbrHNHFHCh58T31gXVcLtu29s7V7AoMdg2ng6w4ehA=</ServerCertificate>
+        <SecurityMode>Sign_2</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UAProfile/Transport/uatcp-uasc-uabinary</SupportedProfile>
+      </Endpoint>
+      <Configuration>
+        <OperationTimeout>120000</OperationTimeout>
+        <UseBinaryEncoding>true</UseBinaryEncoding>
+        <MaxStringLength>1048576</MaxStringLength>
+        <MaxByteStringLength>4194304</MaxByteStringLength>
+        <MaxArrayLength>1048576</MaxArrayLength>
+        <MaxMessageSize>4194304</MaxMessageSize>
+        <MaxBufferSize>8196</MaxBufferSize>
+        <ConnectionLifetime>120000</ConnectionLifetime>
+        <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+      </Configuration>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <SelectedUserTokenPolicy>0</SelectedUserTokenPolicy>
+      <UserIdentity i:nil="true" />
+      <ComIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost:9000/UA/TestServer</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/TestServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:9000/UA/TestServer/discovery</String>
+            <String>opc.tcp://localhost:9001/UA/TestServer</String>
+            <String>net.tcp://localhost:9002/UA/TestServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQRfqP7zqHaLRMnabhw+VVBTAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MTAyNjE2NTE0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA6B4Ue0sQ048zmcAelK0tKx3uy+bXqCKHUbIV7Mwa/owuH6VyjVKoKmASZm03NMaDxLuoDC5aiEMoig3yscFdv3paeK9ycvQ4Ru8+LGcuU2ZqfX2OPQJzevLhK7InBIjcY9lY014FCdciWvDgru3AIayQGulF4jzUx3pfsR4xQyECAwEAAaNmMGQwYgYDVR0BBFswWYAQiph0PnNLZ7xp6bIQGklRJqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCesFPo+jZjiknxzOMY+EezMAkGBSsOAwIdBQADgYEAwl7/Rgyg/u6fHsWHDIXiQtEVwf4LIHZgef4P233wrjceQ1esrdmSJRJxWy54kascaGdQD14Msd98ETZm4Xx4xldYmnvtal/iNsoJiC5nL1O1pu+kQEx81DmqFrqN9uDQIpbrHNHFHCh58T31gXVcLtu29s7V7AoMdg2ng6w4ehA=</ServerCertificate>
+        <SecurityMode>None_1</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxmlorbinary</SupportedProfile>
+      </Endpoint>
+      <Configuration>
+        <OperationTimeout>120000</OperationTimeout>
+        <UseBinaryEncoding>true</UseBinaryEncoding>
+        <MaxStringLength>1048576</MaxStringLength>
+        <MaxByteStringLength>4194304</MaxByteStringLength>
+        <MaxArrayLength>1048576</MaxArrayLength>
+        <MaxMessageSize>4194304</MaxMessageSize>
+        <MaxBufferSize>65536</MaxBufferSize>
+        <ConnectionLifetime>120000</ConnectionLifetime>
+        <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+      </Configuration>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <SelectedUserTokenPolicy>0</SelectedUserTokenPolicy>
+      <UserIdentity i:nil="true" />
+      <ComIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost:9000/UA/TestServer/Basic128Rsa15</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/TestServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:9000/UA/TestServer/discovery</String>
+            <String>opc.tcp://localhost:9001/UA/TestServer</String>
+            <String>net.tcp://localhost:9002/UA/TestServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQRfqP7zqHaLRMnabhw+VVBTAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MTAyNjE2NTE0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA6B4Ue0sQ048zmcAelK0tKx3uy+bXqCKHUbIV7Mwa/owuH6VyjVKoKmASZm03NMaDxLuoDC5aiEMoig3yscFdv3paeK9ycvQ4Ru8+LGcuU2ZqfX2OPQJzevLhK7InBIjcY9lY014FCdciWvDgru3AIayQGulF4jzUx3pfsR4xQyECAwEAAaNmMGQwYgYDVR0BBFswWYAQiph0PnNLZ7xp6bIQGklRJqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCesFPo+jZjiknxzOMY+EezMAkGBSsOAwIdBQADgYEAwl7/Rgyg/u6fHsWHDIXiQtEVwf4LIHZgef4P233wrjceQ1esrdmSJRJxWy54kascaGdQD14Msd98ETZm4Xx4xldYmnvtal/iNsoJiC5nL1O1pu+kQEx81DmqFrqN9uDQIpbrHNHFHCh58T31gXVcLtu29s7V7AoMdg2ng6w4ehA=</ServerCertificate>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxmlorbinary</SupportedProfile>
+      </Endpoint>
+      <Configuration>
+        <OperationTimeout>120000</OperationTimeout>
+        <UseBinaryEncoding>false</UseBinaryEncoding>
+        <MaxStringLength>1048576</MaxStringLength>
+        <MaxByteStringLength>4194304</MaxByteStringLength>
+        <MaxArrayLength>1048576</MaxArrayLength>
+        <MaxMessageSize>4194304</MaxMessageSize>
+        <MaxBufferSize>8196</MaxBufferSize>
+        <ConnectionLifetime>120000</ConnectionLifetime>
+        <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+      </Configuration>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <SelectedUserTokenPolicy>0</SelectedUserTokenPolicy>
+      <UserIdentity i:nil="true" />
+      <ComIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+    <ConfiguredEndpoint>
+      <Endpoint>
+        <EndpointUrl>http://localhost:9000/UA/TestServer/Basic128Rsa15/Sign</EndpointUrl>
+        <Server>
+          <ApplicationUri>http://localhost/UA/TestServer</ApplicationUri>
+          <ApplicationType>Server_0</ApplicationType>
+          <ApplicationName>
+            <Locale i:nil="true" />
+            <Text>UA Test Server</Text>
+          </ApplicationName>
+          <DiscoveryUrls>
+            <String>http://localhost:9000/UA/TestServer/discovery</String>
+            <String>opc.tcp://localhost:9001/UA/TestServer</String>
+            <String>net.tcp://localhost:9002/UA/TestServer/discovery</String>
+          </DiscoveryUrls>
+        </Server>
+        <ServerCertificate>MIICRzCCAbSgAwIBAgIQRfqP7zqHaLRMnabhw+VVBTAJBgUrDgMCHQUAMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290MB4XDTA3MTAyNjE2NTE0MVoXDTM5MTIzMTIzNTk1OVowMzEYMBYGCgmSJomT8ixkARkWCFNQQVJIQVdLMRcwFQYDVQQDEw5VQVNhbXBsZVNlcnZlcjCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkCgYEA6B4Ue0sQ048zmcAelK0tKx3uy+bXqCKHUbIV7Mwa/owuH6VyjVKoKmASZm03NMaDxLuoDC5aiEMoig3yscFdv3paeK9ycvQ4Ru8+LGcuU2ZqfX2OPQJzevLhK7InBIjcY9lY014FCdciWvDgru3AIayQGulF4jzUx3pfsR4xQyECAwEAAaNmMGQwYgYDVR0BBFswWYAQiph0PnNLZ7xp6bIQGklRJqEzMDExGDAWBgoJkiaJk/IsZAEZFghTUEFSSEFXSzEVMBMGA1UEAxMMVUFTYW1wbGVSb290ghCesFPo+jZjiknxzOMY+EezMAkGBSsOAwIdBQADgYEAwl7/Rgyg/u6fHsWHDIXiQtEVwf4LIHZgef4P233wrjceQ1esrdmSJRJxWy54kascaGdQD14Msd98ETZm4Xx4xldYmnvtal/iNsoJiC5nL1O1pu+kQEx81DmqFrqN9uDQIpbrHNHFHCh58T31gXVcLtu29s7V7AoMdg2ng6w4ehA=</ServerCertificate>
+        <SecurityMode>Sign_2</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+            <IssuedTokenType i:nil="true" />
+            <IssuerUrl i:nil="true" />
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <SupportedProfile>http://opcfoundation.org/UA/profiles/transport/wsxmlorbinary</SupportedProfile>
+      </Endpoint>
+      <Configuration>
+        <OperationTimeout>120000</OperationTimeout>
+        <UseBinaryEncoding>false</UseBinaryEncoding>
+        <MaxStringLength>1048576</MaxStringLength>
+        <MaxByteStringLength>4194304</MaxByteStringLength>
+        <MaxArrayLength>1048576</MaxArrayLength>
+        <MaxMessageSize>4194304</MaxMessageSize>
+        <MaxBufferSize>8196</MaxBufferSize>
+        <ConnectionLifetime>120000</ConnectionLifetime>
+        <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+      </Configuration>
+      <UpdateBeforeConnect>true</UpdateBeforeConnect>
+      <SelectedUserTokenPolicy>0</SelectedUserTokenPolicy>
+      <UserIdentity i:nil="true" />
+      <ComIdentity i:nil="true" />
+    </ConfiguredEndpoint>
+  </Endpoints>
+</ConfiguredEndpoint>

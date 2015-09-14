@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Server Development</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Server Development Overview</h1>
+<p>Developing your own UA Server based on the <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?> 
+ <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?> is easiest 
+ if you begin by customizing one of the existing <span style="font-style: italic;">quickstart 
+ applications</span>:<span style="font-style: italic;"> </span><a href="DAServerOverview.htm">DA 
+ Server</a>, <a href="HaServerOverview.htm">HA Data Server</a>, <a href="HAEventsServerOverview.htm">HA 
+ Events Server</a>, or <a href="ACServerOverview.htm">AC Server</a>. However, 
+ we recommend using the <a href="Overview_referenceServer.htm">Reference 
+ Server</a> and will use it in the following tutorial.</p>
+<p>This tutorial will guide you through creating a simple Server for data 
+ acquisition.</p>
+<h3>Assumptions</h3>
+<ul type="disc">
+	<li><p><?rh-udv_start name="vsnet" ?>Visual Studio .NET 2008<?rh-udv_end ?>, 
+	 C#</p></li>
+	<li><p>Some experience with .NET, C#, and OPC fundamentals.</p></li>
+</ul>
+<h3>Requirements</h3>
+<ul type="disc">
+	<li><p>All applications (Server and Client) require the <span style="font-weight: bold;">OPC.UA.CertificateGenerator.exe</span> 
+	 utility to create a self-signed certificate upon first launch of the 
+	 application.<br />
+	Download and install the local discovery server from <a href="http://www.opcfoundation.org/ua/lds">www.opcfoundation.org/ua/lds</a> 
+	 </p></li>
+</ul>
+<h3>Steps:</h3>
+<ul type="disc">
+	<li><p><a href="Step_1_-_New_Project.htm">Step 1 - New Project</a></p></li>
+	<li><p><a href="Step_2_-_Address_Space.htm">Step 2 - Address Space 
+	 Definition</a></p></li>
+	<li><p><a href="Step_3_-_Reading_Values.htm">Step 3 - Reading Values 
+	 and Updating the Nodes in the Address Space</a></p></li>
+	<li><p><a href="Step_4_-_Handling_Write_Requests.htm">Step 4 - Handling 
+	 Write Requests</a></p></li>
+	<li><p><a href="Step_5_-_Testing_Server.htm">Step 5 - Testing Server</a></p></li>
+	<li><p><a href="Step_6_-_Deploying_Server.htm">Step 6 - Deploying Server</a></p></li>
+</ul>
+</body>
+</html>

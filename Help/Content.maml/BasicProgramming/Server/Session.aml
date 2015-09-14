@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="86045f38-67d2-4225-9921-dea3ca73a43b" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The Session object stores the state information for an application Session. It provides properties and methods that allow other components to determine things like the preferred locales or the user identity associated with the Session.
+    </para>
+      <para>
+      The Session object is usually accessed via the <codeEntityReference>T:Opc.Ua.Server.OperationContext</codeEntityReference>  object which is passed as a parameter to methods that are used during request processing.
+    </para>
+      <para>
+      The Session object also manages the diagnostic information associated with the Session. When a Session is created it creates the Nodes in the address space that represent the diagnostic information. Other components can access diagnostics via properties on the Session object. These Nodes are deleted when the Session is closed.
+    </para>
+      <para>
+      The Session object supports a concept called effective identity which can be used by applications to determine what resources a Session has access to. The effective identity is set when the user identity token is validated.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

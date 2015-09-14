@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="108fde6b-10b9-4322-a24d-0ac17662e276" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The <application>Opc.Ua.ConfigurationTool</application> application is used to create COM servers that COM clients can connect to. The COM server stores all of the information required to connect to a UA server in the registry.
+    </para>
+      <para>
+      The <application>Opc.Ua.ConfigurationTool</application> application includes a wizard that will allow administrators to browse for servers using the <token>LDS</token>, select an endpoint and then create a new COM server.
+    </para>
+      <para>
+      This application can also be used as a command line utility.
+    </para>
+      <para>
+      When a COM client connects to a UA server via the proxy it launches the <application>OpcUaComDllHost.exe</application>  process. This is a local COM server written in C++ that wraps the <application>Opc.Ua.ComInterop.DLL</application>. The host process is required because .NET does not support EXE COM servers.
+    </para>
+      <para>
+      By default, errors connecting to the UA server are written to the <system>OpcUaComDllHost.log.txt</system> file in the same directory as the executable.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

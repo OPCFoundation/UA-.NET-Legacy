@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="search-keywords" content="client, development, testing" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 5 - Testing your Client</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Client Development Tutorial</h1>
+<p>Testing a Client requires much patience, and unfortunately cannot be 
+ automated like a Server.</p>
+<h2><a name="Launch_Capability"></a>Launch Capability</h2>
+<ol type="1">
+	<li><p>Compile and build your newly developed client.</p></li>
+	<li><p>Launch the <a href="Overview_referenceServer.htm">Reference 
+	 Server</a> and then connect the client to the server.</p></li>
+	<li><p>Right-click on the project and choose &quot;Start new instance&quot; 
+	 from the &quot;Debug&quot; menu.</p></li>
+	<li><p>The application should launch successfully. </p></li>
+</ol>
+<h2><a name="Subscribe"></a>Subscribe</h2>
+<ol type="1">
+	<li><p>Once the client is connected you will use the node browser to 
+	 navigate to any node here:<br />
+	CTT -&gt; Dynamic -&gt; All Profiles -&gt; Scalar</p></li>
+	<li><p>Select a child node such as Int16, by simply clicking on it 
+	 once.</p></li>
+	<li><p>Now click on our &quot;Subscribe&quot; menu item, which is in 
+	 the &quot;Server&quot; menu.</p></li>
+	<li><p>The new &quot;SubscriptionOutput&quot; window should open and 
+	 you should see data-changes update the screen about once per second.</p></li>
+</ol>
+<h2><a name="Test_with_UA_CTT__Compliance_Test_Tool_"></a>Test with <?rh-udv_start 
+	 name="ctt-long" ?>UA CTT (Compliance Test Tool)<?rh-udv_end ?></h2>
+<ol type="1">
+	<li><p>Lastly, but most importantly you need to test your client for 
+	 compliance.</p></li>
+	<li><p>Download and install the latest <a href="http://www.opcfoundation.org/uactt"><?rh-udv_start 
+	 name="ctt-long" ?>UA CTT (Compliance Test Tool)<?rh-udv_end ?></a> 
+	 from the <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?> 
+	 website.</p></li>
+	<li><p>The <?rh-udv_start name="ctt-short" ?>UA CTT<?rh-udv_end ?> 
+	 contains product documentation (similar to this) which describes this 
+	 powerful tool, and also contains tutorials which demonstrate how to 
+	 test a client.</p></li>
+	<li><p>Open the product documentation and navigate to the following 
+	 page:<br />
+	<span style="font-family: 'Courier New', monospace;">Compliance Testing 
+	 -&gt; Client Testing -&gt; Introduction.</span></p></li>
+</ol>
+<p>Next, see </p>
+</body>
+</html>

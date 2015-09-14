@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Adobe RoboHelp 8" />
+<title>Starting_the_application</title>
+<link rel="StyleSheet" href="MS_Help.css" type="text/css" />
+</head>
+
+<body>
+<p>&nbsp;</p><?rh-region_start type="body" ?>
+<h2><?rh-variable_start name="title" format="default" ?>Starting the application<?rh-variable_end ?></h2>
+<table class="TopRowAlternatingRows" cellspacing="0" width="90%">
+	<col />
+	<col />
+	<col />
+	<tr class="t1st">
+		<td><p align="center"><span style="font-weight: bold;">Step</span></p></td>
+		<td><span style="font-weight: bold;">Process</span></td>
+		<td><span style="font-weight: bold;">Result</span></td>
+	</tr>
+	<tr class="t2Row">
+		<td valign="top"><p align="center">1</p></td>
+		<td valign="top">Click the Microsoft Windows Start button</td>
+		<td valign="top"><p>The Microsoft Windows Start Menu displays</p></td>
+	</tr>
+	<tr class="t1Row">
+		<td valign="top"><p align="center">2</p></td>
+		<td valign="top">Point at Programs</td>
+		<td valign="top"><p>The Applications sub-menu opens</p></td>
+	</tr>
+	<tr class="t2Row">
+		<td valign="top"><p align="center">3</p></td>
+		<td valign="top">Point at BigCo</td>
+		<td valign="top"><p>The BigCo sub-menu opens</p></td>
+	</tr>
+	<tr class="t1Row">
+		<td valign="top"><p align="center">4</p></td>
+		<td valign="top">Click the WidgetMax icon</td>
+		<td valign="top"><p>The WidgetMax application opens</p></td>
+	</tr>
+</table>
+<p>&#160;</p>
+<p>&#160;</p>
+<?rh-region_end type="body" ?>
+<p>&nbsp;</p>
+</body>
+</html>

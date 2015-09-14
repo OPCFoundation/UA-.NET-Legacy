@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="f74b06ee-f5bc-495c-9dc0-99fcfe0feac0" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The StandardServer is the root class for a Server application. It inherits from the stack’s SessionServerBase which implements all of UA services which are part of the ISessionEndpoint or IDiscoveryEndpoint ServiceContracts.
+    </para>
+      <para>
+      The StandardServer provides implementations for most of these Services. Developers can customize these implementations by creating a subtype of StandardServer and overriding the appropriate methods.
+    </para>
+      <para>
+      One instance of the StandardServer class exists per application but multiple applications may reside in the same process (i.e. the library does not rely on static data). The StandardServer is initialized by calling the <codeEntityReference>Overload:Opc.Ua.Server.StandardServer.Start</codeEntityReference> method and passing an <codeEntityReference>T:Opc.Ua.ApplicationConfiguration</codeEntityReference>  structure which provides all of the configurable parameters for the Server. This includes a list of endpoints and security policies. The <codeEntityReference>Overload:Opc.Ua.Server.StandardServer.Start</codeEntityReference> method will create all of the WCF <codeEntityReference>T:Opc.Ua.ServiceHost</codeEntityReference> objects required to implement all combinations of endpoint and security policies.
+    </para>
+      <para>
+      After initializing the endpoints the <codeEntityReference>Overload:Opc.Ua.Server.StandardServer.Start</codeEntityReference> method creates all of the manager objects which handle different aspects of the Server functionality and stores them in an instance of the <codeEntityReference>T:Opc.Ua.Server.ServerInternalData</codeEntityReference>  object.
+    </para>
+      <para>
+      The flow calls through the StandardServer is one way – from the stack or the hosting process to the manager objects. If the server is stopped and restarted the <codeEntityReference>T:Opc.Ua.Server.ServerInternalData</codeEntityReference>  object will be disposed and replaced with a new version.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

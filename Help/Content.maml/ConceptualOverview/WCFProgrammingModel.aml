@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="47116dd8-00ba-42d0-9097-f26c867fbbf7" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The WCF programming model allows application developers to create applications which exchange SOAP messages.
+    </para>
+      <para>
+      The UA Sample Libraries are built using the Windows Communication Foundation (WCF) which is part of the .NET Framework Version 3.0 and later.. The programming model is illustrated in Figure 1.
+    </para>
+      <mediaLink>
+        <caption placement="after" lead="Figure">1 – The WCF Programming Model </caption>
+        <image placement="center" xlink:href="0616eb1c-9469-4a1a-b77e-0e62484937d8" />
+      </mediaLink>
+      <para>
+      An application which initiates a message exchange is called the WCF Client and the application which waits for incoming messages is called a WCF Service (Note that the use of the term ‘Service’ in WCF is different from the use of the term in UA. A UA Service is equivalent to a WCF Operation).
+    </para>
+      <para>
+      A WCF Service may expose one or more WCF Endpoints which represent an addressable location on the network. Each WCF Endpoint is described by an address, a binding and a contract. The address specifies where to send messages. The binding describes how to send messages. And the contract describes what the messages contain. WCF Clients need to know this information before they can access a WCF Service.
+    </para>
+      <para>
+      A WCF contract has 4 parts: a ServiceContract, an OperationContract, a MessageContract and a DataContract. The ServiceContract defines the operations supported by an WCF Endpoint. It is implemented as an interface decorated with the ServiceContract attribute. The OperationContract defines a single message exchange that a Client may initiate. An OperationContract may define a single message or a request-response message pair (UA applications only use request-response message pairs). It is implemented as method decorated with OperationContract attribute. A MessageContract defines the body of a SOAP message exchanged during an operation. It is implemented as a class decorated with MessageContract attribute. The DataContract describes a parameter in the message and is also implement as a class.
+    </para>
+      <para>
+      A WCF Channel is logical network connection that can be used to exchange multiple messages. A WCF Client must create a WCF Channel when it connects to an Endpoint. When a channel is created the security tokens are negotiated an a unique identifier is assigned. This identifier is used by the application to associate a UA session with a particular WCF channel. A single UA session can only be accessed via one WCF channel at any given time. If the WCF channel is closed for any reason (e.g. a network interruption) the client must create a new WCF channel and associate it with UA Session by calling the ActivateSession service.
+    </para>
+      <para>
+      More information on the WCF programming model can be found in the MSDN documentation provided by Microsoft.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

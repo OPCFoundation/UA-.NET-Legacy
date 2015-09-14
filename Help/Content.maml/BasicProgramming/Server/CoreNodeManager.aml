@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="47e2cbdc-0485-4e19-99aa-99657350cee9" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The CoreNodeManager provides access to an in memory database of Nodes and their references.
+    </para>
+      <para>
+      The database can store any object that implements the <codeEntityReference>T:Opc.Ua.ILocalNode</codeEntityReference>  interface. When the CoreNodeManager is initialized it loads the standard address space defined by the UA specifications. These Nodes can be accessed using well known NodeIds which are defined as constants in the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" /> (e.g. Objects.Server).
+  </para>
+      <para>
+      Classes that implement the <codeEntityReference>T:Opc.Ua.ILocalNode</codeEntityReference>  interface are tightly coupled to the CoreNodeManager and all method and property calls are expected to return without blocking. The CoreNodeManager will always acquire its own lock before using the <codeEntityReference>T:Opc.Ua.ILocalNode</codeEntityReference>  interface so implementations that can be accessed by application code outside of the CoreNodeManager must take care to ensure that no deadlocks occur. This can be accomplished by either ensuring that the <codeEntityReference>T:Opc.Ua.ILocalNode</codeEntityReference>  node implementation does not attempt to access the CoreNodeManager while it holds its synchronization lock or by acquiring the CoreNodeManager synchronization lock  before attempting to acquire the <codeEntityReference>T:Opc.Ua.ILocalNode</codeEntityReference>  implementation’s synchronization lock .
+    </para>
+      <para>
+      The  synchronization lock for the CoreNodeManager is made available as the <codeEntityReference>P:Opc.Ua.Server.CoreNodeManager.DataLock</codeEntityReference> property. The lock must be acquired by using the <codeEntityReference>T:Opc.Ua.SafeLock</codeEntityReference> object defined in the <link xlink:href="a7bd88ec-112d-4bdc-989a-fd8b352ed695" />.
+  </para>
+      <para>
+      The CoreNodeManager also provides a mechanism for loosely coupled Nodes via the <codeEntityReference>M:Opc.Ua.Server.CoreNodeManager.RegisterSource(Opc.Ua.NodeId,System.Object,System.Object,System.Boolean)</codeEntityReference> method. Developers that use this approach must call the RegisterSource method once for every loosely coupled Node and provide a source and a handle. The source is the object which knows how to get the values for the Node’s attributes and must implement one or more of the source interfaces. The handle is an identifier which the source can use to determine which node is being accessed.
+    </para>
+      <para>
+      The source is used when the CoreNodeManager processes an operation that affects a Node. The CoreNodeManager will always start by looking for the cached node and then checking for a source that supports the interface required for the operation. If one exists it adds or creates a list of operations that the source will have to process. After processing all operations, the CoreNodeManager will release its synchronization lock and call the appropriate method on the source object and pass the list of operations with the handles provided by the source. This means source object may perform a blocking operation unless prohibited by the source interface (e.g. <codeEntityReference>T:Opc.Ua.Server.IReadMetadataSource</codeEntityReference> ).
+    </para>
+      <para>
+      Every Node with a source has an associated <codeEntityReference>T:Opc.Ua.ILocalNode</codeEntityReference>  object which stores  the defaults for its attribute values. These values will be passed to the source when attribute value is being read. If a source does not support a particular attribute it can do nothing and the CoreNodeManager will return the default value. If a source returns a new value the <codeEntityReference>T:Opc.Ua.ILocalNode</codeEntityReference>  object is not updated. The default values can be updated by acquiring the synchronization lock on the CoreNodeManager and calling the <codeEntityReference>Overload:Opc.Ua.Server.CoreNodeManager.GetLocalNode</codeEntityReference> method.
+    </para>
+      <para>
+      The source interfaces supported by the CoreNodeManager are described in Table 1.
+    </para>
+      <table>
+        <title>
+        Table 1 – CoreNodeManager Source Interfaces
+      </title>
+        <tableHeader>
+          <row>
+            <entry>
+              <para>
+              Name
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Description
+            </para>
+            </entry>
+          </row>
+        </tableHeader>
+        <row>
+          <entry>
+            <para>
+            IReadMetadataSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Reads the metadata attributes for a Node.
+          </para>
+            <para>
+            Calls to this interface must be non-blocking and are called while the CoreNodeManager is holding its synchronization lock.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IReadDataSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Reads the attribute values for one or more Nodes.
+          </para>
+            <para>
+            Sources that support reads for metadata attributes must also implement IReadMetadataSource.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IWriteDataSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Writes the attribute values for one or more Nodes.
+          </para>
+            <para>
+            Sources that do not implement IReadDataSource will need to ensure the associated ILocalNode object is updated with the new value.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IReadHistoryDataSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Reads the historical attributes values for one or more Nodes.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IReadHistoryEventSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Reads the historical events for one or more Nodes.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IUpdateHistoryDataSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Updates the historical attributes values for one or more Nodes.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IUpdateHistoryEventSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Updates the historical events for one or more Nodes.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IMethodSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Invokes a method on one or more Nodes.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            IMonitoredItemSource
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Creates/Delete or Modifies a MonitoredItem for one or more Nodes.
+          </para>
+            <para>
+            Sources are expected to push the data changes or events onto the MonitoredItem queue.
+          </para>
+          </entry>
+        </row>
+      </table>
+      <para>
+      The CoreNodeManager provides a number of methods that can be used to create new Nodes. If an application creates a new Variable or Object, the <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference> will be used to automatically create the instance declaration hierarchy required by the <codeEntityReference>P:Opc.Ua.Server.NodeMetadata.TypeDefinition</codeEntityReference>.  Any automatically created Nodes can be replaced by calling the <codeEntityReference>M:Opc.Ua.Server.CoreNodeManager.ReplaceNode(Opc.Ua.ILocalNode,Opc.Ua.ILocalNode)</codeEntityReference> method. New Nodes are automatically assigned numeric identifiers unless the caller provides a NodeIdFactory to the call.
+    </para>
+      <para>
+      The CoreNodeManager does not persist any Nodes or <codeEntityReference>P:Opc.Ua.Server.NodeSource.References</codeEntityReference> that are added to it. Applications that need to save changes must keep track of the new Nodes and save them at the appropriate time (e.g. after the a Node is created or a reference added). The CoreNodeManager provides events that allow another component to be notified when Nodes and <codeEntityReference>P:Opc.Ua.Server.NodeSource.References</codeEntityReference> are added or removed.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

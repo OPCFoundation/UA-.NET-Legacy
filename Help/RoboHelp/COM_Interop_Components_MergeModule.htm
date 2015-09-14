@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>COM Interop Components MergeModule</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>COM Interop Components MergeModule</h1>
+<h2>Overview</h2>
+<p>For installing the UA/COM Proxy/Wrapper services that are provided by 
+ the <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?>.</p>
+<h2>Deployed Components</h2>
+<ul type="disc">
+	<li>UA COM Proxy Server</li>
+	<li>UA COM Server Wrapper</li>
+	<li>Configuration files</li>
+</ul>
+<h2>Installation Locations</h2>
+<ul type="disc">
+	<li>Program Files &gt; OPC Foundation &gt; Unified Architecture &gt; 
+	 ComInterop: </li>
+	<ul type="disc">
+		<li>interop.NetFwTypeLib.dll</li>
+		<li>UA Client Library (<span style="font-style: italic;">Opc.Ua.Client.dll</span>)</li>
+		<li>UA COM Interop Library (<span style="font-style: italic;">Opc.Ua.ComInterop.dll</span>)</li>
+		<li>Opc.Ua.ComProxyServer.Config.xml</li>
+		<li>Opc.Ua.ComProxyServer.exe.config</li>
+		<li>Opc.Ua.ComServerWrapper.Config.xml</li>
+		<li>Opc.Ua.ComServerWrapper.exe.config</li>
+		<li>UA Configuration Library (<span style="font-style: italic;">Opc.Ua.Configuration.dll</span>)</li>
+		<li>UA Core Library (<span style="font-style: italic;">Opc.Ua.Core.dll</span>)</li>
+		<li>UA Server Library (<span style="font-style: italic;">Opc.Ua.Server.dll</span>)</li>
+		<li>UA COM Proxy Server</li>
+		<li>UA COM Server Wrapper</li>
+	</ul>
+	<li>Program Files &gt; Reference Assemblies &gt; OPC Foundation &gt; 
+	 Unified Architecture &gt; v1.1: </li>
+	<ul type="disc">
+		<li>UA COM Interop Library</li>
+		<li>UA COM Interop Library (documentation)</li>
+	</ul>
+</ul>
+<h2>Registry Settings</h2>
+<ul type="disc">
+	<li>(none)</li>
+</ul>
+<h2>File Associations</h2>
+<ul type="disc">
+	<li>(none)</li>
+</ul>
+<h2>Shortcuts</h2>
+<ul type="disc">
+	<li>(none)</li>
+</ul>
+<h2>Actions</h2>
+<ul type="disc">
+	<li>Installation:</li>
+	<ul type="disc">
+		<li>Opc.Ua.ComProxyServer.exe /regserver</li>
+	</ul>
+	<li>Commit:</li>
+	<ul type="disc">
+		<li>Opc.Ua.ComProxyServer.exe /install /silent</li>
+	</ul>
+	<li>Rollback:</li>
+	<ul type="disc">
+		<li>(none)</li>
+	</ul>
+	<li>Uninstall: </li>
+	<ul type="disc">
+		<li>Opc.Ua.ComServerWrapper.exe /uninstall /silent</li>
+		<li>Opc.Ua.ComProxyServer.exe /uninstall /silent</li>
+		<li>Opc.Ua.ComProxyServer.exe /unregserver</li>
+	</ul>
+</ul>
+<h2>Dependencies</h2>
+<ul type="disc">
+	<li>OPC COM ProxyStub MergeModule <span style="font-style: italic;">(no 
+	 documentation available)</span></li>
+</ul>
+<p>See also:</p>
+<ul type="disc">
+	<li><a href="Using_Merge_Modules.htm">Using Merge Modules</a></li>
+</ul>
+</body>
+</html>

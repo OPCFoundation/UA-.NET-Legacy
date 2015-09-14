@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Data Access Overview</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Data Access Overview</h1>
+<p>Data Access is the original OPC specification, adapted into the core 
+ of OPC UA and defined in <a href="http://www.opcfoundation.org/ua/part8"><?rh-udv_start 
+	 name="UaSpec08" ?>UA Specifications Part 8 - Data Access (http://www.opcfoundation.org/ua/part8)<?rh-udv_end ?></a>.</p>
+<p>Intended for continuous data acquisition from a PLC/controller, and 
+ providing the following capabilities:</p>
+<table style="border-collapse: separate; border-collapse: separate;" cellspacing="0" 
+		 width="100%" border="1">
+	<col style="width: 18.128%;" />
+	<col style="width: 81.872%;" />
+	<tr>
+		<td><p style="text-align: center;"><span style="font-weight: bold;">Capability</span></p></td>
+		<td><p><span style="font-weight: bold;">Description</span></p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Discovery</p></td>
+		<td><p>The ability to locate other OPC UA products available on 
+		 a PC/network.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Browsing</p></td>
+		<td><p>The ability to browse the address space of a Server to obtain 
+		 a list of usable Nodes.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Read</p></td>
+		<td><p>To read 1...n Nodes in a single call and obtain the value, 
+		 quality, timestamp, and a success/failure code for each element 
+		 - all within a single call.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Write</p></td>
+		<td><p>To write to 1...n Nodes in a single call while obtaining 
+		 the success/failure code for each individual element.</p></td>
+	</tr>
+	<tr>
+		<td><p style="text-align: center; font-weight: bold;">Subscription</p></td>
+		<td><p>The ability to request a Server to monitor Nodes and to 
+		 send a notification to the Client when the value changes.</p></td>
+	</tr>
+</table>
+<p>There are many other features of OPC UA that are inherited by the Data 
+ Access <span style="font-style: italic;">profile</span>.</p>
+<p>There are 2 demonstration applications available:</p>
+<ul type="disc">
+	<li><p><a href="DAServerOverview.htm">Data Access Server - Overview</a></p></li>
+	<li><p><a href="DAClientOverview.htm">Data Access Client - Overview</a></p></li>
+</ul>
+</body>
+</html>

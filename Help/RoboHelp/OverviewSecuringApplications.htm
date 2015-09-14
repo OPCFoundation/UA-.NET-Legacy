@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>OverviewSecuringApplications</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Securing Applications Overview</h1>
+<p>OPC UA requires all products to be identified by a secure digital signature 
+ that uniquely identifies a specific product, to a specific computer. Each 
+ application can then be configured with a &quot;trust list&quot; that 
+ identifies other UA products that it will trust. When a UA Client connects 
+ to a Server, the Server and Client will check each other's certificates 
+ to make sure that they trust each other. Both products must trust each 
+ other for a connection to be established.</p>
+<p>When connecting a Client to a Server for the first time, typically the 
+ connection will be rejected as both applications do not trust each other 
+ - although some products may be configured to automatically trust new 
+ connections. An administrator will typically modify the trust list of 
+ the applications to make sure the Server trusts the Client, and the Client 
+ trusts the Server.</p>
+<p>There are 2 tutorials that will walk you through the configuration process:</p>
+<ul type="disc">
+	<li><p><a href="Trusting_Applications_built_with_.NET_API.htm">Trusting 
+	 Applications built with .NET API</a></p></li>
+	<li><p><a href="Trusting_Applications_built_from_other_Frameworks.htm">Trusting 
+	 Applications built from other Frameworks</a></p></li>
+</ul>
+</body>
+</html>

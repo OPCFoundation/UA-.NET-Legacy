@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Using Merge Modules</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Using Merge Modules</h1>
+<p>The <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?> 
+ merge modules simplify the deployment of applications built with the <?rh-udv_start 
+	 name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>, and also for deploying 
+ the <a href="Local_Discovery_Server_(LDS).htm"><?rh-udv_start name="UaDiscoSvr" ?>UA Discovery Server<?rh-udv_end ?></a>. 
+ Simply including a merge-module within your installer is typically all 
+ that is required to redistribute <?rh-udv_start name="CompanyName" ?>OPC Foundation<?rh-udv_end ?> 
+ deliverables.</p>
+<h2>Visual Studio .NET Installer</h2>
+<ol type="1">
+	<li><p>In your [existing] installer project simply right-click on the 
+	 project (within the solution explorer) and choose Add &gt; Merge Module 
+	 from the menu.</p></li>
+	<li><p>Select any applicable merge-modules from the dialog, and then 
+	 click OK.</p></li>
+	<li><p>Build the installer and test it.</p></li>
+</ol>
+<h2>Other Installer Products</h2>
+<p>Please refer to the product documentation if using another application 
+ to build your installer.</p>
+<p>See also:</p>
+<ul type="disc">
+	<li><a href="Overview_redistributables.htm">Merge Module Overview</a></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="14136039-f5d7-4c43-a071-1a50a30b06b1" revisionNumber="1">
+  <developerOrientationDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>Required introduction</para>
+    </introduction>
+    <!-- Add one or more top-level section elements.  These are collapsible.
+       If using <autoOutline /> tag, add an address attribute to identify
+       it so that it can be jumped to with a hyperlink. -->
+    <inThisSection>
+      <content>
+        <para> Add links to all subtopics.</para>
+        <para>
+          <link xlink:href="">
+          </link>
+        </para>
+        <para>Link description</para>
+      </content>
+    </inThisSection>
+  </developerOrientationDocument>
+</topic>

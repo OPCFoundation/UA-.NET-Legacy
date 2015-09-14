@@ -1,0 +1,32 @@
+﻿<ua:ConfiguredEndpointCollection
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd" 
+  xmlns:ua="http://opcfoundation.org/UA/SDK/Configuration.xsd">
+  <ua:KnownHosts />
+  <ua:Endpoints>
+    <ua:ConfiguredEndpoint>
+      <ua:Endpoint>
+        <EndpointUrl>opc.tcp://localhost:9001/UA/TestServer</EndpointUrl>
+        <SecurityMode>None_1</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</SecurityPolicyUri>
+        <UserIdentityTokens>
+          <UserTokenPolicy>
+            <TokenType>Anonymous_0</TokenType>
+          </UserTokenPolicy>
+          <UserTokenPolicy>
+            <TokenType>UserName_1</TokenType>
+          </UserTokenPolicy>
+          <UserTokenPolicy>
+            <TokenType>Certificate_2</TokenType>
+          </UserTokenPolicy>
+          <UserTokenPolicy>
+            <TokenType>IssuedToken_3</TokenType>
+            <IssuedTokenType>urn:oasis:names:tc:SAML:1.0:assertion:Assertion</IssuedTokenType>
+          </UserTokenPolicy>
+        </UserIdentityTokens>
+        <TransportProfileUri>http://opcfoundation.org/UAProfile/Transport/uatcp-uasc-uabinary</TransportProfileUri>
+        <SecurityLevel>0</SecurityLevel>
+      </ua:Endpoint>
+    </ua:ConfiguredEndpoint>
+  </ua:Endpoints>
+</ua:ConfiguredEndpointCollection>

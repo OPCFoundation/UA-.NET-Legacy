@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{65BCA55A-F355-4110-80DB-11E001979C5D}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <SignManifests>false</SignManifests>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <!-- This property group is only here to support building this project using the 
+       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
+       to set the TargetFrameworkVersion to v3.5 -->
+  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT,USE_HTTPS_BINDING_FOR_HTTP</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Xml.Linq, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Serialization, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyVersionInfo.cs" />
+    <Compile Include="Schema\ApplicationConfiguration.cs">
+      <DependentUpon>ApplicationConfiguration.xsd</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Security\Certificates\CertificateFactory.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Security\Certificates\CertificateIdentifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Security\Certificates\CertificateStoreIdentifier.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Security\Certificates\ICertificateStore.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Security\Constants\SecurityConstants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Security\Constants\SecurityPolicies.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="SilverlightDefs.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Stack\Client\ClientBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Client\DiscoveryClient.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Client\IChannelBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Client\InvokeServiceMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Client\IServiceRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Client\SessionChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Client\WcfChannelBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Configuration\ApplicationConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Configuration\ConfiguredEndpoints.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Configuration\EndpointConfiguration.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Configuration\EndpointDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Constants\ConditionStateNames.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Constants\Namespaces.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Generated\Opc.Ua.Channels.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Generated\Opc.Ua.Client.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Generated\Opc.Ua.Constants.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Generated\Opc.Ua.DataTypes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Generated\Opc.Ua.Interfaces.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Generated\Opc.Ua.Messages.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Https\HttpsTransportChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Server\IEndpointBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Tcp\TcpChannelQuotas.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Tcp\TcpMessageType.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Transport\AsyncResultBase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Transport\ITransportChannel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Transport\ITransportListener.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Transport\ITransportListenerCallback.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Transport\TransportChannelSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Transport\TransportListenerSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\Argument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\BrowseDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\BrowsePath.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\EUInformation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\EventFieldList.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\HistoryReadValueId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\HistoryUpdateDetails.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\MonitoredItemCreateRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\MonitoredItemCreateResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\MonitoredItemModifyRequest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\MonitoredItemNotification.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\NotificationMessage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\Range.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\ReadValueId.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\ReferenceDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\ServiceFault.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\StatusResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\UserTokenPolicy.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\VariableAttributes.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\ViewDescription.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Stack\Types\WriteValue.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Types\BuiltIn\AttributeValues.cs" />
+    <Compile Include="Types\BuiltIn\BuiltInTypeCollections.cs" />
+    <Compile Include="Types\BuiltIn\DataValue.cs" />
+    <Compile Include="Types\BuiltIn\DiagnosticInfo.cs" />
+    <Compile Include="Types\BuiltIn\DiagnosticMasks.cs" />
+    <Compile Include="Types\BuiltIn\ExpandedNodeId.cs" />
+    <Compile Include="Types\BuiltIn\ExtensionObject.cs" />
+    <Compile Include="Types\BuiltIn\ITranslatableObject.cs" />
+    <Compile Include="Types\BuiltIn\ITypeTable.cs" />
+    <Compile Include="Types\BuiltIn\LocalizedText.cs" />
+    <Compile Include="Types\BuiltIn\MessageContextExtension.cs" />
+    <Compile Include="Types\BuiltIn\NodeId.cs" />
+    <Compile Include="Types\BuiltIn\QualifiedName.cs" />
+    <Compile Include="Types\BuiltIn\StatusCode.cs" />
+    <Compile Include="Types\BuiltIn\Uuid.cs" />
+    <Compile Include="Types\BuiltIn\Variant.cs" />
+    <Compile Include="Types\Constants\Attributes.Helpers.cs" />
+    <Compile Include="Types\Constants\StatusCodes.Helpers.cs" />
+    <Compile Include="Types\Encoders\BinaryDecoder.cs" />
+    <Compile Include="Types\Encoders\BinaryEncoder.cs" />
+    <Compile Include="Types\Encoders\EncodableObject.cs" />
+    <Compile Include="Types\Encoders\EncodeableFactory.cs" />
+    <Compile Include="Types\Encoders\IDecoder.cs" />
+    <Compile Include="Types\Encoders\IEncodable.cs" />
+    <Compile Include="Types\Encoders\IEncoder.cs" />
+    <Compile Include="Types\Encoders\XmlDecoder.cs" />
+    <Compile Include="Types\Encoders\XmlEncoder.cs" />
+    <Compile Include="Types\Generated\Opc.Ua.Attributes.cs" />
+    <Compile Include="Types\Generated\Opc.Ua.StatusCodes.cs" />
+    <Compile Include="Types\Schemas\BinarySchema.cs" />
+    <Compile Include="Types\Utils\DataComparer.cs" />
+    <Compile Include="Types\Utils\DataGenerator.cs" />
+    <Compile Include="Types\Utils\HiResClock.cs" />
+    <Compile Include="Types\Utils\Lock.cs" />
+    <Compile Include="Types\Utils\NamespaceTable.cs" />
+    <Compile Include="Types\Utils\NumericRange.cs" />
+    <Compile Include="Types\Utils\ReadOnlyList.cs" />
+    <Compile Include="Types\Utils\RelativePath.cs" />
+    <Compile Include="Types\Utils\ServiceMessageContext.cs" />
+    <Compile Include="Types\Utils\ServiceResult.cs" />
+    <Compile Include="Types\Utils\ServiceResultException.cs" />
+    <Compile Include="Types\Utils\TypeInfo.cs" />
+    <Compile Include="Types\Utils\Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Schema\ApplicationConfiguration.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Types\Schemas\BuiltInTypes.bsd" />
+    <None Include="Types\Schemas\StandardTypes.bsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Types\Schemas\BuiltInTypes.xml" />
+    <Content Include="Types\Utils\LocalizedData.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

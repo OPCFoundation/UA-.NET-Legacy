@@ -1,0 +1,130 @@
+﻿
+<html>
+<head>
+ <link rel="shortcut icon" href="favicon.ico">
+ <title>OPC Foundation Unified Architecture Technology Samples</title>
+
+ <meta name="generator" content="Adobe RoboHelp 9" />
+ <meta name="description" content="WebHelp 5.50" />
+
+</head>
+
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript" src="whutils.js"></script>
+<script type="text/javascript" language="javascript" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" >
+<!--
+if (!window.gbWhVer||!window.gbWhUtil||!window.gbWhMsg)
+	document.location.reload();
+//-->
+</script>
+
+<script type="text/javascript" language="javascript" src="whstub.js"></script>
+<script language="javascript">
+<!--
+var nWebhelpNavPaneMode = 1;			//1: DHTML 2:PureHTML 3:Noframe At all
+var strPaneDHTML  = "whskin_pdhtml.htm";		//whd_nvp10.htm  if tab enabled, whnframe.htm if tab disabled.
+var strPaneList   = "whskin_plist.htm";
+
+var strPane = "";
+
+var nViewFrameType = -1;
+
+if (!window.gAgent)
+{
+	// low end browser, we don't even try to determine it.
+	document.location = "whnjs.htm";
+}
+else
+{
+	if (!gbNav4&&!gbIE4&&!gbOpera7&&!gbSafari)				
+		document.location = "whnjs.htm";
+	else if (gbNav4 && !gbNav6 && ((gnVerMinor <= 4.06)))
+		document.location = "whnjs.htm";
+	else if (gbMac && gbIE4 && !gbIE5)		
+		document.location = "whnjs.htm";
+	//figure out which mode is the best
+	else
+	{
+		nViewFrameType=nWebhelpNavPaneMode;
+		if (nWebhelpNavPaneMode==1)
+		{
+			var gbDHTML=(nWebhelpNavPaneMode==1);
+			if (gbNav4&&(gnVerMinor < 4.1))                 nViewFrameType = 2;
+			if (gbNav4&&(gnVerMinor == 4.6))                nViewFrameType = 2;
+			if (gbIE4&&gbDHTML)                             nViewFrameType = 1;
+			if (gbIE4&&gbSunOS&&nWebhelpNavPaneMode==2)     nViewFrameType = 2;
+			if (gbNav4&&gbSunOS&&nViewFrameType==2)         nViewFrameType = 2;
+			if (gbNav6&&gbDHTML)                            nViewFrameType = 1;
+			if (gbMac)                                      nViewFrameType = 2;
+			if (gbMac && gbNav6)                            nViewFrameType = 1;
+			if (gbSafari3)                                  nViewFrameType = 1;
+		}
+	}
+}
+
+if (nViewFrameType!=-1)
+{
+	var gbWindows = ((gAgent.indexOf("win") != -1) || (gAgent.indexOf("16bit") != -1));
+	//The colordepth of the 16 color on Windows is 1. 
+	if ((gbWindows) && (gbNav4) && (window.screen) && (window.screen.colorDepth <= 4))
+	{
+	   alert("WebHelp has detected that your display is set to 16 colors. For full WebHelp support, please set your display to use 256 or more colors.");
+	   nViewFrameType = 2;
+	}
+
+	//figure out which one is navpane
+	// ReplaceMark:nViewFrameType = 1
+	if (nViewFrameType == 1)
+	{
+		if (gbNav4 && !gbNav6)
+			strPane = strPaneList;
+		else
+			strPane = strPaneDHTML;
+	}
+	else
+		strPane = strPaneList;
+}
+//-->
+</script>
+<script type="text/javascript" language="javascript" src="whstart.js"></script>
+<script type="text/javascript" language="javascript">
+<!--
+if (!gbIE4&&!gbNav4&&!gbOpera7&&!gbSafari)
+	document.location = "whnjs.htm";
+
+function CMRAgent( strID, strURL, strLabel, strFrameAttr )
+{
+  this.m_strID = strID;
+  this.m_strURL = strURL;
+  this.m_strLabel = strLabel;
+  this.m_strFrameAttr = strFrameAttr;
+}
+
+function CMRServer()
+{
+  this.m_cAgents = new Array;
+}
+var cMRServer = new CMRServer;
+// GetServerInfo
+// Registry the agent array handled by webhelp
+// ReplaceMark:MRServer.strServerData
+//-->
+</script>
+
+<script type="text/javascript" language="javascript">
+<!--
+if (nViewFrameType!=-1)
+{
+	var strHTML = "<frameset rows=\"32,*\" hostof=\"parent:toolbar!startpage:yes\" frameborder=\"0\" border=\"0\"> <frame src=\"whskin_tbars.htm\" id=\"toolbar\" frameborder=\"0\" border=\"0\" scrolling=\"no\" noresize=\"\" marginheight=\"0\" marginwidth=\"0\" title=\"Toolbar\"></frame> <frame src=\"whskin_frmset01.htm\"  frameborder=\"1\" border=\"1\" scrolling=\"auto\" marginheight=\"0\" marginwidth=\"0\"></frame></frameset>";
+	document.write(strHTML);
+}
+//-->
+</script>
+
+<frameset cols="100%,*" frameborder=no border=0>
+  <frame src="whnjs.htm">
+  <frame src="whskin_blank.htm" noresize>
+</frameset>
+
+</html>

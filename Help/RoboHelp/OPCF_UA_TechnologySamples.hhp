@@ -1,0 +1,115 @@
+﻿[OPTIONS]
+Compiled File=OPCF_UA_TechnologySamples.chm
+Title=OPC Foundation Unified Architecture Technology Samples
+Contents File=AppHelp.hhc
+Index File=AppHelp.hhk
+Default topic=About_the_OPC_Foundation.htm
+Default Window=OPC Foundation Help
+Error log file=
+Display compile progress=No
+Display compile notes=No
+Full-text search=Yes
+Binary Index=No
+Auto Index=No
+Enhanced decompilation=No
+Binary TOC=No
+Flat=No
+Custom tab="&Glossary", HHActiveX.GlossaryPane
+
+[WINDOWS]
+OPC Foundation Help="OPC Foundation Unified Architecture Sample Application Help","AppHelp.hhc","AppHelp.hhk","","","http://www.widgetmax.com","Web Site",,,0x40080520,0,0x43006,[50,50,850,650],0x0,0x0,,0,0,0,[Glossary,HHActiveX.GlossaryPane]
+
+[FILES]
+Splash.htm
+Welcome.htm
+The_Information_Screen.htm
+License_Agreement.htm
+Launching_the_Configuration_Tool.htm
+UaConfig_Manage_Security.htm
+UaConfig_Manage_Application.htm
+UaConfig_Manage_Certificates.htm
+UaConfig_HTTP_Access_Rules.htm
+UA_Configuration_Tool.htm
+UA_Sample_Server.htm
+UA_Sample_Client.htm
+Local_Discovery_Server_(LDS).htm
+Overview.htm
+About_TechnologyName.htm
+About_the_OPC_Foundation.htm
+UaConfig_Manage_COM_Interop.htm
+HAEventsClientOverview.htm
+ACServerOverview.htm
+ACClientOverview.htm
+ComIop_Overview.htm
+HaServerOverview.htm
+HAEventsServerOverview.htm
+HAClientOverview.htm
+Address_Space_Navigation.htm
+Reading_Nodes.htm
+Data_Access_Overview.htm
+Historical_Access_Overview.htm
+Alarms_&_Conditions_Overview.htm
+DAServerOverview.htm
+DAClientOverview.htm
+HaData_Client_Aggregates.htm
+Writing_to_Nodes.htm
+UaGenericClientDiscovery.htm
+DAServerConfiguration.htm
+DAClientConfiguration.htm
+GenericClientConfiguration.htm
+Subscriptions.htm
+GenericServerConfiguration.htm
+HADataClient_Configuration.htm
+Troubleshooting.htm
+ACClient_Configuration.htm
+HAEventsServer_Configuration.htm
+HADataServer_Configuration.htm
+ACServer_Configuration.htm
+HAEventsClient_Configuration.htm
+Starting___Stopping_the_Service.htm
+Developing_UA_Applications.htm
+Certification.htm
+Getting_Started.htm
+Overview_referenceServer.htm
+Firewall_Settings.htm
+Step_1_-_New_ProjectClient.htm
+Step_2_-_Address_Space.htm
+Step_3_-_Reading_Values.htm
+Step_4_-_Handling_Write_Requests.htm
+Step_6_-_Deploying_Server.htm
+Step_5_-_Testing_Server.htm
+Overview_-_Reference_Client.htm
+Server_Development.htm
+Step_1_-_New_Project.htm
+Client_Development.htm
+Step_5_-_Testing_your_Client.htm
+Useful_Components.htm
+Step_4_-_Consuming_DataChanges.htm
+Step_3_-_Setup_Subscription.htm
+Step_2_-_Enhance_User_Interface.htm
+OverviewSecuringApplications.htm
+Step_6_-_Deploying_your_Client.htm
+Trusting_Applications_built_with_.NET_API.htm
+Local_Discovery_Server_MergeModule.htm
+Overview_redistributables.htm
+COM_Interop_Components_MergeModule.htm
+DotNet_Stack_MergeModule.htm
+Using_Merge_Modules.htm
+Certificate_Generator.htm
+HTTPS_Connectivity.htm
+Trusting_Applications_built_from_other_Frameworks.htm
+
+AppHelp.glo
+OPCF_UA_TechnologySamples.brs
+[ALIAS]
+#include OPCF_UA_TechnologySamples.ali
+
+[MAP]
+#include BSSCDefault.h
+#include WidgetMax.h
+
+[TEXT POPUPS]
+BSSCDefault.h
+WidgetMax.h
+
+

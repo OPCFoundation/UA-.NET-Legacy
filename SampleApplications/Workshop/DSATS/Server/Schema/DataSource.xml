@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DataSource 
+    xmlns="http://opcfoundation.org/DSATSDemo/DataSource.xsd"
+    xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+    xmlns:ns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+  
+  <!-- NodeIds (e.g. svr=2;ns=3;i=10226) have an NamespaceIndex (ns=??)
+       This index refers to an entry in this table.
+       The first entry in this table is ns=1;
+  -->
+  <NamespaceUris>
+    <ns:Uri>http://opcfoundation.org/DSATSDemo</ns:Uri>
+    <ns:Uri>http://www.prosysopc.com/OPCUA/SampleAddressSpace</ns:Uri>
+    <ns:Uri>http://test.org/UA/Data/</ns:Uri>
+  </NamespaceUris>
+
+  <!-- NodeIds (e.g. svr=2;ns=3;i=10226) have an ServerIndex (svr=??)
+       This index refers to an entry in this table.
+       This is the URL that is used to connect to the NOV rig server.
+       The first entry in this table is svr=1;
+       
+       Note that only ONE server is supported at this time.
+       All nodes in this file must reference exactly one entry.
+  -->
+  <ServerUris>
+    <ns:Uri>opc.tcp://DrillLink:8081/OPCUA/SampleConsoleServer</ns:Uri>
+    <ns:Uri>opc.tcp://localhost:51210/UA/SampleServer</ns:Uri>
+  </ServerUris>
+
+  <!-- Specifies the phases for the rig. Each name must be unique. -->
+  <Phase BrowseName="Stationary">
+    <Description>The well is not active (off bottom).</Description>
+  </Phase>
+  <Phase BrowseName="Rotate">
+    <Description>Traditional drilling (on bottom making new hole).</Description>
+  </Phase>
+  <Phase BrowseName="Slide">
+    <Description>Horizontal drilling (no rotation in drill string).</Description>
+  </Phase>
+
+  <!-- Specifies the locks for the rig. Each name must be unique.
+       Each lock can have a list of certificate thumbprints.
+       If a client uses one of them then it does not need approval to request the lock.
+  -->
+  <Lock BrowseName="RotateLock">
+    <Permission Thumbprint="B80756125FD0809DA54E96FD9AE9D6AD7010CFB6"></Permission>
+    <Permission Thumbprint="5DF8666537629A00A00DBB19F727F4F38FA1B133"></Permission>
+  </Lock>
+  <Lock BrowseName="SlideLock">
+    <Permission Thumbprint="B80756125FD0809DA54E96FD9AE9D6AD7010CFB6"></Permission>
+    <Permission Thumbprint="5DF8666537629A00A00DBB19F727F4F38FA1B133"></Permission>
+  </Lock>
+
+  <!-- Specifies tools in the rig.
+       Only TopDrive and MudPumps supported at this time.
+  -->
+  <Declaration Path="" BrowseName="TopDrive" TypeDefinitionId="ns=1;i=217">
+    
+    <!-- Specifies the locks required for each phase.
+         If no lock is specified the tool cannot be controlled for that phase.
+    -->
+    <AccessRules>
+      <AccessRule Phase="Rotate" Lock="RotateLock" />
+      <AccessRule Phase="Slide" Lock="SlideLock" />
+    </AccessRules>
+    
+    <!-- List of sources for the tool.
+         Can be a literal value or a link to another UA server.
+    -->
+    <Sources>
+      <Source Path="AssetInfo/Manufacturer">
+        <DefaultValue>
+          <ua:String>NOV</ua:String>
+        </DefaultValue>
+      </Source>
+      <Source Path="Enabled">
+        <RemoteId>svr=1;ns=2;s=TD_ENABLE</RemoteId>
+      </Source>
+      <Source Path="DeviceReady">
+        <RemoteId>svr=1;ns=2;s=TD_READY</RemoteId>
+      </Source>
+      <Source Path="LocalControl">
+        <RemoteId>svr=1;ns=2;s=TD_MANUAL</RemoteId>
+      </Source>
+      <Source Path="WatchdogCounter">
+        <RemoteId>svr=1;ns=2;s=TD_COUNTER</RemoteId>
+      </Source>
+      <Source Path="OperationalLimits/MinRPM">
+        <RemoteId>svr=1;ns=2;s=TD_SPEED_CW_SERP_MIN_LIM</RemoteId>
+      </Source>
+      <Source Path="OperationalLimits/MaxRPM">
+        <RemoteId>svr=1;ns=2;s=TD_SPEED_CW_SERP_MAX_LIM</RemoteId>
+      </Source>
+      <Source Path="OperationalLimits/MinTorque">
+        <RemoteId>svr=1;ns=2;s=TD_TORQUE_CW_SERP_MIN_LIM</RemoteId>
+      </Source>
+      <Source Path="OperationalLimits/MaxTorque">
+        <RemoteId>svr=1;ns=2;s=TD_TORQUE_CW_SERP_MAX_LIM</RemoteId>
+      </Source>
+
+      <Source Path="Measurements/RPM">
+        <RemoteId>svr=1;ns=2;s=TD_SPEED_FB</RemoteId>
+      </Source>
+      <Source Path="Measurements/Torque">
+        <RemoteId>svr=1;ns=2;s=TD_TORQUE_FB</RemoteId>
+      </Source>
+      <Source Path="Measurements/Orientation">
+        <RemoteId>svr=1;ns=2;s=TD_POS_FB</RemoteId>
+      </Source>
+      
+      <Source Path="SetPoints/RPM">
+        <RemoteId>svr=1;ns=2;s=TD_SPEED_CMD</RemoteId>
+      </Source>
+      <Source Path="SetPoints/Torque">
+        <RemoteId>svr=1;ns=2;s=TD_TORQUE_CMD</RemoteId>
+      </Source>
+      
+    </Sources>
+  </Declaration>
+
+  <Declaration Path="MudPumps" BrowseName="Mud Pump 1" TypeDefinitionId="ns=1;i=259">
+    <Sources>
+      <Source Path="Enabled">
+        <RemoteId>svr=1;ns=2;s=MP1_ENABLE</RemoteId>
+      </Source>
+    </Sources>
+  </Declaration>
+
+  <Declaration Path="MudPumps" BrowseName="Mud Pump 2" TypeDefinitionId="ns=1;i=259">
+    <Sources>
+      <Source Path="Enabled">
+        <RemoteId>svr=1;ns=2;s=MP2_ENABLE</RemoteId>
+      </Source>
+    </Sources>
+  </Declaration>
+  
+  <!--
+  <Declaration Path="MudPumps" BrowseName="MP1" TypeDefinitionId="ns=1;i=259">
+    <AccessRules>
+      <AccessRule Phase="Phase1" Lock="Lock1" />
+    </AccessRules>
+    <Sources>
+      <Source Path="Enabled">
+        <DefaultValue>
+          <ua:Boolean>true</ua:Boolean>
+        </DefaultValue>
+      </Source>
+      <Source Path="ActiveLockId">
+        <RemoteId>svr=2;ns=3;i=10227</RemoteId>
+      </Source>
+      <Source Path="Measurements/SPM">
+        <RemoteId>svr=2;ns=3;i=10854</RemoteId>
+      </Source>
+      <Source Path="SetPoints/SPM">
+        <RemoteId>svr=2;ns=3;i=10226</RemoteId>
+      </Source>
+    </Sources>
+  </Declaration>
+  
+  <Declaration Path="MudPumps" BrowseName="MP2" TypeDefinitionId="ns=1;i=259">
+    <AccessRules>
+      <AccessRule Phase="Phase2" Lock="Lock2" />
+    </AccessRules>
+    <Sources>
+      <Source Path="Enabled">
+        <DefaultValue>
+          <ua:Boolean>true</ua:Boolean>
+        </DefaultValue>
+      </Source>
+      <Source Path="ActiveLockId">
+        <RemoteId>svr=2;ns=3;i=10227</RemoteId>
+      </Source>
+      <Source Path="Measurements/SPM">
+        <RemoteId>svr=2;ns=3;i=10854</RemoteId>
+      </Source>
+      <Source Path="SetPoints/SPM">
+        <RemoteId>svr=2;ns=3;i=10226</RemoteId>
+      </Source>
+    </Sources>
+  </Declaration>
+  
+  <Declaration Path="MudPumps" BrowseName="MP3" TypeDefinitionId="ns=1;i=259">
+    <AccessRules>
+      <AccessRule Phase="Phase3" Lock="Lock3" />
+    </AccessRules>
+    <Sources>
+      <Source Path="Enabled">
+        <DefaultValue>
+          <ua:Boolean>false</ua:Boolean>
+        </DefaultValue>
+      </Source>
+      <Source Path="ActiveLockId">
+        <RemoteId>svr=2;ns=3;i=10227</RemoteId>
+      </Source>
+      <Source Path="Measurements/SPM">
+        <RemoteId>svr=2;ns=3;i=10854</RemoteId>
+      </Source>
+      <Source Path="SetPoints/SPM">
+        <RemoteId>svr=2;ns=3;i=10226</RemoteId>
+      </Source>
+    </Sources>
+  </Declaration>
+  -->
+  
+</DataSource>

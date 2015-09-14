@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="af755277-f460-4336-8cd6-4e0c450551ea" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The INodeManager interface is implemented by custom NodeManagers which provide access to a sub-set of the Server’s address space. An developer that needs to build a front end for an existing system will want to create a custom NodeManager.
+    </para>
+      <para>
+      When implementing a custom NodeManager a developer must decide how to map the information model from the underlying system onto the UA information model. This mapping could be generic or it could be coded directly into the logic of the NodeManager. For example, an underlying system may expose a structure with several properties. The NodeManager implementation would have knowledge of this structure and would only store the structure. The NodeManager would then define a syntax for it NodeIds that can be parsed to determine which property is being accessed in any given operation.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

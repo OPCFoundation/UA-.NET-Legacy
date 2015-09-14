@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Troubleshooting</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Troubleshooting</h1>
+<p>Unlike OPC Classic, which relied upon the Microsoft COM/DCOM framework, 
+ OPC UA is a much simpler solution and requires fewer troubleshooting steps. 
+ See also:</p>
+<ul type="disc">
+	<li><p><a href="#Tracing">Tracing</a> can be enabled to assist in troubleshooting. 
+	 </p></li>
+	<li><p><a href="Firewall_Settings.htm">Firewall configuration</a> and 
+	 TCP port reconfiguration</p></li>
+</ul>
+<p>Common problems are shown below: </p>
+<table style="border: Solid 1px #000000; margin-left: 4px; margin-right: 4px; 
+		 margin-top: 4px; margin-bottom: 4px;" cellspacing="0" width="100%">
+	<col style="width: 25.617%;" />
+	<col style="width: 35.133%;" />
+	<col style="width: 39.25%;" />
+	<tr>
+		<td style="border: Solid 1px #000000;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Error</span></p></td>
+		<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Description</span></p></td>
+		<td style="border-top: Solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000;"><p style="text-align: center;"><span 
+		 style="font-weight: bold;">Resolution</span></p></td>
+	</tr>
+	<tr>
+		<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000; vertical-align: top;"><p>Bad_SecureChannelClosed 
+		 when connecting a client to the server.</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; 
+			 vertical-align: top;"><p>UA Server has rejected the certificate 
+		 and closed the channel.</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; 
+			 vertical-align: top;"><p>Launch the <?rh-udv_start name="UaCfgTool" ?>Configuration Tool<?rh-udv_end ?> 
+		 and verify the UA Server and UA Client both trust each other's 
+		 certificate. See: </p>
+		<ul type="disc">
+			<li><p><a href="UaConfig_Manage_Security.htm#Select_Certificate_to_Trust">Select 
+			 Certificate to Trust</a></p></li>
+			<li><p><a href="UaConfig_Manage_Security.htm#Trust_Another_Application">Trust 
+			 Another Application</a></p></li>
+		</ul></td>
+	</tr>
+	<tr>
+		<td style="border-left: solid 1px #000000; border-right: Solid 1px #000000; 
+			 border-bottom: Solid 1px #000000; vertical-align: top;"><p>Exception 
+		 (AddressAlreadyInUseException)</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; 
+			 vertical-align: top;"><p>When launching the Generic UA Server 
+		 application you see:</p>
+		<p class="Code">HTTP could not register URL http://+:51211/UA/Sampleserver/. 
+		 Another application has already registered this URL with HTTP.SYS.</p></td>
+		<td style="border-right: Solid 1px #000000; border-bottom: Solid 1px #000000; 
+			 vertical-align: top;"><p>This application can run interactively 
+		 and as a Windows Service. In this case, the application has been 
+		 launched interactively, but the Windows Service is already running. 
+		 You can either:</p>
+		<ul type="disc">
+			<li><p>Close the server you just opened.</p></li>
+			<li><p>Shutdown the service which is identified as: &quot;<span 
+			 style="font-weight: bold;">UA COM Server Wrapper</span>&quot;</p></li>
+		</ul></td>
+	</tr>
+</table>
+<h2><a name="Tracing"></a>Tracing</h2>
+<p>Each application has a configuration file (*.Config.Xml) containing 
+ parameters for tuning the trace output from the <?rh-udv_start name="opcf-ua-sdk" ?>UA .NET API<?rh-udv_end ?>. 
+ All logs are output to:</p>
+<p>&lt;application installation directory&gt;\Logs\</p>
+</body>
+</html>

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="331faee3-04bf-448a-80ef-d7deeb9cdce0" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The MonitoredItem class stores the client-side state for a MonitoredItem belonging to a Subscription on a Server. It maintains two sets of properties: the values requested when the MonitoredItem is/was created and the current values based on the revised values returned by the Server. The requested properties are what is saved when then MonitoredItem is serialized.
+    </para>
+      <para>
+      The <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference> for the MonitoredItem can be specified as an absolute <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference> or as a starting <codeEntityReference>T:Opc.Ua.NodeId</codeEntityReference> followed by  <codeEntityReference>P:Opc.Ua.Client.MonitoredItem.RelativePath</codeEntityReference>  string which conforms to the syntax defined in [UA Part 4]. The  <codeEntityReference>P:Opc.Ua.Client.MonitoredItem.RelativePath </codeEntityReference> class included in the Stack can parse these strings and produce the structures required by the UA services.
+  </para>
+      <para>
+      Changes to any of the properties which affect the state of the MonitoredItem on the Server are not applied immediately. Instead the ParametersModified flag is set and the changes will only be applied when the ApplyChanges method on the Subscription is called. Note that changes to parameters which can only be specified when the MonitoredItem was created are ignored if the MonitoredItem has already been created. Client applications that wish to change these parameters must delete the monitored item and then re-create it.
+    </para>
+      <para>
+      The current values for  monitoring  parameters are stored in the Status property. Client application must use the Status. Error property to check an error occurs while creating or modifying the item. MonitoredItems that specify a <codeEntityReference>P:Opc.Ua.Client.MonitoredItem.RelativePath</codeEntityReference> string may have encountered an error parsing or translating the <codeEntityReference>P:Opc.Ua.Client.MonitoredItem.RelativePath</codeEntityReference> . When such an error occurs the Error property is set and the MonitoredItem is not created.
+    </para>
+      <para>
+      The MonitoredItem maintains a local queue for data changes or events received from the Server. This means the client application does not need to explicitly process NotificationMessages and can simply read the latest value from the MonitoredItem whenever it is required. The length of the local queue is controlled by the <codeEntityReference>P:Opc.Ua.Client.MonitoredItem.CacheQueueSize</codeEntityReference> property.
+    </para>
+      <para>
+      The MonitoredItem provides a Notification event which can be used by the client application to receive events whenever a new notification is received from the Server. It is always called after it is added to the cache.
+    </para>
+      <para>
+      The MonitoredItem is designed for multi-threaded operation because the Publish requests may arrive on any thread. However, data which is accessed while updating the cache is protected with a separate synchronization lock from data that is used while updating the MonitoredItem parameters. This means notifications can continue to arrive while other threads update the MonitoredItem parameters.
+    </para>
+      <para>
+      Client applications must be careful when update  MonitoredItem parameters while another thread has called ApplyChanges on the Subscription because it could lead to situation where the state of the MonitoredItem on the Server does not match the state of the MonitoredItem on the client. Client applications that expect to update MonitoredItems from multiple threads must acquire the StateLock on the owning <link xlink:href="d0e49081-31b5-48c8-b6b8-510ddced982d" /> first.
+    </para>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

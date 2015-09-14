@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="1e9c70d0-ecd0-4d1c-93b4-9a2c7d1fc9cd" revisionNumber="1">
+  <developerConceptualDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <introduction>
+      <para>
+      The SessionManager implements the Services in the <link xlink:href="86045f38-67d2-4225-9921-dea3ca73a43b" /> Service Set and allows other components to access the current Sessions and to receive events when Sessions are created, activated or closed.
+    </para>
+      <para>
+      Whenever a request arrives the <link xlink:href="f74b06ee-f5bc-495c-9dc0-99fcfe0feac0" /> calls the <codeEntityReference>M:Opc.Ua.Server.SessionManager.ValidateRequest(Opc.Ua.RequestHeader,Opc.Ua.Server.RequestType)</codeEntityReference> method on SessionManager. This method checks the authentication token and verifies that the <link xlink:href="86045f38-67d2-4225-9921-dea3ca73a43b" /> is still valid and that secure channel matches the one associated with the <link xlink:href="86045f38-67d2-4225-9921-dea3ca73a43b" />. It then returns an <codeEntityReference>T:Opc.Ua.Server.OperationContext</codeEntityReference> which contains a reference to the <link xlink:href="86045f38-67d2-4225-9921-dea3ca73a43b" /> object. The <link xlink:href="f74b06ee-f5bc-495c-9dc0-99fcfe0feac0" /> passes the <codeEntityReference>T:Opc.Ua.Server.OperationContext</codeEntityReference>  to the other components responsible for processing the request.
+    </para>
+      <para>
+      The SessionManager also handles validation of user identity tokens by raising the <codeEntityReference>E:Opc.Ua.Server.SessionManager.ImpersonateUser</codeEntityReference> event whenever <codeEntityReference>M:Opc.Ua.Server.SessionManager.ActivateSession(Opc.Ua.Server.OperationContext,Opc.Ua.NodeId,Opc.Ua.SignatureData,System.Collections.Generic.List{Opc.Ua.SoftwareCertificate},Opc.Ua.ExtensionObject,Opc.Ua.SignatureData,Opc.Ua.StringCollection,System.Byte[]@)</codeEntityReference> is called. It is up to the developer to decide what user token types are supported and how they are validated.  The SessionManager class provides static methods that validate username/password tokens by logging in as a Windows user, validate X509 certificates by using the application’s default <codeEntityReference>T:Opc.Ua.CertificateValidator</codeEntityReference>  and validate WS-Security tokens issued by any of the application’s trusted Certificate Authorities. By default, the SessionManager only accepts anonymous tokens.
+    </para>
+      <para>
+      The SessionManager also maintains a timer that periodically checks for Sessions that have expired because the Client has not been sending requests. Expired Sessions are removed and closed by calling the <codeEntityReference>M:Opc.Ua.Server.SessionManager.CloseSession(Opc.Ua.NodeId)</codeEntityReference> method on the <link xlink:href="711d24b1-86ac-4f11-b381-7eed1336ef2c" /> object. Note that this method is used by the CloseSession service as well which means the process used to clean up expired Sessions is exactly the same as the process used when Clients gracefully terminate the <link xlink:href="86045f38-67d2-4225-9921-dea3ca73a43b" />.
+    </para>
+      <para>
+      The SessionManager  provides the ISessionManager interface which defines the events shown in Table 1.
+    </para>
+      <table>
+        <title>
+        Table 1 – ISessionManager Interface
+      </title>
+        <tableHeader>
+          <row>
+            <entry>
+              <para>
+              Event
+            </para>
+            </entry>
+            <entry>
+              <para>
+              Description
+            </para>
+            </entry>
+          </row>
+        </tableHeader>
+        <row>
+          <entry>
+            <para>
+            SessionCreated
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Raised after a Session is created.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            SessionActivated
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Raised each time the preferred locales or user identity changes.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            SessionClosing
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Raised before a Session is closed.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+            ImpersonateUser
+          </para>
+          </entry>
+          <entry>
+            <para>
+            Raised whenever the Client provides a new user identity for the Session.
+          </para>
+            <para>
+            This event  allows the receiver to validate the new identity. If the identity is not valid the SessionManager will reject the ActivateSession request.
+          </para>
+            <para>
+            If accepted the SessionManager will raise the SessionActivated event after the new identity has been assigned to the Session.
+          </para>
+            <para>
+            The receiver has the option of specifying an effective identity which will be used by other components for authorization.
+          </para>
+          </entry>
+        </row>
+      </table>
+    </introduction>
+    <relatedTopics>
+    </relatedTopics>
+  </developerConceptualDocument>
+</topic>

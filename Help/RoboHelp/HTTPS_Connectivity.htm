@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Softing: Alin Moldovean and Cristi Pogacean" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>HTTPS Connectivity</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>HTTPS Connection Procedure</h1>
+<h2>1. Scope</h2>
+<p>This document describes a step by step procedure for establishing a 
+ secure connection over the HTTPS protocol between an OPC UA Server and 
+ an OPC UA Client developed with the .NET stack provided by OPC Foundation.</p>
+<h2>2. Requirements</h2>
+<p>The OPC UA 1.02 .NET Sample Applications package needs to be installed 
+ on the local machine.</p>
+<p>This will deploy the <span style="font-style: italic;"><a href="UA_Sample_Server.htm">UA 
+ Sample Server</a></span>, <span style="font-style: italic;"><a href="UA_Sample_Client.htm">UA 
+ Sample Client</a>,</span> and <span style="font-style: italic;"><a href="UA_Configuration_Tool.htm">UA 
+ Configuration Tool</a></span> applications that are needed for this procedure.</p>
+<p>The package can be downloaded from the <a href="http://www.opcfoundation.org">OPC 
+ Foundation website</a>.</p>
+<h2>3. Procedure description</h2>
+<p>In order to be able to establish a secure connection the SSL binding 
+ needs on the machine where the server application is running. This can 
+ be performed using the <span style="font-style: italic;">UA Configuration 
+ Tool</span> application.</p>
+<p>An HTTPS connection requires a certificate to be used for performing 
+ the message encryption. This certificate is different than the application 
+ instance certificate of the server. </p>
+<p>In a real scenario (e.g. a web site) the HTTPS certificate (or SSL certificate) 
+ is issued and signed by a worldwide trusted Certification Authority (e.g. 
+ VeriSign, DigiCert) because it should be validated and trusted by the 
+ operating system before establishing a connection. For Windows operating 
+ systems this means the certificate of the issuer should be in the “LocalMachine\Root” 
+ store in order to be considered trusted. This store already contains a 
+ list of known CAs (like VeriSign and DigiCert) and the certificates issued 
+ by them will be automatically trusted.</p>
+<p>In our example we will create our own CA and we use it to issue the 
+ HTTPS certificate. After that we will manually copy the CA certificate 
+ to the “LocalMachine\Root” store on the machines where the UA client application 
+ will run. In this way the HTTPS certificate will be considered trusted 
+ by the operating system (i.e. issued by a trusted authority) and we do 
+ not need to purchase an HTTPS certificate from an authority.</p>
+<p>On a machine where OPC UA 1.02 .NET Sample Applications is installed, 
+ perform the following steps:</p>
+<h3>3.1. Launch the Dashboard application.</h3>
+<p>The application can be used for launching/stopping the other applications 
+ (Sample Client, Sample Server, Configuration Tool…) and can be found at 
+ <span style="font-style: italic;">Start -&gt; All Programs -&gt; OPC Foundation 
+ -&gt; Unified Architecture -&gt; 1.02 -&gt; Sample Applications -&gt; 
+ OPC UA Dashboard</span>.</p>
+<p class="Picture">&#160;<img src="image115.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<h3>3.2. Launch the Configuration Tool application</h3>
+<p class="Picture">&#160;<img src="image116.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<h3>3.3. Create a new Certificate Authority</h3>
+<p>From the Configuration Tool application select the “Manage Certificates” 
+ tab and create a new CA certificate the using the “Create Certificate 
+ Authority&quot; button.</p>
+<p class="Picture">&#160;<img src="image117.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<p>Save the certificate somewhere on the disk (e.g. “D:\HTTPS”) and specify 
+ a password. In our example we use <span style="font-weight: bold;">opcf</span> 
+ as password.</p>
+<p class="Picture">&#160;<img src="image118.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<h3>3.4. Import the CA certificate into the trusted root store of the local 
+ machine.</h3>
+<p>From Configuration Tool:</p>
+<ul type="disc">
+	<li><p>Select the “Manage Certificates” tab</p></li>
+	<li><p>Set StoreType to <span style="font-style: italic;">Windows</span></p></li>
+	<li><p>Set StorePath to <span style="font-style: italic;">LocalMachine\Root</span></p></li>
+	<li><p>Click the “Import Certificate to Store” button</p></li>
+	<li><p>Browse to the public key file of the previously create CA certificate. 
+	 In our example this should be the “D:\HTTPS\certs\OPCF [0FF56F5……..].der” 
+	 file (with the specific thumbprint at the end).</p></li>
+	<li><p>Click <span style="font-style: italic;">“Open”</span>.</p></li>
+	<li><p>Click <span style="font-style: italic;">“Yes”</span> when receiving 
+	 a warning message like “You are adding this certificate to a trust 
+	 list that may be shared…”</p></li>
+</ul>
+<p class="Picture">&#160;<img src="image119.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<h3>3.5. Issue a new SSL certificate based on the previously created CA</h3>
+<p>From Configuration Tool:</p>
+<ul type="disc">
+	<li><p>Select the “Manage Certificates” tab.</p></li>
+	<li><p>Set StoreType to <span style="font-style: italic;">Directory</span></p></li>
+	<li><p>Set StorePath to <span style="font-style: italic;">D:\HTTPS</span></p></li>
+	<li><p>Click the “Issue SSL/TLS certificate button…”.</p></li>
+</ul>
+<p class="Picture">&#160;<img src="image120.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<ul type="disc">
+	<li><p>In the displayed dialog set StoreType to <span style="font-style: italic;">Directory</span>.</p></li>
+	<li><p>Set StorePath to “<span style="font-style: italic;">D:\HTTPS</span>”.</p></li>
+	<li><p>Specify the CA key file: browse to “D:\HTTPS\private” and specify 
+	 the private key of the CA file (created in step nr. 3).</p></li>
+	<li><p>Specify the password of the CA private key file (in our example 
+	 is opcf).</p></li>
+	<li><p>Leave the default value for Domain Name (the name of the local 
+	 machine).</p></li>
+	<li><p>Click OK</p></li>
+</ul>
+<p class="Picture"><img src="image121.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h3>3.6. Create the SSL binding for the HTTPS port using the certificate 
+ created in the previous step</h3>
+<p>From Configuration Tool:</p>
+<ul type="disc">
+	<li><p>Select the “Manage Certificates” tab.</p></li>
+	<li><p>Click “Bind SSL/TLS Certificate”.</p></li>
+</ul>
+<p class="Picture">&#160;<img src="image122.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<ul type="disc">
+	<li><p>On the displayed dialog click “New”. </p></li>
+	<li><p>On the new dialog, leave the IP Address as “0.0.0.0”</p></li>
+	<li><p>Set the Port value to 51212 (the default HTTPS port for Sample 
+	 Server)</p></li>
+	<li><p>Specify the Certificate by browsing the certificate created 
+	 in the step nr. 5. It should be located “D:\HTTPS\” and it has the 
+	 name of the local machine.</p></li>
+	<li><p>Click OK.</p></li>
+</ul>
+<p class="Picture">&#160;<img src="image123.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<ul type="disc">
+	<li><p>Click “Yes” when receiving the revocation status related warning.</p></li>
+	<li><p>Click “No” when receiving the “Delete certificate from current 
+	 location…” message.</p></li>
+</ul>
+<h3>3.7. Check the HTTPS connection status on the local machine</h3>
+<p>In this moment UA Sample Client should be able to establish an HTTPS 
+ connection with UA Sample Server.</p>
+<ul type="disc">
+	<li><p>From the Dashboard application launch Generic Server and Generic 
+	 Client. This should start UA Sample Server and UA Sample Client.</p></li>
+	<li><p>From the menu bar of UA Sample Client click Discovery -&gt; 
+	 Servers</p></li>
+	<li><p>Double-click on the “UA Sample Server” record line of the displayed 
+	 dialog</p></li>
+</ul>
+<p class="Picture"><img src="image124.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<ul type="disc">
+	<li><p>Click “Connect” (in the main form of UA Client).</p></li>
+	<li><p>In the Protocol field select the value “HTTPS”.</p></li>
+</ul>
+<p class="Picture">&#160;<img src="image125.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<ul type="disc">
+	<li><p>Click OK.</p></li>
+	<li><p>Click OK in the “Session Open” dialog.</p></li>
+</ul>
+<p>An HTTPS connection should be established now between Sample Client 
+ and Sample Server.</p>
+<p class="Picture">&#160;<img src="image126.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<h3>3.8. Copy the CA certificate to LocalMachine\Root on the remote client 
+ machine.</h3>
+<p>If the client application runs on a different machine the CA certificate 
+ (the certificate generated at step nr. 3) needs to be copied to the LocalMachine\Root 
+ store of the client machine. </p>
+<p>The Configuration Tool application should be used on the client machine 
+ to add the CA in the list of Trusted Root Certification Authorities.</p>
+<p>Follow these steps:</p>
+<ul type="disc">
+	<li><p>Copy the public key of the CA certificate on a disk location 
+	 from the client machine. The file should be located at “D:\HTTPS\certs\ 
+	 OPCF [0FF56F5BB72…….].der” on the server machine. The thumbprint part 
+	 of the file name may be different.</p></li>
+	<li><p>Launch Configuration Tool application on the client machine.</p></li>
+	<li><p>Select the “Manage Certificates” tab</p></li>
+	<li><p>Set StoreType to Windows</p></li>
+	<li><p>Set StorePath to LocalMachine\Root</p></li>
+	<li><p>Click the “Import Certificate to Store” button</p></li>
+	<li><p>Browse to location where the CA certificate was copied on the 
+	 client machine.</p></li>
+	<li><p>Click “Open”.</p></li>
+	<li><p>Click “Yes” when receiving a warning message like “You are adding 
+	 this certificate to a trust list that may be shared…”</p></li>
+</ul>
+<p class="Picture">&#160;<img src="image127.gif" alt="" style="border: none;" 
+								 border="0" /></p>
+<p>In this moment a <span style="font-style: italic;">UA Sample Client</span> 
+ instance running on a remote machine (a machine different than the server 
+ machine) should be able to establish an HTTPS connection with <span style="font-style: italic;">UA 
+ Sample Server</span>.</p>
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="search-keywords" content="client, datachange, subscription, development" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 4 - Consuming DataChanges</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Client Development Tutorial</h1>
+<h2>Step 4 - Consuming Data-changes</h2>
+<p>We will now add the code to consume the data-changes for our monitored 
+ item and output them to the screen.</p>
+<p>This step is a continuation from <a href="Step_3_-_Setup_Subscription.htm">Step 
+ 3 - Setup Subscription</a>.</p>
+<h3>Defining our Window Instance</h3>
+<ol type="1">
+	<li><p>Move the cursor above the event-handler.</p></li>
+	<li><p>Add the following window definition code:<br />
+	<span style="font-family: 'Courier New', monospace;">private SubscriptionOutput 
+	 outputWindow;</span></p></li>
+	<li><p>Place the cursor back in the event-handler, but add the following 
+	 code to the bottom of the code block:<br />
+	<span style="font-family: 'Courier New', monospace;">if( outputWindow 
+	 == null )<br />
+	{<br />
+	&#160;outputWindow = new SubscriptionOutput();<br />
+	}</span></p></li>
+</ol>
+<h3>Directing Data-Change Output to Window</h3>
+<ol type="1">
+	<li><p>We now need to add the actual event handler for the monitoredItem.Notification 
+	 defined in <a href="Step_3_-_Setup_Subscription.htm">Step 3</a>.</p></li>
+	<li><p>Move the cursor out of the event handler and then add the following 
+	 code:<br />
+	void monitoredItem_Notification(MonitoredItem monitoredItem, MonitoredItemNotificationEventArgs 
+	 e)<br />
+	{<br />
+	&#160;if(this.InvokeRequired)<br />
+	&#160;{<br />
+	&#160;&#160;&#160;this.BeginInvoke(new MonitoredItemNotificationEventHandler(monitoredItem_Notification), 
+	 monitoredItem, e);<br />
+	&#160;&#160;&#160;return;<br />
+	&#160;}<br />
+	&#160;MonitoredItemNotification notification = e.NotificationValue 
+	 as MonitoredItemNotification;<br />
+	&#160;if( notification == null )<br />
+	&#160;{<br />
+	&#160;&#160;&#160;return;<br />
+	&#160;}<br />
+	&#160;outputWindow.label1.Text = &quot;value: &quot; + Utils.Format( 
+	 &quot;{0}&quot;, notification.Value.WrappedValue.ToString()) +<br />
+	&#160;&#160;&#160;&quot;;\nStatusCode: &quot; + Utils.Format( &quot;{0}&quot;, 
+	 notification.Value.StatusCode.ToString()) + <br />
+	&#160;&#160;&#160;&quot;;\nSource timestamp: &quot; + notification.Value.SourceTimestamp.ToString() 
+	 +<br />
+	&#160;&#160;&#160;&quot;;\nServer timestamp: &quot; + notification.Value.ServerTimestamp.ToString();<br />
+	}</p></li>
+	<li><p>You are done!<br />
+	The code in this example is not perfect, and is missing some important 
+	 things such as:</p></li>
+	<ol type="1">
+		<li><p>Sufficient error trapping.</p></li>
+		<li><p>Removal of monitored items and the subscription.</p></li>
+	</ol>
+</ol>
+<p>Next, see <a href="Step_5_-_Testing_your_Client.htm">Step 5 - Testing 
+ your Client</a>.</p>
+<h2>See Also</h2>
+<ul type="disc">
+	<li><p><a href="Useful_Components.htm">Useful Components</a>.</p></li>
+</ul>
+</body>
+</html>

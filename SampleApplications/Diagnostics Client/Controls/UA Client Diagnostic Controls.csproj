@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0593CE7A-209F-450B-8569-55AAB3AADFE3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Opc.Ua.Client.Diagnostic.Controls</RootNamespace>
+    <AssemblyName>Opc.Ua.DiagnosticClientControls</AssemblyName>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DiagnosticListViewItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerCapabilitesDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerCapabilitesDlg.Designer.cs">
+      <DependentUpon>ServerCapabilitesDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DiagnosticCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DiagnosticCtrl.Designer.cs">
+      <DependentUpon>DiagnosticCtrl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerDiagnosticsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerDiagnosticsDlg.Designer.cs">
+      <DependentUpon>ServerDiagnosticsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ServerStatusDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ServerStatusDlg.Designer.cs">
+      <DependentUpon>ServerStatusDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SessionDiagnosticsDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SessionDiagnosticsDlg.Designer.cs">
+      <DependentUpon>SessionDiagnosticsDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SessionDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SessionDlg.Designer.cs">
+      <DependentUpon>SessionDlg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SessionCtrl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SessionCtrl.Designer.cs">
+      <DependentUpon>SessionCtrl.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ServerCapabilitesDlg.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ServerCapabilitesDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerDiagnosticsDlg.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ServerDiagnosticsDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ServerStatusDlg.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ServerStatusDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionDiagnosticsDlg.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SessionDiagnosticsDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionDlg.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SessionDlg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SessionCtrl.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SessionCtrl.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Stack\Core\UA Core Library.csproj">
+      <Project>{7543afcb-f5af-44af-83c9-23164474c1e9}</Project>
+      <Name>UA Core Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Samples\Controls\UA Sample Controls.csproj">
+      <Project>{92AE819B-4938-4502-AC32-67063F9893CD}</Project>
+      <Name>UA Sample Controls</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SampleLibraries\Client\UA Client Library.csproj">
+      <Project>{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}</Project>
+      <Name>UA Client Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SampleLibraries\Controls\UA Client Controls.csproj">
+      <Project>{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}</Project>
+      <Name>UA Client Controls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

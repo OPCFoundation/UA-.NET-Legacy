@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='utf-8' ?>
+<tocdata>
+<item name="Welcome" url="welcome.htm" />
+<item name="About the OPC Foundation" url="the_information_screen.htm" />
+<item name="About Unified Architecture" url="about_technologyname.htm" />
+<item name="License Agreement" url="license_agreement.htm" />
+<item name="Overview of Applications" url="overview.htm" />
+<item name="Getting Started" url="getting_started.htm" />
+<book name="Sample Applications" >
+  <book name="Local Discovery Server (LDS)" >
+    <item name="Overview" url="local_discovery_server_(lds).htm" />
+  </book>
+</book>
+<book name="Technology Samples" >
+  <book name="Data Access" >
+    <item name="Data Access Overview" url="data_access_overview.htm" />
+    <book name="Server" >
+      <item name="Overview" url="daserveroverview.htm" />
+    </book>
+    <book name="Client" >
+      <item name="Overview" url="daclientoverview.htm" />
+    </book>
+  </book>
+  <book name="Historical Access" >
+    <item name="Historical Access Overview" url="historical_access_overview.htm" />
+    <book name="Data" >
+      <book name="Server" >
+        <item name="Overview" url="haserveroverview.htm" />
+      </book>
+      <book name="Client" >
+        <item name="Overview" url="haclientoverview.htm" />
+        <item name="Aggregates" url="hadata_client_aggregates.htm" />
+      </book>
+    </book>
+    <book name="Events" >
+      <book name="Server" >
+        <item name="Overview" url="haeventsserveroverview.htm" />
+      </book>
+      <book name="Client" >
+        <item name="Overview" url="haeventsclientoverview.htm" />
+      </book>
+    </book>
+  </book>
+  <book name="Alarms &amp; Conditions" >
+    <item name="Alarms &amp; Conditions Overview" url="alarms_&amp;_conditions_overview.htm" />
+    <book name="Server" >
+      <item name="Overview" url="acserveroverview.htm" />
+    </book>
+    <book name="Client" >
+      <item name="Overview" url="acclientoverview.htm" />
+    </book>
+  </book>
+</book>
+<book name="Reference" >
+  <item name="Certification" url="certification.htm" />
+  <item name="Firewall Settings" url="firewall_settings.htm" />
+  <item name="Troubleshooting" url="troubleshooting.htm" />
+</book>
+
+</tocdata>

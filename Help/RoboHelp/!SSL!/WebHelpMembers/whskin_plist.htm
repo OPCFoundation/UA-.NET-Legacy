@@ -1,0 +1,238 @@
+﻿<html>
+<head>
+<title> Navigation Pane </title>
+
+<meta name="generator" content="Adobe RoboHelp 9" />
+<meta name="description" content="WebHelp 5.50" />
+<script language="javascript" src="whver.js"></script>
+<script language="javascript1.2" src="whmsg.js"></script>
+<script language="javascript1.2" src="whproxy.js"></script>
+</head>
+<script language="javascript">
+<!--
+var strFrmToc="";
+var strFrmNdx="";
+var strFrmFts="";
+var strFrmGls="";
+var strFrmDft="";
+var gstrName="";
+
+//set overwrite here
+function setListFrames(strToc,strNdx,strFts,strGls,strDefault)
+{
+	strFrmToc=strToc;
+	strFrmNdx=strNdx;
+	strFrmFts=strFts;
+	strFrmGls=strGls;
+	strFrmDft=strDefault;
+	if(strFrmDft==strFrmToc)
+		gstrName="toc";
+	else if(strFrmDft==strFrmNdx)
+		gstrName="idx";
+	else if(strFrmDft==strFrmFts)
+		gstrName="fts";
+	else if(strFrmDft==strFrmGls)
+		gstrName="glo";
+}
+
+function setWebHelpPane()
+{
+	setListFrames("whgdata/whnvf30.htm","whgdata/whnvf31.htm","whgdata/whnvf32.htm","whgdata/whnvf33.htm","whgdata/whnvf30.htm");
+}
+
+function window_unload()
+{
+	if(!gbNav4||gbNav6) // resize will call unload, but the register code will never be called on Netscape 4.
+	{
+		UnRegisterListener2(this,WH_MSG_SHOWTOC);
+		UnRegisterListener2(this,WH_MSG_SHOWIDX);
+		UnRegisterListener2(this,WH_MSG_SHOWFTS);
+		UnRegisterListener2(this,WH_MSG_SHOWGLO);
+		UnRegisterListener2(this,WH_MSG_GETPANEINFO);
+	}
+}
+
+function window_onload()
+{
+	var bHidePane=false;
+	var oMsg=new whMessage(WH_MSG_GETCMD,this,1,null);
+	if(SendMessage(oMsg))
+	{
+		if(oMsg.oParam>0)
+		{
+			if(oMsg.oParam==1)
+				gstrName="toc";
+			else if(oMsg.oParam==2)
+				gstrName="idx";
+			else if(oMsg.oParam==3)
+				gstrName="fts";
+			else if(oMsg.oParam==4)
+				gstrName="glo";
+			switchNvp(gstrName);
+		}
+		else if(oMsg.oParam==0)
+		{
+			bHidePane=true;
+		}
+		else if(gstrName)
+			switchNvp(gstrName);
+	}
+	if(bHidePane)
+	{
+		oMsg=new whMessage(WH_MSG_HIDEPANE,this,1,null)
+		SendMessage(oMsg);
+	}
+	else if(gstrName)
+	{
+		oMsg=new whMessage(WH_MSG_PANEINFO,this,1,gstrName);
+		SendMessage(oMsg);
+	}
+	oMsg=new whMessage(WH_MSG_NOSYNC,this,1,null);
+	SendMessage(oMsg);
+	oMsg=new whMessage(WH_MSG_NOSEARCHINPUT,this,1,null);
+	SendMessage(oMsg);
+
+}
+
+function switchNvp(strName)
+{
+	var strFile="";
+	if(strName=="toc")		strFile=strFrmToc;
+	else if(strName=="idx")	strFile=strFrmNdx;
+	else if(strName=="fts")	strFile=strFrmFts;
+	else if(strName=="glo")	strFile=strFrmGls;
+
+	gstrName=strName;
+	frames[0].location=strFile;	
+}
+
+function onSendMessage(oMsg)
+{
+	if(oMsg)
+	{
+		var onMsg=null;
+		var nMsgId=oMsg.nMessageId;
+		if(nMsgId==WH_MSG_SHOWTOC)
+		{
+			switchNvp("toc");
+			onMsg=new whMessage(WH_MSG_PANEINFO,this,1,"toc");
+			SendMessage(onMsg);
+			onMsg=new whMessage(WH_MSG_SHOWPANE,this,1,null);
+			SendMessage(onMsg);
+		}
+		else if(nMsgId==WH_MSG_SHOWIDX)
+		{
+			switchNvp("idx");
+			onMsg=new whMessage(WH_MSG_PANEINFO,this,1,"idx");
+			SendMessage(onMsg);
+			onMsg=new whMessage(WH_MSG_SHOWPANE,this,1,null);
+			SendMessage(onMsg);
+		}
+		else if(nMsgId==WH_MSG_SHOWFTS)
+		{
+			switchNvp("fts");
+			onMsg=new whMessage(WH_MSG_PANEINFO,this,1,"fts");
+			SendMessage(onMsg);
+			onMsg=new whMessage(WH_MSG_SHOWPANE,this,1,null);
+			SendMessage(onMsg);
+		}
+		else if(nMsgId==WH_MSG_SHOWGLO)
+		{
+			switchNvp("glo");
+			onMsg=new whMessage(WH_MSG_PANEINFO,this,1,"glo");
+			SendMessage(onMsg);
+			onMsg=new whMessage(WH_MSG_SHOWPANE,this,1,null);
+			SendMessage(onMsg);
+		}
+		else if(nMsgId==WH_MSG_GETPANEINFO)
+		{
+			oMsg.oParam=gstrName;
+			return false;
+		}
+	}
+	return true;
+}
+
+function onResize()
+{
+	var oMsg=null;
+	if(gbIE4)
+	{
+		if(document.body)
+		{
+			if(document.body.clientWidth>1&&document.body.clientHeight>1)
+			{
+				oMsg=new whMessage(WH_MSG_RESIZEPANE,this,1,null);
+				SendMessage(oMsg);
+			}
+		}
+	}
+	else
+	{
+		if(window.innerWidth!=0&&window.innerHeight!=0)
+		{
+			oMsg=new whMessage(WH_MSG_RESIZEPANE,this,1,null);
+			SendMessage(oMsg);
+		}
+	}
+}
+
+if(window.gbWhMsg&&window.gbWhVer&&window.gbWhProxy)
+{
+	var oMsg=new whMessage(WH_MSG_GETPANES,this,1,null);
+	if(SendMessage(oMsg))
+	{
+		if(oMsg.oParam)
+		{
+			for(var i=0;i<oMsg.oParam.aPanes.length;i++)
+			{
+				if(oMsg.oParam.aPanes[i].sPaneName=="toc")
+					strFrmToc=oMsg.oParam.aPanes[i].sPaneURL;
+				else if(oMsg.oParam.aPanes[i].sPaneName=="idx")
+					strFrmNdx=oMsg.oParam.aPanes[i].sPaneURL;
+				else if(oMsg.oParam.aPanes[i].sPaneName=="fts")
+					strFrmFts=oMsg.oParam.aPanes[i].sPaneURL;
+				else if(oMsg.oParam.aPanes[i].sPaneName=="glo")
+					strFrmGls=oMsg.oParam.aPanes[i].sPaneURL;
+				if(oMsg.oParam.sDefault==oMsg.oParam.aPanes[i].sPaneName)
+				{
+					strFrmDft=oMsg.oParam.aPanes[i].sPaneURL;
+				}
+			}
+		}
+		else
+			setWebHelpPane();
+	}
+	else
+		setWebHelpPane();
+
+	RegisterListener2(this,WH_MSG_SHOWTOC);
+	RegisterListener2(this,WH_MSG_SHOWIDX);
+	RegisterListener2(this,WH_MSG_SHOWFTS);
+	RegisterListener2(this,WH_MSG_SHOWGLO);
+	RegisterListener2(this,WH_MSG_GETPANEINFO);
+
+	if(gbIE55)
+		window.onresize=onResize;
+
+	window.onunload=window_unload;
+	window.onload=window_onload;
+
+	var strHtml="";
+	strHtml+="<frameset rows=\'100%,*\'>";
+	strHtml+="<frame name=\'nvplist\' title=\'navpane frame\' src=\'" + strFrmDft +"\'></frame>";
+	strHtml+="<frame src=\'whskin_blank.htm\' noresize></frame>";
+	strHtml+="</frameset>";
+	document.write(strHtml);
+}
+else
+	document.location.reload();
+
+if(window.gbNav6)
+{
+	var oMsg=new whMessage(WH_MSG_RELOADNS6,this,1,null);
+	SendMessage(oMsg);
+}
+//-->
+</script>
+</html>

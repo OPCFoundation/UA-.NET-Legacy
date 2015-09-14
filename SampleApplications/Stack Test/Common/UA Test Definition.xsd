@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema targetNamespace="http://opcfoundation.org/UA/Test" elementFormDefault="qualified" xmlns="http://opcfoundation.org/UA/Test" xmlns:mstns="http://opcfoundation.org/UA/Test" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="TestSequence">
+    <xs:annotation>
+      <xs:documentation>
+        This is a sequence of test cases to be executed - it the root of the configuration file.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TestCase" type="TestCase" minOccurs="0" maxOccurs="unbounded">
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="HaltOnError" type="xs:boolean" default="false" use="optional">
+        <xs:annotation>
+          <xs:documentation>
+            This tells the test client to halt if it encounters an error. Errors are written to the log file otherwise.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="RandomDataStepSize" type="xs:int" default="7" use="optional">
+        <xs:annotation>
+          <xs:documentation>
+            The step size to use when generating random data.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+      <xs:attribute name="LogDetailLevel" type="xs:unsignedInt" default="4294967295" use="optional">
+        <xs:annotation>
+          <xs:documentation>
+            This controls how much detail appears in the log files.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="TestCase">
+    <xs:annotation>
+      <xs:documentation>
+        This is an instance of a single test to run.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Name" type="xs:NCName" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            This name of the test scenario to run.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="DisplayText" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Additiona text that describes what the test case.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Seed" type="xs:unsignedInt" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The number to passed to random data generator when creating the request.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ResponseSeed" type="xs:unsignedInt" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The number to passed to random data generator when creating the response.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Start" type="xs:int" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The iteration to start with (must be less that the Count).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Count" type="xs:int" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The total number of iterations (assuming Start is 0).
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Parameter" type="TestParameter" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Additional parameters that are specific to the test case.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="TestId" type="xs:unsignedInt" default="0" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          A id for the test that is unique within the sequence. This id is assigned when the
+          test sequence is read and should not be explicitly specified in the test file.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+    <xs:attribute name="SkipTest" type="xs:boolean" default="false" use="optional">
+      <xs:annotation>
+        <xs:documentation>
+          Indicates the test will be skipped.
+        </xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:complexType>
+  <xs:complexType name="TestParameter">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1">
+      </xs:element>
+      <xs:element name="Value" type="xs:string" minOccurs="1" maxOccurs="1">
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TestLog">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ProcessName" type="xs:string" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The name of the executable that created the log.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="SecureChannelId" type="xs:string" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The identifier associated with the secure channel used for the test.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="TestCaseFile" type="xs:string" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The full path of the test case file used.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="RandomDataFile" type="xs:string" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The full path of the random data file used.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="CreateTime" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              When the log was created.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="TestEvent" type="TestEvent" minOccurs="0" maxOccurs="unbounded">
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="TestEventType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotValidated">
+        <xs:annotation>
+          <xs:documentation>
+            Generated when the test case could not be validated.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Started">
+        <xs:annotation>
+          <xs:documentation>
+            Generated when the test case is validated and processing has started.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Failed">
+        <xs:annotation>
+          <xs:documentation>
+            Generated when the test case failed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Completed">
+        <xs:annotation>
+          <xs:documentation>
+            Generated when the test case completes successfully.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="StackEvents" >
+        <xs:annotation>
+          <xs:documentation>
+            Generated when the stack events are logged.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="TestEvent">
+    <xs:sequence>
+      <xs:element name="TestId" type="xs:unsignedInt" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The id of the test case that generated the event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Iteration" type="xs:int" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The iteration within the test case that generated the event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Timestamp" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The UTC time indicating when the event occurred.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="EventType" type="TestEventType" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The type of event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Details" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            Free from text describing the event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Results" type="TestParameter" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Additional results that defined for specific test cases.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="StackEvents" type="StackEvent" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Any stack events that occurred.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StackEvent">
+    <xs:sequence>
+      <xs:element name="EventType" type="StackEventType" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The type of event generated by the stack.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Timestamp" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The UTC time of the event.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="RequestId" type="xs:unsignedInt" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The request id assigned to the message.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="MessageType" type="StackMessageType" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>
+            The message type that was sent/received.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Field" type="TestParameter" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>
+            Additional results that defined for specific test cases.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="StackEventType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="SocketConnected">
+        <xs:annotation>
+          <xs:documentation>
+            A socket has been established.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SocketConnectFailed">
+        <xs:annotation>
+          <xs:documentation>
+            A socket connection failed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SocketClosed">
+        <xs:annotation>
+          <xs:documentation>
+            The socket was closed.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RequestQueued">
+        <xs:annotation>
+          <xs:documentation>
+            The client stack has received a request from the application.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RequestSent">
+        <xs:annotation>
+          <xs:documentation>
+            The client stack has completely sent the request.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RequestReceived">
+        <xs:annotation>
+          <xs:documentation>
+            The server stack has completely received the request.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RequestComplete">
+        <xs:annotation>
+          <xs:documentation>
+            The server stack has passed the request to the application.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ResponseQueued">
+        <xs:annotation>
+          <xs:documentation>
+            The server stack has received the response from the application.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ResponseSent">
+        <xs:annotation>
+          <xs:documentation>
+            The server stack has completely sent the response.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ResponseReceived">
+        <xs:annotation>
+          <xs:documentation>
+            The client stack has completely received the response.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ResponseComplete">
+        <xs:annotation>
+          <xs:documentation>
+            The client stack has returned the response to the application.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MessageSent">
+        <xs:annotation>
+          <xs:documentation>
+            A TCP message was sent via the socket.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MessageReceived">
+        <xs:annotation>
+          <xs:documentation>
+            A TCP message was received via the socket.
+          </xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="StackMessageType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Hello">
+      </xs:enumeration>
+      <xs:enumeration value="Acknowledge">
+      </xs:enumeration>
+      <xs:enumeration value="Disconnect">
+      </xs:enumeration>
+      <xs:enumeration value="DataChunk">
+      </xs:enumeration>
+      <xs:enumeration value="DataFinal">
+      </xs:enumeration>
+      <xs:enumeration value="Abort">
+      </xs:enumeration>
+      <xs:enumeration value="Error">
+      </xs:enumeration>
+      <xs:enumeration value="Unknown" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

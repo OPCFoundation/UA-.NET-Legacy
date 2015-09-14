@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="6bbc555a-d947-4986-8546-4eb740647dbf" revisionNumber="1">
+  <developerReferenceWithoutSyntaxDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!--
+  <summary>
+    <para>Optional summary abstract</para>
+  </summary>
+  -->
+    <!-- NOTE: This is similar to the API reference documentation which is
+       produced by the reference build.  You should probably just use that
+       instead of this. -->
+    <introduction>
+      <table>
+        <title>
+        The UA libraries are now distributed in a number of different packages which are described in the table below:
+      </title>
+        <row>
+          <entry>
+            <para>
+              <application>
+              OPC UA SDK 1.00 Redistributables MergeModule (x86)
+            </application>
+            </para>
+          </entry>
+          <entry>
+            <para>
+            Installs the UA Local Discovery Server and the UA Configuration Tool
+            The UA  Local Discovery Server is installed as a Windows Service that starts automatically on startup starts automatically on startup
+            The executables are placed in <userInput>$(CommonFilesFolder)\OPC Foundation\UA\</userInput></para>
+            <para>
+            Setting the <environmentVariable>UA_COM_INTEROP</environmentVariable> property installs the assemblies used by the COM wrappers and proxies. The executables are placed in:
+          </para>
+            <para>
+              <userInput>$(CommonFilesFolder)\OPC Foundation\UA\v1.0\Bin\OPC Foundation\UA</userInput>
+            </para>
+            <para>
+            The COM client applications will need access to <application>OpcUaComDllHost</application> process which is registered as a COM EXE server.
+          </para>
+            <para>
+            Setting the <environmentVariable>UA_DOTNET_SDK</environmentVariable> property installs all files required to build applications that use the .NET version of the stack. Assemblies and documentation are placed in
+          </para>
+            <para>
+              <userInput>
+              $(ProgramFilesFolder)\Reference Assemblies\OPC Foundation\UA\v1.0
+            </userInput>
+            </para>
+            <para>
+            Setting the <environmentVariable>UA_ANSIC_SDK</environmentVariable> property installs all files required to build applications that use the ANSI C version of the stack. Headers and libraries are placed in:
+          </para>
+            <para>
+              <userInput>
+              $(CommonFilesFolder)\OPC Foundation\UA\v1.0
+            </userInput>
+            </para>
+            <para>
+            Setting the <environmentVariable>UA_OPENSSL_SDK</environmentVariable> installs all files required to build applications that use the OpenSSL library used by the ANSI C stack. Headers and libraries are placed in:
+          </para>
+            <para>
+              <userInput>
+              $(CommonFilesFolder)\OPC Foundation\UA\v1.0
+            </userInput>
+            </para>
+            <para>
+            Only the DLL version of the OpenSSL libraries are installed.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+              <application>
+              OPC UA SDK 1.00 Redistributables Setup (x86)
+            </application>
+            </para>
+          </entry>
+          <entry>
+            <para>
+            Installs all of the redistributable files. It prompts the user to choose which components are installed.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+              <application>
+              OPC UA SDK 1.00 Sample Binaries Setup (x86)
+            </application>
+            </para>
+          </entry>
+          <entry>
+            <para>
+            Installs the binaries for the sample applications.
+          </para>
+          </entry>
+        </row>
+        <row>
+          <entry>
+            <para>
+              <application>
+              OPC UA SDK 1.00 Sample Source Code Setup (x86)
+            </application>
+            </para>
+          </entry>
+          <entry>
+            <para>
+            Installs the source code for all of the samples.
+          </para>
+          </entry>
+        </row>
+      </table>
+    </introduction>
+    <section>
+      <title>Prerequisites</title>
+      <content>
+        <para>
+        The <application>Package</application> requires the
+        <externalLink><linkText>.NET 3.0 SP1 runtime</linkText><linkAlternateText>Microsoft .NET Framework 3.0 Redistributable Package</linkAlternateText><linkUri>http://www.microsoft.com/downloads/details.aspx?FamilyId=10CC340B-F857-4A14-83F5-25634C3BF043&amp;displaylang=en</linkUri></externalLink>.
+        It should run on any Microsoft operating system that supports the .NET 3.0 runtime.
+      </para>
+        <para>
+        The binaries installer requires that the
+        <externalLink><linkText>OPC Core Components Redistributable</linkText><linkAlternateText>Category: Core Components</linkAlternateText><linkUri>http://www.opcfoundation.org/Downloads.aspx?CM=1&amp;CN=KEY&amp;CI=280&amp;CU=10</linkUri></externalLink>
+        be installed first. Note that this package is installed by many OPC applications.
+      </para>
+        <para>
+        The <application>Package</application> will install on Vista, however, the UAC (User Access Control) must be turned off to install the application certificates.
+      </para>
+        <para>
+        If the <application>Package</application> installer does not run on Vista then you must turn on IIS6 compatibility mode. You form the 'Turn windows features on or off' dialog and check the IIS6 Management components.
+      </para>
+        <para>
+        The <application>Package</application> also requires that <application>IIS</application> be installed. If <application>IIS</application> is installed after installing the .NET runtime then it may be necessary to run the following command in a command shell:
+      </para>
+        <para>
+          <userInput>%SystemRoot%\Microsoft.NET\Framework\v2.0.50727\aspnet_regiis.exe r</userInput>
+        </para>
+        <para>
+        Building the sample applications requires the
+        <externalLink><linkText>Windows SDK for Vista.</linkText><linkAlternateText>Microsoft® Windows® Software Development Kit Update for Windows Vista™</linkAlternateText><linkUri>http://www.microsoft.com/downloads/details.aspx?FamilyID=ff6467e6-5bba-4bf5-b562-9199be864d29&amp;DisplayLang=en</linkUri></externalLink></para>
+        <para>
+        Developers using Visual Studio 2005 should install
+        <externalLink><linkText>Service Pack 1.</linkText><linkAlternateText>
+            Visual Studio 2005 Service Pack 1 (SP1)
+          </linkAlternateText><linkUri>http://msdn.microsoft.com/en-us/vstudio/bb265237.aspx</linkUri></externalLink></para>
+        <para>
+        Using the COM-DA and COM-AE wrappers require the OPC Core Components Redistributables. These can be downloaded from the OPC Foundation website
+        <externalLink><linkText>here</linkText><linkAlternateText>Downloads</linkAlternateText><linkUri>http://www.opcfoundation.org/Downloads.aspx</linkUri></externalLink>.
+      </para>
+      </content>
+    </section>
+    <section>
+      <title>Installation</title>
+      <content>
+        <para>
+        The <application>Package</application> is distributed as a ZIP file that contains a program called setup.exe and an MSI file. On Vista you must unzip the files into their own directory and run the setup.exe. Trying to run the MSI directly will not work.
+      </para>
+        <para>
+        The Sample applications are configured to connect to the sample COM-DA and COM-AE servers if they are installed on a machine.
+      </para>
+      </content>
+    </section>
+    <!-- <languageReferenceRemarks>Optional reference remarks</languageReferenceRemarks> -->
+    <!-- <codeExample>Optional code example </codeExample> -->
+    <relatedTopics>
+      <externalLink>
+        <linkText>OPC Core Components Redistributable</linkText>
+        <linkAlternateText>Category: Core Components</linkAlternateText>
+        <linkUri>http://www.opcfoundation.org/Downloads.aspx?CM=1&amp;CN=KEY&amp;CI=280&amp;CU=10</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText>.NET 3.0 SP1 runtime</linkText>
+        <linkAlternateText>Microsoft .NET Framework 3.0 Redistributable Package</linkAlternateText>
+        <linkUri>http://www.microsoft.com/downloads/details.aspx?FamilyId=10CC340B-F857-4A14-83F5-25634C3BF043&amp;displaylang=en</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText>Windows SDK for Vista.</linkText>
+        <linkAlternateText>Microsoft® Windows® Software Development Kit Update for Windows Vista™</linkAlternateText>
+        <linkUri>http://www.microsoft.com/downloads/details.aspx?FamilyID=ff6467e6-5bba-4bf5-b562-9199be864d29&amp;DisplayLang=en</linkUri>
+      </externalLink>
+      <externalLink>
+        <linkText>Service Pack 1</linkText>
+        <linkAlternateText>
+        Visual Studio 2005 Service Pack 1 (SP1)
+      </linkAlternateText>
+        <linkUri>http://msdn.microsoft.com/en-us/vstudio/bb265237.aspx</linkUri>
+      </externalLink>
+    </relatedTopics>
+  </developerReferenceWithoutSyntaxDocument>
+</topic>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="4" minorversion="0">
+	<word_docs>
+		<word_doc>
+			<file_name>__GLOBAL__</file_name>
+			<settingsflag>0</settingsflag>
+			<afolder></afolder>
+			<pfolder></pfolder>
+			<type>5</type>
+			<location>2</location>
+			<flags>0</flags>
+			<cshstring>TopicAlias</cshstring>
+			<authorstatus>0</authorstatus>
+			<status>0</status>
+			<template_name></template_name>
+			<cbt_mode>1</cbt_mode>
+			<buildtags></buildtags>
+			<toc_assoc>0</toc_assoc>
+			<index_assoc>0</index_assoc>
+			<glossary_assoc>0</glossary_assoc>
+			<override_flag>0</override_flag>
+			<gen_files/>
+		</word_doc>
+	</word_docs>
+</rhpml>

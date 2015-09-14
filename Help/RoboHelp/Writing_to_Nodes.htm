@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Writing to Nodes</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Writing to Nodes using the Generic Client</h1>
+<p>The client provides the ability to write 1...n nodes in a single call.</p>
+<p>Simply locate a node within the address-space browser and then right-click 
+ and choose <span style="font-weight: bold;">Write </span>from the context-menu. 
+ The following multi-step dialog will open:</p>
+<h3>Step 1 - Choose the Nodes to Write to</h3>
+<p class="Picture"><img src="image66.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Within this dialog you can navigate and select the nodes from the left-side 
+ of the dialog by dragging-n-dropping them into the right-side of the dialog.</p>
+<p>Right-clicking on a node on the right-side will yield this context-menu: 
+ </p>
+<p class="Picture"><img src="image67.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<h4>New</h4>
+<p class="Picture"><img src="image68.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Adds a new node to the list of selected nodes.</p>
+<h4>Edit</h4>
+<p class="Picture"><img src="image69.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>Edits the currently node allowing you to specify exactly which attribute 
+ to write to, and if it is the value attribute (and the node is an array) 
+ then you can specify the index range (positions within the array) to write 
+ to.</p>
+<h4>Edit Value</h4>
+<p class="Picture"><img src="image70.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>A simple dialog where you can modify the value of the node.</p>
+<h4>Delete</h4>
+<p>Removes the currently selected node from the list of nodes.</p>
+<h3>Invoking the Write</h3>
+<p>Click <span style="font-weight: bold;">Next</span> to invoke the Write.</p>
+<h2>Step 2 - Write</h2>
+<p class="Picture"><img src="image71.gif" alt="" style="border: none;" 
+						 border="0" /></p>
+<p>This dialog shows the nodes that were written to on the left, and the 
+ results of each write operation on the right.</p>
+<p>Clicking the <span style="font-weight: bold;">Write</span> button will 
+ invoke another write operation.</p>
+<p>Right-clicking on a node (left side of the window) will open a context-sensitive 
+ menu as described above.</p>
+</body>
+</html>

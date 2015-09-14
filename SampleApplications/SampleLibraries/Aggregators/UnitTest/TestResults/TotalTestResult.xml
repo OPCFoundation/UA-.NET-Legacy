@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ha:AggregateTestResultSet
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:ha="http://osisoft.com/UA/Server/PIUAServer/HATestConfiguration.xsd"
+  >
+    <!--Total data with good bouding value, Annex A.5.2, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode> <!-- Raw, Good in OPCUA spec. -->
+          <ha:Value>10</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!-- Caculated,Good in OPCUA Spec. -->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData1</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!--Calculated,Good in OPCUA Spec. -->
+          <ha:Value>0</ha:Value> <!--10 in OPCUA Spec.-->
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!--Calculated,Good in OPCUA Spec. -->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData2</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>          <!--Calculated,Good in OPCUA Spec. -->
+          <ha:Value>0</ha:Value>          <!--10 in OPCUA Spec.-->
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>          <!--Calculated,Good in OPCUA Spec. -->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData3</ha:TestDataName>
+    </ha:AggregateTestResult>
+
+    <!-- Total data with good bounding value with bad data in the interval, Annex A.5.3, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:35-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!-- Calculated,Good in OPCUA Spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:40-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Bad</ha:StatusCode>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:45-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!--BadNoData in OPCUA Spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:50-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>50</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:55-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>          <!-- Calculated,Good in OPCUA Spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:35-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:00-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData1</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:35-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>30</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:40-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Bad</ha:StatusCode> <!-- BadNoData in OPC Spec.-->
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:45-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>40</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:50-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>50</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:55-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!--Calculated,Good in OPCUA Spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:35-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:00-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData2</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:35-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>30</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:40-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Bad</ha:StatusCode> <!-- BadData in the spec.-->
+         </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:45-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>40</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:50-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>50</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:55-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!--Calculated,Good in OPCUA Spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:35-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:00-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData3</ha:TestDataName>
+    </ha:AggregateTestResult>
+
+    <!-- Total data with no good end bounding value, Annex A.5.4, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:20-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>80</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:25-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!--Calculated,Good in OPCUA Spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:30-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>90</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:35-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>  <!-- BadNoData in the spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:01:20-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:40-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData1</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:20-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>70</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:25-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>80</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:30-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>90</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:35-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>          <!-- BadNoData in the spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:01:20-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:40-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData2</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:20-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>70</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:25-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>80</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:30-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,Good</ha:StatusCode>
+          <ha:Value>90</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:01:35-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Calculated,GoodNoData</ha:StatusCode>          <!-- BadNoData in the spec.-->
+          <ha:Value>0</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:01:20-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:40-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData3</ha:TestDataName>
+    </ha:AggregateTestResult>
+</ha:AggregateTestResultSet>
+
+
+

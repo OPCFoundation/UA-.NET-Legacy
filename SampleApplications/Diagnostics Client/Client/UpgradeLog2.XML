@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="UA Diagnostic Client">
+</Property><Property Name="Solution File" Value="D:\Work\OpcFUA\NET\SampleApplications\trunk\Diagnostics Client\Client\UA Diagnostic Client.sln">
+</Property><Property Name="Date" Value="Wednesday, September 19, 2012">
+</Property><Property Name="Time" Value="13:42:48 PM">
+</Property><Property Name="Log Number" Value="2">
+</Property></Properties><Event ErrorLevel="0" Project="UA Client Diagnostic Controls" Source="..\Controls\UA Client Diagnostic Controls.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="UA Client Diagnostic Controls" Source="..\Controls\UA Client Diagnostic Controls.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="UA Client Diagnostic Controls" Source="..\Controls\UA Client Diagnostic Controls.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>

@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="template" content="OPCFMasterPage.htt" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="search-keywords" content="client, subscription, development" />
+<meta name="rh-authors" content="Nathan Pocock" />
+<meta name="generator" content="Adobe RoboHelp 9" />
+<title>Step 3 - Setup Subscription</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<h1>Client Development Tutorial</h1>
+<h2>Step 3 - Setup a Subscription</h2>
+<p>In this step we will do the following:</p>
+<ul type="disc">
+	<li><p>Attach an event handler to the new &quot;Subscribe&quot; menu 
+	 item which will do the following:</p></li>
+	<ul type="disc">
+		<li><p>Create a new subscription.</p></li>
+		<li><p>Add 1 monitored item that will poll every second.</p></li>
+	</ul>
+</ul>
+<h3>Attaching the Event Handler</h3>
+<ol type="1">
+	<li><p>Highlight the &quot;Subscription&quot; menu item, and then double-click 
+	 it; this will create a new/empty event handler.</p></li>
+	<li><p>The cursor will be automatically positioned to the first empty 
+	 line. This is where you will start coding (next).</p></li>
+</ol>
+<h3>Creating the New Subscription</h3>
+<ol type="1">
+	<li><p>First, we need to define our subscription object. Our use of 
+	 this subscription in this tutorial will be very basic, meaning that 
+	 we will simply create the subscription and assume that it will remain 
+	 alive throughout the lifetime of the connection.</p></li>
+	<li><p>Move the cursor above the event handler and copy/paste the following 
+	 code:<br />
+	<span style="font-family: 'Courier New', monospace;">private Subscription 
+	 m_subscription;</span></p></li>
+	<li><p>Move the cursor back into the event handler and now define our 
+	 subscription, but only if it has not already been defined:<br />
+	<span style="font-family: 'Courier New', monospace;">if( m_subscription 
+	 == null )<br />
+	{<br />
+	&#160;m_subscription = new Subscription(m_session.DefaultSubscription);<br />
+	&#160;m_subscription.PublishingEnabled=true;<br />
+	&#160;m_subscription.PublishingInterval=1000;<br />
+	&#160;m_session.AddSubscription(m_subscription);<br />
+	&#160;m_subscription.Create();<br />
+	}</span></p></li>
+</ol>
+<h3>Adding the Monitored Item</h3>
+<ol type="1">
+	<li><p>Now we will take the NodeId of the currently selected node, 
+	 and will turn it into a monitored item which we will add to our subscription.</p></li>
+	<li><p>Move the cursor above the event handler and create a monitored 
+	 item variable:<br />
+	<span style="font-family: 'Courier New', monospace;">private MonitoredItem 
+	 monitoredItem;</span></p></li>
+	<li><p>Move the cursor back into the event handler and create the following 
+	 &quot;if block&quot; below the code that you have previously created: 
+	 <br />
+	<span style="font-family: 'Courier New', monospace;">if( monitoredItem 
+	 == null )<br />
+	{<br />
+	&#160;monitoredItem = new MonitoredItem( m_subscription.DefaultItem 
+	 );<br />
+	&#160;&#160;monitoredItem.StartNodeId = <br />
+	&#160;&#160;monitoredItem.AttributeId = Attributes.Value;<br />
+	&#160;&#160;monitoredItem.MonitoringMode = MonitoringMode.Reporting;<br />
+	&#160;&#160;monitoredItem.SamplingInterval = 1000;<br />
+	&#160;&#160;monitoredItem.QueueSize = 0;<br />
+	&#160;&#160;monitoredItem.DiscardOldest = true;<br />
+	&#160;// define event handler for this item, and then add to subscription<br />
+	&#160;&#160;monitoredItem.Notification += new MonitoredItemNotificationEventHandler( 
+	 monitoredItem_Notification);<br />
+	&#160;m_subscription.AddItem( monitoredItem );<br />
+	}</span></p></li>
+</ol>
+<p>Next, <a href="Step_4_-_Consuming_DataChanges.htm">Step 4 - Consuming 
+ Data-changes</a>.</p>
+</body>
+</html>

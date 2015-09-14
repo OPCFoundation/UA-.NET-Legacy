@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeEntityDocument
+  xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <assembly>
+    <assemblyName>Assembly name</assemblyName>
+  </assembly>
+  <codeEntities>
+    <codeEntity>
+      <codeEntityReference>API member ID</codeEntityReference>
+    </codeEntity>
+  </codeEntities>
+</codeEntityDocument>

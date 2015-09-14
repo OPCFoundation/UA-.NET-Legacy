@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rhpml majorversion="4" minorversion="0">
+	<projectproperties>
+		<projecttitle>OPC Foundation Unified Architecture Technology Samples</projecttitle>
+		<homepage>About_the_OPC_Foundation.htm</homepage>
+		<primarylayout>WebHelpMembers</primarylayout>
+		<Flags>92</Flags>
+		<language>1033</language>
+	</projectproperties>
+	<TOCFileNames>
+		<TOC>
+			<file>AppHelp.hhc</file>
+			<default>default</default>
+		</TOC>
+	</TOCFileNames>
+	<IndexFileNames>
+		<Index>
+			<file>AppHelp.hhk</file>
+			<default>default</default>
+		</Index>
+	</IndexFileNames>
+	<GlossaryFileNames>
+		<Glossary>
+			<file>AppHelp.glo</file>
+			<default>default</default>
+		</Glossary>
+	</GlossaryFileNames>
+	<ignoredwords/>
+	<TODOList>
+		<TODOItem>First Draft</TODOItem>
+		<TODOItem>Added To TOC</TODOItem>
+		<TODOItem>Links</TODOItem>
+		<TODOItem>Ran Smart Index</TODOItem>
+		<TODOItem>Index keywords</TODOItem>
+		<TODOItem>See Also keywords</TODOItem>
+		<TODOItem>Images</TODOItem>
+		<TODOItem>Browse Sequences</TODOItem>
+		<TODOItem>Tested</TODOItem>
+		<TODOItem>Finalized</TODOItem>
+		<TODOItem>Reviewed</TODOItem>
+	</TODOList>
+	<miscproperties/>
+	<CompileOptions>
+		<Flags>4</Flags>
+	</CompileOptions>
+	<Collections>
+		<FolderCollectionFilename>root.fpj</FolderCollectionFilename>
+		<SkinCollectionFilename>rhskins.apj</SkinCollectionFilename>
+		<BaggageCollectionFilename>rhbag.apj</BaggageCollectionFilename>
+		<WindowCollectionFilename>rhwnd.apj</WindowCollectionFilename>
+		<TemplateCollectionFilename>rhtemplate.apj</TemplateCollectionFilename>
+		<BuildTagCollectionFilename>rhbuildtag.apj</BuildTagCollectionFilename>
+		<MapFileCollectionFilename>rhmapfile.apj</MapFileCollectionFilename>
+		<ColorCollectionFilename>rhcolor.apj</ColorCollectionFilename>
+		<sresCollectionFilename>rhsharedresource.apj</sresCollectionFilename>
+		<FontSetCollectionFilename>rhfontset.apj</FontSetCollectionFilename>
+		<ExternalFileCollectionFilename>rhextern.apj</ExternalFileCollectionFilename>
+		<LayoutCollectionFilename>rhlayout.apj</LayoutCollectionFilename>
+		<AKeywordCollectionFilename>rhakeyword.apj</AKeywordCollectionFilename>
+		<KKeywordCollectionFilename>rhkkeyword.apj</KKeywordCollectionFilename>
+		<PopupTopicCollectionFilename>rhpopup.apj</PopupTopicCollectionFilename>
+		<FramesetCollectionFilename>rhframeset.apj</FramesetCollectionFilename>
+		<MergedHelpCollectionFilename>rhmhelp.apj</MergedHelpCollectionFilename>
+		<InfoTypeCollectionFilename>rhinfotype.apj</InfoTypeCollectionFilename>
+		<VariableCollectionFilename>rhvariable.apj</VariableCollectionFilename>
+		<SnippetCollectionFilename>rhsnippet.apj</SnippetCollectionFilename>
+		<RHFrameDocsCollectionFileName>RHFrameDocs.apj</RHFrameDocsCollectionFileName>
+		<RHWordDocsCollectionFileName>RHWordDocs.apj</RHWordDocsCollectionFileName>
+	</Collections>
+	<mergedhelpfiles/>
+</rhpml>

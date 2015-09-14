@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRunConfiguration name="Local Test Run" id="12594332-720f-450b-b604-7d36a3424d4e" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Description>This is a default test run configuration for a local test run.</Description>
+  <Deployment>
+    <DeploymentItem filename="UnitTest\TestResults\BoundingValueTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\StartTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestData.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\WorstQualityTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\AnnotationCountTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\DurationGoodTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\DurationBadTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\TimeAverageTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\InterpolativeTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\RangeTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\TotalTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\MinTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\CountTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\DeltaTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\PercentGoodTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\MaxActualTimeTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\MaxTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\EndTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\MinActualTimeTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\DurationInState1TestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\TotalizeAverageTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\NumberOfTransitionsTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\AverageTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\PercentBadTestResult.xml" />
+    <DeploymentItem filename="UnitTest\TestResults\DurationInState0TestResult.xml" />
+  </Deployment>
+  <TestTypeSpecific />
+</TestRunConfiguration>

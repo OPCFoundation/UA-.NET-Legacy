@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ha:AggregateTestResultSet
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:ha="http://osisoft.com/UA/Server/PIUAServer/HATestConfiguration.xsd"
+  >
+  <!--Start data with good bouding value, Annex A.16.2, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Raw,Good</ha:StatusCode>
+          <ha:Value>10</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData1</ha:TestDataName>
+    </ha:AggregateTestResult>
+
+    <!-- Start data with bad bounding value, Annex A.16.3, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:15-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:10-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:20-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData2</ha:TestDataName>
+    </ha:AggregateTestResult>
+
+    <!-- Start data with no good end bounding value, Annex A.16.4, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:35-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:40-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>UncertainDataSubnormal</ha:StatusCode> <!--Raw, Bad in the spec. However, the manuscript says it should be UncertainDataSubnormal. Need clarification.-->
+          <ha:Value>40</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:45-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:50-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Raw,Good</ha:StatusCode>
+          <ha:Value>50</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:55-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:35-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:00-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData1</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:39-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Raw,Good</ha:StatusCode>
+          <ha:Value>30</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:42-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>UncertainDataSubnormal</ha:StatusCode>  <!--Raw, Bad in the spec. However, the manuscript says it should be UncertainDataSubnormal. Need clarification.-->
+          <ha:Value>40</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:48-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Raw,Good</ha:StatusCode>
+          <ha:Value>40</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:52-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Raw,Good</ha:StatusCode>
+          <ha:Value>50</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:55-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:35-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:01:00-05:00</ua:EndTime>
+        <ua:ResampleInterval>5000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData2</ha:TestDataName>
+    </ha:AggregateTestResult>
+
+    <!-- Start data with partial intervals. Annex A.16.5, OPCUA Spec. Part 13-->
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:10-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Raw,Good</ha:StatusCode>
+          <ha:Value>10</ha:Value>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:30-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Partial,Good</ha:StatusCode>
+          <ha:Value>30</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:05-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:35-05:00</ua:EndTime>
+        <ua:ResampleInterval>16000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData1</ha:TestDataName>
+    </ha:AggregateTestResult>
+    <ha:AggregateTestResult>
+      <ha:DataValues>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:05-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>BadNoData</ha:StatusCode>
+        </ha:DataValueEntry>
+        <ha:DataValueEntry>
+          <ha:SourceTimestamp>2009-08-13T10:00:25-05:00</ha:SourceTimestamp>
+          <ha:StatusCode>Partial,Good</ha:StatusCode>          <!-- Raw, Good in the spec.-->
+          <ha:Value>20</ha:Value>
+        </ha:DataValueEntry>
+      </ha:DataValues>
+      <ha:Details>
+        <ua:StartTime>2009-08-13T10:00:05-05:00</ua:StartTime>
+        <ua:EndTime>2009-08-13T10:00:35-05:00</ua:EndTime>
+        <ua:ResampleInterval>16000</ua:ResampleInterval>
+      </ha:Details>
+      <ha:TestDataName>TestData2</ha:TestDataName>
+    </ha:AggregateTestResult>
+</ha:AggregateTestResultSet>
+
+

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="refresh" content="3;URL=somepage.htm" />
+<meta name="generator" content="Adobe RoboHelp 8" />
+<title>MPTest</title>
+<link rel="StyleSheet" href="default.css" type="text/css" />
+</head>
+
+<body>
+<?rh-region_start type="header" style="width: 100%; position: relative;" ?>
+<p>&#160;</p>
+<?rh-region_end type="header" ?><?rh-region_start type="body" ?>
+<table cellspacing="0" width="100%">
+		<col style="width: 100%;" />
+		<tr>
+			<td><div style="border: solid 1px #000000; padding: 5px; width: 95%; 
+					 background-color: #c0c0c0; float: left;">
+				<p style="font-weight: bold;"><span style="font-weight: bold;">Instructions 
+				 for using this Master Page: </span></p>
+				<ol type="1">
+					<li><p>This Master Page is intended to assist with 
+					 rapidly building a redirect topic. A redirect topic 
+					 is one that displays briefly, then opens a different 
+					 topic. These are very powerful when you need to use 
+					 them. for example, maybe you have a need to simply 
+					 link to something such as a Microsoft Word document, 
+					 Adobe PDF document, Microsoft Excel document, or other 
+					 type of file. These can take a while to open and display. 
+					 This makes your user think the link is broken. Using 
+					 the redirect, you may insert a message to please be 
+					 patient while the document is opened. This provides 
+					 a clue to your user that something is indeed happening 
+					 and the link is not broken. It also helps them to 
+					 be more patient as the file loads.<br />
+					<br />
+					Redirect topics are also often used to present a Splash 
+					 page briefly when your help system loads. The user 
+					 sees the Splash page, then a few seconds later sees 
+					 the first topic you want them to see.</p></li>
+					<li><p>Create a topic based on this Master Page.</p></li>
+					<li><p>Insert an Image or change the text in the area 
+					 below to present the page as you wish the user to 
+					 see it.</p></li>
+					<li><p>Click the HTML button at the top of the page. 
+					 When you do this, look near the top of the page. You 
+					 should find a line that reads:<br />
+					&lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;URL=somepage.htm&quot; 
+					 /&gt;</p></li>
+					<li><p>Change the 3 to the desired number of seconds 
+					 to wait before the page opens the URL. (0 = Immediate)</p></li>
+					<li><p>Change the URL= to point at another topic page 
+					 or a file such as MyFile.PDF, MyFile.DOC, MyFile.XLS, 
+					 etc<br />
+					For example, if you want to point at MyFile.XLS, the 
+					 line would read:<br />
+					&lt;meta http-equiv=&quot;refresh&quot; content=&quot;3;URL=MyFile.XLS&quot; 
+					 /&gt;.<br />
+					*NOTE: If you are creating locally installed WebHelp 
+					 and are using the Mark Of The Web (MOTW), these links 
+					 will fail.</p></li>
+					<li><p>Note that the text as well as any image you 
+					 add will be centered both horizontally and vertically 
+					 on the page. This is accomplished by using a single 
+					 cell table with no borders. Then centering both vertically 
+					 and horizontally.</p></li>
+					<li><p>Remember to add any referenced files to your 
+					 Baggage Files folder.</p></li>
+					<li><p>Delete this Text Box after creating a topic 
+					 using this Master Page.</p></li>
+				</ol>
+			</div>
+			&#160;</td>
+		</tr>
+	</table>
+	<p style="font-weight: bold;" align="center">Please be patient as the 
+	 Document/File is opened</p>
+<?rh-region_end type="body" ?>
+<p>&#160;</p>
+</body>
+</html>
