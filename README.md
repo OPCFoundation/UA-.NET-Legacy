@@ -2,7 +2,7 @@
 
 The OPC Foundation has formally released the Unified Architecture .NET Stack and Sample Code to the community.
 
-Please review official site page (http://http://opcfoundation.github.io/UA-.NET/) for:
+Please review official site page (http://opcfoundation.github.io/UA-.NET/) for:
  * Overview
  * Licensing
  * Sample Applications overview
