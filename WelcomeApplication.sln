@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WelcomeApplication", "WelcomeApplication.csproj", "{449B00E9-C638-4DD0-8BAE-6CE8577714C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WelcomeApplication", "Dashboard\WelcomeApplication.csproj", "{449B00E9-C638-4DD0-8BAE-6CE8577714C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

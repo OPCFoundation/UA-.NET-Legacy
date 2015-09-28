@@ -9,29 +9,29 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleLibraries", "SampleLi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stack", "Stack", "{F8ADA46B-F2EA-42D3-8860-06D9333E57E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Client", "Client\UA Sample Client.csproj", "{D7601329-530D-4537-B9B9-D9D53D5F81F6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Client", "SampleApplications\Samples\Client\UA Sample Client.csproj", "{D7601329-530D-4537-B9B9-D9D53D5F81F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Library", "Common\UA Sample Library.csproj", "{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Library", "SampleApplications\Samples\Common\UA Sample Library.csproj", "{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Controls", "Controls\UA Sample Controls.csproj", "{92AE819B-4938-4502-AC32-67063F9893CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Controls", "SampleApplications\Samples\Controls\UA Sample Controls.csproj", "{92AE819B-4938-4502-AC32-67063F9893CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA History Client", "HistoryClient\UA History Client.csproj", "{F5E8F2E9-CE85-489F-87D7-523060BCF823}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA History Client", "SampleApplications\Samples\HistoryClient\UA History Client.csproj", "{F5E8F2E9-CE85-489F-87D7-523060BCF823}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Network Tester", "NetworkTester\UA Network Tester.csproj", "{D71697DF-05D4-481A-B320-D2398F2192C3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Network Tester", "SampleApplications\Samples\NetworkTester\UA Network Tester.csproj", "{D71697DF-05D4-481A-B320-D2398F2192C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Server", "Server\UA Sample Server.csproj", "{B109EBAE-BB08-40A7-BB9E-7E56B9151B17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Sample Server", "SampleApplications\Samples\Server\UA Sample Server.csproj", "{B109EBAE-BB08-40A7-BB9E-7E56B9151B17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Test Tool", "ServerTest\UA Server Test Tool.csproj", "{1B5BADAA-EA40-47B0-A4BF-C5D39FB237EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Test Tool", "SampleApplications\Samples\ServerTest\UA Server Test Tool.csproj", "{1B5BADAA-EA40-47B0-A4BF-C5D39FB237EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Library", "..\SampleLibraries\Client\UA Client Library.csproj", "{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Library", "SampleApplications\SampleLibraries\Client\UA Client Library.csproj", "{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Configuration Library", "..\SampleLibraries\Configuration\UA Configuration Library.csproj", "{8AB4CB8E-E216-425D-B600-350D0B6B59CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Configuration Library", "SampleApplications\SampleLibraries\Configuration\UA Configuration Library.csproj", "{8AB4CB8E-E216-425D-B600-350D0B6B59CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Controls", "..\SampleLibraries\Controls\UA Client Controls.csproj", "{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Controls", "SampleApplications\SampleLibraries\Controls\UA Client Controls.csproj", "{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Library", "..\SampleLibraries\Server\UA Server Library.csproj", "{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Library", "SampleApplications\SampleLibraries\Server\UA Server Library.csproj", "{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "..\..\Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

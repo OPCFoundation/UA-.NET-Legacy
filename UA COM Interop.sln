@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Stack", "Stack", "{BE529B80
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SampleLibraries", "SampleLibraries", "{840888D6-8252-4D7A-B0A5-B879AD6C07CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA COM Server Wrapper", "..\ComIOP\Wrapper\ServerWrapper\UA COM Server Wrapper.csproj", "{F4805912-A3F9-4045-BC63-01F34A216EE7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA COM Server Wrapper", "ComIOP\Wrapper\ServerWrapper\UA COM Server Wrapper.csproj", "{F4805912-A3F9-4045-BC63-01F34A216EE7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{24D3C616-ED4C-4AF9-B529-7B418EC8ACC4} = {24D3C616-ED4C-4AF9-B529-7B418EC8ACC4}
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5} = {E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}
@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA COM Server Wrapper", "..
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9} = {7543AFCB-F5AF-44AF-83C9-23164474C1E9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA COM Interop Library", "..\ComIOP\Common\UA COM Interop Library.csproj", "{24D3C616-ED4C-4AF9-B529-7B418EC8ACC4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA COM Interop Library", "ComIOP\Common\UA COM Interop Library.csproj", "{24D3C616-ED4C-4AF9-B529-7B418EC8ACC4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5} = {E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90} = {42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}
@@ -24,15 +24,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA COM Interop Library", ".
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9} = {7543AFCB-F5AF-44AF-83C9-23164474C1E9}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "..\Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Library", "..\SampleApplications\SampleLibraries\Client\UA Client Library.csproj", "{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Library", "SampleApplications\SampleLibraries\Client\UA Client Library.csproj", "{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Configuration Library", "..\SampleApplications\SampleLibraries\Configuration\UA Configuration Library.csproj", "{8AB4CB8E-E216-425D-B600-350D0B6B59CD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Configuration Library", "SampleApplications\SampleLibraries\Configuration\UA Configuration Library.csproj", "{8AB4CB8E-E216-425D-B600-350D0B6B59CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Library", "..\SampleApplications\SampleLibraries\Server\UA Server Library.csproj", "{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Library", "SampleApplications\SampleLibraries\Server\UA Server Library.csproj", "{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UA COM Proxy Server", "..\ComIOP\Wrapper\ProxyServer\UA COM Proxy Server.vcxproj", "{C228B4A7-8A03-4663-AD6C-8B16CE83D4DC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UA COM Proxy Server", "ComIOP\Wrapper\ProxyServer\UA COM Proxy Server.vcxproj", "{C228B4A7-8A03-4663-AD6C-8B16CE83D4DC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{24D3C616-ED4C-4AF9-B529-7B418EC8ACC4} = {24D3C616-ED4C-4AF9-B529-7B418EC8ACC4}
 		{268AE545-D614-4B66-AEF3-C5B85919AD9D} = {268AE545-D614-4B66-AEF3-C5B85919AD9D}
@@ -42,7 +42,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UA COM Proxy Server", "..\C
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9} = {7543AFCB-F5AF-44AF-83C9-23164474C1E9}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UA COM Server Class Library", "..\ComIOP\Wrapper\Common\OPC Sample Utility Classes.vcxproj", "{268AE545-D614-4B66-AEF3-C5B85919AD9D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UA COM Server Class Library", "ComIOP\Wrapper\Common\OPC Sample Utility Classes.vcxproj", "{268AE545-D614-4B66-AEF3-C5B85919AD9D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
