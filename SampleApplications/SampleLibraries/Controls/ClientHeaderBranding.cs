@@ -47,7 +47,7 @@ namespace Opc.Ua.Server.Controls
         private void ClientHeaderBranding_Load(object sender, EventArgs e)
         {
             appName.Text = this.Parent.Text;
-            labelBuild.Text = string.Format("UA .NET API Build: {0}", Assembly.GetEntryAssembly().GetName().Version);
+            labelBuild.Text = string.Format("UA .NET API Build: {0}", Assembly.GetExecutingAssembly().GetName().Version.ToString());
         }
     }
 }
