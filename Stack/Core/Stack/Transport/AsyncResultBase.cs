@@ -235,6 +235,20 @@ namespace Opc.Ua
                         }
                     }
                 }
+
+                // release the wait event.
+                if (m_waitHandle != null)
+                {
+                    try
+                    {
+                        m_waitHandle.Close();
+                        m_waitHandle = null;
+                    }
+                    catch (Exception)
+                    {
+                        // ignore 
+                    }
+                }
             }
 
             return true;
