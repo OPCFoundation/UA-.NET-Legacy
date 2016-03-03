@@ -1343,7 +1343,7 @@ namespace Opc.Ua
                         if (Object.ReferenceEquals(policies[ii], value))
                         {
                             m_selectedUserTokenPolicyIndex = ii;
-                            break;
+                            return;
                         }
                     }
                 }
