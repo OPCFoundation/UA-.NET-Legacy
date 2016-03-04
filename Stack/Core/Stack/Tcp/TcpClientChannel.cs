@@ -187,7 +187,7 @@ namespace Opc.Ua.Bindings
                 }
 
                 // check if a handshake is in progress.
-                if (m_handshakeOperation != null)
+                if (m_handshakeOperation != null && !m_handshakeOperation.IsCompleted)
                 {
                     m_handshakeOperation.Fault(ServiceResult.Create(StatusCodes.BadConnectionClosed, "Channel was closed by the user."));
                 }
