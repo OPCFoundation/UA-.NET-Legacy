@@ -259,6 +259,49 @@ namespace Opc.Ua
         }
 
         /// <summary>
+        /// Creates a self signed application instance certificate (with option to specify algorithm) 
+        /// </summary>
+        /// <param name="storeType"></param>
+        /// <param name="storePath"></param>
+        /// <param name="applicationUri"></param>
+        /// <param name="applicationName"></param>
+        /// <param name="subjectName"></param>
+        /// <param name="domainNames"></param>
+        /// <param name="keySize"></param>
+        /// <param name="lifetimeInMonths"></param>
+        /// <param name="algorithm"></param>
+        /// <returns></returns>
+        public static X509Certificate2 CreateCertificate(
+            string storeType,
+            string storePath,
+            string applicationUri,
+            string applicationName,
+            string subjectName,
+            IList<String> domainNames,
+            ushort keySize,
+            ushort lifetimeInMonths,
+            ushort algorithm)
+        {
+            return CreateCertificate(
+                storeType,
+                storePath,
+                null,
+                applicationUri,
+                applicationName,
+                subjectName,
+                domainNames,
+                keySize,
+                DateTime.MinValue,
+                lifetimeInMonths,
+                0,
+                false,
+                false,
+                null,
+                null,
+                algorithm);
+        }
+
+        /// <summary>
         /// Creates a self signed application instance certificate.
         /// </summary>
         /// <param name="storeType">Type of certificate store (Windows or Directory) <see cref="CertificateStoreType"/>.</param>
@@ -276,6 +319,7 @@ namespace Opc.Ua
         /// <param name="usePEMFormat">if set to <c>true</c> the private ket is store in the PEM format.</param>
         /// <param name="issuerKeyFilePath">The path to the PFX file containing the CA private key.</param>
         /// <param name="issuerKeyFilePassword">The  password for the PFX file containing the CA private key.</param>
+        /// <param name="algorithm">Signature algorithm (0 = SHA1; 1 = SHA256) This settings applies only to Windows storeType option.</param>
         /// <returns>The certificate with a private key.</returns>
         public static X509Certificate2 CreateCertificate(
             string storeType,
@@ -292,7 +336,8 @@ namespace Opc.Ua
             bool isCA,
             bool usePEMFormat,
             string issuerKeyFilePath,
-            string issuerKeyFilePassword)
+            string issuerKeyFilePassword,
+            ushort algorithm = 0)
         {
 #if !SILVERLIGHT
             X509Certificate2 certificate  = null;
@@ -359,7 +404,8 @@ namespace Opc.Ua
                 subjectName.ToString(),
                 domainNames,
                 keySize,
-                lifetimeInMonths);
+                lifetimeInMonths,
+                algorithm);
             
             // add it to the store.
             if (!String.IsNullOrEmpty(storePath))
@@ -2139,12 +2185,14 @@ namespace Opc.Ua
             string subjectName,
             IList<string> hostNames,
             ushort keySize,
-            ushort lifetimeInMonths)
+            ushort lifetimeInMonths,
+            ushort algorithm = 0)
         {
             IntPtr hKey = IntPtr.Zero;
             IntPtr pKpi = IntPtr.Zero;
             IntPtr pThumbprint = IntPtr.Zero;
             IntPtr pContext = IntPtr.Zero;
+            IntPtr pAlgorithmId = IntPtr.Zero;
             IntPtr pNewContext = IntPtr.Zero;
             CRYPT_DATA_BLOB publicKeyId = new CRYPT_DATA_BLOB();
             CERT_NAME_BLOB subjectNameBlob = new CERT_NAME_BLOB();
@@ -2180,7 +2228,7 @@ namespace Opc.Ua
 
                 // allocate memory for all possible extensions.
                 extensions.cExtension = 0;
-                extensions.rgExtension = Marshal.AllocHGlobal(6*Marshal.SizeOf(typeof(CERT_EXTENSION)));
+                extensions.rgExtension = Marshal.AllocHGlobal(6 * Marshal.SizeOf(typeof(CERT_EXTENSION)));
 
                 // create the subject key info extension.
                 IntPtr pPos = extensions.rgExtension;
@@ -2259,8 +2307,29 @@ namespace Opc.Ua
                 hExtensionList = GCHandle.Alloc(extensions, GCHandleType.Pinned);
                 hSubjectNameBlob = GCHandle.Alloc(subjectNameBlob, GCHandleType.Pinned);
 
-                // create the certificate.
-                pContext = NativeMethods.CertCreateSelfSignCertificate(
+                if (algorithm == 1)
+                {
+                    CRYPT_ALGORITHM_IDENTIFIER algorithmID = new CRYPT_ALGORITHM_IDENTIFIER();
+                    algorithmID.pszObjId = "1.2.840.113549.1.1.11"; //SHA256
+
+                    pAlgorithmId = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(CRYPT_ALGORITHM_IDENTIFIER)));
+                    Marshal.StructureToPtr(algorithmID, pAlgorithmId, false);
+
+                    //create the certificate
+                    pContext = NativeMethods.CertCreateSelfSignCertificate(
+                         hProvider,
+                         hSubjectNameBlob.AddrOfPinnedObject(),
+                         0,
+                         pKpi,
+                         pAlgorithmId,
+                         IntPtr.Zero,
+                         hValidTo.AddrOfPinnedObject(),
+                         hExtensionList.AddrOfPinnedObject());
+                }
+                else
+                {
+                    // (default) create the certificate.
+                    pContext = NativeMethods.CertCreateSelfSignCertificate(
                     hProvider,
                     hSubjectNameBlob.AddrOfPinnedObject(),
                     0,
@@ -2269,6 +2338,7 @@ namespace Opc.Ua
                     IntPtr.Zero,
                     hValidTo.AddrOfPinnedObject(),
                     hExtensionList.AddrOfPinnedObject());
+                }
 
                 if (pContext == IntPtr.Zero)
                 {
@@ -2346,6 +2416,12 @@ namespace Opc.Ua
                     Marshal.FreeHGlobal(pThumbprint);
                 }
 
+                if (pAlgorithmId != IntPtr.Zero)
+                {
+                    Marshal.DestroyStructure(pAlgorithmId, typeof(CRYPT_ALGORITHM_IDENTIFIER));
+                    Marshal.FreeHGlobal(pAlgorithmId);
+                }
+
                 if (hValidTo.IsAllocated) hValidTo.Free();
                 if (hExtensionList.IsAllocated) hExtensionList.Free();
                 if (hSubjectNameBlob.IsAllocated) hSubjectNameBlob.Free();
@@ -2382,7 +2458,8 @@ namespace Opc.Ua
             string subjectName,
             IList<string> hostNames,
             ushort keySize,
-            ushort lifetimeInMonths)
+            ushort lifetimeInMonths,
+            ushort algorithm = 0)
         {
             IntPtr hProvider = IntPtr.Zero;
             IntPtr hMemoryStore = IntPtr.Zero;
@@ -2441,7 +2518,8 @@ namespace Opc.Ua
                     subjectName,
                     hostNames,
                     keySize,
-                    lifetimeInMonths);
+                    lifetimeInMonths,
+                    algorithm);
 
                 // determine the size of the PKCS#12 blob.
                 bResult = NativeMethods.PFXExportCertStoreEx(
