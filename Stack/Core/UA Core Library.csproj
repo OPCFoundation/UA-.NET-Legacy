@@ -350,6 +350,7 @@
       </SubType>
     </None>
     <EmbeddedResource Include="Types\Schemas\StandardTypes.bsd" />
+    <None Include="UA Core Library.csproj.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Types\Utils\LocalizedData.txt" />
@@ -374,6 +375,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <!--<Exec Command="..\..\.nuget\nuget pack &quot;UA Core Library.csproj&quot; -Prop Configuration=Release"></Exec>-->
+    <Exec Command="..\..\.nuget\nuget pack &quot;UA Core Library.csproj&quot; -Prop Configuration=$(Configuration) -OutputDirectory ..\..\Packages\"></Exec>
+  </Target>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>
