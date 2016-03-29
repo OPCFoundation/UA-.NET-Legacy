@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2011 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -250,10 +250,10 @@ namespace Opc.Ua
         Write = 2,
 
         /// <summary>
-        /// A description for the EraseExisiting field.
+        /// A description for the EraseExisting field.
         /// </summary>
-        [EnumMember(Value = "EraseExisiting_4")]
-        EraseExisiting = 4,
+        [EnumMember(Value = "EraseExisting_4")]
+        EraseExisting = 4,
 
         /// <summary>
         /// A description for the Append field.
@@ -327,6 +327,366 @@ namespace Opc.Ua
             for (int ii = 0; ii < this.Count; ii++)
             {
                 clone.Add((OpenFileMode)Utils.Clone(this[ii]));
+            }
+
+            return clone;
+        }
+        #endregion
+    }
+    #endregion
+    #endif
+    #endregion
+
+    #region TrustListMasks Enumeration
+    #if (!OPCUA_EXCLUDE_TrustListMasks)
+    /// <summary>
+    /// A description for the TrustListMasks DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public enum TrustListMasks
+    {
+        /// <summary>
+        /// A description for the None field.
+        /// </summary>
+        [EnumMember(Value = "None_0")]
+        None = 0,
+
+        /// <summary>
+        /// A description for the TrustedCertificates field.
+        /// </summary>
+        [EnumMember(Value = "TrustedCertificates_1")]
+        TrustedCertificates = 1,
+
+        /// <summary>
+        /// A description for the TrustedCrls field.
+        /// </summary>
+        [EnumMember(Value = "TrustedCrls_2")]
+        TrustedCrls = 2,
+
+        /// <summary>
+        /// A description for the IssuerCertificates field.
+        /// </summary>
+        [EnumMember(Value = "IssuerCertificates_4")]
+        IssuerCertificates = 4,
+
+        /// <summary>
+        /// A description for the IssuerCrls field.
+        /// </summary>
+        [EnumMember(Value = "IssuerCrls_8")]
+        IssuerCrls = 8,
+
+        /// <summary>
+        /// A description for the All field.
+        /// </summary>
+        [EnumMember(Value = "All_15")]
+        All = 15,
+    }
+    #endif
+    #endregion
+
+    #region TrustListDataType Class
+    #if (!OPCUA_EXCLUDE_TrustListDataType)
+    /// <summary>
+    /// A description for the TrustListDataType DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class TrustListDataType : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public TrustListDataType()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_specifiedLists = (uint)0;
+            m_trustedCertificates = new ByteStringCollection();
+            m_trustedCrls = new ByteStringCollection();
+            m_issuerCertificates = new ByteStringCollection();
+            m_issuerCrls = new ByteStringCollection();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// A description for the SpecifiedLists field.
+        /// </summary>
+        [DataMember(Name = "SpecifiedLists", IsRequired = false, Order = 1)]
+        public uint SpecifiedLists
+        {
+            get { return m_specifiedLists;  }
+            set { m_specifiedLists = value; }
+        }
+
+        /// <summary>
+        /// A description for the TrustedCertificates field.
+        /// </summary>
+        [DataMember(Name = "TrustedCertificates", IsRequired = false, Order = 2)]
+        public ByteStringCollection TrustedCertificates
+        {
+            get
+            {
+                return m_trustedCertificates;
+            }
+
+            set
+            {
+                m_trustedCertificates = value;
+
+                if (value == null)
+                {
+                    m_trustedCertificates = new ByteStringCollection();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the TrustedCrls field.
+        /// </summary>
+        [DataMember(Name = "TrustedCrls", IsRequired = false, Order = 3)]
+        public ByteStringCollection TrustedCrls
+        {
+            get
+            {
+                return m_trustedCrls;
+            }
+
+            set
+            {
+                m_trustedCrls = value;
+
+                if (value == null)
+                {
+                    m_trustedCrls = new ByteStringCollection();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the IssuerCertificates field.
+        /// </summary>
+        [DataMember(Name = "IssuerCertificates", IsRequired = false, Order = 4)]
+        public ByteStringCollection IssuerCertificates
+        {
+            get
+            {
+                return m_issuerCertificates;
+            }
+
+            set
+            {
+                m_issuerCertificates = value;
+
+                if (value == null)
+                {
+                    m_issuerCertificates = new ByteStringCollection();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the IssuerCrls field.
+        /// </summary>
+        [DataMember(Name = "IssuerCrls", IsRequired = false, Order = 5)]
+        public ByteStringCollection IssuerCrls
+        {
+            get
+            {
+                return m_issuerCrls;
+            }
+
+            set
+            {
+                m_issuerCrls = value;
+
+                if (value == null)
+                {
+                    m_issuerCrls = new ByteStringCollection();
+                }
+            }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.TrustListDataType; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.TrustListDataType_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.TrustListDataType_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteUInt32("SpecifiedLists", SpecifiedLists);
+            encoder.WriteByteStringArray("TrustedCertificates", TrustedCertificates);
+            encoder.WriteByteStringArray("TrustedCrls", TrustedCrls);
+            encoder.WriteByteStringArray("IssuerCertificates", IssuerCertificates);
+            encoder.WriteByteStringArray("IssuerCrls", IssuerCrls);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            SpecifiedLists = decoder.ReadUInt32("SpecifiedLists");
+            TrustedCertificates = decoder.ReadByteStringArray("TrustedCertificates");
+            TrustedCrls = decoder.ReadByteStringArray("TrustedCrls");
+            IssuerCertificates = decoder.ReadByteStringArray("IssuerCertificates");
+            IssuerCrls = decoder.ReadByteStringArray("IssuerCrls");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            TrustListDataType value = encodeable as TrustListDataType;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!Utils.IsEqual(m_specifiedLists, value.m_specifiedLists)) return false;
+            if (!Utils.IsEqual(m_trustedCertificates, value.m_trustedCertificates)) return false;
+            if (!Utils.IsEqual(m_trustedCrls, value.m_trustedCrls)) return false;
+            if (!Utils.IsEqual(m_issuerCertificates, value.m_issuerCertificates)) return false;
+            if (!Utils.IsEqual(m_issuerCrls, value.m_issuerCrls)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            TrustListDataType clone = (TrustListDataType)this.MemberwiseClone();
+
+            clone.m_specifiedLists = (uint)Utils.Clone(this.m_specifiedLists);
+            clone.m_trustedCertificates = (ByteStringCollection)Utils.Clone(this.m_trustedCertificates);
+            clone.m_trustedCrls = (ByteStringCollection)Utils.Clone(this.m_trustedCrls);
+            clone.m_issuerCertificates = (ByteStringCollection)Utils.Clone(this.m_issuerCertificates);
+            clone.m_issuerCrls = (ByteStringCollection)Utils.Clone(this.m_issuerCrls);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private uint m_specifiedLists;
+        private ByteStringCollection m_trustedCertificates;
+        private ByteStringCollection m_trustedCrls;
+        private ByteStringCollection m_issuerCertificates;
+        private ByteStringCollection m_issuerCrls;
+        #endregion
+    }
+
+    #region TrustListDataTypeCollection Class
+    /// <summary>
+    /// A collection of TrustListDataType objects.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [CollectionDataContract(Name = "ListOfTrustListDataType", Namespace = Opc.Ua.Namespaces.OpcUaXsd, ItemName = "TrustListDataType")]
+    public partial class TrustListDataTypeCollection : List<TrustListDataType>, ICloneable
+    {
+        #region Constructors
+        /// <summary>
+        /// Initializes the collection with default values.
+        /// </summary>
+        public TrustListDataTypeCollection() {}
+
+        /// <summary>
+        /// Initializes the collection with an initial capacity.
+        /// </summary>
+        public TrustListDataTypeCollection(int capacity) : base(capacity) {}
+
+        /// <summary>
+        /// Initializes the collection with another collection.
+        /// </summary>
+        public TrustListDataTypeCollection(IEnumerable<TrustListDataType> collection) : base(collection) {}
+        #endregion
+
+        #region Static Operators
+        /// <summary>
+        /// Converts an array to a collection.
+        /// </summary>
+        public static implicit operator TrustListDataTypeCollection(TrustListDataType[] values)
+        {
+            if (values != null)
+            {
+                return new TrustListDataTypeCollection(values);
+            }
+
+            return new TrustListDataTypeCollection();
+        }
+
+        /// <summary>
+        /// Converts a collection to an array.
+        /// </summary>
+        public static explicit operator TrustListDataType[](TrustListDataTypeCollection values)
+        {
+            if (values != null)
+            {
+                return values.ToArray();
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region ICloneable Methods
+        /// <summary>
+        /// Creates a deep copy of the collection.
+        /// </summary>
+        public object Clone()
+        {
+            TrustListDataTypeCollection clone = new TrustListDataTypeCollection(this.Count);
+
+            for (int ii = 0; ii < this.Count; ii++)
+            {
+                clone.Add((TrustListDataType)Utils.Clone(this[ii]));
             }
 
             return clone;
@@ -610,7 +970,7 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// A mask indicating which attributes are writeable.
+        /// A mask indicating which attributes are writable.
         /// </summary>
         [DataMember(Name = "WriteMask", IsRequired = false, Order = 6)]
         public uint WriteMask
@@ -620,7 +980,7 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// A mask indicating which attributes are writeable by the current user.
+        /// A mask indicating which attributes are writable by the current user.
         /// </summary>
         [DataMember(Name = "UserWriteMask", IsRequired = false, Order = 7)]
         public uint UserWriteMask
@@ -3116,6 +3476,405 @@ namespace Opc.Ua
     #endif
     #endregion
 
+    #region OptionSet Class
+    #if (!OPCUA_EXCLUDE_OptionSet)
+    /// <summary>
+    /// This abstract Structured DataType is the base DataType for all DataTypes representing a bit mask.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class OptionSet : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public OptionSet()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_value = null;
+            m_validBits = null;
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// Array of bytes representing the bits in the option set.
+        /// </summary>
+        [DataMember(Name = "Value", IsRequired = false, Order = 1)]
+        public byte[] Value
+        {
+            get { return m_value;  }
+            set { m_value = value; }
+        }
+
+        /// <summary>
+        /// Array of bytes with same size as value representing the valid bits in the value parameter.
+        /// </summary>
+        [DataMember(Name = "ValidBits", IsRequired = false, Order = 2)]
+        public byte[] ValidBits
+        {
+            get { return m_validBits;  }
+            set { m_validBits = value; }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.OptionSet; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.OptionSet_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.OptionSet_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteByteString("Value", Value);
+            encoder.WriteByteString("ValidBits", ValidBits);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            Value = decoder.ReadByteString("Value");
+            ValidBits = decoder.ReadByteString("ValidBits");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            OptionSet value = encodeable as OptionSet;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!Utils.IsEqual(m_value, value.m_value)) return false;
+            if (!Utils.IsEqual(m_validBits, value.m_validBits)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            OptionSet clone = (OptionSet)this.MemberwiseClone();
+
+            clone.m_value = (byte[])Utils.Clone(this.m_value);
+            clone.m_validBits = (byte[])Utils.Clone(this.m_validBits);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private byte[] m_value;
+        private byte[] m_validBits;
+        #endregion
+    }
+
+    #region OptionSetCollection Class
+    /// <summary>
+    /// A collection of OptionSet objects.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [CollectionDataContract(Name = "ListOfOptionSet", Namespace = Opc.Ua.Namespaces.OpcUaXsd, ItemName = "OptionSet")]
+    public partial class OptionSetCollection : List<OptionSet>, ICloneable
+    {
+        #region Constructors
+        /// <summary>
+        /// Initializes the collection with default values.
+        /// </summary>
+        public OptionSetCollection() {}
+
+        /// <summary>
+        /// Initializes the collection with an initial capacity.
+        /// </summary>
+        public OptionSetCollection(int capacity) : base(capacity) {}
+
+        /// <summary>
+        /// Initializes the collection with another collection.
+        /// </summary>
+        public OptionSetCollection(IEnumerable<OptionSet> collection) : base(collection) {}
+        #endregion
+
+        #region Static Operators
+        /// <summary>
+        /// Converts an array to a collection.
+        /// </summary>
+        public static implicit operator OptionSetCollection(OptionSet[] values)
+        {
+            if (values != null)
+            {
+                return new OptionSetCollection(values);
+            }
+
+            return new OptionSetCollection();
+        }
+
+        /// <summary>
+        /// Converts a collection to an array.
+        /// </summary>
+        public static explicit operator OptionSet[](OptionSetCollection values)
+        {
+            if (values != null)
+            {
+                return values.ToArray();
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region ICloneable Methods
+        /// <summary>
+        /// Creates a deep copy of the collection.
+        /// </summary>
+        public object Clone()
+        {
+            OptionSetCollection clone = new OptionSetCollection(this.Count);
+
+            for (int ii = 0; ii < this.Count; ii++)
+            {
+                clone.Add((OptionSet)Utils.Clone(this[ii]));
+            }
+
+            return clone;
+        }
+        #endregion
+    }
+    #endregion
+    #endif
+    #endregion
+
+    #region Union Class
+    #if (!OPCUA_EXCLUDE_Union)
+    /// <summary>
+    /// This abstract DataType is the base DataType for all union DataTypes.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class Union : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public Union()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+        }
+        #endregion
+
+        #region Public Properties
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.Union; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.Union_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.Union_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            Union value = encodeable as Union;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            Union clone = (Union)this.MemberwiseClone();
+
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        #endregion
+    }
+
+    #region UnionCollection Class
+    /// <summary>
+    /// A collection of Union objects.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [CollectionDataContract(Name = "ListOfUnion", Namespace = Opc.Ua.Namespaces.OpcUaXsd, ItemName = "Union")]
+    public partial class UnionCollection : List<Union>, ICloneable
+    {
+        #region Constructors
+        /// <summary>
+        /// Initializes the collection with default values.
+        /// </summary>
+        public UnionCollection() {}
+
+        /// <summary>
+        /// Initializes the collection with an initial capacity.
+        /// </summary>
+        public UnionCollection(int capacity) : base(capacity) {}
+
+        /// <summary>
+        /// Initializes the collection with another collection.
+        /// </summary>
+        public UnionCollection(IEnumerable<Union> collection) : base(collection) {}
+        #endregion
+
+        #region Static Operators
+        /// <summary>
+        /// Converts an array to a collection.
+        /// </summary>
+        public static implicit operator UnionCollection(Union[] values)
+        {
+            if (values != null)
+            {
+                return new UnionCollection(values);
+            }
+
+            return new UnionCollection();
+        }
+
+        /// <summary>
+        /// Converts a collection to an array.
+        /// </summary>
+        public static explicit operator Union[](UnionCollection values)
+        {
+            if (values != null)
+            {
+                return values.ToArray();
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region ICloneable Methods
+        /// <summary>
+        /// Creates a deep copy of the collection.
+        /// </summary>
+        public object Clone()
+        {
+            UnionCollection clone = new UnionCollection(this.Count);
+
+            for (int ii = 0; ii < this.Count; ii++)
+            {
+                clone.Add((Union)Utils.Clone(this[ii]));
+            }
+
+            return clone;
+        }
+        #endregion
+    }
+    #endregion
+    #endif
+    #endregion
+
     #region TimeZoneDataType Class
     #if (!OPCUA_EXCLUDE_TimeZoneDataType)
     /// <summary>
@@ -4253,657 +5012,6 @@ namespace Opc.Ua
     #endif
     #endregion
 
-    #region DnsServiceRecord Class
-    #if (!OPCUA_EXCLUDE_DnsServiceRecord)
-    /// <summary>
-    /// The description of a DNS service discovered with multicast discovery.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class DnsServiceRecord : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public DnsServiceRecord()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_serviceName = null;
-            m_serviceType = null;
-            m_dnsName = null;
-            m_port = (ushort)0;
-            m_ipAddresses = new StringCollection();
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// The name of the DNS service.
-        /// </summary>
-        [DataMember(Name = "ServiceName", IsRequired = false, Order = 1)]
-        public string ServiceName
-        {
-            get { return m_serviceName;  }
-            set { m_serviceName = value; }
-        }
-
-        /// <summary>
-        /// The type of the DNS service.
-        /// </summary>
-        [DataMember(Name = "ServiceType", IsRequired = false, Order = 2)]
-        public string ServiceType
-        {
-            get { return m_serviceType;  }
-            set { m_serviceType = value; }
-        }
-
-        /// <summary>
-        /// The DNS name of the host where the DNS service runs.
-        /// </summary>
-        [DataMember(Name = "DnsName", IsRequired = false, Order = 3)]
-        public string DnsName
-        {
-            get { return m_dnsName;  }
-            set { m_dnsName = value; }
-        }
-
-        /// <summary>
-        /// The port used by the service.
-        /// </summary>
-        [DataMember(Name = "Port", IsRequired = false, Order = 4)]
-        public ushort Port
-        {
-            get { return m_port;  }
-            set { m_port = value; }
-        }
-
-        /// <summary>
-        /// The DNS name of the host where the DNS service runs.
-        /// </summary>
-        [DataMember(Name = "IpAddresses", IsRequired = false, Order = 5)]
-        public StringCollection IpAddresses
-        {
-            get
-            {
-                return m_ipAddresses;
-            }
-
-            set
-            {
-                m_ipAddresses = value;
-
-                if (value == null)
-                {
-                    m_ipAddresses = new StringCollection();
-                }
-            }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.DnsServiceRecord; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.DnsServiceRecord_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.DnsServiceRecord_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteString("ServiceName", ServiceName);
-            encoder.WriteString("ServiceType", ServiceType);
-            encoder.WriteString("DnsName", DnsName);
-            encoder.WriteUInt16("Port", Port);
-            encoder.WriteStringArray("IpAddresses", IpAddresses);
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            ServiceName = decoder.ReadString("ServiceName");
-            ServiceType = decoder.ReadString("ServiceType");
-            DnsName = decoder.ReadString("DnsName");
-            Port = decoder.ReadUInt16("Port");
-            IpAddresses = decoder.ReadStringArray("IpAddresses");
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            DnsServiceRecord value = encodeable as DnsServiceRecord;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_serviceName, value.m_serviceName)) return false;
-            if (!Utils.IsEqual(m_serviceType, value.m_serviceType)) return false;
-            if (!Utils.IsEqual(m_dnsName, value.m_dnsName)) return false;
-            if (!Utils.IsEqual(m_port, value.m_port)) return false;
-            if (!Utils.IsEqual(m_ipAddresses, value.m_ipAddresses)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            DnsServiceRecord clone = (DnsServiceRecord)this.MemberwiseClone();
-
-            clone.m_serviceName = (string)Utils.Clone(this.m_serviceName);
-            clone.m_serviceType = (string)Utils.Clone(this.m_serviceType);
-            clone.m_dnsName = (string)Utils.Clone(this.m_dnsName);
-            clone.m_port = (ushort)Utils.Clone(this.m_port);
-            clone.m_ipAddresses = (StringCollection)Utils.Clone(this.m_ipAddresses);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private string m_serviceName;
-        private string m_serviceType;
-        private string m_dnsName;
-        private ushort m_port;
-        private StringCollection m_ipAddresses;
-        #endregion
-    }
-
-    #region DnsServiceRecordCollection Class
-    /// <summary>
-    /// A collection of DnsServiceRecord objects.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [CollectionDataContract(Name = "ListOfDnsServiceRecord", Namespace = Opc.Ua.Namespaces.OpcUaXsd, ItemName = "DnsServiceRecord")]
-    public partial class DnsServiceRecordCollection : List<DnsServiceRecord>, ICloneable
-    {
-        #region Constructors
-        /// <summary>
-        /// Initializes the collection with default values.
-        /// </summary>
-        public DnsServiceRecordCollection() {}
-
-        /// <summary>
-        /// Initializes the collection with an initial capacity.
-        /// </summary>
-        public DnsServiceRecordCollection(int capacity) : base(capacity) {}
-
-        /// <summary>
-        /// Initializes the collection with another collection.
-        /// </summary>
-        public DnsServiceRecordCollection(IEnumerable<DnsServiceRecord> collection) : base(collection) {}
-        #endregion
-
-        #region Static Operators
-        /// <summary>
-        /// Converts an array to a collection.
-        /// </summary>
-        public static implicit operator DnsServiceRecordCollection(DnsServiceRecord[] values)
-        {
-            if (values != null)
-            {
-                return new DnsServiceRecordCollection(values);
-            }
-
-            return new DnsServiceRecordCollection();
-        }
-
-        /// <summary>
-        /// Converts a collection to an array.
-        /// </summary>
-        public static explicit operator DnsServiceRecord[](DnsServiceRecordCollection values)
-        {
-            if (values != null)
-            {
-                return values.ToArray();
-            }
-
-            return null;
-        }
-        #endregion
-
-        #region ICloneable Methods
-        /// <summary>
-        /// Creates a deep copy of the collection.
-        /// </summary>
-        public object Clone()
-        {
-            DnsServiceRecordCollection clone = new DnsServiceRecordCollection(this.Count);
-
-            for (int ii = 0; ii < this.Count; ii++)
-            {
-                clone.Add((DnsServiceRecord)Utils.Clone(this[ii]));
-            }
-
-            return clone;
-        }
-        #endregion
-    }
-    #endregion
-    #endif
-    #endregion
-
-    #region FindDnsServicesRequest Class
-    #if (!OPCUA_EXCLUDE_FindDnsServicesRequest)
-    /// <summary>
-    /// Finds the DNS services known to the discovery server.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class FindDnsServicesRequest : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public FindDnsServicesRequest()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_requestHeader = new RequestHeader();
-            m_endpointUrl = null;
-            m_serviceNameFilters = new StringCollection();
-            m_serviceTypeFilters = new StringCollection();
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A standard header included in all requests sent to a server.
-        /// </summary>
-        [DataMember(Name = "RequestHeader", IsRequired = false, Order = 1)]
-        public RequestHeader RequestHeader
-        {
-            get
-            {
-                return m_requestHeader;
-            }
-
-            set
-            {
-                m_requestHeader = value;
-
-                if (value == null)
-                {
-                    m_requestHeader = new RequestHeader();
-                }
-            }
-        }
-
-        /// <summary>
-        /// The URL used by the client to send the request.
-        /// </summary>
-        [DataMember(Name = "EndpointUrl", IsRequired = false, Order = 2)]
-        public string EndpointUrl
-        {
-            get { return m_endpointUrl;  }
-            set { m_endpointUrl = value; }
-        }
-
-        /// <summary>
-        /// Return all DNS services with an instance name that matches one of the filters in this list.
-        /// </summary>
-        [DataMember(Name = "ServiceNameFilters", IsRequired = false, Order = 3)]
-        public StringCollection ServiceNameFilters
-        {
-            get
-            {
-                return m_serviceNameFilters;
-            }
-
-            set
-            {
-                m_serviceNameFilters = value;
-
-                if (value == null)
-                {
-                    m_serviceNameFilters = new StringCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Return all DNS services with a service type that matches one of the filters in this list.
-        /// </summary>
-        [DataMember(Name = "ServiceTypeFilters", IsRequired = false, Order = 4)]
-        public StringCollection ServiceTypeFilters
-        {
-            get
-            {
-                return m_serviceTypeFilters;
-            }
-
-            set
-            {
-                m_serviceTypeFilters = value;
-
-                if (value == null)
-                {
-                    m_serviceTypeFilters = new StringCollection();
-                }
-            }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.FindDnsServicesRequest; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.FindDnsServicesRequest_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.FindDnsServicesRequest_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteEncodeable("RequestHeader", RequestHeader, typeof(RequestHeader));
-            encoder.WriteString("EndpointUrl", EndpointUrl);
-            encoder.WriteStringArray("ServiceNameFilters", ServiceNameFilters);
-            encoder.WriteStringArray("ServiceTypeFilters", ServiceTypeFilters);
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            RequestHeader = (RequestHeader)decoder.ReadEncodeable("RequestHeader", typeof(RequestHeader));
-            EndpointUrl = decoder.ReadString("EndpointUrl");
-            ServiceNameFilters = decoder.ReadStringArray("ServiceNameFilters");
-            ServiceTypeFilters = decoder.ReadStringArray("ServiceTypeFilters");
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            FindDnsServicesRequest value = encodeable as FindDnsServicesRequest;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_requestHeader, value.m_requestHeader)) return false;
-            if (!Utils.IsEqual(m_endpointUrl, value.m_endpointUrl)) return false;
-            if (!Utils.IsEqual(m_serviceNameFilters, value.m_serviceNameFilters)) return false;
-            if (!Utils.IsEqual(m_serviceTypeFilters, value.m_serviceTypeFilters)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            FindDnsServicesRequest clone = (FindDnsServicesRequest)this.MemberwiseClone();
-
-            clone.m_requestHeader = (RequestHeader)Utils.Clone(this.m_requestHeader);
-            clone.m_endpointUrl = (string)Utils.Clone(this.m_endpointUrl);
-            clone.m_serviceNameFilters = (StringCollection)Utils.Clone(this.m_serviceNameFilters);
-            clone.m_serviceTypeFilters = (StringCollection)Utils.Clone(this.m_serviceTypeFilters);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private RequestHeader m_requestHeader;
-        private string m_endpointUrl;
-        private StringCollection m_serviceNameFilters;
-        private StringCollection m_serviceTypeFilters;
-        #endregion
-    }
-    #endif
-    #endregion
-
-    #region FindDnsServicesResponse Class
-    #if (!OPCUA_EXCLUDE_FindDnsServicesResponse)
-    /// <summary>
-    /// Finds the DNS services known to the discovery server.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class FindDnsServicesResponse : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public FindDnsServicesResponse()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_responseHeader = new ResponseHeader();
-            m_services = new DnsServiceRecordCollection();
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A standard header included in all responses returned by servers.
-        /// </summary>
-        [DataMember(Name = "ResponseHeader", IsRequired = false, Order = 1)]
-        public ResponseHeader ResponseHeader
-        {
-            get
-            {
-                return m_responseHeader;
-            }
-
-            set
-            {
-                m_responseHeader = value;
-
-                if (value == null)
-                {
-                    m_responseHeader = new ResponseHeader();
-                }
-            }
-        }
-
-        /// <summary>
-        /// The services that met the criteria specified in the request.
-        /// </summary>
-        [DataMember(Name = "Services", IsRequired = false, Order = 2)]
-        public DnsServiceRecordCollection Services
-        {
-            get
-            {
-                return m_services;
-            }
-
-            set
-            {
-                m_services = value;
-
-                if (value == null)
-                {
-                    m_services = new DnsServiceRecordCollection();
-                }
-            }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.FindDnsServicesResponse; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.FindDnsServicesResponse_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.FindDnsServicesResponse_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteEncodeable("ResponseHeader", ResponseHeader, typeof(ResponseHeader));
-            encoder.WriteEncodeableArray("Services", Services.ToArray(), typeof(DnsServiceRecord));
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            ResponseHeader = (ResponseHeader)decoder.ReadEncodeable("ResponseHeader", typeof(ResponseHeader));
-            Services = (DnsServiceRecordCollection)decoder.ReadEncodeableArray("Services", typeof(DnsServiceRecord));
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            FindDnsServicesResponse value = encodeable as FindDnsServicesResponse;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_responseHeader, value.m_responseHeader)) return false;
-            if (!Utils.IsEqual(m_services, value.m_services)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            FindDnsServicesResponse clone = (FindDnsServicesResponse)this.MemberwiseClone();
-
-            clone.m_responseHeader = (ResponseHeader)Utils.Clone(this.m_responseHeader);
-            clone.m_services = (DnsServiceRecordCollection)Utils.Clone(this.m_services);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private ResponseHeader m_responseHeader;
-        private DnsServiceRecordCollection m_services;
-        #endregion
-    }
-    #endif
-    #endregion
-
     #region FindServersRequest Class
     #if (!OPCUA_EXCLUDE_FindServersRequest)
     /// <summary>
@@ -5280,6 +5388,645 @@ namespace Opc.Ua
     #endif
     #endregion
 
+    #region ServerOnNetwork Class
+    #if (!OPCUA_EXCLUDE_ServerOnNetwork)
+    /// <summary>
+    /// A description for the ServerOnNetwork DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class ServerOnNetwork : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public ServerOnNetwork()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_recordId = (uint)0;
+            m_serverName = null;
+            m_discoveryUrl = null;
+            m_serverCapabilities = new StringCollection();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// A description for the RecordId field.
+        /// </summary>
+        [DataMember(Name = "RecordId", IsRequired = false, Order = 1)]
+        public uint RecordId
+        {
+            get { return m_recordId;  }
+            set { m_recordId = value; }
+        }
+
+        /// <summary>
+        /// A description for the ServerName field.
+        /// </summary>
+        [DataMember(Name = "ServerName", IsRequired = false, Order = 2)]
+        public string ServerName
+        {
+            get { return m_serverName;  }
+            set { m_serverName = value; }
+        }
+
+        /// <summary>
+        /// A description for the DiscoveryUrl field.
+        /// </summary>
+        [DataMember(Name = "DiscoveryUrl", IsRequired = false, Order = 3)]
+        public string DiscoveryUrl
+        {
+            get { return m_discoveryUrl;  }
+            set { m_discoveryUrl = value; }
+        }
+
+        /// <summary>
+        /// A description for the ServerCapabilities field.
+        /// </summary>
+        [DataMember(Name = "ServerCapabilities", IsRequired = false, Order = 4)]
+        public StringCollection ServerCapabilities
+        {
+            get
+            {
+                return m_serverCapabilities;
+            }
+
+            set
+            {
+                m_serverCapabilities = value;
+
+                if (value == null)
+                {
+                    m_serverCapabilities = new StringCollection();
+                }
+            }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.ServerOnNetwork; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.ServerOnNetwork_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.ServerOnNetwork_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteUInt32("RecordId", RecordId);
+            encoder.WriteString("ServerName", ServerName);
+            encoder.WriteString("DiscoveryUrl", DiscoveryUrl);
+            encoder.WriteStringArray("ServerCapabilities", ServerCapabilities);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            RecordId = decoder.ReadUInt32("RecordId");
+            ServerName = decoder.ReadString("ServerName");
+            DiscoveryUrl = decoder.ReadString("DiscoveryUrl");
+            ServerCapabilities = decoder.ReadStringArray("ServerCapabilities");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            ServerOnNetwork value = encodeable as ServerOnNetwork;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!Utils.IsEqual(m_recordId, value.m_recordId)) return false;
+            if (!Utils.IsEqual(m_serverName, value.m_serverName)) return false;
+            if (!Utils.IsEqual(m_discoveryUrl, value.m_discoveryUrl)) return false;
+            if (!Utils.IsEqual(m_serverCapabilities, value.m_serverCapabilities)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            ServerOnNetwork clone = (ServerOnNetwork)this.MemberwiseClone();
+
+            clone.m_recordId = (uint)Utils.Clone(this.m_recordId);
+            clone.m_serverName = (string)Utils.Clone(this.m_serverName);
+            clone.m_discoveryUrl = (string)Utils.Clone(this.m_discoveryUrl);
+            clone.m_serverCapabilities = (StringCollection)Utils.Clone(this.m_serverCapabilities);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private uint m_recordId;
+        private string m_serverName;
+        private string m_discoveryUrl;
+        private StringCollection m_serverCapabilities;
+        #endregion
+    }
+
+    #region ServerOnNetworkCollection Class
+    /// <summary>
+    /// A collection of ServerOnNetwork objects.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [CollectionDataContract(Name = "ListOfServerOnNetwork", Namespace = Opc.Ua.Namespaces.OpcUaXsd, ItemName = "ServerOnNetwork")]
+    public partial class ServerOnNetworkCollection : List<ServerOnNetwork>, ICloneable
+    {
+        #region Constructors
+        /// <summary>
+        /// Initializes the collection with default values.
+        /// </summary>
+        public ServerOnNetworkCollection() {}
+
+        /// <summary>
+        /// Initializes the collection with an initial capacity.
+        /// </summary>
+        public ServerOnNetworkCollection(int capacity) : base(capacity) {}
+
+        /// <summary>
+        /// Initializes the collection with another collection.
+        /// </summary>
+        public ServerOnNetworkCollection(IEnumerable<ServerOnNetwork> collection) : base(collection) {}
+        #endregion
+
+        #region Static Operators
+        /// <summary>
+        /// Converts an array to a collection.
+        /// </summary>
+        public static implicit operator ServerOnNetworkCollection(ServerOnNetwork[] values)
+        {
+            if (values != null)
+            {
+                return new ServerOnNetworkCollection(values);
+            }
+
+            return new ServerOnNetworkCollection();
+        }
+
+        /// <summary>
+        /// Converts a collection to an array.
+        /// </summary>
+        public static explicit operator ServerOnNetwork[](ServerOnNetworkCollection values)
+        {
+            if (values != null)
+            {
+                return values.ToArray();
+            }
+
+            return null;
+        }
+        #endregion
+
+        #region ICloneable Methods
+        /// <summary>
+        /// Creates a deep copy of the collection.
+        /// </summary>
+        public object Clone()
+        {
+            ServerOnNetworkCollection clone = new ServerOnNetworkCollection(this.Count);
+
+            for (int ii = 0; ii < this.Count; ii++)
+            {
+                clone.Add((ServerOnNetwork)Utils.Clone(this[ii]));
+            }
+
+            return clone;
+        }
+        #endregion
+    }
+    #endregion
+    #endif
+    #endregion
+
+    #region FindServersOnNetworkRequest Class
+    #if (!OPCUA_EXCLUDE_FindServersOnNetworkRequest)
+    /// <summary>
+    /// A description for the FindServersOnNetworkRequest DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class FindServersOnNetworkRequest : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public FindServersOnNetworkRequest()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_requestHeader = new RequestHeader();
+            m_startingRecordId = (uint)0;
+            m_maxRecordsToReturn = (uint)0;
+            m_serverCapabilityFilter = new StringCollection();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// A description for the RequestHeader field.
+        /// </summary>
+        [DataMember(Name = "RequestHeader", IsRequired = false, Order = 1)]
+        public RequestHeader RequestHeader
+        {
+            get
+            {
+                return m_requestHeader;
+            }
+
+            set
+            {
+                m_requestHeader = value;
+
+                if (value == null)
+                {
+                    m_requestHeader = new RequestHeader();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the StartingRecordId field.
+        /// </summary>
+        [DataMember(Name = "StartingRecordId", IsRequired = false, Order = 2)]
+        public uint StartingRecordId
+        {
+            get { return m_startingRecordId;  }
+            set { m_startingRecordId = value; }
+        }
+
+        /// <summary>
+        /// A description for the MaxRecordsToReturn field.
+        /// </summary>
+        [DataMember(Name = "MaxRecordsToReturn", IsRequired = false, Order = 3)]
+        public uint MaxRecordsToReturn
+        {
+            get { return m_maxRecordsToReturn;  }
+            set { m_maxRecordsToReturn = value; }
+        }
+
+        /// <summary>
+        /// A description for the ServerCapabilityFilter field.
+        /// </summary>
+        [DataMember(Name = "ServerCapabilityFilter", IsRequired = false, Order = 4)]
+        public StringCollection ServerCapabilityFilter
+        {
+            get
+            {
+                return m_serverCapabilityFilter;
+            }
+
+            set
+            {
+                m_serverCapabilityFilter = value;
+
+                if (value == null)
+                {
+                    m_serverCapabilityFilter = new StringCollection();
+                }
+            }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.FindServersOnNetworkRequest; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.FindServersOnNetworkRequest_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.FindServersOnNetworkRequest_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteEncodeable("RequestHeader", RequestHeader, typeof(RequestHeader));
+            encoder.WriteUInt32("StartingRecordId", StartingRecordId);
+            encoder.WriteUInt32("MaxRecordsToReturn", MaxRecordsToReturn);
+            encoder.WriteStringArray("ServerCapabilityFilter", ServerCapabilityFilter);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            RequestHeader = (RequestHeader)decoder.ReadEncodeable("RequestHeader", typeof(RequestHeader));
+            StartingRecordId = decoder.ReadUInt32("StartingRecordId");
+            MaxRecordsToReturn = decoder.ReadUInt32("MaxRecordsToReturn");
+            ServerCapabilityFilter = decoder.ReadStringArray("ServerCapabilityFilter");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            FindServersOnNetworkRequest value = encodeable as FindServersOnNetworkRequest;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!Utils.IsEqual(m_requestHeader, value.m_requestHeader)) return false;
+            if (!Utils.IsEqual(m_startingRecordId, value.m_startingRecordId)) return false;
+            if (!Utils.IsEqual(m_maxRecordsToReturn, value.m_maxRecordsToReturn)) return false;
+            if (!Utils.IsEqual(m_serverCapabilityFilter, value.m_serverCapabilityFilter)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            FindServersOnNetworkRequest clone = (FindServersOnNetworkRequest)this.MemberwiseClone();
+
+            clone.m_requestHeader = (RequestHeader)Utils.Clone(this.m_requestHeader);
+            clone.m_startingRecordId = (uint)Utils.Clone(this.m_startingRecordId);
+            clone.m_maxRecordsToReturn = (uint)Utils.Clone(this.m_maxRecordsToReturn);
+            clone.m_serverCapabilityFilter = (StringCollection)Utils.Clone(this.m_serverCapabilityFilter);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private RequestHeader m_requestHeader;
+        private uint m_startingRecordId;
+        private uint m_maxRecordsToReturn;
+        private StringCollection m_serverCapabilityFilter;
+        #endregion
+    }
+    #endif
+    #endregion
+
+    #region FindServersOnNetworkResponse Class
+    #if (!OPCUA_EXCLUDE_FindServersOnNetworkResponse)
+    /// <summary>
+    /// A description for the FindServersOnNetworkResponse DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class FindServersOnNetworkResponse : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public FindServersOnNetworkResponse()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_responseHeader = new ResponseHeader();
+            m_lastCounterResetTime = DateTime.MinValue;
+            m_servers = new ServerOnNetworkCollection();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// A description for the ResponseHeader field.
+        /// </summary>
+        [DataMember(Name = "ResponseHeader", IsRequired = false, Order = 1)]
+        public ResponseHeader ResponseHeader
+        {
+            get
+            {
+                return m_responseHeader;
+            }
+
+            set
+            {
+                m_responseHeader = value;
+
+                if (value == null)
+                {
+                    m_responseHeader = new ResponseHeader();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the LastCounterResetTime field.
+        /// </summary>
+        [DataMember(Name = "LastCounterResetTime", IsRequired = false, Order = 2)]
+        public DateTime LastCounterResetTime
+        {
+            get { return m_lastCounterResetTime;  }
+            set { m_lastCounterResetTime = value; }
+        }
+
+        /// <summary>
+        /// A description for the Servers field.
+        /// </summary>
+        [DataMember(Name = "Servers", IsRequired = false, Order = 3)]
+        public ServerOnNetworkCollection Servers
+        {
+            get
+            {
+                return m_servers;
+            }
+
+            set
+            {
+                m_servers = value;
+
+                if (value == null)
+                {
+                    m_servers = new ServerOnNetworkCollection();
+                }
+            }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.FindServersOnNetworkResponse; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.FindServersOnNetworkResponse_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.FindServersOnNetworkResponse_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteEncodeable("ResponseHeader", ResponseHeader, typeof(ResponseHeader));
+            encoder.WriteDateTime("LastCounterResetTime", LastCounterResetTime);
+            encoder.WriteEncodeableArray("Servers", Servers.ToArray(), typeof(ServerOnNetwork));
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            ResponseHeader = (ResponseHeader)decoder.ReadEncodeable("ResponseHeader", typeof(ResponseHeader));
+            LastCounterResetTime = decoder.ReadDateTime("LastCounterResetTime");
+            Servers = (ServerOnNetworkCollection)decoder.ReadEncodeableArray("Servers", typeof(ServerOnNetwork));
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            FindServersOnNetworkResponse value = encodeable as FindServersOnNetworkResponse;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!Utils.IsEqual(m_responseHeader, value.m_responseHeader)) return false;
+            if (!Utils.IsEqual(m_lastCounterResetTime, value.m_lastCounterResetTime)) return false;
+            if (!Utils.IsEqual(m_servers, value.m_servers)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            FindServersOnNetworkResponse clone = (FindServersOnNetworkResponse)this.MemberwiseClone();
+
+            clone.m_responseHeader = (ResponseHeader)Utils.Clone(this.m_responseHeader);
+            clone.m_lastCounterResetTime = (DateTime)Utils.Clone(this.m_lastCounterResetTime);
+            clone.m_servers = (ServerOnNetworkCollection)Utils.Clone(this.m_servers);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private ResponseHeader m_responseHeader;
+        private DateTime m_lastCounterResetTime;
+        private ServerOnNetworkCollection m_servers;
+        #endregion
+    }
+    #endif
+    #endregion
+
     #region MessageSecurityMode Enumeration
     #if (!OPCUA_EXCLUDE_MessageSecurityMode)
     /// <summary>
@@ -5350,6 +6097,12 @@ namespace Opc.Ua
         /// </summary>
         [EnumMember(Value = "IssuedToken_3")]
         IssuedToken = 3,
+
+        /// <summary>
+        /// A user identified by Kerberos ticket.
+        /// </summary>
+        [EnumMember(Value = "Kerberos_4")]
+        Kerberos = 4,
     }
     #endif
     #endregion
@@ -6962,6 +7715,664 @@ namespace Opc.Ua
 
         #region Private Fields
         private ResponseHeader m_responseHeader;
+        #endregion
+    }
+    #endif
+    #endregion
+
+    #region DiscoveryConfiguration Class
+    #if (!OPCUA_EXCLUDE_DiscoveryConfiguration)
+    /// <summary>
+    /// A base type for discovery configuration information.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class DiscoveryConfiguration : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public DiscoveryConfiguration()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+        }
+        #endregion
+
+        #region Public Properties
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.DiscoveryConfiguration; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.DiscoveryConfiguration_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.DiscoveryConfiguration_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            DiscoveryConfiguration value = encodeable as DiscoveryConfiguration;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            DiscoveryConfiguration clone = (DiscoveryConfiguration)this.MemberwiseClone();
+
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        #endregion
+    }
+    #endif
+    #endregion
+
+    #region MdnsDiscoveryConfiguration Class
+    #if (!OPCUA_EXCLUDE_MdnsDiscoveryConfiguration)
+    /// <summary>
+    /// The discovery information needed for mDNS registration.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class MdnsDiscoveryConfiguration : DiscoveryConfiguration
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public MdnsDiscoveryConfiguration()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_mdnsServerName = null;
+            m_serverCapabilities = new StringCollection();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// The name for server that is broadcast via mDNS.
+        /// </summary>
+        [DataMember(Name = "MdnsServerName", IsRequired = false, Order = 1)]
+        public string MdnsServerName
+        {
+            get { return m_mdnsServerName;  }
+            set { m_mdnsServerName = value; }
+        }
+
+        /// <summary>
+        /// The server capabilities that are broadcast via mDNS.
+        /// </summary>
+        [DataMember(Name = "ServerCapabilities", IsRequired = false, Order = 2)]
+        public StringCollection ServerCapabilities
+        {
+            get
+            {
+                return m_serverCapabilities;
+            }
+
+            set
+            {
+                m_serverCapabilities = value;
+
+                if (value == null)
+                {
+                    m_serverCapabilities = new StringCollection();
+                }
+            }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public override ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.MdnsDiscoveryConfiguration; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public override ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.MdnsDiscoveryConfiguration_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public override ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.MdnsDiscoveryConfiguration_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public override void Encode(IEncoder encoder)
+        {
+            base.Encode(encoder);
+
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteString("MdnsServerName", MdnsServerName);
+            encoder.WriteStringArray("ServerCapabilities", ServerCapabilities);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public override void Decode(IDecoder decoder)
+        {
+            base.Decode(decoder);
+
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            MdnsServerName = decoder.ReadString("MdnsServerName");
+            ServerCapabilities = decoder.ReadStringArray("ServerCapabilities");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public override bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            MdnsDiscoveryConfiguration value = encodeable as MdnsDiscoveryConfiguration;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!base.IsEqual(encodeable)) return false;
+            if (!Utils.IsEqual(m_mdnsServerName, value.m_mdnsServerName)) return false;
+            if (!Utils.IsEqual(m_serverCapabilities, value.m_serverCapabilities)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public override object Clone()
+        {
+            MdnsDiscoveryConfiguration clone = (MdnsDiscoveryConfiguration)base.Clone();
+
+            clone.m_mdnsServerName = (string)Utils.Clone(this.m_mdnsServerName);
+            clone.m_serverCapabilities = (StringCollection)Utils.Clone(this.m_serverCapabilities);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private string m_mdnsServerName;
+        private StringCollection m_serverCapabilities;
+        #endregion
+    }
+    #endif
+    #endregion
+
+    #region RegisterServer2Request Class
+    #if (!OPCUA_EXCLUDE_RegisterServer2Request)
+    /// <summary>
+    /// A description for the RegisterServer2Request DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class RegisterServer2Request : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public RegisterServer2Request()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_requestHeader = new RequestHeader();
+            m_server = new RegisteredServer();
+            m_discoveryConfiguration = new ExtensionObjectCollection();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// A description for the RequestHeader field.
+        /// </summary>
+        [DataMember(Name = "RequestHeader", IsRequired = false, Order = 1)]
+        public RequestHeader RequestHeader
+        {
+            get
+            {
+                return m_requestHeader;
+            }
+
+            set
+            {
+                m_requestHeader = value;
+
+                if (value == null)
+                {
+                    m_requestHeader = new RequestHeader();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the Server field.
+        /// </summary>
+        [DataMember(Name = "Server", IsRequired = false, Order = 2)]
+        public RegisteredServer Server
+        {
+            get
+            {
+                return m_server;
+            }
+
+            set
+            {
+                m_server = value;
+
+                if (value == null)
+                {
+                    m_server = new RegisteredServer();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the DiscoveryConfiguration field.
+        /// </summary>
+        [DataMember(Name = "DiscoveryConfiguration", IsRequired = false, Order = 3)]
+        public ExtensionObjectCollection DiscoveryConfiguration
+        {
+            get
+            {
+                return m_discoveryConfiguration;
+            }
+
+            set
+            {
+                m_discoveryConfiguration = value;
+
+                if (value == null)
+                {
+                    m_discoveryConfiguration = new ExtensionObjectCollection();
+                }
+            }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.RegisterServer2Request; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.RegisterServer2Request_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.RegisterServer2Request_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteEncodeable("RequestHeader", RequestHeader, typeof(RequestHeader));
+            encoder.WriteEncodeable("Server", Server, typeof(RegisteredServer));
+            encoder.WriteExtensionObjectArray("DiscoveryConfiguration", DiscoveryConfiguration);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            RequestHeader = (RequestHeader)decoder.ReadEncodeable("RequestHeader", typeof(RequestHeader));
+            Server = (RegisteredServer)decoder.ReadEncodeable("Server", typeof(RegisteredServer));
+            DiscoveryConfiguration = decoder.ReadExtensionObjectArray("DiscoveryConfiguration");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            RegisterServer2Request value = encodeable as RegisterServer2Request;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!Utils.IsEqual(m_requestHeader, value.m_requestHeader)) return false;
+            if (!Utils.IsEqual(m_server, value.m_server)) return false;
+            if (!Utils.IsEqual(m_discoveryConfiguration, value.m_discoveryConfiguration)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            RegisterServer2Request clone = (RegisterServer2Request)this.MemberwiseClone();
+
+            clone.m_requestHeader = (RequestHeader)Utils.Clone(this.m_requestHeader);
+            clone.m_server = (RegisteredServer)Utils.Clone(this.m_server);
+            clone.m_discoveryConfiguration = (ExtensionObjectCollection)Utils.Clone(this.m_discoveryConfiguration);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private RequestHeader m_requestHeader;
+        private RegisteredServer m_server;
+        private ExtensionObjectCollection m_discoveryConfiguration;
+        #endregion
+    }
+    #endif
+    #endregion
+
+    #region RegisterServer2Response Class
+    #if (!OPCUA_EXCLUDE_RegisterServer2Response)
+    /// <summary>
+    /// A description for the RegisterServer2Response DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class RegisterServer2Response : IEncodeable
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public RegisterServer2Response()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_responseHeader = new ResponseHeader();
+            m_configurationResults = new StatusCodeCollection();
+            m_diagnosticInfos = new DiagnosticInfoCollection();
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// A description for the ResponseHeader field.
+        /// </summary>
+        [DataMember(Name = "ResponseHeader", IsRequired = false, Order = 1)]
+        public ResponseHeader ResponseHeader
+        {
+            get
+            {
+                return m_responseHeader;
+            }
+
+            set
+            {
+                m_responseHeader = value;
+
+                if (value == null)
+                {
+                    m_responseHeader = new ResponseHeader();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the ConfigurationResults field.
+        /// </summary>
+        [DataMember(Name = "ConfigurationResults", IsRequired = false, Order = 2)]
+        public StatusCodeCollection ConfigurationResults
+        {
+            get
+            {
+                return m_configurationResults;
+            }
+
+            set
+            {
+                m_configurationResults = value;
+
+                if (value == null)
+                {
+                    m_configurationResults = new StatusCodeCollection();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A description for the DiagnosticInfos field.
+        /// </summary>
+        [DataMember(Name = "DiagnosticInfos", IsRequired = false, Order = 3)]
+        public DiagnosticInfoCollection DiagnosticInfos
+        {
+            get
+            {
+                return m_diagnosticInfos;
+            }
+
+            set
+            {
+                m_diagnosticInfos = value;
+
+                if (value == null)
+                {
+                    m_diagnosticInfos = new DiagnosticInfoCollection();
+                }
+            }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public virtual ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.RegisterServer2Response; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public virtual ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.RegisterServer2Response_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public virtual ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.RegisterServer2Response_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public virtual void Encode(IEncoder encoder)
+        {
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteEncodeable("ResponseHeader", ResponseHeader, typeof(ResponseHeader));
+            encoder.WriteStatusCodeArray("ConfigurationResults", ConfigurationResults);
+            encoder.WriteDiagnosticInfoArray("DiagnosticInfos", DiagnosticInfos);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public virtual void Decode(IDecoder decoder)
+        {
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            ResponseHeader = (ResponseHeader)decoder.ReadEncodeable("ResponseHeader", typeof(ResponseHeader));
+            ConfigurationResults = decoder.ReadStatusCodeArray("ConfigurationResults");
+            DiagnosticInfos = decoder.ReadDiagnosticInfoArray("DiagnosticInfos");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public virtual bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            RegisterServer2Response value = encodeable as RegisterServer2Response;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!Utils.IsEqual(m_responseHeader, value.m_responseHeader)) return false;
+            if (!Utils.IsEqual(m_configurationResults, value.m_configurationResults)) return false;
+            if (!Utils.IsEqual(m_diagnosticInfos, value.m_diagnosticInfos)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public virtual object Clone()
+        {
+            RegisterServer2Response clone = (RegisterServer2Response)this.MemberwiseClone();
+
+            clone.m_responseHeader = (ResponseHeader)Utils.Clone(this.m_responseHeader);
+            clone.m_configurationResults = (StatusCodeCollection)Utils.Clone(this.m_configurationResults);
+            clone.m_diagnosticInfos = (DiagnosticInfoCollection)Utils.Clone(this.m_diagnosticInfos);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private ResponseHeader m_responseHeader;
+        private StatusCodeCollection m_configurationResults;
+        private DiagnosticInfoCollection m_diagnosticInfos;
         #endregion
     }
     #endif
@@ -9346,6 +10757,137 @@ namespace Opc.Ua
     #endif
     #endregion
 
+    #region KerberosIdentityToken Class
+    #if (!OPCUA_EXCLUDE_KerberosIdentityToken)
+    /// <summary>
+    /// A description for the KerberosIdentityToken DataType.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
+    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
+    public partial class KerberosIdentityToken : UserIdentityToken
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public KerberosIdentityToken()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Called by the .NET framework during deserialization.
+        /// </summary>
+        [OnDeserializing]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+            m_ticketData = null;
+        }
+        #endregion
+
+        #region Public Properties
+        /// <summary>
+        /// A description for the TicketData field.
+        /// </summary>
+        [DataMember(Name = "TicketData", IsRequired = false, Order = 1)]
+        public byte[] TicketData
+        {
+            get { return m_ticketData;  }
+            set { m_ticketData = value; }
+        }
+        #endregion
+
+        #region IEncodeable Members
+        /// <summary cref="IEncodeable.TypeId" />
+        public override ExpandedNodeId TypeId
+        {
+            get { return DataTypeIds.KerberosIdentityToken; }
+        }
+
+        /// <summary cref="IEncodeable.BinaryEncodingId" />
+        public override ExpandedNodeId BinaryEncodingId
+        {
+            get { return ObjectIds.KerberosIdentityToken_Encoding_DefaultBinary; }
+        }
+
+        /// <summary cref="IEncodeable.XmlEncodingId" />
+        public override ExpandedNodeId XmlEncodingId
+        {
+            get { return ObjectIds.KerberosIdentityToken_Encoding_DefaultXml; }
+        }
+
+        /// <summary cref="IEncodeable.Encode(IEncoder)" />
+        public override void Encode(IEncoder encoder)
+        {
+            base.Encode(encoder);
+
+            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            encoder.WriteByteString("TicketData", TicketData);
+
+            encoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.Decode(IDecoder)" />
+        public override void Decode(IDecoder decoder)
+        {
+            base.Decode(decoder);
+
+            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
+
+            TicketData = decoder.ReadByteString("TicketData");
+
+            decoder.PopNamespace();
+        }
+
+        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
+        public override bool IsEqual(IEncodeable encodeable)
+        {
+            if (Object.ReferenceEquals(this, encodeable))
+            {
+                return true;
+            }
+
+            KerberosIdentityToken value = encodeable as KerberosIdentityToken;
+
+            if (value == null)
+            {
+                return false;
+            }
+
+            if (!base.IsEqual(encodeable)) return false;
+            if (!Utils.IsEqual(m_ticketData, value.m_ticketData)) return false;
+
+            return true;
+        }
+
+        /// <summary cref="ICloneable.Clone" />
+        public override object Clone()
+        {
+            KerberosIdentityToken clone = (KerberosIdentityToken)base.Clone();
+
+            clone.m_ticketData = (byte[])Utils.Clone(this.m_ticketData);
+
+            return clone;
+        }
+        #endregion
+
+        #region Private Fields
+        private byte[] m_ticketData;
+        #endregion
+    }
+    #endif
+    #endregion
+
     #region IssuedIdentityToken Class
     #if (!OPCUA_EXCLUDE_IssuedIdentityToken)
     /// <summary>
@@ -10847,7 +12389,7 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// A mask which specifies which attributes are writeable.
+        /// A mask which specifies which attributes are writable.
         /// </summary>
         [DataMember(Name = "WriteMask", IsRequired = false, Order = 4)]
         public uint WriteMask
@@ -10857,7 +12399,7 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// A mask which specifies which attributes are writeable by the current user.
+        /// A mask which specifies which attributes are writable by the current user.
         /// </summary>
         [DataMember(Name = "UserWriteMask", IsRequired = false, Order = 5)]
         public uint UserWriteMask
@@ -14986,7 +16528,7 @@ namespace Opc.Ua
     #region AttributeWriteMask Enumeration
     #if (!OPCUA_EXCLUDE_AttributeWriteMask)
     /// <summary>
-    /// Define bits used to indicate which attributes are writeable.
+    /// Define bits used to indicate which attributes are writable.
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
@@ -14994,139 +16536,139 @@ namespace Opc.Ua
     public enum AttributeWriteMask
     {
         /// <summary>
-        /// No attributes are writeable.
+        /// No attributes are writable.
         /// </summary>
         [EnumMember(Value = "None_0")]
         None = 0,
 
         /// <summary>
-        /// The access level attribute is writeable.
+        /// The access level attribute is writable.
         /// </summary>
         [EnumMember(Value = "AccessLevel_1")]
         AccessLevel = 1,
 
         /// <summary>
-        /// The array dimensions attribute is writeable.
+        /// The array dimensions attribute is writable.
         /// </summary>
         [EnumMember(Value = "ArrayDimensions_2")]
         ArrayDimensions = 2,
 
         /// <summary>
-        /// The browse name attribute is writeable.
+        /// The browse name attribute is writable.
         /// </summary>
         [EnumMember(Value = "BrowseName_4")]
         BrowseName = 4,
 
         /// <summary>
-        /// The contains no loops attribute is writeable.
+        /// The contains no loops attribute is writable.
         /// </summary>
         [EnumMember(Value = "ContainsNoLoops_8")]
         ContainsNoLoops = 8,
 
         /// <summary>
-        /// The data type attribute is writeable.
+        /// The data type attribute is writable.
         /// </summary>
         [EnumMember(Value = "DataType_16")]
         DataType = 16,
 
         /// <summary>
-        /// The description attribute is writeable.
+        /// The description attribute is writable.
         /// </summary>
         [EnumMember(Value = "Description_32")]
         Description = 32,
 
         /// <summary>
-        /// The display name attribute is writeable.
+        /// The display name attribute is writable.
         /// </summary>
         [EnumMember(Value = "DisplayName_64")]
         DisplayName = 64,
 
         /// <summary>
-        /// The event notifier attribute is writeable.
+        /// The event notifier attribute is writable.
         /// </summary>
         [EnumMember(Value = "EventNotifier_128")]
         EventNotifier = 128,
 
         /// <summary>
-        /// The executable attribute is writeable.
+        /// The executable attribute is writable.
         /// </summary>
         [EnumMember(Value = "Executable_256")]
         Executable = 256,
 
         /// <summary>
-        /// The historizing attribute is writeable.
+        /// The historizing attribute is writable.
         /// </summary>
         [EnumMember(Value = "Historizing_512")]
         Historizing = 512,
 
         /// <summary>
-        /// The inverse name attribute is writeable.
+        /// The inverse name attribute is writable.
         /// </summary>
         [EnumMember(Value = "InverseName_1024")]
         InverseName = 1024,
 
         /// <summary>
-        /// The is abstract attribute is writeable.
+        /// The is abstract attribute is writable.
         /// </summary>
         [EnumMember(Value = "IsAbstract_2048")]
         IsAbstract = 2048,
 
         /// <summary>
-        /// The minimum sampling interval attribute is writeable.
+        /// The minimum sampling interval attribute is writable.
         /// </summary>
         [EnumMember(Value = "MinimumSamplingInterval_4096")]
         MinimumSamplingInterval = 4096,
 
         /// <summary>
-        /// The node class attribute is writeable.
+        /// The node class attribute is writable.
         /// </summary>
         [EnumMember(Value = "NodeClass_8192")]
         NodeClass = 8192,
 
         /// <summary>
-        /// The node id attribute is writeable.
+        /// The node id attribute is writable.
         /// </summary>
         [EnumMember(Value = "NodeId_16384")]
         NodeId = 16384,
 
         /// <summary>
-        /// The symmetric attribute is writeable.
+        /// The symmetric attribute is writable.
         /// </summary>
         [EnumMember(Value = "Symmetric_32768")]
         Symmetric = 32768,
 
         /// <summary>
-        /// The user access level attribute is writeable.
+        /// The user access level attribute is writable.
         /// </summary>
         [EnumMember(Value = "UserAccessLevel_65536")]
         UserAccessLevel = 65536,
 
         /// <summary>
-        /// The user executable attribute is writeable.
+        /// The user executable attribute is writable.
         /// </summary>
         [EnumMember(Value = "UserExecutable_131072")]
         UserExecutable = 131072,
 
         /// <summary>
-        /// The user write mask attribute is writeable.
+        /// The user write mask attribute is writable.
         /// </summary>
         [EnumMember(Value = "UserWriteMask_262144")]
         UserWriteMask = 262144,
 
         /// <summary>
-        /// The value rank attribute is writeable.
+        /// The value rank attribute is writable.
         /// </summary>
         [EnumMember(Value = "ValueRank_524288")]
         ValueRank = 524288,
 
         /// <summary>
-        /// The write mask attribute is writeable.
+        /// The write mask attribute is writable.
         /// </summary>
         [EnumMember(Value = "WriteMask_1048576")]
         WriteMask = 1048576,
 
         /// <summary>
-        /// The value attribute is writeable.
+        /// The value attribute is writable.
         /// </summary>
         [EnumMember(Value = "ValueForVariableType_2097152")]
         ValueForVariableType = 2097152,
@@ -39572,2342 +41114,6 @@ namespace Opc.Ua
         #endregion
     }
     #endregion
-    #endif
-    #endregion
-
-    #region ScalarTestType Class
-    #if (!OPCUA_EXCLUDE_ScalarTestType)
-    /// <summary>
-    /// A complex type containing all possible scalar types used for testing.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class ScalarTestType : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public ScalarTestType()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_boolean = true;
-            m_sByte = (sbyte)0;
-            m_byte = (byte)0;
-            m_int16 = (short)0;
-            m_uInt16 = (ushort)0;
-            m_int32 = (int)0;
-            m_uInt32 = (uint)0;
-            m_int64 = (long)0;
-            m_uInt64 = (ulong)0;
-            m_float = (float)0;
-            m_double = (double)0;
-            m_string = null;
-            m_dateTime = DateTime.MinValue;
-            m_guid = Uuid.Empty;
-            m_byteString = null;
-            m_xmlElement = null;
-            m_nodeId = null;
-            m_expandedNodeId = null;
-            m_statusCode = StatusCodes.Good;
-            m_diagnosticInfo = null;
-            m_qualifiedName = null;
-            m_localizedText = null;
-            m_extensionObject = null;
-            m_dataValue = new DataValue();
-            m_enumeratedValue = EnumeratedTestType.Red;
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A description for the Boolean field.
-        /// </summary>
-        [DataMember(Name = "Boolean", IsRequired = false, Order = 1)]
-        public bool Boolean
-        {
-            get { return m_boolean;  }
-            set { m_boolean = value; }
-        }
-
-        /// <summary>
-        /// A description for the SByte field.
-        /// </summary>
-        [DataMember(Name = "SByte", IsRequired = false, Order = 2)]
-        public sbyte SByte
-        {
-            get { return m_sByte;  }
-            set { m_sByte = value; }
-        }
-
-        /// <summary>
-        /// A description for the Byte field.
-        /// </summary>
-        [DataMember(Name = "Byte", IsRequired = false, Order = 3)]
-        public byte Byte
-        {
-            get { return m_byte;  }
-            set { m_byte = value; }
-        }
-
-        /// <summary>
-        /// A description for the Int16 field.
-        /// </summary>
-        [DataMember(Name = "Int16", IsRequired = false, Order = 4)]
-        public short Int16
-        {
-            get { return m_int16;  }
-            set { m_int16 = value; }
-        }
-
-        /// <summary>
-        /// A description for the UInt16 field.
-        /// </summary>
-        [DataMember(Name = "UInt16", IsRequired = false, Order = 5)]
-        public ushort UInt16
-        {
-            get { return m_uInt16;  }
-            set { m_uInt16 = value; }
-        }
-
-        /// <summary>
-        /// A description for the Int32 field.
-        /// </summary>
-        [DataMember(Name = "Int32", IsRequired = false, Order = 6)]
-        public int Int32
-        {
-            get { return m_int32;  }
-            set { m_int32 = value; }
-        }
-
-        /// <summary>
-        /// A description for the UInt32 field.
-        /// </summary>
-        [DataMember(Name = "UInt32", IsRequired = false, Order = 7)]
-        public uint UInt32
-        {
-            get { return m_uInt32;  }
-            set { m_uInt32 = value; }
-        }
-
-        /// <summary>
-        /// A description for the Int64 field.
-        /// </summary>
-        [DataMember(Name = "Int64", IsRequired = false, Order = 8)]
-        public long Int64
-        {
-            get { return m_int64;  }
-            set { m_int64 = value; }
-        }
-
-        /// <summary>
-        /// A description for the UInt64 field.
-        /// </summary>
-        [DataMember(Name = "UInt64", IsRequired = false, Order = 9)]
-        public ulong UInt64
-        {
-            get { return m_uInt64;  }
-            set { m_uInt64 = value; }
-        }
-
-        /// <summary>
-        /// A description for the Float field.
-        /// </summary>
-        [DataMember(Name = "Float", IsRequired = false, Order = 10)]
-        public float Float
-        {
-            get { return m_float;  }
-            set { m_float = value; }
-        }
-
-        /// <summary>
-        /// A description for the Double field.
-        /// </summary>
-        [DataMember(Name = "Double", IsRequired = false, Order = 11)]
-        public double Double
-        {
-            get { return m_double;  }
-            set { m_double = value; }
-        }
-
-        /// <summary>
-        /// A description for the String field.
-        /// </summary>
-        [DataMember(Name = "String", IsRequired = false, Order = 12)]
-        public string String
-        {
-            get { return m_string;  }
-            set { m_string = value; }
-        }
-
-        /// <summary>
-        /// A description for the DateTime field.
-        /// </summary>
-        [DataMember(Name = "DateTime", IsRequired = false, Order = 13)]
-        public DateTime DateTime
-        {
-            get { return m_dateTime;  }
-            set { m_dateTime = value; }
-        }
-
-        /// <summary>
-        /// A description for the Guid field.
-        /// </summary>
-        [DataMember(Name = "Guid", IsRequired = false, Order = 14)]
-        public Uuid Guid
-        {
-            get { return m_guid;  }
-            set { m_guid = value; }
-        }
-
-        /// <summary>
-        /// A description for the ByteString field.
-        /// </summary>
-        [DataMember(Name = "ByteString", IsRequired = false, Order = 15)]
-        public byte[] ByteString
-        {
-            get { return m_byteString;  }
-            set { m_byteString = value; }
-        }
-
-        /// <summary>
-        /// A description for the XmlElement field.
-        /// </summary>
-        [DataMember(Name = "XmlElement", IsRequired = false, Order = 16)]
-        public XmlElement XmlElement
-        {
-            get { return m_xmlElement;  }
-            set { m_xmlElement = value; }
-        }
-
-        /// <summary>
-        /// A description for the NodeId field.
-        /// </summary>
-        [DataMember(Name = "NodeId", IsRequired = false, Order = 17)]
-        public NodeId NodeId
-        {
-            get { return m_nodeId;  }
-            set { m_nodeId = value; }
-        }
-
-        /// <summary>
-        /// A description for the ExpandedNodeId field.
-        /// </summary>
-        [DataMember(Name = "ExpandedNodeId", IsRequired = false, Order = 18)]
-        public ExpandedNodeId ExpandedNodeId
-        {
-            get { return m_expandedNodeId;  }
-            set { m_expandedNodeId = value; }
-        }
-
-        /// <summary>
-        /// A description for the StatusCode field.
-        /// </summary>
-        [DataMember(Name = "StatusCode", IsRequired = false, Order = 19)]
-        public StatusCode StatusCode
-        {
-            get { return m_statusCode;  }
-            set { m_statusCode = value; }
-        }
-
-        /// <summary>
-        /// A description for the DiagnosticInfo field.
-        /// </summary>
-        [DataMember(Name = "DiagnosticInfo", IsRequired = false, Order = 20)]
-        public DiagnosticInfo DiagnosticInfo
-        {
-            get { return m_diagnosticInfo;  }
-            set { m_diagnosticInfo = value; }
-        }
-
-        /// <summary>
-        /// A description for the QualifiedName field.
-        /// </summary>
-        [DataMember(Name = "QualifiedName", IsRequired = false, Order = 21)]
-        public QualifiedName QualifiedName
-        {
-            get { return m_qualifiedName;  }
-            set { m_qualifiedName = value; }
-        }
-
-        /// <summary>
-        /// A description for the LocalizedText field.
-        /// </summary>
-        [DataMember(Name = "LocalizedText", IsRequired = false, Order = 22)]
-        public LocalizedText LocalizedText
-        {
-            get { return m_localizedText;  }
-            set { m_localizedText = value; }
-        }
-
-        /// <summary>
-        /// A description for the ExtensionObject field.
-        /// </summary>
-        [DataMember(Name = "ExtensionObject", IsRequired = false, Order = 23)]
-        public ExtensionObject ExtensionObject
-        {
-            get { return m_extensionObject;  }
-            set { m_extensionObject = value; }
-        }
-
-        /// <summary>
-        /// A description for the DataValue field.
-        /// </summary>
-        [DataMember(Name = "DataValue", IsRequired = false, Order = 24)]
-        public DataValue DataValue
-        {
-            get { return m_dataValue;  }
-            set { m_dataValue = value; }
-        }
-
-        /// <summary>
-        /// A description for the EnumeratedValue field.
-        /// </summary>
-        [DataMember(Name = "EnumeratedValue", IsRequired = false, Order = 25)]
-        public EnumeratedTestType EnumeratedValue
-        {
-            get { return m_enumeratedValue;  }
-            set { m_enumeratedValue = value; }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.ScalarTestType; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.ScalarTestType_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.ScalarTestType_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteBoolean("Boolean", Boolean);
-            encoder.WriteSByte("SByte", SByte);
-            encoder.WriteByte("Byte", Byte);
-            encoder.WriteInt16("Int16", Int16);
-            encoder.WriteUInt16("UInt16", UInt16);
-            encoder.WriteInt32("Int32", Int32);
-            encoder.WriteUInt32("UInt32", UInt32);
-            encoder.WriteInt64("Int64", Int64);
-            encoder.WriteUInt64("UInt64", UInt64);
-            encoder.WriteFloat("Float", Float);
-            encoder.WriteDouble("Double", Double);
-            encoder.WriteString("String", String);
-            encoder.WriteDateTime("DateTime", DateTime);
-            encoder.WriteGuid("Guid", Guid);
-            encoder.WriteByteString("ByteString", ByteString);
-            encoder.WriteXmlElement("XmlElement", XmlElement);
-            encoder.WriteNodeId("NodeId", NodeId);
-            encoder.WriteExpandedNodeId("ExpandedNodeId", ExpandedNodeId);
-            encoder.WriteStatusCode("StatusCode", StatusCode);
-            encoder.WriteDiagnosticInfo("DiagnosticInfo", DiagnosticInfo);
-            encoder.WriteQualifiedName("QualifiedName", QualifiedName);
-            encoder.WriteLocalizedText("LocalizedText", LocalizedText);
-            encoder.WriteExtensionObject("ExtensionObject", ExtensionObject);
-            encoder.WriteDataValue("DataValue", DataValue);
-            encoder.WriteEnumerated("EnumeratedValue", EnumeratedValue);
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            Boolean = decoder.ReadBoolean("Boolean");
-            SByte = decoder.ReadSByte("SByte");
-            Byte = decoder.ReadByte("Byte");
-            Int16 = decoder.ReadInt16("Int16");
-            UInt16 = decoder.ReadUInt16("UInt16");
-            Int32 = decoder.ReadInt32("Int32");
-            UInt32 = decoder.ReadUInt32("UInt32");
-            Int64 = decoder.ReadInt64("Int64");
-            UInt64 = decoder.ReadUInt64("UInt64");
-            Float = decoder.ReadFloat("Float");
-            Double = decoder.ReadDouble("Double");
-            String = decoder.ReadString("String");
-            DateTime = decoder.ReadDateTime("DateTime");
-            Guid = decoder.ReadGuid("Guid");
-            ByteString = decoder.ReadByteString("ByteString");
-            XmlElement = decoder.ReadXmlElement("XmlElement");
-            NodeId = decoder.ReadNodeId("NodeId");
-            ExpandedNodeId = decoder.ReadExpandedNodeId("ExpandedNodeId");
-            StatusCode = decoder.ReadStatusCode("StatusCode");
-            DiagnosticInfo = decoder.ReadDiagnosticInfo("DiagnosticInfo");
-            QualifiedName = decoder.ReadQualifiedName("QualifiedName");
-            LocalizedText = decoder.ReadLocalizedText("LocalizedText");
-            ExtensionObject = decoder.ReadExtensionObject("ExtensionObject");
-            DataValue = decoder.ReadDataValue("DataValue");
-            EnumeratedValue = (EnumeratedTestType)decoder.ReadEnumerated("EnumeratedValue", typeof(EnumeratedTestType));
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            ScalarTestType value = encodeable as ScalarTestType;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_boolean, value.m_boolean)) return false;
-            if (!Utils.IsEqual(m_sByte, value.m_sByte)) return false;
-            if (!Utils.IsEqual(m_byte, value.m_byte)) return false;
-            if (!Utils.IsEqual(m_int16, value.m_int16)) return false;
-            if (!Utils.IsEqual(m_uInt16, value.m_uInt16)) return false;
-            if (!Utils.IsEqual(m_int32, value.m_int32)) return false;
-            if (!Utils.IsEqual(m_uInt32, value.m_uInt32)) return false;
-            if (!Utils.IsEqual(m_int64, value.m_int64)) return false;
-            if (!Utils.IsEqual(m_uInt64, value.m_uInt64)) return false;
-            if (!Utils.IsEqual(m_float, value.m_float)) return false;
-            if (!Utils.IsEqual(m_double, value.m_double)) return false;
-            if (!Utils.IsEqual(m_string, value.m_string)) return false;
-            if (!Utils.IsEqual(m_dateTime, value.m_dateTime)) return false;
-            if (!Utils.IsEqual(m_guid, value.m_guid)) return false;
-            if (!Utils.IsEqual(m_byteString, value.m_byteString)) return false;
-            if (!Utils.IsEqual(m_xmlElement, value.m_xmlElement)) return false;
-            if (!Utils.IsEqual(m_nodeId, value.m_nodeId)) return false;
-            if (!Utils.IsEqual(m_expandedNodeId, value.m_expandedNodeId)) return false;
-            if (!Utils.IsEqual(m_statusCode, value.m_statusCode)) return false;
-            if (!Utils.IsEqual(m_diagnosticInfo, value.m_diagnosticInfo)) return false;
-            if (!Utils.IsEqual(m_qualifiedName, value.m_qualifiedName)) return false;
-            if (!Utils.IsEqual(m_localizedText, value.m_localizedText)) return false;
-            if (!Utils.IsEqual(m_extensionObject, value.m_extensionObject)) return false;
-            if (!Utils.IsEqual(m_dataValue, value.m_dataValue)) return false;
-            if (!Utils.IsEqual(m_enumeratedValue, value.m_enumeratedValue)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            ScalarTestType clone = (ScalarTestType)this.MemberwiseClone();
-
-            clone.m_boolean = (bool)Utils.Clone(this.m_boolean);
-            clone.m_sByte = (sbyte)Utils.Clone(this.m_sByte);
-            clone.m_byte = (byte)Utils.Clone(this.m_byte);
-            clone.m_int16 = (short)Utils.Clone(this.m_int16);
-            clone.m_uInt16 = (ushort)Utils.Clone(this.m_uInt16);
-            clone.m_int32 = (int)Utils.Clone(this.m_int32);
-            clone.m_uInt32 = (uint)Utils.Clone(this.m_uInt32);
-            clone.m_int64 = (long)Utils.Clone(this.m_int64);
-            clone.m_uInt64 = (ulong)Utils.Clone(this.m_uInt64);
-            clone.m_float = (float)Utils.Clone(this.m_float);
-            clone.m_double = (double)Utils.Clone(this.m_double);
-            clone.m_string = (string)Utils.Clone(this.m_string);
-            clone.m_dateTime = (DateTime)Utils.Clone(this.m_dateTime);
-            clone.m_guid = (Uuid)Utils.Clone(this.m_guid);
-            clone.m_byteString = (byte[])Utils.Clone(this.m_byteString);
-            clone.m_xmlElement = (XmlElement)Utils.Clone(this.m_xmlElement);
-            clone.m_nodeId = (NodeId)Utils.Clone(this.m_nodeId);
-            clone.m_expandedNodeId = (ExpandedNodeId)Utils.Clone(this.m_expandedNodeId);
-            clone.m_statusCode = (StatusCode)Utils.Clone(this.m_statusCode);
-            clone.m_diagnosticInfo = (DiagnosticInfo)Utils.Clone(this.m_diagnosticInfo);
-            clone.m_qualifiedName = (QualifiedName)Utils.Clone(this.m_qualifiedName);
-            clone.m_localizedText = (LocalizedText)Utils.Clone(this.m_localizedText);
-            clone.m_extensionObject = (ExtensionObject)Utils.Clone(this.m_extensionObject);
-            clone.m_dataValue = (DataValue)Utils.Clone(this.m_dataValue);
-            clone.m_enumeratedValue = (EnumeratedTestType)Utils.Clone(this.m_enumeratedValue);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private bool m_boolean;
-        private sbyte m_sByte;
-        private byte m_byte;
-        private short m_int16;
-        private ushort m_uInt16;
-        private int m_int32;
-        private uint m_uInt32;
-        private long m_int64;
-        private ulong m_uInt64;
-        private float m_float;
-        private double m_double;
-        private string m_string;
-        private DateTime m_dateTime;
-        private Uuid m_guid;
-        private byte[] m_byteString;
-        private XmlElement m_xmlElement;
-        private NodeId m_nodeId;
-        private ExpandedNodeId m_expandedNodeId;
-        private StatusCode m_statusCode;
-        private DiagnosticInfo m_diagnosticInfo;
-        private QualifiedName m_qualifiedName;
-        private LocalizedText m_localizedText;
-        private ExtensionObject m_extensionObject;
-        private DataValue m_dataValue;
-        private EnumeratedTestType m_enumeratedValue;
-        #endregion
-    }
-
-    #region ScalarTestTypeCollection Class
-    /// <summary>
-    /// A collection of ScalarTestType objects.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [CollectionDataContract(Name = "ListOfScalarTestType", Namespace = Opc.Ua.Namespaces.OpcUaXsd, ItemName = "ScalarTestType")]
-    public partial class ScalarTestTypeCollection : List<ScalarTestType>, ICloneable
-    {
-        #region Constructors
-        /// <summary>
-        /// Initializes the collection with default values.
-        /// </summary>
-        public ScalarTestTypeCollection() {}
-
-        /// <summary>
-        /// Initializes the collection with an initial capacity.
-        /// </summary>
-        public ScalarTestTypeCollection(int capacity) : base(capacity) {}
-
-        /// <summary>
-        /// Initializes the collection with another collection.
-        /// </summary>
-        public ScalarTestTypeCollection(IEnumerable<ScalarTestType> collection) : base(collection) {}
-        #endregion
-
-        #region Static Operators
-        /// <summary>
-        /// Converts an array to a collection.
-        /// </summary>
-        public static implicit operator ScalarTestTypeCollection(ScalarTestType[] values)
-        {
-            if (values != null)
-            {
-                return new ScalarTestTypeCollection(values);
-            }
-
-            return new ScalarTestTypeCollection();
-        }
-
-        /// <summary>
-        /// Converts a collection to an array.
-        /// </summary>
-        public static explicit operator ScalarTestType[](ScalarTestTypeCollection values)
-        {
-            if (values != null)
-            {
-                return values.ToArray();
-            }
-
-            return null;
-        }
-        #endregion
-
-        #region ICloneable Methods
-        /// <summary>
-        /// Creates a deep copy of the collection.
-        /// </summary>
-        public object Clone()
-        {
-            ScalarTestTypeCollection clone = new ScalarTestTypeCollection(this.Count);
-
-            for (int ii = 0; ii < this.Count; ii++)
-            {
-                clone.Add((ScalarTestType)Utils.Clone(this[ii]));
-            }
-
-            return clone;
-        }
-        #endregion
-    }
-    #endregion
-    #endif
-    #endregion
-
-    #region ArrayTestType Class
-    #if (!OPCUA_EXCLUDE_ArrayTestType)
-    /// <summary>
-    /// A complex type containing all possible array types used for testing.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class ArrayTestType : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public ArrayTestType()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_booleans = new BooleanCollection();
-            m_sBytes = new SByteCollection();
-            m_int16s = new Int16Collection();
-            m_uInt16s = new UInt16Collection();
-            m_int32s = new Int32Collection();
-            m_uInt32s = new UInt32Collection();
-            m_int64s = new Int64Collection();
-            m_uInt64s = new UInt64Collection();
-            m_floats = new FloatCollection();
-            m_doubles = new DoubleCollection();
-            m_strings = new StringCollection();
-            m_dateTimes = new DateTimeCollection();
-            m_guids = new UuidCollection();
-            m_byteStrings = new ByteStringCollection();
-            m_xmlElements = new XmlElementCollection();
-            m_nodeIds = new NodeIdCollection();
-            m_expandedNodeIds = new ExpandedNodeIdCollection();
-            m_statusCodes = new StatusCodeCollection();
-            m_diagnosticInfos = new DiagnosticInfoCollection();
-            m_qualifiedNames = new QualifiedNameCollection();
-            m_localizedTexts = new LocalizedTextCollection();
-            m_extensionObjects = new ExtensionObjectCollection();
-            m_dataValues = new DataValueCollection();
-            m_variants = new VariantCollection();
-            m_enumeratedValues = new EnumeratedTestTypeCollection();
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A description for the Booleans field.
-        /// </summary>
-        [DataMember(Name = "Booleans", IsRequired = false, Order = 1)]
-        public BooleanCollection Booleans
-        {
-            get
-            {
-                return m_booleans;
-            }
-
-            set
-            {
-                m_booleans = value;
-
-                if (value == null)
-                {
-                    m_booleans = new BooleanCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the SBytes field.
-        /// </summary>
-        [DataMember(Name = "SBytes", IsRequired = false, Order = 2)]
-        public SByteCollection SBytes
-        {
-            get
-            {
-                return m_sBytes;
-            }
-
-            set
-            {
-                m_sBytes = value;
-
-                if (value == null)
-                {
-                    m_sBytes = new SByteCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Int16s field.
-        /// </summary>
-        [DataMember(Name = "Int16s", IsRequired = false, Order = 3)]
-        public Int16Collection Int16s
-        {
-            get
-            {
-                return m_int16s;
-            }
-
-            set
-            {
-                m_int16s = value;
-
-                if (value == null)
-                {
-                    m_int16s = new Int16Collection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the UInt16s field.
-        /// </summary>
-        [DataMember(Name = "UInt16s", IsRequired = false, Order = 4)]
-        public UInt16Collection UInt16s
-        {
-            get
-            {
-                return m_uInt16s;
-            }
-
-            set
-            {
-                m_uInt16s = value;
-
-                if (value == null)
-                {
-                    m_uInt16s = new UInt16Collection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Int32s field.
-        /// </summary>
-        [DataMember(Name = "Int32s", IsRequired = false, Order = 5)]
-        public Int32Collection Int32s
-        {
-            get
-            {
-                return m_int32s;
-            }
-
-            set
-            {
-                m_int32s = value;
-
-                if (value == null)
-                {
-                    m_int32s = new Int32Collection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the UInt32s field.
-        /// </summary>
-        [DataMember(Name = "UInt32s", IsRequired = false, Order = 6)]
-        public UInt32Collection UInt32s
-        {
-            get
-            {
-                return m_uInt32s;
-            }
-
-            set
-            {
-                m_uInt32s = value;
-
-                if (value == null)
-                {
-                    m_uInt32s = new UInt32Collection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Int64s field.
-        /// </summary>
-        [DataMember(Name = "Int64s", IsRequired = false, Order = 7)]
-        public Int64Collection Int64s
-        {
-            get
-            {
-                return m_int64s;
-            }
-
-            set
-            {
-                m_int64s = value;
-
-                if (value == null)
-                {
-                    m_int64s = new Int64Collection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the UInt64s field.
-        /// </summary>
-        [DataMember(Name = "UInt64s", IsRequired = false, Order = 8)]
-        public UInt64Collection UInt64s
-        {
-            get
-            {
-                return m_uInt64s;
-            }
-
-            set
-            {
-                m_uInt64s = value;
-
-                if (value == null)
-                {
-                    m_uInt64s = new UInt64Collection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Floats field.
-        /// </summary>
-        [DataMember(Name = "Floats", IsRequired = false, Order = 9)]
-        public FloatCollection Floats
-        {
-            get
-            {
-                return m_floats;
-            }
-
-            set
-            {
-                m_floats = value;
-
-                if (value == null)
-                {
-                    m_floats = new FloatCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Doubles field.
-        /// </summary>
-        [DataMember(Name = "Doubles", IsRequired = false, Order = 10)]
-        public DoubleCollection Doubles
-        {
-            get
-            {
-                return m_doubles;
-            }
-
-            set
-            {
-                m_doubles = value;
-
-                if (value == null)
-                {
-                    m_doubles = new DoubleCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Strings field.
-        /// </summary>
-        [DataMember(Name = "Strings", IsRequired = false, Order = 11)]
-        public StringCollection Strings
-        {
-            get
-            {
-                return m_strings;
-            }
-
-            set
-            {
-                m_strings = value;
-
-                if (value == null)
-                {
-                    m_strings = new StringCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the DateTimes field.
-        /// </summary>
-        [DataMember(Name = "DateTimes", IsRequired = false, Order = 12)]
-        public DateTimeCollection DateTimes
-        {
-            get
-            {
-                return m_dateTimes;
-            }
-
-            set
-            {
-                m_dateTimes = value;
-
-                if (value == null)
-                {
-                    m_dateTimes = new DateTimeCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Guids field.
-        /// </summary>
-        [DataMember(Name = "Guids", IsRequired = false, Order = 13)]
-        public UuidCollection Guids
-        {
-            get
-            {
-                return m_guids;
-            }
-
-            set
-            {
-                m_guids = value;
-
-                if (value == null)
-                {
-                    m_guids = new UuidCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the ByteStrings field.
-        /// </summary>
-        [DataMember(Name = "ByteStrings", IsRequired = false, Order = 14)]
-        public ByteStringCollection ByteStrings
-        {
-            get
-            {
-                return m_byteStrings;
-            }
-
-            set
-            {
-                m_byteStrings = value;
-
-                if (value == null)
-                {
-                    m_byteStrings = new ByteStringCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the XmlElements field.
-        /// </summary>
-        [DataMember(Name = "XmlElements", IsRequired = false, Order = 15)]
-        public XmlElementCollection XmlElements
-        {
-            get
-            {
-                return m_xmlElements;
-            }
-
-            set
-            {
-                m_xmlElements = value;
-
-                if (value == null)
-                {
-                    m_xmlElements = new XmlElementCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the NodeIds field.
-        /// </summary>
-        [DataMember(Name = "NodeIds", IsRequired = false, Order = 16)]
-        public NodeIdCollection NodeIds
-        {
-            get
-            {
-                return m_nodeIds;
-            }
-
-            set
-            {
-                m_nodeIds = value;
-
-                if (value == null)
-                {
-                    m_nodeIds = new NodeIdCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the ExpandedNodeIds field.
-        /// </summary>
-        [DataMember(Name = "ExpandedNodeIds", IsRequired = false, Order = 17)]
-        public ExpandedNodeIdCollection ExpandedNodeIds
-        {
-            get
-            {
-                return m_expandedNodeIds;
-            }
-
-            set
-            {
-                m_expandedNodeIds = value;
-
-                if (value == null)
-                {
-                    m_expandedNodeIds = new ExpandedNodeIdCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the StatusCodes field.
-        /// </summary>
-        [DataMember(Name = "StatusCodes", IsRequired = false, Order = 18)]
-        public StatusCodeCollection StatusCodes
-        {
-            get
-            {
-                return m_statusCodes;
-            }
-
-            set
-            {
-                m_statusCodes = value;
-
-                if (value == null)
-                {
-                    m_statusCodes = new StatusCodeCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the DiagnosticInfos field.
-        /// </summary>
-        [DataMember(Name = "DiagnosticInfos", IsRequired = false, Order = 19)]
-        public DiagnosticInfoCollection DiagnosticInfos
-        {
-            get
-            {
-                return m_diagnosticInfos;
-            }
-
-            set
-            {
-                m_diagnosticInfos = value;
-
-                if (value == null)
-                {
-                    m_diagnosticInfos = new DiagnosticInfoCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the QualifiedNames field.
-        /// </summary>
-        [DataMember(Name = "QualifiedNames", IsRequired = false, Order = 20)]
-        public QualifiedNameCollection QualifiedNames
-        {
-            get
-            {
-                return m_qualifiedNames;
-            }
-
-            set
-            {
-                m_qualifiedNames = value;
-
-                if (value == null)
-                {
-                    m_qualifiedNames = new QualifiedNameCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the LocalizedTexts field.
-        /// </summary>
-        [DataMember(Name = "LocalizedTexts", IsRequired = false, Order = 21)]
-        public LocalizedTextCollection LocalizedTexts
-        {
-            get
-            {
-                return m_localizedTexts;
-            }
-
-            set
-            {
-                m_localizedTexts = value;
-
-                if (value == null)
-                {
-                    m_localizedTexts = new LocalizedTextCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the ExtensionObjects field.
-        /// </summary>
-        [DataMember(Name = "ExtensionObjects", IsRequired = false, Order = 22)]
-        public ExtensionObjectCollection ExtensionObjects
-        {
-            get
-            {
-                return m_extensionObjects;
-            }
-
-            set
-            {
-                m_extensionObjects = value;
-
-                if (value == null)
-                {
-                    m_extensionObjects = new ExtensionObjectCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the DataValues field.
-        /// </summary>
-        [DataMember(Name = "DataValues", IsRequired = false, Order = 23)]
-        public DataValueCollection DataValues
-        {
-            get
-            {
-                return m_dataValues;
-            }
-
-            set
-            {
-                m_dataValues = value;
-
-                if (value == null)
-                {
-                    m_dataValues = new DataValueCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Variants field.
-        /// </summary>
-        [DataMember(Name = "Variants", IsRequired = false, Order = 24)]
-        public VariantCollection Variants
-        {
-            get
-            {
-                return m_variants;
-            }
-
-            set
-            {
-                m_variants = value;
-
-                if (value == null)
-                {
-                    m_variants = new VariantCollection();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the EnumeratedValues field.
-        /// </summary>
-        [DataMember(Name = "EnumeratedValues", IsRequired = false, Order = 25)]
-        public EnumeratedTestTypeCollection EnumeratedValues
-        {
-            get
-            {
-                return m_enumeratedValues;
-            }
-
-            set
-            {
-                m_enumeratedValues = value;
-
-                if (value == null)
-                {
-                    m_enumeratedValues = new EnumeratedTestTypeCollection();
-                }
-            }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.ArrayTestType; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.ArrayTestType_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.ArrayTestType_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteBooleanArray("Booleans", Booleans);
-            encoder.WriteSByteArray("SBytes", SBytes);
-            encoder.WriteInt16Array("Int16s", Int16s);
-            encoder.WriteUInt16Array("UInt16s", UInt16s);
-            encoder.WriteInt32Array("Int32s", Int32s);
-            encoder.WriteUInt32Array("UInt32s", UInt32s);
-            encoder.WriteInt64Array("Int64s", Int64s);
-            encoder.WriteUInt64Array("UInt64s", UInt64s);
-            encoder.WriteFloatArray("Floats", Floats);
-            encoder.WriteDoubleArray("Doubles", Doubles);
-            encoder.WriteStringArray("Strings", Strings);
-            encoder.WriteDateTimeArray("DateTimes", DateTimes);
-            encoder.WriteGuidArray("Guids", Guids);
-            encoder.WriteByteStringArray("ByteStrings", ByteStrings);
-            encoder.WriteXmlElementArray("XmlElements", XmlElements);
-            encoder.WriteNodeIdArray("NodeIds", NodeIds);
-            encoder.WriteExpandedNodeIdArray("ExpandedNodeIds", ExpandedNodeIds);
-            encoder.WriteStatusCodeArray("StatusCodes", StatusCodes);
-            encoder.WriteDiagnosticInfoArray("DiagnosticInfos", DiagnosticInfos);
-            encoder.WriteQualifiedNameArray("QualifiedNames", QualifiedNames);
-            encoder.WriteLocalizedTextArray("LocalizedTexts", LocalizedTexts);
-            encoder.WriteExtensionObjectArray("ExtensionObjects", ExtensionObjects);
-            encoder.WriteDataValueArray("DataValues", DataValues);
-            encoder.WriteVariantArray("Variants", Variants);
-            encoder.WriteEnumeratedArray("EnumeratedValues", EnumeratedValues.ToArray(), typeof(EnumeratedTestType));
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            Booleans = decoder.ReadBooleanArray("Booleans");
-            SBytes = decoder.ReadSByteArray("SBytes");
-            Int16s = decoder.ReadInt16Array("Int16s");
-            UInt16s = decoder.ReadUInt16Array("UInt16s");
-            Int32s = decoder.ReadInt32Array("Int32s");
-            UInt32s = decoder.ReadUInt32Array("UInt32s");
-            Int64s = decoder.ReadInt64Array("Int64s");
-            UInt64s = decoder.ReadUInt64Array("UInt64s");
-            Floats = decoder.ReadFloatArray("Floats");
-            Doubles = decoder.ReadDoubleArray("Doubles");
-            Strings = decoder.ReadStringArray("Strings");
-            DateTimes = decoder.ReadDateTimeArray("DateTimes");
-            Guids = decoder.ReadGuidArray("Guids");
-            ByteStrings = decoder.ReadByteStringArray("ByteStrings");
-            XmlElements = decoder.ReadXmlElementArray("XmlElements");
-            NodeIds = decoder.ReadNodeIdArray("NodeIds");
-            ExpandedNodeIds = decoder.ReadExpandedNodeIdArray("ExpandedNodeIds");
-            StatusCodes = decoder.ReadStatusCodeArray("StatusCodes");
-            DiagnosticInfos = decoder.ReadDiagnosticInfoArray("DiagnosticInfos");
-            QualifiedNames = decoder.ReadQualifiedNameArray("QualifiedNames");
-            LocalizedTexts = decoder.ReadLocalizedTextArray("LocalizedTexts");
-            ExtensionObjects = decoder.ReadExtensionObjectArray("ExtensionObjects");
-            DataValues = decoder.ReadDataValueArray("DataValues");
-            Variants = decoder.ReadVariantArray("Variants");
-            EnumeratedValues = (EnumeratedTestTypeCollection)decoder.ReadEnumeratedArray("EnumeratedValues", typeof(EnumeratedTestType));
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            ArrayTestType value = encodeable as ArrayTestType;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_booleans, value.m_booleans)) return false;
-            if (!Utils.IsEqual(m_sBytes, value.m_sBytes)) return false;
-            if (!Utils.IsEqual(m_int16s, value.m_int16s)) return false;
-            if (!Utils.IsEqual(m_uInt16s, value.m_uInt16s)) return false;
-            if (!Utils.IsEqual(m_int32s, value.m_int32s)) return false;
-            if (!Utils.IsEqual(m_uInt32s, value.m_uInt32s)) return false;
-            if (!Utils.IsEqual(m_int64s, value.m_int64s)) return false;
-            if (!Utils.IsEqual(m_uInt64s, value.m_uInt64s)) return false;
-            if (!Utils.IsEqual(m_floats, value.m_floats)) return false;
-            if (!Utils.IsEqual(m_doubles, value.m_doubles)) return false;
-            if (!Utils.IsEqual(m_strings, value.m_strings)) return false;
-            if (!Utils.IsEqual(m_dateTimes, value.m_dateTimes)) return false;
-            if (!Utils.IsEqual(m_guids, value.m_guids)) return false;
-            if (!Utils.IsEqual(m_byteStrings, value.m_byteStrings)) return false;
-            if (!Utils.IsEqual(m_xmlElements, value.m_xmlElements)) return false;
-            if (!Utils.IsEqual(m_nodeIds, value.m_nodeIds)) return false;
-            if (!Utils.IsEqual(m_expandedNodeIds, value.m_expandedNodeIds)) return false;
-            if (!Utils.IsEqual(m_statusCodes, value.m_statusCodes)) return false;
-            if (!Utils.IsEqual(m_diagnosticInfos, value.m_diagnosticInfos)) return false;
-            if (!Utils.IsEqual(m_qualifiedNames, value.m_qualifiedNames)) return false;
-            if (!Utils.IsEqual(m_localizedTexts, value.m_localizedTexts)) return false;
-            if (!Utils.IsEqual(m_extensionObjects, value.m_extensionObjects)) return false;
-            if (!Utils.IsEqual(m_dataValues, value.m_dataValues)) return false;
-            if (!Utils.IsEqual(m_variants, value.m_variants)) return false;
-            if (!Utils.IsEqual(m_enumeratedValues, value.m_enumeratedValues)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            ArrayTestType clone = (ArrayTestType)this.MemberwiseClone();
-
-            clone.m_booleans = (BooleanCollection)Utils.Clone(this.m_booleans);
-            clone.m_sBytes = (SByteCollection)Utils.Clone(this.m_sBytes);
-            clone.m_int16s = (Int16Collection)Utils.Clone(this.m_int16s);
-            clone.m_uInt16s = (UInt16Collection)Utils.Clone(this.m_uInt16s);
-            clone.m_int32s = (Int32Collection)Utils.Clone(this.m_int32s);
-            clone.m_uInt32s = (UInt32Collection)Utils.Clone(this.m_uInt32s);
-            clone.m_int64s = (Int64Collection)Utils.Clone(this.m_int64s);
-            clone.m_uInt64s = (UInt64Collection)Utils.Clone(this.m_uInt64s);
-            clone.m_floats = (FloatCollection)Utils.Clone(this.m_floats);
-            clone.m_doubles = (DoubleCollection)Utils.Clone(this.m_doubles);
-            clone.m_strings = (StringCollection)Utils.Clone(this.m_strings);
-            clone.m_dateTimes = (DateTimeCollection)Utils.Clone(this.m_dateTimes);
-            clone.m_guids = (UuidCollection)Utils.Clone(this.m_guids);
-            clone.m_byteStrings = (ByteStringCollection)Utils.Clone(this.m_byteStrings);
-            clone.m_xmlElements = (XmlElementCollection)Utils.Clone(this.m_xmlElements);
-            clone.m_nodeIds = (NodeIdCollection)Utils.Clone(this.m_nodeIds);
-            clone.m_expandedNodeIds = (ExpandedNodeIdCollection)Utils.Clone(this.m_expandedNodeIds);
-            clone.m_statusCodes = (StatusCodeCollection)Utils.Clone(this.m_statusCodes);
-            clone.m_diagnosticInfos = (DiagnosticInfoCollection)Utils.Clone(this.m_diagnosticInfos);
-            clone.m_qualifiedNames = (QualifiedNameCollection)Utils.Clone(this.m_qualifiedNames);
-            clone.m_localizedTexts = (LocalizedTextCollection)Utils.Clone(this.m_localizedTexts);
-            clone.m_extensionObjects = (ExtensionObjectCollection)Utils.Clone(this.m_extensionObjects);
-            clone.m_dataValues = (DataValueCollection)Utils.Clone(this.m_dataValues);
-            clone.m_variants = (VariantCollection)Utils.Clone(this.m_variants);
-            clone.m_enumeratedValues = (EnumeratedTestTypeCollection)Utils.Clone(this.m_enumeratedValues);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private BooleanCollection m_booleans;
-        private SByteCollection m_sBytes;
-        private Int16Collection m_int16s;
-        private UInt16Collection m_uInt16s;
-        private Int32Collection m_int32s;
-        private UInt32Collection m_uInt32s;
-        private Int64Collection m_int64s;
-        private UInt64Collection m_uInt64s;
-        private FloatCollection m_floats;
-        private DoubleCollection m_doubles;
-        private StringCollection m_strings;
-        private DateTimeCollection m_dateTimes;
-        private UuidCollection m_guids;
-        private ByteStringCollection m_byteStrings;
-        private XmlElementCollection m_xmlElements;
-        private NodeIdCollection m_nodeIds;
-        private ExpandedNodeIdCollection m_expandedNodeIds;
-        private StatusCodeCollection m_statusCodes;
-        private DiagnosticInfoCollection m_diagnosticInfos;
-        private QualifiedNameCollection m_qualifiedNames;
-        private LocalizedTextCollection m_localizedTexts;
-        private ExtensionObjectCollection m_extensionObjects;
-        private DataValueCollection m_dataValues;
-        private VariantCollection m_variants;
-        private EnumeratedTestTypeCollection m_enumeratedValues;
-        #endregion
-    }
-
-    #region ArrayTestTypeCollection Class
-    /// <summary>
-    /// A collection of ArrayTestType objects.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [CollectionDataContract(Name = "ListOfArrayTestType", Namespace = Opc.Ua.Namespaces.OpcUaXsd, ItemName = "ArrayTestType")]
-    public partial class ArrayTestTypeCollection : List<ArrayTestType>, ICloneable
-    {
-        #region Constructors
-        /// <summary>
-        /// Initializes the collection with default values.
-        /// </summary>
-        public ArrayTestTypeCollection() {}
-
-        /// <summary>
-        /// Initializes the collection with an initial capacity.
-        /// </summary>
-        public ArrayTestTypeCollection(int capacity) : base(capacity) {}
-
-        /// <summary>
-        /// Initializes the collection with another collection.
-        /// </summary>
-        public ArrayTestTypeCollection(IEnumerable<ArrayTestType> collection) : base(collection) {}
-        #endregion
-
-        #region Static Operators
-        /// <summary>
-        /// Converts an array to a collection.
-        /// </summary>
-        public static implicit operator ArrayTestTypeCollection(ArrayTestType[] values)
-        {
-            if (values != null)
-            {
-                return new ArrayTestTypeCollection(values);
-            }
-
-            return new ArrayTestTypeCollection();
-        }
-
-        /// <summary>
-        /// Converts a collection to an array.
-        /// </summary>
-        public static explicit operator ArrayTestType[](ArrayTestTypeCollection values)
-        {
-            if (values != null)
-            {
-                return values.ToArray();
-            }
-
-            return null;
-        }
-        #endregion
-
-        #region ICloneable Methods
-        /// <summary>
-        /// Creates a deep copy of the collection.
-        /// </summary>
-        public object Clone()
-        {
-            ArrayTestTypeCollection clone = new ArrayTestTypeCollection(this.Count);
-
-            for (int ii = 0; ii < this.Count; ii++)
-            {
-                clone.Add((ArrayTestType)Utils.Clone(this[ii]));
-            }
-
-            return clone;
-        }
-        #endregion
-    }
-    #endregion
-    #endif
-    #endregion
-
-    #region CompositeTestType Class
-    #if (!OPCUA_EXCLUDE_CompositeTestType)
-    /// <summary>
-    /// A description for the CompositeTestType DataType.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class CompositeTestType : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public CompositeTestType()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_field1 = new ScalarTestType();
-            m_field2 = new ArrayTestType();
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A description for the Field1 field.
-        /// </summary>
-        [DataMember(Name = "Field1", IsRequired = false, Order = 1)]
-        public ScalarTestType Field1
-        {
-            get
-            {
-                return m_field1;
-            }
-
-            set
-            {
-                m_field1 = value;
-
-                if (value == null)
-                {
-                    m_field1 = new ScalarTestType();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Field2 field.
-        /// </summary>
-        [DataMember(Name = "Field2", IsRequired = false, Order = 2)]
-        public ArrayTestType Field2
-        {
-            get
-            {
-                return m_field2;
-            }
-
-            set
-            {
-                m_field2 = value;
-
-                if (value == null)
-                {
-                    m_field2 = new ArrayTestType();
-                }
-            }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.CompositeTestType; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.CompositeTestType_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.CompositeTestType_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteEncodeable("Field1", Field1, typeof(ScalarTestType));
-            encoder.WriteEncodeable("Field2", Field2, typeof(ArrayTestType));
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            Field1 = (ScalarTestType)decoder.ReadEncodeable("Field1", typeof(ScalarTestType));
-            Field2 = (ArrayTestType)decoder.ReadEncodeable("Field2", typeof(ArrayTestType));
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            CompositeTestType value = encodeable as CompositeTestType;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_field1, value.m_field1)) return false;
-            if (!Utils.IsEqual(m_field2, value.m_field2)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            CompositeTestType clone = (CompositeTestType)this.MemberwiseClone();
-
-            clone.m_field1 = (ScalarTestType)Utils.Clone(this.m_field1);
-            clone.m_field2 = (ArrayTestType)Utils.Clone(this.m_field2);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private ScalarTestType m_field1;
-        private ArrayTestType m_field2;
-        #endregion
-    }
-    #endif
-    #endregion
-
-    #region TestStackRequest Class
-    #if (!OPCUA_EXCLUDE_TestStackRequest)
-    /// <summary>
-    /// A description for the TestStackRequest DataType.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class TestStackRequest : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public TestStackRequest()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_requestHeader = new RequestHeader();
-            m_testId = (uint)0;
-            m_iteration = (int)0;
-            m_input = Variant.Null;
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A description for the RequestHeader field.
-        /// </summary>
-        [DataMember(Name = "RequestHeader", IsRequired = false, Order = 1)]
-        public RequestHeader RequestHeader
-        {
-            get
-            {
-                return m_requestHeader;
-            }
-
-            set
-            {
-                m_requestHeader = value;
-
-                if (value == null)
-                {
-                    m_requestHeader = new RequestHeader();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the TestId field.
-        /// </summary>
-        [DataMember(Name = "TestId", IsRequired = false, Order = 2)]
-        public uint TestId
-        {
-            get { return m_testId;  }
-            set { m_testId = value; }
-        }
-
-        /// <summary>
-        /// A description for the Iteration field.
-        /// </summary>
-        [DataMember(Name = "Iteration", IsRequired = false, Order = 3)]
-        public int Iteration
-        {
-            get { return m_iteration;  }
-            set { m_iteration = value; }
-        }
-
-        /// <summary>
-        /// A description for the Input field.
-        /// </summary>
-        [DataMember(Name = "Input", IsRequired = false, Order = 4)]
-        public Variant Input
-        {
-            get { return m_input;  }
-            set { m_input = value; }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.TestStackRequest; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.TestStackRequest_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.TestStackRequest_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteEncodeable("RequestHeader", RequestHeader, typeof(RequestHeader));
-            encoder.WriteUInt32("TestId", TestId);
-            encoder.WriteInt32("Iteration", Iteration);
-            encoder.WriteVariant("Input", Input);
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            RequestHeader = (RequestHeader)decoder.ReadEncodeable("RequestHeader", typeof(RequestHeader));
-            TestId = decoder.ReadUInt32("TestId");
-            Iteration = decoder.ReadInt32("Iteration");
-            Input = decoder.ReadVariant("Input");
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            TestStackRequest value = encodeable as TestStackRequest;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_requestHeader, value.m_requestHeader)) return false;
-            if (!Utils.IsEqual(m_testId, value.m_testId)) return false;
-            if (!Utils.IsEqual(m_iteration, value.m_iteration)) return false;
-            if (!Utils.IsEqual(m_input, value.m_input)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            TestStackRequest clone = (TestStackRequest)this.MemberwiseClone();
-
-            clone.m_requestHeader = (RequestHeader)Utils.Clone(this.m_requestHeader);
-            clone.m_testId = (uint)Utils.Clone(this.m_testId);
-            clone.m_iteration = (int)Utils.Clone(this.m_iteration);
-            clone.m_input = (Variant)Utils.Clone(this.m_input);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private RequestHeader m_requestHeader;
-        private uint m_testId;
-        private int m_iteration;
-        private Variant m_input;
-        #endregion
-    }
-    #endif
-    #endregion
-
-    #region TestStackResponse Class
-    #if (!OPCUA_EXCLUDE_TestStackResponse)
-    /// <summary>
-    /// A description for the TestStackResponse DataType.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class TestStackResponse : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public TestStackResponse()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_responseHeader = new ResponseHeader();
-            m_output = Variant.Null;
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A description for the ResponseHeader field.
-        /// </summary>
-        [DataMember(Name = "ResponseHeader", IsRequired = false, Order = 1)]
-        public ResponseHeader ResponseHeader
-        {
-            get
-            {
-                return m_responseHeader;
-            }
-
-            set
-            {
-                m_responseHeader = value;
-
-                if (value == null)
-                {
-                    m_responseHeader = new ResponseHeader();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Output field.
-        /// </summary>
-        [DataMember(Name = "Output", IsRequired = false, Order = 2)]
-        public Variant Output
-        {
-            get { return m_output;  }
-            set { m_output = value; }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.TestStackResponse; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.TestStackResponse_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.TestStackResponse_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteEncodeable("ResponseHeader", ResponseHeader, typeof(ResponseHeader));
-            encoder.WriteVariant("Output", Output);
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            ResponseHeader = (ResponseHeader)decoder.ReadEncodeable("ResponseHeader", typeof(ResponseHeader));
-            Output = decoder.ReadVariant("Output");
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            TestStackResponse value = encodeable as TestStackResponse;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_responseHeader, value.m_responseHeader)) return false;
-            if (!Utils.IsEqual(m_output, value.m_output)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            TestStackResponse clone = (TestStackResponse)this.MemberwiseClone();
-
-            clone.m_responseHeader = (ResponseHeader)Utils.Clone(this.m_responseHeader);
-            clone.m_output = (Variant)Utils.Clone(this.m_output);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private ResponseHeader m_responseHeader;
-        private Variant m_output;
-        #endregion
-    }
-    #endif
-    #endregion
-
-    #region TestStackExRequest Class
-    #if (!OPCUA_EXCLUDE_TestStackExRequest)
-    /// <summary>
-    /// A description for the TestStackExRequest DataType.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class TestStackExRequest : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public TestStackExRequest()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_requestHeader = new RequestHeader();
-            m_testId = (uint)0;
-            m_iteration = (int)0;
-            m_input = new CompositeTestType();
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A description for the RequestHeader field.
-        /// </summary>
-        [DataMember(Name = "RequestHeader", IsRequired = false, Order = 1)]
-        public RequestHeader RequestHeader
-        {
-            get
-            {
-                return m_requestHeader;
-            }
-
-            set
-            {
-                m_requestHeader = value;
-
-                if (value == null)
-                {
-                    m_requestHeader = new RequestHeader();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the TestId field.
-        /// </summary>
-        [DataMember(Name = "TestId", IsRequired = false, Order = 2)]
-        public uint TestId
-        {
-            get { return m_testId;  }
-            set { m_testId = value; }
-        }
-
-        /// <summary>
-        /// A description for the Iteration field.
-        /// </summary>
-        [DataMember(Name = "Iteration", IsRequired = false, Order = 3)]
-        public int Iteration
-        {
-            get { return m_iteration;  }
-            set { m_iteration = value; }
-        }
-
-        /// <summary>
-        /// A description for the Input field.
-        /// </summary>
-        [DataMember(Name = "Input", IsRequired = false, Order = 4)]
-        public CompositeTestType Input
-        {
-            get
-            {
-                return m_input;
-            }
-
-            set
-            {
-                m_input = value;
-
-                if (value == null)
-                {
-                    m_input = new CompositeTestType();
-                }
-            }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.TestStackExRequest; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.TestStackExRequest_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.TestStackExRequest_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteEncodeable("RequestHeader", RequestHeader, typeof(RequestHeader));
-            encoder.WriteUInt32("TestId", TestId);
-            encoder.WriteInt32("Iteration", Iteration);
-            encoder.WriteEncodeable("Input", Input, typeof(CompositeTestType));
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            RequestHeader = (RequestHeader)decoder.ReadEncodeable("RequestHeader", typeof(RequestHeader));
-            TestId = decoder.ReadUInt32("TestId");
-            Iteration = decoder.ReadInt32("Iteration");
-            Input = (CompositeTestType)decoder.ReadEncodeable("Input", typeof(CompositeTestType));
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            TestStackExRequest value = encodeable as TestStackExRequest;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_requestHeader, value.m_requestHeader)) return false;
-            if (!Utils.IsEqual(m_testId, value.m_testId)) return false;
-            if (!Utils.IsEqual(m_iteration, value.m_iteration)) return false;
-            if (!Utils.IsEqual(m_input, value.m_input)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            TestStackExRequest clone = (TestStackExRequest)this.MemberwiseClone();
-
-            clone.m_requestHeader = (RequestHeader)Utils.Clone(this.m_requestHeader);
-            clone.m_testId = (uint)Utils.Clone(this.m_testId);
-            clone.m_iteration = (int)Utils.Clone(this.m_iteration);
-            clone.m_input = (CompositeTestType)Utils.Clone(this.m_input);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private RequestHeader m_requestHeader;
-        private uint m_testId;
-        private int m_iteration;
-        private CompositeTestType m_input;
-        #endregion
-    }
-    #endif
-    #endregion
-
-    #region TestStackExResponse Class
-    #if (!OPCUA_EXCLUDE_TestStackExResponse)
-    /// <summary>
-    /// A description for the TestStackExResponse DataType.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class TestStackExResponse : IEncodeable
-    {
-        #region Constructors
-        /// <summary>
-        /// The default constructor.
-        /// </summary>
-        public TestStackExResponse()
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Called by the .NET framework during deserialization.
-        /// </summary>
-        [OnDeserializing]
-        private void Initialize(StreamingContext context)
-        {
-            Initialize();
-        }
-
-        /// <summary>
-        /// Sets private members to default values.
-        /// </summary>
-        private void Initialize()
-        {
-            m_responseHeader = new ResponseHeader();
-            m_output = new CompositeTestType();
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// A description for the ResponseHeader field.
-        /// </summary>
-        [DataMember(Name = "ResponseHeader", IsRequired = false, Order = 1)]
-        public ResponseHeader ResponseHeader
-        {
-            get
-            {
-                return m_responseHeader;
-            }
-
-            set
-            {
-                m_responseHeader = value;
-
-                if (value == null)
-                {
-                    m_responseHeader = new ResponseHeader();
-                }
-            }
-        }
-
-        /// <summary>
-        /// A description for the Output field.
-        /// </summary>
-        [DataMember(Name = "Output", IsRequired = false, Order = 2)]
-        public CompositeTestType Output
-        {
-            get
-            {
-                return m_output;
-            }
-
-            set
-            {
-                m_output = value;
-
-                if (value == null)
-                {
-                    m_output = new CompositeTestType();
-                }
-            }
-        }
-        #endregion
-
-        #region IEncodeable Members
-        /// <summary cref="IEncodeable.TypeId" />
-        public virtual ExpandedNodeId TypeId
-        {
-            get { return DataTypeIds.TestStackExResponse; }
-        }
-
-        /// <summary cref="IEncodeable.BinaryEncodingId" />
-        public virtual ExpandedNodeId BinaryEncodingId
-        {
-            get { return ObjectIds.TestStackExResponse_Encoding_DefaultBinary; }
-        }
-
-        /// <summary cref="IEncodeable.XmlEncodingId" />
-        public virtual ExpandedNodeId XmlEncodingId
-        {
-            get { return ObjectIds.TestStackExResponse_Encoding_DefaultXml; }
-        }
-
-        /// <summary cref="IEncodeable.Encode(IEncoder)" />
-        public virtual void Encode(IEncoder encoder)
-        {
-            encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            encoder.WriteEncodeable("ResponseHeader", ResponseHeader, typeof(ResponseHeader));
-            encoder.WriteEncodeable("Output", Output, typeof(CompositeTestType));
-
-            encoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.Decode(IDecoder)" />
-        public virtual void Decode(IDecoder decoder)
-        {
-            decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
-
-            ResponseHeader = (ResponseHeader)decoder.ReadEncodeable("ResponseHeader", typeof(ResponseHeader));
-            Output = (CompositeTestType)decoder.ReadEncodeable("Output", typeof(CompositeTestType));
-
-            decoder.PopNamespace();
-        }
-
-        /// <summary cref="IEncodeable.IsEqual(IEncodeable)" />
-        public virtual bool IsEqual(IEncodeable encodeable)
-        {
-            if (Object.ReferenceEquals(this, encodeable))
-            {
-                return true;
-            }
-
-            TestStackExResponse value = encodeable as TestStackExResponse;
-
-            if (value == null)
-            {
-                return false;
-            }
-
-            if (!Utils.IsEqual(m_responseHeader, value.m_responseHeader)) return false;
-            if (!Utils.IsEqual(m_output, value.m_output)) return false;
-
-            return true;
-        }
-
-        /// <summary cref="ICloneable.Clone" />
-        public virtual object Clone()
-        {
-            TestStackExResponse clone = (TestStackExResponse)this.MemberwiseClone();
-
-            clone.m_responseHeader = (ResponseHeader)Utils.Clone(this.m_responseHeader);
-            clone.m_output = (CompositeTestType)Utils.Clone(this.m_output);
-
-            return clone;
-        }
-        #endregion
-
-        #region Private Fields
-        private ResponseHeader m_responseHeader;
-        private CompositeTestType m_output;
-        #endregion
-    }
     #endif
     #endregion
 

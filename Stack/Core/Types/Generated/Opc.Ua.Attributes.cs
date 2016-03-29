@@ -65,12 +65,12 @@ namespace Opc.Ua
         public const uint Description = 5;
 
         /// <summary>
-        /// Indicates which attributes are writeable.
+        /// Indicates which attributes are writable.
         /// </summary>
         public const uint WriteMask = 6;
 
         /// <summary>
-        /// Indicates which attributes are writeable by the current user.
+        /// Indicates which attributes are writable by the current user.
         /// </summary>
         public const uint UserWriteMask = 7;
 
