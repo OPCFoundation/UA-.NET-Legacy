@@ -138,7 +138,6 @@ namespace Quickstarts.Sortiermaschine.Client
 
                 if (m_session == null)
                 {
-                    SortiermaschineCB.Enabled = false;
                     return;
                 }
 
@@ -147,11 +146,6 @@ namespace Quickstarts.Sortiermaschine.Client
                 {
                     m_connectedOnce = true;
                 }
-
-                SortiermaschineCB.Enabled = true;
-
-                // update list of Sortiermaschines
-                GetSortiermaschines();
             }
             catch (Exception exception)
             {
@@ -164,14 +158,7 @@ namespace Quickstarts.Sortiermaschine.Client
         /// </summary>
         private void Server_ReconnectStarting(object sender, EventArgs e)
         {
-            try
-            {
-                SortiermaschineCB.Enabled = false;
-            }
-            catch (Exception exception)
-            {
-                ClientUtils.HandleException(this.Text, exception);
-            }
+
         }
 
         /// <summary>
@@ -189,7 +176,6 @@ namespace Quickstarts.Sortiermaschine.Client
                     break;
                 }
 
-                SortiermaschineCB.Enabled = true;
             }
             catch (Exception exception)
             {
@@ -206,130 +192,7 @@ namespace Quickstarts.Sortiermaschine.Client
         }
         #endregion
 
-        #region Private Methods
-        /// <summary>
-        /// Gets the Sortiermaschines.
-        /// </summary>
-        private void GetSortiermaschines()
-        {
-            SortiermaschineCB.Items.Clear();
-
-            BrowseDescription nodeToBrowse = new BrowseDescription();
-
-            nodeToBrowse.NodeId = Opc.Ua.ObjectIds.ObjectsFolder;
-            nodeToBrowse.BrowseDirection = BrowseDirection.Forward;
-            nodeToBrowse.ReferenceTypeId = Opc.Ua.ReferenceTypeIds.HierarchicalReferences;
-            nodeToBrowse.IncludeSubtypes = true;
-            nodeToBrowse.NodeClassMask = (uint)(NodeClass.Object);
-            nodeToBrowse.ResultMask = (uint)(BrowseResultMask.All);
-
-            ReferenceDescriptionCollection references = ClientUtils.Browse(
-                m_session,
-                nodeToBrowse,
-                false);
-
-            if (references != null)
-            {
-                NodeId SortiermaschineTypeId = ExpandedNodeId.ToNodeId(ObjectTypeIds.SortiermaschineType, m_session.NamespaceUris);
-
-                for (int ii = 0; ii < references.Count; ii++)
-                {
-                    if (SortiermaschineTypeId == references[ii].TypeDefinition)
-                    {
-                        SortiermaschineCB.Items.Add(references[ii]);
-                    }
-                }
-
-                if (SortiermaschineCB.Items.Count > 0)
-                {
-                    SortiermaschineCB.SelectedIndex = 0;
-                }
-            }
-        }
-        #endregion
-
         #region Event Handlers
-        private void SortiermaschineCB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (m_session == null)
-                {
-                    return;
-                }
-
-                if (m_subscription != null)
-                {
-                    m_session.RemoveSubscription(m_subscription);
-                    m_subscription = null;
-                }
-
-                ReferenceDescription Sortiermaschine = (ReferenceDescription)SortiermaschineCB.SelectedItem;
-
-                if (Sortiermaschine == null)
-                {
-                    return;
-                }
-
-                m_subscription = new Subscription();
-
-                m_subscription.PublishingEnabled = true;
-                m_subscription.PublishingInterval = 1000;
-                m_subscription.Priority = 1;
-                m_subscription.KeepAliveCount = 10;
-                m_subscription.LifetimeCount = 20;
-                m_subscription.MaxNotificationsPerPublish = 1000;
-
-                m_session.AddSubscription(m_subscription);
-                m_subscription.Create();
-
-                NamespaceTable wellKnownNamespaceUris = new NamespaceTable();
-                wellKnownNamespaceUris.Append(Namespaces.Sortiermaschine);
-
-                string[] browsePaths = new string[]
-                {
-                    "1:PipeX001/1:FTX001/1:Output",
-                    "1:DrumX001/1:LIX001/1:Output",
-                    "1:PipeX002/1:FTX002/1:Output",
-                    "1:LCX001/1:SetPoint",
-                };
-
-                List<NodeId> nodes = ClientUtils.TranslateBrowsePaths(
-                    m_session,
-                    (NodeId)Sortiermaschine.NodeId,
-                    wellKnownNamespaceUris,
-                    browsePaths);
-
-                Control[] controls = new Control[]
-                {
-                    DisplayAirFlowRate,
-                    DisplayBoxHeight,
-                    DisplayHookPressure,
-                    DisplayCounterWaste
-                };
-
-                for (int ii = 0; ii < nodes.Count; ii++)
-                {
-                    controls[ii].Text = "---";
-
-                    if (nodes[ii] != null)
-                    {
-                        MonitoredItem monitoredItem = new MonitoredItem();
-                        monitoredItem.StartNodeId = nodes[ii];
-                        monitoredItem.AttributeId = Attributes.Value;
-                        monitoredItem.Handle = controls[ii];
-                        monitoredItem.Notification += new MonitoredItemNotificationEventHandler(MonitoredItem_Notification);
-                        m_subscription.AddItem(monitoredItem);
-                    }
-                }
-
-                m_subscription.ApplyChanges();
-            }
-            catch (Exception exception)
-            {
-                ClientUtils.HandleException(this.Text, exception);
-            }
-        }
 
         void MonitoredItem_Notification(MonitoredItem monitoredItem, MonitoredItemNotificationEventArgs e)
         {

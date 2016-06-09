@@ -66,6 +66,7 @@ namespace Quickstarts.Sortiermaschine.Client
             this.HelpMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Help_ContentsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.MainPN = new System.Windows.Forms.Panel();
+            this.InputLampLabel1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.InputLamp = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -84,12 +85,10 @@ namespace Quickstarts.Sortiermaschine.Client
             this.DisplayAirFlowRate = new System.Windows.Forms.Label();
             this.AirFlowRate = new System.Windows.Forms.Label();
             this.SortiermaschineLB = new System.Windows.Forms.Label();
-            this.SortiermaschineCB = new System.Windows.Forms.ComboBox();
             this.ConnectServerCTRL = new Opc.Ua.Client.Controls.ConnectServerCtrl();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.InputLampLabel1 = new System.Windows.Forms.Label();
             this.MenuBar.SuspendLayout();
             this.MainPN.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -159,7 +158,6 @@ namespace Quickstarts.Sortiermaschine.Client
             this.MainPN.Controls.Add(this.label2);
             this.MainPN.Controls.Add(this.textBox2);
             this.MainPN.Controls.Add(this.button3);
-            this.MainPN.Controls.Add(this.SortiermaschineCB);
             this.MainPN.Controls.Add(this.ResetCounter);
             this.MainPN.Controls.Add(this.ResetCounterWaste);
             this.MainPN.Controls.Add(this.DisplayCounter);
@@ -178,6 +176,15 @@ namespace Quickstarts.Sortiermaschine.Client
             this.MainPN.Padding = new System.Windows.Forms.Padding(2, 2, 2, 0);
             this.MainPN.Size = new System.Drawing.Size(884, 365);
             this.MainPN.TabIndex = 3;
+            // 
+            // InputLampLabel1
+            // 
+            this.InputLampLabel1.AutoSize = true;
+            this.InputLampLabel1.Location = new System.Drawing.Point(367, 174);
+            this.InputLampLabel1.Name = "InputLampLabel1";
+            this.InputLampLabel1.Size = new System.Drawing.Size(89, 13);
+            this.InputLampLabel1.TabIndex = 21;
+            this.InputLampLabel1.Text = "InputLampLabel1";
             // 
             // textBox1
             // 
@@ -341,15 +348,6 @@ namespace Quickstarts.Sortiermaschine.Client
             this.SortiermaschineLB.TabIndex = 1;
             this.SortiermaschineLB.Text = "Sortiermaschine";
             // 
-            // SortiermaschineCB
-            // 
-            this.SortiermaschineCB.FormattingEnabled = true;
-            this.SortiermaschineCB.Location = new System.Drawing.Point(544, 13);
-            this.SortiermaschineCB.Name = "SortiermaschineCB";
-            this.SortiermaschineCB.Size = new System.Drawing.Size(164, 21);
-            this.SortiermaschineCB.TabIndex = 2;
-            this.SortiermaschineCB.SelectedIndexChanged += new System.EventHandler(this.SortiermaschineCB_SelectedIndexChanged);
-            // 
             // ConnectServerCTRL
             // 
             this.ConnectServerCTRL.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -400,15 +398,6 @@ namespace Quickstarts.Sortiermaschine.Client
             this.linkLabel1.Text = "www.hs-esslingen.de";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // InputLampLabel1
-            // 
-            this.InputLampLabel1.AutoSize = true;
-            this.InputLampLabel1.Location = new System.Drawing.Point(367, 174);
-            this.InputLampLabel1.Name = "InputLampLabel1";
-            this.InputLampLabel1.Size = new System.Drawing.Size(89, 13);
-            this.InputLampLabel1.TabIndex = 21;
-            this.InputLampLabel1.Text = "InputLampLabel1";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -454,7 +443,6 @@ namespace Quickstarts.Sortiermaschine.Client
         private System.Windows.Forms.Label BoxHeight;
         private System.Windows.Forms.Label DisplayAirFlowRate;
         private System.Windows.Forms.Label AirFlowRate;
-        private System.Windows.Forms.ComboBox SortiermaschineCB;
         private System.Windows.Forms.Label SortiermaschineLB;
         private Opc.Ua.Client.Controls.ConnectServerCtrl ConnectServerCTRL;
         private System.Windows.Forms.StatusStrip StatusBar;

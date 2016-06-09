@@ -51,7 +51,9 @@
   </TransportQuotas>
   <ServerConfiguration>
     <BaseAddresses>
+      <!--
       <ua:String>http://localhost:62540/Quickstarts/BoilerServer</ua:String>
+      -->
       <ua:String>opc.tcp://localhost:62541/Quickstarts/BoilerServer</ua:String>
     </BaseAddresses>
     <SecurityPolicies>
