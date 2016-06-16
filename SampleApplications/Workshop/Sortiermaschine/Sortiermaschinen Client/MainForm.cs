@@ -74,7 +74,6 @@ namespace Quickstarts.Sortiermaschine.Client
         private ApplicationConfiguration m_configuration;
         private Session m_session;
         private Subscription m_subscription;
-        private MonitoredItem monitoredItem;
         private bool m_connectedOnce;
         #endregion
 
