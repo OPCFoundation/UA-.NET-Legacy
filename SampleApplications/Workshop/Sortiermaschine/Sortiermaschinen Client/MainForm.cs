@@ -53,6 +53,8 @@ namespace Quickstarts.Sortiermaschine.Client
         {
             InitializeComponent();
             this.Icon = ClientUtils.GetAppIcon();
+            nodes = new List<NodeId>();
+            nodes.Add(new NodeId("|var|Raspberry Pi.Application.PLC_PRG.iCounter", 4));
         }
 
         /// <summary>
@@ -75,6 +77,7 @@ namespace Quickstarts.Sortiermaschine.Client
         private Session m_session;
         private Subscription m_subscription;
         private bool m_connectedOnce;
+        private List<NodeId> nodes;
         #endregion
 
         #region Private Methods
@@ -240,12 +243,84 @@ namespace Quickstarts.Sortiermaschine.Client
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DisplayCounterWaste.Text = "0";
+            try
+            {
+                DisplayCounterWaste.Text = "0";
+                WriteValue valueToWrite = new WriteValue();
+
+                valueToWrite.NodeId = nodes[3];
+                valueToWrite.AttributeId = Attributes.Value;
+                valueToWrite.Value.Value = 0;
+                valueToWrite.Value.StatusCode = StatusCodes.Good;
+                valueToWrite.Value.ServerTimestamp = DateTime.MinValue;
+                valueToWrite.Value.SourceTimestamp = DateTime.MinValue;
+
+                WriteValueCollection valuesToWrite = new WriteValueCollection();
+                valuesToWrite.Add(valueToWrite);
+
+                // write current value.
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
+
+                m_session.Write(
+                    null,
+                    valuesToWrite,
+                    out results,
+                    out diagnosticInfos);
+
+                ClientBase.ValidateResponse(results, valuesToWrite);
+                ClientBase.ValidateDiagnosticInfos(diagnosticInfos, valuesToWrite);
+
+                if (StatusCode.IsBad(results[0]))
+                {
+                    throw new ServiceResultException(results[0]);
+                }
+            }
+            catch (Exception exception)
+            {
+                ClientUtils.HandleException("Error Writing Value", exception);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            DisplayCounter.Text = "0";
+            try
+            {
+                DisplayCounter.Text = "0";
+                WriteValue valueToWrite = new WriteValue();
+
+                valueToWrite.NodeId = nodes[4];
+                valueToWrite.AttributeId = Attributes.Value;
+                valueToWrite.Value.Value = 0;
+                valueToWrite.Value.StatusCode = StatusCodes.Good;
+                valueToWrite.Value.ServerTimestamp = DateTime.MinValue;
+                valueToWrite.Value.SourceTimestamp = DateTime.MinValue;
+
+                WriteValueCollection valuesToWrite = new WriteValueCollection();
+                valuesToWrite.Add(valueToWrite);
+
+                // write current value.
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
+
+                m_session.Write(
+                    null,
+                    valuesToWrite,
+                    out results,
+                    out diagnosticInfos);
+
+                ClientBase.ValidateResponse(results, valuesToWrite);
+                ClientBase.ValidateDiagnosticInfos(diagnosticInfos, valuesToWrite);
+
+                if (StatusCode.IsBad(results[0]))
+                {
+                    throw new ServiceResultException(results[0]);
+                }
+            }
+            catch (Exception exception)
+            {
+                ClientUtils.HandleException("Error Writing Value", exception);
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -310,10 +385,6 @@ namespace Quickstarts.Sortiermaschine.Client
 
                 m_session.AddSubscription(m_subscription);
                 m_subscription.Create();
-
-                List<NodeId> nodes = new List<NodeId>();
-
-                nodes.Add(new NodeId("|var|Raspberry Pi.Application.PLC_PRG.iCounter", 4));
 
                 Control[] controls = new Control[] 
                 {
