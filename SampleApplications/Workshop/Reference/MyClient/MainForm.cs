@@ -247,7 +247,8 @@ namespace Quickstarts.MyClient
             {
                 //ReferenceDescription reference = (ReferenceDescription)BrowseCTRL.BrowseCTRL.BrowseTV.SelectedNode.Tag;
                 monitoredItem = new MonitoredItem(m_subscription.DefaultItem);
-                monitoredItem.StartNodeId = (NodeId)BrowseCTRL.SelectedNode.NodeId;
+                //monitoredItem.StartNodeId = (NodeId)BrowseCTRL.SelectedNode.NodeId;
+                monitoredItem.StartNodeId = new NodeId("|var|Raspberry Pi.Application.PLC_PRG.iCounter",4);
                 //monitoredItem.DisplayName = Utils.Format("{0}", reference);
                 monitoredItem.AttributeId = Attributes.Value;
                 monitoredItem.MonitoringMode = MonitoringMode.Reporting;

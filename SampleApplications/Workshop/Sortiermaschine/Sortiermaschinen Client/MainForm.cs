@@ -247,61 +247,7 @@ namespace Quickstarts.Sortiermaschine.Client
         private void button2_Click(object sender, EventArgs e)
         {
             DisplayCounter.Text = "0";
-        }   
-
-      private void button3_Click(object sender, EventArgs e)
-        {
-          /*  if (m_subscription == null)
-            {
-                m_subscription = new Subscription(m_session.DefaultSubscription);
-                m_subscription.PublishingEnabled = true;
-                m_subscription.PublishingInterval = 1000;
-                m_session.AddSubscription(m_subscription);
-                m_subscription.Create();
-            }
-
-            if (monitoredItem == null)
-            {
-                monitoredItem = new MonitoredItem(m_subscription.DefaultItem);
-                monitoredItem.StartNodeId = (NodeId) BrowseCTRL.SelectedNode.NodeId;
-                monitoredItem.AttributeId = Attributes.Value;
-                monitoredItem.MonitoringMode = MonitoringMode.Reporting;
-                monitoredItem.SamplingInterval = 1000;
-                monitoredItem.QueueSize = 0;
-                monitoredItem.DiscardOldest = true;
-                // define event handler for this item, and then add to subscription
-                monitoredItem.Notification += new MonitoredItemNotificationEventHandler(monitoredItem_Notification);
-                m_subscription.AddItem(monitoredItem);
-
-
-                if (outputWindow == null)
-                {
-                    outputWindow = new SubscriptionOutput();
-                }
-                outputWindow.Show();
-            }
-
-
         }
-        private SubscriptionOutput outputWindow;
-        void monitoredItem_Notification(MonitoredItem monitoredItem, MonitoredItemNotificationEventArgs e)
-        {
-            if (this.InvokeRequired)
-            {
-                this.BeginInvoke(new MonitoredItemNotificationEventHandler(monitoredItem_Notification), monitoredItem, e);
-                return;
-            }
-            MonitoredItemNotification notification = e.NotificationValue as MonitoredItemNotification;
-            if (notification == null)
-            {
-                return;
-            } 
-              SubscriptionOut.label1.Text = "value: " + Utils.Format("{0}", notification.Value.WrappedValue.ToString()) +
-              ";\nStatusCode: " + Utils.Format("{0}", notification.Value.StatusCode.ToString()) +
-              ";\nSource timestamp: " + notification.Value.SourceTimestamp.ToString() +
-              ";\nServer timestamp: " + notification.Value.ServerTimestamp.ToString();
-          */    
-        } 
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
@@ -336,9 +282,71 @@ namespace Quickstarts.Sortiermaschine.Client
                         break;
                 }
             }
-            
+
         }
-    } 
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (m_session == null)
+                {
+                    return;
+                }
 
+                if (m_subscription != null)
+                {
+                    m_session.RemoveSubscription(m_subscription);
+                    m_subscription = null;
+                }
+
+                m_subscription = new Subscription();
+
+                m_subscription.PublishingEnabled = true;
+                m_subscription.PublishingInterval = 1000;
+                m_subscription.Priority = 1;
+                m_subscription.KeepAliveCount = 10;
+                m_subscription.LifetimeCount = 20;
+                m_subscription.MaxNotificationsPerPublish = 1000;
+
+                m_session.AddSubscription(m_subscription);
+                m_subscription.Create();
+
+                List<NodeId> nodes = new List<NodeId>();
+
+                nodes.Add(new NodeId("|var|Raspberry Pi.Application.PLC_PRG.iCounter", 4));
+
+                Control[] controls = new Control[] 
+                {
+                    DisplayAirFlowRate,
+                    DisplayHookPressure,
+                    DisplayBoxHeight,
+                    DisplayCounterWaste,
+                    DisplayCounter
+                };
+
+                for (int ii = 0; ii < nodes.Count; ii++)
+                {
+                    controls[ii].Text = "---";
+
+                    if (nodes[ii] != null)
+                    {
+                        MonitoredItem monitoredItem = new MonitoredItem();
+                        monitoredItem.StartNodeId = nodes[ii];
+                        monitoredItem.AttributeId = Attributes.Value;
+                        monitoredItem.Handle = controls[ii];
+                        monitoredItem.Notification += new MonitoredItemNotificationEventHandler(MonitoredItem_Notification);
+                        m_subscription.AddItem(monitoredItem);
+                    }
+                }
+
+                m_subscription.ApplyChanges();
+            }
+            catch (Exception exception)
+            {
+                ClientUtils.HandleException(this.Text, exception);
+            }
+        }
+
+    }
 }
