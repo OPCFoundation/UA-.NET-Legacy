@@ -53,6 +53,8 @@ namespace Quickstarts.Sortiermaschine.Client
         {
             InitializeComponent();
             this.Icon = ClientUtils.GetAppIcon();
+            // Hier die Liste der Nodes Initaialisieren, für die ein MonitoredItem erstellt werden soll. In der Reihenfolge 
+            // von Oben nach unten wie im MainForm abgeblide.
             nodes = new List<NodeId>();
             nodes.Add(new NodeId("|var|Raspberry Pi.Application.PLC_PRG.iCounter", 4));
         }
@@ -240,7 +242,9 @@ namespace Quickstarts.Sortiermaschine.Client
         {
             Process.Start(e.Link.LinkData as string);
         }
-
+        /// <summary>
+        /// Setzt den CounterWaste Wert im Server auf 0
+        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -282,6 +286,9 @@ namespace Quickstarts.Sortiermaschine.Client
             }
         }
 
+        /// <summary>
+        /// Setzt den Counter Wert im Server auf 0
+        /// </summary>
         private void button2_Click(object sender, EventArgs e)
         {
             try
