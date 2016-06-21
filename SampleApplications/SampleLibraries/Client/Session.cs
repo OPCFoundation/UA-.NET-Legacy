@@ -1964,7 +1964,10 @@ namespace Opc.Ua.Client
             bool requireEncryption = securityPolicyUri != SecurityPolicies.None;
             if (!requireEncryption)
             {
-                requireEncryption = identityPolicy.SecurityPolicyUri != SecurityPolicies.None;
+                // OPC-UA 1.03 Part 4 7.37: null or empty string => fall back to SecureChannel policy
+                requireEncryption = identityPolicy.SecurityPolicyUri != null &&
+                    identityPolicy.SecurityPolicyUri != "" &&
+                    identityPolicy.SecurityPolicyUri != SecurityPolicies.None;
             }
 
             // validate the server certificate.
