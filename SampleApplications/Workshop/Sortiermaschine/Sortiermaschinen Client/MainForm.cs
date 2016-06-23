@@ -53,10 +53,6 @@ namespace Quickstarts.Sortiermaschine.Client
         {
             InitializeComponent();
             this.Icon = ClientUtils.GetAppIcon();
-            // Hier die Liste der Nodes Initaialisieren, für die ein MonitoredItem erstellt werden soll. In der Reihenfolge 
-            // von Oben nach unten wie im MainForm abgeblide.
-            nodes = new List<NodeId>();
-            nodes.Add(new NodeId("|var|Raspberry Pi.Application.PLC_PRG.iCounter", 4));
         }
 
         /// <summary>
@@ -69,8 +65,16 @@ namespace Quickstarts.Sortiermaschine.Client
             this.Icon = ClientUtils.GetAppIcon();
 
             ConnectServerCTRL.Configuration = m_configuration = configuration;
-            ConnectServerCTRL.ServerUrl = "opc.tcp://localhost:62541/Quickstarts/SortiermaschineServer";
+            ConnectServerCTRL.ServerUrl = "opc.tcp://192.168.0.54:4840"; // IP-Adresse der Festo-CPX-CEC-Steuerung
             this.Text = m_configuration.ApplicationName;
+            // Hier die Liste der Nodes Initaialisieren, für die ein MonitoredItem erstellt werden soll. In der Reihenfolge 
+            // von Oben nach unten wie im MainForm abgeblide.
+            nodes = new List<NodeId>();
+            nodes.Add(new NodeId("|var|CPX-CEC-C1-V3.Application.Main_Ablauf.Flow", 2));
+            nodes.Add(new NodeId("|var|CPX-CEC-C1-V3.Application.Main_Ablauf.PGreif", 2));
+            nodes.Add(new NodeId("|var|CPX-CEC-C1-V3.Application.Main_Ablauf.HoehePuk", 2));
+            nodes.Add(new NodeId("|var|CPX-CEC-C1-V3.Application.Main_Ablauf.Ausschusszaehler", 2));
+            nodes.Add(new NodeId("|var|CPX-CEC-C1-V3.Application.Main_Ablauf.PukZaehler", 2));
         }
         #endregion
 
@@ -249,12 +253,16 @@ namespace Quickstarts.Sortiermaschine.Client
         {
             try
             {
+                if (m_session == null)
+                {
+                    return;
+                }
                 DisplayCounterWaste.Text = "0";
                 WriteValue valueToWrite = new WriteValue();
 
                 valueToWrite.NodeId = nodes[3];
                 valueToWrite.AttributeId = Attributes.Value;
-                valueToWrite.Value.Value = 0;
+                valueToWrite.Value.Value = Convert.ToInt16("0");
                 valueToWrite.Value.StatusCode = StatusCodes.Good;
                 valueToWrite.Value.ServerTimestamp = DateTime.MinValue;
                 valueToWrite.Value.SourceTimestamp = DateTime.MinValue;
@@ -293,12 +301,16 @@ namespace Quickstarts.Sortiermaschine.Client
         {
             try
             {
+                if (m_session == null)
+                {
+                    return;
+                }
                 DisplayCounter.Text = "0";
                 WriteValue valueToWrite = new WriteValue();
 
                 valueToWrite.NodeId = nodes[4];
                 valueToWrite.AttributeId = Attributes.Value;
-                valueToWrite.Value.Value = 0;
+                valueToWrite.Value.Value = Convert.ToInt16("0");
                 valueToWrite.Value.StatusCode = StatusCodes.Good;
                 valueToWrite.Value.ServerTimestamp = DateTime.MinValue;
                 valueToWrite.Value.SourceTimestamp = DateTime.MinValue;
