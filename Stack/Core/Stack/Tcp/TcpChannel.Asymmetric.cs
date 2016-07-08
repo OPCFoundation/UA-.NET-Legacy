@@ -128,6 +128,11 @@ namespace Opc.Ua.Bindings
         /// </summary>
         protected byte[] CreateNonce()
         {
+            if (SecurityPolicyUri == SecurityPolicies.None)
+            {
+                return null;
+            }
+
             if (m_random == null)
             {
                 m_random = new RNGCryptoServiceProvider();
