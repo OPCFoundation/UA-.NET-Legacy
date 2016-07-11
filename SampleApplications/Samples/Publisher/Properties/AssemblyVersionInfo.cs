@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Reciprocal Community License ("RCL") Version 1.00
  * 
@@ -38,10 +38,10 @@ internal static class AssemblyVersionInfo
     /// <summary>
     /// The current build version.
     /// </summary>
-    public const string CurrentVersion = "1.02.336.0";
+    public const string CurrentVersion = "1.03.340.0";
 
     /// <summary>
     /// The current build file version.
     /// </summary>
-    public const string CurrentFileVersion = "1.02.336.0";
+    public const string CurrentFileVersion = "1.03.340.0";
 }
