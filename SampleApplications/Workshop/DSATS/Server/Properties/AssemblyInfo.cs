@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  * 
@@ -39,7 +39,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OPC Foundation")]
 [assembly: AssemblyProduct("OPC UA Quickstarts")]
-[assembly: AssemblyCopyright("Copyright © OPC Foundation 2011")]
+[assembly: AssemblyCopyright("Copyright © OPC Foundation 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

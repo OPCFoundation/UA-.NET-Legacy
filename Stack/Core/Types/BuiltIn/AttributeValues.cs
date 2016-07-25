@@ -1,4 +1,4 @@
-/* Copyright (c) 1996-2015, OPC Foundation. All rights reserved.
+/* Copyright (c) 1996-2016, OPC Foundation. All rights reserved.
 
    The source code in this file is covered under a dual-license scenario:
      - RCL: for OPC Foundation members in good-standing
@@ -97,8 +97,18 @@ namespace Opc.Ua
         /// Indicates if the Variable generates SemanticChangeEvents when its value changes.
         /// </summary>
         public const byte SemanticChange = 0x10;
+
+        /// <summary>
+        /// Indicates if the current StatusCode of the value is writable.
+        /// </summary>
+        public const byte StatusWrite = 0x20;
+
+        /// <summary>
+        /// Indicates if the current SourceTimestamp is writable.
+        /// </summary>
+        public const byte TimestampWrite = 0x40;
     }
-        
+
     /// <summary>
     /// Constants defined for the ValueRank attribute.
     /// </summary>

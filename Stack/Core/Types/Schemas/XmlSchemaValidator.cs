@@ -1,4 +1,4 @@
-/* Copyright (c) 1996-2015, OPC Foundation. All rights reserved.
+/* Copyright (c) 1996-2016, OPC Foundation. All rights reserved.
 
    The source code in this file is covered under a dual-license scenario:
      - RCL: for OPC Foundation members in good-standing
@@ -84,7 +84,7 @@ namespace Opc.Ua.Schema.Xml
             m_schema = XmlSchema.Read(stream, new ValidationEventHandler(OnValidate));
 
             foreach (XmlSchemaImport import in m_schema.Includes)
-            {                    
+            {
                 if (import.Namespace == Namespaces.OpcUa)
                 {
                     StreamReader strm = new StreamReader(Assembly.Load("Opc.Ua.Core").GetManifestResourceStream("Opc.Ua.Model.Opc.Ua.Types.xsd"));
@@ -103,20 +103,24 @@ namespace Opc.Ua.Schema.Xml
 
                 if (!fileInfo.Exists)
                 {
-                    StreamReader strm = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(location));
-                    import.Schema = XmlSchema.Read(strm, new ValidationEventHandler(OnValidate));
+                    using (StreamReader strm = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(location)))
+                    {
+                        import.Schema = XmlSchema.Read(strm, new ValidationEventHandler(OnValidate));
+                    }
                 }
                 else
                 {
-                    Stream strm = File.OpenRead(location);
-                    import.Schema = XmlSchema.Read(strm, new ValidationEventHandler(OnValidate));
-                }                
+                    using (Stream strm = File.OpenRead(location))
+                    {
+                        import.Schema = XmlSchema.Read(strm, new ValidationEventHandler(OnValidate));
+                    }
+                }
             }
- 
+
             m_schemaSet = new XmlSchemaSet();
             m_schemaSet.Add(m_schema);
-            m_schemaSet.Compile();                        
-		}       
+            m_schemaSet.Compile();
+		}
 
         /// <summary>
         /// Returns the schema for the specified type (returns the entire schema if null).

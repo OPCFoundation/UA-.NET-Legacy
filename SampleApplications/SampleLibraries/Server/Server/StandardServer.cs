@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  * 
@@ -2160,7 +2160,7 @@ namespace Opc.Ua.Server
         /// <returns>Boolean value.</returns>
         public bool RegisterWithDiscoveryServer()
         {
-            ApplicationConfiguration configuration = ApplicationConfiguration.Load(new FileInfo(base.Configuration.SourceFilePath), ApplicationType.Server, null, false);
+            ApplicationConfiguration configuration = string.IsNullOrEmpty(base.Configuration.SourceFilePath) ? base.Configuration : ApplicationConfiguration.Load(new FileInfo(base.Configuration.SourceFilePath), ApplicationType.Server, null, false);
             CertificateValidationEventHandler registrationCertificateValidator = new CertificateValidationEventHandler(RegistrationValidator_CertificateValidation);
             configuration.CertificateValidator.CertificateValidation += registrationCertificateValidator;            
 
