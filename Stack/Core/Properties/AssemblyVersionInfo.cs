@@ -1,4 +1,4 @@
-/* Copyright (c) 1996-2015, OPC Foundation. All rights reserved.
+/* Copyright (c) 1996-2016, OPC Foundation. All rights reserved.
 
    The source code in this file is covered under a dual-license scenario:
      - RCL: for OPC Foundation members in good-standing
@@ -26,15 +26,15 @@ internal static class AssemblyVersionInfo
     /// <summary>
     /// The current copy right notice.
     /// </summary>
-    public const string Copyright = "Copyright © 2004-2015 OPC Foundation, Inc";
+    public const string Copyright = "Copyright © 2004-2016 OPC Foundation, Inc";
 
     /// <summary>
     /// The current build version.
     /// </summary>
-    public const string CurrentVersion = "1.02.336.0";
+    public const string CurrentVersion = "1.03.340.0";
 
     /// <summary>
     /// The current build file version.
     /// </summary>
-    public const string CurrentFileVersion = "1.02.336.0";
+    public const string CurrentFileVersion = "1.03.340.0";
 }

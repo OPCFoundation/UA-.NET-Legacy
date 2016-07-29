@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  * 
@@ -141,28 +141,7 @@ namespace Opc.Ua.Server
                 // output by the ModelDesigner V2. These nodes are added to the CoreNodeManager
                 // via the AttachNode() method when the DiagnosticsNodeManager starts.
                 Server.CoreNodeManager.ImportNodes(SystemContext, PredefinedNodes.Values, true);
-                
-                // hook up the server lock method.
-                MethodState serverLock = (MethodState)FindPredefinedNode(
-                    MethodIds.ServerLock_Lock,
-                    typeof(MethodState));
 
-                if (serverLock != null)
-                {
-                    serverLock.OnCallMethod = OnLockServer;
-                }                
-                
-                // hook up the server unlock method.
-                MethodState serverUnlock = (MethodState)FindPredefinedNode(
-                    MethodIds.ServerLock_Unlock,
-                    typeof(MethodState));
-
-                if (serverUnlock != null)
-                {
-                    serverUnlock.OnCallMethod = OnUnlockServer;
-                }
-                
-                
                 // hook up the server GetMonitoredItems method.
                 MethodState getMonitoredItems = (MethodState)FindPredefinedNode(
                     MethodIds.Server_GetMonitoredItems,

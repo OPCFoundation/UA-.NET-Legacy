@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  * 
@@ -159,7 +159,8 @@ namespace Opc.Ua.ServerTest
         {
             try
             {
-                m_session.Call(ObjectIds.ServerLock, MethodIds.ServerLock_Lock);
+                // ServerLock/Lock method was removed from 1.03 specs.
+                // m_session.Call(ObjectIds.ServerLock, MethodIds.ServerLock_Lock);
                 m_readOnlyTests = false;
                 m_unlockRequired = true;
             }
@@ -196,7 +197,8 @@ namespace Opc.Ua.ServerTest
             {
                 try
                 {
-                    m_session.Call(ObjectIds.ServerLock, MethodIds.ServerLock_Unlock);
+                    // ServerLock/Unlock method was removed from 1.03 specs.
+                    // m_session.Call(ObjectIds.ServerLock, MethodIds.ServerLock_Unlock);
                 }
                 catch (Exception)
                 {

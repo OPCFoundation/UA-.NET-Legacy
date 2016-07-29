@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  * 
@@ -39,7 +39,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OPC Foundation")]
 [assembly: AssemblyProduct("NetworkTester")]
-[assembly: AssemblyCopyright("Copyright © 2014 OPC Foundation")]
+[assembly: AssemblyCopyright("Copyright © 2016 OPC Foundation")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -58,5 +58,5 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion("1.02.336.0")]
-[assembly: AssemblyFileVersion("1.02.336.0")]
+[assembly: AssemblyVersion("1.03.340.0")]
+[assembly: AssemblyFileVersion("1.03.340.0")]
