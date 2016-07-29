@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Server Library", "Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Opc.Ua.Publisher", "SampleApplications\Samples\Publisher\Opc.Ua.Publisher.csproj", "{C2A3557B-CC0B-4291-8AAE-2C7FF44833E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2A3557B-CC0B-4291-8AAE-2C7FF44833E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2A3557B-CC0B-4291-8AAE-2C7FF44833E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2A3557B-CC0B-4291-8AAE-2C7FF44833E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2A3557B-CC0B-4291-8AAE-2C7FF44833E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,5 +110,6 @@ Global
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A} = {04A2AED8-1959-43CD-BCC1-B25F43D9C91D}
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5} = {04A2AED8-1959-43CD-BCC1-B25F43D9C91D}
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9} = {F8ADA46B-F2EA-42D3-8860-06D9333E57E0}
+		{C2A3557B-CC0B-4291-8AAE-2C7FF44833E9} = {A579C6F2-2C5F-4176-BEAE-0D1BD0750375}
 	EndGlobalSection
 EndGlobal

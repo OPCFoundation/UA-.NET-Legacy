@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  * 
@@ -166,7 +166,7 @@ namespace Opc.Ua.Sample.Controls
         /// <summary>
         /// Stores the data associated with a list view item.
         /// </summary>
-        private class ItemData
+        public class ItemData
         {
             public Subscription        Subscription;
             public NotificationMessage NotificationMessage;
@@ -294,23 +294,15 @@ namespace Opc.Ua.Sample.Controls
                     }
                 }
 
-                // get the current control contents.
-                List<ItemData> tags = new List<ItemData>();
+                AddItem(new ItemData(e.Subscription, e.NotificationMessage));
 
-                foreach (ListViewItem item in ItemsLV.Items)
+                if (ItemsLV.Items.Count > MaxMessageCount)
                 {
-                    ItemData tag = item.Tag as ItemData;
-
-                    if (tag != null)
+                    for (int i = 0; i < (ItemsLV.Items.Count - MaxMessageCount); i++)
                     {
-                        tags.Add(tag);
+                        ItemsLV.Items.RemoveAt(i);
                     }
                 }
-
-                tags.Insert(0, new ItemData(e.Subscription, e.NotificationMessage));
-
-                // update control.
-                Update(tags);
             }
             catch (Exception exception)
             {

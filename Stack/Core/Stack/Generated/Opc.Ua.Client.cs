@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -4492,276 +4492,6 @@ namespace Opc.Ua
         }
         #endif
         #endregion
-
-        #region TestStack Methods
-        #if (!OPCUA_EXCLUDE_TestStack)
-        /// <summary>
-        /// Invokes the TestStack service.
-        /// </summary>
-        public virtual ResponseHeader TestStack(
-            RequestHeader requestHeader,
-            uint          testId,
-            int           iteration,
-            Variant       input,
-            out Variant   output)
-        {
-            TestStackRequest request = new TestStackRequest();
-            TestStackResponse response = null;
-
-            request.RequestHeader = requestHeader;
-            request.TestId        = testId;
-            request.Iteration     = iteration;
-            request.Input         = input;
-
-            UpdateRequestHeader(request, requestHeader == null, "TestStack");
-
-            try
-            {
-                if (UseTransportChannel)
-                {
-                    IServiceResponse genericResponse = TransportChannel.SendRequest(request);
-
-                    if (genericResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    ValidateResponse(genericResponse.ResponseHeader);
-                    response = (TestStackResponse)genericResponse;
-                }
-                else
-                {
-                    TestStackResponseMessage responseMessage = InnerChannel.TestStack(new TestStackMessage(request));
-
-                    if (responseMessage == null || responseMessage.TestStackResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    response = responseMessage.TestStackResponse;
-                    ValidateResponse(response.ResponseHeader);
-                }
-
-                output = response.Output;
-            }
-            finally
-            {
-                RequestCompleted(request, response, "TestStack");
-            }
-
-            return response.ResponseHeader;
-        }
-
-        /// <summary>
-        /// Begins an asynchronous invocation of the TestStack service.
-        /// </summary>
-        public IAsyncResult BeginTestStack(
-            RequestHeader requestHeader,
-            uint          testId,
-            int           iteration,
-            Variant       input,
-            AsyncCallback callback,
-            object        asyncState)
-        {
-            TestStackRequest request = new TestStackRequest();
-
-            request.RequestHeader = requestHeader;
-            request.TestId        = testId;
-            request.Iteration     = iteration;
-            request.Input         = input;
-
-            UpdateRequestHeader(request, requestHeader == null, "TestStack");
-
-            if (UseTransportChannel)
-            {
-                return TransportChannel.BeginSendRequest(request, callback, asyncState);
-            }
-
-            return InnerChannel.BeginTestStack(new TestStackMessage(request), callback, asyncState);
-        }
-
-        /// <summary>
-        /// Finishes an asynchronous invocation of the TestStack service.
-        /// </summary>
-        public ResponseHeader EndTestStack(
-            IAsyncResult result,
-            out Variant output)
-        {
-            TestStackResponse response = null;
-
-            try
-            {
-                if (UseTransportChannel)
-                {
-                    IServiceResponse genericResponse = TransportChannel.EndSendRequest(result);
-
-                    if (genericResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    ValidateResponse(genericResponse.ResponseHeader);
-                    response = (TestStackResponse)genericResponse;
-                }
-                else
-                {
-                    TestStackResponseMessage responseMessage = InnerChannel.EndTestStack(result);
-
-                    if (responseMessage == null || responseMessage.TestStackResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    response = responseMessage.TestStackResponse;
-                    ValidateResponse(response.ResponseHeader);
-                }
-
-                output = response.Output;
-            }
-            finally
-            {
-                RequestCompleted(null, response, "TestStack");
-            }
-
-            return response.ResponseHeader;
-        }
-        #endif
-        #endregion
-
-        #region TestStackEx Methods
-        #if (!OPCUA_EXCLUDE_TestStackEx)
-        /// <summary>
-        /// Invokes the TestStackEx service.
-        /// </summary>
-        public virtual ResponseHeader TestStackEx(
-            RequestHeader         requestHeader,
-            uint                  testId,
-            int                   iteration,
-            CompositeTestType     input,
-            out CompositeTestType output)
-        {
-            TestStackExRequest request = new TestStackExRequest();
-            TestStackExResponse response = null;
-
-            request.RequestHeader = requestHeader;
-            request.TestId        = testId;
-            request.Iteration     = iteration;
-            request.Input         = input;
-
-            UpdateRequestHeader(request, requestHeader == null, "TestStackEx");
-
-            try
-            {
-                if (UseTransportChannel)
-                {
-                    IServiceResponse genericResponse = TransportChannel.SendRequest(request);
-
-                    if (genericResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    ValidateResponse(genericResponse.ResponseHeader);
-                    response = (TestStackExResponse)genericResponse;
-                }
-                else
-                {
-                    TestStackExResponseMessage responseMessage = InnerChannel.TestStackEx(new TestStackExMessage(request));
-
-                    if (responseMessage == null || responseMessage.TestStackExResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    response = responseMessage.TestStackExResponse;
-                    ValidateResponse(response.ResponseHeader);
-                }
-
-                output = response.Output;
-            }
-            finally
-            {
-                RequestCompleted(request, response, "TestStackEx");
-            }
-
-            return response.ResponseHeader;
-        }
-
-        /// <summary>
-        /// Begins an asynchronous invocation of the TestStackEx service.
-        /// </summary>
-        public IAsyncResult BeginTestStackEx(
-            RequestHeader     requestHeader,
-            uint              testId,
-            int               iteration,
-            CompositeTestType input,
-            AsyncCallback     callback,
-            object            asyncState)
-        {
-            TestStackExRequest request = new TestStackExRequest();
-
-            request.RequestHeader = requestHeader;
-            request.TestId        = testId;
-            request.Iteration     = iteration;
-            request.Input         = input;
-
-            UpdateRequestHeader(request, requestHeader == null, "TestStackEx");
-
-            if (UseTransportChannel)
-            {
-                return TransportChannel.BeginSendRequest(request, callback, asyncState);
-            }
-
-            return InnerChannel.BeginTestStackEx(new TestStackExMessage(request), callback, asyncState);
-        }
-
-        /// <summary>
-        /// Finishes an asynchronous invocation of the TestStackEx service.
-        /// </summary>
-        public ResponseHeader EndTestStackEx(
-            IAsyncResult          result,
-            out CompositeTestType output)
-        {
-            TestStackExResponse response = null;
-
-            try
-            {
-                if (UseTransportChannel)
-                {
-                    IServiceResponse genericResponse = TransportChannel.EndSendRequest(result);
-
-                    if (genericResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    ValidateResponse(genericResponse.ResponseHeader);
-                    response = (TestStackExResponse)genericResponse;
-                }
-                else
-                {
-                    TestStackExResponseMessage responseMessage = InnerChannel.EndTestStackEx(result);
-
-                    if (responseMessage == null || responseMessage.TestStackExResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    response = responseMessage.TestStackExResponse;
-                    ValidateResponse(response.ResponseHeader);
-                }
-
-                output = response.Output;
-            }
-            finally
-            {
-                RequestCompleted(null, response, "TestStackEx");
-            }
-
-            return response.ResponseHeader;
-        }
-        #endif
-        #endregion
         #endregion
     }
 
@@ -4922,6 +4652,145 @@ namespace Opc.Ua
             finally
             {
                 RequestCompleted(null, response, "FindServers");
+            }
+
+            return response.ResponseHeader;
+        }
+        #endif
+        #endregion
+
+        #region FindServersOnNetwork Methods
+        #if (!OPCUA_EXCLUDE_FindServersOnNetwork)
+        /// <summary>
+        /// Invokes the FindServersOnNetwork service.
+        /// </summary>
+        public virtual ResponseHeader FindServersOnNetwork(
+            RequestHeader                 requestHeader,
+            uint                          startingRecordId,
+            uint                          maxRecordsToReturn,
+            StringCollection              serverCapabilityFilter,
+            out DateTime                  lastCounterResetTime,
+            out ServerOnNetworkCollection servers)
+        {
+            FindServersOnNetworkRequest request = new FindServersOnNetworkRequest();
+            FindServersOnNetworkResponse response = null;
+
+            request.RequestHeader          = requestHeader;
+            request.StartingRecordId       = startingRecordId;
+            request.MaxRecordsToReturn     = maxRecordsToReturn;
+            request.ServerCapabilityFilter = serverCapabilityFilter;
+
+            UpdateRequestHeader(request, requestHeader == null, "FindServersOnNetwork");
+
+            try
+            {
+                if (UseTransportChannel)
+                {
+                    IServiceResponse genericResponse = TransportChannel.SendRequest(request);
+
+                    if (genericResponse == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    ValidateResponse(genericResponse.ResponseHeader);
+                    response = (FindServersOnNetworkResponse)genericResponse;
+                }
+                else
+                {
+                    FindServersOnNetworkResponseMessage responseMessage = InnerChannel.FindServersOnNetwork(new FindServersOnNetworkMessage(request));
+
+                    if (responseMessage == null || responseMessage.FindServersOnNetworkResponse == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    response = responseMessage.FindServersOnNetworkResponse;
+                    ValidateResponse(response.ResponseHeader);
+                }
+
+                lastCounterResetTime = response.LastCounterResetTime;
+                servers              = response.Servers;
+            }
+            finally
+            {
+                RequestCompleted(request, response, "FindServersOnNetwork");
+            }
+
+            return response.ResponseHeader;
+        }
+
+        /// <summary>
+        /// Begins an asynchronous invocation of the FindServersOnNetwork service.
+        /// </summary>
+        public IAsyncResult BeginFindServersOnNetwork(
+            RequestHeader    requestHeader,
+            uint             startingRecordId,
+            uint             maxRecordsToReturn,
+            StringCollection serverCapabilityFilter,
+            AsyncCallback    callback,
+            object           asyncState)
+        {
+            FindServersOnNetworkRequest request = new FindServersOnNetworkRequest();
+
+            request.RequestHeader          = requestHeader;
+            request.StartingRecordId       = startingRecordId;
+            request.MaxRecordsToReturn     = maxRecordsToReturn;
+            request.ServerCapabilityFilter = serverCapabilityFilter;
+
+            UpdateRequestHeader(request, requestHeader == null, "FindServersOnNetwork");
+
+            if (UseTransportChannel)
+            {
+                return TransportChannel.BeginSendRequest(request, callback, asyncState);
+            }
+
+            return InnerChannel.BeginFindServersOnNetwork(new FindServersOnNetworkMessage(request), callback, asyncState);
+        }
+
+        /// <summary>
+        /// Finishes an asynchronous invocation of the FindServersOnNetwork service.
+        /// </summary>
+        public ResponseHeader EndFindServersOnNetwork(
+            IAsyncResult                  result,
+            out DateTime                  lastCounterResetTime,
+            out ServerOnNetworkCollection servers)
+        {
+            FindServersOnNetworkResponse response = null;
+
+            try
+            {
+                if (UseTransportChannel)
+                {
+                    IServiceResponse genericResponse = TransportChannel.EndSendRequest(result);
+
+                    if (genericResponse == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    ValidateResponse(genericResponse.ResponseHeader);
+                    response = (FindServersOnNetworkResponse)genericResponse;
+                }
+                else
+                {
+                    FindServersOnNetworkResponseMessage responseMessage = InnerChannel.EndFindServersOnNetwork(result);
+
+                    if (responseMessage == null || responseMessage.FindServersOnNetworkResponse == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    response = responseMessage.FindServersOnNetworkResponse;
+                    ValidateResponse(response.ResponseHeader);
+                }
+
+                lastCounterResetTime = response.LastCounterResetTime;
+                servers              = response.Servers;
+            }
+            finally
+            {
+                RequestCompleted(null, response, "FindServersOnNetwork");
             }
 
             return response.ResponseHeader;
@@ -5095,141 +4964,6 @@ namespace Opc.Ua
         #endregion
 
         #region Client API
-        #region FindDnsServices Methods
-        #if (!OPCUA_EXCLUDE_FindDnsServices)
-        /// <summary>
-        /// Invokes the FindDnsServices service.
-        /// </summary>
-        public virtual ResponseHeader FindDnsServices(
-            RequestHeader                  requestHeader,
-            string                         endpointUrl,
-            StringCollection               serviceNameFilters,
-            StringCollection               serviceTypeFilters,
-            out DnsServiceRecordCollection services)
-        {
-            FindDnsServicesRequest request = new FindDnsServicesRequest();
-            FindDnsServicesResponse response = null;
-
-            request.RequestHeader      = requestHeader;
-            request.EndpointUrl        = endpointUrl;
-            request.ServiceNameFilters = serviceNameFilters;
-            request.ServiceTypeFilters = serviceTypeFilters;
-
-            UpdateRequestHeader(request, requestHeader == null, "FindDnsServices");
-
-            try
-            {
-                if (UseTransportChannel)
-                {
-                    IServiceResponse genericResponse = TransportChannel.SendRequest(request);
-
-                    if (genericResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    ValidateResponse(genericResponse.ResponseHeader);
-                    response = (FindDnsServicesResponse)genericResponse;
-                }
-                else
-                {
-                    FindDnsServicesResponseMessage responseMessage = InnerChannel.FindDnsServices(new FindDnsServicesMessage(request));
-
-                    if (responseMessage == null || responseMessage.FindDnsServicesResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    response = responseMessage.FindDnsServicesResponse;
-                    ValidateResponse(response.ResponseHeader);
-                }
-
-                services = response.Services;
-            }
-            finally
-            {
-                RequestCompleted(request, response, "FindDnsServices");
-            }
-
-            return response.ResponseHeader;
-        }
-
-        /// <summary>
-        /// Begins an asynchronous invocation of the FindDnsServices service.
-        /// </summary>
-        public IAsyncResult BeginFindDnsServices(
-            RequestHeader    requestHeader,
-            string           endpointUrl,
-            StringCollection serviceNameFilters,
-            StringCollection serviceTypeFilters,
-            AsyncCallback    callback,
-            object           asyncState)
-        {
-            FindDnsServicesRequest request = new FindDnsServicesRequest();
-
-            request.RequestHeader      = requestHeader;
-            request.EndpointUrl        = endpointUrl;
-            request.ServiceNameFilters = serviceNameFilters;
-            request.ServiceTypeFilters = serviceTypeFilters;
-
-            UpdateRequestHeader(request, requestHeader == null, "FindDnsServices");
-
-            if (UseTransportChannel)
-            {
-                return TransportChannel.BeginSendRequest(request, callback, asyncState);
-            }
-
-            return InnerChannel.BeginFindDnsServices(new FindDnsServicesMessage(request), callback, asyncState);
-        }
-
-        /// <summary>
-        /// Finishes an asynchronous invocation of the FindDnsServices service.
-        /// </summary>
-        public ResponseHeader EndFindDnsServices(
-            IAsyncResult                   result,
-            out DnsServiceRecordCollection services)
-        {
-            FindDnsServicesResponse response = null;
-
-            try
-            {
-                if (UseTransportChannel)
-                {
-                    IServiceResponse genericResponse = TransportChannel.EndSendRequest(result);
-
-                    if (genericResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    ValidateResponse(genericResponse.ResponseHeader);
-                    response = (FindDnsServicesResponse)genericResponse;
-                }
-                else
-                {
-                    FindDnsServicesResponseMessage responseMessage = InnerChannel.EndFindDnsServices(result);
-
-                    if (responseMessage == null || responseMessage.FindDnsServicesResponse == null)
-                    {
-                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
-                    }
-
-                    response = responseMessage.FindDnsServicesResponse;
-                    ValidateResponse(response.ResponseHeader);
-                }
-
-                services = response.Services;
-            }
-            finally
-            {
-                RequestCompleted(null, response, "FindDnsServices");
-            }
-
-            return response.ResponseHeader;
-        }
-        #endif
-        #endregion
-
         #region RegisterServer Methods
         #if (!OPCUA_EXCLUDE_RegisterServer)
         /// <summary>
@@ -5346,6 +5080,141 @@ namespace Opc.Ua
             finally
             {
                 RequestCompleted(null, response, "RegisterServer");
+            }
+
+            return response.ResponseHeader;
+        }
+        #endif
+        #endregion
+
+        #region RegisterServer2 Methods
+        #if (!OPCUA_EXCLUDE_RegisterServer2)
+        /// <summary>
+        /// Invokes the RegisterServer2 service.
+        /// </summary>
+        public virtual ResponseHeader RegisterServer2(
+            RequestHeader                requestHeader,
+            RegisteredServer             server,
+            ExtensionObjectCollection    discoveryConfiguration,
+            out StatusCodeCollection     configurationResults,
+            out DiagnosticInfoCollection diagnosticInfos)
+        {
+            RegisterServer2Request request = new RegisterServer2Request();
+            RegisterServer2Response response = null;
+
+            request.RequestHeader          = requestHeader;
+            request.Server                 = server;
+            request.DiscoveryConfiguration = discoveryConfiguration;
+
+            UpdateRequestHeader(request, requestHeader == null, "RegisterServer2");
+
+            try
+            {
+                if (UseTransportChannel)
+                {
+                    IServiceResponse genericResponse = TransportChannel.SendRequest(request);
+
+                    if (genericResponse == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    ValidateResponse(genericResponse.ResponseHeader);
+                    response = (RegisterServer2Response)genericResponse;
+                }
+                else
+                {
+                    RegisterServer2ResponseMessage responseMessage = InnerChannel.RegisterServer2(new RegisterServer2Message(request));
+
+                    if (responseMessage == null || responseMessage.RegisterServer2Response == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    response = responseMessage.RegisterServer2Response;
+                    ValidateResponse(response.ResponseHeader);
+                }
+
+                configurationResults = response.ConfigurationResults;
+                diagnosticInfos      = response.DiagnosticInfos;
+            }
+            finally
+            {
+                RequestCompleted(request, response, "RegisterServer2");
+            }
+
+            return response.ResponseHeader;
+        }
+
+        /// <summary>
+        /// Begins an asynchronous invocation of the RegisterServer2 service.
+        /// </summary>
+        public IAsyncResult BeginRegisterServer2(
+            RequestHeader             requestHeader,
+            RegisteredServer          server,
+            ExtensionObjectCollection discoveryConfiguration,
+            AsyncCallback             callback,
+            object                    asyncState)
+        {
+            RegisterServer2Request request = new RegisterServer2Request();
+
+            request.RequestHeader          = requestHeader;
+            request.Server                 = server;
+            request.DiscoveryConfiguration = discoveryConfiguration;
+
+            UpdateRequestHeader(request, requestHeader == null, "RegisterServer2");
+
+            if (UseTransportChannel)
+            {
+                return TransportChannel.BeginSendRequest(request, callback, asyncState);
+            }
+
+            return InnerChannel.BeginRegisterServer2(new RegisterServer2Message(request), callback, asyncState);
+        }
+
+        /// <summary>
+        /// Finishes an asynchronous invocation of the RegisterServer2 service.
+        /// </summary>
+        public ResponseHeader EndRegisterServer2(
+            IAsyncResult                 result,
+            out StatusCodeCollection     configurationResults,
+            out DiagnosticInfoCollection diagnosticInfos)
+        {
+            RegisterServer2Response response = null;
+
+            try
+            {
+                if (UseTransportChannel)
+                {
+                    IServiceResponse genericResponse = TransportChannel.EndSendRequest(result);
+
+                    if (genericResponse == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    ValidateResponse(genericResponse.ResponseHeader);
+                    response = (RegisterServer2Response)genericResponse;
+                }
+                else
+                {
+                    RegisterServer2ResponseMessage responseMessage = InnerChannel.EndRegisterServer2(result);
+
+                    if (responseMessage == null || responseMessage.RegisterServer2Response == null)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadUnknownResponse);
+                    }
+
+                    response = responseMessage.RegisterServer2Response;
+                    ValidateResponse(response.ResponseHeader);
+                }
+
+                configurationResults = response.ConfigurationResults;
+                diagnosticInfos      = response.DiagnosticInfos;
+            }
+            finally
+            {
+                RequestCompleted(null, response, "RegisterServer2");
             }
 
             return response.ResponseHeader;

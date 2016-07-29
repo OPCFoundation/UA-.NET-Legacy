@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -102,20 +102,29 @@ namespace Opc.Ua
         {
             FindServersResponse response = null;
 
-            FindServersRequest request = (FindServersRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            ApplicationDescriptionCollection servers = null;
+                FindServersRequest request = (FindServersRequest)incoming;
 
-            response = new FindServersResponse();
+                ApplicationDescriptionCollection servers = null;
 
-            response.ResponseHeader = ServerInstance.FindServers(
-               request.RequestHeader,
-               request.EndpointUrl,
-               request.LocaleIds,
-               request.ServerUris,
-               out servers);
+                response = new FindServersResponse();
 
-            response.Servers = servers;
+                response.ResponseHeader = ServerInstance.FindServers(
+                   request.RequestHeader,
+                   request.EndpointUrl,
+                   request.LocaleIds,
+                   request.ServerUris,
+                   out servers);
+
+                response.Servers = servers;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -126,15 +135,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual FindServersResponseMessage FindServers(FindServersMessage request)
         {
+            FindServersResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.FindServersRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                FindServersResponse response = (FindServersResponse)FindServers(request.FindServersRequest);
+                response = (FindServersResponse)FindServers(request.FindServersRequest);
+                // OnResponseSent(response);
                 return new FindServersResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.FindServersRequest, e);
+                Exception fault = CreateSoapFault(request.FindServersRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -145,6 +161,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.FindServersRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -157,7 +175,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.FindServersRequest, e);
+                Exception fault = CreateSoapFault(message.FindServersRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -169,11 +189,127 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new FindServersResponseMessage((FindServersResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+        #endif
+        #endif
+        #endregion
+
+        #region FindServersOnNetwork Service
+        #if (!OPCUA_EXCLUDE_FindServersOnNetwork)
+        /// <summary>
+        /// Invokes the FindServersOnNetwork service.
+        /// </summary>
+        public IServiceResponse FindServersOnNetwork(IServiceRequest incoming)
+        {
+            FindServersOnNetworkResponse response = null;
+
+            try
+            {
+                // OnRequestReceived(incoming);
+
+                FindServersOnNetworkRequest request = (FindServersOnNetworkRequest)incoming;
+
+                DateTime lastCounterResetTime = DateTime.MinValue;
+                ServerOnNetworkCollection servers = null;
+
+                response = new FindServersOnNetworkResponse();
+
+                response.ResponseHeader = ServerInstance.FindServersOnNetwork(
+                   request.RequestHeader,
+                   request.StartingRecordId,
+                   request.MaxRecordsToReturn,
+                   request.ServerCapabilityFilter,
+                   out lastCounterResetTime,
+                   out servers);
+
+                response.LastCounterResetTime = lastCounterResetTime;
+                response.Servers              = servers;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
+
+            return response;
+        }
+
+        #if OPCUA_USE_SYNCHRONOUS_ENDPOINTS
+        /// <summary>
+        /// The operation contract for the FindServersOnNetwork service.
+        /// </summary>
+        public virtual FindServersOnNetworkResponseMessage FindServersOnNetwork(FindServersOnNetworkMessage request)
+        {
+            FindServersOnNetworkResponse response = null;
+
+            try
+            {
+                // OnRequestReceived(message.FindServersOnNetworkRequest);
+
+                SetRequestContext(RequestEncoding.Xml);
+                response = (FindServersOnNetworkResponse)FindServersOnNetwork(request.FindServersOnNetworkRequest);
+                // OnResponseSent(response);
+                return new FindServersOnNetworkResponseMessage(response);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(request.FindServersOnNetworkRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+        #else
+        /// <summary>
+        /// Asynchronously calls the FindServersOnNetwork service.
+        /// </summary>
+        public virtual IAsyncResult BeginFindServersOnNetwork(FindServersOnNetworkMessage message, AsyncCallback callback, object callbackData)
+        {
+            try
+            {
+                // OnRequestReceived(message.FindServersOnNetworkRequest);
+
+                // check for bad data.
+                if (message == null) throw new ArgumentNullException("message");
+
+                // set the request context.
+                SetRequestContext(RequestEncoding.Xml);
+
+                // create handler.
+                ProcessRequestAsyncResult result = new ProcessRequestAsyncResult(this, callback, callbackData, 0);
+                return result.BeginProcessRequest(SecureChannelContext.Current, message.FindServersOnNetworkRequest);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(message.FindServersOnNetworkRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+
+        /// <summary>
+        /// Waits for an asynchronous call to the FindServersOnNetwork service to complete.
+        /// </summary>
+        public virtual FindServersOnNetworkResponseMessage EndFindServersOnNetwork(IAsyncResult ar)
+        {
+            try
+            {
+                IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
+                return new FindServersOnNetworkResponseMessage((FindServersOnNetworkResponse)response);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -189,20 +325,29 @@ namespace Opc.Ua
         {
             GetEndpointsResponse response = null;
 
-            GetEndpointsRequest request = (GetEndpointsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            EndpointDescriptionCollection endpoints = null;
+                GetEndpointsRequest request = (GetEndpointsRequest)incoming;
 
-            response = new GetEndpointsResponse();
+                EndpointDescriptionCollection endpoints = null;
 
-            response.ResponseHeader = ServerInstance.GetEndpoints(
-               request.RequestHeader,
-               request.EndpointUrl,
-               request.LocaleIds,
-               request.ProfileUris,
-               out endpoints);
+                response = new GetEndpointsResponse();
 
-            response.Endpoints = endpoints;
+                response.ResponseHeader = ServerInstance.GetEndpoints(
+                   request.RequestHeader,
+                   request.EndpointUrl,
+                   request.LocaleIds,
+                   request.ProfileUris,
+                   out endpoints);
+
+                response.Endpoints = endpoints;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -213,15 +358,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual GetEndpointsResponseMessage GetEndpoints(GetEndpointsMessage request)
         {
+            GetEndpointsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.GetEndpointsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                GetEndpointsResponse response = (GetEndpointsResponse)GetEndpoints(request.GetEndpointsRequest);
+                response = (GetEndpointsResponse)GetEndpoints(request.GetEndpointsRequest);
+                // OnResponseSent(response);
                 return new GetEndpointsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.GetEndpointsRequest, e);
+                Exception fault = CreateSoapFault(request.GetEndpointsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -232,6 +384,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.GetEndpointsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -244,7 +398,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.GetEndpointsRequest, e);
+                Exception fault = CreateSoapFault(message.GetEndpointsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -256,11 +412,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new GetEndpointsResponseMessage((GetEndpointsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -276,49 +435,58 @@ namespace Opc.Ua
         {
             CreateSessionResponse response = null;
 
-            CreateSessionRequest request = (CreateSessionRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            NodeId sessionId = null;
-            NodeId authenticationToken = null;
-            double revisedSessionTimeout = 0;
-            byte[] serverNonce = null;
-            byte[] serverCertificate = null;
-            EndpointDescriptionCollection serverEndpoints = null;
-            SignedSoftwareCertificateCollection serverSoftwareCertificates = null;
-            SignatureData serverSignature = null;
-            uint maxRequestMessageSize = 0;
+                CreateSessionRequest request = (CreateSessionRequest)incoming;
 
-            response = new CreateSessionResponse();
+                NodeId sessionId = null;
+                NodeId authenticationToken = null;
+                double revisedSessionTimeout = 0;
+                byte[] serverNonce = null;
+                byte[] serverCertificate = null;
+                EndpointDescriptionCollection serverEndpoints = null;
+                SignedSoftwareCertificateCollection serverSoftwareCertificates = null;
+                SignatureData serverSignature = null;
+                uint maxRequestMessageSize = 0;
 
-            response.ResponseHeader = ServerInstance.CreateSession(
-               request.RequestHeader,
-               request.ClientDescription,
-               request.ServerUri,
-               request.EndpointUrl,
-               request.SessionName,
-               request.ClientNonce,
-               request.ClientCertificate,
-               request.RequestedSessionTimeout,
-               request.MaxResponseMessageSize,
-               out sessionId,
-               out authenticationToken,
-               out revisedSessionTimeout,
-               out serverNonce,
-               out serverCertificate,
-               out serverEndpoints,
-               out serverSoftwareCertificates,
-               out serverSignature,
-               out maxRequestMessageSize);
+                response = new CreateSessionResponse();
 
-            response.SessionId                  = sessionId;
-            response.AuthenticationToken        = authenticationToken;
-            response.RevisedSessionTimeout      = revisedSessionTimeout;
-            response.ServerNonce                = serverNonce;
-            response.ServerCertificate          = serverCertificate;
-            response.ServerEndpoints            = serverEndpoints;
-            response.ServerSoftwareCertificates = serverSoftwareCertificates;
-            response.ServerSignature            = serverSignature;
-            response.MaxRequestMessageSize      = maxRequestMessageSize;
+                response.ResponseHeader = ServerInstance.CreateSession(
+                   request.RequestHeader,
+                   request.ClientDescription,
+                   request.ServerUri,
+                   request.EndpointUrl,
+                   request.SessionName,
+                   request.ClientNonce,
+                   request.ClientCertificate,
+                   request.RequestedSessionTimeout,
+                   request.MaxResponseMessageSize,
+                   out sessionId,
+                   out authenticationToken,
+                   out revisedSessionTimeout,
+                   out serverNonce,
+                   out serverCertificate,
+                   out serverEndpoints,
+                   out serverSoftwareCertificates,
+                   out serverSignature,
+                   out maxRequestMessageSize);
+
+                response.SessionId                  = sessionId;
+                response.AuthenticationToken        = authenticationToken;
+                response.RevisedSessionTimeout      = revisedSessionTimeout;
+                response.ServerNonce                = serverNonce;
+                response.ServerCertificate          = serverCertificate;
+                response.ServerEndpoints            = serverEndpoints;
+                response.ServerSoftwareCertificates = serverSoftwareCertificates;
+                response.ServerSignature            = serverSignature;
+                response.MaxRequestMessageSize      = maxRequestMessageSize;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -329,15 +497,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual CreateSessionResponseMessage CreateSession(CreateSessionMessage request)
         {
+            CreateSessionResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.CreateSessionRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                CreateSessionResponse response = (CreateSessionResponse)CreateSession(request.CreateSessionRequest);
+                response = (CreateSessionResponse)CreateSession(request.CreateSessionRequest);
+                // OnResponseSent(response);
                 return new CreateSessionResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.CreateSessionRequest, e);
+                Exception fault = CreateSoapFault(request.CreateSessionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -348,6 +523,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.CreateSessionRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -360,7 +537,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.CreateSessionRequest, e);
+                Exception fault = CreateSoapFault(message.CreateSessionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -372,11 +551,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new CreateSessionResponseMessage((CreateSessionResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -392,28 +574,37 @@ namespace Opc.Ua
         {
             ActivateSessionResponse response = null;
 
-            ActivateSessionRequest request = (ActivateSessionRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            byte[] serverNonce = null;
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                ActivateSessionRequest request = (ActivateSessionRequest)incoming;
 
-            response = new ActivateSessionResponse();
+                byte[] serverNonce = null;
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.ActivateSession(
-               request.RequestHeader,
-               request.ClientSignature,
-               request.ClientSoftwareCertificates,
-               request.LocaleIds,
-               request.UserIdentityToken,
-               request.UserTokenSignature,
-               out serverNonce,
-               out results,
-               out diagnosticInfos);
+                response = new ActivateSessionResponse();
 
-            response.ServerNonce     = serverNonce;
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.ActivateSession(
+                   request.RequestHeader,
+                   request.ClientSignature,
+                   request.ClientSoftwareCertificates,
+                   request.LocaleIds,
+                   request.UserIdentityToken,
+                   request.UserTokenSignature,
+                   out serverNonce,
+                   out results,
+                   out diagnosticInfos);
+
+                response.ServerNonce     = serverNonce;
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -424,15 +615,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual ActivateSessionResponseMessage ActivateSession(ActivateSessionMessage request)
         {
+            ActivateSessionResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.ActivateSessionRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                ActivateSessionResponse response = (ActivateSessionResponse)ActivateSession(request.ActivateSessionRequest);
+                response = (ActivateSessionResponse)ActivateSession(request.ActivateSessionRequest);
+                // OnResponseSent(response);
                 return new ActivateSessionResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.ActivateSessionRequest, e);
+                Exception fault = CreateSoapFault(request.ActivateSessionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -443,6 +641,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.ActivateSessionRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -455,7 +655,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.ActivateSessionRequest, e);
+                Exception fault = CreateSoapFault(message.ActivateSessionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -467,11 +669,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new ActivateSessionResponseMessage((ActivateSessionResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -487,15 +692,24 @@ namespace Opc.Ua
         {
             CloseSessionResponse response = null;
 
-            CloseSessionRequest request = (CloseSessionRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
+
+                CloseSessionRequest request = (CloseSessionRequest)incoming;
 
 
-            response = new CloseSessionResponse();
+                response = new CloseSessionResponse();
 
-            response.ResponseHeader = ServerInstance.CloseSession(
-               request.RequestHeader,
-               request.DeleteSubscriptions);
+                response.ResponseHeader = ServerInstance.CloseSession(
+                   request.RequestHeader,
+                   request.DeleteSubscriptions);
 
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -506,15 +720,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual CloseSessionResponseMessage CloseSession(CloseSessionMessage request)
         {
+            CloseSessionResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.CloseSessionRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                CloseSessionResponse response = (CloseSessionResponse)CloseSession(request.CloseSessionRequest);
+                response = (CloseSessionResponse)CloseSession(request.CloseSessionRequest);
+                // OnResponseSent(response);
                 return new CloseSessionResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.CloseSessionRequest, e);
+                Exception fault = CreateSoapFault(request.CloseSessionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -525,6 +746,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.CloseSessionRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -537,7 +760,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.CloseSessionRequest, e);
+                Exception fault = CreateSoapFault(message.CloseSessionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -549,11 +774,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new CloseSessionResponseMessage((CloseSessionResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -569,18 +797,27 @@ namespace Opc.Ua
         {
             CancelResponse response = null;
 
-            CancelRequest request = (CancelRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            uint cancelCount = 0;
+                CancelRequest request = (CancelRequest)incoming;
 
-            response = new CancelResponse();
+                uint cancelCount = 0;
 
-            response.ResponseHeader = ServerInstance.Cancel(
-               request.RequestHeader,
-               request.RequestHandle,
-               out cancelCount);
+                response = new CancelResponse();
 
-            response.CancelCount = cancelCount;
+                response.ResponseHeader = ServerInstance.Cancel(
+                   request.RequestHeader,
+                   request.RequestHandle,
+                   out cancelCount);
+
+                response.CancelCount = cancelCount;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -591,15 +828,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual CancelResponseMessage Cancel(CancelMessage request)
         {
+            CancelResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.CancelRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                CancelResponse response = (CancelResponse)Cancel(request.CancelRequest);
+                response = (CancelResponse)Cancel(request.CancelRequest);
+                // OnResponseSent(response);
                 return new CancelResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.CancelRequest, e);
+                Exception fault = CreateSoapFault(request.CancelRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -610,6 +854,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.CancelRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -622,7 +868,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.CancelRequest, e);
+                Exception fault = CreateSoapFault(message.CancelRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -634,11 +882,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new CancelResponseMessage((CancelResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -654,21 +905,30 @@ namespace Opc.Ua
         {
             AddNodesResponse response = null;
 
-            AddNodesRequest request = (AddNodesRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            AddNodesResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                AddNodesRequest request = (AddNodesRequest)incoming;
 
-            response = new AddNodesResponse();
+                AddNodesResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.AddNodes(
-               request.RequestHeader,
-               request.NodesToAdd,
-               out results,
-               out diagnosticInfos);
+                response = new AddNodesResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.AddNodes(
+                   request.RequestHeader,
+                   request.NodesToAdd,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -679,15 +939,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual AddNodesResponseMessage AddNodes(AddNodesMessage request)
         {
+            AddNodesResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.AddNodesRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                AddNodesResponse response = (AddNodesResponse)AddNodes(request.AddNodesRequest);
+                response = (AddNodesResponse)AddNodes(request.AddNodesRequest);
+                // OnResponseSent(response);
                 return new AddNodesResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.AddNodesRequest, e);
+                Exception fault = CreateSoapFault(request.AddNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -698,6 +965,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.AddNodesRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -710,7 +979,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.AddNodesRequest, e);
+                Exception fault = CreateSoapFault(message.AddNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -722,11 +993,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new AddNodesResponseMessage((AddNodesResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -742,21 +1016,30 @@ namespace Opc.Ua
         {
             AddReferencesResponse response = null;
 
-            AddReferencesRequest request = (AddReferencesRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                AddReferencesRequest request = (AddReferencesRequest)incoming;
 
-            response = new AddReferencesResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.AddReferences(
-               request.RequestHeader,
-               request.ReferencesToAdd,
-               out results,
-               out diagnosticInfos);
+                response = new AddReferencesResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.AddReferences(
+                   request.RequestHeader,
+                   request.ReferencesToAdd,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -767,15 +1050,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual AddReferencesResponseMessage AddReferences(AddReferencesMessage request)
         {
+            AddReferencesResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.AddReferencesRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                AddReferencesResponse response = (AddReferencesResponse)AddReferences(request.AddReferencesRequest);
+                response = (AddReferencesResponse)AddReferences(request.AddReferencesRequest);
+                // OnResponseSent(response);
                 return new AddReferencesResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.AddReferencesRequest, e);
+                Exception fault = CreateSoapFault(request.AddReferencesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -786,6 +1076,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.AddReferencesRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -798,7 +1090,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.AddReferencesRequest, e);
+                Exception fault = CreateSoapFault(message.AddReferencesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -810,11 +1104,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new AddReferencesResponseMessage((AddReferencesResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -830,21 +1127,30 @@ namespace Opc.Ua
         {
             DeleteNodesResponse response = null;
 
-            DeleteNodesRequest request = (DeleteNodesRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                DeleteNodesRequest request = (DeleteNodesRequest)incoming;
 
-            response = new DeleteNodesResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.DeleteNodes(
-               request.RequestHeader,
-               request.NodesToDelete,
-               out results,
-               out diagnosticInfos);
+                response = new DeleteNodesResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.DeleteNodes(
+                   request.RequestHeader,
+                   request.NodesToDelete,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -855,15 +1161,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual DeleteNodesResponseMessage DeleteNodes(DeleteNodesMessage request)
         {
+            DeleteNodesResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.DeleteNodesRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                DeleteNodesResponse response = (DeleteNodesResponse)DeleteNodes(request.DeleteNodesRequest);
+                response = (DeleteNodesResponse)DeleteNodes(request.DeleteNodesRequest);
+                // OnResponseSent(response);
                 return new DeleteNodesResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.DeleteNodesRequest, e);
+                Exception fault = CreateSoapFault(request.DeleteNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -874,6 +1187,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.DeleteNodesRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -886,7 +1201,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.DeleteNodesRequest, e);
+                Exception fault = CreateSoapFault(message.DeleteNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -898,11 +1215,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new DeleteNodesResponseMessage((DeleteNodesResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -918,21 +1238,30 @@ namespace Opc.Ua
         {
             DeleteReferencesResponse response = null;
 
-            DeleteReferencesRequest request = (DeleteReferencesRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                DeleteReferencesRequest request = (DeleteReferencesRequest)incoming;
 
-            response = new DeleteReferencesResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.DeleteReferences(
-               request.RequestHeader,
-               request.ReferencesToDelete,
-               out results,
-               out diagnosticInfos);
+                response = new DeleteReferencesResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.DeleteReferences(
+                   request.RequestHeader,
+                   request.ReferencesToDelete,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -943,15 +1272,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual DeleteReferencesResponseMessage DeleteReferences(DeleteReferencesMessage request)
         {
+            DeleteReferencesResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.DeleteReferencesRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                DeleteReferencesResponse response = (DeleteReferencesResponse)DeleteReferences(request.DeleteReferencesRequest);
+                response = (DeleteReferencesResponse)DeleteReferences(request.DeleteReferencesRequest);
+                // OnResponseSent(response);
                 return new DeleteReferencesResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.DeleteReferencesRequest, e);
+                Exception fault = CreateSoapFault(request.DeleteReferencesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -962,6 +1298,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.DeleteReferencesRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -974,7 +1312,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.DeleteReferencesRequest, e);
+                Exception fault = CreateSoapFault(message.DeleteReferencesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -986,11 +1326,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new DeleteReferencesResponseMessage((DeleteReferencesResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1006,23 +1349,32 @@ namespace Opc.Ua
         {
             BrowseResponse response = null;
 
-            BrowseRequest request = (BrowseRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            BrowseResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                BrowseRequest request = (BrowseRequest)incoming;
 
-            response = new BrowseResponse();
+                BrowseResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.Browse(
-               request.RequestHeader,
-               request.View,
-               request.RequestedMaxReferencesPerNode,
-               request.NodesToBrowse,
-               out results,
-               out diagnosticInfos);
+                response = new BrowseResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.Browse(
+                   request.RequestHeader,
+                   request.View,
+                   request.RequestedMaxReferencesPerNode,
+                   request.NodesToBrowse,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1033,15 +1385,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual BrowseResponseMessage Browse(BrowseMessage request)
         {
+            BrowseResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.BrowseRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                BrowseResponse response = (BrowseResponse)Browse(request.BrowseRequest);
+                response = (BrowseResponse)Browse(request.BrowseRequest);
+                // OnResponseSent(response);
                 return new BrowseResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.BrowseRequest, e);
+                Exception fault = CreateSoapFault(request.BrowseRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1052,6 +1411,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.BrowseRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1064,7 +1425,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.BrowseRequest, e);
+                Exception fault = CreateSoapFault(message.BrowseRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1076,11 +1439,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new BrowseResponseMessage((BrowseResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1096,22 +1462,31 @@ namespace Opc.Ua
         {
             BrowseNextResponse response = null;
 
-            BrowseNextRequest request = (BrowseNextRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            BrowseResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                BrowseNextRequest request = (BrowseNextRequest)incoming;
 
-            response = new BrowseNextResponse();
+                BrowseResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.BrowseNext(
-               request.RequestHeader,
-               request.ReleaseContinuationPoints,
-               request.ContinuationPoints,
-               out results,
-               out diagnosticInfos);
+                response = new BrowseNextResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.BrowseNext(
+                   request.RequestHeader,
+                   request.ReleaseContinuationPoints,
+                   request.ContinuationPoints,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1122,15 +1497,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual BrowseNextResponseMessage BrowseNext(BrowseNextMessage request)
         {
+            BrowseNextResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.BrowseNextRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                BrowseNextResponse response = (BrowseNextResponse)BrowseNext(request.BrowseNextRequest);
+                response = (BrowseNextResponse)BrowseNext(request.BrowseNextRequest);
+                // OnResponseSent(response);
                 return new BrowseNextResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.BrowseNextRequest, e);
+                Exception fault = CreateSoapFault(request.BrowseNextRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1141,6 +1523,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.BrowseNextRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1153,7 +1537,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.BrowseNextRequest, e);
+                Exception fault = CreateSoapFault(message.BrowseNextRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1165,11 +1551,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new BrowseNextResponseMessage((BrowseNextResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1185,21 +1574,30 @@ namespace Opc.Ua
         {
             TranslateBrowsePathsToNodeIdsResponse response = null;
 
-            TranslateBrowsePathsToNodeIdsRequest request = (TranslateBrowsePathsToNodeIdsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            BrowsePathResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                TranslateBrowsePathsToNodeIdsRequest request = (TranslateBrowsePathsToNodeIdsRequest)incoming;
 
-            response = new TranslateBrowsePathsToNodeIdsResponse();
+                BrowsePathResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.TranslateBrowsePathsToNodeIds(
-               request.RequestHeader,
-               request.BrowsePaths,
-               out results,
-               out diagnosticInfos);
+                response = new TranslateBrowsePathsToNodeIdsResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.TranslateBrowsePathsToNodeIds(
+                   request.RequestHeader,
+                   request.BrowsePaths,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1210,15 +1608,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual TranslateBrowsePathsToNodeIdsResponseMessage TranslateBrowsePathsToNodeIds(TranslateBrowsePathsToNodeIdsMessage request)
         {
+            TranslateBrowsePathsToNodeIdsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.TranslateBrowsePathsToNodeIdsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                TranslateBrowsePathsToNodeIdsResponse response = (TranslateBrowsePathsToNodeIdsResponse)TranslateBrowsePathsToNodeIds(request.TranslateBrowsePathsToNodeIdsRequest);
+                response = (TranslateBrowsePathsToNodeIdsResponse)TranslateBrowsePathsToNodeIds(request.TranslateBrowsePathsToNodeIdsRequest);
+                // OnResponseSent(response);
                 return new TranslateBrowsePathsToNodeIdsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.TranslateBrowsePathsToNodeIdsRequest, e);
+                Exception fault = CreateSoapFault(request.TranslateBrowsePathsToNodeIdsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1229,6 +1634,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.TranslateBrowsePathsToNodeIdsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1241,7 +1648,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.TranslateBrowsePathsToNodeIdsRequest, e);
+                Exception fault = CreateSoapFault(message.TranslateBrowsePathsToNodeIdsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1253,11 +1662,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new TranslateBrowsePathsToNodeIdsResponseMessage((TranslateBrowsePathsToNodeIdsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1273,18 +1685,27 @@ namespace Opc.Ua
         {
             RegisterNodesResponse response = null;
 
-            RegisterNodesRequest request = (RegisterNodesRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            NodeIdCollection registeredNodeIds = null;
+                RegisterNodesRequest request = (RegisterNodesRequest)incoming;
 
-            response = new RegisterNodesResponse();
+                NodeIdCollection registeredNodeIds = null;
 
-            response.ResponseHeader = ServerInstance.RegisterNodes(
-               request.RequestHeader,
-               request.NodesToRegister,
-               out registeredNodeIds);
+                response = new RegisterNodesResponse();
 
-            response.RegisteredNodeIds = registeredNodeIds;
+                response.ResponseHeader = ServerInstance.RegisterNodes(
+                   request.RequestHeader,
+                   request.NodesToRegister,
+                   out registeredNodeIds);
+
+                response.RegisteredNodeIds = registeredNodeIds;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1295,15 +1716,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual RegisterNodesResponseMessage RegisterNodes(RegisterNodesMessage request)
         {
+            RegisterNodesResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.RegisterNodesRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                RegisterNodesResponse response = (RegisterNodesResponse)RegisterNodes(request.RegisterNodesRequest);
+                response = (RegisterNodesResponse)RegisterNodes(request.RegisterNodesRequest);
+                // OnResponseSent(response);
                 return new RegisterNodesResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.RegisterNodesRequest, e);
+                Exception fault = CreateSoapFault(request.RegisterNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1314,6 +1742,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.RegisterNodesRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1326,7 +1756,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.RegisterNodesRequest, e);
+                Exception fault = CreateSoapFault(message.RegisterNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1338,11 +1770,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new RegisterNodesResponseMessage((RegisterNodesResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1358,15 +1793,24 @@ namespace Opc.Ua
         {
             UnregisterNodesResponse response = null;
 
-            UnregisterNodesRequest request = (UnregisterNodesRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
+
+                UnregisterNodesRequest request = (UnregisterNodesRequest)incoming;
 
 
-            response = new UnregisterNodesResponse();
+                response = new UnregisterNodesResponse();
 
-            response.ResponseHeader = ServerInstance.UnregisterNodes(
-               request.RequestHeader,
-               request.NodesToUnregister);
+                response.ResponseHeader = ServerInstance.UnregisterNodes(
+                   request.RequestHeader,
+                   request.NodesToUnregister);
 
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1377,15 +1821,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual UnregisterNodesResponseMessage UnregisterNodes(UnregisterNodesMessage request)
         {
+            UnregisterNodesResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.UnregisterNodesRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                UnregisterNodesResponse response = (UnregisterNodesResponse)UnregisterNodes(request.UnregisterNodesRequest);
+                response = (UnregisterNodesResponse)UnregisterNodes(request.UnregisterNodesRequest);
+                // OnResponseSent(response);
                 return new UnregisterNodesResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.UnregisterNodesRequest, e);
+                Exception fault = CreateSoapFault(request.UnregisterNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1396,6 +1847,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.UnregisterNodesRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1408,7 +1861,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.UnregisterNodesRequest, e);
+                Exception fault = CreateSoapFault(message.UnregisterNodesRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1420,11 +1875,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new UnregisterNodesResponseMessage((UnregisterNodesResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1440,34 +1898,43 @@ namespace Opc.Ua
         {
             QueryFirstResponse response = null;
 
-            QueryFirstRequest request = (QueryFirstRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            QueryDataSetCollection queryDataSets = null;
-            byte[] continuationPoint = null;
-            ParsingResultCollection parsingResults = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
-            ContentFilterResult filterResult = null;
+                QueryFirstRequest request = (QueryFirstRequest)incoming;
 
-            response = new QueryFirstResponse();
+                QueryDataSetCollection queryDataSets = null;
+                byte[] continuationPoint = null;
+                ParsingResultCollection parsingResults = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
+                ContentFilterResult filterResult = null;
 
-            response.ResponseHeader = ServerInstance.QueryFirst(
-               request.RequestHeader,
-               request.View,
-               request.NodeTypes,
-               request.Filter,
-               request.MaxDataSetsToReturn,
-               request.MaxReferencesToReturn,
-               out queryDataSets,
-               out continuationPoint,
-               out parsingResults,
-               out diagnosticInfos,
-               out filterResult);
+                response = new QueryFirstResponse();
 
-            response.QueryDataSets     = queryDataSets;
-            response.ContinuationPoint = continuationPoint;
-            response.ParsingResults    = parsingResults;
-            response.DiagnosticInfos   = diagnosticInfos;
-            response.FilterResult      = filterResult;
+                response.ResponseHeader = ServerInstance.QueryFirst(
+                   request.RequestHeader,
+                   request.View,
+                   request.NodeTypes,
+                   request.Filter,
+                   request.MaxDataSetsToReturn,
+                   request.MaxReferencesToReturn,
+                   out queryDataSets,
+                   out continuationPoint,
+                   out parsingResults,
+                   out diagnosticInfos,
+                   out filterResult);
+
+                response.QueryDataSets     = queryDataSets;
+                response.ContinuationPoint = continuationPoint;
+                response.ParsingResults    = parsingResults;
+                response.DiagnosticInfos   = diagnosticInfos;
+                response.FilterResult      = filterResult;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1478,15 +1945,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual QueryFirstResponseMessage QueryFirst(QueryFirstMessage request)
         {
+            QueryFirstResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.QueryFirstRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                QueryFirstResponse response = (QueryFirstResponse)QueryFirst(request.QueryFirstRequest);
+                response = (QueryFirstResponse)QueryFirst(request.QueryFirstRequest);
+                // OnResponseSent(response);
                 return new QueryFirstResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.QueryFirstRequest, e);
+                Exception fault = CreateSoapFault(request.QueryFirstRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1497,6 +1971,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.QueryFirstRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1509,7 +1985,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.QueryFirstRequest, e);
+                Exception fault = CreateSoapFault(message.QueryFirstRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1521,11 +1999,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new QueryFirstResponseMessage((QueryFirstResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1541,22 +2022,31 @@ namespace Opc.Ua
         {
             QueryNextResponse response = null;
 
-            QueryNextRequest request = (QueryNextRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            QueryDataSetCollection queryDataSets = null;
-            byte[] revisedContinuationPoint = null;
+                QueryNextRequest request = (QueryNextRequest)incoming;
 
-            response = new QueryNextResponse();
+                QueryDataSetCollection queryDataSets = null;
+                byte[] revisedContinuationPoint = null;
 
-            response.ResponseHeader = ServerInstance.QueryNext(
-               request.RequestHeader,
-               request.ReleaseContinuationPoint,
-               request.ContinuationPoint,
-               out queryDataSets,
-               out revisedContinuationPoint);
+                response = new QueryNextResponse();
 
-            response.QueryDataSets            = queryDataSets;
-            response.RevisedContinuationPoint = revisedContinuationPoint;
+                response.ResponseHeader = ServerInstance.QueryNext(
+                   request.RequestHeader,
+                   request.ReleaseContinuationPoint,
+                   request.ContinuationPoint,
+                   out queryDataSets,
+                   out revisedContinuationPoint);
+
+                response.QueryDataSets            = queryDataSets;
+                response.RevisedContinuationPoint = revisedContinuationPoint;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1567,15 +2057,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual QueryNextResponseMessage QueryNext(QueryNextMessage request)
         {
+            QueryNextResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.QueryNextRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                QueryNextResponse response = (QueryNextResponse)QueryNext(request.QueryNextRequest);
+                response = (QueryNextResponse)QueryNext(request.QueryNextRequest);
+                // OnResponseSent(response);
                 return new QueryNextResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.QueryNextRequest, e);
+                Exception fault = CreateSoapFault(request.QueryNextRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1586,6 +2083,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.QueryNextRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1598,7 +2097,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.QueryNextRequest, e);
+                Exception fault = CreateSoapFault(message.QueryNextRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1610,11 +2111,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new QueryNextResponseMessage((QueryNextResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1630,23 +2134,32 @@ namespace Opc.Ua
         {
             ReadResponse response = null;
 
-            ReadRequest request = (ReadRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            DataValueCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                ReadRequest request = (ReadRequest)incoming;
 
-            response = new ReadResponse();
+                DataValueCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.Read(
-               request.RequestHeader,
-               request.MaxAge,
-               request.TimestampsToReturn,
-               request.NodesToRead,
-               out results,
-               out diagnosticInfos);
+                response = new ReadResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.Read(
+                   request.RequestHeader,
+                   request.MaxAge,
+                   request.TimestampsToReturn,
+                   request.NodesToRead,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1657,15 +2170,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual ReadResponseMessage Read(ReadMessage request)
         {
+            ReadResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.ReadRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                ReadResponse response = (ReadResponse)Read(request.ReadRequest);
+                response = (ReadResponse)Read(request.ReadRequest);
+                // OnResponseSent(response);
                 return new ReadResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.ReadRequest, e);
+                Exception fault = CreateSoapFault(request.ReadRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1676,6 +2196,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.ReadRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1688,7 +2210,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.ReadRequest, e);
+                Exception fault = CreateSoapFault(message.ReadRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1700,11 +2224,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new ReadResponseMessage((ReadResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1720,24 +2247,33 @@ namespace Opc.Ua
         {
             HistoryReadResponse response = null;
 
-            HistoryReadRequest request = (HistoryReadRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            HistoryReadResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                HistoryReadRequest request = (HistoryReadRequest)incoming;
 
-            response = new HistoryReadResponse();
+                HistoryReadResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.HistoryRead(
-               request.RequestHeader,
-               request.HistoryReadDetails,
-               request.TimestampsToReturn,
-               request.ReleaseContinuationPoints,
-               request.NodesToRead,
-               out results,
-               out diagnosticInfos);
+                response = new HistoryReadResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.HistoryRead(
+                   request.RequestHeader,
+                   request.HistoryReadDetails,
+                   request.TimestampsToReturn,
+                   request.ReleaseContinuationPoints,
+                   request.NodesToRead,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1748,15 +2284,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual HistoryReadResponseMessage HistoryRead(HistoryReadMessage request)
         {
+            HistoryReadResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.HistoryReadRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                HistoryReadResponse response = (HistoryReadResponse)HistoryRead(request.HistoryReadRequest);
+                response = (HistoryReadResponse)HistoryRead(request.HistoryReadRequest);
+                // OnResponseSent(response);
                 return new HistoryReadResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.HistoryReadRequest, e);
+                Exception fault = CreateSoapFault(request.HistoryReadRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1767,6 +2310,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.HistoryReadRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1779,7 +2324,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.HistoryReadRequest, e);
+                Exception fault = CreateSoapFault(message.HistoryReadRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1791,11 +2338,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new HistoryReadResponseMessage((HistoryReadResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1811,21 +2361,30 @@ namespace Opc.Ua
         {
             WriteResponse response = null;
 
-            WriteRequest request = (WriteRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                WriteRequest request = (WriteRequest)incoming;
 
-            response = new WriteResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.Write(
-               request.RequestHeader,
-               request.NodesToWrite,
-               out results,
-               out diagnosticInfos);
+                response = new WriteResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.Write(
+                   request.RequestHeader,
+                   request.NodesToWrite,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1836,15 +2395,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual WriteResponseMessage Write(WriteMessage request)
         {
+            WriteResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.WriteRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                WriteResponse response = (WriteResponse)Write(request.WriteRequest);
+                response = (WriteResponse)Write(request.WriteRequest);
+                // OnResponseSent(response);
                 return new WriteResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.WriteRequest, e);
+                Exception fault = CreateSoapFault(request.WriteRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1855,6 +2421,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.WriteRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1867,7 +2435,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.WriteRequest, e);
+                Exception fault = CreateSoapFault(message.WriteRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1879,11 +2449,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new WriteResponseMessage((WriteResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1899,21 +2472,30 @@ namespace Opc.Ua
         {
             HistoryUpdateResponse response = null;
 
-            HistoryUpdateRequest request = (HistoryUpdateRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            HistoryUpdateResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                HistoryUpdateRequest request = (HistoryUpdateRequest)incoming;
 
-            response = new HistoryUpdateResponse();
+                HistoryUpdateResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.HistoryUpdate(
-               request.RequestHeader,
-               request.HistoryUpdateDetails,
-               out results,
-               out diagnosticInfos);
+                response = new HistoryUpdateResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.HistoryUpdate(
+                   request.RequestHeader,
+                   request.HistoryUpdateDetails,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -1924,15 +2506,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual HistoryUpdateResponseMessage HistoryUpdate(HistoryUpdateMessage request)
         {
+            HistoryUpdateResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.HistoryUpdateRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                HistoryUpdateResponse response = (HistoryUpdateResponse)HistoryUpdate(request.HistoryUpdateRequest);
+                response = (HistoryUpdateResponse)HistoryUpdate(request.HistoryUpdateRequest);
+                // OnResponseSent(response);
                 return new HistoryUpdateResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.HistoryUpdateRequest, e);
+                Exception fault = CreateSoapFault(request.HistoryUpdateRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -1943,6 +2532,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.HistoryUpdateRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -1955,7 +2546,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.HistoryUpdateRequest, e);
+                Exception fault = CreateSoapFault(message.HistoryUpdateRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -1967,11 +2560,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new HistoryUpdateResponseMessage((HistoryUpdateResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -1987,21 +2583,30 @@ namespace Opc.Ua
         {
             CallResponse response = null;
 
-            CallRequest request = (CallRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            CallMethodResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                CallRequest request = (CallRequest)incoming;
 
-            response = new CallResponse();
+                CallMethodResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.Call(
-               request.RequestHeader,
-               request.MethodsToCall,
-               out results,
-               out diagnosticInfos);
+                response = new CallResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.Call(
+                   request.RequestHeader,
+                   request.MethodsToCall,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2012,15 +2617,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual CallResponseMessage Call(CallMessage request)
         {
+            CallResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.CallRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                CallResponse response = (CallResponse)Call(request.CallRequest);
+                response = (CallResponse)Call(request.CallRequest);
+                // OnResponseSent(response);
                 return new CallResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.CallRequest, e);
+                Exception fault = CreateSoapFault(request.CallRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2031,6 +2643,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.CallRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2043,7 +2657,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.CallRequest, e);
+                Exception fault = CreateSoapFault(message.CallRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2055,11 +2671,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new CallResponseMessage((CallResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2075,23 +2694,32 @@ namespace Opc.Ua
         {
             CreateMonitoredItemsResponse response = null;
 
-            CreateMonitoredItemsRequest request = (CreateMonitoredItemsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            MonitoredItemCreateResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                CreateMonitoredItemsRequest request = (CreateMonitoredItemsRequest)incoming;
 
-            response = new CreateMonitoredItemsResponse();
+                MonitoredItemCreateResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.CreateMonitoredItems(
-               request.RequestHeader,
-               request.SubscriptionId,
-               request.TimestampsToReturn,
-               request.ItemsToCreate,
-               out results,
-               out diagnosticInfos);
+                response = new CreateMonitoredItemsResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.CreateMonitoredItems(
+                   request.RequestHeader,
+                   request.SubscriptionId,
+                   request.TimestampsToReturn,
+                   request.ItemsToCreate,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2102,15 +2730,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual CreateMonitoredItemsResponseMessage CreateMonitoredItems(CreateMonitoredItemsMessage request)
         {
+            CreateMonitoredItemsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.CreateMonitoredItemsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                CreateMonitoredItemsResponse response = (CreateMonitoredItemsResponse)CreateMonitoredItems(request.CreateMonitoredItemsRequest);
+                response = (CreateMonitoredItemsResponse)CreateMonitoredItems(request.CreateMonitoredItemsRequest);
+                // OnResponseSent(response);
                 return new CreateMonitoredItemsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.CreateMonitoredItemsRequest, e);
+                Exception fault = CreateSoapFault(request.CreateMonitoredItemsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2121,6 +2756,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.CreateMonitoredItemsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2133,7 +2770,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.CreateMonitoredItemsRequest, e);
+                Exception fault = CreateSoapFault(message.CreateMonitoredItemsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2145,11 +2784,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new CreateMonitoredItemsResponseMessage((CreateMonitoredItemsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2165,23 +2807,32 @@ namespace Opc.Ua
         {
             ModifyMonitoredItemsResponse response = null;
 
-            ModifyMonitoredItemsRequest request = (ModifyMonitoredItemsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            MonitoredItemModifyResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                ModifyMonitoredItemsRequest request = (ModifyMonitoredItemsRequest)incoming;
 
-            response = new ModifyMonitoredItemsResponse();
+                MonitoredItemModifyResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.ModifyMonitoredItems(
-               request.RequestHeader,
-               request.SubscriptionId,
-               request.TimestampsToReturn,
-               request.ItemsToModify,
-               out results,
-               out diagnosticInfos);
+                response = new ModifyMonitoredItemsResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.ModifyMonitoredItems(
+                   request.RequestHeader,
+                   request.SubscriptionId,
+                   request.TimestampsToReturn,
+                   request.ItemsToModify,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2192,15 +2843,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual ModifyMonitoredItemsResponseMessage ModifyMonitoredItems(ModifyMonitoredItemsMessage request)
         {
+            ModifyMonitoredItemsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.ModifyMonitoredItemsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                ModifyMonitoredItemsResponse response = (ModifyMonitoredItemsResponse)ModifyMonitoredItems(request.ModifyMonitoredItemsRequest);
+                response = (ModifyMonitoredItemsResponse)ModifyMonitoredItems(request.ModifyMonitoredItemsRequest);
+                // OnResponseSent(response);
                 return new ModifyMonitoredItemsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.ModifyMonitoredItemsRequest, e);
+                Exception fault = CreateSoapFault(request.ModifyMonitoredItemsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2211,6 +2869,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.ModifyMonitoredItemsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2223,7 +2883,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.ModifyMonitoredItemsRequest, e);
+                Exception fault = CreateSoapFault(message.ModifyMonitoredItemsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2235,11 +2897,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new ModifyMonitoredItemsResponseMessage((ModifyMonitoredItemsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2255,23 +2920,32 @@ namespace Opc.Ua
         {
             SetMonitoringModeResponse response = null;
 
-            SetMonitoringModeRequest request = (SetMonitoringModeRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                SetMonitoringModeRequest request = (SetMonitoringModeRequest)incoming;
 
-            response = new SetMonitoringModeResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.SetMonitoringMode(
-               request.RequestHeader,
-               request.SubscriptionId,
-               request.MonitoringMode,
-               request.MonitoredItemIds,
-               out results,
-               out diagnosticInfos);
+                response = new SetMonitoringModeResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.SetMonitoringMode(
+                   request.RequestHeader,
+                   request.SubscriptionId,
+                   request.MonitoringMode,
+                   request.MonitoredItemIds,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2282,15 +2956,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual SetMonitoringModeResponseMessage SetMonitoringMode(SetMonitoringModeMessage request)
         {
+            SetMonitoringModeResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.SetMonitoringModeRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                SetMonitoringModeResponse response = (SetMonitoringModeResponse)SetMonitoringMode(request.SetMonitoringModeRequest);
+                response = (SetMonitoringModeResponse)SetMonitoringMode(request.SetMonitoringModeRequest);
+                // OnResponseSent(response);
                 return new SetMonitoringModeResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.SetMonitoringModeRequest, e);
+                Exception fault = CreateSoapFault(request.SetMonitoringModeRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2301,6 +2982,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.SetMonitoringModeRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2313,7 +2996,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.SetMonitoringModeRequest, e);
+                Exception fault = CreateSoapFault(message.SetMonitoringModeRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2325,11 +3010,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new SetMonitoringModeResponseMessage((SetMonitoringModeResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2345,30 +3033,39 @@ namespace Opc.Ua
         {
             SetTriggeringResponse response = null;
 
-            SetTriggeringRequest request = (SetTriggeringRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection addResults = null;
-            DiagnosticInfoCollection addDiagnosticInfos = null;
-            StatusCodeCollection removeResults = null;
-            DiagnosticInfoCollection removeDiagnosticInfos = null;
+                SetTriggeringRequest request = (SetTriggeringRequest)incoming;
 
-            response = new SetTriggeringResponse();
+                StatusCodeCollection addResults = null;
+                DiagnosticInfoCollection addDiagnosticInfos = null;
+                StatusCodeCollection removeResults = null;
+                DiagnosticInfoCollection removeDiagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.SetTriggering(
-               request.RequestHeader,
-               request.SubscriptionId,
-               request.TriggeringItemId,
-               request.LinksToAdd,
-               request.LinksToRemove,
-               out addResults,
-               out addDiagnosticInfos,
-               out removeResults,
-               out removeDiagnosticInfos);
+                response = new SetTriggeringResponse();
 
-            response.AddResults            = addResults;
-            response.AddDiagnosticInfos    = addDiagnosticInfos;
-            response.RemoveResults         = removeResults;
-            response.RemoveDiagnosticInfos = removeDiagnosticInfos;
+                response.ResponseHeader = ServerInstance.SetTriggering(
+                   request.RequestHeader,
+                   request.SubscriptionId,
+                   request.TriggeringItemId,
+                   request.LinksToAdd,
+                   request.LinksToRemove,
+                   out addResults,
+                   out addDiagnosticInfos,
+                   out removeResults,
+                   out removeDiagnosticInfos);
+
+                response.AddResults            = addResults;
+                response.AddDiagnosticInfos    = addDiagnosticInfos;
+                response.RemoveResults         = removeResults;
+                response.RemoveDiagnosticInfos = removeDiagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2379,15 +3076,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual SetTriggeringResponseMessage SetTriggering(SetTriggeringMessage request)
         {
+            SetTriggeringResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.SetTriggeringRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                SetTriggeringResponse response = (SetTriggeringResponse)SetTriggering(request.SetTriggeringRequest);
+                response = (SetTriggeringResponse)SetTriggering(request.SetTriggeringRequest);
+                // OnResponseSent(response);
                 return new SetTriggeringResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.SetTriggeringRequest, e);
+                Exception fault = CreateSoapFault(request.SetTriggeringRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2398,6 +3102,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.SetTriggeringRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2410,7 +3116,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.SetTriggeringRequest, e);
+                Exception fault = CreateSoapFault(message.SetTriggeringRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2422,11 +3130,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new SetTriggeringResponseMessage((SetTriggeringResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2442,22 +3153,31 @@ namespace Opc.Ua
         {
             DeleteMonitoredItemsResponse response = null;
 
-            DeleteMonitoredItemsRequest request = (DeleteMonitoredItemsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                DeleteMonitoredItemsRequest request = (DeleteMonitoredItemsRequest)incoming;
 
-            response = new DeleteMonitoredItemsResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.DeleteMonitoredItems(
-               request.RequestHeader,
-               request.SubscriptionId,
-               request.MonitoredItemIds,
-               out results,
-               out diagnosticInfos);
+                response = new DeleteMonitoredItemsResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.DeleteMonitoredItems(
+                   request.RequestHeader,
+                   request.SubscriptionId,
+                   request.MonitoredItemIds,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2468,15 +3188,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual DeleteMonitoredItemsResponseMessage DeleteMonitoredItems(DeleteMonitoredItemsMessage request)
         {
+            DeleteMonitoredItemsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.DeleteMonitoredItemsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                DeleteMonitoredItemsResponse response = (DeleteMonitoredItemsResponse)DeleteMonitoredItems(request.DeleteMonitoredItemsRequest);
+                response = (DeleteMonitoredItemsResponse)DeleteMonitoredItems(request.DeleteMonitoredItemsRequest);
+                // OnResponseSent(response);
                 return new DeleteMonitoredItemsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.DeleteMonitoredItemsRequest, e);
+                Exception fault = CreateSoapFault(request.DeleteMonitoredItemsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2487,6 +3214,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.DeleteMonitoredItemsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2499,7 +3228,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.DeleteMonitoredItemsRequest, e);
+                Exception fault = CreateSoapFault(message.DeleteMonitoredItemsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2511,11 +3242,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new DeleteMonitoredItemsResponseMessage((DeleteMonitoredItemsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2531,32 +3265,41 @@ namespace Opc.Ua
         {
             CreateSubscriptionResponse response = null;
 
-            CreateSubscriptionRequest request = (CreateSubscriptionRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            uint subscriptionId = 0;
-            double revisedPublishingInterval = 0;
-            uint revisedLifetimeCount = 0;
-            uint revisedMaxKeepAliveCount = 0;
+                CreateSubscriptionRequest request = (CreateSubscriptionRequest)incoming;
 
-            response = new CreateSubscriptionResponse();
+                uint subscriptionId = 0;
+                double revisedPublishingInterval = 0;
+                uint revisedLifetimeCount = 0;
+                uint revisedMaxKeepAliveCount = 0;
 
-            response.ResponseHeader = ServerInstance.CreateSubscription(
-               request.RequestHeader,
-               request.RequestedPublishingInterval,
-               request.RequestedLifetimeCount,
-               request.RequestedMaxKeepAliveCount,
-               request.MaxNotificationsPerPublish,
-               request.PublishingEnabled,
-               request.Priority,
-               out subscriptionId,
-               out revisedPublishingInterval,
-               out revisedLifetimeCount,
-               out revisedMaxKeepAliveCount);
+                response = new CreateSubscriptionResponse();
 
-            response.SubscriptionId            = subscriptionId;
-            response.RevisedPublishingInterval = revisedPublishingInterval;
-            response.RevisedLifetimeCount      = revisedLifetimeCount;
-            response.RevisedMaxKeepAliveCount  = revisedMaxKeepAliveCount;
+                response.ResponseHeader = ServerInstance.CreateSubscription(
+                   request.RequestHeader,
+                   request.RequestedPublishingInterval,
+                   request.RequestedLifetimeCount,
+                   request.RequestedMaxKeepAliveCount,
+                   request.MaxNotificationsPerPublish,
+                   request.PublishingEnabled,
+                   request.Priority,
+                   out subscriptionId,
+                   out revisedPublishingInterval,
+                   out revisedLifetimeCount,
+                   out revisedMaxKeepAliveCount);
+
+                response.SubscriptionId            = subscriptionId;
+                response.RevisedPublishingInterval = revisedPublishingInterval;
+                response.RevisedLifetimeCount      = revisedLifetimeCount;
+                response.RevisedMaxKeepAliveCount  = revisedMaxKeepAliveCount;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2567,15 +3310,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual CreateSubscriptionResponseMessage CreateSubscription(CreateSubscriptionMessage request)
         {
+            CreateSubscriptionResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.CreateSubscriptionRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                CreateSubscriptionResponse response = (CreateSubscriptionResponse)CreateSubscription(request.CreateSubscriptionRequest);
+                response = (CreateSubscriptionResponse)CreateSubscription(request.CreateSubscriptionRequest);
+                // OnResponseSent(response);
                 return new CreateSubscriptionResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.CreateSubscriptionRequest, e);
+                Exception fault = CreateSoapFault(request.CreateSubscriptionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2586,6 +3336,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.CreateSubscriptionRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2598,7 +3350,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.CreateSubscriptionRequest, e);
+                Exception fault = CreateSoapFault(message.CreateSubscriptionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2610,11 +3364,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new CreateSubscriptionResponseMessage((CreateSubscriptionResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2630,29 +3387,38 @@ namespace Opc.Ua
         {
             ModifySubscriptionResponse response = null;
 
-            ModifySubscriptionRequest request = (ModifySubscriptionRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            double revisedPublishingInterval = 0;
-            uint revisedLifetimeCount = 0;
-            uint revisedMaxKeepAliveCount = 0;
+                ModifySubscriptionRequest request = (ModifySubscriptionRequest)incoming;
 
-            response = new ModifySubscriptionResponse();
+                double revisedPublishingInterval = 0;
+                uint revisedLifetimeCount = 0;
+                uint revisedMaxKeepAliveCount = 0;
 
-            response.ResponseHeader = ServerInstance.ModifySubscription(
-               request.RequestHeader,
-               request.SubscriptionId,
-               request.RequestedPublishingInterval,
-               request.RequestedLifetimeCount,
-               request.RequestedMaxKeepAliveCount,
-               request.MaxNotificationsPerPublish,
-               request.Priority,
-               out revisedPublishingInterval,
-               out revisedLifetimeCount,
-               out revisedMaxKeepAliveCount);
+                response = new ModifySubscriptionResponse();
 
-            response.RevisedPublishingInterval = revisedPublishingInterval;
-            response.RevisedLifetimeCount      = revisedLifetimeCount;
-            response.RevisedMaxKeepAliveCount  = revisedMaxKeepAliveCount;
+                response.ResponseHeader = ServerInstance.ModifySubscription(
+                   request.RequestHeader,
+                   request.SubscriptionId,
+                   request.RequestedPublishingInterval,
+                   request.RequestedLifetimeCount,
+                   request.RequestedMaxKeepAliveCount,
+                   request.MaxNotificationsPerPublish,
+                   request.Priority,
+                   out revisedPublishingInterval,
+                   out revisedLifetimeCount,
+                   out revisedMaxKeepAliveCount);
+
+                response.RevisedPublishingInterval = revisedPublishingInterval;
+                response.RevisedLifetimeCount      = revisedLifetimeCount;
+                response.RevisedMaxKeepAliveCount  = revisedMaxKeepAliveCount;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2663,15 +3429,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual ModifySubscriptionResponseMessage ModifySubscription(ModifySubscriptionMessage request)
         {
+            ModifySubscriptionResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.ModifySubscriptionRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                ModifySubscriptionResponse response = (ModifySubscriptionResponse)ModifySubscription(request.ModifySubscriptionRequest);
+                response = (ModifySubscriptionResponse)ModifySubscription(request.ModifySubscriptionRequest);
+                // OnResponseSent(response);
                 return new ModifySubscriptionResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.ModifySubscriptionRequest, e);
+                Exception fault = CreateSoapFault(request.ModifySubscriptionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2682,6 +3455,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.ModifySubscriptionRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2694,7 +3469,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.ModifySubscriptionRequest, e);
+                Exception fault = CreateSoapFault(message.ModifySubscriptionRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2706,11 +3483,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new ModifySubscriptionResponseMessage((ModifySubscriptionResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2726,22 +3506,31 @@ namespace Opc.Ua
         {
             SetPublishingModeResponse response = null;
 
-            SetPublishingModeRequest request = (SetPublishingModeRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                SetPublishingModeRequest request = (SetPublishingModeRequest)incoming;
 
-            response = new SetPublishingModeResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.SetPublishingMode(
-               request.RequestHeader,
-               request.PublishingEnabled,
-               request.SubscriptionIds,
-               out results,
-               out diagnosticInfos);
+                response = new SetPublishingModeResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.SetPublishingMode(
+                   request.RequestHeader,
+                   request.PublishingEnabled,
+                   request.SubscriptionIds,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2752,15 +3541,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual SetPublishingModeResponseMessage SetPublishingMode(SetPublishingModeMessage request)
         {
+            SetPublishingModeResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.SetPublishingModeRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                SetPublishingModeResponse response = (SetPublishingModeResponse)SetPublishingMode(request.SetPublishingModeRequest);
+                response = (SetPublishingModeResponse)SetPublishingMode(request.SetPublishingModeRequest);
+                // OnResponseSent(response);
                 return new SetPublishingModeResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.SetPublishingModeRequest, e);
+                Exception fault = CreateSoapFault(request.SetPublishingModeRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2771,6 +3567,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.SetPublishingModeRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2783,7 +3581,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.SetPublishingModeRequest, e);
+                Exception fault = CreateSoapFault(message.SetPublishingModeRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2795,11 +3595,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new SetPublishingModeResponseMessage((SetPublishingModeResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2815,33 +3618,42 @@ namespace Opc.Ua
         {
             PublishResponse response = null;
 
-            PublishRequest request = (PublishRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            uint subscriptionId = 0;
-            UInt32Collection availableSequenceNumbers = null;
-            bool moreNotifications = false;
-            NotificationMessage notificationMessage = null;
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                PublishRequest request = (PublishRequest)incoming;
 
-            response = new PublishResponse();
+                uint subscriptionId = 0;
+                UInt32Collection availableSequenceNumbers = null;
+                bool moreNotifications = false;
+                NotificationMessage notificationMessage = null;
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.Publish(
-               request.RequestHeader,
-               request.SubscriptionAcknowledgements,
-               out subscriptionId,
-               out availableSequenceNumbers,
-               out moreNotifications,
-               out notificationMessage,
-               out results,
-               out diagnosticInfos);
+                response = new PublishResponse();
 
-            response.SubscriptionId           = subscriptionId;
-            response.AvailableSequenceNumbers = availableSequenceNumbers;
-            response.MoreNotifications        = moreNotifications;
-            response.NotificationMessage      = notificationMessage;
-            response.Results                  = results;
-            response.DiagnosticInfos          = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.Publish(
+                   request.RequestHeader,
+                   request.SubscriptionAcknowledgements,
+                   out subscriptionId,
+                   out availableSequenceNumbers,
+                   out moreNotifications,
+                   out notificationMessage,
+                   out results,
+                   out diagnosticInfos);
+
+                response.SubscriptionId           = subscriptionId;
+                response.AvailableSequenceNumbers = availableSequenceNumbers;
+                response.MoreNotifications        = moreNotifications;
+                response.NotificationMessage      = notificationMessage;
+                response.Results                  = results;
+                response.DiagnosticInfos          = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2852,15 +3664,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual PublishResponseMessage Publish(PublishMessage request)
         {
+            PublishResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.PublishRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                PublishResponse response = (PublishResponse)Publish(request.PublishRequest);
+                response = (PublishResponse)Publish(request.PublishRequest);
+                // OnResponseSent(response);
                 return new PublishResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.PublishRequest, e);
+                Exception fault = CreateSoapFault(request.PublishRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2871,6 +3690,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.PublishRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2883,7 +3704,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.PublishRequest, e);
+                Exception fault = CreateSoapFault(message.PublishRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2895,11 +3718,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new PublishResponseMessage((PublishResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -2915,19 +3741,28 @@ namespace Opc.Ua
         {
             RepublishResponse response = null;
 
-            RepublishRequest request = (RepublishRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            NotificationMessage notificationMessage = null;
+                RepublishRequest request = (RepublishRequest)incoming;
 
-            response = new RepublishResponse();
+                NotificationMessage notificationMessage = null;
 
-            response.ResponseHeader = ServerInstance.Republish(
-               request.RequestHeader,
-               request.SubscriptionId,
-               request.RetransmitSequenceNumber,
-               out notificationMessage);
+                response = new RepublishResponse();
 
-            response.NotificationMessage = notificationMessage;
+                response.ResponseHeader = ServerInstance.Republish(
+                   request.RequestHeader,
+                   request.SubscriptionId,
+                   request.RetransmitSequenceNumber,
+                   out notificationMessage);
+
+                response.NotificationMessage = notificationMessage;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -2938,15 +3773,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual RepublishResponseMessage Republish(RepublishMessage request)
         {
+            RepublishResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.RepublishRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                RepublishResponse response = (RepublishResponse)Republish(request.RepublishRequest);
+                response = (RepublishResponse)Republish(request.RepublishRequest);
+                // OnResponseSent(response);
                 return new RepublishResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.RepublishRequest, e);
+                Exception fault = CreateSoapFault(request.RepublishRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -2957,6 +3799,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.RepublishRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -2969,7 +3813,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.RepublishRequest, e);
+                Exception fault = CreateSoapFault(message.RepublishRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -2981,11 +3827,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new RepublishResponseMessage((RepublishResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -3001,22 +3850,31 @@ namespace Opc.Ua
         {
             TransferSubscriptionsResponse response = null;
 
-            TransferSubscriptionsRequest request = (TransferSubscriptionsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            TransferResultCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                TransferSubscriptionsRequest request = (TransferSubscriptionsRequest)incoming;
 
-            response = new TransferSubscriptionsResponse();
+                TransferResultCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.TransferSubscriptions(
-               request.RequestHeader,
-               request.SubscriptionIds,
-               request.SendInitialValues,
-               out results,
-               out diagnosticInfos);
+                response = new TransferSubscriptionsResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.TransferSubscriptions(
+                   request.RequestHeader,
+                   request.SubscriptionIds,
+                   request.SendInitialValues,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -3027,15 +3885,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual TransferSubscriptionsResponseMessage TransferSubscriptions(TransferSubscriptionsMessage request)
         {
+            TransferSubscriptionsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.TransferSubscriptionsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                TransferSubscriptionsResponse response = (TransferSubscriptionsResponse)TransferSubscriptions(request.TransferSubscriptionsRequest);
+                response = (TransferSubscriptionsResponse)TransferSubscriptions(request.TransferSubscriptionsRequest);
+                // OnResponseSent(response);
                 return new TransferSubscriptionsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.TransferSubscriptionsRequest, e);
+                Exception fault = CreateSoapFault(request.TransferSubscriptionsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -3046,6 +3911,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.TransferSubscriptionsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -3058,7 +3925,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.TransferSubscriptionsRequest, e);
+                Exception fault = CreateSoapFault(message.TransferSubscriptionsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -3070,11 +3939,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new TransferSubscriptionsResponseMessage((TransferSubscriptionsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -3090,21 +3962,30 @@ namespace Opc.Ua
         {
             DeleteSubscriptionsResponse response = null;
 
-            DeleteSubscriptionsRequest request = (DeleteSubscriptionsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            StatusCodeCollection results = null;
-            DiagnosticInfoCollection diagnosticInfos = null;
+                DeleteSubscriptionsRequest request = (DeleteSubscriptionsRequest)incoming;
 
-            response = new DeleteSubscriptionsResponse();
+                StatusCodeCollection results = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
 
-            response.ResponseHeader = ServerInstance.DeleteSubscriptions(
-               request.RequestHeader,
-               request.SubscriptionIds,
-               out results,
-               out diagnosticInfos);
+                response = new DeleteSubscriptionsResponse();
 
-            response.Results         = results;
-            response.DiagnosticInfos = diagnosticInfos;
+                response.ResponseHeader = ServerInstance.DeleteSubscriptions(
+                   request.RequestHeader,
+                   request.SubscriptionIds,
+                   out results,
+                   out diagnosticInfos);
+
+                response.Results         = results;
+                response.DiagnosticInfos = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -3115,15 +3996,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual DeleteSubscriptionsResponseMessage DeleteSubscriptions(DeleteSubscriptionsMessage request)
         {
+            DeleteSubscriptionsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.DeleteSubscriptionsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                DeleteSubscriptionsResponse response = (DeleteSubscriptionsResponse)DeleteSubscriptions(request.DeleteSubscriptionsRequest);
+                response = (DeleteSubscriptionsResponse)DeleteSubscriptions(request.DeleteSubscriptionsRequest);
+                // OnResponseSent(response);
                 return new DeleteSubscriptionsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.DeleteSubscriptionsRequest, e);
+                Exception fault = CreateSoapFault(request.DeleteSubscriptionsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -3134,6 +4022,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.DeleteSubscriptionsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -3146,7 +4036,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.DeleteSubscriptionsRequest, e);
+                Exception fault = CreateSoapFault(message.DeleteSubscriptionsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -3158,185 +4050,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new DeleteSubscriptionsResponseMessage((DeleteSubscriptionsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-            }
-        }
-        #endif
-        #endif
-        #endregion
-
-        #region TestStack Service
-        #if (!OPCUA_EXCLUDE_TestStack)
-        /// <summary>
-        /// Invokes the TestStack service.
-        /// </summary>
-        public IServiceResponse TestStack(IServiceRequest incoming)
-        {
-            TestStackResponse response = null;
-
-            TestStackRequest request = (TestStackRequest)incoming;
-
-            Variant output = new Variant();
-
-            response = new TestStackResponse();
-
-            response.ResponseHeader = ServerInstance.TestStack(
-               request.RequestHeader,
-               request.TestId,
-               request.Iteration,
-               request.Input,
-               out output);
-
-            response.Output = output;
-
-            return response;
-        }
-
-        #if OPCUA_USE_SYNCHRONOUS_ENDPOINTS
-        /// <summary>
-        /// The operation contract for the TestStack service.
-        /// </summary>
-        public virtual TestStackResponseMessage TestStack(TestStackMessage request)
-        {
-            try
-            {
-                SetRequestContext(RequestEncoding.Xml);
-                TestStackResponse response = (TestStackResponse)TestStack(request.TestStackRequest);
-                return new TestStackResponseMessage(response);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(request.TestStackRequest, e);
-            }
-        }
-        #else
-        /// <summary>
-        /// Asynchronously calls the TestStack service.
-        /// </summary>
-        public virtual IAsyncResult BeginTestStack(TestStackMessage message, AsyncCallback callback, object callbackData)
-        {
-            try
-            {
-                // check for bad data.
-                if (message == null) throw new ArgumentNullException("message");
-
-                // set the request context.
-                SetRequestContext(RequestEncoding.Xml);
-
-                // create handler.
-                ProcessRequestAsyncResult result = new ProcessRequestAsyncResult(this, callback, callbackData, 0);
-                return result.BeginProcessRequest(SecureChannelContext.Current, message.TestStackRequest);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(message.TestStackRequest, e);
-            }
-        }
-
-        /// <summary>
-        /// Waits for an asynchronous call to the TestStack service to complete.
-        /// </summary>
-        public virtual TestStackResponseMessage EndTestStack(IAsyncResult ar)
-        {
-            try
-            {
-                IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                return new TestStackResponseMessage((TestStackResponse)response);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-            }
-        }
-        #endif
-        #endif
-        #endregion
-
-        #region TestStackEx Service
-        #if (!OPCUA_EXCLUDE_TestStackEx)
-        /// <summary>
-        /// Invokes the TestStackEx service.
-        /// </summary>
-        public IServiceResponse TestStackEx(IServiceRequest incoming)
-        {
-            TestStackExResponse response = null;
-
-            TestStackExRequest request = (TestStackExRequest)incoming;
-
-            CompositeTestType output = null;
-
-            response = new TestStackExResponse();
-
-            response.ResponseHeader = ServerInstance.TestStackEx(
-               request.RequestHeader,
-               request.TestId,
-               request.Iteration,
-               request.Input,
-               out output);
-
-            response.Output = output;
-
-            return response;
-        }
-
-        #if OPCUA_USE_SYNCHRONOUS_ENDPOINTS
-        /// <summary>
-        /// The operation contract for the TestStackEx service.
-        /// </summary>
-        public virtual TestStackExResponseMessage TestStackEx(TestStackExMessage request)
-        {
-            try
-            {
-                SetRequestContext(RequestEncoding.Xml);
-                TestStackExResponse response = (TestStackExResponse)TestStackEx(request.TestStackExRequest);
-                return new TestStackExResponseMessage(response);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(request.TestStackExRequest, e);
-            }
-        }
-        #else
-        /// <summary>
-        /// Asynchronously calls the TestStackEx service.
-        /// </summary>
-        public virtual IAsyncResult BeginTestStackEx(TestStackExMessage message, AsyncCallback callback, object callbackData)
-        {
-            try
-            {
-                // check for bad data.
-                if (message == null) throw new ArgumentNullException("message");
-
-                // set the request context.
-                SetRequestContext(RequestEncoding.Xml);
-
-                // create handler.
-                ProcessRequestAsyncResult result = new ProcessRequestAsyncResult(this, callback, callbackData, 0);
-                return result.BeginProcessRequest(SecureChannelContext.Current, message.TestStackExRequest);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(message.TestStackExRequest, e);
-            }
-        }
-
-        /// <summary>
-        /// Waits for an asynchronous call to the TestStackEx service to complete.
-        /// </summary>
-        public virtual TestStackExResponseMessage EndTestStackEx(IAsyncResult ar)
-        {
-            try
-            {
-                IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                return new TestStackExResponseMessage((TestStackExResponse)response);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -3351,112 +4072,109 @@ namespace Opc.Ua
         protected virtual void CreateKnownTypes()
         {
             #if (!OPCUA_EXCLUDE_FindServers)
-            SupportedServices.Add(DataTypes.FindServersRequest, new ServiceDefinition(typeof(FindServersRequest), new InvokeServiceEventHandler(FindServers)));
+            SupportedServices.Add(DataTypeIds.FindServersRequest, new ServiceDefinition(typeof(FindServersRequest), new InvokeServiceEventHandler(FindServers)));
+            #endif
+            #if (!OPCUA_EXCLUDE_FindServersOnNetwork)
+            SupportedServices.Add(DataTypeIds.FindServersOnNetworkRequest, new ServiceDefinition(typeof(FindServersOnNetworkRequest), new InvokeServiceEventHandler(FindServersOnNetwork)));
             #endif
             #if (!OPCUA_EXCLUDE_GetEndpoints)
-            SupportedServices.Add(DataTypes.GetEndpointsRequest, new ServiceDefinition(typeof(GetEndpointsRequest), new InvokeServiceEventHandler(GetEndpoints)));
+            SupportedServices.Add(DataTypeIds.GetEndpointsRequest, new ServiceDefinition(typeof(GetEndpointsRequest), new InvokeServiceEventHandler(GetEndpoints)));
             #endif
             #if (!OPCUA_EXCLUDE_CreateSession)
-            SupportedServices.Add(DataTypes.CreateSessionRequest, new ServiceDefinition(typeof(CreateSessionRequest), new InvokeServiceEventHandler(CreateSession)));
+            SupportedServices.Add(DataTypeIds.CreateSessionRequest, new ServiceDefinition(typeof(CreateSessionRequest), new InvokeServiceEventHandler(CreateSession)));
             #endif
             #if (!OPCUA_EXCLUDE_ActivateSession)
-            SupportedServices.Add(DataTypes.ActivateSessionRequest, new ServiceDefinition(typeof(ActivateSessionRequest), new InvokeServiceEventHandler(ActivateSession)));
+            SupportedServices.Add(DataTypeIds.ActivateSessionRequest, new ServiceDefinition(typeof(ActivateSessionRequest), new InvokeServiceEventHandler(ActivateSession)));
             #endif
             #if (!OPCUA_EXCLUDE_CloseSession)
-            SupportedServices.Add(DataTypes.CloseSessionRequest, new ServiceDefinition(typeof(CloseSessionRequest), new InvokeServiceEventHandler(CloseSession)));
+            SupportedServices.Add(DataTypeIds.CloseSessionRequest, new ServiceDefinition(typeof(CloseSessionRequest), new InvokeServiceEventHandler(CloseSession)));
             #endif
             #if (!OPCUA_EXCLUDE_Cancel)
-            SupportedServices.Add(DataTypes.CancelRequest, new ServiceDefinition(typeof(CancelRequest), new InvokeServiceEventHandler(Cancel)));
+            SupportedServices.Add(DataTypeIds.CancelRequest, new ServiceDefinition(typeof(CancelRequest), new InvokeServiceEventHandler(Cancel)));
             #endif
             #if (!OPCUA_EXCLUDE_AddNodes)
-            SupportedServices.Add(DataTypes.AddNodesRequest, new ServiceDefinition(typeof(AddNodesRequest), new InvokeServiceEventHandler(AddNodes)));
+            SupportedServices.Add(DataTypeIds.AddNodesRequest, new ServiceDefinition(typeof(AddNodesRequest), new InvokeServiceEventHandler(AddNodes)));
             #endif
             #if (!OPCUA_EXCLUDE_AddReferences)
-            SupportedServices.Add(DataTypes.AddReferencesRequest, new ServiceDefinition(typeof(AddReferencesRequest), new InvokeServiceEventHandler(AddReferences)));
+            SupportedServices.Add(DataTypeIds.AddReferencesRequest, new ServiceDefinition(typeof(AddReferencesRequest), new InvokeServiceEventHandler(AddReferences)));
             #endif
             #if (!OPCUA_EXCLUDE_DeleteNodes)
-            SupportedServices.Add(DataTypes.DeleteNodesRequest, new ServiceDefinition(typeof(DeleteNodesRequest), new InvokeServiceEventHandler(DeleteNodes)));
+            SupportedServices.Add(DataTypeIds.DeleteNodesRequest, new ServiceDefinition(typeof(DeleteNodesRequest), new InvokeServiceEventHandler(DeleteNodes)));
             #endif
             #if (!OPCUA_EXCLUDE_DeleteReferences)
-            SupportedServices.Add(DataTypes.DeleteReferencesRequest, new ServiceDefinition(typeof(DeleteReferencesRequest), new InvokeServiceEventHandler(DeleteReferences)));
+            SupportedServices.Add(DataTypeIds.DeleteReferencesRequest, new ServiceDefinition(typeof(DeleteReferencesRequest), new InvokeServiceEventHandler(DeleteReferences)));
             #endif
             #if (!OPCUA_EXCLUDE_Browse)
-            SupportedServices.Add(DataTypes.BrowseRequest, new ServiceDefinition(typeof(BrowseRequest), new InvokeServiceEventHandler(Browse)));
+            SupportedServices.Add(DataTypeIds.BrowseRequest, new ServiceDefinition(typeof(BrowseRequest), new InvokeServiceEventHandler(Browse)));
             #endif
             #if (!OPCUA_EXCLUDE_BrowseNext)
-            SupportedServices.Add(DataTypes.BrowseNextRequest, new ServiceDefinition(typeof(BrowseNextRequest), new InvokeServiceEventHandler(BrowseNext)));
+            SupportedServices.Add(DataTypeIds.BrowseNextRequest, new ServiceDefinition(typeof(BrowseNextRequest), new InvokeServiceEventHandler(BrowseNext)));
             #endif
             #if (!OPCUA_EXCLUDE_TranslateBrowsePathsToNodeIds)
-            SupportedServices.Add(DataTypes.TranslateBrowsePathsToNodeIdsRequest, new ServiceDefinition(typeof(TranslateBrowsePathsToNodeIdsRequest), new InvokeServiceEventHandler(TranslateBrowsePathsToNodeIds)));
+            SupportedServices.Add(DataTypeIds.TranslateBrowsePathsToNodeIdsRequest, new ServiceDefinition(typeof(TranslateBrowsePathsToNodeIdsRequest), new InvokeServiceEventHandler(TranslateBrowsePathsToNodeIds)));
             #endif
             #if (!OPCUA_EXCLUDE_RegisterNodes)
-            SupportedServices.Add(DataTypes.RegisterNodesRequest, new ServiceDefinition(typeof(RegisterNodesRequest), new InvokeServiceEventHandler(RegisterNodes)));
+            SupportedServices.Add(DataTypeIds.RegisterNodesRequest, new ServiceDefinition(typeof(RegisterNodesRequest), new InvokeServiceEventHandler(RegisterNodes)));
             #endif
             #if (!OPCUA_EXCLUDE_UnregisterNodes)
-            SupportedServices.Add(DataTypes.UnregisterNodesRequest, new ServiceDefinition(typeof(UnregisterNodesRequest), new InvokeServiceEventHandler(UnregisterNodes)));
+            SupportedServices.Add(DataTypeIds.UnregisterNodesRequest, new ServiceDefinition(typeof(UnregisterNodesRequest), new InvokeServiceEventHandler(UnregisterNodes)));
             #endif
             #if (!OPCUA_EXCLUDE_QueryFirst)
-            SupportedServices.Add(DataTypes.QueryFirstRequest, new ServiceDefinition(typeof(QueryFirstRequest), new InvokeServiceEventHandler(QueryFirst)));
+            SupportedServices.Add(DataTypeIds.QueryFirstRequest, new ServiceDefinition(typeof(QueryFirstRequest), new InvokeServiceEventHandler(QueryFirst)));
             #endif
             #if (!OPCUA_EXCLUDE_QueryNext)
-            SupportedServices.Add(DataTypes.QueryNextRequest, new ServiceDefinition(typeof(QueryNextRequest), new InvokeServiceEventHandler(QueryNext)));
+            SupportedServices.Add(DataTypeIds.QueryNextRequest, new ServiceDefinition(typeof(QueryNextRequest), new InvokeServiceEventHandler(QueryNext)));
             #endif
             #if (!OPCUA_EXCLUDE_Read)
-            SupportedServices.Add(DataTypes.ReadRequest, new ServiceDefinition(typeof(ReadRequest), new InvokeServiceEventHandler(Read)));
+            SupportedServices.Add(DataTypeIds.ReadRequest, new ServiceDefinition(typeof(ReadRequest), new InvokeServiceEventHandler(Read)));
             #endif
             #if (!OPCUA_EXCLUDE_HistoryRead)
-            SupportedServices.Add(DataTypes.HistoryReadRequest, new ServiceDefinition(typeof(HistoryReadRequest), new InvokeServiceEventHandler(HistoryRead)));
+            SupportedServices.Add(DataTypeIds.HistoryReadRequest, new ServiceDefinition(typeof(HistoryReadRequest), new InvokeServiceEventHandler(HistoryRead)));
             #endif
             #if (!OPCUA_EXCLUDE_Write)
-            SupportedServices.Add(DataTypes.WriteRequest, new ServiceDefinition(typeof(WriteRequest), new InvokeServiceEventHandler(Write)));
+            SupportedServices.Add(DataTypeIds.WriteRequest, new ServiceDefinition(typeof(WriteRequest), new InvokeServiceEventHandler(Write)));
             #endif
             #if (!OPCUA_EXCLUDE_HistoryUpdate)
-            SupportedServices.Add(DataTypes.HistoryUpdateRequest, new ServiceDefinition(typeof(HistoryUpdateRequest), new InvokeServiceEventHandler(HistoryUpdate)));
+            SupportedServices.Add(DataTypeIds.HistoryUpdateRequest, new ServiceDefinition(typeof(HistoryUpdateRequest), new InvokeServiceEventHandler(HistoryUpdate)));
             #endif
             #if (!OPCUA_EXCLUDE_Call)
-            SupportedServices.Add(DataTypes.CallRequest, new ServiceDefinition(typeof(CallRequest), new InvokeServiceEventHandler(Call)));
+            SupportedServices.Add(DataTypeIds.CallRequest, new ServiceDefinition(typeof(CallRequest), new InvokeServiceEventHandler(Call)));
             #endif
             #if (!OPCUA_EXCLUDE_CreateMonitoredItems)
-            SupportedServices.Add(DataTypes.CreateMonitoredItemsRequest, new ServiceDefinition(typeof(CreateMonitoredItemsRequest), new InvokeServiceEventHandler(CreateMonitoredItems)));
+            SupportedServices.Add(DataTypeIds.CreateMonitoredItemsRequest, new ServiceDefinition(typeof(CreateMonitoredItemsRequest), new InvokeServiceEventHandler(CreateMonitoredItems)));
             #endif
             #if (!OPCUA_EXCLUDE_ModifyMonitoredItems)
-            SupportedServices.Add(DataTypes.ModifyMonitoredItemsRequest, new ServiceDefinition(typeof(ModifyMonitoredItemsRequest), new InvokeServiceEventHandler(ModifyMonitoredItems)));
+            SupportedServices.Add(DataTypeIds.ModifyMonitoredItemsRequest, new ServiceDefinition(typeof(ModifyMonitoredItemsRequest), new InvokeServiceEventHandler(ModifyMonitoredItems)));
             #endif
             #if (!OPCUA_EXCLUDE_SetMonitoringMode)
-            SupportedServices.Add(DataTypes.SetMonitoringModeRequest, new ServiceDefinition(typeof(SetMonitoringModeRequest), new InvokeServiceEventHandler(SetMonitoringMode)));
+            SupportedServices.Add(DataTypeIds.SetMonitoringModeRequest, new ServiceDefinition(typeof(SetMonitoringModeRequest), new InvokeServiceEventHandler(SetMonitoringMode)));
             #endif
             #if (!OPCUA_EXCLUDE_SetTriggering)
-            SupportedServices.Add(DataTypes.SetTriggeringRequest, new ServiceDefinition(typeof(SetTriggeringRequest), new InvokeServiceEventHandler(SetTriggering)));
+            SupportedServices.Add(DataTypeIds.SetTriggeringRequest, new ServiceDefinition(typeof(SetTriggeringRequest), new InvokeServiceEventHandler(SetTriggering)));
             #endif
             #if (!OPCUA_EXCLUDE_DeleteMonitoredItems)
-            SupportedServices.Add(DataTypes.DeleteMonitoredItemsRequest, new ServiceDefinition(typeof(DeleteMonitoredItemsRequest), new InvokeServiceEventHandler(DeleteMonitoredItems)));
+            SupportedServices.Add(DataTypeIds.DeleteMonitoredItemsRequest, new ServiceDefinition(typeof(DeleteMonitoredItemsRequest), new InvokeServiceEventHandler(DeleteMonitoredItems)));
             #endif
             #if (!OPCUA_EXCLUDE_CreateSubscription)
-            SupportedServices.Add(DataTypes.CreateSubscriptionRequest, new ServiceDefinition(typeof(CreateSubscriptionRequest), new InvokeServiceEventHandler(CreateSubscription)));
+            SupportedServices.Add(DataTypeIds.CreateSubscriptionRequest, new ServiceDefinition(typeof(CreateSubscriptionRequest), new InvokeServiceEventHandler(CreateSubscription)));
             #endif
             #if (!OPCUA_EXCLUDE_ModifySubscription)
-            SupportedServices.Add(DataTypes.ModifySubscriptionRequest, new ServiceDefinition(typeof(ModifySubscriptionRequest), new InvokeServiceEventHandler(ModifySubscription)));
+            SupportedServices.Add(DataTypeIds.ModifySubscriptionRequest, new ServiceDefinition(typeof(ModifySubscriptionRequest), new InvokeServiceEventHandler(ModifySubscription)));
             #endif
             #if (!OPCUA_EXCLUDE_SetPublishingMode)
-            SupportedServices.Add(DataTypes.SetPublishingModeRequest, new ServiceDefinition(typeof(SetPublishingModeRequest), new InvokeServiceEventHandler(SetPublishingMode)));
+            SupportedServices.Add(DataTypeIds.SetPublishingModeRequest, new ServiceDefinition(typeof(SetPublishingModeRequest), new InvokeServiceEventHandler(SetPublishingMode)));
             #endif
             #if (!OPCUA_EXCLUDE_Publish)
-            SupportedServices.Add(DataTypes.PublishRequest, new ServiceDefinition(typeof(PublishRequest), new InvokeServiceEventHandler(Publish)));
+            SupportedServices.Add(DataTypeIds.PublishRequest, new ServiceDefinition(typeof(PublishRequest), new InvokeServiceEventHandler(Publish)));
             #endif
             #if (!OPCUA_EXCLUDE_Republish)
-            SupportedServices.Add(DataTypes.RepublishRequest, new ServiceDefinition(typeof(RepublishRequest), new InvokeServiceEventHandler(Republish)));
+            SupportedServices.Add(DataTypeIds.RepublishRequest, new ServiceDefinition(typeof(RepublishRequest), new InvokeServiceEventHandler(Republish)));
             #endif
             #if (!OPCUA_EXCLUDE_TransferSubscriptions)
-            SupportedServices.Add(DataTypes.TransferSubscriptionsRequest, new ServiceDefinition(typeof(TransferSubscriptionsRequest), new InvokeServiceEventHandler(TransferSubscriptions)));
+            SupportedServices.Add(DataTypeIds.TransferSubscriptionsRequest, new ServiceDefinition(typeof(TransferSubscriptionsRequest), new InvokeServiceEventHandler(TransferSubscriptions)));
             #endif
             #if (!OPCUA_EXCLUDE_DeleteSubscriptions)
-            SupportedServices.Add(DataTypes.DeleteSubscriptionsRequest, new ServiceDefinition(typeof(DeleteSubscriptionsRequest), new InvokeServiceEventHandler(DeleteSubscriptions)));
-            #endif
-            #if (!OPCUA_EXCLUDE_TestStack)
-            SupportedServices.Add(DataTypes.TestStackRequest, new ServiceDefinition(typeof(TestStackRequest), new InvokeServiceEventHandler(TestStack)));
-            #endif
-            #if (!OPCUA_EXCLUDE_TestStackEx)
-            SupportedServices.Add(DataTypes.TestStackExRequest, new ServiceDefinition(typeof(TestStackExRequest), new InvokeServiceEventHandler(TestStackEx)));
+            SupportedServices.Add(DataTypeIds.DeleteSubscriptionsRequest, new ServiceDefinition(typeof(DeleteSubscriptionsRequest), new InvokeServiceEventHandler(DeleteSubscriptions)));
             #endif
         }
         #endregion
@@ -3519,93 +4237,6 @@ namespace Opc.Ua
         #endregion
 
         #region IDiscoveryEndpoint Members
-        #region FindDnsServices Service
-        #if (!OPCUA_EXCLUDE_FindDnsServices)
-        /// <summary>
-        /// Invokes the FindDnsServices service.
-        /// </summary>
-        public IServiceResponse FindDnsServices(IServiceRequest incoming)
-        {
-            FindDnsServicesResponse response = null;
-
-            FindDnsServicesRequest request = (FindDnsServicesRequest)incoming;
-
-            DnsServiceRecordCollection services = null;
-
-            response = new FindDnsServicesResponse();
-
-            response.ResponseHeader = ServerInstance.FindDnsServices(
-               request.RequestHeader,
-               request.EndpointUrl,
-               request.ServiceNameFilters,
-               request.ServiceTypeFilters,
-               out services);
-
-            response.Services = services;
-
-            return response;
-        }
-
-        #if OPCUA_USE_SYNCHRONOUS_ENDPOINTS
-        /// <summary>
-        /// The operation contract for the FindDnsServices service.
-        /// </summary>
-        public virtual FindDnsServicesResponseMessage FindDnsServices(FindDnsServicesMessage request)
-        {
-            try
-            {
-                SetRequestContext(RequestEncoding.Xml);
-                FindDnsServicesResponse response = (FindDnsServicesResponse)FindDnsServices(request.FindDnsServicesRequest);
-                return new FindDnsServicesResponseMessage(response);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(request.FindDnsServicesRequest, e);
-            }
-        }
-        #else
-        /// <summary>
-        /// Asynchronously calls the FindDnsServices service.
-        /// </summary>
-        public virtual IAsyncResult BeginFindDnsServices(FindDnsServicesMessage message, AsyncCallback callback, object callbackData)
-        {
-            try
-            {
-                // check for bad data.
-                if (message == null) throw new ArgumentNullException("message");
-
-                // set the request context.
-                SetRequestContext(RequestEncoding.Xml);
-
-                // create handler.
-                ProcessRequestAsyncResult result = new ProcessRequestAsyncResult(this, callback, callbackData, 0);
-                return result.BeginProcessRequest(SecureChannelContext.Current, message.FindDnsServicesRequest);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(message.FindDnsServicesRequest, e);
-            }
-        }
-
-        /// <summary>
-        /// Waits for an asynchronous call to the FindDnsServices service to complete.
-        /// </summary>
-        public virtual FindDnsServicesResponseMessage EndFindDnsServices(IAsyncResult ar)
-        {
-            try
-            {
-                IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                return new FindDnsServicesResponseMessage((FindDnsServicesResponse)response);
-            }
-            catch (Exception e)
-            {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-            }
-        }
-        #endif
-        #endif
-        #endregion
-
         #region FindServers Service
         #if (!OPCUA_EXCLUDE_FindServers)
         /// <summary>
@@ -3615,20 +4246,29 @@ namespace Opc.Ua
         {
             FindServersResponse response = null;
 
-            FindServersRequest request = (FindServersRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            ApplicationDescriptionCollection servers = null;
+                FindServersRequest request = (FindServersRequest)incoming;
 
-            response = new FindServersResponse();
+                ApplicationDescriptionCollection servers = null;
 
-            response.ResponseHeader = ServerInstance.FindServers(
-               request.RequestHeader,
-               request.EndpointUrl,
-               request.LocaleIds,
-               request.ServerUris,
-               out servers);
+                response = new FindServersResponse();
 
-            response.Servers = servers;
+                response.ResponseHeader = ServerInstance.FindServers(
+                   request.RequestHeader,
+                   request.EndpointUrl,
+                   request.LocaleIds,
+                   request.ServerUris,
+                   out servers);
+
+                response.Servers = servers;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -3639,15 +4279,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual FindServersResponseMessage FindServers(FindServersMessage request)
         {
+            FindServersResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.FindServersRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                FindServersResponse response = (FindServersResponse)FindServers(request.FindServersRequest);
+                response = (FindServersResponse)FindServers(request.FindServersRequest);
+                // OnResponseSent(response);
                 return new FindServersResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.FindServersRequest, e);
+                Exception fault = CreateSoapFault(request.FindServersRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -3658,6 +4305,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.FindServersRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -3670,7 +4319,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.FindServersRequest, e);
+                Exception fault = CreateSoapFault(message.FindServersRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -3682,11 +4333,127 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new FindServersResponseMessage((FindServersResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+        #endif
+        #endif
+        #endregion
+
+        #region FindServersOnNetwork Service
+        #if (!OPCUA_EXCLUDE_FindServersOnNetwork)
+        /// <summary>
+        /// Invokes the FindServersOnNetwork service.
+        /// </summary>
+        public IServiceResponse FindServersOnNetwork(IServiceRequest incoming)
+        {
+            FindServersOnNetworkResponse response = null;
+
+            try
+            {
+                // OnRequestReceived(incoming);
+
+                FindServersOnNetworkRequest request = (FindServersOnNetworkRequest)incoming;
+
+                DateTime lastCounterResetTime = DateTime.MinValue;
+                ServerOnNetworkCollection servers = null;
+
+                response = new FindServersOnNetworkResponse();
+
+                response.ResponseHeader = ServerInstance.FindServersOnNetwork(
+                   request.RequestHeader,
+                   request.StartingRecordId,
+                   request.MaxRecordsToReturn,
+                   request.ServerCapabilityFilter,
+                   out lastCounterResetTime,
+                   out servers);
+
+                response.LastCounterResetTime = lastCounterResetTime;
+                response.Servers              = servers;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
+
+            return response;
+        }
+
+        #if OPCUA_USE_SYNCHRONOUS_ENDPOINTS
+        /// <summary>
+        /// The operation contract for the FindServersOnNetwork service.
+        /// </summary>
+        public virtual FindServersOnNetworkResponseMessage FindServersOnNetwork(FindServersOnNetworkMessage request)
+        {
+            FindServersOnNetworkResponse response = null;
+
+            try
+            {
+                // OnRequestReceived(message.FindServersOnNetworkRequest);
+
+                SetRequestContext(RequestEncoding.Xml);
+                response = (FindServersOnNetworkResponse)FindServersOnNetwork(request.FindServersOnNetworkRequest);
+                // OnResponseSent(response);
+                return new FindServersOnNetworkResponseMessage(response);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(request.FindServersOnNetworkRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+        #else
+        /// <summary>
+        /// Asynchronously calls the FindServersOnNetwork service.
+        /// </summary>
+        public virtual IAsyncResult BeginFindServersOnNetwork(FindServersOnNetworkMessage message, AsyncCallback callback, object callbackData)
+        {
+            try
+            {
+                // OnRequestReceived(message.FindServersOnNetworkRequest);
+
+                // check for bad data.
+                if (message == null) throw new ArgumentNullException("message");
+
+                // set the request context.
+                SetRequestContext(RequestEncoding.Xml);
+
+                // create handler.
+                ProcessRequestAsyncResult result = new ProcessRequestAsyncResult(this, callback, callbackData, 0);
+                return result.BeginProcessRequest(SecureChannelContext.Current, message.FindServersOnNetworkRequest);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(message.FindServersOnNetworkRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+
+        /// <summary>
+        /// Waits for an asynchronous call to the FindServersOnNetwork service to complete.
+        /// </summary>
+        public virtual FindServersOnNetworkResponseMessage EndFindServersOnNetwork(IAsyncResult ar)
+        {
+            try
+            {
+                IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
+                return new FindServersOnNetworkResponseMessage((FindServersOnNetworkResponse)response);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -3702,20 +4469,29 @@ namespace Opc.Ua
         {
             GetEndpointsResponse response = null;
 
-            GetEndpointsRequest request = (GetEndpointsRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
 
-            EndpointDescriptionCollection endpoints = null;
+                GetEndpointsRequest request = (GetEndpointsRequest)incoming;
 
-            response = new GetEndpointsResponse();
+                EndpointDescriptionCollection endpoints = null;
 
-            response.ResponseHeader = ServerInstance.GetEndpoints(
-               request.RequestHeader,
-               request.EndpointUrl,
-               request.LocaleIds,
-               request.ProfileUris,
-               out endpoints);
+                response = new GetEndpointsResponse();
 
-            response.Endpoints = endpoints;
+                response.ResponseHeader = ServerInstance.GetEndpoints(
+                   request.RequestHeader,
+                   request.EndpointUrl,
+                   request.LocaleIds,
+                   request.ProfileUris,
+                   out endpoints);
+
+                response.Endpoints = endpoints;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -3726,15 +4502,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual GetEndpointsResponseMessage GetEndpoints(GetEndpointsMessage request)
         {
+            GetEndpointsResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.GetEndpointsRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                GetEndpointsResponse response = (GetEndpointsResponse)GetEndpoints(request.GetEndpointsRequest);
+                response = (GetEndpointsResponse)GetEndpoints(request.GetEndpointsRequest);
+                // OnResponseSent(response);
                 return new GetEndpointsResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.GetEndpointsRequest, e);
+                Exception fault = CreateSoapFault(request.GetEndpointsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -3745,6 +4528,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.GetEndpointsRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -3757,7 +4542,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.GetEndpointsRequest, e);
+                Exception fault = CreateSoapFault(message.GetEndpointsRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -3769,11 +4556,14 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new GetEndpointsResponseMessage((GetEndpointsResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -3789,15 +4579,24 @@ namespace Opc.Ua
         {
             RegisterServerResponse response = null;
 
-            RegisterServerRequest request = (RegisterServerRequest)incoming;
+            try
+            {
+                // OnRequestReceived(incoming);
+
+                RegisterServerRequest request = (RegisterServerRequest)incoming;
 
 
-            response = new RegisterServerResponse();
+                response = new RegisterServerResponse();
 
-            response.ResponseHeader = ServerInstance.RegisterServer(
-               request.RequestHeader,
-               request.Server);
+                response.ResponseHeader = ServerInstance.RegisterServer(
+                   request.RequestHeader,
+                   request.Server);
 
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
 
             return response;
         }
@@ -3808,15 +4607,22 @@ namespace Opc.Ua
         /// </summary>
         public virtual RegisterServerResponseMessage RegisterServer(RegisterServerMessage request)
         {
+            RegisterServerResponse response = null;
+
             try
             {
+                // OnRequestReceived(message.RegisterServerRequest);
+
                 SetRequestContext(RequestEncoding.Xml);
-                RegisterServerResponse response = (RegisterServerResponse)RegisterServer(request.RegisterServerRequest);
+                response = (RegisterServerResponse)RegisterServer(request.RegisterServerRequest);
+                // OnResponseSent(response);
                 return new RegisterServerResponseMessage(response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(request.RegisterServerRequest, e);
+                Exception fault = CreateSoapFault(request.RegisterServerRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #else
@@ -3827,6 +4633,8 @@ namespace Opc.Ua
         {
             try
             {
+                // OnRequestReceived(message.RegisterServerRequest);
+
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
 
@@ -3839,7 +4647,9 @@ namespace Opc.Ua
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(message.RegisterServerRequest, e);
+                Exception fault = CreateSoapFault(message.RegisterServerRequest, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
 
@@ -3851,11 +4661,126 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
                 return new RegisterServerResponseMessage((RegisterServerResponse)response);
             }
             catch (Exception e)
             {
-                throw CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+        #endif
+        #endif
+        #endregion
+
+        #region RegisterServer2 Service
+        #if (!OPCUA_EXCLUDE_RegisterServer2)
+        /// <summary>
+        /// Invokes the RegisterServer2 service.
+        /// </summary>
+        public IServiceResponse RegisterServer2(IServiceRequest incoming)
+        {
+            RegisterServer2Response response = null;
+
+            try
+            {
+                // OnRequestReceived(incoming);
+
+                RegisterServer2Request request = (RegisterServer2Request)incoming;
+
+                StatusCodeCollection configurationResults = null;
+                DiagnosticInfoCollection diagnosticInfos = null;
+
+                response = new RegisterServer2Response();
+
+                response.ResponseHeader = ServerInstance.RegisterServer2(
+                   request.RequestHeader,
+                   request.Server,
+                   request.DiscoveryConfiguration,
+                   out configurationResults,
+                   out diagnosticInfos);
+
+                response.ConfigurationResults = configurationResults;
+                response.DiagnosticInfos      = diagnosticInfos;
+            }
+            finally
+            {
+                // OnResponseSent(response);
+            }
+
+            return response;
+        }
+
+        #if OPCUA_USE_SYNCHRONOUS_ENDPOINTS
+        /// <summary>
+        /// The operation contract for the RegisterServer2 service.
+        /// </summary>
+        public virtual RegisterServer2ResponseMessage RegisterServer2(RegisterServer2Message request)
+        {
+            RegisterServer2Response response = null;
+
+            try
+            {
+                // OnRequestReceived(message.RegisterServer2Request);
+
+                SetRequestContext(RequestEncoding.Xml);
+                response = (RegisterServer2Response)RegisterServer2(request.RegisterServer2Request);
+                // OnResponseSent(response);
+                return new RegisterServer2ResponseMessage(response);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(request.RegisterServer2Request, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+        #else
+        /// <summary>
+        /// Asynchronously calls the RegisterServer2 service.
+        /// </summary>
+        public virtual IAsyncResult BeginRegisterServer2(RegisterServer2Message message, AsyncCallback callback, object callbackData)
+        {
+            try
+            {
+                // OnRequestReceived(message.RegisterServer2Request);
+
+                // check for bad data.
+                if (message == null) throw new ArgumentNullException("message");
+
+                // set the request context.
+                SetRequestContext(RequestEncoding.Xml);
+
+                // create handler.
+                ProcessRequestAsyncResult result = new ProcessRequestAsyncResult(this, callback, callbackData, 0);
+                return result.BeginProcessRequest(SecureChannelContext.Current, message.RegisterServer2Request);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(message.RegisterServer2Request, e);
+                // OnResponseFaultSent(fault);
+                throw fault;
+            }
+        }
+
+        /// <summary>
+        /// Waits for an asynchronous call to the RegisterServer2 service to complete.
+        /// </summary>
+        public virtual RegisterServer2ResponseMessage EndRegisterServer2(IAsyncResult ar)
+        {
+            try
+            {
+                IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
+                // OnResponseSent(response);
+                return new RegisterServer2ResponseMessage((RegisterServer2Response)response);
+            }
+            catch (Exception e)
+            {
+                Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
+                // OnResponseFaultSent(fault);
+                throw fault;
             }
         }
         #endif
@@ -3869,17 +4794,20 @@ namespace Opc.Ua
         /// </summary>
         protected virtual void CreateKnownTypes()
         {
-            #if (!OPCUA_EXCLUDE_FindDnsServices)
-            SupportedServices.Add(DataTypes.FindDnsServicesRequest, new ServiceDefinition(typeof(FindDnsServicesRequest), new InvokeServiceEventHandler(FindDnsServices)));
-            #endif
             #if (!OPCUA_EXCLUDE_FindServers)
-            SupportedServices.Add(DataTypes.FindServersRequest, new ServiceDefinition(typeof(FindServersRequest), new InvokeServiceEventHandler(FindServers)));
+            SupportedServices.Add(DataTypeIds.FindServersRequest, new ServiceDefinition(typeof(FindServersRequest), new InvokeServiceEventHandler(FindServers)));
+            #endif
+            #if (!OPCUA_EXCLUDE_FindServersOnNetwork)
+            SupportedServices.Add(DataTypeIds.FindServersOnNetworkRequest, new ServiceDefinition(typeof(FindServersOnNetworkRequest), new InvokeServiceEventHandler(FindServersOnNetwork)));
             #endif
             #if (!OPCUA_EXCLUDE_GetEndpoints)
-            SupportedServices.Add(DataTypes.GetEndpointsRequest, new ServiceDefinition(typeof(GetEndpointsRequest), new InvokeServiceEventHandler(GetEndpoints)));
+            SupportedServices.Add(DataTypeIds.GetEndpointsRequest, new ServiceDefinition(typeof(GetEndpointsRequest), new InvokeServiceEventHandler(GetEndpoints)));
             #endif
             #if (!OPCUA_EXCLUDE_RegisterServer)
-            SupportedServices.Add(DataTypes.RegisterServerRequest, new ServiceDefinition(typeof(RegisterServerRequest), new InvokeServiceEventHandler(RegisterServer)));
+            SupportedServices.Add(DataTypeIds.RegisterServerRequest, new ServiceDefinition(typeof(RegisterServerRequest), new InvokeServiceEventHandler(RegisterServer)));
+            #endif
+            #if (!OPCUA_EXCLUDE_RegisterServer2)
+            SupportedServices.Add(DataTypeIds.RegisterServer2Request, new ServiceDefinition(typeof(RegisterServer2Request), new InvokeServiceEventHandler(RegisterServer2)));
             #endif
         }
         #endregion

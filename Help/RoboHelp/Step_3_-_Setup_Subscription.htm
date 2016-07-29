@@ -68,7 +68,7 @@
 	{<br />
 	&#160;monitoredItem = new MonitoredItem( m_subscription.DefaultItem 
 	 );<br />
-	&#160;&#160;monitoredItem.StartNodeId = <br />
+	&#160;&#160;monitoredItem.StartNodeId = (NodeId)BrowseCTRL.SelectedNode.NodeId;<br />
 	&#160;&#160;monitoredItem.AttributeId = Attributes.Value;<br />
 	&#160;&#160;monitoredItem.MonitoringMode = MonitoringMode.Reporting;<br />
 	&#160;&#160;monitoredItem.SamplingInterval = 1000;<br />
@@ -78,6 +78,7 @@
 	&#160;&#160;monitoredItem.Notification += new MonitoredItemNotificationEventHandler( 
 	 monitoredItem_Notification);<br />
 	&#160;m_subscription.AddItem( monitoredItem );<br />
+	&#160;m_subscription.ApplyChanges();<br />
 	}</span></p></li>
 </ol>
 <p>Next, <a href="Step_4_-_Consuming_DataChanges.htm">Step 4 - Consuming 

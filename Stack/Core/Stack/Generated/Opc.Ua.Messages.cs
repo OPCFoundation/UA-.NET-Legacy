@@ -1,5 +1,5 @@
 /* ========================================================================
- * Copyright (c) 2005-2013 The OPC Foundation, Inc. All rights reserved.
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
  *
  * OPC Foundation MIT License 1.00
  *
@@ -35,113 +35,6 @@ using System.Runtime.Serialization;
 
 namespace Opc.Ua
 {
-    #region FindDnsServices Service Messages
-    #if (!OPCUA_EXCLUDE_FindDnsServices)
-    public partial class FindDnsServicesRequest : IServiceRequest
-    {
-    }
-
-    public partial class FindDnsServicesResponse : IServiceResponse
-    {
-    }
-
-    /// <summary>
-    /// The message contract for the FindDnsServices service.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    [MessageContract(IsWrapped=false)]
-    public class FindDnsServicesMessage : IServiceMessage
-    {
-        /// <summary>
-        /// The body of the message.
-        /// </summary>
-        [MessageBodyMember(Namespace = Namespaces.OpcUaXsd, Order = 0)]
-        public FindDnsServicesRequest FindDnsServicesRequest;
-
-        /// <summary>
-        /// Initializes an empty message.
-        /// </summary>
-        public FindDnsServicesMessage()
-        {
-        }
-
-        /// <summary>
-        /// Initializes the message with the body.
-        /// </summary>
-        public FindDnsServicesMessage(FindDnsServicesRequest FindDnsServicesRequest)
-        {
-            this.FindDnsServicesRequest = FindDnsServicesRequest;
-        }
-
-        #region IServiceMessage Members
-        /// <summary cref="IServiceMessage.GetRequest" />
-        public IServiceRequest GetRequest()
-        {
-            return FindDnsServicesRequest;
-        }
-
-        /// <summary cref="IServiceMessage.CreateResponse" />
-        public object CreateResponse(IServiceResponse response)
-        {
-            FindDnsServicesResponse body = response as FindDnsServicesResponse;
-
-            if (body == null)
-            {
-                body = new FindDnsServicesResponse();
-                body.ResponseHeader = ((ServiceFault)response).ResponseHeader;
-            }
-
-            return new FindDnsServicesResponseMessage(body);
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// The message contract for the FindDnsServices service response.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    [MessageContract(IsWrapped=false)]
-    public class FindDnsServicesResponseMessage
-    {
-        /// <summary>
-        /// The body of the message.
-        /// </summary>
-        [MessageBodyMember(Namespace=Namespaces.OpcUaXsd, Order=0)]
-        public FindDnsServicesResponse FindDnsServicesResponse;
-
-        /// <summary>
-        /// Initializes an empty message.
-        /// </summary>
-        public FindDnsServicesResponseMessage()
-        {
-        }
-
-        /// <summary>
-        /// Initializes the message with the body.
-        /// </summary>
-        public FindDnsServicesResponseMessage(FindDnsServicesResponse FindDnsServicesResponse)
-        {
-            this.FindDnsServicesResponse = FindDnsServicesResponse;
-        }
-
-        /// <summary>
-        /// Initializes the message with a service fault.
-        /// </summary>
-        public FindDnsServicesResponseMessage(ServiceFault ServiceFault)
-        {
-            this.FindDnsServicesResponse = new FindDnsServicesResponse();
-
-            if (ServiceFault != null)
-            {
-                this.FindDnsServicesResponse.ResponseHeader = ServiceFault.ResponseHeader;
-            }
-        }
-    }
-    #endif
-    #endregion
-
     #region FindServers Service Messages
     #if (!OPCUA_EXCLUDE_FindServers)
     public partial class FindServersRequest : IServiceRequest
@@ -243,6 +136,113 @@ namespace Opc.Ua
             if (ServiceFault != null)
             {
                 this.FindServersResponse.ResponseHeader = ServiceFault.ResponseHeader;
+            }
+        }
+    }
+    #endif
+    #endregion
+
+    #region FindServersOnNetwork Service Messages
+    #if (!OPCUA_EXCLUDE_FindServersOnNetwork)
+    public partial class FindServersOnNetworkRequest : IServiceRequest
+    {
+    }
+
+    public partial class FindServersOnNetworkResponse : IServiceResponse
+    {
+    }
+
+    /// <summary>
+    /// The message contract for the FindServersOnNetwork service.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
+    [MessageContract(IsWrapped=false)]
+    public class FindServersOnNetworkMessage : IServiceMessage
+    {
+        /// <summary>
+        /// The body of the message.
+        /// </summary>
+        [MessageBodyMember(Namespace = Namespaces.OpcUaXsd, Order = 0)]
+        public FindServersOnNetworkRequest FindServersOnNetworkRequest;
+
+        /// <summary>
+        /// Initializes an empty message.
+        /// </summary>
+        public FindServersOnNetworkMessage()
+        {
+        }
+
+        /// <summary>
+        /// Initializes the message with the body.
+        /// </summary>
+        public FindServersOnNetworkMessage(FindServersOnNetworkRequest FindServersOnNetworkRequest)
+        {
+            this.FindServersOnNetworkRequest = FindServersOnNetworkRequest;
+        }
+
+        #region IServiceMessage Members
+        /// <summary cref="IServiceMessage.GetRequest" />
+        public IServiceRequest GetRequest()
+        {
+            return FindServersOnNetworkRequest;
+        }
+
+        /// <summary cref="IServiceMessage.CreateResponse" />
+        public object CreateResponse(IServiceResponse response)
+        {
+            FindServersOnNetworkResponse body = response as FindServersOnNetworkResponse;
+
+            if (body == null)
+            {
+                body = new FindServersOnNetworkResponse();
+                body.ResponseHeader = ((ServiceFault)response).ResponseHeader;
+            }
+
+            return new FindServersOnNetworkResponseMessage(body);
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// The message contract for the FindServersOnNetwork service response.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
+    [MessageContract(IsWrapped=false)]
+    public class FindServersOnNetworkResponseMessage
+    {
+        /// <summary>
+        /// The body of the message.
+        /// </summary>
+        [MessageBodyMember(Namespace=Namespaces.OpcUaXsd, Order=0)]
+        public FindServersOnNetworkResponse FindServersOnNetworkResponse;
+
+        /// <summary>
+        /// Initializes an empty message.
+        /// </summary>
+        public FindServersOnNetworkResponseMessage()
+        {
+        }
+
+        /// <summary>
+        /// Initializes the message with the body.
+        /// </summary>
+        public FindServersOnNetworkResponseMessage(FindServersOnNetworkResponse FindServersOnNetworkResponse)
+        {
+            this.FindServersOnNetworkResponse = FindServersOnNetworkResponse;
+        }
+
+        /// <summary>
+        /// Initializes the message with a service fault.
+        /// </summary>
+        public FindServersOnNetworkResponseMessage(ServiceFault ServiceFault)
+        {
+            this.FindServersOnNetworkResponse = new FindServersOnNetworkResponse();
+
+            if (ServiceFault != null)
+            {
+                this.FindServersOnNetworkResponse.ResponseHeader = ServiceFault.ResponseHeader;
             }
         }
     }
@@ -457,6 +457,113 @@ namespace Opc.Ua
             if (ServiceFault != null)
             {
                 this.RegisterServerResponse.ResponseHeader = ServiceFault.ResponseHeader;
+            }
+        }
+    }
+    #endif
+    #endregion
+
+    #region RegisterServer2 Service Messages
+    #if (!OPCUA_EXCLUDE_RegisterServer2)
+    public partial class RegisterServer2Request : IServiceRequest
+    {
+    }
+
+    public partial class RegisterServer2Response : IServiceResponse
+    {
+    }
+
+    /// <summary>
+    /// The message contract for the RegisterServer2 service.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
+    [MessageContract(IsWrapped=false)]
+    public class RegisterServer2Message : IServiceMessage
+    {
+        /// <summary>
+        /// The body of the message.
+        /// </summary>
+        [MessageBodyMember(Namespace = Namespaces.OpcUaXsd, Order = 0)]
+        public RegisterServer2Request RegisterServer2Request;
+
+        /// <summary>
+        /// Initializes an empty message.
+        /// </summary>
+        public RegisterServer2Message()
+        {
+        }
+
+        /// <summary>
+        /// Initializes the message with the body.
+        /// </summary>
+        public RegisterServer2Message(RegisterServer2Request RegisterServer2Request)
+        {
+            this.RegisterServer2Request = RegisterServer2Request;
+        }
+
+        #region IServiceMessage Members
+        /// <summary cref="IServiceMessage.GetRequest" />
+        public IServiceRequest GetRequest()
+        {
+            return RegisterServer2Request;
+        }
+
+        /// <summary cref="IServiceMessage.CreateResponse" />
+        public object CreateResponse(IServiceResponse response)
+        {
+            RegisterServer2Response body = response as RegisterServer2Response;
+
+            if (body == null)
+            {
+                body = new RegisterServer2Response();
+                body.ResponseHeader = ((ServiceFault)response).ResponseHeader;
+            }
+
+            return new RegisterServer2ResponseMessage(body);
+        }
+        #endregion
+    }
+
+    /// <summary>
+    /// The message contract for the RegisterServer2 service response.
+    /// </summary>
+    /// <exclude />
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
+    [MessageContract(IsWrapped=false)]
+    public class RegisterServer2ResponseMessage
+    {
+        /// <summary>
+        /// The body of the message.
+        /// </summary>
+        [MessageBodyMember(Namespace=Namespaces.OpcUaXsd, Order=0)]
+        public RegisterServer2Response RegisterServer2Response;
+
+        /// <summary>
+        /// Initializes an empty message.
+        /// </summary>
+        public RegisterServer2ResponseMessage()
+        {
+        }
+
+        /// <summary>
+        /// Initializes the message with the body.
+        /// </summary>
+        public RegisterServer2ResponseMessage(RegisterServer2Response RegisterServer2Response)
+        {
+            this.RegisterServer2Response = RegisterServer2Response;
+        }
+
+        /// <summary>
+        /// Initializes the message with a service fault.
+        /// </summary>
+        public RegisterServer2ResponseMessage(ServiceFault ServiceFault)
+        {
+            this.RegisterServer2Response = new RegisterServer2Response();
+
+            if (ServiceFault != null)
+            {
+                this.RegisterServer2Response.ResponseHeader = ServiceFault.ResponseHeader;
             }
         }
     }
@@ -4095,220 +4202,6 @@ namespace Opc.Ua
             if (ServiceFault != null)
             {
                 this.DeleteSubscriptionsResponse.ResponseHeader = ServiceFault.ResponseHeader;
-            }
-        }
-    }
-    #endif
-    #endregion
-
-    #region TestStack Service Messages
-    #if (!OPCUA_EXCLUDE_TestStack)
-    public partial class TestStackRequest : IServiceRequest
-    {
-    }
-
-    public partial class TestStackResponse : IServiceResponse
-    {
-    }
-
-    /// <summary>
-    /// The message contract for the TestStack service.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    [MessageContract(IsWrapped=false)]
-    public class TestStackMessage : IServiceMessage
-    {
-        /// <summary>
-        /// The body of the message.
-        /// </summary>
-        [MessageBodyMember(Namespace = Namespaces.OpcUaXsd, Order = 0)]
-        public TestStackRequest TestStackRequest;
-
-        /// <summary>
-        /// Initializes an empty message.
-        /// </summary>
-        public TestStackMessage()
-        {
-        }
-
-        /// <summary>
-        /// Initializes the message with the body.
-        /// </summary>
-        public TestStackMessage(TestStackRequest TestStackRequest)
-        {
-            this.TestStackRequest = TestStackRequest;
-        }
-
-        #region IServiceMessage Members
-        /// <summary cref="IServiceMessage.GetRequest" />
-        public IServiceRequest GetRequest()
-        {
-            return TestStackRequest;
-        }
-
-        /// <summary cref="IServiceMessage.CreateResponse" />
-        public object CreateResponse(IServiceResponse response)
-        {
-            TestStackResponse body = response as TestStackResponse;
-
-            if (body == null)
-            {
-                body = new TestStackResponse();
-                body.ResponseHeader = ((ServiceFault)response).ResponseHeader;
-            }
-
-            return new TestStackResponseMessage(body);
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// The message contract for the TestStack service response.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    [MessageContract(IsWrapped=false)]
-    public class TestStackResponseMessage
-    {
-        /// <summary>
-        /// The body of the message.
-        /// </summary>
-        [MessageBodyMember(Namespace=Namespaces.OpcUaXsd, Order=0)]
-        public TestStackResponse TestStackResponse;
-
-        /// <summary>
-        /// Initializes an empty message.
-        /// </summary>
-        public TestStackResponseMessage()
-        {
-        }
-
-        /// <summary>
-        /// Initializes the message with the body.
-        /// </summary>
-        public TestStackResponseMessage(TestStackResponse TestStackResponse)
-        {
-            this.TestStackResponse = TestStackResponse;
-        }
-
-        /// <summary>
-        /// Initializes the message with a service fault.
-        /// </summary>
-        public TestStackResponseMessage(ServiceFault ServiceFault)
-        {
-            this.TestStackResponse = new TestStackResponse();
-
-            if (ServiceFault != null)
-            {
-                this.TestStackResponse.ResponseHeader = ServiceFault.ResponseHeader;
-            }
-        }
-    }
-    #endif
-    #endregion
-
-    #region TestStackEx Service Messages
-    #if (!OPCUA_EXCLUDE_TestStackEx)
-    public partial class TestStackExRequest : IServiceRequest
-    {
-    }
-
-    public partial class TestStackExResponse : IServiceResponse
-    {
-    }
-
-    /// <summary>
-    /// The message contract for the TestStackEx service.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    [MessageContract(IsWrapped=false)]
-    public class TestStackExMessage : IServiceMessage
-    {
-        /// <summary>
-        /// The body of the message.
-        /// </summary>
-        [MessageBodyMember(Namespace = Namespaces.OpcUaXsd, Order = 0)]
-        public TestStackExRequest TestStackExRequest;
-
-        /// <summary>
-        /// Initializes an empty message.
-        /// </summary>
-        public TestStackExMessage()
-        {
-        }
-
-        /// <summary>
-        /// Initializes the message with the body.
-        /// </summary>
-        public TestStackExMessage(TestStackExRequest TestStackExRequest)
-        {
-            this.TestStackExRequest = TestStackExRequest;
-        }
-
-        #region IServiceMessage Members
-        /// <summary cref="IServiceMessage.GetRequest" />
-        public IServiceRequest GetRequest()
-        {
-            return TestStackExRequest;
-        }
-
-        /// <summary cref="IServiceMessage.CreateResponse" />
-        public object CreateResponse(IServiceResponse response)
-        {
-            TestStackExResponse body = response as TestStackExResponse;
-
-            if (body == null)
-            {
-                body = new TestStackExResponse();
-                body.ResponseHeader = ((ServiceFault)response).ResponseHeader;
-            }
-
-            return new TestStackExResponseMessage(body);
-        }
-        #endregion
-    }
-
-    /// <summary>
-    /// The message contract for the TestStackEx service response.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    [MessageContract(IsWrapped=false)]
-    public class TestStackExResponseMessage
-    {
-        /// <summary>
-        /// The body of the message.
-        /// </summary>
-        [MessageBodyMember(Namespace=Namespaces.OpcUaXsd, Order=0)]
-        public TestStackExResponse TestStackExResponse;
-
-        /// <summary>
-        /// Initializes an empty message.
-        /// </summary>
-        public TestStackExResponseMessage()
-        {
-        }
-
-        /// <summary>
-        /// Initializes the message with the body.
-        /// </summary>
-        public TestStackExResponseMessage(TestStackExResponse TestStackExResponse)
-        {
-            this.TestStackExResponse = TestStackExResponse;
-        }
-
-        /// <summary>
-        /// Initializes the message with a service fault.
-        /// </summary>
-        public TestStackExResponseMessage(ServiceFault ServiceFault)
-        {
-            this.TestStackExResponse = new TestStackExResponse();
-
-            if (ServiceFault != null)
-            {
-                this.TestStackExResponse.ResponseHeader = ServiceFault.ResponseHeader;
             }
         }
     }
