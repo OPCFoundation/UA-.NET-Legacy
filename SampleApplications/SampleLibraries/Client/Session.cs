@@ -1909,6 +1909,13 @@ namespace Opc.Ua.Client
             Open(sessionName, 0, identity, null);
         }
 
+        /// <summary>
+        /// Establishes a session with the server.
+        /// </summary>
+        /// <param name="sessionName">The name to assign to the session.</param>
+        /// <param name="sessionTimeout">The session timeout.</param>
+        /// <param name="identity">The user identity.</param>
+        /// <param name="preferredLocales">The list of preferred locales.</param>
         public void Open(
             string sessionName,
             uint sessionTimeout,
@@ -1990,7 +1997,7 @@ namespace Opc.Ua.Client
                 if(checkDomain)
                 {
                     CheckCertificateDomain(m_endpoint);
-                }                
+                }
 
                 //X509Certificate2Collection certificateChain = Utils.ParseCertificateChainBlob(certificateData);                
                 //if (certificateChain.Count > 0)
