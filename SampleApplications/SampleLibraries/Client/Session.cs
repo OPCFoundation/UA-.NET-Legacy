@@ -809,7 +809,7 @@ namespace Opc.Ua.Client
             // create the session.
 			try
 			{
-				session.Open( sessionName, sessionTimeout, identity, preferredLocales );
+				session.Open( sessionName, sessionTimeout, identity, preferredLocales, checkDomain );
 			}
 			catch
 			{
@@ -1909,6 +1909,15 @@ namespace Opc.Ua.Client
             Open(sessionName, 0, identity, null);
         }
 
+        public void Open(
+            string sessionName,
+            uint sessionTimeout,
+            IUserIdentity identity,
+            IList<string> preferredLocales)
+        {
+            Open(sessionName, sessionTimeout, identity, preferredLocales, true);
+        }
+
         /// <summary>
         /// Establishes a session with the server.
         /// </summary>
@@ -1916,12 +1925,14 @@ namespace Opc.Ua.Client
         /// <param name="sessionTimeout">The session timeout.</param>
         /// <param name="identity">The user identity.</param>
         /// <param name="preferredLocales">The list of preferred locales.</param>
+        /// <param name="checkDomain">If set to <c>true</c> then the domain in the certificate must match the endpoint used.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public void Open(
             string        sessionName,
             uint          sessionTimeout,
             IUserIdentity identity,
-            IList<string> preferredLocales)
+            IList<string> preferredLocales,
+            bool          checkDomain)
         {
             // check connection state.
             lock (SyncRoot)
@@ -1976,7 +1987,10 @@ namespace Opc.Ua.Client
                 serverCertificate = Utils.ParseCertificateBlob(certificateData);
                 m_configuration.CertificateValidator.Validate(serverCertificate);
 
-                CheckCertificateDomain(m_endpoint);
+                if(checkDomain)
+                {
+                    CheckCertificateDomain(m_endpoint);
+                }                
 
                 //X509Certificate2Collection certificateChain = Utils.ParseCertificateChainBlob(certificateData);                
                 //if (certificateChain.Count > 0)
