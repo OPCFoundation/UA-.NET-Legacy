@@ -31,6 +31,12 @@ namespace Opc.Ua
         string DisplayName { get; }
 
         /// <summary>
+        /// The user token policy.
+        /// </summary>
+        /// <value>The user token policy.</value>
+        string PolicyId { get; }
+
+        /// <summary>
         /// The type of identity token used.
         /// </summary>
         /// <value>The type of the token.</value>

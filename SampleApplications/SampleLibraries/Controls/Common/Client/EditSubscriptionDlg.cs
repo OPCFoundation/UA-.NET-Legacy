@@ -48,7 +48,6 @@ namespace Opc.Ua.Client.Controls
         public EditSubscriptionDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
       

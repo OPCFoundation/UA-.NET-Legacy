@@ -125,8 +125,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(215, 59);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(221, 91);
             this.Name = "DateTimeValueEditDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit DateTime Value";

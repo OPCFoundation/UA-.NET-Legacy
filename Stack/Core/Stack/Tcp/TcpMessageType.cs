@@ -52,7 +52,17 @@ namespace Opc.Ua.Bindings
         /// A mask used to select the chunk type portion of the message id.
         /// </summary>
         public const uint ChunkTypeMask = 0xFF000000;
-                       
+
+        /// <summary>
+        /// A chunk for a generic message.
+        /// </summary>
+        public const uint MessageIntermediate = Message | Intermediate;
+        
+        /// <summary>
+        /// A chunk for a generic message.
+        /// </summary>
+        public const uint MessageFinal = Message | Final;
+
         /// <summary>
         /// A chunk for a generic message.
         /// </summary>

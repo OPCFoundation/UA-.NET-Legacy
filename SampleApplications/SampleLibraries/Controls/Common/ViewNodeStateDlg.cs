@@ -49,7 +49,6 @@ namespace Opc.Ua.Client.Controls
         public ViewNodeStateDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
             ResultsDV.AutoGenerateColumns = false;
 
             m_dataset = new DataSet();

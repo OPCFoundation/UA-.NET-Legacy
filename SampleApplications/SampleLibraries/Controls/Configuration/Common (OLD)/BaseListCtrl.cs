@@ -333,8 +333,6 @@ namespace Opc.Ua.Client.Controls
                 }
             }
 
-            NotifyItemAdded(item);
-
 			// return new item.
 			return listItem;
 		}

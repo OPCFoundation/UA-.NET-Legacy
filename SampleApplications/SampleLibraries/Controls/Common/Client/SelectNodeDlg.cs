@@ -48,7 +48,6 @@ namespace Opc.Ua.Client.Controls
         public SelectNodeDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

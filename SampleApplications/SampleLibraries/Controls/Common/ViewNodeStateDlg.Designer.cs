@@ -175,8 +175,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // ValueLN
             // 
-            this.ValueLN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.ValueLN.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.ValueLN.AutoSize = true;
             this.ValueLN.Location = new System.Drawing.Point(3, 0);
             this.ValueLN.Name = "ValueLN";
@@ -187,8 +187,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // DataTypeLB
             // 
-            this.DataTypeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.DataTypeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.DataTypeLB.AutoSize = true;
             this.DataTypeLB.Location = new System.Drawing.Point(3, 27);
             this.DataTypeLB.Name = "DataTypeLB";
@@ -205,8 +205,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(787, 321);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(3000, 1000);
+            this.MinimumSize = new System.Drawing.Size(300, 100);
             this.Name = "ViewNodeStateDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "View Node";

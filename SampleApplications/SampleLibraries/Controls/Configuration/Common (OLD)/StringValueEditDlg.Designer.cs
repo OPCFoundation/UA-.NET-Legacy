@@ -127,8 +127,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(252, 55);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(221, 89);
             this.Name = "StringValueEditDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit String Value";

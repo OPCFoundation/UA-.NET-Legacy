@@ -123,9 +123,9 @@ namespace Opc.Ua.Client.Controls
             // 
             // CertificateStoreCTRL
             // 
-            this.CertificateStoreCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CertificateStoreCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.CertificateStoreCTRL.Location = new System.Drawing.Point(6, 6);
             this.CertificateStoreCTRL.MinimumSize = new System.Drawing.Size(300, 51);
             this.CertificateStoreCTRL.Name = "CertificateStoreCTRL";
@@ -140,8 +140,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(618, 90);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(2048, 128);
+            this.MinimumSize = new System.Drawing.Size(300, 128);
             this.Name = "CertificateStoreDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Certificate Store";

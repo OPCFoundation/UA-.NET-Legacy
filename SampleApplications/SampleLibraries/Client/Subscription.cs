@@ -1,31 +1,18 @@
-/* ========================================================================
- * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
- *
- * OPC Foundation MIT License 1.00
- * 
- * Permission is hereby granted, free of charge, to any person
- * obtaining a copy of this software and associated documentation
- * files (the "Software"), to deal in the Software without
- * restriction, including without limitation the rights to use,
- * copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following
- * conditions:
- * 
- * The above copyright notice and this permission notice shall be
- * included in all copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
- * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
- * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
- * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- *
- * The complete license agreement can be found here:
- * http://opcfoundation.org/License/MIT/1.00/
- * ======================================================================*/
+/* Copyright (c) 1996-2016, OPC Foundation. All rights reserved.
+
+   The source code in this file is covered under a dual-license scenario:
+     - RCL: for OPC Foundation members in good-standing
+     - GPL V2: everybody else
+
+   RCL license terms accompanied with this source code. See http://opcfoundation.org/License/RCL/1.00/
+
+   GNU General Public License as published by the Free Software Foundation;
+   version 2 of the License are accompanied with this source code. See http://opcfoundation.org/License/GPLv2
+
+   This source code is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
 
 using System;
 using System.Collections;
@@ -739,8 +726,6 @@ namespace Opc.Ua.Client
                     {
                         lifetimeCount++;
                     }
-
-                    Utils.Trace("Adjusted LifetimeCount to value={0}, for subscription {1}. ", lifetimeCount, Id);
                 }
             }
 
@@ -748,14 +733,12 @@ namespace Opc.Ua.Client
             // to ensure the user does not experience unexpected drop outs.
             else
             {
-                Utils.Trace("Adjusted LifetimeCount from value={0}, to value={1}, for subscription {2}. ", lifetimeCount, 1000, Id);
                 lifetimeCount = 1000;
             }
 
             // lifetime must be greater than the keep alive count.
             if (lifetimeCount < keepAliveCount)
             {
-                Utils.Trace("Adjusted LifetimeCount from value={0}, to value={1}, for subscription {2}. ", lifetimeCount, keepAliveCount, Id);
                 lifetimeCount = keepAliveCount;
             }
         }
@@ -799,31 +782,6 @@ namespace Opc.Ua.Client
             StartKeepAliveTimer();
 
             m_changeMask |= SubscriptionChangeMask.Created;
-
-            if (m_keepAliveCount != revisedKeepAliveCount)
-            {
-                Utils.Trace("For subscription {0}, Keep alive count was revised from {1} to {2}", Id, m_keepAliveCount, revisedKeepAliveCount);
-            }
-
-            if (m_lifetimeCount != revisedLifetimeCounter)
-            {
-                Utils.Trace("For subscription {0}, Lifetime count was revised from {1} to {2}", Id, m_lifetimeCount, revisedLifetimeCounter);
-            }
-
-            if (m_publishingInterval != revisedPublishingInterval)
-            {
-                Utils.Trace("For subscription {0}, Publishing interval was revised from {1} to {2}", Id, m_publishingInterval, revisedPublishingInterval);
-            }
-
-            if (revisedLifetimeCounter < revisedKeepAliveCount * 3)
-            {
-                Utils.Trace("For subscription {0}, Revised lifetime counter (value={1}) is less than three times the keep alive count (value={2})", Id, revisedLifetimeCounter, revisedKeepAliveCount);
-            }
-
-            if (m_currentPriority == 0)
-            {
-                Utils.Trace("For subscription {0}, the priority was set to 0.", Id);
-            }
 
             CreateItems();
 
@@ -1668,21 +1626,19 @@ namespace Opc.Ua.Client
                 {
                     FastDataChangeNotificationEventHandler datachangeCallback = m_fastDataChangeCallback;
                     FastEventNotificationEventHandler eventCallback = m_fastEventCallback;
-                    int noNotificationsReceived = 0;
 
                     for (int ii = 0; ii < messagesToProcess.Count; ii++)
                     {                
                         NotificationMessage message = messagesToProcess[ii];
-                        noNotificationsReceived = 0;
+
                         try
                         {
                             for (int jj = 0; jj < message.NotificationData.Count; jj++)
                             {
                                 DataChangeNotification datachange = message.NotificationData[jj].Body as DataChangeNotification;
+
                                 if (datachange != null)
                                 {
-                                    noNotificationsReceived += datachange.MonitoredItems.Count;
-
                                     if (!m_disableMonitoredItemCache)
                                     {
                                         SaveDataChange(message, datachange, message.StringTable);
@@ -1695,10 +1651,9 @@ namespace Opc.Ua.Client
                                 }
 
                                 EventNotificationList events = message.NotificationData[jj].Body as EventNotificationList;
+
                                 if (events != null)
                                 {
-                                    noNotificationsReceived += events.Events.Count;
-
                                     if (!m_disableMonitoredItemCache)
                                     {
                                         SaveEvents(message, events, message.StringTable);
@@ -1709,23 +1664,11 @@ namespace Opc.Ua.Client
                                         eventCallback(this, events, message.StringTable);
                                     }
                                 }
-                                
-                                StatusChangeNotification statusChanged = message.NotificationData[jj].Body as StatusChangeNotification;
-
-                                if (statusChanged != null)
-                                {
-                                    Utils.Trace("StatusChangeNotification received with Status = {0} for SubscriptionId={1}.", statusChanged.Status.ToString(), Id);
-                                }
                             }
                         }
                         catch (Exception e)
                         {
                             Utils.Trace(e, "Error while processing incoming message #{0}.", message.SequenceNumber);
-                        }
-
-                        if (MaxNotificationsPerPublish != 0 && noNotificationsReceived > MaxNotificationsPerPublish)
-                        {
-                            Utils.Trace("For subscription {0}, more notifications were received={1} than the max notifications per publish value={2}", Id, noNotificationsReceived, MaxNotificationsPerPublish);    
                         }
                     }
                 }
@@ -1913,12 +1856,6 @@ namespace Opc.Ua.Client
         /// </summary>
         private void SaveDataChange(NotificationMessage message, DataChangeNotification notifications, IList<string> stringTable)
         {
-            // check for empty monitored items list.
-            if (notifications.MonitoredItems == null || notifications.MonitoredItems.Count == 0)
-            {
-                Utils.Trace("Publish response contains empty MonitoredItems list for SubscritpionId = {0}.", m_id);                
-            }
-
             for (int ii = 0; ii < notifications.MonitoredItems.Count; ii++)
             {
                 MonitoredItemNotification notification = notifications.MonitoredItems[ii];
@@ -1930,7 +1867,6 @@ namespace Opc.Ua.Client
                 {
                     if (!m_monitoredItems.TryGetValue(notification.ClientHandle, out monitoredItem))
                     {
-                        Utils.Trace("Publish response contains invalid MonitoredItem.SubscritpionId = {0}, ClientHandle = {1}", m_id, notification.ClientHandle);
                         continue;
                     }
                 } 
@@ -1964,7 +1900,6 @@ namespace Opc.Ua.Client
                 {
                     if (!m_monitoredItems.TryGetValue(eventFields.ClientHandle, out monitoredItem))
                     {
-                        Utils.Trace("Publish response contains invalid MonitoredItem.SubscritpionId = {0}, ClientHandle = {1}", m_id, eventFields.ClientHandle);
                         continue;
                     }
                 }

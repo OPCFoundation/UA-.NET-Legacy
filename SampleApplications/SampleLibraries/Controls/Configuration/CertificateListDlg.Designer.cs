@@ -142,8 +142,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // StoreGB
             // 
-            this.StoreGB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.StoreGB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.StoreGB.Controls.Add(this.CertificateStoreCTRL);
             this.StoreGB.Location = new System.Drawing.Point(6, 6);
             this.StoreGB.Name = "StoreGB";
@@ -166,8 +166,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // FiltersGB
             // 
-            this.FiltersGB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.FiltersGB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.FiltersGB.Controls.Add(this.FilterBTN);
             this.FiltersGB.Controls.Add(this.PrivateKeyCK);
             this.FiltersGB.Controls.Add(this.PrivateKeyLB);
@@ -209,8 +209,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // IssuerNameTB
             // 
-            this.IssuerNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.IssuerNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.IssuerNameTB.Location = new System.Drawing.Point(100, 66);
             this.IssuerNameTB.Name = "IssuerNameTB";
             this.IssuerNameTB.Size = new System.Drawing.Size(809, 20);
@@ -218,8 +218,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // DomainTB
             // 
-            this.DomainTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DomainTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.DomainTB.Location = new System.Drawing.Point(100, 42);
             this.DomainTB.Name = "DomainTB";
             this.DomainTB.Size = new System.Drawing.Size(809, 20);
@@ -227,8 +227,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // SubjectNameTB
             // 
-            this.SubjectNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubjectNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.SubjectNameTB.Location = new System.Drawing.Point(100, 18);
             this.SubjectNameTB.Name = "SubjectNameTB";
             this.SubjectNameTB.Size = new System.Drawing.Size(809, 20);
@@ -312,9 +312,9 @@ namespace Opc.Ua.Client.Controls
             // 
             // CertificatesCTRL
             // 
-            this.CertificatesCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.CertificatesCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.CertificatesCTRL.Instructions = null;
             this.CertificatesCTRL.Location = new System.Drawing.Point(6, 224);
             this.CertificatesCTRL.Name = "CertificatesCTRL";
@@ -329,8 +329,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(927, 656);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1024, 1024);
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "CertificateListDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Manage Certificates in Certificate Store";

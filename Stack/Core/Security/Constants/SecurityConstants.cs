@@ -187,7 +187,12 @@ namespace Opc.Ua
         /// Communicates with UA TCP, UA Security and UA Binary.
         /// </summary>
         public const string UaTcpTransport = "http://opcfoundation.org/UA-Profile/Transport/uatcp-uasc-uabinary";
-        
+
+        /// <summary>
+        /// Communicates with UA TCP over TLS, UA Security and UA Binary.
+        /// </summary>
+        public const string UaTlsTransport = "http://opcfoundation.org/UA-Profile/Transport/uatls-uasc-uabinary";
+
         /// <summary>
         /// Communicates with SOAP 1.2, WS Security and UA XML.
         /// </summary>
@@ -212,6 +217,11 @@ namespace Opc.Ua
         /// Communicates with UA Binary over HTTPS.
         /// </summary>
         public const string HttpsBinaryTransport = "http://opcfoundation.org/UA-Profile/Transport/https-uabinary";
+
+        /// <summary>
+        /// Communicates with UA Binary over AMQPS.
+        /// </summary>
+        public const string AmqpsBinaryTransport = "http://opcfoundation.org/UA-Profile/Transport/amqps-uabinary";
         
         /// <summary>
         /// Converts the URI to a URI that can be used for comparison.

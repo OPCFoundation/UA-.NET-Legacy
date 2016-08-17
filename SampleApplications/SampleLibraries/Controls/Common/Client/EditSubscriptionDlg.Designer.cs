@@ -62,26 +62,26 @@ namespace Opc.Ua.Client.Controls
             this.BottomPN = new System.Windows.Forms.Panel();
             this.MainPN = new System.Windows.Forms.Panel();
             this.ControlsPN = new System.Windows.Forms.TableLayoutPanel();
-            this.PriorityTB = new System.Windows.Forms.NumericUpDown();
-            this.PriorityLB = new System.Windows.Forms.Label();
-            this.MaxNotificationsPerPublishUP = new System.Windows.Forms.NumericUpDown();
-            this.MaxNotificationsPerPublishLB = new System.Windows.Forms.Label();
             this.LifetimeCountLB = new System.Windows.Forms.Label();
             this.LifetimeCountUP = new System.Windows.Forms.NumericUpDown();
             this.PublishingEnabledLB = new System.Windows.Forms.Label();
             this.KeepAliveCountLB = new System.Windows.Forms.Label();
             this.PublishingIntervalLB = new System.Windows.Forms.Label();
+            this.KeepAliveCountUP = new System.Windows.Forms.NumericUpDown();
             this.PublishingIntervalUP = new System.Windows.Forms.NumericUpDown();
             this.PublishingEnabledCK = new System.Windows.Forms.CheckBox();
-            this.KeepAliveCountUP = new System.Windows.Forms.NumericUpDown();
+            this.MaxNotificationsPerPublishLB = new System.Windows.Forms.Label();
+            this.MaxNotificationsPerPublishUP = new System.Windows.Forms.NumericUpDown();
+            this.PriorityLB = new System.Windows.Forms.Label();
+            this.PriorityTB = new System.Windows.Forms.NumericUpDown();
             this.BottomPN.SuspendLayout();
             this.MainPN.SuspendLayout();
             this.ControlsPN.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PriorityTB)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaxNotificationsPerPublishUP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LifetimeCountUP)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PublishingIntervalUP)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.KeepAliveCountUP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PublishingIntervalUP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxNotificationsPerPublishUP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PriorityTB)).BeginInit();
             this.SuspendLayout();
             // 
             // CancelBTN
@@ -161,52 +161,6 @@ namespace Opc.Ua.Client.Controls
             this.ControlsPN.Size = new System.Drawing.Size(248, 149);
             this.ControlsPN.TabIndex = 0;
             // 
-            // PriorityTB
-            // 
-            this.PriorityTB.Location = new System.Drawing.Point(106, 107);
-            this.PriorityTB.Maximum = new decimal(new int[] {
-            255,
-            0,
-            0,
-            0});
-            this.PriorityTB.Name = "PriorityTB";
-            this.PriorityTB.Size = new System.Drawing.Size(138, 20);
-            this.PriorityTB.TabIndex = 9;
-            // 
-            // PriorityLB
-            // 
-            this.PriorityLB.AutoSize = true;
-            this.PriorityLB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PriorityLB.Location = new System.Drawing.Point(3, 104);
-            this.PriorityLB.Name = "PriorityLB";
-            this.PriorityLB.Size = new System.Drawing.Size(97, 26);
-            this.PriorityLB.TabIndex = 8;
-            this.PriorityLB.Text = "Priority";
-            this.PriorityLB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // MaxNotificationsPerPublishUP
-            // 
-            this.MaxNotificationsPerPublishUP.Location = new System.Drawing.Point(106, 81);
-            this.MaxNotificationsPerPublishUP.Maximum = new decimal(new int[] {
-            0,
-            1,
-            0,
-            0});
-            this.MaxNotificationsPerPublishUP.Name = "MaxNotificationsPerPublishUP";
-            this.MaxNotificationsPerPublishUP.Size = new System.Drawing.Size(138, 20);
-            this.MaxNotificationsPerPublishUP.TabIndex = 7;
-            // 
-            // MaxNotificationsPerPublishLB
-            // 
-            this.MaxNotificationsPerPublishLB.AutoSize = true;
-            this.MaxNotificationsPerPublishLB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MaxNotificationsPerPublishLB.Location = new System.Drawing.Point(3, 78);
-            this.MaxNotificationsPerPublishLB.Name = "MaxNotificationsPerPublishLB";
-            this.MaxNotificationsPerPublishLB.Size = new System.Drawing.Size(97, 26);
-            this.MaxNotificationsPerPublishLB.TabIndex = 6;
-            this.MaxNotificationsPerPublishLB.Text = "Max Notifications";
-            this.MaxNotificationsPerPublishLB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // LifetimeCountLB
             // 
             this.LifetimeCountLB.AutoSize = true;
@@ -263,6 +217,18 @@ namespace Opc.Ua.Client.Controls
             this.PublishingIntervalLB.Text = "Publishing Interval";
             this.PublishingIntervalLB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // KeepAliveCountUP
+            // 
+            this.KeepAliveCountUP.Location = new System.Drawing.Point(106, 29);
+            this.KeepAliveCountUP.Maximum = new decimal(new int[] {
+            0,
+            1,
+            0,
+            0});
+            this.KeepAliveCountUP.Name = "KeepAliveCountUP";
+            this.KeepAliveCountUP.Size = new System.Drawing.Size(138, 20);
+            this.KeepAliveCountUP.TabIndex = 3;
+            // 
             // PublishingIntervalUP
             // 
             this.PublishingIntervalUP.Increment = new decimal(new int[] {
@@ -291,17 +257,51 @@ namespace Opc.Ua.Client.Controls
             this.PublishingEnabledCK.TabIndex = 11;
             this.PublishingEnabledCK.UseVisualStyleBackColor = true;
             // 
-            // KeepAliveCountUP
+            // MaxNotificationsPerPublishLB
             // 
-            this.KeepAliveCountUP.Location = new System.Drawing.Point(106, 29);
-            this.KeepAliveCountUP.Maximum = new decimal(new int[] {
+            this.MaxNotificationsPerPublishLB.AutoSize = true;
+            this.MaxNotificationsPerPublishLB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MaxNotificationsPerPublishLB.Location = new System.Drawing.Point(3, 78);
+            this.MaxNotificationsPerPublishLB.Name = "MaxNotificationsPerPublishLB";
+            this.MaxNotificationsPerPublishLB.Size = new System.Drawing.Size(97, 26);
+            this.MaxNotificationsPerPublishLB.TabIndex = 6;
+            this.MaxNotificationsPerPublishLB.Text = "Max Notifications";
+            this.MaxNotificationsPerPublishLB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // MaxNotificationsPerPublishUP
+            // 
+            this.MaxNotificationsPerPublishUP.Location = new System.Drawing.Point(106, 81);
+            this.MaxNotificationsPerPublishUP.Maximum = new decimal(new int[] {
             0,
             1,
             0,
             0});
-            this.KeepAliveCountUP.Name = "KeepAliveCountUP";
-            this.KeepAliveCountUP.Size = new System.Drawing.Size(138, 20);
-            this.KeepAliveCountUP.TabIndex = 3;
+            this.MaxNotificationsPerPublishUP.Name = "MaxNotificationsPerPublishUP";
+            this.MaxNotificationsPerPublishUP.Size = new System.Drawing.Size(138, 20);
+            this.MaxNotificationsPerPublishUP.TabIndex = 7;
+            // 
+            // PriorityLB
+            // 
+            this.PriorityLB.AutoSize = true;
+            this.PriorityLB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PriorityLB.Location = new System.Drawing.Point(3, 104);
+            this.PriorityLB.Name = "PriorityLB";
+            this.PriorityLB.Size = new System.Drawing.Size(97, 26);
+            this.PriorityLB.TabIndex = 8;
+            this.PriorityLB.Text = "Priority";
+            this.PriorityLB.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // PriorityTB
+            // 
+            this.PriorityTB.Location = new System.Drawing.Point(106, 107);
+            this.PriorityTB.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.PriorityTB.Name = "PriorityTB";
+            this.PriorityTB.Size = new System.Drawing.Size(138, 20);
+            this.PriorityTB.TabIndex = 9;
             // 
             // EditSubscriptionDlg
             // 
@@ -313,9 +313,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(248, 179);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(264, 217);
+            this.MinimumSize = new System.Drawing.Size(264, 100);
             this.Name = "EditSubscriptionDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Subscription";
@@ -324,11 +324,11 @@ namespace Opc.Ua.Client.Controls
             this.MainPN.PerformLayout();
             this.ControlsPN.ResumeLayout(false);
             this.ControlsPN.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PriorityTB)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.MaxNotificationsPerPublishUP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LifetimeCountUP)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PublishingIntervalUP)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.KeepAliveCountUP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PublishingIntervalUP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MaxNotificationsPerPublishUP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PriorityTB)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

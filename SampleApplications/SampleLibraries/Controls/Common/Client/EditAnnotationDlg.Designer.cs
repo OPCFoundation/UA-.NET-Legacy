@@ -127,8 +127,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // AnnotationTimeLB
             // 
-            this.AnnotationTimeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.AnnotationTimeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.AnnotationTimeLB.AutoSize = true;
             this.AnnotationTimeLB.Location = new System.Drawing.Point(3, 52);
             this.AnnotationTimeLB.Name = "AnnotationTimeLB";
@@ -139,8 +139,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // AnnotationTimeDP
             // 
-            this.AnnotationTimeDP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.AnnotationTimeDP.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.AnnotationTimeDP.CustomFormat = "HH:mm:ss yyyy-MM-dd";
             this.AnnotationTimeDP.Enabled = false;
             this.AnnotationTimeDP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
@@ -151,8 +151,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // UserNameLB
             // 
-            this.UserNameLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.UserNameLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.UserNameLB.AutoSize = true;
             this.UserNameLB.Location = new System.Drawing.Point(3, 26);
             this.UserNameLB.Name = "UserNameLB";
@@ -170,8 +170,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // CommentLB
             // 
-            this.CommentLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.CommentLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)));
             this.CommentLB.AutoSize = true;
             this.CommentLB.Location = new System.Drawing.Point(3, 0);
             this.CommentLB.Name = "CommentLB";
@@ -197,9 +197,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(453, 110);
             this.Controls.Add(this.ControlsPN);
             this.Controls.Add(this.BottomPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(3000, 1000);
+            this.MinimumSize = new System.Drawing.Size(300, 100);
             this.Name = "EditAnnotationDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Annotation";

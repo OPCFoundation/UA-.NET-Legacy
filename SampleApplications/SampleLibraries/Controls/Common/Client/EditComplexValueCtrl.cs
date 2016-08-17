@@ -955,7 +955,7 @@ namespace Opc.Ua.Client.Controls.Common
             row[1] = info.Name;
             row[2] = GetDataTypeString(info);
             row[3] = ValueToString(info.Value, info.TypeInfo);
-            row[4] = ImageList.Images[ClientUtils.GetImageIndex(Attributes.Value, info.Value)];
+            // row[4] = ImageList.Images[ClientUtils.GetImageIndex(Attributes.Value, info.Value)];
 
             m_dataset.Tables[0].Rows.Add(row);
         }
@@ -1051,7 +1051,7 @@ namespace Opc.Ua.Client.Controls.Common
             row[1] = (info.Name != null) ? info.Name : "unknown";
             row[2] = GetDataTypeString(info);
             row[3] = ValueToString(info.Value, info.TypeInfo);
-            row[4] = ImageList.Images[ClientUtils.GetImageIndex(Attributes.Value, info.Value)];
+            // row[4] = ImageList.Images[ClientUtils.GetImageIndex(Attributes.Value, info.Value)];
 
             m_dataset.Tables[0].Rows.Add(row);
         }

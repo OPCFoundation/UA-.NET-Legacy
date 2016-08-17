@@ -126,8 +126,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(677, 384);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1024, 1024);
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "ConfiguredServerListDlg";
             this.Padding = new System.Windows.Forms.Padding(2, 2, 2, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

@@ -58,11 +58,11 @@ namespace Opc.Ua.Client.Controls
         private void InitializeComponent()
         {
             this.ButtonsPN = new System.Windows.Forms.Panel();
-            this.YesToAllBTN = new System.Windows.Forms.Button();
             this.YesBTN = new System.Windows.Forms.Button();
             this.NoBTN = new System.Windows.Forms.Button();
             this.MainPN = new System.Windows.Forms.Panel();
             this.MessageLB = new System.Windows.Forms.Label();
+            this.YesToAllBTN = new System.Windows.Forms.Button();
             this.ButtonsPN.SuspendLayout();
             this.MainPN.SuspendLayout();
             this.SuspendLayout();
@@ -77,17 +77,6 @@ namespace Opc.Ua.Client.Controls
             this.ButtonsPN.Name = "ButtonsPN";
             this.ButtonsPN.Size = new System.Drawing.Size(242, 31);
             this.ButtonsPN.TabIndex = 0;
-            // 
-            // YesToAllBTN
-            // 
-            this.YesToAllBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.YesToAllBTN.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.YesToAllBTN.Location = new System.Drawing.Point(84, 4);
-            this.YesToAllBTN.Name = "YesToAllBTN";
-            this.YesToAllBTN.Size = new System.Drawing.Size(75, 23);
-            this.YesToAllBTN.TabIndex = 2;
-            this.YesToAllBTN.Text = "Yes To All";
-            this.YesToAllBTN.UseVisualStyleBackColor = true;
             // 
             // YesBTN
             // 
@@ -132,6 +121,17 @@ namespace Opc.Ua.Client.Controls
             this.MessageLB.TabIndex = 0;
             this.MessageLB.Text = "label1";
             // 
+            // YesToAllBTN
+            // 
+            this.YesToAllBTN.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.YesToAllBTN.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            this.YesToAllBTN.Location = new System.Drawing.Point(84, 4);
+            this.YesToAllBTN.Name = "YesToAllBTN";
+            this.YesToAllBTN.Size = new System.Drawing.Size(75, 23);
+            this.YesToAllBTN.TabIndex = 2;
+            this.YesToAllBTN.Text = "Yes To All";
+            this.YesToAllBTN.UseVisualStyleBackColor = true;
+            // 
             // YesNoDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -141,8 +141,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(242, 52);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(2048, 2048);
+            this.MinimumSize = new System.Drawing.Size(258, 90);
             this.Name = "YesNoDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Caption";

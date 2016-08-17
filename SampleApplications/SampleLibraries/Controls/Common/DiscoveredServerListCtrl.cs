@@ -250,6 +250,7 @@ namespace Opc.Ua.Client.Controls
             try
             {
                 client = DiscoveryClient.Create(
+                    m_configuration,
                     discoveryUrl,
                     BindingFactory.Create(m_configuration, m_configuration.CreateMessageContext()),
                     EndpointConfiguration.Create(m_configuration));

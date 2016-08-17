@@ -553,7 +553,7 @@ namespace Opc.Ua.Server
                 if (m_clientCertificate != null)
                 {
                     byte[] dataToSign = Utils.Append(m_serverCertificate.RawData, m_serverNonce);
-                    //byte[] dataToSign = Utils.Append(m_serverCertificateChain, m_serverNonce);
+                    // byte[] dataToSign = Utils.Append(m_serverCertificateChain, m_serverNonce);
 
                     if (!SecurityPolicies.Verify(m_clientCertificate, m_endpoint.SecurityPolicyUri, dataToSign, clientSignature))
                     {
@@ -847,7 +847,7 @@ namespace Opc.Ua.Server
                 buffer.AppendFormat("Session {0}", context);             
                 buffer.AppendFormat(", Id={0}", m_sessionId);               
                 buffer.AppendFormat(", Name={0}", m_sessionName);     
-                buffer.AppendFormat(", ChannelId={0}", m_secureChannelId);
+                buffer.AppendFormat(", GroupId={0}", m_secureChannelId);
 
                 if (m_identity != null)
                 {
@@ -984,7 +984,7 @@ namespace Opc.Ua.Server
             }
 
             // find the user token policy.
-            policy = m_endpoint.FindUserTokenPolicy( token.PolicyId );
+            policy = m_endpoint.FindUserTokenPolicy(token.PolicyId);
 
             if (policy == null)
             {

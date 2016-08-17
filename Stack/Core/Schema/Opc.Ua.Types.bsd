@@ -6,7 +6,6 @@
   DefaultByteOrder="LittleEndian"
   TargetNamespace="http://opcfoundation.org/UA/"
 >
-  <!-- This File was generated on 2015-08-18 and supports the specifications supported by version 1.1.335.1 of the OPC UA deliverables. -->
 
   <opc:Import Namespace="http://opcfoundation.org/BinarySchema/" />
 
@@ -238,6 +237,166 @@
     <opc:Field Name="IssuerCrls" TypeName="opc:ByteString" LengthField="NoOfIssuerCrls" />
   </opc:StructuredType>
 
+  <opc:StructuredType Name="DataTypeDefinition" BaseType="ua:ExtensionObject">
+  </opc:StructuredType>
+
+  <opc:EnumeratedType Name="StructureType" LengthInBits="32">
+    <opc:EnumeratedValue Name="Structure" Value="0" />
+    <opc:EnumeratedValue Name="StructureWithOptionalFields" Value="1" />
+    <opc:EnumeratedValue Name="Union" Value="2" />
+  </opc:EnumeratedType>
+
+  <opc:StructuredType Name="StructureDefinition" BaseType="tns:DataTypeDefinition">
+    <opc:Field Name="DefaultEncodingId" TypeName="ua:NodeId" />
+    <opc:Field Name="BaseDataType" TypeName="ua:NodeId" />
+    <opc:Field Name="StructureType" TypeName="tns:StructureType" />
+    <opc:Field Name="NoOfFields" TypeName="opc:Int32" />
+    <opc:Field Name="Fields" TypeName="tns:StructureField" LengthField="NoOfFields" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="EnumDefinition" BaseType="tns:DataTypeDefinition">
+    <opc:Field Name="NoOfFields" TypeName="opc:Int32" />
+    <opc:Field Name="Fields" TypeName="tns:EnumField" LengthField="NoOfFields" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="StructureField" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Name" TypeName="opc:String" />
+    <opc:Field Name="Description" TypeName="ua:LocalizedText" />
+    <opc:Field Name="DataType" TypeName="ua:NodeId" />
+    <opc:Field Name="ValueRank" TypeName="opc:Int32" />
+    <opc:Field Name="IsOptional" TypeName="opc:Boolean" />
+  </opc:StructuredType>
+
+  <opc:EnumeratedType Name="IdentityCriteriaType" LengthInBits="32">
+    <opc:EnumeratedValue Name="UserName" Value="1" />
+    <opc:EnumeratedValue Name="Thumbprint" Value="2" />
+    <opc:EnumeratedValue Name="Scope" Value="3" />
+    <opc:EnumeratedValue Name="GroupId" Value="4" />
+    <opc:EnumeratedValue Name="Anonymous" Value="5" />
+    <opc:EnumeratedValue Name="Everyone" Value="6" />
+  </opc:EnumeratedType>
+
+  <opc:StructuredType Name="IdentityMappingRuleType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="CriteriaType" TypeName="tns:IdentityCriteriaType" />
+    <opc:Field Name="Criteria" TypeName="opc:String" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="ApplicationPermissionRuleType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="ApplicationUri" TypeName="opc:String" />
+    <opc:Field Name="Thumbprint" TypeName="opc:String" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="ConfigurationVersionDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="MajorVersion" TypeName="opc:UInt32" />
+    <opc:Field Name="MinorVersion" TypeName="opc:UInt32" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="DataSetMetaDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Name" TypeName="opc:String" />
+    <opc:Field Name="NoOfFields" TypeName="opc:Int32" />
+    <opc:Field Name="Fields" TypeName="tns:FieldMetaData" LengthField="NoOfFields" />
+    <opc:Field Name="DataSetClassId" TypeName="opc:Guid" />
+    <opc:Field Name="NoOfNamespaces" TypeName="opc:Int32" />
+    <opc:Field Name="Namespaces" TypeName="opc:String" LengthField="NoOfNamespaces" />
+    <opc:Field Name="NoOfStructureDataTypes" TypeName="opc:Int32" />
+    <opc:Field Name="StructureDataTypes" TypeName="tns:StructureDescription" LengthField="NoOfStructureDataTypes" />
+    <opc:Field Name="NoOfEnumDataTypes" TypeName="opc:Int32" />
+    <opc:Field Name="EnumDataTypes" TypeName="tns:EnumDescription" LengthField="NoOfEnumDataTypes" />
+    <opc:Field Name="ConfigurationVersion" TypeName="tns:ConfigurationVersionDataType" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="FieldMetaData" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Name" TypeName="opc:String" />
+    <opc:Field Name="PromotedField" TypeName="opc:Boolean" />
+    <opc:Field Name="DataType" TypeName="ua:NodeId" />
+    <opc:Field Name="ValueRank" TypeName="opc:Int32" />
+    <opc:Field Name="NoOfArrayDimensions" TypeName="opc:Int32" />
+    <opc:Field Name="ArrayDimensions" TypeName="opc:UInt32" LengthField="NoOfArrayDimensions" />
+    <opc:Field Name="DataSetFieldId" TypeName="opc:Guid" />
+    <opc:Field Name="NoOfProperties" TypeName="opc:Int32" />
+    <opc:Field Name="Properties" TypeName="tns:KeyValuePair" LengthField="NoOfProperties" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="DataTypeDescription" BaseType="ua:ExtensionObject">
+    <opc:Field Name="DataTypeId" TypeName="ua:NodeId" />
+    <opc:Field Name="Name" TypeName="ua:QualifiedName" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="StructureDescription" BaseType="tns:DataTypeDescription">
+    <opc:Field Name="DataTypeId" TypeName="ua:NodeId" SourceType="tns:DataTypeDescription" />
+    <opc:Field Name="Name" TypeName="ua:QualifiedName" SourceType="tns:DataTypeDescription" />
+    <opc:Field Name="StructureDefinition" TypeName="tns:StructureDefinition" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="EnumDescription" BaseType="tns:DataTypeDescription">
+    <opc:Field Name="DataTypeId" TypeName="ua:NodeId" SourceType="tns:DataTypeDescription" />
+    <opc:Field Name="Name" TypeName="ua:QualifiedName" SourceType="tns:DataTypeDescription" />
+    <opc:Field Name="EnumDefinition" TypeName="tns:EnumDefinition" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="KeyValuePair" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Key" TypeName="ua:QualifiedName" />
+    <opc:Field Name="Value" TypeName="ua:Variant" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="PublishedVariableDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="PublishedVariable" TypeName="ua:NodeId" />
+    <opc:Field Name="AttributeId" TypeName="opc:UInt32" />
+    <opc:Field Name="SamplingIntervalHint" TypeName="opc:Double" />
+    <opc:Field Name="DeadbandType" TypeName="opc:UInt32" />
+    <opc:Field Name="DeadbandValue" TypeName="opc:Double" />
+    <opc:Field Name="IndexRange" TypeName="opc:String" />
+    <opc:Field Name="SubstituteValue" TypeName="ua:Variant" />
+    <opc:Field Name="NoOfMetaDataProperties" TypeName="opc:Int32" />
+    <opc:Field Name="MetaDataProperties" TypeName="ua:QualifiedName" LengthField="NoOfMetaDataProperties" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="SecurityKeyServiceDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="ApplicationUri" TypeName="opc:String" />
+    <opc:Field Name="NoOfEndpointUrls" TypeName="opc:Int32" />
+    <opc:Field Name="EndpointUrls" TypeName="opc:String" LengthField="NoOfEndpointUrls" />
+    <opc:Field Name="NoOfAuthorizationUrls" TypeName="opc:Int32" />
+    <opc:Field Name="AuthorizationUrls" TypeName="opc:String" LengthField="NoOfAuthorizationUrls" />
+    <opc:Field Name="TransportProfileUri" TypeName="opc:String" />
+  </opc:StructuredType>
+
+  <opc:EnumeratedType Name="DataSetContentMask" LengthInBits="32">
+    <opc:EnumeratedValue Name="FieldStatusCode" Value="1" />
+    <opc:EnumeratedValue Name="FieldSourceTimestamp" Value="2" />
+    <opc:EnumeratedValue Name="FieldServerTimestamp" Value="4" />
+    <opc:EnumeratedValue Name="FieldSourcePicoSeconds" Value="8" />
+    <opc:EnumeratedValue Name="FieldServerPicoSeconds" Value="16" />
+    <opc:EnumeratedValue Name="FieldRawDataEncoding" Value="32" />
+    <opc:EnumeratedValue Name="HeaderTimestamp" Value="64" />
+    <opc:EnumeratedValue Name="HeaderPicoSeconds" Value="128" />
+    <opc:EnumeratedValue Name="HeaderStatusCode" Value="256" />
+    <opc:EnumeratedValue Name="HeaderMajorVersion" Value="512" />
+    <opc:EnumeratedValue Name="HeaderMinorVersion" Value="1024" />
+  </opc:EnumeratedType>
+
+  <opc:StructuredType Name="DataConnectionDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="DataSetFieldId" TypeName="opc:Guid" />
+    <opc:Field Name="ReceiverIndexRange" TypeName="opc:String" />
+    <opc:Field Name="TargetNodeId" TypeName="ua:NodeId" />
+    <opc:Field Name="AttributeId" TypeName="opc:UInt32" />
+    <opc:Field Name="WriteIndexRange" TypeName="opc:String" />
+    <opc:Field Name="OverrideValueHandling" TypeName="tns:OverrideValueHandling" />
+    <opc:Field Name="OverrideValue" TypeName="ua:Variant" />
+  </opc:StructuredType>
+
+  <opc:EnumeratedType Name="OverrideValueHandling" LengthInBits="32">
+    <opc:EnumeratedValue Name="Disabled" Value="0" />
+    <opc:EnumeratedValue Name="LastUseableValue" Value="1" />
+    <opc:EnumeratedValue Name="OverrideValue" Value="2" />
+  </opc:EnumeratedType>
+
+  <opc:EnumeratedType Name="PubSubState" LengthInBits="32">
+    <opc:EnumeratedValue Name="Disabled" Value="0" />
+    <opc:EnumeratedValue Name="Stopped" Value="1" />
+    <opc:EnumeratedValue Name="Operational" Value="2" />
+    <opc:EnumeratedValue Name="Error" Value="3" />
+  </opc:EnumeratedType>
+
   <opc:EnumeratedType Name="IdType" LengthInBits="32">
     <opc:Documentation>The type of identifier used in a node id.</opc:Documentation>
     <opc:EnumeratedValue Name="Numeric" Value="0" />
@@ -447,6 +606,13 @@
     <opc:Field Name="Description" TypeName="ua:LocalizedText" />
   </opc:StructuredType>
 
+  <opc:StructuredType Name="EnumField" BaseType="tns:EnumValueType">
+    <opc:Field Name="Value" TypeName="opc:Int64" SourceType="tns:EnumValueType" />
+    <opc:Field Name="DisplayName" TypeName="ua:LocalizedText" SourceType="tns:EnumValueType" />
+    <opc:Field Name="Description" TypeName="ua:LocalizedText" SourceType="tns:EnumValueType" />
+    <opc:Field Name="Name" TypeName="opc:String" />
+  </opc:StructuredType>
+
   <opc:StructuredType Name="OptionSet" BaseType="ua:ExtensionObject">
     <opc:Documentation>This abstract Structured DataType is the base DataType for all DataTypes representing a bit mask.</opc:Documentation>
     <opc:Field Name="Value" TypeName="opc:ByteString" />
@@ -543,6 +709,14 @@
   <opc:StructuredType Name="ServiceFault" BaseType="ua:ExtensionObject">
     <opc:Documentation>The response returned by all services when there is a service level error.</opc:Documentation>
     <opc:Field Name="ResponseHeader" TypeName="tns:ResponseHeader" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="SessionLessServiceMessageDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="NoOfNamespaceUris" TypeName="opc:Int32" />
+    <opc:Field Name="NamespaceUris" TypeName="opc:String" LengthField="NoOfNamespaceUris" />
+    <opc:Field Name="NoOfServerUris" TypeName="opc:Int32" />
+    <opc:Field Name="ServerUris" TypeName="opc:String" LengthField="NoOfServerUris" />
+    <opc:Field Name="ServiceId" TypeName="opc:UInt32" />
   </opc:StructuredType>
 
   <opc:StructuredType Name="FindServersRequest" BaseType="ua:ExtensionObject">

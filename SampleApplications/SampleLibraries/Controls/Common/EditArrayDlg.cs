@@ -52,7 +52,6 @@ namespace Opc.Ua.Client.Controls
         public EditArrayDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
             ArrayDV.AutoGenerateColumns = false;
 
             m_dataset = new DataSet();
