@@ -58,7 +58,6 @@ namespace Opc.Ua.Client.Controls
         private void InitializeComponent()
         {
             this.MainPN = new System.Windows.Forms.Panel();
-            this.ValueCTRL = new Opc.Ua.Client.Controls.Common.EditComplexValueCtrl();
             this.BottomPN = new System.Windows.Forms.Panel();
             this.ButtonsPN = new System.Windows.Forms.FlowLayoutPanel();
             this.CancelBTN = new System.Windows.Forms.Button();
@@ -66,6 +65,7 @@ namespace Opc.Ua.Client.Controls
             this.BackBTN = new System.Windows.Forms.Button();
             this.SetArraySizeBTN = new System.Windows.Forms.Button();
             this.SetTypeCB = new System.Windows.Forms.ComboBox();
+            this.ValueCTRL = new Opc.Ua.Client.Controls.Common.EditComplexValueCtrl();
             this.MainPN.SuspendLayout();
             this.BottomPN.SuspendLayout();
             this.ButtonsPN.SuspendLayout();
@@ -80,15 +80,6 @@ namespace Opc.Ua.Client.Controls
             this.MainPN.Name = "MainPN";
             this.MainPN.Size = new System.Drawing.Size(658, 221);
             this.MainPN.TabIndex = 1;
-            // 
-            // ValueCTRL
-            // 
-            this.ValueCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ValueCTRL.Location = new System.Drawing.Point(0, 0);
-            this.ValueCTRL.Name = "ValueCTRL";
-            this.ValueCTRL.Size = new System.Drawing.Size(658, 221);
-            this.ValueCTRL.TabIndex = 0;
-            this.ValueCTRL.ValueChanged += new System.EventHandler(this.ValueCTRL_ValueChanged);
             // 
             // BottomPN
             // 
@@ -171,6 +162,15 @@ namespace Opc.Ua.Client.Controls
             this.SetTypeCB.TabIndex = 10;
             this.SetTypeCB.SelectedIndexChanged += new System.EventHandler(this.SetTypeCB_SelectedIndexChanged);
             // 
+            // ValueCTRL
+            // 
+            this.ValueCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ValueCTRL.Location = new System.Drawing.Point(0, 0);
+            this.ValueCTRL.Name = "ValueCTRL";
+            this.ValueCTRL.Size = new System.Drawing.Size(658, 221);
+            this.ValueCTRL.TabIndex = 0;
+            this.ValueCTRL.ValueChanged += new System.EventHandler(this.ValueCTRL_ValueChanged);
+            // 
             // EditComplexValueDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -178,9 +178,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(658, 249);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(3000, 1000);
+            this.MinimumSize = new System.Drawing.Size(50, 100);
             this.Name = "EditComplexValueDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Value";

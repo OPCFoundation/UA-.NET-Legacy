@@ -303,7 +303,7 @@ namespace Opc.Ua.Client.Controls
                             bits.Append(" | ");
                         }
                            
-                        bits.Append("Writeable");
+                        bits.Append("Writable");
                     }
                     
                     if ((accessLevel & AccessLevels.HistoryRead) != 0)

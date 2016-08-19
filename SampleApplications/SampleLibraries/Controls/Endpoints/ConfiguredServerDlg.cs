@@ -39,7 +39,6 @@ using System.IO;
 using System.Threading;
 
 using Opc.Ua.Configuration;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Opc.Ua.Client.Controls
 {
@@ -55,10 +54,14 @@ namespace Opc.Ua.Client.Controls
         public ConfiguredServerDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
+
+            // options for override limits are fixed.
+            foreach (UseDefaultLimits value in Enum.GetValues(typeof(UseDefaultLimits)))
+            {
+                UseDefaultLimitsCB.Items.Add(value);
+            }
 
             m_userIdentities = new Dictionary<string, UserIdentityToken>();
-            m_statusObject = new StatusObject((int)StatusChannel.MaxStatusChannels);
         }
         #endregion
 
@@ -81,36 +84,7 @@ namespace Opc.Ua.Client.Controls
             None = -1,
             DA = (int)ComSpecification.DA,
             AE = (int)ComSpecification.AE,
-            HDA = (int)ComSpecification.HDA
-        }
-
-        /// <summary>
-        /// The type of status (for coloring the status textbox).
-        /// </summary>
-        private enum StatusType
-        {
-            Ok = 0,
-            Warning = 1,
-            Error = 2
-        }
-
-        /// <summary>
-        /// The status channel inside the StatusObject.
-        /// </summary>
-        private enum StatusChannel
-        {
-            Discovery = 0,
-            SelectedSecurityMode = 1,
-            ApplicationType = 2,
-            SelectedProtocol = 3,
-            ApplicationUri = 4,
-            DiscoveryURLs = 5,
-            Server = 6,
-            DifferentCertificate = 7,
-            SecurityPolicyUri = 8,
-            TransportProfileUri = 9,
-            SelectedSecurityPolicy = 10,
-            MaxStatusChannels = 11
+            HDA = (int)ComSpecification.HDA,
         }
 
         /// <summary>
@@ -122,235 +96,22 @@ namespace Opc.Ua.Client.Controls
             No
         }
 
-        /// <summary>
-        /// This class merges multiple error/warning/status codes from multiple sources.
-        /// Initialize it with the number of status channels and update "StatusChannel" accordingly.
-        /// Provides a general view of all the statuses (joined texts, worst status).
-        /// </summary>
-        private class StatusObject
-        {
-            public StatusObject(int maxChannels)
-            {
-                m_maxChannels = maxChannels;
-                m_statusTexts = new string[maxChannels];
-                m_statusTypes = new StatusType[maxChannels];
-
-                for (int i = 0; i < m_maxChannels; ++i)
-                {
-                    m_statusTexts[i] = String.Empty;
-                    m_statusTypes[i] = StatusType.Ok;
-                }
-            }
-
-            public String StatusString
-            {
-                get
-                {
-                    String status = String.Empty;
-
-                    for (int i = 0; i < m_maxChannels; ++i)
-                    {
-                        if (!String.IsNullOrEmpty(m_statusTexts[i]))
-                        {
-                            if (!String.IsNullOrEmpty(status))
-                            {
-                                status += " | ";
-                            }
-
-                            status += m_statusTexts[i];
-                        }
-                    }
-
-                    return status;
-                }
-            }
-
-            public StatusType StatusType
-            {
-                get
-                {
-                    StatusType type = StatusType.Ok;
-                    
-                    for (int i = 0; i < m_maxChannels; ++i)
-                    {
-                        if (m_statusTypes[i] > type)
-                        {
-                            type = m_statusTypes[i];
-                        }
-                    }
-
-                    return type;
-                }
-            }
-
-            public void SetStatus(StatusChannel channel, String text, StatusType type)
-            {
-                int intChannel = (int)channel;
-
-                if ((intChannel >= 0) && (intChannel < m_maxChannels))
-                {
-                    m_statusTexts[intChannel] = text;
-                    m_statusTypes[intChannel] = type;
-                }
-            }
-
-            public void ClearStatus(StatusChannel channel)
-            {
-                int intChannel = (int)channel;
-
-                if ((intChannel >= 0) && (intChannel < m_maxChannels))
-                {
-                    m_statusTexts[intChannel] = String.Empty;
-                    m_statusTypes[intChannel] = StatusType.Ok;
-                }
-            }
-
-            private int m_maxChannels;
-            private String[] m_statusTexts;
-            private StatusType[] m_statusTypes;
-        }
-
-        /// <summary>
-        /// This class is used by the EndopintListLB (list box).
-        /// Holds references to the received EndpointDescription and its MessageSecurityMode, SecurityPolicyUri, MessageSecurityMode and EncodingSupport.
-        /// Also prepares a user-friendly text representation of all the endpoint-rellevant characteristics.
-        /// The extracted EndpointDescription properties are used in selecting the right combo-box values when user clicks in the endpoint list box.
-        /// </summary>
-        private class EndpointDescriptionString
-        {
-            public EndpointDescriptionString(EndpointDescription endpointDescription)
-            {
-                m_endpointDescription = endpointDescription;
-                m_protocol = new Protocol(endpointDescription);
-                m_currentPolicy = SecurityPolicies.GetDisplayName(endpointDescription.SecurityPolicyUri);
-                m_messageSecurityMode = endpointDescription.SecurityMode;
-
-                switch (m_endpointDescription.EncodingSupport)
-                {
-                    case BinaryEncodingSupport.None:
-                        {
-                            m_encoding = Encoding.Xml;
-                            break;
-                        }
-
-                    case BinaryEncodingSupport.Optional:
-                    case BinaryEncodingSupport.Required:
-                        {
-                            m_encoding = Encoding.Binary;
-                            break;
-                        }
-                }
-
-                BuildEndpointDescription();
-            }
-
-            public EndpointDescription EndpointDescription
-            {
-                get
-                {
-                    return m_endpointDescription;
-                }
-            }
-
-            public Protocol Protocol
-            {
-                get
-                {
-                    return m_protocol;
-                }
-            }
-
-            public string CurrentPolicy
-            {
-                get
-                {
-                    return m_currentPolicy;
-                }
-            }
-
-            public MessageSecurityMode MessageSecurityMode
-            {
-                get
-                {
-                    return m_messageSecurityMode;
-                }
-            }
-
-            public Encoding Encoding
-            {
-                get
-                {
-                    return m_encoding;
-                }
-            }
-
-            public override string ToString()
-            {
-                return m_stringRepresentation;
-            }
-
-            private void BuildEndpointDescription()
-            {
-                m_stringRepresentation = m_protocol.ToString() + " - ";
-                m_stringRepresentation += m_endpointDescription.SecurityMode + " - ";
-                m_stringRepresentation += SecurityPolicies.GetDisplayName(m_endpointDescription.SecurityPolicyUri) + " - ";
-
-                switch (m_endpointDescription.EncodingSupport)
-                {
-                    case BinaryEncodingSupport.None:
-                        {
-                            m_stringRepresentation += Encoding.Xml;
-                            break;
-                        }
-
-                    case BinaryEncodingSupport.Required:
-                        {
-                            m_stringRepresentation += Encoding.Binary;
-                            break;
-                        }
-
-                    case BinaryEncodingSupport.Optional:
-                        {
-                            m_stringRepresentation += Encoding.Binary + "/" + Encoding.Xml;
-                            break;
-                        }
-                }
-
-            }
-
-            private Protocol m_protocol;
-            private EndpointDescription m_endpointDescription;
-            private MessageSecurityMode m_messageSecurityMode;
-            private string m_currentPolicy;
-            private Encoding m_encoding;
-            private string m_stringRepresentation;
-        }
-
         private ConfiguredEndpoint m_endpoint;
         private EndpointDescription m_currentDescription;
         private EndpointDescriptionCollection m_availableEndpoints;
-        private List<EndpointDescriptionString> m_availableEndpointsDescriptions;
         private int m_discoveryTimeout;
         private int m_discoverCount;
         private ApplicationConfiguration m_configuration;
         private bool m_updating;
-        private bool m_selecting;
         private Dictionary<string, UserIdentityToken> m_userIdentities;
         private EndpointComIdentity m_comIdentity;
         private EndpointConfiguration m_endpointConfiguration;
         private bool m_discoverySucceeded;
         private Uri m_discoveryUrl;
         private bool m_showAllOptions;
-        private String m_discoveryStatus;
-        private StatusObject m_statusObject;
         #endregion
 
         #region Public Interface
-        public EndpointDescriptionCollection AvailableEnpoints
-        {
-            get { return m_availableEndpoints; }
-        }
-
         /// <summary>
         /// The timeout in milliseconds to use when discovering servers.
         /// </summary>
@@ -371,7 +132,6 @@ namespace Opc.Ua.Client.Controls
 
             // construct a list of available endpoint descriptions for the application.
             m_availableEndpoints = new EndpointDescriptionCollection();
-            m_availableEndpointsDescriptions = new List<EndpointDescriptionString>();
             m_endpointConfiguration = EndpointConfiguration.Create(configuration);
 
             // create a default endpoint description.
@@ -380,7 +140,8 @@ namespace Opc.Ua.Client.Controls
 
             // initializing the protocol will trigger an update to all other controls.
             InitializeProtocols(m_availableEndpoints);
-            BuildEndpointDescriptionStrings(m_availableEndpoints);
+
+            UseDefaultLimitsCB.SelectedItem = UseDefaultLimits.Yes;
 
             // discover endpoints in the background.
             m_discoverySucceeded = false;
@@ -407,7 +168,6 @@ namespace Opc.Ua.Client.Controls
 
             // construct a list of available endpoint descriptions for the application.
             m_availableEndpoints = new EndpointDescriptionCollection();
-            m_availableEndpointsDescriptions = new List<EndpointDescriptionString>();
 
             m_availableEndpoints.Add(endpoint.Description);
             m_currentDescription = endpoint.Description;
@@ -428,8 +188,6 @@ namespace Opc.Ua.Client.Controls
                     }
                 }
             }
-
-            BuildEndpointDescriptionStrings(m_availableEndpoints);
 
             UserTokenPolicy policy = m_endpoint.SelectedUserTokenPolicy;
 
@@ -459,6 +217,8 @@ namespace Opc.Ua.Client.Controls
                 {
                     m_userIdentities[userTokenItem.ToString()] = m_endpoint.UserIdentity;
                 }
+
+                UserTokenTypeCB.SelectedIndex = UserTokenTypeCB.Items.Add(userTokenItem);
             }
 
             // copy com identity.
@@ -469,6 +229,15 @@ namespace Opc.Ua.Client.Controls
 
             // check if the current settings match the defaults.
             EndpointConfiguration defaultConfiguration = EndpointConfiguration.Create(configuration);
+
+            if (SameAsDefaults(defaultConfiguration, m_endpoint.Configuration))
+            {
+                UseDefaultLimitsCB.SelectedItem = UseDefaultLimits.Yes;
+            }
+            else
+            {
+                UseDefaultLimitsCB.SelectedItem = UseDefaultLimits.No;
+            }
 
             // discover endpoints in the background.
             Interlocked.Increment(ref m_discoverCount);
@@ -484,25 +253,6 @@ namespace Opc.Ua.Client.Controls
         #endregion
 
         #region Private Methods
-
-        /// <summary>
-        /// Creates the string representation of each EndpointDescription - to be used in the Endpoint Description List
-        /// </summary>
-        private void BuildEndpointDescriptionStrings(EndpointDescriptionCollection endpoints)
-        {
-            lock (m_availableEndpointsDescriptions)
-            {
-                m_availableEndpointsDescriptions.Clear();
-
-                foreach (EndpointDescription endpoint in endpoints)
-                {
-                    m_availableEndpointsDescriptions.Add(new EndpointDescriptionString(endpoint));
-                }
-
-                InitializeEndpointList(m_availableEndpointsDescriptions);
-            }
-        }
-
         /// <summary>
         /// Returns true if the configuration is the same as the default.
         /// </summary>
@@ -589,7 +339,7 @@ namespace Opc.Ua.Client.Controls
                         continue;
                     }
 
-                    if ((currentProtocol != null) && (!currentProtocol.Matches(url)))
+                    if (!currentProtocol.Matches(url))
                     {
                         continue;
                     }
@@ -634,6 +384,61 @@ namespace Opc.Ua.Client.Controls
             return bestMatch;
         }
 
+        /// <summary>
+        /// Finds the best match for the current protocol and security selections.
+        /// </summary>
+        private int FindBestUserTokenPolicy(EndpointDescription endpoint)
+        {
+            // filter by the current token type.
+            UserTokenItem currentTokenType = new UserTokenItem(UserTokenType.Anonymous);
+
+            if (UserTokenTypeCB.SelectedIndex != -1)
+            {
+                currentTokenType = (UserTokenItem)UserTokenTypeCB.SelectedItem;
+            }
+
+            // filter by issued token type.
+            string currentIssuedTokenType = (string)IssuedTokenTypeCB.SelectedItem;
+
+            // find all matching descriptions.      
+            UserTokenPolicyCollection matches = new UserTokenPolicyCollection();
+
+            if (endpoint != null)
+            {
+                for (int ii = 0; ii < endpoint.UserIdentityTokens.Count; ii++)
+                {
+                    UserTokenPolicy policy = endpoint.UserIdentityTokens[ii];
+
+                    if (currentTokenType.Policy.PolicyId == policy.PolicyId)
+                    {
+                        return ii;
+                    }
+                }
+
+                for (int ii = 0; ii < endpoint.UserIdentityTokens.Count; ii++)
+                {
+                    UserTokenPolicy policy = endpoint.UserIdentityTokens[ii];
+
+                    if (currentTokenType.Policy.TokenType != policy.TokenType)
+                    {
+                        continue;
+                    }
+
+                    if (policy.TokenType == UserTokenType.IssuedToken)
+                    {
+                        if (currentIssuedTokenType != policy.IssuedTokenType)
+                        {
+                            continue;
+                        }
+                    }
+
+                    return ii;
+                }
+            }
+
+            return -1;
+        }
+
         private class Protocol
         {
             public Uri Url;
@@ -646,30 +451,25 @@ namespace Opc.Ua.Client.Controls
 
             public Protocol(EndpointDescription url)
             {
-                Url = null;
+                Url = Utils.ParseUri(url.EndpointUrl);
 
-                if (url != null)
+                if (Url.Scheme == Utils.UriSchemeHttp)
                 {
-                    Url = Utils.ParseUri(url.EndpointUrl);
-
-                    if ((Url != null) && (Url.Scheme == Utils.UriSchemeHttp))
+                    switch (url.TransportProfileUri)
                     {
-                        switch (url.TransportProfileUri)
+                        case Profiles.HttpsXmlTransport:
+                        case Profiles.HttpsBinaryTransport:
+                        case Profiles.HttpsXmlOrBinaryTransport:
                         {
-                            case Profiles.HttpsXmlTransport:
-                            case Profiles.HttpsBinaryTransport:
-                            case Profiles.HttpsXmlOrBinaryTransport:
-                                {
-                                    Profile = "REST";
-                                    break;
-                                }
+                            Profile = "REST";
+                            break;
+                        }
 
-                            case Profiles.WsHttpXmlTransport:
-                            case Profiles.WsHttpXmlOrBinaryTransport:
-                                {
-                                    Profile = "WS-*";
-                                    break;
-                                }
+                        case Profiles.WsHttpXmlTransport:
+                        case Profiles.WsHttpXmlOrBinaryTransport:
+                        {
+                            Profile = "WS-*";
+                            break;
                         }
                     }
                 }
@@ -841,7 +641,7 @@ namespace Opc.Ua.Client.Controls
                     {
                         Uri url = Utils.ParseUri(endpoint.EndpointUrl);
 
-                        if ((url != null) && (currentProtocol != null))
+                        if (url != null)
                         {
                             if (!currentProtocol.Matches(url))
                             {
@@ -912,7 +712,7 @@ namespace Opc.Ua.Client.Controls
                     {
                         Uri url = Utils.ParseUri(endpoint.EndpointUrl);
 
-                        if ((url != null) && (currentProtocol != null))
+                        if (url != null)
                         {
                             if (!currentProtocol.Matches(url))
                             {
@@ -965,7 +765,7 @@ namespace Opc.Ua.Client.Controls
         /// <summary>
         /// Initializes the message encodings dropdown.
         /// </summary>
-        private void InitializeEncodings(EndpointDescriptionCollection endpoints, EndpointDescription endpoint)
+        private void InitializeEncodings(EndpointDescription endpoint)
         {
             // preserve the existing value.
             Encoding currentEncoding = Encoding.Default;
@@ -979,49 +779,26 @@ namespace Opc.Ua.Client.Controls
 
             if (endpoint != null)
             {
-                Protocol protocol = new Protocol(endpoint);
-                String securityPolicy = SecurityPolicies.GetDisplayName(endpoint.SecurityPolicyUri);
-
-                foreach (EndpointDescription endpointDescription in endpoints)
+                switch (endpoint.EncodingSupport)
                 {
-                    if ((protocol.Matches(Utils.ParseUri(endpointDescription.EndpointUrl))) &&
-                        (endpoint.SecurityMode == endpointDescription.SecurityMode) &&
-                        (securityPolicy == SecurityPolicies.GetDisplayName(endpointDescription.SecurityPolicyUri)))
-                    {
-                        switch (endpointDescription.EncodingSupport)
+                    case BinaryEncodingSupport.None:
                         {
-                            case BinaryEncodingSupport.None:
-                                {
-                                    if (!EncodingCB.Items.Contains(Encoding.Xml))
-                                    {
-                                        EncodingCB.Items.Add(Encoding.Xml);
-                                    }
-                                    break;
-                                }
-
-                            case BinaryEncodingSupport.Required:
-                                {
-                                    if (!EncodingCB.Items.Contains(Encoding.Binary))
-                                    {
-                                        EncodingCB.Items.Add(Encoding.Binary);
-                                    }
-                                    break;
-                                }
-
-                            case BinaryEncodingSupport.Optional:
-                                {
-                                    if (!EncodingCB.Items.Contains(Encoding.Binary))
-                                    {
-                                        EncodingCB.Items.Add(Encoding.Binary);
-                                    }
-                                    if (!EncodingCB.Items.Contains(Encoding.Xml))
-                                    {
-                                        EncodingCB.Items.Add(Encoding.Xml);
-                                    }
-                                    break;
-                                }
+                            EncodingCB.Items.Add(Encoding.Xml);
+                            break;
                         }
-                    }
+
+                    case BinaryEncodingSupport.Required:
+                        {
+                            EncodingCB.Items.Add(Encoding.Binary);
+                            break;
+                        }
+
+                    case BinaryEncodingSupport.Optional:
+                        {
+                            EncodingCB.Items.Add(Encoding.Binary);
+                            EncodingCB.Items.Add(Encoding.Xml);
+                            break;
+                        }
                 }
             }
 
@@ -1040,6 +817,82 @@ namespace Opc.Ua.Client.Controls
             }
 
             EncodingCB.SelectedIndex = index;
+        }
+
+        /// <summary>
+        /// Initializes the user token types dropdown.
+        /// </summary>
+        private void InitializeUserTokenTypes(EndpointDescription endpoint)
+        {
+            // preserve the existing value.
+            UserTokenItem currentTokenType = new UserTokenItem(UserTokenType.Anonymous);
+
+            if (UserTokenTypeCB.SelectedIndex != -1)
+            {
+                currentTokenType = (UserTokenItem)UserTokenTypeCB.SelectedItem;
+            }
+
+            UserTokenTypeCB.Items.Clear();
+
+            // show all options.
+            if (m_showAllOptions)
+            {
+                UserTokenTypeCB.Items.Add(new UserTokenItem(UserTokenType.Anonymous));
+                UserTokenTypeCB.Items.Add(new UserTokenItem(UserTokenType.UserName));
+                UserTokenTypeCB.Items.Add(new UserTokenItem(UserTokenType.Certificate));
+                UserTokenTypeCB.Items.Add(new UserTokenItem(UserTokenType.IssuedToken));
+            }
+
+            // find all unique token types.  
+            else
+            {
+                if (endpoint != null)
+                {
+                    foreach (UserTokenPolicy policy in endpoint.UserIdentityTokens)
+                    {
+                        UserTokenTypeCB.Items.Add(new UserTokenItem(policy));
+                    }
+                }
+
+                // add at least one policy.
+                if (UserTokenTypeCB.Items.Count == 0)
+                {
+                    UserTokenTypeCB.Items.Add(new UserTokenItem(UserTokenType.Anonymous));
+                }
+            }
+
+            int index = -1;
+
+            // try to match policy id.
+            for (int ii = 0; ii < UserTokenTypeCB.Items.Count; ii++)
+            {
+                UserTokenItem item = (UserTokenItem)UserTokenTypeCB.Items[ii];
+
+                if (item.Policy.PolicyId == currentTokenType.Policy.PolicyId)
+                {
+                    index = ii;
+                    break;
+                }
+            }
+
+            // match user token type.
+            if (index == -1)
+            {
+                index = 0;
+
+                for (int ii = 0; ii < UserTokenTypeCB.Items.Count; ii++)
+                {
+                    UserTokenItem item = (UserTokenItem)UserTokenTypeCB.Items[ii];
+
+                    if (item.Policy.TokenType == currentTokenType.Policy.TokenType)
+                    {
+                        index = ii;
+                        break;
+                    }
+                }
+            }
+
+            UserTokenTypeCB.SelectedIndex = index;
         }
 
         private class UserTokenItem
@@ -1073,38 +926,70 @@ namespace Opc.Ua.Client.Controls
         }
 
         /// <summary>
-        /// Initializes the endpoint list control.
+        /// Initializes the user identity control.
         /// </summary>
-        private void InitializeEndpointList(List<EndpointDescriptionString> endpoints)
+        private void InitializeIssuedTokenType(EndpointDescription endpoint)
         {
-            EndpointListLB.Items.Clear();
+            // get the current user token type.
+            UserTokenItem currentTokenType = new UserTokenItem(UserTokenType.Anonymous);
 
-            foreach (EndpointDescriptionString endpointString in endpoints)
+            if (UserTokenTypeCB.SelectedIndex != -1)
             {
-                EndpointListLB.Items.Add(endpointString);
+                currentTokenType = (UserTokenItem)UserTokenTypeCB.SelectedItem;
+            }
+
+            // preserve the existing value.
+            string currentIssuedTokenType = (string)IssuedTokenTypeCB.SelectedItem;
+
+            IssuedTokenTypeCB.Items.Clear();
+            IssuedTokenTypeCB.Enabled = false;
+
+            // only applies to issued tokens.
+            if (currentTokenType.Policy.TokenType != UserTokenType.IssuedToken)
+            {
+                return;
+            }
+
+            // only one item to select.
+            if (currentTokenType.Policy.IssuedTokenType != null)
+            {
+                IssuedTokenTypeCB.Items.Add(currentTokenType.Policy.IssuedTokenType);
+                IssuedTokenTypeCB.SelectedIndex = 0;
+                IssuedTokenTypeCB.Enabled = true;
             }
         }
 
-        private void SelectCorrespondingEndpointFromList(EndpointDescription endpoint)
+        /// <summary>
+        /// Initializes the user identity control.
+        /// </summary>
+        private void InitializeUserIdentity(ConfiguredEndpoint endpoint)
         {
-            if (!m_selecting)
+            // get the current user token type.
+            UserTokenItem currentItem = new UserTokenItem(UserTokenType.Anonymous);
+
+            if (UserTokenTypeCB.SelectedIndex != -1)
             {
-                int index = -1;
+                currentItem = (UserTokenItem)UserTokenTypeCB.SelectedItem;
+            }
 
-                // try to match endpoint description id
-                if (endpoint != null)
+            // get the identity.
+            UserIdentityToken identity = null;
+            m_userIdentities.TryGetValue(currentItem.ToString(), out identity);
+
+            // set the default values.
+            UserIdentityTB.Text = null;
+            UserIdentityTB.Enabled = currentItem.Policy.TokenType != UserTokenType.Anonymous;
+            UserIdentityBTN.Enabled = currentItem.Policy.TokenType != UserTokenType.Anonymous;
+
+            // update from endpoint.
+            if (identity != null)
+            {
+                UserNameIdentityToken userNameToken = identity as UserNameIdentityToken;
+
+                if (userNameToken != null)
                 {
-                    for (int ii = 0; ii < EndpointListLB.Items.Count; ii++)
-                    {
-                        if (endpoint == ((EndpointDescriptionString)EndpointListLB.Items[ii]).EndpointDescription)
-                        {
-                            index = ii;
-                            break;
-                        }
-                    }
+                    UserIdentityTB.Text = userNameToken.UserName;
                 }
-
-                EndpointListLB.SelectedIndex = index;
             }
         }
 
@@ -1124,9 +1009,7 @@ namespace Opc.Ua.Client.Controls
 
             }
 
-            OnUpdateStatus(new Tuple<String, StatusType>("Attempting to read latest configuration options from server.", StatusType.Ok));
-
-            String discoveryMessage = String.Empty;
+            OnUpdateStatus("Attempting to read latest configuration options from server.");
 
             // process each url.
             foreach (string discoveryUrl in server.DiscoveryUrls)
@@ -1135,11 +1018,11 @@ namespace Opc.Ua.Client.Controls
 
                 if (url != null)
                 {
-                    if (DiscoverEndpoints(url, out discoveryMessage))
+                    if (DiscoverEndpoints(url))
                     {
                         m_discoverySucceeded = true;
                         m_discoveryUrl = url;
-                        OnUpdateStatus(new Tuple<String, StatusType>("Configuration options are up to date.", StatusType.Ok));
+                        OnUpdateStatus("Configuration options are up to date.");
                         return;
                     }
 
@@ -1152,19 +1035,20 @@ namespace Opc.Ua.Client.Controls
             }
 
             OnUpdateEndpoints(m_availableEndpoints);
-            OnUpdateStatus(new Tuple<String, StatusType>("Warning: Configuration options may not be correct because the server is not available (" + discoveryMessage + ").", StatusType.Warning));
+            OnUpdateStatus("Configuration options may not be correct because the server is not available.");
         }
 
         /// <summary>
         /// Fetches the servers from the discovery server.
         /// </summary>
-        private bool DiscoverEndpoints(Uri discoveryUrl, out String message)
+        private bool DiscoverEndpoints(Uri discoveryUrl)
         {
             // use a short timeout.
             EndpointConfiguration configuration = EndpointConfiguration.Create(m_configuration);
             configuration.OperationTimeout = m_discoveryTimeout;
 
             DiscoveryClient client = DiscoveryClient.Create(
+                m_configuration,
                 discoveryUrl,
                 BindingFactory.Create(m_configuration, m_configuration.CreateMessageContext()),
                 EndpointConfiguration.Create(m_configuration));
@@ -1173,13 +1057,11 @@ namespace Opc.Ua.Client.Controls
             {
                 EndpointDescriptionCollection endpoints = client.GetEndpoints(null);
                 OnUpdateEndpoints(endpoints);
-                message = String.Empty;
                 return true;
             }
             catch (Exception e)
             {
                 Utils.Trace("Could not fetch endpoints from url: {0}. Reason={1}", discoveryUrl, e.Message);
-                message = e.Message;
                 return false;
             }
             finally
@@ -1199,9 +1081,7 @@ namespace Opc.Ua.Client.Controls
                 return;
             }
 
-            Tuple<String, StatusType> statusTuple = status as Tuple<String, StatusType>;
-            m_statusObject.SetStatus(StatusChannel.Discovery, statusTuple.Item1, statusTuple.Item2);
-            UpdateStatus();
+            StatusTB.Text = status as string;
         }
 
         /// <summary>
@@ -1229,9 +1109,7 @@ namespace Opc.Ua.Client.Controls
                 else
                 {
                     m_showAllOptions = false;
-
                     m_availableEndpoints = endpoints;
-                    BuildEndpointDescriptionStrings(m_availableEndpoints);
 
                     if (endpoints.Count > 0)
                     {
@@ -1384,6 +1262,13 @@ namespace Opc.Ua.Client.Controls
             endpoint.Server.ApplicationType = ApplicationType.Server;
             endpoint.Server.ApplicationUri = endpoint.EndpointUrl;
 
+            UserTokenItem userTokenType = (UserTokenItem)UserTokenTypeCB.SelectedItem;
+
+            if (userTokenType != null && userTokenType.Policy != null)
+            {
+                endpoint.UserIdentityTokens.Add(userTokenType.Policy);
+            }
+
             return endpoint;
         }
         #endregion
@@ -1459,6 +1344,21 @@ namespace Opc.Ua.Client.Controls
                     m_endpoint.Update(configuration);
                 }
 
+                // set the user token policy.
+                m_endpoint.SelectedUserTokenPolicyIndex = FindBestUserTokenPolicy(m_currentDescription);
+
+                // update the user identity.
+                UserTokenItem userTokenItem = (UserTokenItem)UserTokenTypeCB.SelectedItem;
+
+                UserIdentityToken userIdentity = null;
+
+                if (!m_userIdentities.TryGetValue(userTokenItem.ToString(), out userIdentity))
+                {
+                    userIdentity = null;
+                }
+
+                m_endpoint.UserIdentity = userIdentity;
+
                 DialogResult = DialogResult.OK;
             }
             catch (Exception exception)
@@ -1471,47 +1371,22 @@ namespace Opc.Ua.Client.Controls
         {
             try
             {
+                m_updating = true;
                 InitializeSecurityModes(m_availableEndpoints);
 
-                if (!m_updating)
-                {
-                    try
-                    {
-                        m_updating = true;
+                // update current description.
+                m_currentDescription = FindBestEndpointDescription(m_availableEndpoints);
 
-                        // update current description.
-                        m_currentDescription = FindBestEndpointDescription(m_availableEndpoints);
-
-                        InitializeEncodings(m_availableEndpoints, m_currentDescription);
-                        SelectCorrespondingEndpointFromList(m_currentDescription);
-                    }
-                    finally
-                    {
-                        m_updating = false;
-                    }
-                }
-
-                if (ProtocolCB.SelectedItem != null)
-                {
-                    if (((Protocol)ProtocolCB.SelectedItem).Url.DnsSafeHost != m_endpoint.EndpointUrl.DnsSafeHost)
-                    {
-                        m_statusObject.SetStatus(StatusChannel.SelectedProtocol, "Warning: Selected Endpoint hostname is different than initial hostname.", StatusType.Warning);
-                    }
-                    else
-                    {
-                        m_statusObject.ClearStatus(StatusChannel.SelectedProtocol);
-                    }
-                }
-                else
-                {
-                    m_statusObject.SetStatus(StatusChannel.SelectedProtocol, "Error: Selected Protocol is invalid.", StatusType.Warning);
-                }
-
-                UpdateStatus();
+                InitializeEncodings(m_currentDescription);
+                InitializeUserTokenTypes(m_currentDescription);
             }
             catch (Exception exception)
             {
                 GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
+            }
+            finally
+            {
+                m_updating = false;
             }
         }
 
@@ -1530,37 +1405,14 @@ namespace Opc.Ua.Client.Controls
                         // update current description.
                         m_currentDescription = FindBestEndpointDescription(m_availableEndpoints);
 
-                        InitializeEncodings(m_availableEndpoints, m_currentDescription);
-                        SelectCorrespondingEndpointFromList(m_currentDescription);
+                        InitializeEncodings(m_currentDescription);
+                        InitializeUserTokenTypes(m_currentDescription);
                     }
                     finally
                     {
                         m_updating = false;
                     }
                 }
-
-                if (SecurityModeCB.SelectedItem != null)
-                {
-                    if ((((MessageSecurityMode)SecurityModeCB.SelectedItem) == MessageSecurityMode.None) &&
-                        (ProtocolCB.SelectedItem != null) && (((Protocol)ProtocolCB.SelectedItem).ToString().IndexOf("https") != 0))
-                    {
-                        m_statusObject.SetStatus(StatusChannel.SelectedSecurityMode, "Warning: Selected Endpoint has no security.", StatusType.Warning);
-                    }
-                    else if (((MessageSecurityMode)SecurityModeCB.SelectedItem) == MessageSecurityMode.Invalid)
-                    {
-                        m_statusObject.SetStatus(StatusChannel.SelectedSecurityMode, "Error: Selected Endpoint Security Mode is unsupported.", StatusType.Warning);
-                    }
-                    else
-                    {
-                        m_statusObject.ClearStatus(StatusChannel.SelectedSecurityMode);
-                    }
-                }
-                else
-                {
-                    m_statusObject.SetStatus(StatusChannel.SelectedSecurityMode, "Error: Selected Endpoint Security Mode is invalid.", StatusType.Warning);
-                }
-
-                UpdateStatus();
             }
             catch (Exception exception)
             {
@@ -1581,26 +1433,14 @@ namespace Opc.Ua.Client.Controls
                         // update current description.
                         m_currentDescription = FindBestEndpointDescription(m_availableEndpoints);
 
-                        InitializeEncodings(m_availableEndpoints, m_currentDescription);
-                        SelectCorrespondingEndpointFromList(m_currentDescription); 
+                        InitializeEncodings(m_currentDescription);
+                        InitializeUserTokenTypes(m_currentDescription);
                     }
                     finally
                     {
                         m_updating = false;
                     }
                 }
-
-                if (SecurityPolicyCB.SelectedItem != null)
-                {
-                    m_statusObject.ClearStatus(StatusChannel.SelectedSecurityPolicy);
-                }
-                else
-                {
-                    m_statusObject.SetStatus(StatusChannel.SelectedSecurityPolicy, "Error: Selected Security Policy is invalid.", StatusType.Warning);
-                }
-
-                UpdateStatus();
-
             }
             catch (Exception exception)
             {
@@ -1608,139 +1448,12 @@ namespace Opc.Ua.Client.Controls
             }
         }
 
-        private void EndpointListLB_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!m_updating)
-            {
-                try
-                {
-                    m_updating = true;
-                    m_selecting = true;
-
-                    int selectedIndex = EndpointListLB.SelectedIndex;
-
-                    if (selectedIndex != -1)
-                    {
-                        EndpointDescriptionString selection = (EndpointDescriptionString)EndpointListLB.SelectedItem;
-
-                        int index = -1;
-
-                        for (int i = 0; i < ProtocolCB.Items.Count; ++i)
-                        {
-                            if (((Protocol)ProtocolCB.Items[i]).ToString() == selection.Protocol.ToString())
-                            {
-                                index = i;
-                                break;
-                            }
-                        }
-
-                        ProtocolCB.SelectedIndex = index;
-
-                        InitializeSecurityModes(m_availableEndpoints);
-
-                        m_currentDescription = m_availableEndpoints[selectedIndex];
-
-                        InitializeEncodings(m_availableEndpoints, m_currentDescription);
-
-                        index = -1;
-
-                        for (int i = 0; i < SecurityModeCB.Items.Count; ++i)
-                        {
-                            if ((MessageSecurityMode)SecurityModeCB.Items[i] == selection.MessageSecurityMode)
-                            {
-                                index = i;
-                                break;
-                            }
-                        }
-
-                        SecurityModeCB.SelectedIndex = index;
-
-                        index = -1;
-
-                        for (int i = 0; i < SecurityPolicyCB.Items.Count; ++i)
-                        {
-                            if ((string)SecurityPolicyCB.Items[i] == selection.CurrentPolicy)
-                            {
-                                index = i;
-                                break;
-                            }
-                        }
-
-                        SecurityPolicyCB.SelectedIndex = index;
-
-                        index = -1;
-
-                        for (int i = 0; i < EncodingCB.Items.Count; ++i)
-                        {
-                            if ((Encoding)EncodingCB.Items[i] == selection.Encoding)
-                            {
-                                index = i;
-                                break;
-                            }
-                        }
-
-                        EncodingCB.SelectedIndex = index;
-                    }
-                }
-                catch (Exception exception)
-                {
-                    GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
-                }
-                finally
-                {
-                    m_updating = false;
-                    m_selecting = false;
-                }
-            }
-
-            UpdateAdvancedEndpointInformation();
-        }
-
-        /// <summary>
-        /// Updates advanced endpoint information.
-        /// </summary>
-        private void UpdateAdvancedEndpointInformation()
+        private void UserTokenPolicyCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                ApplicationNameTB.Text = String.Empty;
-                ApplicationTypeTB.Text = String.Empty;
-                ApplicationUriTB.Text = String.Empty;
-                ProductUriTB.Text = String.Empty;
-                GatewayServerUriTB.Text = String.Empty;
-                DiscoveryProfileUriTB.Text = String.Empty;
-                TransportProfileUriTB.Text = String.Empty;
-                UserSecurityPoliciesTB.Text = String.Empty;
-                SecurityLevelTB.Text = String.Empty;
-
-                if (m_currentDescription != null)
-                {
-                    UserSecurityPoliciesTB.Text = "Anonymous";
-
-                    if (m_currentDescription.Server != null)
-                    {
-                        if (m_currentDescription.Server.ApplicationName != null)
-                        {
-                            ApplicationNameTB.Text = m_currentDescription.Server.ApplicationName.ToString();
-                        }
-
-                        ApplicationTypeTB.Text = m_currentDescription.Server.ApplicationType.ToString();
-                        ApplicationUriTB.Text = m_currentDescription.Server.ApplicationUri;
-                        ProductUriTB.Text = m_currentDescription.Server.ProductUri;
-                        GatewayServerUriTB.Text = m_currentDescription.Server.GatewayServerUri;
-                        DiscoveryProfileUriTB.Text = m_currentDescription.Server.DiscoveryProfileUri;
-                    }
-
-                    SecurityLevelTB.Text = m_currentDescription.SecurityLevel.ToString();
-                    TransportProfileUriTB.Text = m_currentDescription.TransportProfileUri;
-
-                    if (m_currentDescription.UserIdentityTokens.Count > 0)
-                    {
-                        UserSecurityPoliciesTB.Text = String.Join(", ", m_currentDescription.UserIdentityTokens);
-                    }
-                }
-
-                UpdateStatus();
+                InitializeIssuedTokenType(m_currentDescription);
+                InitializeUserIdentity(m_endpoint);
             }
             catch (Exception exception)
             {
@@ -1748,105 +1461,16 @@ namespace Opc.Ua.Client.Controls
             }
         }
 
-        /// <summary>
-        /// Updates the StatusTB text and color.
-        /// Also enables/disables the OK button, should any error occurr (unsupported stuff etc).
-        /// </summary>
-        private void UpdateStatus()
+        private void OverrideLimitsCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                if ((m_currentDescription != null) && (m_currentDescription.Server != null))
+                int index = UseDefaultLimitsCB.SelectedIndex;
+
+                if (index != -1)
                 {
-                    m_statusObject.ClearStatus(StatusChannel.Server);
-                    
-                    if (m_currentDescription.Server.ApplicationType == ApplicationType.Client)
-                    {
-                        m_statusObject.SetStatus(StatusChannel.ApplicationType, "Warning: Application type is unsupported.", StatusType.Warning);
-                    }
-                    else
-                    {
-                        m_statusObject.ClearStatus(StatusChannel.ApplicationType);
-                    }
-
-                    if (string.IsNullOrEmpty(m_currentDescription.Server.ApplicationUri))
-                    {
-                        m_statusObject.SetStatus(StatusChannel.ApplicationUri, "Warning: Application URI is missing.", StatusType.Warning);
-                    }
-                    else
-                    {
-                        m_statusObject.ClearStatus(StatusChannel.ApplicationUri);
-                    }
-
-                    if (string.IsNullOrEmpty(m_currentDescription.TransportProfileUri))
-                    {
-                        m_statusObject.SetStatus(StatusChannel.TransportProfileUri, "Warning: Transport Profile URI is missing.", StatusType.Warning);
-                    }
-                    else if (Utils.ParseUri(m_currentDescription.TransportProfileUri) == null)
-                    {
-                        m_statusObject.SetStatus(StatusChannel.TransportProfileUri, "Warning: Transport Profile URI is invalid.", StatusType.Warning);
-                    }
-
-                    if ((m_currentDescription.Server.DiscoveryUrls == null) || (m_currentDescription.Server.DiscoveryUrls.Count == 0))
-                    {
-                        m_statusObject.SetStatus(StatusChannel.DiscoveryURLs, "Warning: Discovery URLs are missing.", StatusType.Warning);
-                    }
-                    else
-                    {
-                        m_statusObject.ClearStatus(StatusChannel.DiscoveryURLs);
-                    }
-
-                    if ((m_currentDescription.ServerCertificate != null) && (m_currentDescription.ServerCertificate.Length > 0))
-                    {
-                        X509Certificate2 serverCertificate = new X509Certificate2(m_currentDescription.ServerCertificate);
-                        String certificateApplicationUri = Utils.GetApplicationUriFromCertficate(serverCertificate);
-
-                        if (certificateApplicationUri != m_currentDescription.Server.ApplicationUri)
-                        {
-                            m_statusObject.SetStatus(StatusChannel.DifferentCertificate, "Warning: Application URI host different than the certificate host.", StatusType.Warning);
-                        }
-                        else
-                        {
-                            m_statusObject.ClearStatus(StatusChannel.DifferentCertificate);
-                        }
-                    }
-
-                    if (string.IsNullOrEmpty(m_currentDescription.SecurityPolicyUri))
-                    {
-                        m_statusObject.SetStatus(StatusChannel.SecurityPolicyUri, "Error: Security Policy URI is missing.", StatusType.Warning);
-                    }
-                    else if (string.IsNullOrEmpty(SecurityPolicies.GetDisplayName(m_currentDescription.SecurityPolicyUri)))
-                    {
-                        m_statusObject.SetStatus(StatusChannel.SecurityPolicyUri, "Error: Security Policy URI is invalid.", StatusType.Warning);
-                    }
-                    else
-                    {
-                        m_statusObject.ClearStatus(StatusChannel.SecurityPolicyUri);
-                    }
+                    UseDefaultLimitsBTN.Enabled = (UseDefaultLimits)UseDefaultLimitsCB.SelectedItem == UseDefaultLimits.No;
                 }
-                else
-                {
-                    m_statusObject.SetStatus(StatusChannel.Server, "Warning: Server endpoint is invalid.", StatusType.Warning);
-                }
-
-
-                OkBTN.Enabled = true;
-                StatusTB.ForeColor = SystemColors.WindowText;
-                StatusTB.Text = m_statusObject.StatusString;
-
-                if (m_statusObject.StatusType == StatusType.Error)
-                {
-                    OkBTN.Enabled = false;
-                    StatusTB.ForeColor = Color.Red;
-                }
-                else if (m_statusObject.StatusType == StatusType.Warning)
-                {
-                    StatusTB.ForeColor = Color.DarkOrange;
-                }
-
-                // hack for WinForms to update color
-                StatusTB.BackColor = StatusTB.BackColor;
-
             }
             catch (Exception exception)
             {
@@ -1854,6 +1478,53 @@ namespace Opc.Ua.Client.Controls
             }
         }
 
+        private void UserIdentityBTN_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UserTokenItem currentItem = new UserTokenItem(UserTokenType.Anonymous);
+
+                if (UserTokenTypeCB.SelectedIndex != -1)
+                {
+                    currentItem = (UserTokenItem)UserTokenTypeCB.SelectedItem;
+                }
+
+                UserIdentityToken identity = null;
+                m_userIdentities.TryGetValue(currentItem.ToString(), out identity);
+
+                switch (currentItem.Policy.TokenType)
+                {
+                    case UserTokenType.UserName:
+                        {
+                            UserNameIdentityToken userNameToken = identity as UserNameIdentityToken;
+
+                            if (userNameToken == null)
+                            {
+                                userNameToken = new UserNameIdentityToken();
+                            }
+
+                            if (new UsernameTokenDlg().ShowDialog(userNameToken))
+                            {
+                                userNameToken.PolicyId = currentItem.Policy.PolicyId;
+                                m_userIdentities[currentItem.ToString()] = userNameToken;
+                                UserIdentityTB.Text = userNameToken.UserName;
+                            }
+
+                            break;
+                        }
+
+                    default:
+                        {
+                            MessageBox.Show("User token type not supported at this time.", "User Identity");
+                            break;
+                        }
+                }
+            }
+            catch (Exception exception)
+            {
+                GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
+            }
+        }
         #endregion
     }
 }

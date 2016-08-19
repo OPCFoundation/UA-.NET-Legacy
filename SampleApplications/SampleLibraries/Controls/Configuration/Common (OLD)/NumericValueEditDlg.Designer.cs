@@ -110,9 +110,9 @@ namespace Opc.Ua.Client.Controls
             // 
             // ValueCTRL
             // 
-            this.ValueCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueCTRL.Location = new System.Drawing.Point(4, 5);
             this.ValueCTRL.Name = "ValueCTRL";
             this.ValueCTRL.Size = new System.Drawing.Size(207, 20);
@@ -125,8 +125,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(215, 59);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(221, 91);
             this.Name = "NumericValueEditDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Numeric Value";

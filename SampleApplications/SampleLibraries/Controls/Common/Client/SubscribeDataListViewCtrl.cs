@@ -378,7 +378,7 @@ namespace Opc.Ua.Client.Controls
         private void UpdateRow(DataRow row, MonitoredItem monitoredItem)
         {
             row[0] = monitoredItem;
-            row[1] = ImageList.Images[ClientUtils.GetImageIndex(monitoredItem.AttributeId, null)];
+            // row[1] = ImageList.Images[ClientUtils.GetImageIndex(monitoredItem.AttributeId, null)];
             row[2] = m_session.NodeCache.GetDisplayText(monitoredItem.StartNodeId) + "/" + Attributes.GetBrowseName(monitoredItem.AttributeId);
             row[3] = monitoredItem.IndexRange;
             row[4] = monitoredItem.Encoding;
@@ -421,7 +421,7 @@ namespace Opc.Ua.Client.Controls
 
             if (value != null)
             {
-                row[1]  = ImageList.Images[ClientUtils.GetImageIndex(Attributes.Value, value.Value)];
+                // row[1]  = ImageList.Images[ClientUtils.GetImageIndex(Attributes.Value, value.Value)];
                 row[12] = (value.WrappedValue.TypeInfo != null) ? value.WrappedValue.TypeInfo.ToString() : String.Empty;
                 row[13] = value.WrappedValue;
                 row[14] = value.StatusCode;

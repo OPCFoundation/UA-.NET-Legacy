@@ -51,7 +51,6 @@ namespace Opc.Ua.Client.Controls
         public HistoryDataDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

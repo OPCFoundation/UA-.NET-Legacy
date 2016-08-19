@@ -48,7 +48,6 @@ namespace Opc.Ua.Client.Controls
         public EditComplexValueDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
 
             for (BuiltInType ii = BuiltInType.Boolean; ii <= BuiltInType.StatusCode; ii++)
             {

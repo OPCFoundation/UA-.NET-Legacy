@@ -49,7 +49,6 @@ namespace Opc.Ua.Client.Controls
         public CertificateDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
 
             PrivateKeyCB.Items.Add("No");
             PrivateKeyCB.Items.Add("Yes");

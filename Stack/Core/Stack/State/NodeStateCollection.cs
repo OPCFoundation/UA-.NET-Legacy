@@ -166,6 +166,7 @@ namespace Opc.Ua
         public void SaveAsNodeSet2(ISystemContext context, Stream ostrm, string version)
         {
             Opc.Ua.Export.UANodeSet nodeSet = new Opc.Ua.Export.UANodeSet();
+            nodeSet.Version = version;
             nodeSet.LastModified = DateTime.UtcNow;
             nodeSet.LastModifiedSpecified = true;
 
@@ -442,14 +443,17 @@ namespace Opc.Ua
                 assembly = Assembly.GetCallingAssembly();
             }
 
-            Stream istrm = assembly.GetManifestResourceStream(resourcePath);
-
-            if (istrm == null)
+            foreach (string resourceName in assembly.GetManifestResourceNames())
             {
-                throw ServiceResultException.Create(StatusCodes.BadDecodingError, "Could not load nodes from resource: {0}", resourcePath);
+                if (resourceName.EndsWith(resourcePath, StringComparison.OrdinalIgnoreCase))
+                {
+                    Stream istrm = assembly.GetManifestResourceStream(resourceName);
+                    LoadFromBinary(context, istrm, updateTables);
+                    return;
+                }
             }
 
-            LoadFromBinary(context, istrm, updateTables);
+            throw ServiceResultException.Create(StatusCodes.BadDecodingError, "Could not load nodes from resource: {0}", resourcePath);
         }
         #endregion
     }

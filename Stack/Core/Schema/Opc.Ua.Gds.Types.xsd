@@ -1,0 +1,30 @@
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:tns="http://opcfoundation.org/UA/GDS/Types.xsd"
+  targetNamespace="http://opcfoundation.org/UA/GDS/Types.xsd"
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" />
+
+  <xs:complexType name="ApplicationRecordDataType">
+    <xs:sequence>
+      <xs:element name="ApplicationId" type="ua:NodeId" minOccurs="0" nillable="true" />
+      <xs:element name="ApplicationUri" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="ApplicationType" type="ua:ApplicationType" minOccurs="0" />
+      <xs:element name="ApplicationNames" type="ua:ListOfLocalizedText" minOccurs="0" nillable="true" />
+      <xs:element name="ProductUri" type="xs:string" minOccurs="0" nillable="true" />
+      <xs:element name="DiscoveryUrls" type="ua:ListOfString" minOccurs="0" nillable="true" />
+      <xs:element name="ServerCapabilities" type="ua:ListOfString" minOccurs="0" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ApplicationRecordDataType" type="tns:ApplicationRecordDataType" />
+
+  <xs:complexType name="ListOfApplicationRecordDataType">
+    <xs:sequence>
+      <xs:element name="ApplicationRecordDataType" type="tns:ApplicationRecordDataType" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfApplicationRecordDataType" type="tns:ListOfApplicationRecordDataType" nillable="true"></xs:element>
+
+</xs:schema>

@@ -33,10 +33,10 @@ namespace Opc.Ua
         /// <param name="request">The incoming request.</param>
         /// <param name="callback">The callback.</param>
         /// <param name="callbackData">The callback data.</param>
-        /// <returns>The result which must be passed to the EndProcessRequest method.</returns>
-        /// <seealso cref="EndProcessRequest" />
+        /// <returns>The result which must be passed to the FinishRequest method.</returns>
+        /// <seealso cref="FinishRequest" />
         /// <seealso cref="ITransportListener" />
-        IAsyncResult BeginProcessRequest(
+        IAsyncResult QueueRequest(
             string channeId,
             EndpointDescription endpointDescription,
             IServiceRequest request,
@@ -46,9 +46,9 @@ namespace Opc.Ua
         /// <summary>
         /// Ends processing a request received via a binary encoded channel.
         /// </summary>
-        /// <param name="result">The result returned by the BeginProcessRequest method.</param>
+        /// <param name="result">The result returned by the QueueRequest method.</param>
         /// <returns>The response to return over the secure channel.</returns>
-        /// <seealso cref="BeginProcessRequest" />
-        IServiceResponse EndProcessRequest(IAsyncResult result);
+        /// <seealso cref="QueueRequest" />
+        IServiceResponse FinishRequest(IAsyncResult result);
     }
 }

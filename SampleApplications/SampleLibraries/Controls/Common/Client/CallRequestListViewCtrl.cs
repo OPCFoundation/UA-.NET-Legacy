@@ -244,7 +244,7 @@ namespace Opc.Ua.Client.Controls
             }
 
             row[0] = argument;
-            row[1] = ImageList.Images[ClientUtils.GetImageIndex(isOutputArgument, value.Value)];
+            // row[1] = ImageList.Images[ClientUtils.GetImageIndex(isOutputArgument, value.Value)];
             row[2] = argument.Name;
             row[3] = dataType;
             row[4] = value;

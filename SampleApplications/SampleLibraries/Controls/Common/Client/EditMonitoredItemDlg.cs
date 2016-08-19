@@ -48,7 +48,6 @@ namespace Opc.Ua.Client.Controls
         public EditMonitoredItemDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
 
             // add the attributes in numerical order.
             foreach (uint attributeId in Attributes.GetIdentifiers())

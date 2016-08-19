@@ -2183,7 +2183,7 @@ namespace Opc.Ua.Server
 
                         if (updateRequired)
                         {
-                            endpoint.UpdateFromServer(m_bindingFactory);
+                            endpoint.UpdateFromServer(configuration, m_bindingFactory);
                         }
 
                         lock (m_registrationLock)
@@ -2682,6 +2682,7 @@ namespace Opc.Ua.Server
             endpoints = new EndpointDescriptionCollection();
             IList<EndpointDescription> endpointsForHost = null;
 
+            /*
             // create hosts for protocols that require one endpoints per security policy
             foreach (ServerSecurityPolicy securityPolicy in configuration.ServerConfiguration.SecurityPolicies)
             {
@@ -2702,6 +2703,7 @@ namespace Opc.Ua.Server
 
                 endpoints.AddRange(endpointsForHost);
             }
+            */
 
             // create UA TCP host.
             endpointsForHost = CreateUaTcpServiceHost(
@@ -2714,6 +2716,17 @@ namespace Opc.Ua.Server
 
             endpoints.InsertRange(0, endpointsForHost);
 
+            // create TLS host.
+            endpointsForHost = CreateUaTlsServiceHost(
+                hosts,
+                configuration,
+                bindingFactory,
+                configuration.ServerConfiguration.BaseAddresses,
+                serverDescription,
+                configuration.ServerConfiguration.SecurityPolicies);
+
+            endpoints.AddRange(endpointsForHost);
+
             // create HTTPS host.
             endpointsForHost = CreateHttpsServiceHost(
                 hosts,
@@ -2725,6 +2738,17 @@ namespace Opc.Ua.Server
 
             endpoints.AddRange(endpointsForHost);
 
+            // create AMQP host.
+            endpointsForHost = CreateAmqpsServiceHost(
+                hosts,
+                configuration,
+                bindingFactory,
+                configuration.ServerConfiguration.BaseAddresses,
+                serverDescription,
+                configuration.ServerConfiguration.SecurityPolicies);
+
+            endpoints.AddRange(endpointsForHost);
+            
             return new List<ServiceHost>(hosts.Values);
         }
 
@@ -3045,7 +3069,7 @@ namespace Opc.Ua.Server
         /// <returns>Returns the master node manager for the server, the return type is <seealso cref="MasterNodeManager"/>.</returns>
         protected virtual MasterNodeManager CreateMasterNodeManager(IServerInternal server, ApplicationConfiguration configuration)
         {
-            return new MasterNodeManager(server, configuration, null);
+            return new MasterNodeManager(server, configuration, null, null);
         }
 
         /// <summary>

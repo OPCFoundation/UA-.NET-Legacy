@@ -86,7 +86,6 @@ namespace Opc.Ua.Client.Controls
             this.EditMI});
             this.PopupMenu.Name = "PopupMenu";
             this.PopupMenu.Size = new System.Drawing.Size(136, 98);
-            this.PopupMenu.Opening += new System.ComponentModel.CancelEventHandler(this.PopupMenu_Opening);
             // 
             // UpdatesMI
             // 

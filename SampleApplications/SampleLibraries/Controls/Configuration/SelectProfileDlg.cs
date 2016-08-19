@@ -52,7 +52,6 @@ namespace Opc.Ua.Client.Controls
         public SelectProfileDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
 

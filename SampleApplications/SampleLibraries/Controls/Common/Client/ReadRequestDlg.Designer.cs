@@ -124,9 +124,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(784, 262);
             this.Controls.Add(this.ReadRequestCTRL);
             this.Controls.Add(this.ButtonPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(2048, 2048);
+            this.MinimumSize = new System.Drawing.Size(16, 107);
             this.Name = "ReadRequestDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Read Attribute Values";

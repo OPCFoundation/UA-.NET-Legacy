@@ -54,14 +54,6 @@ namespace Opc.Ua.Bindings
 
         #region ITransportChannel Members
         /// <summary>
-        /// A masking indicating which features are implemented.
-        /// </summary>
-        public TransportChannelFeatures SupportedFeatures
-        {
-            get { return TransportChannelFeatures.Open | TransportChannelFeatures.BeginOpen | TransportChannelFeatures.Reconnect | TransportChannelFeatures.BeginSendRequest; }
-        }
-
-        /// <summary>
         /// Gets the description for the endpoint used by the channel.
         /// </summary>
         public EndpointDescription EndpointDescription
@@ -138,7 +130,7 @@ namespace Opc.Ua.Bindings
                     m_settings.ClientCertificate,
                     m_settings.ServerCertificate,
                     m_settings.Description);
-                //((TcpClientChannel)m_channel).ClientCertificateChain = m_settings.ClientCertificateChain;
+                //((TcpClientChannel)m_connection).ClientCertificateChain = m_settings.ClientCertificateChain;
 
                 // begin connect operation.
                 return m_channel.BeginConnect(this.m_url, m_operationTimeout, callback, callbackData);
@@ -154,77 +146,6 @@ namespace Opc.Ua.Bindings
         public void EndOpen(IAsyncResult result)
         {
             m_channel.EndConnect(result);
-        }
-
-        /// <summary>
-        /// Closes any existing secure channel and opens a new one.
-        /// </summary>
-        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
-        /// <remarks>
-        /// Calling this method will cause outstanding requests over the current secure channel to fail.
-        /// </remarks>
-        public void Reconnect()
-        {
-            Utils.Trace("TcpTransportChannel RECONNECT: Reconnecting to {0}.", m_url);
-
-            lock (m_lock)
-            {
-                // the new channel must be created first because WinSock will reuse sockets and this
-                // can result in messages sent over the old socket arriving as messages on the new socket.
-                // if this happens the new channel is shutdown because of a security violation.
-                TcpClientChannel channel = m_channel;
-                m_channel = null;
-                
-                // reconnect.
-                OpenOnDemand();
-
-                // begin connect operation.
-                IAsyncResult result = m_channel.BeginConnect(m_url, m_operationTimeout, null, null);
-                m_channel.EndConnect(result);
-
-                // close existing channel.
-                if (channel != null)
-                {
-                    try
-                    {
-                        channel.Close(1000);
-                    }
-                    catch (Exception)
-                    {
-                        // do nothing.
-                    }
-                    finally
-                    {
-                        channel.Dispose();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Begins an asynchronous operation to close the existing secure channel and open a new one.
-        /// </summary>
-        /// <param name="callback">The callback to call when the operation completes.</param>
-        /// <param name="callbackData">The callback data to return with the callback.</param>
-        /// <returns>
-        /// The result which must be passed to the EndReconnect method.
-        /// </returns>
-        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
-        /// <seealso cref="Reconnect"/>
-        public IAsyncResult BeginReconnect(AsyncCallback callback, object callbackData)
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Completes an asynchronous operation to close the existing secure channel and open a new one.
-        /// </summary>
-        /// <param name="result">The result returned from the BeginReconnect call.</param>
-        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
-        /// <seealso cref="Reconnect"/>
-        public void EndReconnect(IAsyncResult result)
-        {
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -384,11 +305,11 @@ namespace Opc.Ua.Bindings
                 m_settings.ServerCertificate,
                 m_settings.Description);
 
-            //((TcpClientChannel)m_channel).ClientCertificateChain = m_settings.ClientCertificateChain;
+            //((TcpClientChannel)m_connection).ClientCertificateChain = m_settings.ClientCertificateChain;
 
             // begin connect operation.
-            // IAsyncResult result = m_channel.BeginConnect(m_url, m_operationTimeout, null, null);
-            // m_channel.EndConnect(result);
+            // IAsyncResult result = m_connection.BeginConnect(m_url, m_operationTimeout, null, null);
+            // m_connection.EndConnect(result);
         }
         #endregion
 

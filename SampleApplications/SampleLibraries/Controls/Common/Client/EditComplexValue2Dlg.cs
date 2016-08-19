@@ -51,7 +51,6 @@ namespace Opc.Ua.Client.Controls
         public EditComplexValue2Dlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
 

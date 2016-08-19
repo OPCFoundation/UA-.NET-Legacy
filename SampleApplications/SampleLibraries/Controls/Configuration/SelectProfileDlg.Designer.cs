@@ -126,8 +126,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(355, 130);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(3000, 1000);
+            this.MinimumSize = new System.Drawing.Size(371, 168);
             this.Name = "SelectProfileDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Security Profiles";

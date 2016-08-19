@@ -80,24 +80,23 @@ namespace Opc.Ua.Client.Controls
             this.SamplingIntervalCH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiscardOldestCH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OperationStatusCH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EventTypePN = new System.Windows.Forms.SplitContainer();
             this.PopupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.NewMI = new System.Windows.Forms.ToolStripMenuItem();
             this.EditMI = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteMI = new System.Windows.Forms.ToolStripMenuItem();
             this.SetMonitoringModeMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.EventTypePN = new System.Windows.Forms.SplitContainer();
+            this.EventsCTRL = new Opc.Ua.Client.Controls.EventListViewCtrl();
             this.BrowseCTRL = new Opc.Ua.Client.Controls.BrowseTreeViewCtrl();
             this.EventTypeCTRL = new Opc.Ua.Client.Controls.TypeFieldsListViewCtrl();
-            this.EventsCTRL = new Opc.Ua.Client.Controls.EventListViewCtrl();
             this.EventFilterCTRL = new Opc.Ua.Client.Controls.EventFilterListViewCtrl();
             this.ButtonsPN.SuspendLayout();
             this.StatusCTRL.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsDV)).BeginInit();
-            this.PopupMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EventTypePN)).BeginInit();
             this.EventTypePN.Panel1.SuspendLayout();
             this.EventTypePN.Panel2.SuspendLayout();
             this.EventTypePN.SuspendLayout();
+            this.PopupMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // CancelBTN
@@ -289,6 +288,7 @@ namespace Opc.Ua.Client.Controls
             this.SamplingIntervalCH.HeaderText = "Sampling Interval";
             this.SamplingIntervalCH.Name = "SamplingIntervalCH";
             this.SamplingIntervalCH.Visible = false;
+            this.SamplingIntervalCH.Width = 113;
             // 
             // DiscardOldestCH
             // 
@@ -298,6 +298,7 @@ namespace Opc.Ua.Client.Controls
             this.DiscardOldestCH.Name = "DiscardOldestCH";
             this.DiscardOldestCH.ReadOnly = true;
             this.DiscardOldestCH.Visible = false;
+            this.DiscardOldestCH.Width = 101;
             // 
             // OperationStatusCH
             // 
@@ -308,6 +309,23 @@ namespace Opc.Ua.Client.Controls
             this.OperationStatusCH.ReadOnly = true;
             this.OperationStatusCH.Visible = false;
             // 
+            // EventTypePN
+            // 
+            this.EventTypePN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EventTypePN.Location = new System.Drawing.Point(0, 0);
+            this.EventTypePN.Name = "EventTypePN";
+            // 
+            // EventTypePN.Panel1
+            // 
+            this.EventTypePN.Panel1.Controls.Add(this.BrowseCTRL);
+            // 
+            // EventTypePN.Panel2
+            // 
+            this.EventTypePN.Panel2.Controls.Add(this.EventTypeCTRL);
+            this.EventTypePN.Size = new System.Drawing.Size(784, 311);
+            this.EventTypePN.SplitterDistance = 261;
+            this.EventTypePN.TabIndex = 17;
+            // 
             // PopupMenu
             // 
             this.PopupMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -316,7 +334,7 @@ namespace Opc.Ua.Client.Controls
             this.DeleteMI,
             this.SetMonitoringModeMI});
             this.PopupMenu.Name = "PopupMenu";
-            this.PopupMenu.Size = new System.Drawing.Size(197, 92);
+            this.PopupMenu.Size = new System.Drawing.Size(197, 114);
             // 
             // NewMI
             // 
@@ -346,22 +364,13 @@ namespace Opc.Ua.Client.Controls
             this.SetMonitoringModeMI.Text = "Set Monitoring Mode...";
             this.SetMonitoringModeMI.Click += new System.EventHandler(this.SetMonitoringModeMI_Click);
             // 
-            // EventTypePN
+            // EventsCTRL
             // 
-            this.EventTypePN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventTypePN.Location = new System.Drawing.Point(0, 0);
-            this.EventTypePN.Name = "EventTypePN";
-            // 
-            // EventTypePN.Panel1
-            // 
-            this.EventTypePN.Panel1.Controls.Add(this.BrowseCTRL);
-            // 
-            // EventTypePN.Panel2
-            // 
-            this.EventTypePN.Panel2.Controls.Add(this.EventTypeCTRL);
-            this.EventTypePN.Size = new System.Drawing.Size(784, 311);
-            this.EventTypePN.SplitterDistance = 261;
-            this.EventTypePN.TabIndex = 17;
+            this.EventsCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.EventsCTRL.Location = new System.Drawing.Point(0, 0);
+            this.EventsCTRL.Name = "EventsCTRL";
+            this.EventsCTRL.Size = new System.Drawing.Size(784, 311);
+            this.EventsCTRL.TabIndex = 18;
             // 
             // BrowseCTRL
             // 
@@ -381,14 +390,6 @@ namespace Opc.Ua.Client.Controls
             this.EventTypeCTRL.Name = "EventTypeCTRL";
             this.EventTypeCTRL.Size = new System.Drawing.Size(519, 311);
             this.EventTypeCTRL.TabIndex = 16;
-            // 
-            // EventsCTRL
-            // 
-            this.EventsCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventsCTRL.Location = new System.Drawing.Point(0, 0);
-            this.EventsCTRL.Name = "EventsCTRL";
-            this.EventsCTRL.Size = new System.Drawing.Size(784, 311);
-            this.EventsCTRL.TabIndex = 18;
             // 
             // EventFilterCTRL
             // 
@@ -410,9 +411,8 @@ namespace Opc.Ua.Client.Controls
             this.Controls.Add(this.EventFilterCTRL);
             this.Controls.Add(this.StatusCTRL);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1200, 1200);
+            this.MinimumSize = new System.Drawing.Size(400, 91);
             this.Name = "SubscribeEventsDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Event Subscription";
@@ -420,11 +420,10 @@ namespace Opc.Ua.Client.Controls
             this.StatusCTRL.ResumeLayout(false);
             this.StatusCTRL.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemsDV)).EndInit();
-            this.PopupMenu.ResumeLayout(false);
             this.EventTypePN.Panel1.ResumeLayout(false);
             this.EventTypePN.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.EventTypePN)).EndInit();
             this.EventTypePN.ResumeLayout(false);
+            this.PopupMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

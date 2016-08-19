@@ -115,7 +115,7 @@ namespace Opc.Ua.Client.Controls
         public void UpdateRow(DataRow row, FilterDeclarationField field)
         {
             row[0] = field;
-            row[1] = ImageList.Images[ClientUtils.GetImageIndex(m_session, field.InstanceDeclaration.NodeClass, field.InstanceDeclaration.RootTypeId, false)];
+            // row[1] = ImageList.Images[ClientUtils.GetImageIndex(m_session, field.InstanceDeclaration.NodeClass, field.InstanceDeclaration.RootTypeId, false)];
             row[2] = field.InstanceDeclaration.BrowsePathDisplayText;
             row[3] = field.Selected;
             row[4] = field.DisplayInList;

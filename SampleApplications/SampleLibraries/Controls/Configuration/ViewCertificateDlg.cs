@@ -47,7 +47,6 @@ namespace Opc.Ua.Client.Controls
         public ViewCertificateDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
 

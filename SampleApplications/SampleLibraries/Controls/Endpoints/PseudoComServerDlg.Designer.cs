@@ -77,7 +77,7 @@ namespace Opc.Ua.Client.Controls
             this.ButtonsPN.Controls.Add(this.OkBTN);
             this.ButtonsPN.Controls.Add(this.CancelBTN);
             this.ButtonsPN.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ButtonsPN.Location = new System.Drawing.Point(0, 79);
+            this.ButtonsPN.Location = new System.Drawing.Point(0, 81);
             this.ButtonsPN.Name = "ButtonsPN";
             this.ButtonsPN.Size = new System.Drawing.Size(491, 31);
             this.ButtonsPN.TabIndex = 0;
@@ -116,7 +116,7 @@ namespace Opc.Ua.Client.Controls
             this.MainPN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MainPN.Location = new System.Drawing.Point(0, 0);
             this.MainPN.Name = "MainPN";
-            this.MainPN.Size = new System.Drawing.Size(491, 110);
+            this.MainPN.Size = new System.Drawing.Size(491, 112);
             this.MainPN.TabIndex = 1;
             // 
             // ProgIdTB
@@ -191,11 +191,11 @@ namespace Opc.Ua.Client.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(491, 110);
+            this.ClientSize = new System.Drawing.Size(491, 112);
             this.Controls.Add(this.ButtonsPN);
             this.Controls.Add(this.MainPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1024, 148);
+            this.MinimumSize = new System.Drawing.Size(507, 148);
             this.Name = "PseudoComServerDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "COM Server Configuration";

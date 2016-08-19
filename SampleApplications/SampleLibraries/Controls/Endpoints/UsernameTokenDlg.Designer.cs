@@ -74,7 +74,7 @@ namespace Opc.Ua.Client.Controls
             this.ButtonsPN.Controls.Add(this.OkBTN);
             this.ButtonsPN.Controls.Add(this.CancelBTN);
             this.ButtonsPN.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ButtonsPN.Location = new System.Drawing.Point(0, 55);
+            this.ButtonsPN.Location = new System.Drawing.Point(0, 57);
             this.ButtonsPN.Name = "ButtonsPN";
             this.ButtonsPN.Size = new System.Drawing.Size(313, 31);
             this.ButtonsPN.TabIndex = 0;
@@ -110,13 +110,13 @@ namespace Opc.Ua.Client.Controls
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(313, 55);
+            this.panel1.Size = new System.Drawing.Size(313, 57);
             this.panel1.TabIndex = 1;
             // 
             // UserNameCB
             // 
-            this.UserNameCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UserNameCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.UserNameCB.FormattingEnabled = true;
             this.UserNameCB.Location = new System.Drawing.Point(65, 7);
             this.UserNameCB.Name = "UserNameCB";
@@ -125,8 +125,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // PasswordTB
             // 
-            this.PasswordTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PasswordTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordTB.Location = new System.Drawing.Point(65, 31);
             this.PasswordTB.Name = "PasswordTB";
             this.PasswordTB.PasswordChar = '*';
@@ -135,9 +135,9 @@ namespace Opc.Ua.Client.Controls
             // 
             // PasswordLB
             // 
-            this.PasswordLB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.PasswordLB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.PasswordLB.AutoSize = true;
             this.PasswordLB.Location = new System.Drawing.Point(6, 35);
             this.PasswordLB.Name = "PasswordLB";
@@ -148,9 +148,9 @@ namespace Opc.Ua.Client.Controls
             // 
             // UserNameLB
             // 
-            this.UserNameLB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UserNameLB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.UserNameLB.AutoSize = true;
             this.UserNameLB.Location = new System.Drawing.Point(6, 11);
             this.UserNameLB.Name = "UserNameLB";
@@ -163,11 +163,11 @@ namespace Opc.Ua.Client.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(313, 86);
+            this.ClientSize = new System.Drawing.Size(313, 88);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1024, 124);
+            this.MinimumSize = new System.Drawing.Size(329, 124);
             this.Name = "UsernameTokenDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Specify User Name and Password";

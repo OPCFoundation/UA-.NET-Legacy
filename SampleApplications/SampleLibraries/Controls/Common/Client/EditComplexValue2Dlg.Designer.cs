@@ -57,7 +57,7 @@ namespace Opc.Ua.Client.Controls
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditComplexValue2Dlg));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditComplexValueDlg));
             this.CancelBTN = new System.Windows.Forms.Button();
             this.OkBTN = new System.Windows.Forms.Button();
             this.BottomPN = new System.Windows.Forms.Panel();
@@ -202,7 +202,7 @@ namespace Opc.Ua.Client.Controls
             this.Encoding_DefaultBinaryMI.Size = new System.Drawing.Size(148, 22);
             this.Encoding_DefaultBinaryMI.Text = "Default Binary";
             // 
-            // EditComplexValue2Dlg
+            // EditValueDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -211,10 +211,9 @@ namespace Opc.Ua.Client.Controls
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
             this.Controls.Add(this.StatusCTRL);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.Name = "EditComplexValue2Dlg";
+            this.MaximumSize = new System.Drawing.Size(3000, 1000);
+            this.MinimumSize = new System.Drawing.Size(300, 100);
+            this.Name = "EditValueDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Value";
             this.BottomPN.ResumeLayout(false);

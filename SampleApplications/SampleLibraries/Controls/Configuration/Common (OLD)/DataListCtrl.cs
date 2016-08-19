@@ -186,7 +186,6 @@ namespace Opc.Ua.Client.Controls
             public object Value = null;
             public object Component = null;
             public object ComponentId = null;
-            public object ComponentIndex = null;
         }
 		#endregion
 
@@ -210,7 +209,6 @@ namespace Opc.Ua.Client.Controls
             if (value is string)     return true;
             if (value is DateTime)   return true;
             if (value is Guid)       return true;
-            if (value is LocalizedText) return true;
 
             return false;
         }
@@ -368,16 +366,6 @@ namespace Opc.Ua.Client.Controls
             // check for array.
             Array array = value as Array;
 
-            if (array == null)
-            {
-                Matrix matrix = value as Matrix;
-
-                if (matrix != null)
-                {
-                    array = matrix.ToArray();
-                }
-            }
-
             if (array != null)
             {
                 return array.Length > 0;
@@ -487,22 +475,8 @@ namespace Opc.Ua.Client.Controls
 
             if (array != null)
             {
-                if (array.Rank > 1)
-                {
-                    int[] lenghts = new int[array.Rank];
-
-                    for (int i = 0; i < array.Rank; ++i)
-                    {
-                        lenghts[i] = array.GetLength(i);
-                    }
-
-                    return Utils.Format("{1}[{0}]", string.Join(",", lenghts), value.GetType().GetElementType().Name);
-                }
-                else
-                {
-                    return Utils.Format("{1}[{0}]", array.Length, value.GetType().GetElementType().Name);
-                }
-            }
+                return Utils.Format("{1}[{0}]", array.Length, value.GetType().GetElementType().Name);
+            }           
             
             // format list.
             IList list = value as IList;
@@ -604,70 +578,17 @@ namespace Opc.Ua.Client.Controls
             }
 
             // update state.
-            state.Expandable     = IsExpandableType(componentValue);
-            state.Value          = value;
-            state.Component      = componentValue;
-            state.ComponentId    = componentId;
-            state.ComponentIndex = index;
-
-            if (!state.Expandable)
-            {
-                listitem.ImageKey = CollapseIcon;
-            }
-        }
-
-        /// <summary>
-        /// Updates the list with the specified value.
-        /// </summary>
-        private void UpdateList(
-            ref int index,
-            ref bool overwrite,
-            object value,
-            object componentValue,
-            object componentId,
-            string name,
-            string type,
-            bool enabled)
-        {
-            // get the list item to update.
-            ListViewItem listitem = GetListItem(index, ref overwrite, name, type);
-
-            if (!enabled)
-            {
-                listitem.ForeColor = Color.LightGray;
-            }
-
-            // update list item.
-            listitem.SubItems[1].Text = GetValueText(componentValue);
-
-            // move to next item.
-            index++;
-
-            ValueState state = listitem.Tag as ValueState;
-
-            // recursively update sub-values if item is expanded.
-            if (overwrite)
-            {
-                if (state.Expanded && state.Expandable)
-                {
-                    m_depth++;
-                    ShowValue(ref index, ref overwrite, componentValue);
-                    m_depth--;
-                }
-            }
-
-            // update state.
-            state.Expandable = IsExpandableType(componentValue);
-            state.Value = value;
-            state.Component = componentValue;
+            state.Expandable  = IsExpandableType(componentValue);
+            state.Value       = value;
+            state.Component   = componentValue;
             state.ComponentId = componentId;
-            state.ComponentIndex = index;
 
             if (!state.Expandable)
             {
                 listitem.ImageKey = CollapseIcon;
             }
         }
+
         /// <summary>
         /// Shows property of an encodeable object in the control.
         /// </summary>
@@ -720,48 +641,7 @@ namespace Opc.Ua.Client.Controls
             string name = Utils.Format("[{0}]", element);
                       
             // get the element value.
-            object elementValue = null;
-
-            if (value.Rank > 1)
-            {
-                int[] smallArrayDimmensions = new int[value.Rank - 1];
-                int length = 1;
-
-                for (int i = 0; i < value.Rank - 1; ++i)
-                {
-                    smallArrayDimmensions[i] = value.GetLength(i + 1);
-                    length *= smallArrayDimmensions[i];
-                }
-
-                Array flatArray = Utils.FlattenArray(value);
-                Array flatSmallArray = Array.CreateInstance(value.GetType().GetElementType(), length);
-                Array.Copy(flatArray, element * value.GetLength(1), flatSmallArray, 0, length);
-                Array smallArray = Array.CreateInstance(value.GetType().GetElementType(), smallArrayDimmensions);
-                int[] indexes = new int[smallArrayDimmensions.Length];
-
-                for (int ii = 0; ii < flatSmallArray.Length; ii++)
-                {
-                    smallArray.SetValue(flatSmallArray.GetValue(ii), indexes);
-
-                    for (int jj = indexes.Length - 1; jj >= 0; jj--)
-                    {
-                        indexes[jj]++;
-
-                        if (indexes[jj] < smallArrayDimmensions[jj])
-                        {
-                            break;
-                        }
-
-                        indexes[jj] = 0;
-                    }
-                }
-
-                elementValue = smallArray;
-            }
-            else
-            {
-                elementValue = value.GetValue(element);
-            }
+            object elementValue = value.GetValue(element);
             
             // get the type name.
             string type = null;
@@ -780,37 +660,6 @@ namespace Opc.Ua.Client.Controls
                 element,
                 name,
                 type);
-        }
-
-        /// <summary>
-        /// Shows the element of an array in the control.
-        /// </summary>
-        private void ShowValue(ref int index, ref bool overwrite, Array value, int element, bool enabled)
-        {
-            // get the name of the element.
-            string name = Utils.Format("[{0}]", element);
-
-            // get the element value.
-            object elementValue = value.GetValue(element);
-
-            // get the type name.
-            string type = null;
-
-            if (elementValue != null)
-            {
-                type = elementValue.GetType().Name;
-            }
-
-            // update the list view.
-            UpdateList(
-                ref index,
-                ref overwrite,
-                value,
-                elementValue,
-                element,
-                name,
-                type,
-                enabled);
         }
 
         /// <summary>
@@ -1322,36 +1171,8 @@ namespace Opc.Ua.Client.Controls
             {
                 ShowValue(ref index, ref overwrite, datachange.Value);
                 return;
-            }
-
-            // show write value with IndexRange
-            WriteValue writevalue = value as WriteValue;
-
-            if (writevalue != null)
-            {
-                // check if the value is an array
-                Array arrayvalue = writevalue.Value.Value as Array;
-
-                if (arrayvalue != null)
-                {
-                    NumericRange indexRange;
-                    ServiceResult result = NumericRange.Validate(writevalue.IndexRange, out indexRange);
-
-                    if (ServiceResult.IsGood(result) && indexRange != NumericRange.Empty)
-                    {
-                        for (int ii = 0; ii < arrayvalue.Length; ii++)
-                        {
-                            bool enabled = ((indexRange.Begin <= ii && indexRange.End >= ii) ||
-                                            (indexRange.End < 0 && indexRange.Begin == ii));
-
-                            ShowValue(ref index, ref overwrite, arrayvalue, ii, enabled);
-                        }
-
-                        return;
-                    }
-                }
-            }
-
+            }            
+            
             // show events
             EventFieldList eventFields = value as EventFieldList;
 
@@ -1410,31 +1231,21 @@ namespace Opc.Ua.Client.Controls
             // show arrays
             Array array = value as Array;
 
-            if (array == null)
-            {
-                Matrix matrix = value as Matrix;
-                
-                if (matrix != null)
-                {
-                    array = matrix.ToArray();
-                }
-            }
-
             if (array != null)
             {
-                if (!PromptOnLongList(array.GetLength(0)))
+                if (!PromptOnLongList(array.Length))
                 {
                     return;
                 }
 
-                for (int ii = 0; ii < array.GetLength(0); ii++)
+                for (int ii = 0; ii < array.Length; ii++)
                 {
                     ShowValue(ref index, ref overwrite, array, ii);
                 }
 
                 return;
             }
-
+            
             // show lists
             IList list = value as IList;
 
@@ -1647,23 +1458,15 @@ namespace Opc.Ua.Client.Controls
                 }
 
                 object value = null;
-                if (state.Component is LocalizedText)
-                {
-                    value = new StringValueEditDlg().ShowDialog(state.Component.ToString());
-                    if (value != null)
-                    {
-                        value = new LocalizedText(((LocalizedText)state.Component).Key, ((LocalizedText)state.Component).Locale, value.ToString());
-                    }
-                }
-                else
-                {
-                    value = new SimpleValueEditDlg().ShowDialog(state.Component, state.Component.GetType());
-                }
+
+                /*
+                object value = new SimpleValueEditDlg().ShowDialog(state.Component, state.Component.GetType());
 
                 if (value == null)
                 {
                     return;
                 }
+                 * */
 
                 if (state.Value is IEncodeable)
                 {
@@ -1702,39 +1505,13 @@ namespace Opc.Ua.Client.Controls
                 }
                 
                 m_expanding = false;
-                int index = (int)state.ComponentIndex;
-                int indentCount = ItemsLV.Items[index].IndentCount;
-
-                while (ItemsLV.Items[index - 1].IndentCount == indentCount)
-                {
-                    --index;
-                }
-
+                int index = 0;
                 bool overwrite = true;
                 ShowValue(ref index, ref overwrite, state.Value);                
             }
             catch (Exception exception)
             {
-                GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
-            }
-        }
-
-        private void PopupMenu_Opening(object sender, CancelEventArgs e)
-        {
-            try
-            {
-                EditMI.Enabled = false;
-
-                if (ItemsLV.SelectedItems.Count != 1)
-                {
-                    return;
-                }
-
-                EditMI.Enabled = (ItemsLV.SelectedItems[0].ForeColor != Color.LightGray);
-            }
-            catch (Exception exception)
-            {
-                GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
+				GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
             }
         }
         #endregion

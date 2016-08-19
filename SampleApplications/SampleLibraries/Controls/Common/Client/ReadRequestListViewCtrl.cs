@@ -205,7 +205,7 @@ namespace Opc.Ua.Client.Controls
         public void UpdateRow(DataRow row, ReadValueId nodeToRead)
         {
             row[0] = nodeToRead;
-            row[1] = ImageList.Images[ClientUtils.GetImageIndex(nodeToRead.AttributeId, null)];
+            // row[1] = ImageList.Images[ClientUtils.GetImageIndex(nodeToRead.AttributeId, null)];
             row[2] = (m_session != null) ? m_session.NodeCache.GetDisplayText(nodeToRead.NodeId) : Utils.ToString(nodeToRead.NodeId);
             row[3] = Attributes.GetBrowseName(nodeToRead.AttributeId);
             row[4] = nodeToRead.IndexRange;

@@ -168,9 +168,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(247, 84);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(2048, 2048);
+            this.MinimumSize = new System.Drawing.Size(200, 50);
             this.Name = "UserNamePasswordDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Enter User Name";

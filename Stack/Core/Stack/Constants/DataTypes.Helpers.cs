@@ -35,7 +35,7 @@ namespace Opc.Ua
 
 			foreach (FieldInfo field in fields)
 			{
-                if (identifier == (uint)field.GetValue(typeof(DataTypes)))
+                if (identifier == (int)field.GetValue(typeof(DataTypes)))
 				{
 					return field.Name;
 				}

@@ -50,7 +50,6 @@ namespace Opc.Ua.Client.Controls
         public StringValueEditDlg()
         {
             InitializeComponent();
-            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

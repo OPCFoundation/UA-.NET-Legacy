@@ -688,7 +688,7 @@ namespace Opc.Ua.Bindings
                     string actualSignature = Utils.ToHexString(signature);
 
                     Utils.Trace(
-                        "Could not validate signature.\r\nChannelId={0}, TokenId={1}, MessageType={2}, Length={3}\r\nExpectedSignature={4}\r\nActualSignature  ={5}",
+                        "Could not validate signature.\r\nGroupId={0}, TokenId={1}, MessageType={2}, Length={3}\r\nExpectedSignature={4}\r\nActualSignature  ={5}",
                         token.ChannelId,                        
                         token.TokenId,
                         messageType,

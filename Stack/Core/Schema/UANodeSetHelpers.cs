@@ -786,7 +786,7 @@ namespace Opc.Ua.Export
         /// <summary>
         /// Exports a DataTypeDefinition
         /// </summary>
-        private Opc.Ua.Export.DataTypeDefinition Export(Opc.Ua.DataTypeDefinition source, NamespaceTable namespaceUris)
+        private Opc.Ua.Export.DataTypeDefinition Export(Opc.Ua.UADataTypeDefinition source, NamespaceTable namespaceUris)
         {
             if (source == null)
             {
@@ -803,7 +803,7 @@ namespace Opc.Ua.Export
             {
                 List<Opc.Ua.Export.DataTypeField> fields = new List<DataTypeField>();
 
-                foreach (DataTypeDefinitionField field in source.Fields)
+                foreach (UADataTypeDefinitionField field in source.Fields)
                 {
                     Opc.Ua.Export.DataTypeField output = new Opc.Ua.Export.DataTypeField();
 
@@ -836,14 +836,14 @@ namespace Opc.Ua.Export
         /// <summary>
         /// Imports a DataTypeDefinition
         /// </summary>
-        private Opc.Ua.DataTypeDefinition Import(Opc.Ua.Export.DataTypeDefinition source, NamespaceTable namespaceUris)
+        private Opc.Ua.UADataTypeDefinition Import(Opc.Ua.Export.DataTypeDefinition source, NamespaceTable namespaceUris)
         {
             if (source == null)
             {
                 return null;
             }
 
-            Opc.Ua.DataTypeDefinition definition = new Opc.Ua.DataTypeDefinition();
+            Opc.Ua.UADataTypeDefinition definition = new Opc.Ua.UADataTypeDefinition();
 
             definition.Name = ImportQualifiedName(source.Name, namespaceUris);
             definition.SymbolicName = source.SymbolicName;
@@ -851,11 +851,11 @@ namespace Opc.Ua.Export
 
             if (source.Field != null)
             {
-                List<Opc.Ua.DataTypeDefinitionField> fields = new List<Opc.Ua.DataTypeDefinitionField>();
+                List<Opc.Ua.UADataTypeDefinitionField> fields = new List<Opc.Ua.UADataTypeDefinitionField>();
 
                 foreach (DataTypeField field in source.Field)
                 {
-                    Opc.Ua.DataTypeDefinitionField output = new Opc.Ua.DataTypeDefinitionField();
+                    Opc.Ua.UADataTypeDefinitionField output = new Opc.Ua.UADataTypeDefinitionField();
 
                     output.Name = field.Name;
                     output.SymbolicName = field.SymbolicName;
