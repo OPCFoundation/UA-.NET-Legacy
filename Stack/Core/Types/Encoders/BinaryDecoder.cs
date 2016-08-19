@@ -169,7 +169,7 @@ namespace Opc.Ua
                 // lookup message session-less envelope type.
                 Type actualType = context.Factory.GetSystemType(absoluteId);
 
-                if (actualType == null || actualType != typeof(SessionLessServiceMessageDataType))
+                if (actualType == null || actualType != typeof(SessionLessServiceMessageType))
                 {
                     throw new ServiceResultException(StatusCodes.BadEncodingError, Utils.Format("Cannot decode session-less service message with type id: {0}.", absoluteId));
                 }

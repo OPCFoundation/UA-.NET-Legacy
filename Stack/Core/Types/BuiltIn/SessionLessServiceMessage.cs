@@ -35,17 +35,17 @@ namespace Opc.Ua
 
         public ExpandedNodeId TypeId
         {
-            get { return DataTypeIds.SessionLessServiceMessageDataType; }
+            get { return DataTypeIds.SessionLessServiceMessageType; }
         }
 
         public ExpandedNodeId BinaryEncodingId
         {
-            get { return ObjectIds.SessionLessServiceMessageDataType_Encoding_DefaultBinary; }
+            get { return ObjectIds.SessionLessServiceMessageType_Encoding_DefaultBinary; }
         }
 
         public ExpandedNodeId XmlEncodingId
         {
-            get { return ObjectIds.SessionLessServiceMessageDataType_Encoding_DefaultXml; }
+            get { return ObjectIds.SessionLessServiceMessageType_Encoding_DefaultXml; }
         }
 
         public void Encode(IEncoder encoder)

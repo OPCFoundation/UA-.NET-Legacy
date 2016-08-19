@@ -210,7 +210,7 @@ namespace Opc.Ua
                 long start = encoder.m_ostrm.Position;
 
                 // write the type id.
-                encoder.WriteNodeId(null, DataTypeIds.SessionLessServiceMessageDataType);
+                encoder.WriteNodeId(null, DataTypeIds.SessionLessServiceMessageType);
 
                 // write the message.
                 SessionLessServiceMessage envelope = new SessionLessServiceMessage();
