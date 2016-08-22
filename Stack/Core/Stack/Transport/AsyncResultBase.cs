@@ -22,23 +22,10 @@ using System.Threading;
 namespace Opc.Ua
 {
     /// <summary>
-    /// A base class for ChannelAsyncResult objects 
+    /// A base class for AsyncResult objects 
     /// </summary>
     public class AsyncResultBase : IAsyncResult, IDisposable
     {
-        #region Private Fields
-        private object m_lock = new object();
-        private AsyncCallback m_callback;
-        private object m_asyncState;
-        private ManualResetEvent m_waitHandle;
-        private bool m_isCompleted;
-        private IAsyncResult m_innerResult;
-        private DateTime m_deadline;
-        private Timer m_timer;
-        private Exception m_exception;
-        private CancellationTokenSource m_cts;
-        #endregion
-
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="AsyncResultBase"/> class.
@@ -46,12 +33,11 @@ namespace Opc.Ua
         /// <param name="callback">The callback to use when the operation completes.</param>
         /// <param name="callbackData">The callback data.</param>
         /// <param name="timeout">The timeout for the operation.</param>
-        public AsyncResultBase(AsyncCallback callback, object callbackData, int timeout, CancellationTokenSource cts = null)
+        public AsyncResultBase(AsyncCallback callback, object callbackData, int timeout)
         {
             m_callback = callback;
             m_asyncState = callbackData;
             m_deadline = DateTime.MinValue;
-            m_cts = cts;
 
             if (timeout > 0)
             {
@@ -141,29 +127,13 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// The cancellation token associated with the operation.
-        /// </summary>
-        public CancellationToken CancellationToken
-        {
-            get
-            {
-                if (m_cts != null)
-                {
-                    return m_cts.Token;
-                }
-
-                return CancellationToken.None;
-            }
-        }
-
-        /// <summary>
         /// Waits for the operation to complete.
         /// </summary>
         /// <param name="ar">The result object returned from the Begin method.</param>
         public static void WaitForComplete(IAsyncResult ar)
         {
             AsyncResultBase result = ar as AsyncResultBase;
-
+            
             if (result == null)
             {
                 throw new ArgumentException("IAsyncResult passed to call is not an instance of AsyncResultBase.");
@@ -221,17 +191,17 @@ namespace Opc.Ua
                 {
                     try
                     {
-#if !SILVERLIGHT
+                        #if !SILVERLIGHT
                         if (!m_waitHandle.WaitOne(timeout, false))
                         {
                             return false;
                         }
-#else
+                        #else
                         if (!m_waitHandle.WaitOne(timeout))
                         {
                             return false;
                         }
-#endif
+                        #endif
 
                         lock (m_lock)
                         {
@@ -265,25 +235,23 @@ namespace Opc.Ua
                         }
                     }
                 }
+
+                // release the wait event.
+                if (m_waitHandle != null)
+                {
+                    try
+                    {
+                        m_waitHandle.Close();
+                        m_waitHandle = null;
+                    }
+                    catch (Exception)
+                    {
+                        // ignore 
+                    }
+                }
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Called to invoke the callback after the asynchronous operation completes.
-        /// </summary>
-        public void Reset()
-        {
-            lock (m_lock)
-            {
-                m_isCompleted = false;
-
-                if (m_waitHandle != null)
-                {
-                    m_waitHandle.Reset();
-                }
-            }
         }
 
         /// <summary>
@@ -323,18 +291,11 @@ namespace Opc.Ua
         {
             try
             {
-                Exception = new TimeoutException();
-                
-                if (m_cts != null)
-                {
-                    m_cts.Cancel();
-                }
-
                 OperationCompleted();
             }
             catch (Exception e)
             {
-                Utils.Trace(e, "Unexpected error handling timeout for ChannelAsyncResult operation.");
+                Utils.Trace(e, "Unexpected error handling timeout for AsyncResult operation.");
             }
         }
         #endregion
@@ -387,6 +348,18 @@ namespace Opc.Ua
         {
             get { return m_isCompleted; }
         }
+        #endregion
+
+        #region Private Fields
+        private object m_lock = new object();
+        private AsyncCallback m_callback;
+        private object m_asyncState;
+        private ManualResetEvent m_waitHandle;
+        private bool m_isCompleted;
+        private IAsyncResult m_innerResult;
+        private DateTime m_deadline;
+        private Timer m_timer;
+        private Exception m_exception;
         #endregion
     }
 }

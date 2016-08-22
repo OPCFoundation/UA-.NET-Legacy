@@ -41,7 +41,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -53,72 +53,26 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\bin\Release\Opc.Ua.Core.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\Opc.Ua.Core.XML</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Amqp.Net, Version=1.2.0.0, Culture=neutral, PublicKeyToken=905a7b1e6458e0c3, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\AMQPNetLite.1.2.0\lib\net45\Amqp.Net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.0.0.127, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.IdentityModel.Logging.1.0.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Protocol.Extensions, Version=1.0.2.33, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.IdentityModel.Protocol.Extensions.1.0.2.206221351\lib\net45\Microsoft.IdentityModel.Protocol.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.0.0.127, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.IdentityModel.Tokens.5.0.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Host.HttpListener, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Host.HttpListener.3.0.1\lib\net45\Microsoft.Owin.Host.HttpListener.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Hosting, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Hosting.3.0.1\lib\net45\Microsoft.Owin.Hosting.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.ServiceBus, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\WindowsAzure.ServiceBus.3.3.2\lib\net45-full\Microsoft.ServiceBus.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.1\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Selectors" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.IdentityModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Net.Http" />
+    <Reference Include="System.IdentityModel.Selectors">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Runtime.Serialization">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -127,14 +81,6 @@
     </Reference>
     <Reference Include="System.ServiceModel.Web">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -151,7 +97,6 @@
     <Compile Include="Schema\ApplicationConfiguration.cs">
       <DependentUpon>ApplicationConfiguration.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Schema\OAuth2AuthorityConfiguration.cs" />
     <Compile Include="Schema\SecuredApplicationHelpers.cs" />
     <Compile Include="Schema\SecuredApplication.cs">
       <DependentUpon>SecuredApplication.xsd</DependentUpon>
@@ -188,18 +133,6 @@
     <Compile Include="Security\Constants\SecurityConstants.cs" />
     <Compile Include="Security\Constants\SecurityPolicies.cs" />
     <Compile Include="SilverlightDefs.cs" />
-    <Compile Include="Stack\Amqp\AmqpDataSetConfiguration.cs" />
-    <Compile Include="Stack\Amqp\AmqpBrokerConfiguration.cs" />
-    <Compile Include="Stack\Amqp\AmqpTransportListener.cs" />
-    <Compile Include="Stack\Amqp\AmqpTransportChannel.cs" />
-    <Compile Include="Stack\Amqp\AmqpUtils.cs" />
-    <Compile Include="Stack\Amqp\ConnectionManager.cs" />
-    <Compile Include="Stack\Amqp\GenericAmqpConnection.cs" />
-    <Compile Include="Stack\Amqp\GenericAmqpListener.cs" />
-    <Compile Include="Stack\Amqp\IAmqpConnection.cs" />
-    <Compile Include="Stack\Amqp\IAmqpListener.cs" />
-    <Compile Include="Stack\Amqp\MessageChunkCache.cs" />
-    <Compile Include="Stack\Configuration\OAuth2Credential.cs" />
     <Compile Include="Stack\Configuration\ApplicationConfiguration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -215,8 +148,6 @@
     <Compile Include="Stack\Configuration\EndpointConfiguration.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Stack\Generated\Opc.Ua.Gds.Constants.cs" />
-    <Compile Include="Stack\Generated\Opc.Ua.Gds.DataTypes.cs" />
     <Compile Include="Stack\Server\IServerBase.cs" />
     <Compile Include="Stack\State\AcknowledgeableConditionState.cs" />
     <Compile Include="Stack\State\ConditionState.cs" />
@@ -230,14 +161,6 @@
     <Compile Include="Stack\Https\HttpsTransportChannel.cs" />
     <Compile Include="Stack\Https\HttpsListener.cs" />
     <Compile Include="Stack\Tcp\TcpTransportChannel.cs" />
-    <Compile Include="Stack\Tls\TlsConnection.cs" />
-    <Compile Include="Stack\Tls\TlsListener.cs" />
-    <Compile Include="Stack\Tls\UaTcpChannelSerializer.Asymmetric.cs" />
-    <Compile Include="Stack\Tls\UaTcpChannelSerializer.cs" />
-    <Compile Include="Stack\Tls\UaTcpChannelSerializer.Rsa.cs" />
-    <Compile Include="Stack\Tls\UaTcpChannelSerializer.Symmetric.cs" />
-    <Compile Include="Stack\Tls\TlsTransportListener.cs" />
-    <Compile Include="Stack\Tls\TlsTransportChannel.cs" />
     <Compile Include="Stack\Transport\TransportChannelSettings.cs" />
     <Compile Include="Stack\Transport\TransportListenerSettings.cs" />
     <Compile Include="Stack\Transport\AsyncResultBase.cs" />
@@ -362,14 +285,11 @@
     <Compile Include="Types\BuiltIn\MessageContextExtension.cs" />
     <Compile Include="Types\BuiltIn\NodeId.cs" />
     <Compile Include="Types\BuiltIn\QualifiedName.cs" />
-    <Compile Include="Types\BuiltIn\SessionLessServiceMessage.cs" />
     <Compile Include="Types\BuiltIn\StatusCode.cs" />
     <Compile Include="Types\BuiltIn\Uuid.cs" />
     <Compile Include="Types\BuiltIn\Variant.cs" />
     <Compile Include="Types\Constants\StatusCodes.Helpers.cs" />
     <Compile Include="Types\Constants\Attributes.Helpers.cs" />
-    <Compile Include="Types\Encoders\JsonDecoder.cs" />
-    <Compile Include="Types\Encoders\JsonEncoder.cs" />
     <Compile Include="Types\Generated\Opc.Ua.Attributes.cs" />
     <Compile Include="Types\Generated\Opc.Ua.StatusCodes.cs" />
     <Compile Include="Types\Encoders\BinaryDecoder.cs" />
@@ -391,7 +311,6 @@
     <Compile Include="Types\Utils\DataComparer.cs" />
     <Compile Include="Types\Utils\DataGenerator.cs" />
     <Compile Include="Types\Utils\HiResClock.cs" />
-    <Compile Include="Types\Utils\JwtUtils.cs" />
     <Compile Include="Types\Utils\Lock.cs" />
     <Compile Include="Types\Utils\NamespaceTable.cs" />
     <Compile Include="Types\Utils\NumericRange.cs" />
@@ -412,9 +331,7 @@
     <Content Include="Schema\Opc.Ua.NodeSet.xml" />
     <Content Include="Schema\Opc.Ua.NodeSet2.xml" />
     <Content Include="Schema\UANodeSet.xsd" />
-    <Content Include="Stack\Generated\Opc.Ua.PredefinedNodes.xml">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Stack\Generated\Opc.Ua.PredefinedNodes.xml" />
     <Content Include="Schema\Opc.Ua.Services.wsdl" />
     <Content Include="Schema\Opc.Ua.Types.bsd" />
     <Content Include="Schema\Opc.Ua.Types.xsd">
@@ -428,10 +345,6 @@
     <EmbeddedResource Include="Types\Schemas\BuiltInTypes.xml" />
     <EmbeddedResource Include="Types\Schemas\BuiltInTypes.bsd" />
     <EmbeddedResource Include="Stack\Generated\Opc.Ua.PredefinedNodes.uanodes" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
-    <EmbeddedResource Include="Schema\ServerCapabilities.csv" />
     <None Include="Types\Schemas\OPCBinarySchema.xsd">
       <SubType>
       </SubType>

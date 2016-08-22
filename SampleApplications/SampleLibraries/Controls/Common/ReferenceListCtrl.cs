@@ -208,7 +208,7 @@ namespace Opc.Ua.Client.Controls
                 row[3] = reference.IsForward.ToString();
                 row[4] = reference.NodeClass.ToString();
                 row[5] = m_session.NodeCache.GetDisplayText(reference.TypeDefinition);
-                // row[6] = ImageList.Images[ClientUtils.GetImageIndex(m_session, reference.NodeClass, reference.TypeDefinition, false)];
+                row[6] = ImageList.Images[ClientUtils.GetImageIndex(m_session, reference.NodeClass, reference.TypeDefinition, false)];
 
                 m_dataset.Tables[0].Rows.Add(row);
             }

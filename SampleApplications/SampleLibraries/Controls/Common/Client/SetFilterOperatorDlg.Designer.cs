@@ -149,9 +149,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(284, 58);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(300, 96);
-            this.MinimumSize = new System.Drawing.Size(300, 96);
+            this.MinimizeBox = false;
             this.Name = "SetFilterOperatorDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Set Filter Operator";

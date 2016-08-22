@@ -173,7 +173,7 @@ namespace Opc.Ua
 
                 if (String.Compare(domainName, "localhost", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    domainName = System.Net.Dns.GetHostName().ToLowerInvariant();
+                    domainName = System.Net.Dns.GetHostName();
                 }
 
                 if (!Utils.FindStringIgnoreCase(domainNames, domainName))
@@ -501,7 +501,7 @@ namespace Opc.Ua
             {
                 throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "SecurityConfiguration must be specified.");
             }
-            
+
             SecurityConfiguration.Validate();
 
             // ensure application uri matches the certificate.
@@ -513,18 +513,13 @@ namespace Opc.Ua
             }
 #endif
 
-            if (ApplicationUri != null)
-            {
-                ApplicationUri = ApplicationUri.Replace("localhost", System.Net.Dns.GetHostName().ToLowerInvariant());
-            }
-
             //  generate a default uri.
             if (String.IsNullOrEmpty(ApplicationUri))
             {
                 StringBuilder buffer = new StringBuilder();
 
                 buffer.Append("urn:");
-                buffer.Append(System.Net.Dns.GetHostName().ToLowerInvariant());
+                buffer.Append(System.Net.Dns.GetHostName());
                 buffer.Append(":");
                 buffer.Append(ApplicationName);
 

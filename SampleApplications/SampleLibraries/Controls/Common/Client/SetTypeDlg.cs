@@ -48,6 +48,7 @@ namespace Opc.Ua.Client.Controls
         public SetTypeDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
 
             ErrorHandlingCB.Items.Add("Use Default Value");
             ErrorHandlingCB.Items.Add("Throw Exception");

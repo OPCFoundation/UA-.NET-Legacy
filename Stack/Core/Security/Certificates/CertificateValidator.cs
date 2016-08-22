@@ -35,7 +35,7 @@ namespace Opc.Ua
         /// </summary>
         public CertificateValidator()
         {
-            m_validatedCertificates = new Dictionary<string,byte[]>();
+            m_validatedCertificates = new Dictionary<string,X509Certificate2>();
         }
         #endregion
 
@@ -191,7 +191,7 @@ namespace Opc.Ua
                 // add to list of validated certificates.
                 lock (m_lock)
                 {
-                    m_validatedCertificates[certificate.Thumbprint] = certificate.GetRawCertData();
+                    m_validatedCertificates[certificate.Thumbprint] = certificate;
                 }
             }
             catch (ServiceResultException e)
@@ -252,7 +252,7 @@ namespace Opc.Ua
                 // add to list of peers.
                 lock (m_lock)
                 {
-                    m_validatedCertificates[certificate.Thumbprint] = certificate.GetRawCertData();
+                    m_validatedCertificates[certificate.Thumbprint] = certificate;
                 }
             }
         }
@@ -470,13 +470,11 @@ namespace Opc.Ua
                         issuer = GetIssuer(certificate, collection, null, true);
                     }
                 }
-                else
-                {
-                    isTrusted = true;
-                }
 
                 if (issuer != null)
                 {
+                    isTrusted = true;
+
                     issuers.Add(issuer);
                     certificate = issuer.Find(false);
 
@@ -485,6 +483,10 @@ namespace Opc.Ua
                     {
                         break;
                     }
+                }
+                else
+                {
+                    isTrusted = false;
                 }
             }
             while (issuer != null);
@@ -645,11 +647,11 @@ namespace Opc.Ua
                 X509Certificate2 certificate = certificates[0];
 
                 // check for previously validated certificate.
-                byte[] certificate2 = null;
+                X509Certificate2 certificate2 = null;
 
                 if (m_validatedCertificates.TryGetValue(certificate.Thumbprint, out certificate2))
                 {
-                    if (Utils.IsEqual(certificate2, certificate.RawData))
+                    if (Utils.IsEqual(certificate2.RawData, certificate.RawData))
                     {
                         return;
                     }
@@ -771,11 +773,11 @@ namespace Opc.Ua
             lock (m_lock)
             {
                 // check for previously validated certificate.
-                byte[] certificate2 = null;
+                X509Certificate2 certificate2 = null;
 
                 if (m_validatedCertificates.TryGetValue(certificate.Thumbprint, out certificate2))
                 {
-                    if (Utils.IsEqual(certificate2, certificate.RawData))
+                    if (Utils.IsEqual(certificate2.RawData, certificate.RawData))
                     {
                         return;
                     }
@@ -1026,7 +1028,7 @@ namespace Opc.Ua
         #region Private Fields
         private object m_lock = new object();
         private object m_callbackLock = new object();
-        private Dictionary<string,byte[]> m_validatedCertificates;
+        private Dictionary<string,X509Certificate2> m_validatedCertificates;
         private CertificateStoreIdentifier m_trustedCertificateStore;
         private CertificateIdentifierCollection m_trustedCertificateList;
         private CertificateStoreIdentifier m_issuerCertificateStore;

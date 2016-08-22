@@ -50,6 +50,7 @@ namespace Opc.Ua.Client.Controls
         public ReadRequestDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

@@ -348,7 +348,6 @@ namespace Opc.Ua
 
                 return null;
             }
-
             // find by subject name.
             if (!String.IsNullOrEmpty(subjectName))
             {

@@ -136,8 +136,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // DomainNameCTRL
             // 
-            this.DomainNameCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DomainNameCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DomainNameCTRL.CommandText = "Refresh";
             this.DomainNameCTRL.Location = new System.Drawing.Point(47, 0);
             this.DomainNameCTRL.Margin = new System.Windows.Forms.Padding(0);
@@ -148,8 +148,8 @@ namespace Opc.Ua.Client.Controls
             this.DomainNameCTRL.SelectDomains = true;
             this.DomainNameCTRL.Size = new System.Drawing.Size(408, 21);
             this.DomainNameCTRL.TabIndex = 1;
-            this.DomainNameCTRL.HostConnected += new System.EventHandler<Opc.Ua.Client.Controls.SelectHostCtrlEventArgs>(this.DomainNameCTRL_HostConnected);
             this.DomainNameCTRL.HostSelected += new System.EventHandler<Opc.Ua.Client.Controls.SelectHostCtrlEventArgs>(this.DomainNameCTRL_HostSelected);
+            this.DomainNameCTRL.HostConnected += new System.EventHandler<Opc.Ua.Client.Controls.SelectHostCtrlEventArgs>(this.DomainNameCTRL_HostConnected);
             // 
             // DomainLB
             // 
@@ -169,8 +169,7 @@ namespace Opc.Ua.Client.Controls
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.TopPN);
             this.Controls.Add(this.ButtonsPN);
-            this.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.MinimumSize = new System.Drawing.Size(467, 319);
+            this.MaximizeBox = false;
             this.Name = "HostListDlg";
             this.Padding = new System.Windows.Forms.Padding(2, 2, 2, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

@@ -43,10 +43,8 @@ namespace Opc.Ua
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    #if !NET_STANDARD
     [ServiceMessageContextBehavior()]
     [ServiceBehavior(Namespace = Namespaces.OpcUaWsdl, InstanceContextMode=InstanceContextMode.PerSession, ConcurrencyMode=ConcurrencyMode.Multiple)]
-    #endif
     public partial class SessionEndpoint : EndpointBase, ISessionEndpoint, IDiscoveryEndpoint
     {
         #region Constructors
@@ -106,7 +104,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 FindServersRequest request = (FindServersRequest)incoming;
 
@@ -125,7 +123,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -163,7 +161,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.FindServersRequest);
+                // OnRequestReceived(message.FindServersRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -178,7 +176,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.FindServersRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -191,13 +189,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new FindServersResponseMessage((FindServersResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -216,7 +214,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 FindServersOnNetworkRequest request = (FindServersOnNetworkRequest)incoming;
 
@@ -238,7 +236,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -276,7 +274,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.FindServersOnNetworkRequest);
+                // OnRequestReceived(message.FindServersOnNetworkRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -291,7 +289,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.FindServersOnNetworkRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -304,13 +302,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new FindServersOnNetworkResponseMessage((FindServersOnNetworkResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -329,7 +327,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 GetEndpointsRequest request = (GetEndpointsRequest)incoming;
 
@@ -348,7 +346,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -386,7 +384,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.GetEndpointsRequest);
+                // OnRequestReceived(message.GetEndpointsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -401,7 +399,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.GetEndpointsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -414,13 +412,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new GetEndpointsResponseMessage((GetEndpointsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -439,7 +437,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 CreateSessionRequest request = (CreateSessionRequest)incoming;
 
@@ -487,7 +485,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -525,7 +523,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.CreateSessionRequest);
+                // OnRequestReceived(message.CreateSessionRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -540,7 +538,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.CreateSessionRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -553,13 +551,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new CreateSessionResponseMessage((CreateSessionResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -578,7 +576,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 ActivateSessionRequest request = (ActivateSessionRequest)incoming;
 
@@ -605,7 +603,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -643,7 +641,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.ActivateSessionRequest);
+                // OnRequestReceived(message.ActivateSessionRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -658,7 +656,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.ActivateSessionRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -671,13 +669,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new ActivateSessionResponseMessage((ActivateSessionResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -696,7 +694,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 CloseSessionRequest request = (CloseSessionRequest)incoming;
 
@@ -710,7 +708,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -748,7 +746,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.CloseSessionRequest);
+                // OnRequestReceived(message.CloseSessionRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -763,7 +761,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.CloseSessionRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -776,13 +774,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new CloseSessionResponseMessage((CloseSessionResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -801,7 +799,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 CancelRequest request = (CancelRequest)incoming;
 
@@ -818,7 +816,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -856,7 +854,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.CancelRequest);
+                // OnRequestReceived(message.CancelRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -871,7 +869,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.CancelRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -884,13 +882,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new CancelResponseMessage((CancelResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -909,7 +907,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 AddNodesRequest request = (AddNodesRequest)incoming;
 
@@ -929,7 +927,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -967,7 +965,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.AddNodesRequest);
+                // OnRequestReceived(message.AddNodesRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -982,7 +980,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.AddNodesRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -995,13 +993,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new AddNodesResponseMessage((AddNodesResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1020,7 +1018,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 AddReferencesRequest request = (AddReferencesRequest)incoming;
 
@@ -1040,7 +1038,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1078,7 +1076,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.AddReferencesRequest);
+                // OnRequestReceived(message.AddReferencesRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1093,7 +1091,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.AddReferencesRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1106,13 +1104,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new AddReferencesResponseMessage((AddReferencesResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1131,7 +1129,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 DeleteNodesRequest request = (DeleteNodesRequest)incoming;
 
@@ -1151,7 +1149,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1189,7 +1187,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.DeleteNodesRequest);
+                // OnRequestReceived(message.DeleteNodesRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1204,7 +1202,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.DeleteNodesRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1217,13 +1215,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new DeleteNodesResponseMessage((DeleteNodesResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1242,7 +1240,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 DeleteReferencesRequest request = (DeleteReferencesRequest)incoming;
 
@@ -1262,7 +1260,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1300,7 +1298,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.DeleteReferencesRequest);
+                // OnRequestReceived(message.DeleteReferencesRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1315,7 +1313,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.DeleteReferencesRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1328,13 +1326,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new DeleteReferencesResponseMessage((DeleteReferencesResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1353,7 +1351,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 BrowseRequest request = (BrowseRequest)incoming;
 
@@ -1375,7 +1373,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1413,7 +1411,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.BrowseRequest);
+                // OnRequestReceived(message.BrowseRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1428,7 +1426,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.BrowseRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1441,13 +1439,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new BrowseResponseMessage((BrowseResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1466,7 +1464,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 BrowseNextRequest request = (BrowseNextRequest)incoming;
 
@@ -1487,7 +1485,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1525,7 +1523,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.BrowseNextRequest);
+                // OnRequestReceived(message.BrowseNextRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1540,7 +1538,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.BrowseNextRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1553,13 +1551,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new BrowseNextResponseMessage((BrowseNextResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1578,7 +1576,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 TranslateBrowsePathsToNodeIdsRequest request = (TranslateBrowsePathsToNodeIdsRequest)incoming;
 
@@ -1598,7 +1596,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1636,7 +1634,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.TranslateBrowsePathsToNodeIdsRequest);
+                // OnRequestReceived(message.TranslateBrowsePathsToNodeIdsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1651,7 +1649,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.TranslateBrowsePathsToNodeIdsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1664,13 +1662,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new TranslateBrowsePathsToNodeIdsResponseMessage((TranslateBrowsePathsToNodeIdsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1689,7 +1687,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 RegisterNodesRequest request = (RegisterNodesRequest)incoming;
 
@@ -1706,7 +1704,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1744,7 +1742,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.RegisterNodesRequest);
+                // OnRequestReceived(message.RegisterNodesRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1759,7 +1757,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.RegisterNodesRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1772,13 +1770,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new RegisterNodesResponseMessage((RegisterNodesResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1797,7 +1795,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 UnregisterNodesRequest request = (UnregisterNodesRequest)incoming;
 
@@ -1811,7 +1809,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1849,7 +1847,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.UnregisterNodesRequest);
+                // OnRequestReceived(message.UnregisterNodesRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1864,7 +1862,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.UnregisterNodesRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1877,13 +1875,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new UnregisterNodesResponseMessage((UnregisterNodesResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -1902,7 +1900,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 QueryFirstRequest request = (QueryFirstRequest)incoming;
 
@@ -1935,7 +1933,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -1973,7 +1971,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.QueryFirstRequest);
+                // OnRequestReceived(message.QueryFirstRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -1988,7 +1986,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.QueryFirstRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2001,13 +1999,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new QueryFirstResponseMessage((QueryFirstResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2026,7 +2024,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 QueryNextRequest request = (QueryNextRequest)incoming;
 
@@ -2047,7 +2045,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2085,7 +2083,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.QueryNextRequest);
+                // OnRequestReceived(message.QueryNextRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2100,7 +2098,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.QueryNextRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2113,13 +2111,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new QueryNextResponseMessage((QueryNextResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2138,7 +2136,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 ReadRequest request = (ReadRequest)incoming;
 
@@ -2160,7 +2158,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2198,7 +2196,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.ReadRequest);
+                // OnRequestReceived(message.ReadRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2213,7 +2211,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.ReadRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2226,13 +2224,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new ReadResponseMessage((ReadResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2251,7 +2249,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 HistoryReadRequest request = (HistoryReadRequest)incoming;
 
@@ -2274,7 +2272,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2312,7 +2310,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.HistoryReadRequest);
+                // OnRequestReceived(message.HistoryReadRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2327,7 +2325,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.HistoryReadRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2340,13 +2338,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new HistoryReadResponseMessage((HistoryReadResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2365,7 +2363,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 WriteRequest request = (WriteRequest)incoming;
 
@@ -2385,7 +2383,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2423,7 +2421,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.WriteRequest);
+                // OnRequestReceived(message.WriteRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2438,7 +2436,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.WriteRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2451,13 +2449,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new WriteResponseMessage((WriteResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2476,7 +2474,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 HistoryUpdateRequest request = (HistoryUpdateRequest)incoming;
 
@@ -2496,7 +2494,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2534,7 +2532,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.HistoryUpdateRequest);
+                // OnRequestReceived(message.HistoryUpdateRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2549,7 +2547,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.HistoryUpdateRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2562,13 +2560,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new HistoryUpdateResponseMessage((HistoryUpdateResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2587,7 +2585,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 CallRequest request = (CallRequest)incoming;
 
@@ -2607,7 +2605,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2645,7 +2643,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.CallRequest);
+                // OnRequestReceived(message.CallRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2660,7 +2658,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.CallRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2673,13 +2671,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new CallResponseMessage((CallResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2698,7 +2696,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 CreateMonitoredItemsRequest request = (CreateMonitoredItemsRequest)incoming;
 
@@ -2720,7 +2718,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2758,7 +2756,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.CreateMonitoredItemsRequest);
+                // OnRequestReceived(message.CreateMonitoredItemsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2773,7 +2771,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.CreateMonitoredItemsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2786,13 +2784,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new CreateMonitoredItemsResponseMessage((CreateMonitoredItemsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2811,7 +2809,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 ModifyMonitoredItemsRequest request = (ModifyMonitoredItemsRequest)incoming;
 
@@ -2833,7 +2831,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2871,7 +2869,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.ModifyMonitoredItemsRequest);
+                // OnRequestReceived(message.ModifyMonitoredItemsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2886,7 +2884,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.ModifyMonitoredItemsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2899,13 +2897,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new ModifyMonitoredItemsResponseMessage((ModifyMonitoredItemsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -2924,7 +2922,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 SetMonitoringModeRequest request = (SetMonitoringModeRequest)incoming;
 
@@ -2946,7 +2944,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -2984,7 +2982,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.SetMonitoringModeRequest);
+                // OnRequestReceived(message.SetMonitoringModeRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -2999,7 +2997,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.SetMonitoringModeRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3012,13 +3010,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new SetMonitoringModeResponseMessage((SetMonitoringModeResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3037,7 +3035,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 SetTriggeringRequest request = (SetTriggeringRequest)incoming;
 
@@ -3066,7 +3064,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3104,7 +3102,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.SetTriggeringRequest);
+                // OnRequestReceived(message.SetTriggeringRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3119,7 +3117,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.SetTriggeringRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3132,13 +3130,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new SetTriggeringResponseMessage((SetTriggeringResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3157,7 +3155,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 DeleteMonitoredItemsRequest request = (DeleteMonitoredItemsRequest)incoming;
 
@@ -3178,7 +3176,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3216,7 +3214,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.DeleteMonitoredItemsRequest);
+                // OnRequestReceived(message.DeleteMonitoredItemsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3231,7 +3229,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.DeleteMonitoredItemsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3244,13 +3242,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new DeleteMonitoredItemsResponseMessage((DeleteMonitoredItemsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3269,7 +3267,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 CreateSubscriptionRequest request = (CreateSubscriptionRequest)incoming;
 
@@ -3300,7 +3298,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3338,7 +3336,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.CreateSubscriptionRequest);
+                // OnRequestReceived(message.CreateSubscriptionRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3353,7 +3351,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.CreateSubscriptionRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3366,13 +3364,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new CreateSubscriptionResponseMessage((CreateSubscriptionResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3391,7 +3389,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 ModifySubscriptionRequest request = (ModifySubscriptionRequest)incoming;
 
@@ -3419,7 +3417,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3457,7 +3455,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.ModifySubscriptionRequest);
+                // OnRequestReceived(message.ModifySubscriptionRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3472,7 +3470,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.ModifySubscriptionRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3485,13 +3483,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new ModifySubscriptionResponseMessage((ModifySubscriptionResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3510,7 +3508,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 SetPublishingModeRequest request = (SetPublishingModeRequest)incoming;
 
@@ -3531,7 +3529,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3569,7 +3567,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.SetPublishingModeRequest);
+                // OnRequestReceived(message.SetPublishingModeRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3584,7 +3582,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.SetPublishingModeRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3597,13 +3595,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new SetPublishingModeResponseMessage((SetPublishingModeResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3622,7 +3620,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 PublishRequest request = (PublishRequest)incoming;
 
@@ -3654,7 +3652,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3692,7 +3690,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.PublishRequest);
+                // OnRequestReceived(message.PublishRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3707,7 +3705,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.PublishRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3720,13 +3718,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new PublishResponseMessage((PublishResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3745,7 +3743,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 RepublishRequest request = (RepublishRequest)incoming;
 
@@ -3763,7 +3761,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3801,7 +3799,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.RepublishRequest);
+                // OnRequestReceived(message.RepublishRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3816,7 +3814,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.RepublishRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3829,13 +3827,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new RepublishResponseMessage((RepublishResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3854,7 +3852,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 TransferSubscriptionsRequest request = (TransferSubscriptionsRequest)incoming;
 
@@ -3875,7 +3873,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -3913,7 +3911,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.TransferSubscriptionsRequest);
+                // OnRequestReceived(message.TransferSubscriptionsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -3928,7 +3926,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.TransferSubscriptionsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3941,13 +3939,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new TransferSubscriptionsResponseMessage((TransferSubscriptionsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -3966,7 +3964,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 DeleteSubscriptionsRequest request = (DeleteSubscriptionsRequest)incoming;
 
@@ -3986,7 +3984,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -4024,7 +4022,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.DeleteSubscriptionsRequest);
+                // OnRequestReceived(message.DeleteSubscriptionsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -4039,7 +4037,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.DeleteSubscriptionsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4052,13 +4050,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new DeleteSubscriptionsResponseMessage((DeleteSubscriptionsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4189,10 +4187,8 @@ namespace Opc.Ua
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.CodeGenerator", "1.0.0.0")]
-    #if !NET_STANDARD
     [ServiceMessageContextBehavior()]
     [ServiceBehavior(Namespace = Namespaces.OpcUaWsdl, InstanceContextMode=InstanceContextMode.PerSession, ConcurrencyMode=ConcurrencyMode.Multiple)]
-    #endif
     public partial class DiscoveryEndpoint : EndpointBase, IDiscoveryEndpoint, IRegistrationEndpoint
     {
         #region Constructors
@@ -4252,7 +4248,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 FindServersRequest request = (FindServersRequest)incoming;
 
@@ -4271,7 +4267,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -4309,7 +4305,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.FindServersRequest);
+                // OnRequestReceived(message.FindServersRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -4324,7 +4320,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.FindServersRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4337,13 +4333,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new FindServersResponseMessage((FindServersResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4362,7 +4358,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 FindServersOnNetworkRequest request = (FindServersOnNetworkRequest)incoming;
 
@@ -4384,7 +4380,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -4422,7 +4418,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.FindServersOnNetworkRequest);
+                // OnRequestReceived(message.FindServersOnNetworkRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -4437,7 +4433,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.FindServersOnNetworkRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4450,13 +4446,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new FindServersOnNetworkResponseMessage((FindServersOnNetworkResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4475,7 +4471,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 GetEndpointsRequest request = (GetEndpointsRequest)incoming;
 
@@ -4494,7 +4490,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -4532,7 +4528,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.GetEndpointsRequest);
+                // OnRequestReceived(message.GetEndpointsRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -4547,7 +4543,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.GetEndpointsRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4560,13 +4556,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new GetEndpointsResponseMessage((GetEndpointsResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4585,7 +4581,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 RegisterServerRequest request = (RegisterServerRequest)incoming;
 
@@ -4599,7 +4595,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -4637,7 +4633,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.RegisterServerRequest);
+                // OnRequestReceived(message.RegisterServerRequest);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -4652,7 +4648,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.RegisterServerRequest, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4665,13 +4661,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new RegisterServerResponseMessage((RegisterServerResponse)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4690,7 +4686,7 @@ namespace Opc.Ua
 
             try
             {
-                OnRequestReceived(incoming);
+                // OnRequestReceived(incoming);
 
                 RegisterServer2Request request = (RegisterServer2Request)incoming;
 
@@ -4711,7 +4707,7 @@ namespace Opc.Ua
             }
             finally
             {
-                OnResponseSent(response);
+                // OnResponseSent(response);
             }
 
             return response;
@@ -4749,7 +4745,7 @@ namespace Opc.Ua
         {
             try
             {
-                OnRequestReceived(message.RegisterServer2Request);
+                // OnRequestReceived(message.RegisterServer2Request);
 
                 // check for bad data.
                 if (message == null) throw new ArgumentNullException("message");
@@ -4764,7 +4760,7 @@ namespace Opc.Ua
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(message.RegisterServer2Request, e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }
@@ -4777,13 +4773,13 @@ namespace Opc.Ua
             try
             {
                 IServiceResponse response = ProcessRequestAsyncResult.WaitForComplete(ar, true);
-                OnResponseSent(response);
+                // OnResponseSent(response);
                 return new RegisterServer2ResponseMessage((RegisterServer2Response)response);
             }
             catch (Exception e)
             {
                 Exception fault = CreateSoapFault(ProcessRequestAsyncResult.GetRequest(ar), e);
-                OnResponseFaultSent(fault);
+                // OnResponseFaultSent(fault);
                 throw fault;
             }
         }

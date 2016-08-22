@@ -273,7 +273,7 @@ namespace Opc.Ua.Client.Controls
         public void UpdateRow(DataRow row, WriteValue nodeToWrite)
         {
             row[0] = nodeToWrite;
-            // row[1] = ImageList.Images[ClientUtils.GetImageIndex(nodeToWrite.AttributeId, null)];
+            row[1] = ImageList.Images[ClientUtils.GetImageIndex(nodeToWrite.AttributeId, null)];
             row[2] = (m_session != null) ? m_session.NodeCache.GetDisplayText(nodeToWrite.NodeId) : Utils.ToString(nodeToWrite.NodeId);
             row[3] = Attributes.GetBrowseName(nodeToWrite.AttributeId);
             row[4] = nodeToWrite.IndexRange;

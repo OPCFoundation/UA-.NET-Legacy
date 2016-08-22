@@ -25,610 +25,11 @@ using System.IO;
 namespace Opc.Ua
 {
     /// <summary>
-    /// A public/private key to convert.
-    /// </summary>
-    public class CertificateKeyPair
-    {
-        /// <summary>
-        /// Gets or sets the public key.
-        /// </summary>
-        /// <value>
-        /// The public key.
-        /// </value>
-        public byte[] PublicKey { get; set; }
-
-        /// <summary>
-        /// Gets or sets the private key.
-        /// </summary>
-        /// <value>
-        /// The private key.
-        /// </value>
-        public byte[] PrivateKey { get; set; }
-
-        /// <summary>
-        /// Gets or sets a flag indicating that the key is a PEM key.
-        /// </summary>
-        public bool IsPEMKey { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password.
-        /// </summary>
-        /// <value>
-        /// The password.
-        /// </value>
-        public string Password { get; set; }
-    }
-
-    /// <summary>
     /// Creates a manages certificates.
     /// </summary>
     public class CertificateFactory
     {
         #region Public Methods
-        /// <summary>
-        /// Converts a certificate from one format to another.
-        /// </summary>
-        /// <param name="input">The input certificate.</param>
-        /// <param name="newPassword">The password on the output certificate.</param>
-        /// <param name="toPem">If TRUE then convert to PEM format. Converts to PFX format if not specified.</param>
-        /// <returns>The new certificate.</returns>
-        public static CertificateKeyPair Convert(
-            CertificateKeyPair input,
-            string newPassword,
-            bool toPem)
-        {
-            string executablePath = GetCertificateGeneratorPath();
-
-            // check if the proxy exists.
-            FileInfo filePath = new FileInfo(executablePath);
-
-            if (!filePath.Exists)
-            {
-                throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "Cannnot find the Opc.Ua.CertificateGenerator utility: {0}", executablePath);
-            }
-
-            string tempFile = Path.GetTempFileName();
-
-            try
-            {
-                StreamWriter writer = new StreamWriter(tempFile);
-
-                writer.WriteLine("-cmd convert");
-
-                writer.WriteLine("-publicKeyFilePath {0}", Utils.ToHexString(input.PublicKey));
-                writer.WriteLine("-privateKeyFilePath {0}", Utils.ToHexString(input.PrivateKey));
-                writer.WriteLine("-privateKeyPassword {0}", input.Password);
-                writer.WriteLine("-pemInput {0}", input.IsPEMKey);
-
-                if (toPem)
-                {
-                    writer.WriteLine("-pem true");
-                }
-
-                if (!String.IsNullOrEmpty(newPassword))
-                {
-                    writer.WriteLine("-password " + newPassword);
-                }
-
-                writer.WriteLine("");
-                writer.Close();
-
-                Process process = new Process();
-
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = false;
-                process.StartInfo.RedirectStandardError = false;
-                process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.FileName = filePath.FullName;
-                process.StartInfo.Arguments = "-f \"" + tempFile + "\"";
-                process.StartInfo.WorkingDirectory = filePath.DirectoryName;
-
-                process.Start();
-                process.WaitForExit();
-
-                string result = null;
-
-                using (StreamReader reader = new StreamReader(tempFile))
-                {
-                    CertificateKeyPair kp = new CertificateKeyPair();
-                    kp.Password = newPassword;
-                    kp.IsPEMKey = toPem;
-
-                    while ((result = reader.ReadLine()) != null)
-                    {
-                        if (String.IsNullOrEmpty(result))
-                        {
-                            continue;
-                        }
-
-                        if (result.StartsWith("-cmd"))
-                        {
-                            throw new ServiceResultException("Input file was not processed properly.");
-                        }
-
-                        if (result.StartsWith("-error"))
-                        {
-                            throw new ServiceResultException(result);
-                        }
-
-                        if (result.StartsWith("-publicKeyFilePath"))
-                        {
-                            kp.PublicKey = Utils.FromHexString(result.Substring("-publicKeyFilePath".Length).Trim());
-                            continue;
-                        }
-
-                        if (result.StartsWith("-privateKeyFilePath"))
-                        {
-                            kp.PrivateKey = Utils.FromHexString(result.Substring("-privateKeyFilePath".Length).Trim());
-                            continue;
-                        }
-                    }
-
-                    return kp;
-                }
-            }
-            finally
-            {
-                if (tempFile != null)
-                {
-                    try { File.Delete(tempFile); } catch {}
-                }
-            }
-        }
-
-        /// <summary>
-        /// Replaces the certificate in a PFX file.
-        /// </summary>
-        /// <param name="newCertificate">The new certificate.</param>
-        /// <param name="existingCertificate">The existing certificate with a private key.</param>
-        /// <returns>The new certificate with a private key.</returns>
-        public static X509Certificate2 Replace(
-            X509Certificate2 newCertificate,
-            X509Certificate2 existingCertificate)
-        {
-            string executablePath = GetCertificateGeneratorPath();
-
-            // check if the proxy exists.
-            FileInfo filePath = new FileInfo(executablePath);
-
-            if (!filePath.Exists)
-            {
-                throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "Cannnot find the Opc.Ua.CertificateGenerator utility: {0}", executablePath);
-            }
-
-            if (!existingCertificate.HasPrivateKey)
-            {
-                throw ServiceResultException.Create(StatusCodes.BadInvalidArgument, "Existing certificate must have a PrivateKey.");
-            }
-
-            string tempFile = Path.GetTempFileName();
-
-            try
-            {
-                StreamWriter writer = new StreamWriter(tempFile);
-
-                writer.WriteLine("-cmd replace");
-                writer.WriteLine("-publicKeyFilePath {0}", Utils.ToHexString(newCertificate.GetRawCertData()));
-                writer.WriteLine("-privateKeyFilePath {0}", Utils.ToHexString(existingCertificate.Export(X509ContentType.Pfx)));
-
-                writer.WriteLine("");
-                writer.Close();
-
-                Process process = new Process();
-
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = false;
-                process.StartInfo.RedirectStandardError = false;
-                process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.FileName = filePath.FullName;
-                process.StartInfo.Arguments = "-f \"" + tempFile + "\"";
-                process.StartInfo.WorkingDirectory = filePath.DirectoryName;
-
-                process.Start();
-                process.WaitForExit();
-
-                string result = null;
-
-                using (StreamReader reader = new StreamReader(tempFile))
-                {
-                    while ((result = reader.ReadLine()) != null)
-                    {
-                        if (String.IsNullOrEmpty(result))
-                        {
-                            continue;
-                        }
-
-                        if (result.StartsWith("-cmd"))
-                        {
-                            throw new ServiceResultException("Input file was not processed properly.");
-                        }
-
-                        if (result.StartsWith("-error"))
-                        {
-                            throw new ServiceResultException(result);
-                        }
-
-                        if (result.StartsWith("-privateKeyFilePath"))
-                        {
-                            byte[] bytes = Utils.FromHexString(result.Substring("-privateKeyFilePath".Length).Trim());
-                            var x509 = new X509Certificate2(bytes, new System.Security.SecureString(), X509KeyStorageFlags.Exportable);
-                            x509 = CertificateFactory.Load(x509, true);
-                            return x509;
-                        }
-                    }
-                }
-
-                throw new ServiceResultException("Input file was not processed properly.");
-            }
-            finally
-            {
-                if (tempFile != null)
-                {
-                    try { File.Delete(tempFile); }
-                    catch { }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Signs an existing certificate by the CA.
-        /// </summary>
-        /// <param name="requestPath">The path to the certificate signing request.</param>
-        /// <param name="commonName">Name of the common.</param>
-        /// <param name="applicationUri">The application uri. Replaces whatever is in the existing certificate.</param>
-        /// <param name="domainNames">The domain names. Replaces whatever is in the existing certificate.</param>
-        /// <param name="issuerKeyFilePath">The path to the CA private key.</param>
-        /// <param name="issuerKeyFilePassword">The password for the CA private key.</param>
-        /// <param name="startTime">The begining of the validity period for the certificate.</param>
-        /// <param name="lifetimeInMonths">The lifetime in months.</param>
-        /// <param name="hashSizeInBits">The hash size in bits.</param>
-        /// <param name="outputStore">The location for the new certificate.</param>
-        /// <returns>
-        /// The path to the new certificate.
-        /// </returns>
-        /// <exception cref="System.IO.FileNotFoundException">Public key file not found
-        /// or
-        /// Issuer key file not found
-        /// or
-        /// Output store not found</exception>
-        /// <exception cref="ServiceResultException">Input file was not processed properly.
-        /// or
-        /// or
-        /// Invalid response produced by the CertificateGenerator.</exception>
-        public static string Sign(
-            string requestPath,
-            string commonName,
-            string applicationUri,
-            IList<string> domainNames,
-            string issuerKeyFilePath,
-            string issuerKeyFilePassword,
-            DateTime startTime,
-            ushort lifetimeInMonths,
-            ushort hashSizeInBits,
-            string outputStore)
-        {
-            string executablePath = GetCertificateGeneratorPath();
-
-            // check if the proxy exists.
-            FileInfo filePath = new FileInfo(executablePath);
-
-            if (!filePath.Exists)
-            {
-                throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "Cannnot find the Opc.Ua.CertificateGenerator utility: {0}", executablePath);
-            }
-
-            if (requestPath.Contains(":") || requestPath.Contains("."))
-            {
-                requestPath = Utils.GetAbsoluteFilePath(requestPath, true, false, false);
-
-                if (String.IsNullOrEmpty(requestPath))
-                {
-                    throw new FileNotFoundException("Certificate signing request file not found", requestPath);
-                }
-            }
-
-            if (issuerKeyFilePath.Contains(":") || issuerKeyFilePath.Contains("."))
-            {
-                issuerKeyFilePath = Utils.GetAbsoluteFilePath(issuerKeyFilePath, true, false, false);
-
-                if (String.IsNullOrEmpty(issuerKeyFilePath))
-                {
-                    throw new FileNotFoundException("Issuer key file not found", issuerKeyFilePath);
-                }
-            }
-
-            outputStore = Utils.GetAbsoluteDirectoryPath(outputStore, true, false, true);
-
-            if (String.IsNullOrEmpty(outputStore))
-            {
-                throw new FileNotFoundException("Output store not found", outputStore);
-            }
-
-            string tempFile = Path.GetTempFileName();
-
-            try
-            {
-                StreamWriter writer = new StreamWriter(tempFile);
-
-                writer.WriteLine("-cmd process");
-
-                if (!String.IsNullOrEmpty(requestPath))
-                {
-                    writer.WriteLine("-requestFilePath {0}", requestPath);
-                }
-
-                if (!String.IsNullOrEmpty(outputStore))
-                {
-                    writer.WriteLine("-storePath {0}", outputStore);
-                }
-
-                if (!String.IsNullOrEmpty(commonName))
-                {
-                    writer.WriteLine("-applicationName {0}", commonName);
-                }
-
-                if (!String.IsNullOrEmpty(applicationUri))
-                {
-                    writer.WriteLine("-applicationUri {0}", applicationUri);
-                }
-
-                if (domainNames != null && domainNames.Count > 0)
-                {
-                    StringBuilder buffer = new StringBuilder();
-
-                    for (int ii = 0; ii < domainNames.Count; ii++)
-                    {
-                        if (buffer.Length > 0)
-                        {
-                            buffer.Append(",");
-                        }
-
-                        buffer.Append(domainNames[ii]);
-                    }
-
-                    writer.WriteLine("-domainNames {0}", buffer.ToString());
-                }
-
-                if (!String.IsNullOrEmpty(issuerKeyFilePath))
-                {
-                    writer.WriteLine("-issuerKeyFilePath {0}", issuerKeyFilePath);
-                }
-
-                if (!String.IsNullOrEmpty(issuerKeyFilePassword))
-                {
-                    writer.WriteLine("-issuerKeyPassword {0}", issuerKeyFilePassword);
-                }
-
-                if (startTime > DateTime.MinValue)
-                {
-                    writer.WriteLine("-startTime {0}", startTime.Ticks - new DateTime(1601, 1, 1).Ticks);
-                }
-
-                writer.WriteLine("-lifetimeInMonths {0}", lifetimeInMonths);
-                writer.WriteLine("-hashSize {0}", hashSizeInBits);
-
-                writer.WriteLine("");
-                writer.Close();
-
-                Process process = new Process();
-
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = false;
-                process.StartInfo.RedirectStandardError = false;
-                process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.FileName = filePath.FullName;
-                process.StartInfo.Arguments = "-f \"" + tempFile + "\"";
-                process.StartInfo.WorkingDirectory = filePath.DirectoryName;
-
-                process.Start();
-                process.WaitForExit();
-
-                string result = null;
-
-                using (StreamReader reader = new StreamReader(tempFile))
-                {
-                    string newCertificatePath = null;
-
-                    while ((result = reader.ReadLine()) != null)
-                    {
-                        if (String.IsNullOrEmpty(result))
-                        {
-                            continue;
-                        }
-
-                        if (result.StartsWith("-cmd"))
-                        {
-                            throw new ServiceResultException("Input file was not processed properly.");
-                        }
-
-                        if (result.StartsWith("-error"))
-                        {
-                            throw new ServiceResultException(result);
-                        }
-
-                        if (result.StartsWith("-publicKeyFilePath"))
-                        {
-                            newCertificatePath = result.Substring("-publicKeyFilePath".Length).Trim();
-                            continue;
-                        }
-                    }
-
-                    if (String.IsNullOrEmpty(newCertificatePath))
-                    {
-                        throw new ServiceResultException("Invalid response produced by the CertificateGenerator.");
-                    }
-
-                    return newCertificatePath;
-                }
-            }
-            finally
-            {
-                if (tempFile != null)
-                {
-                    try { File.Delete(tempFile); }
-                    catch { }
-                }
-            }
-        }
-
-        /// <summary>
-        /// Creates a certificate signing request.
-        /// </summary>
-        /// <param name="certificate">The certificate to go with the private key.</param>
-        /// <param name="privateKey">The private key used to sign the request.</param>
-        /// <param name="isPEMKey">TRUE if the private key is in PEM format; FALSE otherwise.</param>
-        /// <param name="password">The password for the private key.</param>
-        /// <param name="subjectName">Subject name for the new certificate.</param>
-        /// <param name="applicationUri">The application uri. Replaces whatever is in the existing certificate.</param>
-        /// <param name="domainNames">The domain names. Replaces whatever is in the existing certificate.</param>
-        /// <param name="hashSizeInBits">The hash size in bits.</param>
-        /// <returns>
-        /// The certificate signing request.
-        /// </returns>
-        public static byte[] CreateRequest(
-            X509Certificate2 certificate,
-            byte[] privateKey,
-            bool isPEMKey,
-            string password,
-            string subjectName,
-            string applicationUri,
-            IList<string> domainNames,
-            ushort hashSizeInBits)
-        {
-            string executablePath = GetCertificateGeneratorPath();
-
-            // check if the proxy exists.
-            FileInfo filePath = new FileInfo(executablePath);
-
-            if (!filePath.Exists)
-            {
-                throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "Cannnot find the Opc.Ua.CertificateGenerator utility: {0}", executablePath);
-            }
-
-            if (certificate == null || (!certificate.HasPrivateKey && privateKey == null))
-            {
-                throw ServiceResultException.Create(StatusCodes.BadInvalidArgument, "A private key is required to create a signing request.");
-            }
-
-            string tempFile = Path.GetTempFileName();
-
-            try
-            {
-                StreamWriter writer = new StreamWriter(tempFile);
-
-                writer.WriteLine("-cmd request");
-
-                if (privateKey == null)
-                {
-                    privateKey = certificate.Export(X509ContentType.Pkcs12, (!String.IsNullOrEmpty(password)) ? null : password);
-                }
-
-                writer.WriteLine("-publicKeyFilePath {0}", Utils.ToHexString(certificate.RawData));
-                writer.WriteLine("-privateKeyFilePath {0}", Utils.ToHexString(privateKey));
-                writer.WriteLine("-pemInput {0}", isPEMKey);
-
-                if (!String.IsNullOrEmpty(password))
-                {
-                    writer.WriteLine("-privateKeyPassword {0}", password);
-                }
-
-                if (!String.IsNullOrEmpty(subjectName))
-                {
-                    writer.WriteLine("-subjectName {0}", subjectName);
-                }
-
-                if (!String.IsNullOrEmpty(applicationUri))
-                {
-                    writer.WriteLine("-applicationUri {0}", applicationUri);
-                }
-
-                if (domainNames != null && domainNames.Count > 0)
-                {
-                    StringBuilder buffer = new StringBuilder();
-
-                    for (int ii = 0; ii < domainNames.Count; ii++)
-                    {
-                        if (buffer.Length > 0)
-                        {
-                            buffer.Append(",");
-                        }
-
-                        buffer.Append(domainNames[ii]);
-                    }
-
-                    writer.WriteLine("-domainNames {0}", buffer.ToString());
-                }
-
-                writer.WriteLine("-hashSize {0}", hashSizeInBits);
-
-                writer.WriteLine("");
-                writer.Close();
-
-                Process process = new Process();
-
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = false;
-                process.StartInfo.RedirectStandardError = false;
-                process.StartInfo.RedirectStandardInput = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.FileName = filePath.FullName;
-                process.StartInfo.Arguments = "-f \"" + tempFile + "\"";
-                process.StartInfo.WorkingDirectory = filePath.DirectoryName;
-
-                process.Start();
-                process.WaitForExit();
-
-                string result = null;
-
-                using (StreamReader reader = new StreamReader(tempFile))
-                {
-                    string requestFilePath = null;
-
-                    while ((result = reader.ReadLine()) != null)
-                    {
-                        if (String.IsNullOrEmpty(result))
-                        {
-                            continue;
-                        }
-
-                        if (result.StartsWith("-cmd"))
-                        {
-                            throw new ServiceResultException("Input file was not processed properly.");
-                        }
-
-                        if (result.StartsWith("-error"))
-                        {
-                            throw new ServiceResultException(result);
-                        }
-
-                        if (result.StartsWith("-requestFilePath"))
-                        {
-                            requestFilePath = result.Substring("-requestFilePath".Length).Trim();
-                            continue;
-                        }
-                    }
-
-                    if (String.IsNullOrEmpty(requestFilePath))
-                    {
-                        throw new ServiceResultException("Invalid response produced by the CertificateGenerator.");
-                    }
-
-                    return Utils.FromHexString(requestFilePath);
-                }
-            }
-            finally
-            {
-                if (tempFile != null)
-                {
-                    try { File.Delete(tempFile); }
-                    catch { }
-                }
-            }
-        }
-
         /// <summary>
         /// Creates a certificate from a buffer with DER encoded certificate.
         /// </summary>
@@ -679,39 +80,32 @@ namespace Opc.Ua
                 }
 
                 #if !SILVERLIGHT
-                try
+                // ensure private key is accessible.
+                System.Security.Cryptography.RSACryptoServiceProvider key = certificate.PrivateKey as System.Security.Cryptography.RSACryptoServiceProvider;
+
+                StringBuilder rootDir = new StringBuilder();
+                rootDir.Append(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
+                rootDir.Append("\\Microsoft\\Crypto\\RSA\\MachineKeys\\");
+
+                // chcek if the private key is in the machine store.
+                if (!System.IO.File.Exists(rootDir.ToString() + key.CspKeyContainerInfo.UniqueKeyContainerName))
                 {
-                    // ensure private key is accessible.
-                    System.Security.Cryptography.RSACryptoServiceProvider key = certificate.PrivateKey as System.Security.Cryptography.RSACryptoServiceProvider;
+                    byte[] bytes = certificate.Export(X509ContentType.Pkcs12, String.Empty);
+                    certificate = new X509Certificate2(bytes, String.Empty, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet);
+                    m_certificates[certificate.Thumbprint] = certificate;
 
-                    StringBuilder rootDir = new StringBuilder();
-                    rootDir.Append(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));
-                    rootDir.Append("\\Microsoft\\Crypto\\RSA\\MachineKeys\\");
+                    key = certificate.PrivateKey as System.Security.Cryptography.RSACryptoServiceProvider;
 
-                    // chcek if the private key is in the machine store.
-                    if (!System.IO.File.Exists(rootDir.ToString() + key.CspKeyContainerInfo.UniqueKeyContainerName))
+                    // update the cache.
+                    m_certificates[certificate.Thumbprint] = certificate;
+
+                    if (m_certificates.Count > 100)
                     {
-                        byte[] bytes = certificate.Export(X509ContentType.Pkcs12, String.Empty);
-                        certificate = new X509Certificate2(bytes, String.Empty, X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet);
-                        m_certificates[certificate.Thumbprint] = certificate;
-
-                        key = certificate.PrivateKey as System.Security.Cryptography.RSACryptoServiceProvider;
-
-                        // update the cache.
-                        m_certificates[certificate.Thumbprint] = certificate;
-
-                        if (m_certificates.Count > 100)
-                        {
-                            Utils.Trace("WARNING - Process certificate cache has {0} certificates in it.", m_certificates.Count);
-                        }
-
-                        // save the key container so it can be deleted later.
-                        m_temporaryKeyContainers.Add(certificate);
+                        Utils.Trace("WARNING - Process certificate cache has {0} certificates in it.", m_certificates.Count);
                     }
-                }
-                catch (Exception e)
-                {
-                    Utils.Trace(e, "WARNING - Unexpected error loading private key {0} {1}", certificate.Subject, certificate.Thumbprint);
+
+                    // save the key container so it can be deleted later.
+                    m_temporaryKeyContainers.Add(certificate);
                 }
                 #endif
             }
@@ -865,6 +259,49 @@ namespace Opc.Ua
         }
 
         /// <summary>
+        /// Creates a self signed application instance certificate (with option to specify algorithm) 
+        /// </summary>
+        /// <param name="storeType"></param>
+        /// <param name="storePath"></param>
+        /// <param name="applicationUri"></param>
+        /// <param name="applicationName"></param>
+        /// <param name="subjectName"></param>
+        /// <param name="domainNames"></param>
+        /// <param name="keySize"></param>
+        /// <param name="lifetimeInMonths"></param>
+        /// <param name="algorithm"></param>
+        /// <returns></returns>
+        public static X509Certificate2 CreateCertificate(
+            string storeType,
+            string storePath,
+            string applicationUri,
+            string applicationName,
+            string subjectName,
+            IList<String> domainNames,
+            ushort keySize,
+            ushort lifetimeInMonths,
+            ushort algorithm)
+        {
+            return CreateCertificate(
+                storeType,
+                storePath,
+                null,
+                applicationUri,
+                applicationName,
+                subjectName,
+                domainNames,
+                keySize,
+                DateTime.MinValue,
+                lifetimeInMonths,
+                0,
+                false,
+                false,
+                null,
+                null,
+                algorithm);
+        }
+
+        /// <summary>
         /// Creates a self signed application instance certificate.
         /// </summary>
         /// <param name="storeType">Type of certificate store (Windows or Directory) <see cref="CertificateStoreType"/>.</param>
@@ -882,6 +319,7 @@ namespace Opc.Ua
         /// <param name="usePEMFormat">if set to <c>true</c> the private ket is store in the PEM format.</param>
         /// <param name="issuerKeyFilePath">The path to the PFX file containing the CA private key.</param>
         /// <param name="issuerKeyFilePassword">The  password for the PFX file containing the CA private key.</param>
+        /// <param name="algorithm">Signature algorithm (0 = SHA1; 1 = SHA256) This settings applies only to Windows storeType option.</param>
         /// <returns>The certificate with a private key.</returns>
         public static X509Certificate2 CreateCertificate(
             string storeType,
@@ -898,7 +336,8 @@ namespace Opc.Ua
             bool isCA,
             bool usePEMFormat,
             string issuerKeyFilePath,
-            string issuerKeyFilePassword)
+            string issuerKeyFilePassword,
+            ushort algorithm = 0)
         {
 #if !SILVERLIGHT
             X509Certificate2 certificate  = null;
@@ -965,7 +404,8 @@ namespace Opc.Ua
                 subjectName.ToString(),
                 domainNames,
                 keySize,
-                lifetimeInMonths);
+                lifetimeInMonths,
+                algorithm);
             
             // add it to the store.
             if (!String.IsNullOrEmpty(storePath))
@@ -998,22 +438,19 @@ namespace Opc.Ua
         {
             string executablePath = null;
 
+            //first check on the same folder as the current executable
+            executablePath = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), "Opc.Ua.CertificateGenerator.exe");
+            executablePath = Utils.GetAbsoluteFilePath(executablePath, false, false, false);
+
+            if (executablePath != null)
+            {
+                return executablePath;
+            }
+
             // recursively go up the tree looking for /Bin directories.
             if (executablePath == null)
             {
                 DirectoryInfo dirInfo = new DirectoryInfo(Environment.CurrentDirectory);
-
-                if (dirInfo != null)
-                {
-                    executablePath = dirInfo.FullName;
-                    executablePath += "\\Opc.Ua.CertificateGenerator.exe";
-                    executablePath = Utils.GetAbsoluteFilePath(executablePath, false, false, false);
-
-                    if (executablePath != null)
-                    {
-                        return executablePath;
-                    }
-                }
 
                 while (dirInfo != null)
                 {
@@ -1134,7 +571,7 @@ namespace Opc.Ua
 
                 if (!String.IsNullOrEmpty(applicationName))
                 {
-                    writer.WriteLine("-applicationName {0}", applicationName);
+                    writer.WriteLine("-applicationName {0} ", applicationName);
                 }
 
                 if (!String.IsNullOrEmpty(subjectName))
@@ -2591,10 +2028,11 @@ namespace Opc.Ua
 
             applicationName = buffer.ToString();
 
-            // ensure non-null domain names.
-            if (domainNames == null)
+            // ensure at least one host name.
+            if (domainNames == null || domainNames.Count == 0)
             {
                 domainNames = new List<string>();
+                domainNames.Add(System.Net.Dns.GetHostName());
             }
 
             // create the application uri.
@@ -2603,13 +2041,8 @@ namespace Opc.Ua
                 StringBuilder builder = new StringBuilder();
 
                 builder.Append("urn:");
-
-                if (domainNames != null && domainNames.Count > 0)
-                {
-                    builder.Append(domainNames[0]);
-                    builder.Append(":");
-                }
-
+                builder.Append(domainNames[0]);
+                builder.Append(":");
                 builder.Append(applicationName);
 
                 applicationUri = builder.ToString();
@@ -2625,14 +2058,7 @@ namespace Opc.Ua
             // create the subject name,
             if (String.IsNullOrEmpty(subjectName))
             {
-                if (domainNames == null || domainNames.Count == 0)
-                {
-                    subjectName = Utils.Format("CN={0}", applicationName);
-                }
-                else
-                {
-                    subjectName = Utils.Format("CN={0}/DC={1}", applicationName, domainNames[0]);
-                }
+                subjectName = Utils.Format("CN={0}/DC={1}", applicationName, domainNames[0]);
             }
         }
 
@@ -2759,12 +2185,14 @@ namespace Opc.Ua
             string subjectName,
             IList<string> hostNames,
             ushort keySize,
-            ushort lifetimeInMonths)
+            ushort lifetimeInMonths,
+            ushort algorithm = 0)
         {
             IntPtr hKey = IntPtr.Zero;
             IntPtr pKpi = IntPtr.Zero;
             IntPtr pThumbprint = IntPtr.Zero;
             IntPtr pContext = IntPtr.Zero;
+            IntPtr pAlgorithmId = IntPtr.Zero;
             IntPtr pNewContext = IntPtr.Zero;
             CRYPT_DATA_BLOB publicKeyId = new CRYPT_DATA_BLOB();
             CERT_NAME_BLOB subjectNameBlob = new CERT_NAME_BLOB();
@@ -2800,7 +2228,7 @@ namespace Opc.Ua
 
                 // allocate memory for all possible extensions.
                 extensions.cExtension = 0;
-                extensions.rgExtension = Marshal.AllocHGlobal(6*Marshal.SizeOf(typeof(CERT_EXTENSION)));
+                extensions.rgExtension = Marshal.AllocHGlobal(6 * Marshal.SizeOf(typeof(CERT_EXTENSION)));
 
                 // create the subject key info extension.
                 IntPtr pPos = extensions.rgExtension;
@@ -2879,8 +2307,29 @@ namespace Opc.Ua
                 hExtensionList = GCHandle.Alloc(extensions, GCHandleType.Pinned);
                 hSubjectNameBlob = GCHandle.Alloc(subjectNameBlob, GCHandleType.Pinned);
 
-                // create the certificate.
-                pContext = NativeMethods.CertCreateSelfSignCertificate(
+                if (algorithm == 1)
+                {
+                    CRYPT_ALGORITHM_IDENTIFIER algorithmID = new CRYPT_ALGORITHM_IDENTIFIER();
+                    algorithmID.pszObjId = "1.2.840.113549.1.1.11"; //SHA256
+
+                    pAlgorithmId = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(CRYPT_ALGORITHM_IDENTIFIER)));
+                    Marshal.StructureToPtr(algorithmID, pAlgorithmId, false);
+
+                    //create the certificate
+                    pContext = NativeMethods.CertCreateSelfSignCertificate(
+                         hProvider,
+                         hSubjectNameBlob.AddrOfPinnedObject(),
+                         0,
+                         pKpi,
+                         pAlgorithmId,
+                         IntPtr.Zero,
+                         hValidTo.AddrOfPinnedObject(),
+                         hExtensionList.AddrOfPinnedObject());
+                }
+                else
+                {
+                    // (default) create the certificate.
+                    pContext = NativeMethods.CertCreateSelfSignCertificate(
                     hProvider,
                     hSubjectNameBlob.AddrOfPinnedObject(),
                     0,
@@ -2889,6 +2338,7 @@ namespace Opc.Ua
                     IntPtr.Zero,
                     hValidTo.AddrOfPinnedObject(),
                     hExtensionList.AddrOfPinnedObject());
+                }
 
                 if (pContext == IntPtr.Zero)
                 {
@@ -2966,6 +2416,12 @@ namespace Opc.Ua
                     Marshal.FreeHGlobal(pThumbprint);
                 }
 
+                if (pAlgorithmId != IntPtr.Zero)
+                {
+                    Marshal.DestroyStructure(pAlgorithmId, typeof(CRYPT_ALGORITHM_IDENTIFIER));
+                    Marshal.FreeHGlobal(pAlgorithmId);
+                }
+
                 if (hValidTo.IsAllocated) hValidTo.Free();
                 if (hExtensionList.IsAllocated) hExtensionList.Free();
                 if (hSubjectNameBlob.IsAllocated) hSubjectNameBlob.Free();
@@ -3002,7 +2458,8 @@ namespace Opc.Ua
             string subjectName,
             IList<string> hostNames,
             ushort keySize,
-            ushort lifetimeInMonths)
+            ushort lifetimeInMonths,
+            ushort algorithm = 0)
         {
             IntPtr hProvider = IntPtr.Zero;
             IntPtr hMemoryStore = IntPtr.Zero;
@@ -3061,7 +2518,8 @@ namespace Opc.Ua
                     subjectName,
                     hostNames,
                     keySize,
-                    lifetimeInMonths);
+                    lifetimeInMonths,
+                    algorithm);
 
                 // determine the size of the PKCS#12 blob.
                 bResult = NativeMethods.PFXExportCertStoreEx(

@@ -166,8 +166,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // ArrayDimensionsTB
             // 
-            this.ArrayDimensionsTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ArrayDimensionsTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ArrayDimensionsTB.Location = new System.Drawing.Point(96, 26);
             this.ArrayDimensionsTB.Margin = new System.Windows.Forms.Padding(2);
             this.ArrayDimensionsTB.Name = "ArrayDimensionsTB";
@@ -176,8 +176,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // StructureTypeTB
             // 
-            this.StructureTypeTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.StructureTypeTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.StructureTypeTB.Location = new System.Drawing.Point(96, 2);
             this.StructureTypeTB.Margin = new System.Windows.Forms.Padding(2);
             this.StructureTypeTB.Name = "StructureTypeTB";
@@ -220,9 +220,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(401, 128);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(1000, 166);
-            this.MinimumSize = new System.Drawing.Size(417, 100);
+            this.MinimizeBox = false;
             this.Name = "SetTypeDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Set Data Type and Array Size";

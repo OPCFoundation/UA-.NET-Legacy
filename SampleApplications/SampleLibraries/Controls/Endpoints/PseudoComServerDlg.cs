@@ -53,6 +53,7 @@ namespace Opc.Ua.Client.Controls
         public PseudoComServerDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
 
             foreach (ComSpecification value in Enum.GetValues(typeof(ComSpecification)))
             {

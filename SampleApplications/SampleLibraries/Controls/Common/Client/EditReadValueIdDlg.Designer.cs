@@ -150,8 +150,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // NodeLB
             // 
-            this.NodeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.NodeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.NodeLB.AutoSize = true;
             this.NodeLB.Location = new System.Drawing.Point(3, 0);
             this.NodeLB.Name = "NodeLB";
@@ -170,8 +170,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // AttributeCB
             // 
-            this.AttributeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.AttributeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.AttributeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AttributeCB.FormattingEnabled = true;
             this.AttributeCB.Location = new System.Drawing.Point(87, 29);
@@ -214,8 +214,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // DataEncodingCB
             // 
-            this.DataEncodingCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.DataEncodingCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.DataEncodingCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DataEncodingCB.FormattingEnabled = true;
             this.DataEncodingCB.Location = new System.Drawing.Point(87, 82);
@@ -231,7 +231,6 @@ namespace Opc.Ua.Client.Controls
             this.NodeTB.ReadOnly = true;
             this.NodeTB.Size = new System.Drawing.Size(246, 20);
             this.NodeTB.TabIndex = 2;
-            this.NodeTB.Text = "(unknown unspecified)";
             // 
             // NodeBTN
             // 
@@ -258,8 +257,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(360, 137);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
-            this.MaximumSize = new System.Drawing.Size(3000, 1000);
-            this.MinimumSize = new System.Drawing.Size(50, 100);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditReadValueIdDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Read Request";

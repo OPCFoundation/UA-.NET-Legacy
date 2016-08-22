@@ -39,28 +39,6 @@ namespace Opc.Ua.Bindings
             m_channelLifetime = TcpMessageLimits.DefaultChannelLifetime;
             m_securityTokenLifetime = TcpMessageLimits.DefaultSecurityTokenLifeTime;
         }
-
-        /// <summary>
-        /// Creates an object with default values.
-        /// </summary>
-        public TcpChannelQuotas(ApplicationConfiguration configuration) : this()
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException("configuration");
-            }
-
-            m_certificateValidator = configuration.CertificateValidator.GetChannelValidator();
-            m_messageContext = configuration.CreateMessageContext();
-
-            if (configuration.TransportQuotas != null)
-            {
-                m_maxMessageSize = configuration.TransportQuotas.MaxMessageSize;
-                m_maxBufferSize = configuration.TransportQuotas.MaxMessageSize;
-                m_channelLifetime = configuration.TransportQuotas.ChannelLifetime;
-                m_securityTokenLifetime = configuration.TransportQuotas.SecurityTokenLifetime;
-            }
-        }
         #endregion
 
         #region Public Properties

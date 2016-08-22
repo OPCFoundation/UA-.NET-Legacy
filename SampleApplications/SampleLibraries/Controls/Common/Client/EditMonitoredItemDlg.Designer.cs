@@ -81,10 +81,10 @@ namespace Opc.Ua.Client.Controls
             this.DataEncodingLB = new System.Windows.Forms.Label();
             this.DataEncodingCB = new System.Windows.Forms.ComboBox();
             this.NodeTB = new System.Windows.Forms.TextBox();
+            this.NodeBTN = new Opc.Ua.Client.Controls.SelectNodeCtrl();
             this.QueueSizeUP = new System.Windows.Forms.NumericUpDown();
             this.SamplingIntervalUP = new System.Windows.Forms.NumericUpDown();
             this.DiscardOldestCK = new System.Windows.Forms.CheckBox();
-            this.NodeBTN = new Opc.Ua.Client.Controls.SelectNodeCtrl();
             this.BottomPN.SuspendLayout();
             this.MainPN.SuspendLayout();
             this.ControlsPN.SuspendLayout();
@@ -189,8 +189,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // TriggerTypeCB
             // 
-            this.TriggerTypeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.TriggerTypeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.TriggerTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TriggerTypeCB.FormattingEnabled = true;
             this.TriggerTypeCB.Location = new System.Drawing.Point(97, 261);
@@ -234,8 +234,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // DeadbandTypeCB
             // 
-            this.DeadbandTypeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.DeadbandTypeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.DeadbandTypeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DeadbandTypeCB.FormattingEnabled = true;
             this.DeadbandTypeCB.Location = new System.Drawing.Point(97, 208);
@@ -245,8 +245,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // MonitoringModeCB
             // 
-            this.MonitoringModeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.MonitoringModeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.MonitoringModeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.MonitoringModeCB.FormattingEnabled = true;
             this.MonitoringModeCB.Location = new System.Drawing.Point(97, 109);
@@ -311,8 +311,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // NodeLB
             // 
-            this.NodeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.NodeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.NodeLB.AutoSize = true;
             this.NodeLB.Location = new System.Drawing.Point(3, 0);
             this.NodeLB.Name = "NodeLB";
@@ -331,8 +331,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // AttributeCB
             // 
-            this.AttributeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.AttributeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.AttributeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AttributeCB.FormattingEnabled = true;
             this.AttributeCB.Location = new System.Drawing.Point(97, 29);
@@ -375,8 +375,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // DataEncodingCB
             // 
-            this.DataEncodingCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.DataEncodingCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.DataEncodingCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DataEncodingCB.FormattingEnabled = true;
             this.DataEncodingCB.Location = new System.Drawing.Point(97, 82);
@@ -392,6 +392,21 @@ namespace Opc.Ua.Client.Controls
             this.NodeTB.ReadOnly = true;
             this.NodeTB.Size = new System.Drawing.Size(247, 20);
             this.NodeTB.TabIndex = 1;
+            // 
+            // NodeBTN
+            // 
+            this.NodeBTN.Location = new System.Drawing.Point(347, 0);
+            this.NodeBTN.Margin = new System.Windows.Forms.Padding(0);
+            this.NodeBTN.Name = "NodeBTN";
+            this.NodeBTN.NodeControl = this.NodeTB;
+            this.NodeBTN.ReferenceTypeIds = null;
+            this.NodeBTN.RootId = null;
+            this.NodeBTN.SelectedNode = null;
+            this.NodeBTN.SelectedReference = null;
+            this.NodeBTN.Session = null;
+            this.NodeBTN.Size = new System.Drawing.Size(24, 24);
+            this.NodeBTN.TabIndex = 2;
+            this.NodeBTN.View = null;
             // 
             // QueueSizeUP
             // 
@@ -439,21 +454,6 @@ namespace Opc.Ua.Client.Controls
             this.DiscardOldestCK.TabIndex = 16;
             this.DiscardOldestCK.UseVisualStyleBackColor = true;
             // 
-            // NodeBTN
-            // 
-            this.NodeBTN.Location = new System.Drawing.Point(347, 0);
-            this.NodeBTN.Margin = new System.Windows.Forms.Padding(0);
-            this.NodeBTN.Name = "NodeBTN";
-            this.NodeBTN.NodeControl = this.NodeTB;
-            this.NodeBTN.ReferenceTypeIds = null;
-            this.NodeBTN.RootId = null;
-            this.NodeBTN.SelectedNode = null;
-            this.NodeBTN.SelectedReference = null;
-            this.NodeBTN.Session = null;
-            this.NodeBTN.Size = new System.Drawing.Size(24, 24);
-            this.NodeBTN.TabIndex = 2;
-            this.NodeBTN.View = null;
-            // 
             // EditMonitoredItemDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -464,8 +464,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(371, 315);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
-            this.MaximumSize = new System.Drawing.Size(1000, 353);
-            this.MinimumSize = new System.Drawing.Size(50, 100);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditMonitoredItemDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Monitored Item";

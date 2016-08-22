@@ -49,7 +49,7 @@ namespace Opc.Ua
         /// Encodes the object in a stream.
         /// </summary>
         /// <param name="encoder">The encoder to be used for encoding the current value.</param>
-        void Encode(IEncoder encoder);
+		    void Encode(IEncoder encoder);
 
         /// <summary>
         /// Decodes the object from a stream.

@@ -61,6 +61,7 @@ namespace Opc.Ua.Client.Controls
             this.OkBTN = new System.Windows.Forms.Button();
             this.CancelBTN = new System.Windows.Forms.Button();
             this.MainPN = new System.Windows.Forms.Panel();
+            this.ServersCTRL = new Opc.Ua.Client.Controls.PseudoComServerListCtrl();
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.FileMI = new System.Windows.Forms.ToolStripMenuItem();
             this.File_ExportMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,6 @@ namespace Opc.Ua.Client.Controls
             this.View_RefreshMI = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Help_AboutMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.ServersCTRL = new Opc.Ua.Client.Controls.PseudoComServerListCtrl();
             this.ButtonsPN.SuspendLayout();
             this.MainPN.SuspendLayout();
             this.MenuBar.SuspendLayout();
@@ -119,6 +119,17 @@ namespace Opc.Ua.Client.Controls
             this.MainPN.Size = new System.Drawing.Size(816, 211);
             this.MainPN.TabIndex = 1;
             // 
+            // ServersCTRL
+            // 
+            this.ServersCTRL.Cursor = System.Windows.Forms.Cursors.Default;
+            this.ServersCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ServersCTRL.Instructions = null;
+            this.ServersCTRL.Location = new System.Drawing.Point(2, 2);
+            this.ServersCTRL.Name = "ServersCTRL";
+            this.ServersCTRL.Size = new System.Drawing.Size(812, 207);
+            this.ServersCTRL.TabIndex = 0;
+            this.ServersCTRL.ItemsSelected += new Opc.Ua.Client.Controls.ListItemActionEventHandler(this.ServersCTRL_ItemsSelected);
+            // 
             // MenuBar
             // 
             this.MenuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -139,32 +150,32 @@ namespace Opc.Ua.Client.Controls
             this.File_Seperator1,
             this.File_ExitMI});
             this.FileMI.Name = "FileMI";
-            this.FileMI.Size = new System.Drawing.Size(35, 20);
+            this.FileMI.Size = new System.Drawing.Size(37, 20);
             this.FileMI.Text = "File";
             // 
             // File_ExportMI
             // 
             this.File_ExportMI.Name = "File_ExportMI";
-            this.File_ExportMI.Size = new System.Drawing.Size(118, 22);
+            this.File_ExportMI.Size = new System.Drawing.Size(119, 22);
             this.File_ExportMI.Text = "Export...";
             this.File_ExportMI.Click += new System.EventHandler(this.File_ExportMI_Click);
             // 
             // File_ImportMI
             // 
             this.File_ImportMI.Name = "File_ImportMI";
-            this.File_ImportMI.Size = new System.Drawing.Size(118, 22);
+            this.File_ImportMI.Size = new System.Drawing.Size(119, 22);
             this.File_ImportMI.Text = "Import...";
             this.File_ImportMI.Click += new System.EventHandler(this.File_ImportMI_Click);
             // 
             // File_Seperator1
             // 
             this.File_Seperator1.Name = "File_Seperator1";
-            this.File_Seperator1.Size = new System.Drawing.Size(115, 6);
+            this.File_Seperator1.Size = new System.Drawing.Size(116, 6);
             // 
             // File_ExitMI
             // 
             this.File_ExitMI.Name = "File_ExitMI";
-            this.File_ExitMI.Size = new System.Drawing.Size(118, 22);
+            this.File_ExitMI.Size = new System.Drawing.Size(119, 22);
             this.File_ExitMI.Text = "Exit";
             this.File_ExitMI.Click += new System.EventHandler(this.File_ExitMI_Click);
             // 
@@ -173,13 +184,13 @@ namespace Opc.Ua.Client.Controls
             this.ViewMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.View_RefreshMI});
             this.ViewMI.Name = "ViewMI";
-            this.ViewMI.Size = new System.Drawing.Size(41, 20);
+            this.ViewMI.Size = new System.Drawing.Size(44, 20);
             this.ViewMI.Text = "View";
             // 
             // View_RefreshMI
             // 
             this.View_RefreshMI.Name = "View_RefreshMI";
-            this.View_RefreshMI.Size = new System.Drawing.Size(112, 22);
+            this.View_RefreshMI.Size = new System.Drawing.Size(113, 22);
             this.View_RefreshMI.Text = "Refresh";
             this.View_RefreshMI.Click += new System.EventHandler(this.View_RefreshMI_Click);
             // 
@@ -188,26 +199,15 @@ namespace Opc.Ua.Client.Controls
             this.HelpMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Help_AboutMI});
             this.HelpMI.Name = "HelpMI";
-            this.HelpMI.Size = new System.Drawing.Size(40, 20);
+            this.HelpMI.Size = new System.Drawing.Size(44, 20);
             this.HelpMI.Text = "Help";
             // 
             // Help_AboutMI
             // 
             this.Help_AboutMI.Name = "Help_AboutMI";
-            this.Help_AboutMI.Size = new System.Drawing.Size(115, 22);
+            this.Help_AboutMI.Size = new System.Drawing.Size(116, 22);
             this.Help_AboutMI.Text = "About...";
             this.Help_AboutMI.Click += new System.EventHandler(this.Help_AboutMI_Click);
-            // 
-            // ServersCTRL
-            // 
-            this.ServersCTRL.Cursor = System.Windows.Forms.Cursors.Default;
-            this.ServersCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ServersCTRL.Instructions = null;
-            this.ServersCTRL.Location = new System.Drawing.Point(2, 2);
-            this.ServersCTRL.Name = "ServersCTRL";
-            this.ServersCTRL.Size = new System.Drawing.Size(812, 207);
-            this.ServersCTRL.TabIndex = 0;
-            this.ServersCTRL.ItemsSelected += new Opc.Ua.Client.Controls.ListItemActionEventHandler(this.ServersCTRL_ItemsSelected);
             // 
             // PseudoComServerListDlg
             // 
@@ -217,9 +217,9 @@ namespace Opc.Ua.Client.Controls
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.MenuBar);
             this.Controls.Add(this.ButtonsPN);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.MenuBar;
-            this.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.MaximizeBox = false;
             this.Name = "PseudoComServerListDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Configure COM Pseudo-Servers";

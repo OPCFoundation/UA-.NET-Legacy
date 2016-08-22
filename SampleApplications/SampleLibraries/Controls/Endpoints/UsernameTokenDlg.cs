@@ -54,6 +54,7 @@ namespace Opc.Ua.Client.Controls
         public UsernameTokenDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
 

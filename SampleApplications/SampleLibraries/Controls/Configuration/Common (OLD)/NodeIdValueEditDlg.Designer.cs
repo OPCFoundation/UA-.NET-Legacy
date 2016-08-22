@@ -109,8 +109,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // ValueCTRL
             // 
-            this.ValueCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueCTRL.Location = new System.Drawing.Point(4, 4);
             this.ValueCTRL.MaximumSize = new System.Drawing.Size(4096, 20);
             this.ValueCTRL.MinimumSize = new System.Drawing.Size(100, 20);
@@ -118,17 +118,16 @@ namespace Opc.Ua.Client.Controls
             this.ValueCTRL.Size = new System.Drawing.Size(289, 20);
             this.ValueCTRL.TabIndex = 2;
             // 
-            // NumericValueEditDlg
+            // NodeIdValueEditDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(297, 59);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(221, 91);
-            this.Name = "NumericValueEditDlg";
+            this.Name = "NodeIdValueEditDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit NodeId";
             this.ButtonsPN.ResumeLayout(false);

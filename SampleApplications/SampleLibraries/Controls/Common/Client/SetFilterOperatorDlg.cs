@@ -48,6 +48,7 @@ namespace Opc.Ua.Client.Controls
         public SetFilterOperatorDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
 
             FilterOperatorCB.Items.Add(FilterOperator.IsNull);
             FilterOperatorCB.Items.Add(FilterOperator.Equals);

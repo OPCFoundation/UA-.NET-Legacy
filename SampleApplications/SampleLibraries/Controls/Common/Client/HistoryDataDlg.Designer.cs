@@ -63,16 +63,16 @@ namespace Opc.Ua.Client.Controls
             // HistoryDataCTRL
             // 
             this.HistoryDataCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HistoryDataCTRL.EndTime = new System.DateTime(2011, 10, 6, 4, 33, 49, 627);
+            this.HistoryDataCTRL.EndTime = new System.DateTime(((long)(0)));
             this.HistoryDataCTRL.Location = new System.Drawing.Point(0, 0);
             this.HistoryDataCTRL.MaxReturnValues = ((uint)(0u));
             this.HistoryDataCTRL.Name = "HistoryDataCTRL";
             this.HistoryDataCTRL.NodeId = null;
-            this.HistoryDataCTRL.ProcessingInterval = 10000;
+            this.HistoryDataCTRL.ProcessingInterval = 10000D;
             this.HistoryDataCTRL.ReadType = Opc.Ua.Client.Controls.HistoryDataListView.HistoryReadType.Raw;
             this.HistoryDataCTRL.ReturnBounds = false;
             this.HistoryDataCTRL.Size = new System.Drawing.Size(784, 362);
-            this.HistoryDataCTRL.StartTime = new System.DateTime(((long)(0)));
+            this.HistoryDataCTRL.StartTime = new System.DateTime(2015, 5, 25, 16, 46, 5, 399);
             this.HistoryDataCTRL.TabIndex = 13;
             // 
             // HistoryDataDlg
@@ -81,8 +81,9 @@ namespace Opc.Ua.Client.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 362);
             this.Controls.Add(this.HistoryDataCTRL);
-            this.MaximumSize = new System.Drawing.Size(1200, 1200);
-            this.MinimumSize = new System.Drawing.Size(400, 91);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "HistoryDataDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "History Data";

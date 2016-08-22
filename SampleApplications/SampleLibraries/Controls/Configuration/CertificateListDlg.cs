@@ -50,6 +50,7 @@ namespace Opc.Ua.Client.Controls
         public CertificateListDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
 
         /// <summary>

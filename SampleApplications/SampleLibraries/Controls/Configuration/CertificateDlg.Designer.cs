@@ -145,9 +145,9 @@ namespace Opc.Ua.Client.Controls
             // 
             // PropertiesCTRL
             // 
-            this.PropertiesCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.PropertiesCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.PropertiesCTRL.Cursor = System.Windows.Forms.Cursors.Default;
             this.PropertiesCTRL.Instructions = null;
             this.PropertiesCTRL.Location = new System.Drawing.Point(9, 86);
@@ -162,8 +162,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(785, 513);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "CertificateDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "View Certificate";

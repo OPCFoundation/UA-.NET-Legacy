@@ -131,7 +131,7 @@ namespace Opc.Ua
                 {
                     string discoveryUrl = endpoint.Description.EndpointUrl;
 
-                    if (discoveryUrl.StartsWith(Utils.UriSchemeHttp))
+                    if (!discoveryUrl.StartsWith(Utils.UriSchemeOpcTcp))
                     {
                         discoveryUrl += "/discovery";
                     }
@@ -660,19 +660,9 @@ namespace Opc.Ua
                 description.TransportProfileUri = Profiles.UaTcpTransport;
                 description.Server.DiscoveryUrls.Add(description.EndpointUrl);
             }
-            if (description.EndpointUrl.StartsWith(Utils.UriSchemeOpcTls, StringComparison.Ordinal))
-            {
-                description.TransportProfileUri = Profiles.UaTlsTransport;
-                description.Server.DiscoveryUrls.Add(description.EndpointUrl);
-            }
             else if (description.EndpointUrl.StartsWith(Utils.UriSchemeHttps, StringComparison.Ordinal))
             {
                 description.TransportProfileUri = Profiles.HttpsBinaryTransport;
-                description.Server.DiscoveryUrls.Add(description.EndpointUrl);
-            }
-            else if (description.EndpointUrl.StartsWith(Utils.UriSchemeOpcAmqp, StringComparison.Ordinal))
-            {
-                description.TransportProfileUri = Profiles.AmqpsBinaryTransport;
                 description.Server.DiscoveryUrls.Add(description.EndpointUrl);
             }
             else
@@ -858,32 +848,22 @@ namespace Opc.Ua
                         m_description.TransportProfileUri = Profiles.WsHttpXmlOrBinaryTransport;
                     }
 
-                    else if (url.Scheme == Utils.UriSchemeHttps)
+                    if (url.Scheme == Utils.UriSchemeHttps)
                     {
                         m_description.TransportProfileUri = Profiles.HttpsBinaryTransport;
                     }
 
-                    else if (url.Scheme == Utils.UriSchemeOpcTcp)
+                    if (url.Scheme == Utils.UriSchemeOpcTcp)
                     {
                         m_description.TransportProfileUri = Profiles.UaTcpTransport;
-                    }
-
-                    else if (url.Scheme == Utils.UriSchemeOpcTls)
-                    {
-                        m_description.TransportProfileUri = Profiles.UaTlsTransport;
-                    }
-
-                    else if (url.Scheme == Utils.UriSchemeOpcAmqp)
-                    {
-                        m_description.TransportProfileUri = Profiles.AmqpsBinaryTransport;
                     }
 
                     break;
                 }
             }
             
-            // assign a default configuration.
-            if (m_configuration == null)
+            // ensure a default configuration.
+            if (configuration == null)
             {
                 configuration = EndpointConfiguration.Create();
             }
@@ -1068,34 +1048,33 @@ namespace Opc.Ua
         /// <summary>
         /// Updates an endpoint with information from the server's discovery endpoint.
         /// </summary>
-        public void UpdateFromServer(ApplicationConfiguration application)
+        public void UpdateFromServer()
         {
-            UpdateFromServer(application, BindingFactory.Default, EndpointUrl, m_description.SecurityMode, m_description.SecurityPolicyUri);
+            UpdateFromServer(BindingFactory.Default,  EndpointUrl, m_description.SecurityMode, m_description.SecurityPolicyUri);
         }
         
         /// <summary>
         /// Updates an endpoint with information from the server's discovery endpoint.
         /// </summary>
-        public void UpdateFromServer(ApplicationConfiguration application, BindingFactory bindingFactory)
+        public void UpdateFromServer(BindingFactory bindingFactory)
         {
-            UpdateFromServer(application, bindingFactory, EndpointUrl, m_description.SecurityMode, m_description.SecurityPolicyUri);
+            UpdateFromServer(bindingFactory, EndpointUrl, m_description.SecurityMode, m_description.SecurityPolicyUri);
         }
 
         /// <summary>
         /// Updates an endpoint with information from the server's discovery endpoint.
         /// </summary>
         public void UpdateFromServer(
-            ApplicationConfiguration application,
-            BindingFactory bindingFactory,
-            Uri endpointUrl,
+            BindingFactory      bindingFactory,
+            Uri                 endpointUrl,
             MessageSecurityMode securityMode, 
-            string securityPolicyUri)
+            string              securityPolicyUri)
         { 
             // get the a discovery url.
             Uri discoveryUrl = GetDiscoveryUrl(endpointUrl);
 
             // create the discovery client.
-            DiscoveryClient client = DiscoveryClient.Create(application, discoveryUrl, bindingFactory, m_configuration);
+            DiscoveryClient client = DiscoveryClient.Create(discoveryUrl, bindingFactory, m_configuration);
 
             try
             {
@@ -1243,7 +1222,7 @@ namespace Opc.Ua
             // attempt to construct a discovery url by appending 'discovery' to the endpoint.
             if (discoveryUrls == null || discoveryUrls.Count == 0)
             {
-                if (endpointUrl.Scheme == Utils.UriSchemeHttp)
+                if (endpointUrl.Scheme != Utils.UriSchemeOpcTcp)
                 {
                     return new Uri(String.Format(CultureInfo.InvariantCulture, "{0}/discovery", endpointUrl));
                 }
@@ -1364,7 +1343,7 @@ namespace Opc.Ua
                         if (Object.ReferenceEquals(policies[ii], value))
                         {
                             m_selectedUserTokenPolicyIndex = ii;
-                            break;
+                            return;
                         }
                     }
                 }

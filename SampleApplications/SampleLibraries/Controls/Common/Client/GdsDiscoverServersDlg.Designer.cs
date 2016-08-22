@@ -64,10 +64,10 @@ namespace Opc.Ua.Client.Controls
             this.OkBTN = new System.Windows.Forms.Button();
             this.CancelBTN = new System.Windows.Forms.Button();
             this.ServersLV = new System.Windows.Forms.ListView();
-            this.ApplicationNameCH = new System.Windows.Forms.ColumnHeader();
-            this.ApplicationTypeCH = new System.Windows.Forms.ColumnHeader();
-            this.DNSNamesCH = new System.Windows.Forms.ColumnHeader();
-            this.ProtocolsCH = new System.Windows.Forms.ColumnHeader();
+            this.ApplicationNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ApplicationTypeCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DNSNamesCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ProtocolsCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.PopupMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.DetailsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.TopPN = new System.Windows.Forms.TableLayoutPanel();
@@ -430,8 +430,8 @@ namespace Opc.Ua.Client.Controls
             this.ServerCTRL.TabIndex = 10;
             this.ServerCTRL.UserIdentity = null;
             this.ServerCTRL.UseSecurity = true;
-            this.ServerCTRL.ConnectComplete += new System.EventHandler(this.ServerCTRL_ConnectComplete);
             this.ServerCTRL.ReconnectComplete += new System.EventHandler(this.ServerCTRL_ReconnectComplete);
+            this.ServerCTRL.ConnectComplete += new System.EventHandler(this.ServerCTRL_ConnectComplete);
             // 
             // GdsDiscoverServersDlg
             // 
@@ -442,6 +442,9 @@ namespace Opc.Ua.Client.Controls
             this.Controls.Add(this.BrowseCTRL);
             this.Controls.Add(this.ServerCTRL);
             this.Controls.Add(this.BottomPN);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "GdsDiscoverServersDlg";
             this.Text = "Global Directory Service";
             this.BottomPN.ResumeLayout(false);

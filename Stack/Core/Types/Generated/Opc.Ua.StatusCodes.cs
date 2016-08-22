@@ -150,47 +150,47 @@ namespace Opc.Ua
         public const uint BadSecurityChecksFailed = 0x80130000;
 
         /// <summary>
-        /// The certificate has expired or is not yet valid.
+        /// The Certificate has expired or is not yet valid.
         /// </summary>
         public const uint BadCertificateTimeInvalid = 0x80140000;
 
         /// <summary>
-        /// An issuer certificate has expired or is not yet valid.
+        /// An Issuer Certificate has expired or is not yet valid.
         /// </summary>
         public const uint BadCertificateIssuerTimeInvalid = 0x80150000;
 
         /// <summary>
-        /// The HostName used to connect to a Server does not match a HostName in the certificate.
+        /// The HostName used to connect to a Server does not match a HostName in the Certificate.
         /// </summary>
         public const uint BadCertificateHostNameInvalid = 0x80160000;
 
         /// <summary>
-        /// The URI specified in the ApplicationDescription does not match the URI in the certificate.
+        /// The URI specified in the ApplicationDescription does not match the URI in the Certificate.
         /// </summary>
         public const uint BadCertificateUriInvalid = 0x80170000;
 
         /// <summary>
-        /// The certificate may not be used for the requested operation.
+        /// The Certificate may not be used for the requested operation.
         /// </summary>
         public const uint BadCertificateUseNotAllowed = 0x80180000;
 
         /// <summary>
-        /// The issuer certificate may not be used for the requested operation.
+        /// The Issuer Certificate may not be used for the requested operation.
         /// </summary>
         public const uint BadCertificateIssuerUseNotAllowed = 0x80190000;
 
         /// <summary>
-        /// The certificate is not trusted.
+        /// The Certificate is not trusted.
         /// </summary>
         public const uint BadCertificateUntrusted = 0x801A0000;
 
         /// <summary>
-        /// It was not possible to determine if the certificate has been revoked.
+        /// It was not possible to determine if the Certificate has been revoked.
         /// </summary>
         public const uint BadCertificateRevocationUnknown = 0x801B0000;
 
         /// <summary>
-        /// It was not possible to determine if the issuer certificate has been revoked.
+        /// It was not possible to determine if the Issuer Certificate has been revoked.
         /// </summary>
         public const uint BadCertificateIssuerRevocationUnknown = 0x801C0000;
 
@@ -720,7 +720,7 @@ namespace Opc.Ua
         public const uint BadInvalidTimestampArgument = 0x80BD0000;
 
         /// <summary>
-        /// The server does not support writing the combination of value, status and timestamps provided.
+        /// The server not does support writing the combination of value, status and timestamps provided.
         /// </summary>
         public const uint BadWriteNotSupported = 0x80730000;
 

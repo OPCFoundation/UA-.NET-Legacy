@@ -274,47 +274,55 @@ namespace Opc.Ua.Server
 
             int next = m_end;
 
-            // check for wrap around.
-            if (next >= m_values.Length)
+            // check if the latest value has initial dummy data
+            if (m_values[m_end-1].StatusCode != StatusCodes.BadWaitingForInitialData)
             {
-                next = 0;
-            }
-
-            // check if queue is full.
-            if (m_start == next)
-            {
-
-                if (!m_discardOldest)
+                // check for wrap around.
+                if (next >= m_values.Length)
                 {
-                    m_overflow = m_end - 1;
-                    ServerUtils.ReportDiscardedValue(null, m_monitoredItemId, value);
+                    next = 0;
+                }
 
-                    // overwrite last value
-                    m_values[m_overflow] = value;
-
-                    if (m_errors != null)
+                // check if queue is full.
+                if (m_start == next)
+                {
+                    if (!m_discardOldest)
                     {
-                        m_errors[m_overflow] = error;
+                        m_overflow = m_end - 1;
+                        ServerUtils.ReportDiscardedValue(null, m_monitoredItemId, value);
+
+                        // overwrite last value
+                        m_values[m_overflow] = value;
+
+                        if (m_errors != null)
+                        {
+                            m_errors[m_overflow] = error;
+                        }
+
+                        return;
                     }
 
-                    return;
+                    // remove oldest value.
+                    m_start++;
+
+                    if (m_start >= m_values.Length)
+                    {
+                        m_start = 0;
+                    }
+
+                    // set overflow bit.
+                    m_overflow = m_start;
+                    ServerUtils.ReportDiscardedValue(null, m_monitoredItemId, m_values[m_overflow]);
                 }
-
-                // remove oldest value.
-                m_start++;
-
-                if (m_start >= m_values.Length)
+                else
                 {
-                    m_start = 0;
+                    // Utils.Trace("ENQUEUE VALUE: Value={0}", value.WrappedValue);
                 }
-
-                // set overflow bit.
-                m_overflow = m_start;
-                ServerUtils.ReportDiscardedValue(null, m_monitoredItemId, m_values[m_overflow]);
             }
             else
             {
-               // Utils.Trace("ENQUEUE VALUE: Value={0}", value.WrappedValue);
+				// overwrite the last value
+                next = m_end - 1;
             }
 
             // add value.

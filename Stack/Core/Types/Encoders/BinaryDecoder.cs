@@ -147,46 +147,7 @@ namespace Opc.Ua
                 decoder.Close();
             }
         }
-
-        /// <summary>
-        /// Decodes a session-less message from a buffer.
-        /// </summary>
-        public static IEncodeable DecodeSessionLessMessage(byte[] buffer, ServiceMessageContext context)
-        {
-            if (buffer == null) throw new ArgumentNullException("buffer");
-            if (context == null) throw new ArgumentNullException("context");
-
-            BinaryDecoder decoder = new BinaryDecoder(buffer, context);
-
-            try
-            {
-                // read the node id.
-                NodeId typeId = decoder.ReadNodeId(null);
-
-                // convert to absolute node id.
-                ExpandedNodeId absoluteId = NodeId.ToExpandedNodeId(typeId, context.NamespaceUris);
-
-                // lookup message session-less envelope type.
-                Type actualType = context.Factory.GetSystemType(absoluteId);
-
-                if (actualType == null || actualType != typeof(SessionLessServiceMessageType))
-                {
-                    throw new ServiceResultException(StatusCodes.BadEncodingError, Utils.Format("Cannot decode session-less service message with type id: {0}.", absoluteId));
-                }
-
-                // decode the actual message.
-                SessionLessServiceMessage message = new SessionLessServiceMessage();
-
-                message.Decode(decoder);
-
-                return message.Message;
-            }
-            finally
-            {
-                decoder.Close();
-            }
-        }
-
+        
         /// <summary>
         /// Decodes a message from a buffer.
         /// </summary>

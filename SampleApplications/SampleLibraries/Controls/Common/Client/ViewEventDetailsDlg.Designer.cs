@@ -58,9 +58,9 @@ namespace Opc.Ua.Client.Controls
         private void InitializeComponent()
         {
             this.FieldsLV = new System.Windows.Forms.ListView();
-            this.FieldCH = new System.Windows.Forms.ColumnHeader();
-            this.DataTypeCH = new System.Windows.Forms.ColumnHeader();
-            this.ValueCH = new System.Windows.Forms.ColumnHeader();
+            this.FieldCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DataTypeCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ValueCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // FieldsLV
@@ -101,8 +101,9 @@ namespace Opc.Ua.Client.Controls
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(546, 360);
             this.Controls.Add(this.FieldsLV);
-            this.MaximumSize = new System.Drawing.Size(1200, 1200);
-            this.MinimumSize = new System.Drawing.Size(400, 91);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ViewEventDetailsDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "View Event Details";

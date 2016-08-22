@@ -100,8 +100,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // LocaleCB
             // 
-            this.LocaleCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.LocaleCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LocaleCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LocaleCB.FormattingEnabled = true;
             this.LocaleCB.Location = new System.Drawing.Point(3, 6);
@@ -126,8 +126,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(284, 62);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.BottomPN);
-            this.MaximumSize = new System.Drawing.Size(300, 100);
-            this.MinimumSize = new System.Drawing.Size(300, 100);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SelectLocaleDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Locale";

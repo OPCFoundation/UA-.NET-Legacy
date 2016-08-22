@@ -316,22 +316,7 @@ namespace Opc.Ua
             this(exception, defaultCode, defaultSymbolicId, defaultNamespaceUri, null)
         {
         }
-
-        private static string GetDefaultMessage(Exception exception)
-        {
-            if (exception != null && exception.Message != null)
-            {
-                if (exception.Message.StartsWith("[") || exception is ServiceResultException)
-                {
-                    return exception.Message;
-                }
-
-                return String.Format(CultureInfo.InvariantCulture, "[{0}] {1}", exception.GetType().Name, exception.Message);
-            }
-
-            return String.Empty;
-        }
-
+                
         /// <summary>
         /// Constructs a object from an exception.
         /// </summary>
@@ -342,7 +327,7 @@ namespace Opc.Ua
             Exception exception,
             uint      defaultCode)
         :
-            this(exception, defaultCode, null, null, GetDefaultMessage(exception))
+            this(exception, defaultCode, null, null, exception.Message)
         {
         }      
                 
@@ -351,7 +336,7 @@ namespace Opc.Ua
         /// </summary>
         public ServiceResult(Exception exception)
         :
-            this(exception, StatusCodes.Bad, null, null, GetDefaultMessage(exception))
+            this(exception, StatusCodes.Bad, null, null, exception.Message)
         {
         }      
 

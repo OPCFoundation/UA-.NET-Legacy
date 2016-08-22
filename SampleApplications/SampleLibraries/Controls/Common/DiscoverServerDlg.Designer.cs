@@ -98,8 +98,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // ValueTB
             // 
-            this.ValueTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueTB.Location = new System.Drawing.Point(36, 6);
             this.ValueTB.Name = "ValueTB";
             this.ValueTB.Size = new System.Drawing.Size(306, 20);
@@ -108,9 +108,9 @@ namespace Opc.Ua.Client.Controls
             // 
             // ServersLB
             // 
-            this.ServersLB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ServersLB.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ServersLB.FormattingEnabled = true;
             this.ServersLB.Location = new System.Drawing.Point(4, 32);
             this.ServersLB.Name = "ServersLB";
@@ -142,8 +142,8 @@ namespace Opc.Ua.Client.Controls
             this.Controls.Add(this.ValueLB);
             this.Controls.Add(this.OkBTN);
             this.Controls.Add(this.CancelBTN);
-            this.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.MinimumSize = new System.Drawing.Size(16, 107);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "DiscoverServerDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Discover Servers";

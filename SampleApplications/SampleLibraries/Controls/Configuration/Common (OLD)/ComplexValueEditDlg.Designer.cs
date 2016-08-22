@@ -109,13 +109,14 @@ namespace Opc.Ua.Client.Controls
             // 
             // ValueCTRL
             // 
-            this.ValueCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValueCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ValueCTRL.AutoUpdate = true;
             this.ValueCTRL.Instructions = null;
             this.ValueCTRL.LatestValue = true;
             this.ValueCTRL.Location = new System.Drawing.Point(4, 3);
+            this.ValueCTRL.MonitoredItem = null;
             this.ValueCTRL.Name = "ValueCTRL";
             this.ValueCTRL.Size = new System.Drawing.Size(699, 311);
             this.ValueCTRL.TabIndex = 0;
@@ -127,7 +128,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(707, 345);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ButtonsPN);
-            this.MinimumSize = new System.Drawing.Size(287, 98);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ComplexValueEditDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Value";
