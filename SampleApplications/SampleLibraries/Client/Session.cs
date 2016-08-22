@@ -1,18 +1,31 @@
-/* Copyright (c) 1996-2016, OPC Foundation. All rights reserved.
-
-   The source code in this file is covered under a dual-license scenario:
-     - RCL: for OPC Foundation members in good-standing
-     - GPL V2: everybody else
-
-   RCL license terms accompanied with this source code. See http://opcfoundation.org/License/RCL/1.00/
-
-   GNU General Public License as published by the Free Software Foundation;
-   version 2 of the License are accompanied with this source code. See http://opcfoundation.org/License/GPLv2
-
-   This source code is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+/* ========================================================================
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ *
+ * OPC Foundation MIT License 1.00
+ * 
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * The complete license agreement can be found here:
+ * http://opcfoundation.org/License/MIT/1.00/
+ * ======================================================================*/
 
 using System;
 using System.Collections.Generic;
@@ -71,6 +84,20 @@ namespace Opc.Ua.Client
             base(channel)
         {
             Initialize(channel, configuration, endpoint, clientCertificate); 
+        }
+
+        public Session(
+            ITransportChannel channel,
+            ApplicationConfiguration configuration,
+            ConfiguredEndpoint endpoint,
+            X509Certificate2 clientCertificate,
+            EndpointDescriptionCollection availableEndpoints)
+            :
+                base(channel)
+        {
+            Initialize(channel, configuration, endpoint, clientCertificate);
+
+            m_expectedServerEndpoints = availableEndpoints;
         }
 
         /// <summary>
@@ -224,6 +251,7 @@ namespace Opc.Ua.Client
             m_subscriptions         = new List<Subscription>();
             m_dictionaries          = new Dictionary<NodeId,DataDictionary>();
             m_acknowledgementsToSend = new SubscriptionAcknowledgementCollection();
+            m_latestAcknowledgementsSent = new Dictionary<uint, uint>();
             m_identityHistory       = new List<IUserIdentity>();
             m_outstandingRequests   = new LinkedList<AsyncRequestState>();
             m_keepAliveInterval     = 5000;
@@ -727,7 +755,7 @@ namespace Opc.Ua.Client
             if (endpoint.UpdateBeforeConnect)
             {
                 BindingFactory bindingFactory = BindingFactory.Create(configuration, messageContext);
-                endpoint.UpdateFromServer(configuration, bindingFactory);
+                endpoint.UpdateFromServer(bindingFactory);
 
                 endpointDescription = endpoint.Description;
                 endpointConfiguration = endpoint.Configuration;
@@ -736,36 +764,7 @@ namespace Opc.Ua.Client
             // checks the domains in the certificate.
             if (checkDomain && endpoint.Description.ServerCertificate != null && endpoint.Description.ServerCertificate.Length > 0)
             {
-                bool domainFound = false;
-
-                X509Certificate2 serverCertificate = new X509Certificate2(endpoint.Description.ServerCertificate);
-
-                // check the certificate domains.
-                IList<string> domains = Utils.GetDomainsFromCertficate(serverCertificate);
-
-                if (domains != null)
-                {
-                    string hostname = endpoint.EndpointUrl.DnsSafeHost;
-
-                    if (hostname == "localhost" || hostname == "127.0.0.1")
-                    {
-                        hostname = System.Net.Dns.GetHostName();
-                    }
-
-                    for (int ii = 0; ii < domains.Count; ii++)
-                    {
-                        if (String.Compare(hostname, domains[ii], StringComparison.InvariantCultureIgnoreCase) == 0)
-                        {
-                            domainFound = true;
-                            break;
-                        }
-                    }
-                }
-
-                if (!domainFound)
-                {
-                    throw new ServiceResultException(StatusCodes.BadCertificateHostNameInvalid);
-                }
+                CheckCertificateDomain(endpoint);
             }
 
             X509Certificate2 clientCertificate = null;
@@ -810,7 +809,7 @@ namespace Opc.Ua.Client
             // create the session.
 			try
 			{
-				session.Open( sessionName, sessionTimeout, identity, preferredLocales );
+				session.Open( sessionName, sessionTimeout, identity, preferredLocales, checkDomain );
 			}
 			catch
 			{
@@ -819,6 +818,40 @@ namespace Opc.Ua.Client
 			}
 
             return session;
+        }
+
+        private static void CheckCertificateDomain(ConfiguredEndpoint endpoint)
+        {
+            bool domainFound = false;
+
+            X509Certificate2 serverCertificate = new X509Certificate2(endpoint.Description.ServerCertificate);
+
+            // check the certificate domains.
+            IList<string> domains = Utils.GetDomainsFromCertficate(serverCertificate);
+
+            if (domains != null)
+            {
+                string hostname = endpoint.EndpointUrl.DnsSafeHost;
+
+                if (hostname == "localhost" || hostname == "127.0.0.1")
+                {
+                    hostname = System.Net.Dns.GetHostName();
+                }
+
+                for (int ii = 0; ii < domains.Count; ii++)
+                {
+                    if (String.Compare(hostname, domains[ii], StringComparison.InvariantCultureIgnoreCase) == 0)
+                    {
+                        domainFound = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!domainFound)
+            {
+                throw new ServiceResultException(StatusCodes.BadCertificateHostNameInvalid);
+            }
         }
 
 
@@ -892,6 +925,8 @@ namespace Opc.Ua.Client
                     // check if already connecting.
                     if (m_reconnecting)
                     {
+                        Utils.Trace("Session is already attempting to reconnect.");
+
                         throw ServiceResultException.Create(
                             StatusCodes.BadInvalidState, 
                             "Session is already attempting to reconnect.");
@@ -913,17 +948,14 @@ namespace Opc.Ua.Client
                 // create the client signature.
                 byte[] dataToSign = Utils.Append(endpoint.ServerCertificate, m_serverNonce);
                 SignatureData clientSignature = SecurityPolicies.Sign(m_instanceCertificate, endpoint.SecurityPolicyUri, dataToSign);
-
+                
                 // check that the user identity is supported by the endpoint.
-                UserTokenPolicy identityPolicy = endpoint.FindUserTokenPolicy(m_identity.PolicyId);
+                UserTokenPolicy identityPolicy = endpoint.FindUserTokenPolicy(m_identity.TokenType, m_identity.IssuedTokenType);
 
                 if (identityPolicy == null)
                 {
-                    identityPolicy = endpoint.FindUserTokenPolicy(m_identity.TokenType, m_identity.IssuedTokenType);
-                }
+                    Utils.Trace("Endpoint does not supported the user identity type provided.");
 
-                if (identityPolicy == null)
-                {
                     throw ServiceResultException.Create(
                         StatusCodes.BadUserAccessDenied,
                         "Endpoint does not supported the user identity type provided.");
@@ -955,16 +987,25 @@ namespace Opc.Ua.Client
                 SignedSoftwareCertificateCollection clientSoftwareCertificates = GetSoftwareCertificates();
                                 
                 Utils.Trace("Session REPLACING channel.");
-                // initialize the channel which will be created with the server.
-                ITransportChannel channel = SessionChannel.Create(
-                    m_configuration,
-                    m_endpoint.Description,
-                    m_endpoint.Configuration,
-                    m_instanceCertificate,
-                    MessageContext);
 
-                // disposes the existing channel.
-                TransportChannel = channel;
+                // check if the channel supports reconnect.
+                if ((TransportChannel.SupportedFeatures & TransportChannelFeatures.Reconnect) != 0)
+                {
+                    TransportChannel.Reconnect();
+                }
+                else
+                {
+                    // initialize the channel which will be created with the server.
+                    ITransportChannel channel = SessionChannel.Create(
+                        m_configuration,
+                        m_endpoint.Description,
+                        m_endpoint.Configuration,
+                        m_instanceCertificate,
+                        MessageContext);
+
+                    // disposes the existing channel.
+                    TransportChannel = channel;
+                }
                 
                 // reactivate session.
                 byte[] serverNonce = null;
@@ -1059,7 +1100,7 @@ namespace Opc.Ua.Client
         /// Load the list of subscriptions saved in a file.
         /// </summary>
         /// <param name="filePath">The file path.</param>
-        /// <returns>The list of loaded subscritons</returns>
+        /// <returns>The list of loaded subscriptions</returns>
         public IEnumerable<Subscription> Load(string filePath)
         {
             XmlReaderSettings settings = new XmlReaderSettings();
@@ -1875,12 +1916,30 @@ namespace Opc.Ua.Client
         /// <param name="sessionTimeout">The session timeout.</param>
         /// <param name="identity">The user identity.</param>
         /// <param name="preferredLocales">The list of preferred locales.</param>
+        public void Open(
+            string sessionName,
+            uint sessionTimeout,
+            IUserIdentity identity,
+            IList<string> preferredLocales)
+        {
+            Open(sessionName, sessionTimeout, identity, preferredLocales, true);
+        }
+
+        /// <summary>
+        /// Establishes a session with the server.
+        /// </summary>
+        /// <param name="sessionName">The name to assign to the session.</param>
+        /// <param name="sessionTimeout">The session timeout.</param>
+        /// <param name="identity">The user identity.</param>
+        /// <param name="preferredLocales">The list of preferred locales.</param>
+        /// <param name="checkDomain">If set to <c>true</c> then the domain in the certificate must match the endpoint used.</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public void Open(
             string        sessionName,
             uint          sessionTimeout,
             IUserIdentity identity,
-            IList<string> preferredLocales)
+            IList<string> preferredLocales,
+            bool          checkDomain)
         {
             // check connection state.
             lock (SyncRoot)
@@ -1934,6 +1993,11 @@ namespace Opc.Ua.Client
             {
                 serverCertificate = Utils.ParseCertificateBlob(certificateData);
                 m_configuration.CertificateValidator.Validate(serverCertificate);
+
+                if(checkDomain)
+                {
+                    CheckCertificateDomain(m_endpoint);
+                }
 
                 //X509Certificate2Collection certificateChain = Utils.ParseCertificateChainBlob(certificateData);                
                 //if (certificateChain.Count > 0)
@@ -2046,6 +2110,9 @@ namespace Opc.Ua.Client
                 base.SessionCreated(sessionId, sessionCookie);
             }
 
+            Utils.Trace("Revised session timeout value: {0}. ", m_sessionTimeout);
+            Utils.Trace("Max response message size value: {0}. Max request message size: {1} ", MessageContext.MaxMessageSize, m_maxRequestMessageSize);
+
 			//we need to call CloseSession if CreateSession was successful but some other exception is thrown
 			try
 			{
@@ -2058,8 +2125,62 @@ namespace Opc.Ua.Client
 						"Server did not return the certificate used to create the secure channel." );
 				}
 
+                if (serverSignature == null || serverSignature.Signature == null)
+                {
+                    Utils.Trace("Server signature is null or empty.");
+
+                    //throw ServiceResultException.Create(
+                    //    StatusCodes.BadSecurityChecksFailed,
+                    //    "Server signature is null or empty.");
+                }
+
+                if (m_expectedServerEndpoints != null && m_expectedServerEndpoints.Count > 0)
+                {
+                    // verify that the list of endpoints returned by CreateSession matches the list returned at GetEndpoints.
+                    if (m_expectedServerEndpoints.Count != serverEndpoints.Count)
+                    {
+                        throw ServiceResultException.Create(
+                            StatusCodes.BadSecurityChecksFailed,
+                            "Server did not return a number of ServerEndpoints that matches the one from GetEndpoints.");
+                    }
+
+                    for (int ii = 0; ii < serverEndpoints.Count; ii++)
+                    {
+                        EndpointDescription serverEndpoint = serverEndpoints[ii];
+                        EndpointDescription expectedServerEndpoint = m_expectedServerEndpoints[ii];
+
+                        if (serverEndpoint.SecurityMode != expectedServerEndpoint.SecurityMode ||
+                            serverEndpoint.SecurityPolicyUri != expectedServerEndpoint.SecurityPolicyUri ||
+                            serverEndpoint.TransportProfileUri != expectedServerEndpoint.TransportProfileUri ||
+                            serverEndpoint.SecurityLevel != expectedServerEndpoint.SecurityLevel)
+                        {
+                            throw ServiceResultException.Create(
+                                StatusCodes.BadSecurityChecksFailed,
+                                "The list of ServerEndpoints returned at CreateSession does not match the list from GetEndpoints.");
+                        }
+
+                        if (serverEndpoint.UserIdentityTokens.Count != expectedServerEndpoint.UserIdentityTokens.Count)
+                        {
+                            throw ServiceResultException.Create(
+                                StatusCodes.BadSecurityChecksFailed,
+                                "The list of ServerEndpoints returned at CreateSession does not match the one from GetEndpoints.");
+                        }
+
+                        for (int jj = 0; jj < serverEndpoint.UserIdentityTokens.Count; jj++)
+                        {
+                            if (!serverEndpoint.UserIdentityTokens[jj].IsEqual(expectedServerEndpoint.UserIdentityTokens[jj]))
+                            {
+                                throw ServiceResultException.Create(
+                                StatusCodes.BadSecurityChecksFailed,
+                                "The list of ServerEndpoints returned at CreateSession does not match the one from GetEndpoints.");
+                            }
+                        }
+                    }
+                }
+
+
 				// find the matching description (TBD - check domains against certificate).
-				// bool found = false;
+				bool found = false;
 				Uri expectedUrl = Utils.ParseUri( m_endpoint.Description.EndpointUrl );
 
                 if (expectedUrl != null)
@@ -2083,7 +2204,7 @@ namespace Opc.Ua.Client
                                     m_endpoint.Description.TransportProfileUri = serverEndpoint.TransportProfileUri;
                                     m_endpoint.Description.UserIdentityTokens = serverEndpoint.UserIdentityTokens;
 
-                                    // found = true;
+                                    found = true;
                                     break;
                                 }
                             }
@@ -2092,12 +2213,12 @@ namespace Opc.Ua.Client
                 }
 
 				// could be a security risk.
-				//if( !found )
-				//{
-				//	throw ServiceResultException.Create(
-				//		StatusCodes.BadSecurityChecksFailed,
-				//		"Server did not return an EndpointDescription that matched the one used to create the secure channel." );
-				//}
+				if( !found )
+				{
+					throw ServiceResultException.Create(
+						StatusCodes.BadSecurityChecksFailed,
+						"Server did not return an EndpointDescription that matched the one used to create the secure channel." );
+				}
 
 				// validate the server's signature.
 				byte[] dataToSign = Utils.Append( clientCertificateData, clientNonce );
@@ -2176,6 +2297,19 @@ namespace Opc.Ua.Client
 					out serverNonce,
 					out certificateResults,
 					out certificateDiagnosticInfos );
+
+                if (certificateResults != null)
+                {
+                    for (int i = 0; i < certificateResults.Count; i++)
+                    {
+                        Utils.Trace("ActivateSession result[{0}] = {1}", i, certificateResults[i]);    
+                    }
+                }
+
+                if (certificateResults == null || certificateResults.Count == 0)
+                {
+                    Utils.Trace("Empty results were received for the ActivateSession call.");
+                }
 
 				// fetch namespaces.
 				FetchNamespaceTables();
@@ -2275,12 +2409,7 @@ namespace Opc.Ua.Client
             }
 
             // check that the user identity is supported by the endpoint.
-            UserTokenPolicy identityPolicy = m_endpoint.Description.FindUserTokenPolicy(identity.PolicyId);
-
-            if (identityPolicy == null)
-            {
-                identityPolicy = m_endpoint.Description.FindUserTokenPolicy(identity.TokenType, identity.IssuedTokenType);
-            }
+            UserTokenPolicy identityPolicy = m_endpoint.Description.FindUserTokenPolicy(identity.TokenType, identity.IssuedTokenType);
 
             if (identityPolicy == null)
             {
@@ -2678,6 +2807,8 @@ namespace Opc.Ua.Client
                     {
                         result = StatusCodes.Bad;
                     }
+
+                    Utils.Trace("Session close error: " + result);
                 }
             }
 
@@ -2725,7 +2856,7 @@ namespace Opc.Ua.Client
 
             if (subscription.Created)
             {
-                subscription.Delete(true);
+                subscription.Delete(false);
             }
             
             lock (SyncRoot)
@@ -3466,6 +3597,17 @@ namespace Opc.Ua.Client
             {
                 acknowledgementsToSend = m_acknowledgementsToSend;
                 m_acknowledgementsToSend = new SubscriptionAcknowledgementCollection();
+                foreach (var toSend in acknowledgementsToSend)
+                {
+                    if (m_latestAcknowledgementsSent.ContainsKey(toSend.SubscriptionId))
+                    {
+                        m_latestAcknowledgementsSent[toSend.SubscriptionId] = toSend.SequenceNumber;
+                    }
+                    else
+                    {
+                        m_latestAcknowledgementsSent.Add(toSend.SubscriptionId, toSend.SequenceNumber);
+                    }
+                }
             }
 
             // send publish request.
@@ -3536,6 +3678,14 @@ namespace Opc.Ua.Client
                     out notificationMessage,
                     out acknowledgeResults,
                     out acknowledgeDiagnosticInfos);
+
+                foreach (StatusCode code in acknowledgeResults)
+                {
+                    if (StatusCode.IsBad(code))
+                    {
+                        Utils.Trace("Error - Publish call finished. ResultCode={0}; SubscriptionId={1};", code.ToString(), subscriptionId);
+                    }
+                }
                 
                 // nothing more to do if session changed.
                 if (sessionId != SessionId)
@@ -3557,31 +3707,39 @@ namespace Opc.Ua.Client
                 // nothing more to do if reconnecting.
                 if (m_reconnecting)
                 {
-                    // Utils.Trace("No new publish sent because of reconnect in progress.");
+                    Utils.Trace("No new publish sent because of reconnect in progress.");
                     return;
                 }
             }
             catch (Exception e)
-            {   
-                // Utils.Trace("Publish #{0}, Reconnecting={2}, Error: {1}", requestHeader.RequestHandle, e.Message, m_reconnecting);
-
+            {
+                if (m_subscriptions.Count == 0)
+                {
+                    // Publish responses with error should occur after deleting the last subscription.
+                    Utils.Trace("Publish #{0}, Subscription count = 0, Error: {1}", requestHeader.RequestHandle, e.Message);
+                }
+                else
+                {
+                    Utils.Trace("Publish #{0}, Reconnecting={2}, Error: {1}", requestHeader.RequestHandle, e.Message, m_reconnecting);
+                }
+                
                 moreNotifications = false;
 
                 // ignore errors if reconnecting.
                 if (m_reconnecting)
                 {
-                    // Utils.Trace("Publish abandoned after error due to reconnect: {0}", e.Message);
+                    Utils.Trace("Publish abandoned after error due to reconnect: {0}", e.Message);
                     return;
                 }
 
                 // nothing more to do if session changed.
                 if (sessionId != SessionId)
                 {
-                    // Utils.Trace("Publish abandoned after error because session id changed: Old {0} != New {1}", sessionId, SessionId);
+                    Utils.Trace("Publish abandoned after error because session id changed: Old {0} != New {1}", sessionId, SessionId);
                     return;
                 }
 
-                // try to acknowlege the notifications again in the next publish.
+                // try to acknowledge the notifications again in the next publish.
                 if (acknowledgementsToSend != null)
                 {
                     lock (SyncRoot)
@@ -3772,7 +3930,54 @@ namespace Opc.Ua.Client
                     acknowledgementsToSend.Add(acknowledgement);
                 }
 
+                uint lastSentSequenceNumber = 0;
+                if (availableSequenceNumbers != null)
+                {
+                    foreach (uint availableSequenceNumber in availableSequenceNumbers)
+                    {
+                        if (m_latestAcknowledgementsSent.ContainsKey(subscriptionId))
+                        {
+                            lastSentSequenceNumber = m_latestAcknowledgementsSent[subscriptionId];
+
+                            // If the last sent sequence number is uint.Max do not display the warning; the counter rolled over
+                            // If the last sent sequence number is greater or equal to the available sequence number (returned by the publish), a warning must be logged.
+                            if (((lastSentSequenceNumber >= availableSequenceNumber) && (lastSentSequenceNumber != uint.MaxValue)) || (lastSentSequenceNumber == availableSequenceNumber) && (lastSentSequenceNumber == uint.MaxValue))
+                            {
+                                Utils.Trace("Received sequence number which was already acknowledged={0}", availableSequenceNumber);
+                            }
+                        }
+                    }
+                }
+
+                if (m_latestAcknowledgementsSent.ContainsKey(subscriptionId))
+                {
+                    lastSentSequenceNumber = m_latestAcknowledgementsSent[subscriptionId];
+
+                    // If the last sent sequence number is uint.Max do not display the warning; the counter rolled over
+                    // If the last sent sequence number is greater or equal to the notificationMessage's sequence number (returned by the publish), a warning must be logged.
+                    if (((lastSentSequenceNumber >= notificationMessage.SequenceNumber) && (lastSentSequenceNumber != uint.MaxValue)) || (lastSentSequenceNumber == notificationMessage.SequenceNumber) && (lastSentSequenceNumber == uint.MaxValue))
+                    {
+                        Utils.Trace("Received sequence number which was already acknowledged={0}", notificationMessage.SequenceNumber);
+                    }
+                }
+
+                if (availableSequenceNumbers != null)
+                {
+                    foreach (var acknowledgement in acknowledgementsToSend)
+                    {
+                        if (!availableSequenceNumbers.Contains(acknowledgement.SequenceNumber))
+                        {
+                            Utils.Trace("Sequence number={0} was not received in the available sequence numbers.", acknowledgement.SequenceNumber);
+                        }
+                    }
+                }
+
                 m_acknowledgementsToSend = acknowledgementsToSend;
+
+                if (notificationMessage.IsEmpty)
+                {
+                    Utils.Trace("Empty notification message received for SessionId {0} with PublishTime {1}", SessionId, notificationMessage.PublishTime.ToLocalTime());
+                }
 
                 // find the subscription.
                 foreach (Subscription current in m_subscriptions)
@@ -3787,7 +3992,19 @@ namespace Opc.Ua.Client
 
             // ignore messages with a subscription that has been deleted.
             if (subscription != null)
-            {   
+            {
+                // Validate publish time and reject old values.
+                if (notificationMessage.PublishTime.AddMilliseconds(subscription.CurrentPublishingInterval * subscription.CurrentLifetimeCount) < DateTime.UtcNow)
+                {
+                    Utils.Trace("PublishTime {0} in publish response is too old for SubscriptionId {1}.", notificationMessage.PublishTime.ToLocalTime(), subscription.Id);
+                }
+
+                // Validate publish time and reject old values.
+                if (notificationMessage.PublishTime > DateTime.UtcNow.AddMilliseconds(subscription.CurrentPublishingInterval * subscription.CurrentLifetimeCount))
+                {
+                    Utils.Trace("PublishTime {0} in publish response is newer than actual time for SubscriptionId {1}.", notificationMessage.PublishTime.ToLocalTime(), subscription.Id);
+                }
+
                 // update subscription cache.                                 
                 subscription.SaveMessageInCache(
                     availableSequenceNumbers, 
@@ -3804,6 +4021,10 @@ namespace Opc.Ua.Client
                         ThreadPool.QueueUserWorkItem(OnRaisePublishNotification, args);
                     }
                 }
+            }
+            else
+            {
+                Utils.Trace("Received Publish Response for Unknown SubscriptionId={0}", subscriptionId);
             }
         }
 
@@ -3831,6 +4052,7 @@ namespace Opc.Ua.Client
         
         #region Private Fields
         private SubscriptionAcknowledgementCollection m_acknowledgementsToSend;
+        private Dictionary<uint, uint> m_latestAcknowledgementsSent;
         private List<Subscription> m_subscriptions;
         private Dictionary<NodeId,DataDictionary> m_dictionaries;
         private Subscription m_defaultSubscription;
@@ -3861,7 +4083,9 @@ namespace Opc.Ua.Client
         private long m_keepAliveCounter;
         private bool m_reconnecting;
         private LinkedList<AsyncRequestState> m_outstandingRequests;
-        
+
+        private EndpointDescriptionCollection m_expectedServerEndpoints;
+
         private class AsyncRequestState
         {
             public uint RequestTypeId;

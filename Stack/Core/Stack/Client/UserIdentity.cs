@@ -98,7 +98,7 @@ namespace Opc.Ua
         public UserIdentity(IssuedIdentityToken token, SecurityTokenSerializer serializer, SecurityTokenResolver resolver)
         {
             Initialize(token, serializer, resolver);
-        }
+        }        
         #endregion
 
         #region IUserIdentity Methods
@@ -209,23 +209,9 @@ namespace Opc.Ua
 
                 IssuedIdentityToken wssToken = new IssuedIdentityToken();
                 wssToken.PolicyId = m_policyId;
-                wssToken.IssuedTokenType = Ua.IssuedTokenType.SAML;
                 wssToken.DecryptedTokenData = ostrm.ToArray();
 
                 return wssToken;
-            }
-
-            // handle JWT token.
-            JwtSecurityToken jwtToken = m_token as JwtSecurityToken;
-
-            if (jwtToken != null)
-            {
-                IssuedIdentityToken issuedToken = new IssuedIdentityToken();
-                issuedToken.PolicyId = m_policyId;
-                issuedToken.IssuedTokenType = Ua.IssuedTokenType.JWT;
-                issuedToken.DecryptedTokenData = new UTF8Encoding(false).GetBytes(jwtToken.RawData);
-
-                return issuedToken;
             }
 
             // return a WSS token by default.
@@ -246,7 +232,6 @@ namespace Opc.Ua
 
                 IssuedIdentityToken wssToken = new IssuedIdentityToken();
                 wssToken.PolicyId = m_policyId;
-                wssToken.IssuedTokenType = Ua.IssuedTokenType.GenericWSS;
                 wssToken.DecryptedTokenData = ostrm.ToArray();
 
                 return wssToken;
@@ -361,46 +346,7 @@ namespace Opc.Ua
                 m_issuedTokenType = new XmlQualifiedName("", "urn:oasis:names:tc:SAML:1.0:assertion"); 
                 return;
             }
-
-            JwtSecurityToken jwtToken = token as JwtSecurityToken;
-
-            if (jwtToken != null)
-            {
-                m_displayName = "JWT";
-
-                string uniqueName = null;
-                string name = null;
-                string subject = null;
-
-                // find the subject of the SAML assertion.
-                foreach (var claim in jwtToken.Claims)
-                {
-                    switch (claim.Type)
-                    {
-                        case "unique_name": { uniqueName = claim.Value.ToString(); break; }
-                        case "name": { name = claim.Value.ToString(); break; }
-                        case "sub": { subject = claim.Value.ToString(); break; }
-                    }
-                }
-
-                if (!String.IsNullOrEmpty(uniqueName))
-                {
-                    m_displayName = uniqueName;
-                }
-                else if (!String.IsNullOrEmpty(uniqueName))
-                {
-                    m_displayName = name;
-                }
-                else if (!String.IsNullOrEmpty(subject))
-                {
-                    m_displayName = subject;
-                }
-
-                m_tokenType = UserTokenType.IssuedToken;
-                m_issuedTokenType = new XmlQualifiedName("", "http://opcfoundation.org/UA/UserTokenPolicy#JWT");
-                return;
-            }
-
+            
             m_displayName = UserTokenType.IssuedToken.ToString();
             m_tokenType   = UserTokenType.IssuedToken;
         }
@@ -431,24 +377,11 @@ namespace Opc.Ua
                 return;
             }
    
-            IssuedIdentityToken issuedToken = token as IssuedIdentityToken;
-
-            if (issuedToken != null)
-            {
-                if (issuedToken.IssuedTokenType == Ua.IssuedTokenType.JWT)
-                {
-                    if (issuedToken.DecryptedTokenData == null || issuedToken.DecryptedTokenData.Length == 0)
-                    {
-                        throw new ArgumentException("JSON Web Token has no data associated with it.", "token");
-                    }
-
-                    string jwt = new UTF8Encoding().GetString(issuedToken.DecryptedTokenData);
-                    JwtSecurityToken jwtToken = new JwtSecurityToken(jwt);
-                    Initialize(jwtToken);
-                    return;
-                }
+            IssuedIdentityToken wssToken = token as IssuedIdentityToken;
             
-                Initialize(issuedToken, WSSecurityTokenSerializer.DefaultInstance, null);                
+            if (wssToken != null)
+            {
+                Initialize(wssToken, WSSecurityTokenSerializer.DefaultInstance, null);                
                 return;
             }
             

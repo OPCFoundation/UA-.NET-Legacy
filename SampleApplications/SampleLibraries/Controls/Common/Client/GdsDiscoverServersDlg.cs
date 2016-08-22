@@ -52,6 +52,7 @@ namespace Opc.Ua.Client.Controls
         public GdsDiscoverServersDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
             ServersLV.SmallImageList = new ClientUtils().ImageList;
 
             List<object> items = new  List<object>();
@@ -132,7 +133,7 @@ namespace Opc.Ua.Client.Controls
 
             try
             {
-                ServerCTRL.ConnectAsync().Wait();
+                ServerCTRL.Connect();
             }
             catch (Exception exception)
             {
@@ -178,7 +179,7 @@ namespace Opc.Ua.Client.Controls
 
                 ListViewItem item = new ListViewItem();
                 item.Text = Utils.Format("{0}", description.ApplicationName);
-                // item.ImageIndex = ClientUtils.GetImageIndex(ServerCTRL.Session, NodeClass.Object, null, false);
+                item.ImageIndex = ClientUtils.GetImageIndex(ServerCTRL.Session, NodeClass.Object, null, false);
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());
                 item.SubItems.Add(new ListViewItem.ListViewSubItem());

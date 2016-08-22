@@ -79,7 +79,6 @@ namespace Opc.Ua.Client.Controls
         public void ChangeSession(Session session)
         {
             BrowseCTRL.ChangeSession(session);
-            AttributesCTRL.ChangeSession(session);
         }
 
         /// <summary>

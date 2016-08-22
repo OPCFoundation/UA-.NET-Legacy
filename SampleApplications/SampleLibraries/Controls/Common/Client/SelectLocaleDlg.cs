@@ -48,6 +48,7 @@ namespace Opc.Ua.Client.Controls
         public SelectLocaleDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

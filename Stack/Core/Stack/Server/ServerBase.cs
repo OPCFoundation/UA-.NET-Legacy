@@ -328,13 +328,6 @@ namespace Opc.Ua
                         break;
                     }
 
-                    case Utils.UriSchemeOpcAmqp:
-                    {
-                        address.ProfileUri = Profiles.AmqpsBinaryTransport;
-                        address.DiscoveryUrl = address.Url;
-                        break;
-                    }
-
                     case Utils.UriSchemeNoSecurityHttp:
                     {
                         UriBuilder builder = new UriBuilder(address.Url);
@@ -362,13 +355,6 @@ namespace Opc.Ua
                         address.DiscoveryUrl = address.Url;
                         break;
                     }
-
-                    case Utils.UriSchemeOpcTls:
-                    {
-                        address.ProfileUri = Profiles.UaTlsTransport;
-                        address.DiscoveryUrl = address.Url;
-                        break;
-                    }
                 }
 
                 BaseAddresses.Add(address);
@@ -382,7 +368,7 @@ namespace Opc.Ua
         {
             // build list of discovery uris.
             StringCollection discoveryUrls = new StringCollection();
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = System.Net.Dns.GetHostName();
 
             foreach (BaseAddress baseAddress in BaseAddresses)
             {
@@ -666,11 +652,6 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// Gets or set the capabilities for the server.
-        /// </summary>
-        protected StringCollection ServerCapabilities { get; set; }
-
-        /// <summary>
         /// Gets the list of WCF service hosts used by the server instance.
         /// </summary>
         /// <value>The WCF service hosts.</value>
@@ -757,16 +738,14 @@ namespace Opc.Ua
             // build list of uris.
             List<Uri> uris = new List<Uri>();
             List<EndpointDescription> endpoints = new List<EndpointDescription>();
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = System.Net.Dns.GetHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
                 // UA TCP and HTTPS endpoints have their own host.
                 if (baseAddresses[ii].StartsWith(Utils.UriSchemeOpcTcp, StringComparison.Ordinal) ||
                     baseAddresses[ii].StartsWith(Utils.UriSchemeHttps, StringComparison.Ordinal)  ||
-                    baseAddresses[ii].StartsWith(Utils.UriSchemeNoSecurityHttp, StringComparison.Ordinal) ||
-                    baseAddresses[ii].StartsWith(Utils.UriSchemeOpcAmqp, StringComparison.Ordinal) ||
-                    baseAddresses[ii].StartsWith(Utils.UriSchemeOpcTls, StringComparison.Ordinal))
+                    baseAddresses[ii].StartsWith(Utils.UriSchemeNoSecurityHttp, StringComparison.Ordinal))
                 {
                     continue;
                 }
@@ -883,7 +862,6 @@ namespace Opc.Ua
                     }
                 }
             }
-
             return requireEncryption;
         }
 
@@ -920,7 +898,7 @@ namespace Opc.Ua
 
             // create the endpoint configuration to use.
             EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = System.Net.Dns.GetHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
@@ -1033,131 +1011,6 @@ namespace Opc.Ua
             return endpoints;
         }
 
-
-        /// <summary>
-        /// Create a new service host for UA TCP.
-        /// </summary>
-        protected List<EndpointDescription> CreateUaTlsServiceHost(
-            IDictionary<string, ServiceHost> hosts,
-            ApplicationConfiguration configuration,
-            BindingFactory bindingFactory,
-            IList<string> baseAddresses,
-            ApplicationDescription serverDescription,
-            List<ServerSecurityPolicy> securityPolicies)
-        {
-            // generate a unique host name.
-            string hostName = String.Empty;
-
-            if (hosts.ContainsKey(hostName))
-            {
-                hostName = "/Tls";
-            }
-
-            if (hosts.ContainsKey(hostName))
-            {
-                hostName += Utils.Format("/{0}", hosts.Count);
-            }
-
-            // build list of uris.
-            List<Uri> uris = new List<Uri>();
-            EndpointDescriptionCollection endpoints = new EndpointDescriptionCollection();
-
-            // create the endpoint configuration to use.
-            EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
-
-            for (int ii = 0; ii < baseAddresses.Count; ii++)
-            {
-                // UA TCP and HTTPS endpoints support multiple policies.
-                if (!baseAddresses[ii].StartsWith(Utils.UriSchemeOpcTls, StringComparison.Ordinal))
-                {
-                    continue;
-                }
-
-                UriBuilder uri = new UriBuilder(baseAddresses[ii]);
-
-                if (String.Compare(uri.Host, "localhost", StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    uri.Host = computerName;
-                }
-
-                uris.Add(uri.Uri);
-
-                foreach (ServerSecurityPolicy policy in securityPolicies)
-                {
-                    // create the endpoint description.
-                    EndpointDescription description = new EndpointDescription();
-
-                    description.EndpointUrl = uri.ToString();
-                    description.Server = serverDescription;
-
-                    description.SecurityMode = policy.SecurityMode;
-                    description.SecurityPolicyUri = policy.SecurityPolicyUri;
-                    description.SecurityLevel = policy.SecurityLevel;
-                    description.UserIdentityTokens = GetUserTokenPolicies(configuration, description);
-
-                    if (uri.Scheme == Utils.UriSchemeOpcTls)
-                    {
-                        description.TransportProfileUri = Profiles.UaTlsTransport;
-                    }
-                    else
-                    {
-                        description.TransportProfileUri = Profiles.UaTcpTransport;
-                    }
-
-                    bool requireEncryption = RequireEncryption(description);
-
-                    if (!requireEncryption)
-                    {
-                        foreach (UserTokenPolicy userTokenPolicy in description.UserIdentityTokens)
-                        {
-                            if (userTokenPolicy.SecurityPolicyUri != SecurityPolicies.None)
-                            {
-                                requireEncryption = true;
-                                break;
-                            }
-                        }
-                    }
-
-                    if (requireEncryption)
-                    {
-                        description.ServerCertificate = InstanceCertificate.RawData;
-                    }
-
-                    endpoints.Add(description);
-                }
-
-                // create the UA-TCP stack listener.
-                try
-                {
-                    TransportListenerSettings settings = new TransportListenerSettings();
-
-                    settings.Descriptions = endpoints;
-                    settings.Configuration = endpointConfiguration;
-                    settings.ServerCertificate = this.InstanceCertificate;
-                    settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
-                    settings.NamespaceUris = this.MessageContext.NamespaceUris;
-                    settings.Factory = this.MessageContext.Factory;
-
-                    ITransportListener listener = new Opc.Ua.Bindings.TlsTransportListener();
-
-                    listener.Open(
-                       uri.Uri,
-                       settings,
-                       GetEndpointInstance(this));
-
-                    TransportListeners.Add(listener);
-                }
-                catch (Exception e)
-                {
-                    Utils.Trace(e, "Could not load UA-TCP Stack Listener.");
-                    throw;
-                }
-            }
-
-            return endpoints;
-        }
-
         /// <summary>
         /// Create a new service host for UA HTTPS.
         /// </summary>
@@ -1188,7 +1041,7 @@ namespace Opc.Ua
 
             // create the endpoint configuration to use.
             EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = System.Net.Dns.GetHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
@@ -1261,7 +1114,6 @@ namespace Opc.Ua
 
                     endpoints.Add(description);
 
-                    /*
                     // create the endpoint description.
                     description = new EndpointDescription();
 
@@ -1285,7 +1137,6 @@ namespace Opc.Ua
                     description.TransportProfileUri = Profiles.HttpsXmlTransport;
 
                     endpoints.Add(description);
-                    */
                 }
 
                 // create the stack listener.
@@ -1321,94 +1172,6 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// Create a new service host for UA HTTPS.
-        /// </summary>
-        protected List<EndpointDescription> CreateAmqpsServiceHost(
-            IDictionary<string, ServiceHost> hosts,
-            ApplicationConfiguration configuration,
-            BindingFactory bindingFactory,
-            IList<string> baseAddresses,
-            ApplicationDescription serverDescription,
-            List<ServerSecurityPolicy> securityPolicies)
-        {
-            // build list of uris.
-            List<Uri> uris = new List<Uri>();
-            EndpointDescriptionCollection endpoints = new EndpointDescriptionCollection();
-
-            // create the endpoint configuration to use.
-            EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
-
-            for (int ii = 0; ii < baseAddresses.Count; ii++)
-            {
-                if (!baseAddresses[ii].StartsWith(Utils.UriSchemeOpcAmqp, StringComparison.Ordinal))
-                {
-                    continue;
-                }
-
-                UriBuilder uri = new UriBuilder(baseAddresses[ii]);
-
-                if (uri.Path[uri.Path.Length - 1] != '/')
-                {
-                    uri.Path += "/";
-                }
-
-                if (String.Compare(uri.Host, "localhost", StringComparison.OrdinalIgnoreCase) == 0)
-                {
-                    uri.Host = computerName;
-                }
-
-                uris.Add(uri.Uri);
-
-                foreach (ServerSecurityPolicy policy in securityPolicies)
-                {
-                    EndpointDescription description = new EndpointDescription();
-
-                    description.EndpointUrl = uri.ToString();
-                    description.Server = serverDescription;
-                    description.ServerCertificate = InstanceCertificate.RawData;
-
-                    description.SecurityMode = policy.SecurityMode;
-                    description.SecurityPolicyUri = policy.SecurityPolicyUri;
-                    description.SecurityLevel = policy.SecurityLevel;
-                    description.UserIdentityTokens = GetUserTokenPolicies(configuration, description);
-                    description.TransportProfileUri = Profiles.AmqpsBinaryTransport;
-
-                    endpoints.Add(description);
-                }
-
-                // create the stack listener.
-                try
-                {
-                    TransportListenerSettings settings = new TransportListenerSettings();
-
-                    settings.Descriptions = endpoints;
-                    settings.Configuration = endpointConfiguration;
-                    settings.ServerCertificate = this.InstanceCertificate;
-                    settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
-                    settings.NamespaceUris = this.MessageContext.NamespaceUris;
-                    settings.Factory = this.MessageContext.Factory;
-
-                    ITransportListener listener = new Opc.Ua.Bindings.AmqpTransportListener(configuration, InstanceCertificate, endpoints);
-
-                    listener.Open(
-                       uri.Uri,
-                       settings,
-                       GetEndpointInstance(this));
-
-                    TransportListeners.Add(listener);
-                }
-                catch (Exception e)
-                {
-                    Utils.Trace(e, "Could not load AMQPS Stack Listener.");
-                    throw;
-                }
-            }
-
-            return endpoints;
-        }
-
-        /// <summary>
         /// Returns the UserTokenPolicies supported by the server.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
@@ -1437,11 +1200,6 @@ namespace Opc.Ua
                     }
                 }
 
-                if (policy.IssuerEndpointUrl != null)
-                {
-                    policy.IssuerEndpointUrl = policy.IssuerEndpointUrl.Replace("localhost", System.Net.Dns.GetHostName().ToLowerInvariant());
-                }
-                 
                 policies.Add(policy);
             }
 
@@ -1971,7 +1729,6 @@ namespace Opc.Ua
                 m_maxRequestCount = maxRequestCount;
                 m_totalThreadCount = 0;
                 m_activeThreadCount = 0;
-                m_event = new ManualResetEvent(false);
                 m_stopped = false;
             }
             #endregion
@@ -1996,12 +1753,7 @@ namespace Opc.Ua
                     {
                         m_stopped = true;
 
-                        if (m_event != null)
-                        {
-                            m_event.Set();
-                            m_event.Close();
-                            m_event = null;
-                        }
+                        Monitor.PulseAll(m_lock);
 
                         m_queue.Clear();
                     }
@@ -2016,43 +1768,34 @@ namespace Opc.Ua
             /// <param name="request">The request.</param>
             public void ScheduleIncomingRequest(IEndpointIncomingRequest request)
             {
-                bool sendBadTooManyOperations = false;
-
                 // queue the request.
-                lock (m_lock)
+                lock (m_lock)   // i.e. Monitor.Enter(m_lock)
                 {
                     // check able to schedule requests.
                     if (m_stopped || m_queue.Count >= m_maxRequestCount)
                     {
-                        sendBadTooManyOperations = true;
+                        request.OperationCompleted(null, StatusCodes.BadTooManyOperations);
+                        return;
                     }
-                    else
+
+                    m_queue.Enqueue(request);
+
+                    // wake up an idle thread to handle the request if there is one
+                    if (m_activeThreadCount < m_totalThreadCount)
                     {
-                        m_queue.Enqueue( request );
-
-                        // wake up any waiting threads
-                        m_event.Set();
-
-                        // check if pool is maxed out.
-                        if (m_totalThreadCount >= m_maxThreadCount)
-                        {
-                            return;
-                        }
-
-                        // check if less than min threads or there are no idle threads.
-                        if (m_totalThreadCount < m_minThreadCount || m_totalThreadCount <= m_activeThreadCount)
-                        {
-                            m_totalThreadCount++;
-                            Thread thread = new Thread( OnProcessRequestQueue );
-                            thread.IsBackground = true;
-                            thread.Start( null );
-                        }
+                        Monitor.Pulse(m_lock);
                     }
-                }
+                    // start a new thread to handle the request if none are idle and the pool is not full.
+                    else if (m_totalThreadCount < m_maxThreadCount)
+                    {
+                        Thread thread = new Thread(OnProcessRequestQueue);
+                        thread.IsBackground = true;
+                        thread.Start(null);
+                        m_totalThreadCount++;
+                        m_activeThreadCount++;  // new threads start in an active state
 
-                if (sendBadTooManyOperations)
-                {
-                    request.OperationCompleted( null, StatusCodes.BadTooManyOperations );
+                        Utils.Trace("Thread created: " + Thread.CurrentThread.ManagedThreadId + ". Current thread count: " + m_totalThreadCount + ". Active thread count" + m_activeThreadCount);
+                    }
                 }
             }
             #endregion
@@ -2063,71 +1806,45 @@ namespace Opc.Ua
             /// </summary>
             private void OnProcessRequestQueue(object state)
             {
-                while (true)
+                lock (m_lock)   // i.e. Monitor.Enter(m_lock)
                 {
-                    try
+                    while (true)
                     {
-                        // wait for a quest. end the thread if no activity.
-                        if (!m_event.WaitOne(30000, false))
-                        {
-                            lock (m_lock)
-                            {
-                                if (m_stopped || m_totalThreadCount > m_minThreadCount)
-                                {
-                                    m_totalThreadCount--;
-                                    return;
-                                }
-                            }
-
-                            continue;
-                        }
-
-                        IEndpointIncomingRequest request = null;
-
-                        lock (m_lock)
-                        {
-                            // check if stopped.
-                            if (m_stopped)
-                            {
-                                m_totalThreadCount--;
-                                return;
-                            }
-
-                            // check if the queue is empty.
-                            if (m_queue.Count == 0)
-                            {
-                                continue;
-                            }
-
-                            m_activeThreadCount++;
-
-                            request = m_queue.Dequeue();
-
-                            // reset queue if queue is empty.
-                            if (m_queue.Count == 0)
-                            {
-                                m_event.Reset();
-                            }
-                        }
-
-                        // process the request.
-                        m_server.ProcessRequest(request, state);
-
-                        lock (m_lock)
+                        // check if the queue is empty.
+                        while (m_queue.Count == 0)
                         {
                             m_activeThreadCount--;
 
-                            // check if stopped.
-                            if (m_stopped)
+                            // wait for a request. end the thread if no activity.
+                            if (m_stopped || (!Monitor.Wait(m_lock, 30000) && m_totalThreadCount > m_minThreadCount))
                             {
                                 m_totalThreadCount--;
+
+                                Utils.Trace("Thread ended: " + Thread.CurrentThread.ManagedThreadId + ". Current thread count: " + m_totalThreadCount + ". Active thread count" + m_activeThreadCount);
+
                                 return;
                             }
+
+                            m_activeThreadCount++;
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        Utils.Trace(e, "Unexpected error processing incoming request.");
+
+                        IEndpointIncomingRequest request = m_queue.Dequeue();
+
+                        Monitor.Exit(m_lock);
+
+                        try
+                        {
+                            // process the request.
+                            m_server.ProcessRequest(request, state);
+                        }
+                        catch (Exception e)
+                        {
+                            Utils.Trace(e, "Unexpected error processing incoming request.");
+                        }
+                        finally
+                        {
+                            Monitor.Enter(m_lock);
+                        }
                     }
                 }
             }
@@ -2142,10 +1859,10 @@ namespace Opc.Ua
             private int m_maxThreadCount;
             private int m_minThreadCount;
             private int m_maxRequestCount;
-            private ManualResetEvent m_event;
             private bool m_stopped;
             #endregion
         }
+
         #endregion
 
         #region Private Fields

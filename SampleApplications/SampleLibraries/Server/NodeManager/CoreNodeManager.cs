@@ -88,7 +88,7 @@ namespace Opc.Ua.Server
         }
         #endregion
         
-        #region IDisposable Members
+        #region IDisposable Members        
         /// <summary>
         /// Frees any unmanaged resources.
         /// </summary>
@@ -197,7 +197,7 @@ namespace Opc.Ua.Server
         /// </remarks>
         public void CreateAddressSpace(IDictionary<NodeId,IList<IReference>> externalReferences)
         {
-            // nothing to do.
+            // TBD
         }
                 
         /// <summary cref="INodeManager.DeleteAddressSpace" />
@@ -1057,7 +1057,7 @@ namespace Opc.Ua.Server
                     NodeMetadata metadata = GetNodeMetadata(context, node, BrowseResultMask.All);
                     
                     // check access.
-                    bool Writable = true;
+                    bool writeable = true;
                     ServiceResult error = null;
 
                     // determine access rights.
@@ -1071,25 +1071,25 @@ namespace Opc.Ua.Server
                         case Attributes.UserExecutable:
                         case Attributes.EventNotifier:
                         {
-                            Writable = false;
+                            writeable = false;
                             break;
                         }
 
                         case Attributes.Value:
                         {
-                            Writable = ((metadata.AccessLevel & AccessLevels.CurrentWrite)!= 0);
+                            writeable = ((metadata.AccessLevel & AccessLevels.CurrentWrite)!= 0);
                             break;
                         }
 
                         default:
                         {
-                            Writable = (metadata.WriteMask & Attributes.GetMask(nodeToWrite.AttributeId)) != 0;
+                            writeable = (metadata.WriteMask & Attributes.GetMask(nodeToWrite.AttributeId)) != 0;
                             break;
                         }
                     }
 
-                    // error if not Writable.
-                    if (!Writable)
+                    // error if not writeable.
+                    if (!writeable)
                     {
                         errors[ii] = StatusCodes.BadNotWritable;
                         continue;
@@ -5006,7 +5006,7 @@ namespace Opc.Ua.Server
             m_nodes.Attach(node);
         }
         #endregion
-
+        
         /// <summary>
         /// Returns a node managed by the manager with the specified node id.
         /// </summary>
@@ -5074,6 +5074,121 @@ namespace Opc.Ua.Server
                 m_lock.Exit();
             }
         }
+
+        #if LEGACY_CORENODEMANAGER
+        /// <summary>
+        /// Returns a list of children of the node with the specified browse path.
+        /// </summary>
+        /// <remarks>
+        /// This methods returns all nodes in the fully inhierited type.
+        /// if the browsePath is null then the immediate children of the type node are returned.
+        /// </remarks>
+        public IList<ILocalNode> GetInstanceDeclarations(
+            NodeId               typeId, 
+            IList<QualifiedName> browsePath)
+        {  
+            try
+            {
+                m_lock.Enter();
+
+                Dictionary<QualifiedName,ILocalNode> targets = new Dictionary<QualifiedName,ILocalNode>();
+
+                // find the source.
+                ILocalNode source = GetLocalNode(typeId) as ILocalNode;
+
+                if (source == null)
+                {
+                    return new List<ILocalNode>();
+                }
+
+                // verify that the source is a type node.
+                if (!(source is IObjectType || source is IVariableType))
+                {
+                    return new List<ILocalNode>();
+                }
+
+                // recursively collect targets of the browse path.
+                GetInstanceDeclarations(source, browsePath, targets);
+
+                // return the list of targets.
+                return new List<ILocalNode>(targets.Values);
+            }
+            finally
+            {
+                m_lock.Exit();
+            } 
+        }
+
+        private void GetInstanceDeclarations(
+            ILocalNode                           type, 
+            IList<QualifiedName>                 browsePath,
+            Dictionary<QualifiedName,ILocalNode> targets)
+        {
+            try
+            {
+                m_lock.Enter();
+
+                // find the target of the browse path.
+                ILocalNode parent = type;
+
+                if (browsePath != null)
+                {
+                    for (int ii = 0; ii < browsePath.Count; ii++)
+                    {   
+                        bool found = false;
+
+                        foreach (IReference reference in parent.References.Find(ReferenceTypeIds.HierarchicalReferences, false, true, m_nodes.TypeTree))
+                        {                    
+                            ILocalNode target = GetLocalNode(reference.TargetId) as ILocalNode;
+
+                            if (target != null)
+                            {
+                                if (target.BrowseName == browsePath[ii])
+                                {
+                                    parent = target;
+                                    break;
+                                }
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            return;
+                        }
+                    }
+                }
+                
+                // find the children of the target.
+                foreach (IReference reference in parent.References.Find(ReferenceTypeIds.HierarchicalReferences, false, true, m_nodes.TypeTree))
+                {                    
+                    ILocalNode target = GetLocalNode(reference.TargetId) as ILocalNode;
+
+                    if (target != null)
+                    {
+                        if (!targets.ContainsKey(target.BrowseName))
+                        {
+                            targets.Add(target.BrowseName, target);
+                        }
+                    }
+                }                
+                
+                // recursively find children of the supertype.
+                foreach (IReference reference in type.References.Find(ReferenceTypeIds.HasSubtype, true, true, m_nodes.TypeTree))
+                {                    
+                    ILocalNode supertype = GetLocalNode(reference.TargetId) as ILocalNode;
+
+                    if (supertype != null)
+                    {
+                        GetInstanceDeclarations(supertype, browsePath, targets);
+                    }
+                }
+            }
+            finally
+            {
+                m_lock.Exit();
+            } 
+        }
+        #endif
 
         /// <summary>
         /// Returns a list of nodes which are targets of the specified references.

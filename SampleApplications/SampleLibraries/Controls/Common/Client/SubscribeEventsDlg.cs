@@ -51,6 +51,7 @@ namespace Opc.Ua.Client.Controls
         public SubscribeEventsDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
 
             BrowseCTRL.BrowseTV.CheckBoxes = true;
             BrowseCTRL.BrowseTV.AfterCheck += new TreeViewEventHandler(BrowseTV_AfterCheck);
@@ -353,7 +354,7 @@ namespace Opc.Ua.Client.Controls
         private void UpdateRow(DataRow row, MonitoredItem monitoredItem)
         {
             row[0] = monitoredItem;
-            // row[1] = ImageList.Images[ClientUtils.GetImageIndex(monitoredItem.AttributeId, null)];
+            row[1] = ImageList.Images[ClientUtils.GetImageIndex(monitoredItem.AttributeId, null)];
             row[2] = m_session.NodeCache.GetDisplayText(monitoredItem.StartNodeId) + "/" + Attributes.GetBrowseName(monitoredItem.AttributeId);
             row[3] = monitoredItem.MonitoringMode;
             row[4] = monitoredItem.SamplingInterval;

@@ -48,6 +48,7 @@ namespace Opc.Ua.Client.Controls
         public EditReadValueIdDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
 
             // add the attributes in numerical order.
             foreach (uint attributeId in Attributes.GetIdentifiers())

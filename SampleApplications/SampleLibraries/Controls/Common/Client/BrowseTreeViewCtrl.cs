@@ -281,8 +281,8 @@ namespace Opc.Ua.Client.Controls
                 if (node != null)
                 {
                     TreeNode root = new TreeNode(node.ToString());
-                    // root.ImageIndex = ClientUtils.GetImageIndex(m_session, node.NodeClass, node.TypeDefinitionId, false);
-                    // root.SelectedImageIndex = ClientUtils.GetImageIndex(m_session, node.NodeClass, node.TypeDefinitionId, true);
+                    root.ImageIndex = ClientUtils.GetImageIndex(m_session, node.NodeClass, node.TypeDefinitionId, false);
+                    root.SelectedImageIndex = ClientUtils.GetImageIndex(m_session, node.NodeClass, node.TypeDefinitionId, true);
 
                     ReferenceDescription reference = new ReferenceDescription();
                     reference.NodeId = node.NodeId;
@@ -451,13 +451,13 @@ namespace Opc.Ua.Client.Controls
 
                     if (!m_typeImageMapping.TryGetValue((NodeId)reference.TypeDefinition, out index))
                     {
-                        // child.ImageIndex = ClientUtils.GetImageIndex(m_session, reference.NodeClass, reference.TypeDefinition, false);
-                        // child.SelectedImageIndex = ClientUtils.GetImageIndex(m_session, reference.NodeClass, reference.TypeDefinition, true);
+                        child.ImageIndex = ClientUtils.GetImageIndex(m_session, reference.NodeClass, reference.TypeDefinition, false);
+                        child.SelectedImageIndex = ClientUtils.GetImageIndex(m_session, reference.NodeClass, reference.TypeDefinition, true);
                     }
                     else
                     {
-                        // child.ImageIndex = index;
-                        // child.SelectedImageIndex = index;
+                        child.ImageIndex = index;
+                        child.SelectedImageIndex = index;
                     }
 
                     dictionary[reference.NodeId] = child;

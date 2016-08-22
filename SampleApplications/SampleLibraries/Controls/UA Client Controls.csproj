@@ -40,7 +40,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -52,7 +52,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -484,6 +484,12 @@
     <Compile Include="Configuration\Common %28OLD%29\ReferenceTypeCtrl.Designer.cs">
       <DependentUpon>ReferenceTypeCtrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\Common %28OLD%29\SimpleValueEditDlg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Configuration\Common %28OLD%29\SimpleValueEditDlg.Designer.cs">
+      <DependentUpon>SimpleValueEditDlg.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\Common %28OLD%29\StringValueEditDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -896,6 +902,9 @@
       <DependentUpon>ReferenceTypeCtrl.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Configuration\Common %28OLD%29\SimpleValueEditDlg.resx">
+      <DependentUpon>SimpleValueEditDlg.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Configuration\Common %28OLD%29\StringValueEditDlg.resx">
       <DependentUpon>StringValueEditDlg.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -999,6 +1008,21 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Stack\Core\UA Core Library.csproj">
+      <Project>{7543AFCB-F5AF-44AF-83C9-23164474C1E9}</Project>
+      <Name>UA Core Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Client\UA Client Library.csproj">
+      <Project>{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}</Project>
+      <Name>UA Client Library</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Configuration\UA Configuration Library.csproj">
+      <Project>{8AB4CB8E-E216-425D-B600-350D0B6B59CD}</Project>
+      <Name>UA Configuration Library</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Images\" />
   </ItemGroup>
   <ItemGroup>
@@ -1012,20 +1036,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Stack\Core\UA Core Library.csproj">
-      <Project>{7543afcb-f5af-44af-83c9-23164474c1e9}</Project>
-      <Name>UA Core Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Client\UA Client Library.csproj">
-      <Project>{42e9198c-ed2c-4bc8-b0a1-55d91d8f1e90}</Project>
-      <Name>UA Client Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Configuration\UA Configuration Library.csproj">
-      <Project>{8ab4cb8e-e216-425d-b600-350d0b6b59cd}</Project>
-      <Name>UA Configuration Library</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

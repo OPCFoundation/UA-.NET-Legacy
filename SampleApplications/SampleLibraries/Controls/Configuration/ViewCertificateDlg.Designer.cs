@@ -154,8 +154,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // ApplicationNameTB
             // 
-            this.ApplicationNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ApplicationNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ApplicationNameTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ApplicationNameTB.Location = new System.Drawing.Point(96, 60);
             this.ApplicationNameTB.Name = "ApplicationNameTB";
@@ -175,8 +175,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // ApplicationUriTB
             // 
-            this.ApplicationUriTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ApplicationUriTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ApplicationUriTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ApplicationUriTB.Location = new System.Drawing.Point(96, 112);
             this.ApplicationUriTB.Name = "ApplicationUriTB";
@@ -196,8 +196,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // SubjectNameTB
             // 
-            this.SubjectNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.SubjectNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SubjectNameTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SubjectNameTB.Location = new System.Drawing.Point(96, 164);
             this.SubjectNameTB.Name = "SubjectNameTB";
@@ -217,8 +217,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // DomainsTB
             // 
-            this.DomainsTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.DomainsTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DomainsTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.DomainsTB.Location = new System.Drawing.Point(96, 138);
             this.DomainsTB.Name = "DomainsTB";
@@ -293,8 +293,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // ThumbprintTB
             // 
-            this.ThumbprintTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.ThumbprintTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ThumbprintTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ThumbprintTB.Location = new System.Drawing.Point(96, 268);
             this.ThumbprintTB.Name = "ThumbprintTB";
@@ -314,8 +314,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // IssuerNameTB
             // 
-            this.IssuerNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.IssuerNameTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.IssuerNameTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.IssuerNameTB.Location = new System.Drawing.Point(96, 190);
             this.IssuerNameTB.Name = "IssuerNameTB";
@@ -335,8 +335,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // OrganizationTB
             // 
-            this.OrganizationTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.OrganizationTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.OrganizationTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.OrganizationTB.Location = new System.Drawing.Point(96, 86);
             this.OrganizationTB.Name = "OrganizationTB";
@@ -356,8 +356,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // CertificateStoreCTRL
             // 
-            this.CertificateStoreCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.CertificateStoreCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.CertificateStoreCTRL.LabelWidth = 91;
             this.CertificateStoreCTRL.Location = new System.Drawing.Point(4, 6);
             this.CertificateStoreCTRL.MinimumSize = new System.Drawing.Size(300, 51);
@@ -373,8 +373,8 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(708, 322);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.ButtonsPN);
-            this.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.MinimumSize = new System.Drawing.Size(409, 290);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "ViewCertificateDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "View Certificate";

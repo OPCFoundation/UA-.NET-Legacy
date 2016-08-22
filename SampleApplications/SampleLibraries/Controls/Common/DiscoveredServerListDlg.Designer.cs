@@ -116,6 +116,7 @@ namespace Opc.Ua.Client.Controls
             // 
             this.ServersCTRL.Cursor = System.Windows.Forms.Cursors.Default;
             this.ServersCTRL.DiscoveryTimeout = 0;
+            this.ServersCTRL.DiscoveryUrl = null;
             this.ServersCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ServersCTRL.Instructions = null;
             this.ServersCTRL.Location = new System.Drawing.Point(0, 3);
@@ -147,8 +148,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // HostNameCTRL
             // 
-            this.HostNameCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.HostNameCTRL.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.HostNameCTRL.CommandText = "Discover";
             this.HostNameCTRL.Location = new System.Drawing.Point(63, 0);
             this.HostNameCTRL.Margin = new System.Windows.Forms.Padding(0);
@@ -158,8 +159,8 @@ namespace Opc.Ua.Client.Controls
             this.HostNameCTRL.Padding = new System.Windows.Forms.Padding(2, 0, 0, 0);
             this.HostNameCTRL.Size = new System.Drawing.Size(610, 21);
             this.HostNameCTRL.TabIndex = 1;
-            this.HostNameCTRL.HostConnected += new System.EventHandler<Opc.Ua.Client.Controls.SelectHostCtrlEventArgs>(this.HostNameCTRL_HostConnected);
             this.HostNameCTRL.HostSelected += new System.EventHandler<Opc.Ua.Client.Controls.SelectHostCtrlEventArgs>(this.HostNameCTRL_HostSelected);
+            this.HostNameCTRL.HostConnected += new System.EventHandler<Opc.Ua.Client.Controls.SelectHostCtrlEventArgs>(this.HostNameCTRL_HostConnected);
             // 
             // DiscoveredServerListDlg
             // 
@@ -169,8 +170,8 @@ namespace Opc.Ua.Client.Controls
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.TopPN);
             this.Controls.Add(this.ButtonsPN);
-            this.MaximumSize = new System.Drawing.Size(1024, 1024);
-            this.MinimumSize = new System.Drawing.Size(300, 300);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "DiscoveredServerListDlg";
             this.Padding = new System.Windows.Forms.Padding(2, 2, 2, 0);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

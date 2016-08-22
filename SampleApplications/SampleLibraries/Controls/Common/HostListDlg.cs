@@ -52,6 +52,7 @@ namespace Opc.Ua.Client.Controls
         public HostListDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

@@ -33,10 +33,10 @@ namespace Opc.Ua
         /// </summary>
         /// <param name="discoveryUrl">The discovery URL.</param>
         /// <returns></returns>
-        public static DiscoveryClient Create(ApplicationConfiguration application, Uri discoveryUrl)
+        public static DiscoveryClient Create(Uri discoveryUrl)
         {
             EndpointConfiguration configuration = EndpointConfiguration.Create();
-            ITransportChannel channel = DiscoveryChannel.Create(application, discoveryUrl, configuration, new ServiceMessageContext());
+            ITransportChannel channel = DiscoveryChannel.Create(discoveryUrl, configuration, new ServiceMessageContext());
             return new DiscoveryClient(channel);
         }
 
@@ -46,14 +46,14 @@ namespace Opc.Ua
         /// <param name="discoveryUrl">The discovery URL.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns></returns>
-        public static DiscoveryClient Create(ApplicationConfiguration application, Uri discoveryUrl, EndpointConfiguration configuration)
+        public static DiscoveryClient Create(Uri discoveryUrl, EndpointConfiguration configuration)
         {
             if (configuration == null)
             {
                 configuration = EndpointConfiguration.Create();
             }
 
-            ITransportChannel channel = DiscoveryChannel.Create(application, discoveryUrl, configuration, application.CreateMessageContext());
+            ITransportChannel channel = DiscoveryChannel.Create(discoveryUrl, configuration, new ServiceMessageContext());
             return new DiscoveryClient(channel);
         }
 
@@ -65,7 +65,7 @@ namespace Opc.Ua
         /// <param name="bindingFactory">The binding factory.</param>
         /// <param name="configuration">The configuration.</param>
         /// <returns></returns>
-        public static DiscoveryClient Create(ApplicationConfiguration application, Uri discoveryUrl, BindingFactory bindingFactory, EndpointConfiguration configuration)
+        public static DiscoveryClient Create(Uri discoveryUrl, BindingFactory bindingFactory, EndpointConfiguration configuration)
         {
             if (discoveryUrl == null) throw new ArgumentNullException("discoveryUrl");
 
@@ -79,7 +79,7 @@ namespace Opc.Ua
                 configuration = EndpointConfiguration.Create();
             }
 
-            ITransportChannel channel = DiscoveryChannel.Create(application, discoveryUrl, bindingFactory, configuration, application.CreateMessageContext());
+            ITransportChannel channel = DiscoveryChannel.Create(discoveryUrl, bindingFactory, configuration, new ServiceMessageContext());
             return new DiscoveryClient(channel);
         }
         #endif
@@ -140,7 +140,6 @@ namespace Opc.Ua
         /// <param name="messageContext">The message context to use when serializing the messages.</param>
         /// <returns></returns>
         public static ITransportChannel Create(
-            ApplicationConfiguration configuration, 
             Uri discoveryUrl,
             EndpointConfiguration endpointConfiguration,
             ServiceMessageContext messageContext)
@@ -155,7 +154,7 @@ namespace Opc.Ua
             endpoint.Server.ApplicationType = ApplicationType.DiscoveryServer;
 
             ITransportChannel channel = CreateUaBinaryChannel(
-                configuration,
+                null,
                 endpoint,
                 endpointConfiguration,
                 (System.Security.Cryptography.X509Certificates.X509Certificate2)null,
@@ -174,7 +173,6 @@ namespace Opc.Ua
         /// <param name="messageContext">The message context.</param>
         /// <returns></returns>
         public static ITransportChannel Create(
-            ApplicationConfiguration configuration, 
             Uri discoveryUrl,
             BindingFactory bindingFactory,
             EndpointConfiguration endpointConfiguration,
@@ -190,7 +188,7 @@ namespace Opc.Ua
             endpoint.Server.ApplicationType = ApplicationType.DiscoveryServer;
 
             ITransportChannel channel = CreateUaBinaryChannel(
-                configuration,
+                null,
                 endpoint,
                 endpointConfiguration,
                 (System.Security.Cryptography.X509Certificates.X509Certificate2)null,

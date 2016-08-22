@@ -61,27 +61,10 @@ namespace Opc.Ua
         /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                if (!m_disposed)
-                {
-                    var channel = m_channel;
+            CloseChannel();
+            DisposeChannel();
 
-                    if (channel != null && Interlocked.CompareExchange(ref m_channel, null, channel) == channel)
-                    {
-                        try
-                        {
-                            channel.Close();
-                        }
-                        catch
-                        {
-                            // ignore errors.
-                        }
-                    }
-                }
-
-                m_disposed = true;
-            }
+            m_disposed = true;
         }
         #endregion
 
@@ -162,17 +145,18 @@ namespace Opc.Ua
                 return channel; 
             }
             
-            protected set
+            protected set 
             {
-                var channel = m_channel;
+                ITransportChannel channel = m_channel;
+                m_channel = null;
 
-                if (channel != null && Interlocked.CompareExchange(ref m_channel, null, channel) == channel)
+                if (channel != null)
                 {
                     try
                     {
                         channel.Close();
                     }
-                    catch
+                    catch (Exception)
                     {
                         // ignore errors.
                     }
@@ -270,11 +254,10 @@ namespace Opc.Ua
         /// </summary>
         public virtual StatusCode Close()
         {
-            var channel = m_channel;
-
-            if (channel != null && Interlocked.CompareExchange(ref m_channel, null, channel) == channel)
+            if (m_channel != null)
             {
-                channel.Close();
+                m_channel.Close();
+                m_channel = null;
             }
 
             m_authenticationToken = null;
@@ -308,18 +291,35 @@ namespace Opc.Ua
         /// </summary>
         protected void CloseChannel()
         {
-            var channel = m_channel;
-
-            if (Interlocked.CompareExchange(ref m_channel, null, channel) == channel)
+            if (m_channel != null)
             {
                 try
                 {
-                    channel.Close();
+                    m_channel.Close();
                 }
                 catch
                 {
                     // ignore errors.
                 }
+
+                m_channel = null;
+            }
+        }
+
+        protected void DisposeChannel()
+        {
+            if (m_channel != null)
+            {
+                try
+                {
+                    m_channel.Dispose();
+                }
+                catch
+                {
+                    // ignore errors.
+                }
+
+                m_channel = null;
             }
         }
 
@@ -431,7 +431,12 @@ namespace Opc.Ua
                 requestHandle = response.ResponseHeader.RequestHandle;
                 statusCode = response.ResponseHeader.ServiceResult;
             }
-            
+
+            if (response == null)
+            {
+                statusCode = StatusCodes.Bad;
+            }
+
             int pendingRequestCount = Interlocked.Decrement(ref m_pendingRequestCount);
 
             if (statusCode != StatusCodes.Good)

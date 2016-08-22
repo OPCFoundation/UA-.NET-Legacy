@@ -50,6 +50,7 @@ namespace Opc.Ua.Client.Controls
         public ConfiguredServerListDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

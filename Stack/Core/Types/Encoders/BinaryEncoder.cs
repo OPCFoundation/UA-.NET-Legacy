@@ -195,55 +195,9 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// Encodes a session-less message to a buffer.
-        /// </summary>
-        public static void EncodeSessionLessMessage(IEncodeable message, Stream stream, ServiceMessageContext context, bool leaveOpen = false)
-        {
-            if (message == null) throw new ArgumentNullException("message");
-            if (context == null) throw new ArgumentNullException("context");
-
-            // create encoder.
-            BinaryEncoder encoder = new BinaryEncoder(stream, context);
-
-            try
-            {
-                long start = encoder.m_ostrm.Position;
-
-                // write the type id.
-                encoder.WriteNodeId(null, DataTypeIds.SessionLessServiceMessageType);
-
-                // write the message.
-                SessionLessServiceMessage envelope = new SessionLessServiceMessage();
-                envelope.NamespaceUris = context.NamespaceUris;
-                envelope.ServerUris = context.ServerUris;
-                envelope.Message = message;
-
-                envelope.Encode(encoder);
-
-                // check that the max message size was not exceeded.
-                if (context.MaxMessageSize > 0 && context.MaxMessageSize < (int)(encoder.m_ostrm.Position - start))
-                {
-                    throw ServiceResultException.Create(
-                        StatusCodes.BadEncodingLimitsExceeded,
-                        "MaxMessageSize {0} < {1}",
-                        context.MaxMessageSize,
-                        (int)(encoder.m_ostrm.Position - start));
-                }
-            }
-            finally
-            {
-                // close encoder.
-                if (!leaveOpen)
-                {
-                    encoder.CloseAndReturnBuffer();
-                }
-            }
-        }
-
-        /// <summary>
         /// Encodes a message in a stream.
         /// </summary>
-        public static void EncodeMessage(IEncodeable message, Stream stream, ServiceMessageContext context, bool leaveOpen = false)
+        public static void EncodeMessage(IEncodeable message, Stream stream, ServiceMessageContext context)
         {
             if (message == null) throw new ArgumentNullException("message");
             if (stream == null) throw new ArgumentNullException("stream");
@@ -254,12 +208,9 @@ namespace Opc.Ua
 
             // encode message
             encoder.EncodeMessage(message);
-
+            
             // close encoder.
-            if (!leaveOpen)
-            {
-                encoder.CloseAndReturnBuffer();
-            }
+            encoder.CloseAndReturnBuffer();
         }
 
         /// <summary>

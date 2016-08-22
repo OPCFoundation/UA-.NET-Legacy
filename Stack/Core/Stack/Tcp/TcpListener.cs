@@ -441,41 +441,41 @@ namespace Opc.Ua.Bindings
         /// </summary>
         private void OnRequestReceived(TcpServerChannel channel, uint requestId, IServiceRequest request)
         {
-            try
+            if (m_callback != null)
             {
-                if (m_callback != null)
+                try
                 {
-                    IAsyncResult result = m_callback.QueueRequest(
+                    IAsyncResult result = m_callback.BeginProcessRequest(
                         channel.GlobalChannelId,
                         channel.EndpointDescription,
                         request,
                         OnProcessRequestComplete,
                         new object[] { channel, requestId, request });
                 }
-            }
-            catch (Exception e)
-            {
-                Utils.Trace(e, "TCPLISTENER - Unexpected error processing request.");
-            }
+                catch (Exception e)
+                {
+                    Utils.Trace(e, "TCPLISTENER - Unexpected error processing request.");
+                }
+            }            
         }
 
         private void OnProcessRequestComplete(IAsyncResult result)
         {
-            try
+            if (m_callback != null)
             {
-                object[] args = (object[])result.AsyncState;
-
-                if (m_callback != null)
+                try
                 {
+                    object[] args = (object[])result.AsyncState;
+
                     TcpServerChannel channel = (TcpServerChannel)args[0];
-                    IServiceResponse response = m_callback.FinishRequest(result);
+                    IServiceResponse response = m_callback.EndProcessRequest(result);
                     channel.SendResponse((uint)args[1], response);
                 }
-            }
-            catch (Exception e)
-            {
-                Utils.Trace(e, "TCPLISTENER - Unexpected error sending result.");
-            }
+                catch (Exception e)
+                {
+                    Utils.Trace(e, "TCPLISTENER - Unexpected error sending result.");
+                }
+            }            
         }
 
         /// <summary>

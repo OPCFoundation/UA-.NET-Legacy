@@ -53,6 +53,7 @@ namespace Opc.Ua.Client.Controls
         public PseudoComServerListDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

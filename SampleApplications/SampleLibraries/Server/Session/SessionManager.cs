@@ -297,21 +297,22 @@ namespace Opc.Ua.Server
             try
             {
                 // check if the application has a callback which validates the identity tokens.
-                var Handler = ImpersonateUser;
-
-                if (Handler != null)
+                lock (m_eventLock)
                 {
-                    ImpersonateEventArgs args = new ImpersonateEventArgs(newIdentity, userTokenPolicy);
-                    Handler(session, args);
-
-                    if (ServiceResult.IsBad(args.IdentityValidationError))
+                    if (m_ImpersonateUser != null)
                     {
-                        error = args.IdentityValidationError;
-                    }
-                    else
-                    {
-                        identity = args.Identity;
-                        effectiveIdentity = args.EffectiveIdentity;
+                        ImpersonateEventArgs args = new ImpersonateEventArgs(newIdentity, userTokenPolicy);
+                        m_ImpersonateUser(session, args);
+                        
+                        if (ServiceResult.IsBad(args.IdentityValidationError))
+                        {
+                            error = args.IdentityValidationError;
+                        }
+                        else
+                        {
+                            identity = args.Identity;
+                            effectiveIdentity = args.EffectiveIdentity;
+                        }
                     }
                 }
 
@@ -432,29 +433,9 @@ namespace Opc.Ua.Server
                         return new OperationContext(requestHeader, requestType);
                     }
 
-                    if (NodeId.IsNull(requestHeader.AuthenticationToken))
-                    {
-                        throw new ServiceResultException(StatusCodes.BadSessionIdInvalid);
-                    }
-
                     // find session.
                     if (!m_sessions.TryGetValue(requestHeader.AuthenticationToken, out session))
                     {
-                        var Handler = ValidateSessionLessRequest;
-
-                        if (Handler != null)
-                        {
-                            var args = new ValidateSessionLessRequestEventArgs(requestHeader.AuthenticationToken, requestType);
-                            Handler(this, args);
-
-                            if (ServiceResult.IsBad(args.Error))
-                            {
-                                throw new ServiceResultException(args.Error);
-                            }
-
-                            return new OperationContext(requestHeader, requestType, args.Identity);
-                        }
-
                         throw new ServiceResultException(StatusCodes.BadSessionIdInvalid);
                     }
 
@@ -525,26 +506,29 @@ namespace Opc.Ua.Server
         /// </summary>
         protected virtual void RaiseSessionEvent(Session session, SessionEventReason reason)
         { 
-            SessionEventHandler Handler = null;
-
-            switch (reason)
+            lock (m_eventLock)
             {
-                case SessionEventReason.Created:   { Handler = SessionCreated;   break; }
-                case SessionEventReason.Activated: { Handler = SessionActivated; break; }
-                case SessionEventReason.Closing:   { Handler = SessionClosing;   break; }
-            }
+                SessionEventHandler handler = null;
 
-            if (Handler != null)
-            {
-                try
+                switch (reason)
                 {
-                    Handler(session, reason);
+                    case SessionEventReason.Created:   { handler = m_SessionCreated;   break; }
+                    case SessionEventReason.Activated: { handler = m_SessionActivated; break; }
+                    case SessionEventReason.Closing:   { handler = m_SessionClosing;   break; }
                 }
-                catch (Exception e)
+
+                if (handler != null)
                 {
-                    Utils.Trace(e, "Session event handler raised an exception.");
+                    try
+                    {
+                        handler(session, reason);
+                    }
+                    catch (Exception e)
+                    {
+                        Utils.Trace(e, "Session event handler raised an exception.");
+                    }
                 }
-            }
+            } 
         }
         #endregion
 
@@ -621,25 +605,99 @@ namespace Opc.Ua.Server
         private int m_maxBrowseContinuationPoints;
         private int m_maxHistoryContinuationPoints;
         private int m_minNonceLength;
+
+        private object m_eventLock = new object();
+        private event SessionEventHandler m_SessionCreated;
+        private event SessionEventHandler m_SessionActivated;
+        private event SessionEventHandler m_SessionClosing;
+        private event ImpersonateEventHandler m_ImpersonateUser;
         #endregion
 
         #region ISessionManager Members
-        /// <inheritDoc />
-        public event SessionEventHandler SessionCreated;
+        /// <summary cref="ISessionManager.SessionCreated" />
+        public event SessionEventHandler SessionCreated
+        {
+            add
+            {
+                lock (m_eventLock)
+                {
+                    m_SessionCreated += value;
+                }
+            }
 
-        /// <inheritDoc />
-        public event SessionEventHandler SessionActivated;
+            remove
+            {
+                lock (m_eventLock)
+                {
+                    m_SessionCreated -= value;
+                }
+            }
+        }
+        
+        /// <summary cref="ISessionManager.SessionActivated" />
+        public event SessionEventHandler SessionActivated
+        {
+            add
+            {
+                lock (m_eventLock)
+                {
+                    m_SessionActivated += value;
+                }
+            }
 
-        /// <inheritDoc />
-        public event SessionEventHandler SessionClosing;
+            remove
+            {
+                lock (m_eventLock)
+                {
+                    m_SessionActivated -= value;
+                }
+            }
+        }
+        
+        /// <summary cref="ISessionManager.SessionClosing" />
+        public event SessionEventHandler SessionClosing
+        {
+            add
+            {
+                lock (m_eventLock)
+                {
+                    m_SessionClosing += value;
+                }
+            }
 
-        /// <inheritDoc />
-        public event ImpersonateEventHandler ImpersonateUser;
+            remove
+            {
+                lock (m_eventLock)
+                {
+                    m_SessionClosing -= value;
+                }
+            }
+        }
+        
+        /// <summary cref="ISessionManager.ImpersonateUser" />
+        public event ImpersonateEventHandler ImpersonateUser
+        {
+            add
+            {
+                lock (m_eventLock)
+                {
+                    m_ImpersonateUser += value;
+                }
+            }
 
-        /// <inheritDoc />
-        public event EventHandler<ValidateSessionLessRequestEventArgs> ValidateSessionLessRequest;
+            remove
+            {
+                lock (m_eventLock)
+                {
+                    m_ImpersonateUser -= value;
+                }
+            }
+        }
 
-        /// <inheritDoc />
+        /// <summary>
+        /// Returns all of the sessions known to the session manager.
+        /// </summary>
+        /// <returns>A list of the sessions.</returns>
         public IList<Session> GetSessions()
         {
             lock (m_lock)
@@ -677,11 +735,6 @@ namespace Opc.Ua.Server
         /// Raised before the user identity for a session is changed.
         /// </summary>
         event ImpersonateEventHandler ImpersonateUser;
-
-        /// <summary>
-        /// Raised before the user identity for a session is changed.
-        /// </summary>
-        event EventHandler<ValidateSessionLessRequestEventArgs> ValidateSessionLessRequest;
 
         /// <summary>
         /// Returns all of the sessions known to the session manager.
@@ -796,46 +849,5 @@ namespace Opc.Ua.Server
     /// The delegate for functions used to receive impersonation events.
     /// </summary>
     public delegate void ImpersonateEventHandler(Session session, ImpersonateEventArgs args);
-    #endregion
-
-    #region ImpersonateEventArgs Class
-    /// <summary>
-    /// A class which provides the event arguments for session related event.
-    /// </summary>
-    public class ValidateSessionLessRequestEventArgs : EventArgs
-    {
-        #region Constructors
-        /// <summary>
-        /// Creates a new instance.
-        /// </summary>
-        public ValidateSessionLessRequestEventArgs(NodeId authenticationToken, RequestType requestType)
-        {
-            AuthenticationToken = authenticationToken;
-            RequestType = requestType;
-        }
-        #endregion
-
-        #region Public Properties
-        /// <summary>
-        /// The request type for the request.
-        /// </summary>
-        public RequestType RequestType { get; private set; }
-
-        /// <summary>
-        /// The new user identity for the session.
-        /// </summary>
-        public NodeId AuthenticationToken { get; private set; }
-
-        /// <summary>
-        /// The identity to associate with the session-less request.
-        /// </summary>
-        public IUserIdentity Identity { get; set; }
-
-        /// <summary>
-        /// Set to indicate that an error occurred validating the session-less request and that it should be rejected.
-        /// </summary>
-        public ServiceResult Error { get; set; }
-        #endregion
-    }
     #endregion
 }

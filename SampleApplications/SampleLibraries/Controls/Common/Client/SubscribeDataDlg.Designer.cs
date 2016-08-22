@@ -124,8 +124,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(784, 277);
             this.Controls.Add(this.SubscribeRequestCTRL);
             this.Controls.Add(this.ButtonPN);
-            this.MaximumSize = new System.Drawing.Size(2048, 2048);
-            this.MinimumSize = new System.Drawing.Size(16, 107);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SubscribeDataDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Data Subscription";

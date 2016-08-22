@@ -41,7 +41,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;xLEGACY_CORENODEMANAGER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -71,10 +71,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.IdentityModel.Selectors" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.20622.1351, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\..\GDS\packages\System.IdentityModel.Tokens.Jwt.4.0.2.206221351\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.ServiceModel" />
@@ -120,7 +116,6 @@
     <Compile Include="NodeManager\EventManager.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NodeManager\SecurityKeyManager.cs" />
     <Compile Include="NodeManager\ServerSystemContext.cs" />
     <Compile Include="Properties\AssemblyVersionInfo.cs" />
     <Compile Include="Server\ServerInternalData.cs" />
@@ -180,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Stack\Core\UA Core Library.csproj">
-      <Project>{7543afcb-f5af-44af-83c9-23164474c1e9}</Project>
+      <Project>{7543AFCB-F5AF-44AF-83C9-23164474C1E9}</Project>
       <Name>UA Core Library</Name>
     </ProjectReference>
   </ItemGroup>

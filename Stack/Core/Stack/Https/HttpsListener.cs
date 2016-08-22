@@ -21,9 +21,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ServiceModel.Channels;
 using System.IO;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Web;
@@ -31,15 +29,10 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Reflection;
 using System.Xml;
-using Owin;
-using Microsoft.Owin.Builder;
-using Microsoft.Owin.Hosting;
-using System.Web.Http;
-using System.Net.Http;
 
 namespace Opc.Ua.Bindings
 {
-#if !NET4_CLIENT_FRAMEWORK
+    #if !NET4_CLIENT_FRAMEWORK
     /// <summary>
     /// Manages the connections for a UA HTTPS server.
     /// </summary>
@@ -59,7 +52,7 @@ namespace Opc.Ua.Bindings
         /// Frees any unmanaged resources.
         /// </summary>
         public void Dispose()
-        {
+        {   
             Dispose(true);
         }
 
@@ -69,7 +62,7 @@ namespace Opc.Ua.Bindings
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "m_simulator")]
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing) 
             {
                 lock (m_lock)
                 {
@@ -79,7 +72,7 @@ namespace Opc.Ua.Bindings
             }
         }
         #endregion
-
+        
         #region ITransportListener Members
         /// <summary>
         /// Opens the listener and starts accepting connection.
@@ -145,7 +138,6 @@ namespace Opc.Ua.Bindings
             get { return m_uri; }
         }
 
-        /*
         [ServiceContract]
         private interface ICrossDomainPolicy
         {
@@ -281,49 +273,15 @@ namespace Opc.Ua.Bindings
                 return options;
             }
         }
-        */
-        public class DefaultHttpHandler : DelegatingHandler
-        {
-            public UaHttpsChannelListener Listener { get; set; }
-
-            protected async override Task<HttpResponseMessage> SendAsync(
-                HttpRequestMessage request,
-                CancellationToken cancellationToken)
-            {
-                if (request.Method != HttpMethod.Post)
-                {
-                    return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
-                }
-
-                return await Listener.SendAsync(request, cancellationToken);
-            }
-        }
-
-        public class Startup
-        {
-            public static UaHttpsChannelListener Listener { get; set; }
-      
-            // This code configures Web API. The Startup class is specified as a type
-            // parameter in the WebApp.Start method.
-            public void Configuration(IAppBuilder appBuilder)
-            {
-                HttpConfiguration config = new HttpConfiguration();
-                config.MessageHandlers.Add(new DefaultHttpHandler() { Listener = Listener });
-                appBuilder.UseWebApi(config);
-            }
-        }
 
         /// <summary>
         /// Starts listening at the specified port.
         /// </summary>
         public void Start()
         {
-            Startup.Listener = this;
-            WebApp.Start<Startup>(url: m_uri.ToString());
-
-            /*
             lock (m_lock)
             {
+                UriBuilder root = new UriBuilder(m_uri);
 
                 string path = root.Path;
                 root.Path = String.Empty;
@@ -346,7 +304,6 @@ namespace Opc.Ua.Bindings
                 m_host.AddServiceEndpoint(typeof(IInvokeService), binding, "").Behaviors.Add(new WebHttpBehavior());
                 m_host.Open();
             }
-            */
         }
 
         /// <summary>
@@ -354,7 +311,6 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public void Stop()
         {
-            /*
             lock (m_lock)
             {
                 if (m_host != null)
@@ -363,138 +319,10 @@ namespace Opc.Ua.Bindings
                     m_host = null;
                 }
             }
-            */
         }
         #endregion
-
+                
         #region Private Methods
-        private IServiceResponse CreateFault(Exception e)
-        {
-            var fault = new ServiceResult(e);
-
-            ServiceFault response = new ServiceFault();
-
-            response.ResponseHeader.ServiceResult = fault.Code;
-
-            StringTable stringTable = new StringTable();
-
-            response.ResponseHeader.ServiceDiagnostics = new DiagnosticInfo(
-                fault,
-                DiagnosticsMasks.NoInnerStatus,
-                true,
-                stringTable);
-
-            response.ResponseHeader.StringTable = stringTable.ToArray();
-
-            return response;
-        }
-
-        private void EncodeResponse(HttpResponseMessage message, string requestType, IServiceResponse response)
-        {
-            MemoryStream ostrm = new MemoryStream();
-
-            if (requestType == "application/opcua+uajson")
-            {
-                JsonEncoder.EncodeSessionLessMessage(response, ostrm, m_quotas.MessageContext, true);
-            }
-            else if (requestType == "application/opcua+uabinary")
-            {
-                BinaryEncoder.EncodeSessionLessMessage(response, ostrm, m_quotas.MessageContext, true);
-            }
-            else
-            {
-                BinaryEncoder.EncodeMessage(response, ostrm, m_quotas.MessageContext, true);
-            }
-
-            ostrm.Position = 0;
-            message.Content = new StreamContent(ostrm);
-            message.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(requestType);
-        }
-
-        /// <summary>
-        /// Handles requests arriving from a channel.
-        /// </summary>
-        private async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-        {
-            IAsyncResult result = null;
-
-            try
-            {
-                if (m_callback == null)
-                {
-                    return new HttpResponseMessage(HttpStatusCode.NotImplemented);
-                }
-
-                var istrm = await request.Content.ReadAsByteArrayAsync();
-                var requestType = request.Content.Headers.ContentType.MediaType;
-
-                MemoryStream ostrm = new MemoryStream();
-                HttpResponseMessage response = new HttpResponseMessage();
-
-                try
-                { 
-                    IServiceRequest input = null;
-
-                    if (requestType == "application/opcua+uajson")
-                    {
-                        input = (IServiceRequest)JsonDecoder.DecodeSessionLessMessage(istrm, m_quotas.MessageContext);
-                    }
-                    else if (requestType == "application/opcua+uabinary")
-                    {
-                        input = (IServiceRequest)BinaryDecoder.DecodeSessionLessMessage(istrm, m_quotas.MessageContext);
-                    }
-                    else
-                    {
-                        input = (IServiceRequest)BinaryDecoder.DecodeMessage(istrm, null, m_quotas.MessageContext);
-                    }
-
-                    // extract the JWT token from the HTTP headers.
-                    if (input.RequestHeader == null) input.RequestHeader = new RequestHeader();
-
-                    if (NodeId.IsNull(input.RequestHeader.AuthenticationToken) && input.TypeId != DataTypeIds.CreateSessionRequest)
-                    {
-                        if (request.Headers.Authorization != null && request.Headers.Authorization.Scheme == "Bearer")
-                        {
-                            input.RequestHeader.AuthenticationToken = new NodeId(request.Headers.Authorization.Parameter);
-                        }
-                    }
-
-                    EndpointDescription endpoint = null;
-
-                    foreach (var ep in m_descriptions)
-                    {
-                        if (ep.EndpointUrl.StartsWith(Utils.UriSchemeHttps))
-                        {
-                            endpoint = ep;
-                            break;
-                        }
-                    }
-
-                    result = m_callback.QueueRequest(
-                        m_listenerId,
-                        endpoint,
-                        input as IServiceRequest,
-                        null,
-                        null);
-
-                    var output = m_callback.FinishRequest(result);
-
-                    EncodeResponse(response, requestType, output);
-                    return response;
-                }
-                catch (Exception e)
-                {
-                    EncodeResponse(response, requestType, CreateFault(e));
-                    return response;
-                }
-            }
-            catch (Exception e)
-            {
-                Utils.Trace(e, "HTTPSLISTENER - Unexpected error processing request.");
-                return new HttpResponseMessage(HttpStatusCode.InternalServerError) { ReasonPhrase = e.Message };
-            }
-        }
-
         /// <summary>
         /// Handles requests arriving from a channel.
         /// </summary>
@@ -531,7 +359,7 @@ namespace Opc.Ua.Bindings
                     }
 
                     IEncodeable request = null;
-
+                    
                     if (String.IsNullOrEmpty(action))
                     {
                         request = BinaryDecoder.DecodeMessage(istrm, null, this.m_quotas.MessageContext);
@@ -547,7 +375,7 @@ namespace Opc.Ua.Bindings
                             this.m_quotas.MessageContext);
                     }
 
-                    result = m_callback.QueueRequest(
+                    result = m_callback.BeginProcessRequest(
                         m_listenerId,
                         endpoint,
                         request as IServiceRequest,
@@ -571,7 +399,7 @@ namespace Opc.Ua.Bindings
             {
                 if (m_callback != null)
                 {
-                    IServiceResponse response = m_callback.FinishRequest(result);
+                    IServiceResponse response = m_callback.EndProcessRequest(result);
 
                     string contentType = WebOperationContext.Current.IncomingRequest.ContentType;
 
@@ -646,10 +474,6 @@ namespace Opc.Ua.Bindings
         private ITransportListenerCallback m_callback;
         private System.ServiceModel.ServiceHost m_host;
         #endregion
-    }
-#endif
-}
-
-namespace Opc.Ua
-{
+    }    
+    #endif
 }

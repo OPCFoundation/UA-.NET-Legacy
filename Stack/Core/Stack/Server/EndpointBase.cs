@@ -107,11 +107,11 @@ namespace Opc.Ua
         /// <param name="callback">The callback.</param>
         /// <param name="callbackData">The callback data.</param>
         /// <returns>
-        /// The result which must be passed to the FinishRequest method.
+        /// The result which must be passed to the EndProcessRequest method.
         /// </returns>
-        /// <seealso cref="FinishRequest"/>
+        /// <seealso cref="EndProcessRequest"/>
         /// <seealso cref="ITransportListener"/>
-        public IAsyncResult QueueRequest(
+        public IAsyncResult BeginProcessRequest(
             string channeId,
             EndpointDescription endpointDescription,
             IServiceRequest request,
@@ -136,12 +136,12 @@ namespace Opc.Ua
         /// <summary>
         /// Ends processing a request received via a binary encoded channel.
         /// </summary>
-        /// <param name="result">The result returned by the QueueRequest method.</param>
+        /// <param name="result">The result returned by the BeginProcessRequest method.</param>
         /// <returns>
         /// The response to return over the secure channel.
         /// </returns>
-        /// <seealso cref="QueueRequest"/>
-        public IServiceResponse FinishRequest(IAsyncResult result)
+        /// <seealso cref="BeginProcessRequest"/>
+        public IServiceResponse EndProcessRequest(IAsyncResult result)
         {
             return ProcessRequestAsyncResult.WaitForComplete(result, false);
         }
@@ -589,30 +589,6 @@ namespace Opc.Ua
                 SecureChannelContext.Current = requestContext;
             }
         }
-
-        /// <summary>
-        /// Called when a new request is received by the endpoint.
-        /// </summary>
-        /// <param name="request">The request.</param>
-        protected virtual void OnRequestReceived(IServiceRequest request)
-        {
-        }
-
-        /// <summary>
-        /// Called when a response sent via the endpoint.
-        /// </summary>
-        /// <param name="response">The response.</param>
-        protected virtual void OnResponseSent(IServiceResponse response)
-        {
-        }
-
-        /// <summary>
-        /// Called when a response fault sent via the endpoint.
-        /// </summary>
-        /// <param name="fault">The fault.</param>
-        protected virtual void OnResponseFaultSent(Exception fault)
-        {
-        }
         #endregion
 
         #region ServiceDefinition Classe
@@ -681,7 +657,7 @@ namespace Opc.Ua
 
         #region ProcessRequestAsyncResult Class
         /// <summary>
-        /// An ChannelAsyncResult object when handling an asynchronous request.
+        /// An AsyncResult object when handling an asynchronous request.
         /// </summary>
         protected class ProcessRequestAsyncResult : AsyncResultBase, IEndpointIncomingRequest
         {
@@ -776,7 +752,7 @@ namespace Opc.Ua
             /// <param name="context">The security context for the request</param>
             /// <param name="requestData">The request data.</param>
             /// <returns>
-            /// The result object that is used to call the FinishRequest method.
+            /// The result object that is used to call the EndProcessRequest method.
             /// </returns>
             public IAsyncResult BeginProcessRequest(
                 SecureChannelContext context,
@@ -817,7 +793,7 @@ namespace Opc.Ua
             /// </summary>
             /// <param name="context">The security context for the request</param>
             /// <param name="request">The request.</param>
-            /// <returns>The result object that is used to call the FinishRequest method.</returns>
+            /// <returns>The result object that is used to call the EndProcessRequest method.</returns>
             public IAsyncResult BeginProcessRequest(
                 SecureChannelContext context,
                 IServiceRequest request)

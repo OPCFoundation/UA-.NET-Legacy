@@ -62,6 +62,8 @@ namespace Opc.Ua.Client.Controls
             this.BottomPN = new System.Windows.Forms.Panel();
             this.MainPN = new System.Windows.Forms.Panel();
             this.ControlsPN = new System.Windows.Forms.TableLayoutPanel();
+            this.SourceTimestampCK = new System.Windows.Forms.CheckBox();
+            this.ServerTimestampCK = new System.Windows.Forms.CheckBox();
             this.ServerTimestampLB = new System.Windows.Forms.Label();
             this.ServerTimestampTB = new System.Windows.Forms.TextBox();
             this.SourceTimestampTB = new System.Windows.Forms.TextBox();
@@ -79,8 +81,6 @@ namespace Opc.Ua.Client.Controls
             this.NodeBTN = new Opc.Ua.Client.Controls.SelectNodeCtrl();
             this.ValueBTN = new Opc.Ua.Client.Controls.EditValue2Ctrl();
             this.StatusCodeCK = new System.Windows.Forms.CheckBox();
-            this.ServerTimestampCK = new System.Windows.Forms.CheckBox();
-            this.SourceTimestampCK = new System.Windows.Forms.CheckBox();
             this.BottomPN.SuspendLayout();
             this.MainPN.SuspendLayout();
             this.ControlsPN.SuspendLayout();
@@ -171,6 +171,28 @@ namespace Opc.Ua.Client.Controls
             this.ControlsPN.Size = new System.Drawing.Size(360, 189);
             this.ControlsPN.TabIndex = 1;
             // 
+            // SourceTimestampCK
+            // 
+            this.SourceTimestampCK.AutoSize = true;
+            this.SourceTimestampCK.Location = new System.Drawing.Point(341, 138);
+            this.SourceTimestampCK.Margin = new System.Windows.Forms.Padding(5, 7, 3, 3);
+            this.SourceTimestampCK.Name = "SourceTimestampCK";
+            this.SourceTimestampCK.Size = new System.Drawing.Size(15, 14);
+            this.SourceTimestampCK.TabIndex = 30;
+            this.SourceTimestampCK.UseVisualStyleBackColor = true;
+            this.SourceTimestampCK.CheckedChanged += new System.EventHandler(this.SourceTimestampCK_CheckedChanged);
+            // 
+            // ServerTimestampCK
+            // 
+            this.ServerTimestampCK.AutoSize = true;
+            this.ServerTimestampCK.Location = new System.Drawing.Point(341, 164);
+            this.ServerTimestampCK.Margin = new System.Windows.Forms.Padding(5, 7, 3, 3);
+            this.ServerTimestampCK.Name = "ServerTimestampCK";
+            this.ServerTimestampCK.Size = new System.Drawing.Size(15, 14);
+            this.ServerTimestampCK.TabIndex = 29;
+            this.ServerTimestampCK.UseVisualStyleBackColor = true;
+            this.ServerTimestampCK.CheckedChanged += new System.EventHandler(this.ServerTimestampCK_CheckedChanged);
+            // 
             // ServerTimestampLB
             // 
             this.ServerTimestampLB.AutoSize = true;
@@ -242,8 +264,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // NodeLB
             // 
-            this.NodeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.NodeLB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.NodeLB.AutoSize = true;
             this.NodeLB.Location = new System.Drawing.Point(3, 0);
             this.NodeLB.Name = "NodeLB";
@@ -262,8 +284,8 @@ namespace Opc.Ua.Client.Controls
             // 
             // AttributeCB
             // 
-            this.AttributeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
+            this.AttributeCB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.AttributeCB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.AttributeCB.FormattingEnabled = true;
             this.AttributeCB.Location = new System.Drawing.Point(104, 29);
@@ -348,28 +370,6 @@ namespace Opc.Ua.Client.Controls
             this.StatusCodeCK.UseVisualStyleBackColor = true;
             this.StatusCodeCK.CheckedChanged += new System.EventHandler(this.StatusCodeCK_CheckedChanged);
             // 
-            // ServerTimestampCK
-            // 
-            this.ServerTimestampCK.AutoSize = true;
-            this.ServerTimestampCK.Location = new System.Drawing.Point(341, 164);
-            this.ServerTimestampCK.Margin = new System.Windows.Forms.Padding(5, 7, 3, 3);
-            this.ServerTimestampCK.Name = "ServerTimestampCK";
-            this.ServerTimestampCK.Size = new System.Drawing.Size(15, 14);
-            this.ServerTimestampCK.TabIndex = 29;
-            this.ServerTimestampCK.UseVisualStyleBackColor = true;
-            this.ServerTimestampCK.CheckedChanged += new System.EventHandler(this.ServerTimestampCK_CheckedChanged);
-            // 
-            // SourceTimestampCK
-            // 
-            this.SourceTimestampCK.AutoSize = true;
-            this.SourceTimestampCK.Location = new System.Drawing.Point(341, 138);
-            this.SourceTimestampCK.Margin = new System.Windows.Forms.Padding(5, 7, 3, 3);
-            this.SourceTimestampCK.Name = "SourceTimestampCK";
-            this.SourceTimestampCK.Size = new System.Drawing.Size(15, 14);
-            this.SourceTimestampCK.TabIndex = 30;
-            this.SourceTimestampCK.UseVisualStyleBackColor = true;
-            this.SourceTimestampCK.CheckedChanged += new System.EventHandler(this.SourceTimestampCK_CheckedChanged);
-            // 
             // EditWriteValueDlg
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -380,8 +380,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(360, 219);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.BottomPN);
-            this.MaximumSize = new System.Drawing.Size(3000, 1000);
-            this.MinimumSize = new System.Drawing.Size(50, 100);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "EditWriteValueDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit Write Request";

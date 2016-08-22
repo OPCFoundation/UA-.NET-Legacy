@@ -36,7 +36,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Security.Cryptography.X509Certificates;
 using Opc.Ua;
-using System.Threading.Tasks;
+using Opc.Ua.Client;
 
 namespace Opc.Ua.Client.Controls
 {
@@ -265,13 +265,16 @@ namespace Opc.Ua.Client.Controls
                 }
             }
         }
-
+                
         /// <summary>
         /// Creates a new session.
         /// </summary>
         /// <returns>The new session object.</returns>
         public Session Connect()
         {
+            // disconnect from existing session.
+            Disconnect();
+
             // determine the URL that was selected.
             string serverUrl = UrlCB.Text;
 
@@ -280,20 +283,14 @@ namespace Opc.Ua.Client.Controls
                 serverUrl = (string)UrlCB.SelectedItem;
             }
 
-            return Connect(serverUrl, UseSecurityCK.Checked);
-        }
-
-        /// <summary>
-        /// Creates a new session.
-        /// </summary>
-        /// <returns>The new session object.</returns>
-        private Session Connect(string serverUrl, bool useSecurity)
-        {
-            // disconnect from existing session.
-            InternalDisconnect();
+            if (m_configuration == null)
+            {
+                throw new ArgumentNullException("m_configuration");
+            }
 
             // select the best endpoint.
-            EndpointDescription endpointDescription = EndpointDescription.SelectEndpoint(m_configuration, serverUrl, useSecurity);
+            EndpointDescription endpointDescription = ClientUtils.SelectEndpoint(serverUrl, UseSecurityCK.Checked);
+
             EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(m_configuration);
             ConfiguredEndpoint endpoint = new ConfiguredEndpoint(null, endpointDescription, endpointConfiguration);
 
@@ -323,43 +320,20 @@ namespace Opc.Ua.Client.Controls
         /// <param name="serverUrl">The URL of a server endpoint.</param>
         /// <param name="useSecurity">Whether to use security.</param>
         /// <returns>The new session object.</returns>
-        public async Task<Session> ConnectAsync(string serverUrl = null, bool useSecurity = false)
+        public Session Connect(string serverUrl, bool useSecurity)
         {
-            if (serverUrl == null)
-            {
-                serverUrl = UrlCB.Text;
-
-                if (UrlCB.SelectedIndex >= 0)
-                {
-                    serverUrl = (string)UrlCB.SelectedItem;
-                }
-
-                useSecurity = UseSecurityCK.Checked;
-            }
-            else
-            {
-                UrlCB.Text = serverUrl;
-                UseSecurityCK.Checked = useSecurity;
-            }
-
-            return await Task.Run(() => Connect(serverUrl, useSecurity));
+            UrlCB.Text = serverUrl;
+            UseSecurityCK.Checked = useSecurity;
+            return Connect();
         }
 
         /// <summary>
         /// Disconnects from the server.
         /// </summary>
-        public async Task DisconnectAsync()
+        public void Disconnect()
         {
             UpdateStatus(false, DateTime.UtcNow, "Disconnected");
 
-            await Task.Run(() => InternalDisconnect());
-        }
-
-        /// <summary>
-        /// Disconnects from the server.
-        /// </summary>
-        private void InternalDisconnect()
-        {
             // stop any reconnect operation.
             if (m_reconnectHandler != null)
             {
@@ -376,17 +350,6 @@ namespace Opc.Ua.Client.Controls
 
             // raise an event.
             DoConnectComplete(null);
-        }
-
-        /// <summary>
-        /// Disconnects from the server.
-        /// </summary>
-        public void Disconnect()
-        {
-            UpdateStatus(false, DateTime.UtcNow, "Disconnected");
-
-            // stop any reconnect operation.
-            InternalDisconnect();
         }
 
         /// <summary>
@@ -439,7 +402,7 @@ namespace Opc.Ua.Client.Controls
                 }
 
                 // return the selected endpoint.
-                return EndpointDescription.SelectEndpoint(m_configuration, discoveryUrl, UseSecurityCK.Checked);
+                return ClientUtils.SelectEndpoint(discoveryUrl, UseSecurityCK.Checked);
             }
             finally
             {
@@ -533,11 +496,11 @@ namespace Opc.Ua.Client.Controls
         /// <summary>
         /// Handles a click on the connect button.
         /// </summary>
-        private async void Server_ConnectMI_Click(object sender, EventArgs e)
+        private void Server_ConnectMI_Click(object sender, EventArgs e)
         {
             try
             {
-                await ConnectAsync();
+                Connect();
             }
             catch (Exception exception)
             {

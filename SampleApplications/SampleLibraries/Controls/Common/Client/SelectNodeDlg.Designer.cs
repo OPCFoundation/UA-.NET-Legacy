@@ -116,8 +116,9 @@ namespace Opc.Ua.Client.Controls
             this.ClientSize = new System.Drawing.Size(803, 418);
             this.Controls.Add(this.BrowseCTRL);
             this.Controls.Add(this.BottomPN);
-            this.MaximumSize = new System.Drawing.Size(1200, 1200);
-            this.MinimumSize = new System.Drawing.Size(400, 91);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SelectNodeDlg";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select Node";

@@ -739,7 +739,7 @@ namespace Opc.Ua.Bindings
                 WriteAsymmetricMessageHeader(
                     encoder,
                     messageType | TcpMessageType.Intermediate,
-                    GroupId,
+                    ChannelId,
                     SecurityPolicyUri,
                     senderCertificates,
                     receiverCertificate,

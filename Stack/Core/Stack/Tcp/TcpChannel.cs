@@ -483,7 +483,7 @@ namespace Opc.Ua.Bindings
                 reason = new UTF8Encoding().GetString(reasonBytes);
             }
             
-            // Utils.Trace("Channel {0}: Read = {1}", GroupId, reason);
+            // Utils.Trace("Channel {0}: Read = {1}", ChannelId, reason);
             
             return ServiceResult.Create(statusCode, "Error received from remote host: {0}", reason);
         }
@@ -524,7 +524,7 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// Updates the message type stored in the message header.
         /// </summary>
-        public static void UpdateMessageType(byte[] buffer, int offset, uint messageType)
+        protected static void UpdateMessageType(byte[] buffer, int offset, uint messageType)
         {
             buffer[offset++] = (byte)((messageType & 0x000000FF));
             buffer[offset++] = (byte)((messageType & 0x0000FF00)>>8);
@@ -535,7 +535,7 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// Updates the message size stored in the message header.
         /// </summary>
-        public static void UpdateMessageSize(byte[] buffer, int offset, int messageSize)
+        protected static void UpdateMessageSize(byte[] buffer, int offset, int messageSize)
         {
             if (offset >= Int32.MaxValue - 4)
             {
@@ -654,7 +654,7 @@ namespace Opc.Ua.Bindings
             { 
                 if (m_state != value)
                 {
-                    // Utils.Trace("Channel {0} in {1} state.", GroupId, value);
+                    // Utils.Trace("Channel {0} in {1} state.", ChannelId, value);
                 }
 
                 m_state = value; 

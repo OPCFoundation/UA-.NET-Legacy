@@ -148,25 +148,5 @@ namespace Opc.Ua
         /// Whether the method can be called by the current user.
         /// </summary>
         public const uint UserExecutable = 22;
-
-        /// <summary>
-        /// Provides the metadata and encoding information for custom DataTypes.
-        /// </summary>
-        public const uint DataTypeDefinition = 23;
-
-        /// <summary>
-        /// The permissions available for the node.
-        /// </summary>
-        public const uint Permissions = 24;
-
-        /// <summary>
-        /// The subset of permissions available for the current user.
-        /// </summary>
-        public const uint UserPermissions = 25;
-
-        /// <summary>
-        /// The permissions granted to roles.
-        /// </summary>
-        public const uint RolePermissions = 26;
     }
 }

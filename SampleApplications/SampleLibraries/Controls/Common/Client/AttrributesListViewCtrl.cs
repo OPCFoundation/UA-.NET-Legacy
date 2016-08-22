@@ -72,11 +72,6 @@ namespace Opc.Ua.Client.Controls
         public void ChangeSession(Session session)
         {
             m_session = session;
-
-            if (m_session == null)
-            {
-                AttributesLV.Items.Clear();
-            }
         }
 
         /// <summary>
@@ -297,7 +292,7 @@ namespace Opc.Ua.Client.Controls
                 }
 
                 item.Tag = new AttributeInfo() { NodeToRead = nodesToRead[ii], Value = results[ii] };
-                // item.ImageIndex = ClientUtils.GetImageIndex(m_session, NodeClass.Variable, Opc.Ua.VariableTypeIds.PropertyType, false);
+                item.ImageIndex = ClientUtils.GetImageIndex(m_session, NodeClass.Variable, Opc.Ua.VariableTypeIds.PropertyType, false);
 
                 // display in list.
                 AttributesLV.Items.Add(item);

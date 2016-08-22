@@ -49,6 +49,7 @@ namespace Opc.Ua.Client.Controls
         public CertificateStoreTreeDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         
         /// <summary>

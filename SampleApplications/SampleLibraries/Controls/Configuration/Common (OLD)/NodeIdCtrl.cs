@@ -173,10 +173,9 @@ namespace Opc.Ua.Client.Controls
         {
             try
             {
-                /*
-                ReferenceDescription reference = new SelectNodeDlg().ShowDialog(m_browser, RootId);
+                ReferenceDescription reference = new SelectNodeDlg().ShowDialog(m_browser.Session, RootId, null, "", null);
 
-                if (reference != null)
+                if (reference != null && reference.NodeId != null)
                 {
                     NodeIdTB.Text = Utils.Format("{0}", reference.NodeId);
                     m_reference = reference;
@@ -186,7 +185,6 @@ namespace Opc.Ua.Client.Controls
                         m_IdentifierChanged(this, null);
                     }
                 }
-                 * */
             }
             catch (Exception exception)
             {

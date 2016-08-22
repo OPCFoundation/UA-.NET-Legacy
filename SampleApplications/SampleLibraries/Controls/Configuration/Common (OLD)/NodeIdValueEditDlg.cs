@@ -52,6 +52,7 @@ namespace Opc.Ua.Client.Controls
         public NodeIdValueEditDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
         

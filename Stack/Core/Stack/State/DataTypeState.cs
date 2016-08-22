@@ -46,13 +46,13 @@ namespace Opc.Ua
         /// <summary>
         /// The abstract definition of the data type.
         /// </summary>
-        public UADataTypeDefinition Definition { get; set; }
+        public DataTypeDefinition Definition { get; set; }
     }
 
     /// <summary>
     /// Defines an abstract description of a type.
     /// </summary>
-    public class UADataTypeDefinition
+    public class DataTypeDefinition
     {
         /// <summary>
         /// The name of the type.
@@ -77,13 +77,13 @@ namespace Opc.Ua
         /// <summary>
         /// The fields in structure.
         /// </summary>
-        public List<UADataTypeDefinitionField> Fields { get; set; }
+        public List<DataTypeDefinitionField> Fields { get; set; }
     }
 
     /// <summary>
     /// Defines a field within an abstract definition of a data type.
     /// </summary>
-    public class UADataTypeDefinitionField
+    public class DataTypeDefinitionField
     {
         /// <summary>
         /// The name of the field.
@@ -113,7 +113,7 @@ namespace Opc.Ua
         /// <summary>
         /// A nested description of a structured field.
         /// </summary>
-        public UADataTypeDefinition Definition { get; set; }
+        public DataTypeDefinition Definition { get; set; }
 
         /// <summary>
         /// The value of an enumerated field.

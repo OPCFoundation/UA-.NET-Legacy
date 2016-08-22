@@ -26,6 +26,11 @@ namespace Opc.Ua
     public interface ITransportChannel : IDisposable
     {
         /// <summary>
+        /// A masking indicating which features are implemented.
+        /// </summary>
+        TransportChannelFeatures SupportedFeatures { get; }
+
+        /// <summary>
         /// Gets the description for the endpoint used by the channel.
         /// </summary>
         EndpointDescription EndpointDescription { get; }
@@ -82,6 +87,33 @@ namespace Opc.Ua
         void EndOpen(IAsyncResult result);
 
         /// <summary>
+        /// Closes any existing secure channel and opens a new one.
+        /// </summary>
+        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
+        /// <remarks>
+        /// Calling this method will cause outstanding requests over the current secure channel to fail.
+        /// </remarks>
+        void Reconnect();
+
+        /// <summary>
+        /// Begins an asynchronous operation to close the existing secure channel and open a new one.
+        /// </summary>
+        /// <param name="callback">The callback to call when the operation completes.</param>
+        /// <param name="callbackData">The callback data to return with the callback.</param>
+        /// <returns>The result which must be passed to the EndReconnect method.</returns>
+        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
+        /// <seealso cref="Reconnect" />
+        IAsyncResult BeginReconnect(AsyncCallback callback, object callbackData);
+
+        /// <summary>
+        /// Completes an asynchronous operation to close the existing secure channel and open a new one.
+        /// </summary>
+        /// <param name="result">The result returned from the BeginReconnect call.</param>
+        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
+        /// <seealso cref="Reconnect" />
+        void EndReconnect(IAsyncResult result);
+
+        /// <summary>
         /// Closes the secure channel.
         /// </summary>
         /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
@@ -131,5 +163,47 @@ namespace Opc.Ua
         /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
         /// <seealso cref="SendRequest" />
         IServiceResponse EndSendRequest(IAsyncResult result);
+    }
+
+    /// <summary>
+    /// The masks for the optional features which may not be supported by every transport channel.
+    /// </summary>
+    [Flags]
+    public enum TransportChannelFeatures
+    {
+        /// <summary>
+        /// The channel does not support any optional features.
+        /// </summary>
+        None = 0x0000,
+
+        /// <summary>
+        /// The channel supports Open.
+        /// </summary>
+        Open = 0x0001,
+
+        /// <summary>
+        /// The channel supports asynchronous Open.
+        /// </summary>
+        BeginOpen = 0x0002,
+
+        /// <summary>
+        /// The channel supports Reconnect.
+        /// </summary>
+        Reconnect = 0x0004,
+        
+        /// <summary>
+        /// The channel supports asynchronous Reconnect.
+        /// </summary>
+        BeginReconnect = 0x0008,
+
+        /// <summary>
+        /// The channel supports asynchronous Close.
+        /// </summary>
+        BeginClose = 0x0010,
+
+        /// <summary>
+        /// The channel supports asynchronous SendRequest.
+        /// </summary>
+        BeginSendRequest = 0x0020
     }
 }

@@ -51,6 +51,7 @@ namespace Opc.Ua.Client.Controls
         public EditAnnotationDlg()
         {
             InitializeComponent();
+            this.Icon = ClientUtils.GetAppIcon();
         }
         #endregion
 

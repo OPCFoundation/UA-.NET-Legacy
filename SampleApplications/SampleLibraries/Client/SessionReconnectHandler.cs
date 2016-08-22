@@ -1,18 +1,31 @@
-/* Copyright (c) 1996-2016, OPC Foundation. All rights reserved.
-
-   The source code in this file is covered under a dual-license scenario:
-     - RCL: for OPC Foundation members in good-standing
-     - GPL V2: everybody else
-
-   RCL license terms accompanied with this source code. See http://opcfoundation.org/License/RCL/1.00/
-
-   GNU General Public License as published by the Free Software Foundation;
-   version 2 of the License are accompanied with this source code. See http://opcfoundation.org/License/GPLv2
-
-   This source code is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*/
+/* ========================================================================
+ * Copyright (c) 2005-2016 The OPC Foundation, Inc. All rights reserved.
+ *
+ * OPC Foundation MIT License 1.00
+ * 
+ * Permission is hereby granted, free of charge, to any person
+ * obtaining a copy of this software and associated documentation
+ * files (the "Software"), to deal in the Software without
+ * restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following
+ * conditions:
+ * 
+ * The above copyright notice and this permission notice shall be
+ * included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ * OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ * OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * The complete license agreement can be found here:
+ * http://opcfoundation.org/License/MIT/1.00/
+ * ======================================================================*/
 
 using System;
 using System.Collections.Generic;
@@ -81,7 +94,7 @@ namespace Opc.Ua.Client
                 m_reconnectFailed = false;
                 m_reconnectPeriod = reconnectPeriod;
                 m_callback = callback;
-                m_reconnectTimer = new System.Threading.Timer(OnReconnect, null, reconnectPeriod, Timeout.Infinite);
+                m_reconnectTimer = new System.Threading.Timer(OnReconnect, null, reconnectPeriod, reconnectPeriod);
             }
         }
         #endregion
@@ -100,33 +113,25 @@ namespace Opc.Ua.Client
                     return;
                 }
 
-                // dispose of the timer.
-                lock (m_lock)
-                {
-                    if (m_reconnectTimer != null)
-                    {
-                        m_reconnectTimer.Dispose();
-                        m_reconnectTimer = null;
-                    }
-                }
-
                 // do the reconnect.
                 if (DoReconnect())
                 {
+                    lock (m_lock)
+                    {
+                        if (m_reconnectTimer != null)
+                        {
+                            m_reconnectTimer.Dispose();
+                            m_reconnectTimer = null;
+                        }
+                    }
+
                     // notify the caller.
                     m_callback(this, null);
-                    return;
                 }
             }
             catch (Exception exception)
             {
                 Utils.Trace(exception, "Unexpected error during reconnect.");
-            }
-
-            // schedule the next reconnect.
-            lock (m_lock)
-            {
-                m_reconnectTimer = new System.Threading.Timer(OnReconnect, null, m_reconnectPeriod, Timeout.Infinite);
             }
         }
 
@@ -147,38 +152,23 @@ namespace Opc.Ua.Client
                 }
                 catch (Exception exception)
                 {
-                    bool recreateNow = false;
-
-                    // recreate the session if it has been closed or the nonce is wrong.
+                    // recreate the session if it has been closed.
                     ServiceResultException sre = exception as ServiceResultException;
 
-                    if (sre != null)
+                    // check if the server endpoint could not be reached.
+                    if ((sre != null && (sre.StatusCode == StatusCodes.BadTcpInternalError || sre.StatusCode == StatusCodes.BadCommunicationError)) ||
+                        exception is System.ServiceModel.EndpointNotFoundException)
                     {
-                        switch (sre.StatusCode)
+                        // check if reconnecting is still an option.
+                        if (m_session.LastKeepAliveTime.AddMilliseconds(m_session.SessionTimeout) > DateTime.UtcNow)
                         {
-                            case StatusCodes.BadSessionClosed:
-                            case StatusCodes.BadApplicationSignatureInvalid:
-                            {
-                                recreateNow = true;
-                                break;
-                            }
+                            Utils.Trace("Calling OnReconnectSession in {0} ms.", m_reconnectPeriod);
 
-                            default:
-                            {
-                                Utils.Trace((int)Utils.TraceMasks.Error, "Unexpected RECONNECT error code. {0}", sre.StatusCode);
-                                break;
-                            }
+                            return false;
                         }
                     }
 
                     m_reconnectFailed = true;
-
-                    // try a reconnect again after a delay.
-                    if (!recreateNow)
-                    {
-                        Utils.Trace("Reconnect failed. {0}", exception.Message);
-                        return false;
-                    }
                 }
             }
 
@@ -192,7 +182,7 @@ namespace Opc.Ua.Client
             }
             catch (Exception exception)
             {
-                Utils.Trace("Unexpected re-creating a Session with the UA Server. {0}", exception.Message);
+                Utils.Trace("Could not reconnect the Session. {0}", exception.Message);
                 return false;
             }
         }
