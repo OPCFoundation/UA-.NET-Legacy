@@ -754,8 +754,7 @@ namespace Opc.Ua.Client
             // update endpoint description using the discovery endpoint.
             if (endpoint.UpdateBeforeConnect)
             {
-                BindingFactory bindingFactory = BindingFactory.Create(configuration, messageContext);
-                endpoint.UpdateFromServer(bindingFactory);
+                endpoint.UpdateFromServer(configuration);
 
                 endpointDescription = endpoint.Description;
                 endpointConfiguration = endpoint.Configuration;
@@ -988,25 +987,17 @@ namespace Opc.Ua.Client
                                 
                 Utils.Trace("Session REPLACING channel.");
 
-                // check if the channel supports reconnect.
-                if ((TransportChannel.SupportedFeatures & TransportChannelFeatures.Reconnect) != 0)
-                {
-                    TransportChannel.Reconnect();
-                }
-                else
-                {
-                    // initialize the channel which will be created with the server.
-                    ITransportChannel channel = SessionChannel.Create(
-                        m_configuration,
-                        m_endpoint.Description,
-                        m_endpoint.Configuration,
-                        m_instanceCertificate,
-                        MessageContext);
+                // initialize the channel which will be created with the server.
+                ITransportChannel channel = SessionChannel.Create(
+                    m_configuration,
+                    m_endpoint.Description,
+                    m_endpoint.Configuration,
+                    m_instanceCertificate,
+                    MessageContext);
 
-                    // disposes the existing channel.
-                    TransportChannel = channel;
-                }
-                
+                // disposes the existing channel.
+                TransportChannel = channel;
+
                 // reactivate session.
                 byte[] serverNonce = null;
                 StatusCodeCollection certificateResults = null;

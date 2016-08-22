@@ -49,6 +49,11 @@ namespace Opc.Ua
         public const string UriSchemeHttps = "https";
 
         /// <summary>
+        /// The URI scheme for the AMQPS protocol. 
+        /// </summary>
+        public const string UriSchemeOpcAmqp = "opc.amqp";
+
+        /// <summary>
         /// The URI scheme for using HTTP protocol without any security. 
         /// </summary>
         public const string UriSchemeNoSecurityHttp = "nosecurityhttp";
@@ -57,7 +62,12 @@ namespace Opc.Ua
         /// The URI scheme for the UA TCP protocol. 
         /// </summary>
         public const string UriSchemeOpcTcp = "opc.tcp";
-        
+
+        /// <summary>
+        /// The URI scheme for the UA TCP protocol over TLS/SSL. 
+        /// </summary>
+        public const string UriSchemeOpcTls = "opc.tls";
+
         /// <summary>
         /// The URI scheme for the .NET TCP protocol. 
         /// </summary>
@@ -72,10 +82,15 @@ namespace Opc.Ua
         /// The default port for the UA TCP protocol.
         /// </summary>
         public const int UaTcpDefaultPort = 4840;
-        
+
         /// <summary>
-		/// The urls of the discovery servers on a node.
-		/// </summary>
+        /// The default port for the UA TCP protocol over TLS.
+        /// </summary>
+        public const int UaTlsDefaultPort = 4843;
+
+        /// <summary>
+        /// The urls of the discovery servers on a node.
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2105:ArrayFieldsShouldNotBeReadOnly")]
         public static readonly string[] DiscoveryUrls = new string[]
 		{ 
@@ -214,6 +229,7 @@ namespace Opc.Ua
             /// </summary>
             public const int All = 0x7FFFFFFF;
         }
+
 
         /// <summary>
         /// Sets the output for tracing (thead safe).
@@ -421,13 +437,13 @@ namespace Opc.Ua
                 catch (Exception)
                 {
                     message.Append(format);
-                }
+                } 
             }
             else
             {
                 message.Append(format);
             }
-
+            
             // append exception information.
             if (e != null)
             {
@@ -445,7 +461,7 @@ namespace Opc.Ua
                 // append stack trace.
                 if ((s_traceMasks & (int)TraceMasks.StackTrace) != 0)
                 {
-                    message.AppendFormat(CultureInfo.InvariantCulture, "\r\n\r\n{0}\r\n", new String('=', 40));
+                    message.AppendFormat(CultureInfo.InvariantCulture, "\r\n\r\n{0}\r\n", new String('=', 40));              
                     message.Append(new ServiceResult(e).ToLongString());
                     message.AppendFormat(CultureInfo.InvariantCulture, "\r\n{0}\r\n", new String('=', 40));
                 }
@@ -500,7 +516,6 @@ namespace Opc.Ua
 
             TraceWriteLine(message.ToString(), null);
         }
-
         #endregion
 
         #region File Access
@@ -547,27 +562,20 @@ namespace Opc.Ua
             StringBuilder buffer = new StringBuilder();
 
             // check for special folder.
-            try
-            {
-                Environment.SpecialFolder specialFolder = (Environment.SpecialFolder)Enum.Parse(
-                    typeof(Environment.SpecialFolder), 
-                    folder, 
-                    true);
+            Environment.SpecialFolder specialFolder;
 
-                buffer.Append(Environment.GetFolderPath(specialFolder));
-            }
-
-            // check for generic environment variable.
-            catch (Exception)
+            if (!Enum.TryParse<Environment.SpecialFolder>(folder, out specialFolder))
             {
-                #if !SILVERLIGHT
                 string value = Environment.GetEnvironmentVariable(folder);
 
                 if (value != null)
                 {
                     buffer.Append(value);
                 }
-                #endif
+            }
+            else
+            {
+                buffer.Append(Environment.GetFolderPath(specialFolder));
             }
                        
             // construct new path.

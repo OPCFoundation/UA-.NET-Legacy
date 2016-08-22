@@ -341,7 +341,6 @@ namespace Opc.Ua.Client.Controls
         private bool m_discoverySucceeded;
         private Uri m_discoveryUrl;
         private bool m_showAllOptions;
-        private String m_discoveryStatus;
         private StatusObject m_statusObject;
         #endregion
 
@@ -1165,6 +1164,7 @@ namespace Opc.Ua.Client.Controls
             configuration.OperationTimeout = m_discoveryTimeout;
 
             DiscoveryClient client = DiscoveryClient.Create(
+                m_configuration,
                 discoveryUrl,
                 BindingFactory.Create(m_configuration, m_configuration.CreateMessageContext()),
                 EndpointConfiguration.Create(m_configuration));
