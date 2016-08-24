@@ -23,11 +23,11 @@ using System.Runtime.InteropServices;
 
 namespace Opc.Ua
 {
-	/// <summary>
-	/// The UserIdentityToken class.
-	/// </summary>
-	public partial class UserIdentityToken
-	{                
+    /// <summary>
+    /// The UserIdentityToken class.
+    /// </summary>
+    public partial class UserIdentityToken
+    {
         #region Public Methods
         /// <summary>
         /// Encrypts the token (implemented by the subclass).
@@ -35,14 +35,14 @@ namespace Opc.Ua
         public virtual void Encrypt(X509Certificate2 certificate, byte[] receiverNonce, string securityPolicyUri)
         {
         }
-                
+
         /// <summary>
         /// Decrypts the token (implemented by the subclass).
         /// </summary>
         public virtual void Decrypt(X509Certificate2 certificate, byte[] receiverNonce, string securityPolicyUri)
         {
         }
-                
+
         /// <summary>
         /// Creates a signature with the token (implemented by the subclass).
         /// </summary>
@@ -50,7 +50,7 @@ namespace Opc.Ua
         {
             return new SignatureData();
         }
-                
+
         /// <summary>
         /// Verifies a signature created with the token (implemented by the subclass).
         /// </summary>
@@ -61,11 +61,11 @@ namespace Opc.Ua
         #endregion
     }
 
-	/// <summary>
-	/// The UserIdentityToken class.
-	/// </summary>
-	public partial class UserNameIdentityToken
-	{
+    /// <summary>
+    /// The UserIdentityToken class.
+    /// </summary>
+    public partial class UserNameIdentityToken
+    {
         #region Public Properties
         /// <summary>
         /// The decrypted password associated with the token.
@@ -104,7 +104,7 @@ namespace Opc.Ua
             }
         }
         #endregion
-        
+
         #region Public Methods
         /// <summary>
         /// Encrypts the DecryptedPassword using the EncryptionAlgorithm and places the result in Password
@@ -124,7 +124,7 @@ namespace Opc.Ua
                 m_encryptionAlgorithm = null;
                 return;
             }
-            
+
             // encrypt the password.
             byte[] dataToEncrypt = Utils.Append(new UTF8Encoding().GetBytes(DecryptedPassword), senderNonce);
 
@@ -132,11 +132,11 @@ namespace Opc.Ua
                 certificate,
                 securityPolicyUri,
                 dataToEncrypt);
-                        
+
             m_password = encryptedData.Data;
-            m_encryptionAlgorithm = encryptedData.Algorithm; 
+            m_encryptionAlgorithm = encryptedData.Algorithm;
         }
-                
+
         /// <summary>
         /// Decrypts the Password using the EncryptionAlgorithm and places the result in DecryptedPassword
         /// </summary>
@@ -148,7 +148,7 @@ namespace Opc.Ua
                 DecryptedPassword = new UTF8Encoding().GetString(m_password);
                 return;
             }
-            
+
             // decrypt.
             EncryptedData encryptedData = new EncryptedData();
 
@@ -156,8 +156,8 @@ namespace Opc.Ua
             encryptedData.Algorithm = m_encryptionAlgorithm;
 
             byte[] decryptedPassword = SecurityPolicies.Decrypt(
-                certificate, 
-                securityPolicyUri, 
+                certificate,
+                securityPolicyUri,
                 encryptedData);
 
             if (decryptedPassword == null)
@@ -171,17 +171,17 @@ namespace Opc.Ua
 
             if (senderNonce != null)
             {
-                 startOfNonce -= senderNonce.Length;
+                startOfNonce -= senderNonce.Length;
 
                 for (int ii = 0; ii < senderNonce.Length; ii++)
                 {
-                    if (senderNonce[ii] != decryptedPassword[ii+startOfNonce])
+                    if (senderNonce[ii] != decryptedPassword[ii + startOfNonce])
                     {
                         throw new ServiceResultException(StatusCodes.BadIdentityTokenRejected);
                     }
                 }
-            }            
-                     
+            }
+
             // convert to UTF-8.
             DecryptedPassword = new UTF8Encoding().GetString(decryptedPassword, 0, startOfNonce);
         }
@@ -191,19 +191,19 @@ namespace Opc.Ua
         private SecureString m_decryptedPassword;
         #endregion
     }
-    
-	/// <summary>
-	/// The X509IdentityToken class.
-	/// </summary>
-	public partial class X509IdentityToken
-	{        
+
+    /// <summary>
+    /// The X509IdentityToken class.
+    /// </summary>
+    public partial class X509IdentityToken
+    {
         #region Public Properties
         /// <summary>
         /// The certificate associated with the token.
         /// </summary>
         public X509Certificate2 Certificate
         {
-            get { return m_certificate;  }
+            get { return m_certificate; }
             set { m_certificate = value; }
         }
         #endregion
@@ -215,37 +215,37 @@ namespace Opc.Ua
         public override SignatureData Sign(byte[] dataToSign, string securityPolicyUri)
         {
             X509Certificate2 certificate = m_certificate;
-            
+
             if (certificate == null)
-            {   
+            {
                 certificate = CertificateFactory.Create(m_certificateData, true);
             }
-            
+
             SignatureData signatureData = SecurityPolicies.Sign(
-                certificate, 
-                securityPolicyUri, 
+                certificate,
+                securityPolicyUri,
                 dataToSign);
-            
+
             m_certificateData = certificate.GetRawCertData();
 
             return signatureData;
         }
-                
+
         /// <summary>
         /// Verifies a signature created with the token.
         /// </summary>
         public override bool Verify(byte[] dataToVerify, SignatureData signatureData, string securityPolicyUri)
         {
             X509Certificate2 certificate = m_certificate;
-            
+
             if (certificate == null)
-            {   
+            {
                 certificate = CertificateFactory.Create(m_certificateData, true);
-            }          
-            
+            }
+
             bool valid = SecurityPolicies.Verify(
-                certificate, 
-                securityPolicyUri, 
+                certificate,
+                securityPolicyUri,
                 dataToVerify,
                 signatureData);
 
@@ -259,13 +259,30 @@ namespace Opc.Ua
         private X509Certificate2 m_certificate;
         #endregion
     }
-        
-	/// <summary>
-	/// The IssuedIdentityToken class.
-	/// </summary>
-	public partial class IssuedIdentityToken
+
+    public enum IssuedTokenType
+    {
+        GenericWSS,
+        SAML,
+        JWT,
+        KerberosBinary
+    };
+
+    /// <summary>
+    /// The IssuedIdentityToken class.
+    /// </summary>
+    public partial class IssuedIdentityToken
 	{
         #region Public Properties
+        /// <summary>
+        /// The type of issued token.
+        /// </summary>
+        public IssuedTokenType IssuedTokenType
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// The decrypted password associated with the token.
         /// </summary>
@@ -275,13 +292,21 @@ namespace Opc.Ua
             set { m_decryptedTokenData = value; }
         }
         #endregion
-        
+
         #region Public Methods
         /// <summary>
         /// Encrypts the DecryptedTokenData using the EncryptionAlgorithm and places the result in Password
         /// </summary>
         public override void Encrypt(X509Certificate2 certificate, byte[] senderNonce, string securityPolicyUri)
         {
+            // handle no encryption.
+            if (String.IsNullOrEmpty(securityPolicyUri) || securityPolicyUri == SecurityPolicies.None)
+            {
+                m_tokenData = m_decryptedTokenData;
+                m_encryptionAlgorithm = String.Empty;
+                return;
+            }
+
             byte[] dataToEncrypt = Utils.Append(m_decryptedTokenData, senderNonce);
 
             EncryptedData encryptedData = SecurityPolicies.Encrypt(
@@ -298,6 +323,13 @@ namespace Opc.Ua
         /// </summary>
         public override void Decrypt(X509Certificate2 certificate, byte[] senderNonce, string securityPolicyUri)
         {
+            // handle no encryption.
+            if (String.IsNullOrEmpty(securityPolicyUri) || securityPolicyUri == SecurityPolicies.None)
+            {
+                m_decryptedTokenData = m_tokenData;
+                return;
+            }
+
             EncryptedData encryptedData = new EncryptedData();
 
             encryptedData.Data = m_tokenData;
@@ -328,7 +360,7 @@ namespace Opc.Ua
             m_decryptedTokenData = new byte[startOfNonce];
             Array.Copy(decryptedTokenData, m_decryptedTokenData, startOfNonce);                     
         }
-
+        
         /// <summary>
         /// Creates a signature with the token.
         /// </summary>

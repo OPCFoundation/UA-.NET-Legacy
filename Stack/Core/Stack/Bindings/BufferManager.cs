@@ -113,6 +113,29 @@ namespace Opc.Ua.Bindings
     /// </summary>
     public class BufferManager
     {
+        #region Private Fields
+        private object m_lock = new object();
+        private string m_name;
+        private int m_defaultBufferSize;
+        private System.ServiceModel.Channels.BufferManager m_manager;
+
+#if TRACK_MEMORY
+        class Allocation
+        {
+            public int Id;
+            public byte[] Buffer;
+            public DateTime Timestamp;
+            public string Owner;
+            public string ReleasedBy;
+            public int Reported;
+        }
+
+        private int m_allocated;
+        private int m_id;
+        private SortedDictionary<int,Allocation> m_allocations = new SortedDictionary<int,Allocation>();
+#endif
+
+        #endregion
         #region Constructors
         /// <summary>
         /// Constructs the buffer manager.
@@ -122,8 +145,9 @@ namespace Opc.Ua.Bindings
         /// <param name="maxBufferSize">Max size of the buffer.</param>
         public BufferManager(string name, int maxPoolSize, int maxBufferSize)
         {
-            m_name      = name;
-            m_manager   = System.ServiceModel.Channels.BufferManager.CreateBufferManager(maxPoolSize, maxBufferSize);
+            m_name = name;
+            m_defaultBufferSize = maxBufferSize;
+            m_manager = System.ServiceModel.Channels.BufferManager.CreateBufferManager(maxPoolSize, maxBufferSize);
         }
         #endregion
         
@@ -139,6 +163,11 @@ namespace Opc.Ua.Bindings
             if (size > Int32.MaxValue - 5)
             {
                 throw new ArgumentOutOfRangeException("size");
+            }
+
+            if (size <= 0)
+            {
+                size = m_defaultBufferSize;
             }
 
             lock (m_lock)
@@ -324,29 +353,6 @@ namespace Opc.Ua.Bindings
                 m_manager.ReturnBuffer(buffer);
             }
         }
-        #endregion
-        
-        #region Private Fields
-        private object m_lock = new object();
-        private string m_name;
-        private System.ServiceModel.Channels.BufferManager m_manager;
-
-        #if TRACK_MEMORY
-        class Allocation
-        {
-            public int Id;
-            public byte[] Buffer;
-            public DateTime Timestamp;
-            public string Owner;
-            public string ReleasedBy;
-            public int Reported;
-        }
-
-        private int m_allocated;
-        private int m_id;
-        private SortedDictionary<int,Allocation> m_allocations = new SortedDictionary<int,Allocation>();
-        #endif
-
         #endregion
     }
     #endregion 

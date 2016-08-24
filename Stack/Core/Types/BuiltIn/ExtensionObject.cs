@@ -649,8 +649,10 @@ namespace Opc.Ua
         /// <remarks>
         /// Will add null elements if individual elements cannot be converted.
         /// </remarks>
-        public static Array ToArray(Array extensions, Type elementType)
+        public static Array ToArray(object source, Type elementType)
         {
+            Array extensions = source as Array;
+
             if (extensions == null)
             {
                 return null;
@@ -794,7 +796,12 @@ namespace Opc.Ua
         /// <summary>
         /// The extension object has an encodeable object body.
         /// </summary>
-        EncodeableObject = 3
+        EncodeableObject = 3,
+
+        /// <summary>
+        /// The extension object has a JSON encoded body.
+        /// </summary>
+        Json = 4
     }
     #endregion
     

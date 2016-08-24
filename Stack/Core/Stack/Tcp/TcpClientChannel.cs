@@ -158,7 +158,7 @@ namespace Opc.Ua.Bindings
             try
             {
                 operation.End(Int32.MaxValue);
-                Utils.Trace("TCPCLIENTCHANNEL SOCKET CONNECTED: {0:X8}, ChannelId={1}", Socket.Handle, ChannelId);
+                Utils.Trace("TCPCLIENTCHANNEL SOCKET CONNECTED: {0:X8}, GroupId={1}", Socket.Handle, ChannelId);
             }
             catch (Exception e)
             { 
@@ -187,12 +187,12 @@ namespace Opc.Ua.Bindings
                 }
 
                 // check if a handshake is in progress.
-                if (m_handshakeOperation != null && !m_handshakeOperation.IsCompleted)
+                if (m_handshakeOperation != null)
                 {
                     m_handshakeOperation.Fault(ServiceResult.Create(StatusCodes.BadConnectionClosed, "Channel was closed by the user."));
                 }
                 
-                // Utils.Trace("Channel {0}: Close", ChannelId);
+                // Utils.Trace("Channel {0}: Close", GroupId);
 
                 // attempt a graceful shutdown.
                 if (State == TcpChannelState.Open)
@@ -279,7 +279,7 @@ namespace Opc.Ua.Bindings
                     throw new ServiceResultException(StatusCodes.BadConnectionClosed);
                 }
 
-                // Utils.Trace("Channel {0}: BeginSendRequest()", ChannelId);
+                // Utils.Trace("Channel {0}: BeginSendRequest()", GroupId);
 
                 if (m_reconnecting)
                 {
@@ -324,7 +324,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         private void SendHelloMessage(WriteOperation operation)
         {            
-            // Utils.Trace("Channel {0}: SendHelloMessage()", ChannelId);
+            // Utils.Trace("Channel {0}: SendHelloMessage()", GroupId);
 
             byte[] buffer = BufferManager.TakeBuffer(SendBufferSize, "SendHelloMessage");
             
@@ -373,7 +373,7 @@ namespace Opc.Ua.Bindings
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "protocolVersion")]
         private bool ProcessAcknowledgeMessage(ArraySegment<byte> messageChunk)
         {            
-            // Utils.Trace("Channel {0}: ProcessAcknowledgeMessage()", ChannelId);
+            // Utils.Trace("Channel {0}: ProcessAcknowledgeMessage()", GroupId);
 
             // check state.
             if (State != TcpChannelState.Connecting)
@@ -513,7 +513,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         private bool ProcessOpenSecureChannelResponse(uint messageType, ArraySegment<byte> messageChunk)
         {
-            // Utils.Trace("Channel {0}: ProcessOpenSecureChannelResponse()", ChannelId);
+            // Utils.Trace("Channel {0}: ProcessOpenSecureChannelResponse()", GroupId);
 
             // validate the channel state.            
             if (State != TcpChannelState.Opening && State != TcpChannelState.Open)
@@ -682,35 +682,35 @@ namespace Opc.Ua.Bindings
                 // process a response.
                 if (TcpMessageType.IsType(messageType, TcpMessageType.Message))
                 {
-                    // Utils.Trace("Channel {0}: ProcessResponseMessage", ChannelId);
+                    // Utils.Trace("Channel {0}: ProcessResponseMessage", GroupId);
                     return ProcessResponseMessage(messageType, messageChunk);
                 }
 
                 // check for acknowledge.
                 else if (messageType == TcpMessageType.Acknowledge)
                 {
-                    // Utils.Trace("Channel {0}: ProcessAcknowledgeMessage", ChannelId);
+                    // Utils.Trace("Channel {0}: ProcessAcknowledgeMessage", GroupId);
                     return ProcessAcknowledgeMessage(messageChunk);
                 }
 
                 // check for error.
                 else if (messageType == TcpMessageType.Error)
                 {
-                    // Utils.Trace("Channel {0}: ProcessErrorMessage", ChannelId);
+                    // Utils.Trace("Channel {0}: ProcessErrorMessage", GroupId);
                     return ProcessErrorMessage(messageType, messageChunk);
                 }
 
                 // process open secure channel repsonse.
                 else if (TcpMessageType.IsType(messageType, TcpMessageType.Open))
                 {
-                    // Utils.Trace("Channel {0}: ProcessOpenSecureChannelResponse", ChannelId);
+                    // Utils.Trace("Channel {0}: ProcessOpenSecureChannelResponse", GroupId);
                     return ProcessOpenSecureChannelResponse(messageType, messageChunk);
                 }
 
                 // process a response to a close request.
                 else if (TcpMessageType.IsType(messageType, TcpMessageType.Close))
                 {
-                    // Utils.Trace("Channel {0}: ProcessResponseMessage", ChannelId);
+                    // Utils.Trace("Channel {0}: ProcessResponseMessage", GroupId);
                     return ProcessResponseMessage(messageType, messageChunk);
                 }
 
@@ -766,7 +766,7 @@ namespace Opc.Ua.Bindings
         {
             try
             {
-                // Utils.Trace("Channel {0}: Scheduled Handshake Starting: TokenId={1}", ChannelId, CurrentToken.TokenId);
+                // Utils.Trace("Channel {0}: Scheduled Handshake Starting: TokenId={1}", GroupId, CurrentToken.TokenId);
 
                 lock (DataLock)
                 {
@@ -811,7 +811,7 @@ namespace Opc.Ua.Bindings
 
                     if (Socket != null)
                     {
-                        Utils.Trace("TCPCLIENTCHANNEL SOCKET CLOSED: {0:X8}, ChannelId={1}", Socket.Handle, ChannelId);
+                        Utils.Trace("TCPCLIENTCHANNEL SOCKET CLOSED: {0:X8}, GroupId={1}", Socket.Handle, ChannelId);
                         Socket.Close();
                         Socket = null;
                     }
@@ -845,7 +845,7 @@ namespace Opc.Ua.Bindings
                         return;
                     }
 
-                    // Utils.Trace("Channel {0}: OnHandshakeComplete", ChannelId);
+                    // Utils.Trace("Channel {0}: OnHandshakeComplete", GroupId);
 
                     m_handshakeOperation.End(Int32.MaxValue);
                     m_handshakeOperation = null;
@@ -1004,7 +1004,7 @@ namespace Opc.Ua.Bindings
 
                 if (Socket != null)
                 {
-                    Utils.Trace("TCPCLIENTCHANNEL SOCKET CLOSED: {0:X8}, ChannelId={1}", Socket.Handle, channelId);
+                    Utils.Trace("TCPCLIENTCHANNEL SOCKET CLOSED: {0:X8}, GroupId={1}", Socket.Handle, channelId);
                     Socket.Close();
                     Socket = null;
                 }
@@ -1225,7 +1225,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         protected bool ProcessErrorMessage(uint messageType, ArraySegment<byte> messageChunk)
         {
-            // Utils.Trace("Channel {0}: ProcessErrorMessage()", ChannelId);
+            // Utils.Trace("Channel {0}: ProcessErrorMessage()", GroupId);
 
             // read request buffer sizes.            
             MemoryStream istrm = new MemoryStream(messageChunk.Array, messageChunk.Offset, messageChunk.Count, false);
@@ -1259,7 +1259,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         private void SendCloseSecureChannelRequest(WriteOperation operation)
         {
-            // Utils.Trace("Channel {0}: SendCloseSecureChannelRequest()", ChannelId);
+            // Utils.Trace("Channel {0}: SendCloseSecureChannelRequest()", GroupId);
 
             // supress reconnects if an error occurs.
             m_waitBetweenReconnects = Timeout.Infinite;
@@ -1307,7 +1307,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         private bool ProcessResponseMessage(uint messageType, ArraySegment<byte> messageChunk)
         {
-            // Utils.Trace("Channel {0}: ProcessResponseMessage()", ChannelId);
+            // Utils.Trace("Channel {0}: ProcessResponseMessage()", GroupId);
 
             // validate security on the message.
             TcpChannelToken token = null;

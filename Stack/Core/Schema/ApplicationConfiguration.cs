@@ -52,6 +52,7 @@ namespace Opc.Ua
             m_transportConfigurations = new TransportConfigurationCollection();
 #endif
             m_disableHiResClock = true;
+            m_properties = new Dictionary<string, object>();
 		}
 
         /// <summary>
@@ -64,6 +65,28 @@ namespace Opc.Ua
             Initialize();
         }
         #endregion
+
+        /// <summary>
+        /// Gets an object used to synchronize access to the properties dictionary.
+        /// </summary>
+        /// <value>
+        /// The object used to synchronize access to the properties dictionary.
+        /// </value>
+        public object PropertiesLock
+        {
+            get { return m_properties; }
+        }
+
+        /// <summary>
+        /// Gets a dictionary used to save state associated with the application.
+        /// </summary>
+        /// <value>
+        /// The dictionary used to save state associated with the application.
+        /// </value>
+        public IDictionary<string, object> Properties
+        {
+            get { return m_properties; }
+        }
 
 		#region Persistent Properties
         /// <summary>
@@ -260,6 +283,8 @@ namespace Opc.Ua
         private ServiceMessageContext m_messageContext;
         private CertificateValidator m_certificateValidator;
 #endif
+
+        private Dictionary<string, object> m_properties;
         #endregion
     }
 
