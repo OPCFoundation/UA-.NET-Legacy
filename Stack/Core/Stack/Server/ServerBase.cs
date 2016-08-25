@@ -1768,34 +1768,43 @@ namespace Opc.Ua
             /// <param name="request">The request.</param>
             public void ScheduleIncomingRequest(IEndpointIncomingRequest request)
             {
+                bool reportTooManyOperations = false;
+
                 // queue the request.
                 lock (m_lock)   // i.e. Monitor.Enter(m_lock)
                 {
                     // check able to schedule requests.
                     if (m_stopped || m_queue.Count >= m_maxRequestCount)
                     {
-                        request.OperationCompleted(null, StatusCodes.BadTooManyOperations);
-                        return;
+                        reportTooManyOperations = true;
                     }
-
-                    m_queue.Enqueue(request);
-
-                    // wake up an idle thread to handle the request if there is one
-                    if (m_activeThreadCount < m_totalThreadCount)
+                    else
                     {
-                        Monitor.Pulse(m_lock);
-                    }
-                    // start a new thread to handle the request if none are idle and the pool is not full.
-                    else if (m_totalThreadCount < m_maxThreadCount)
-                    {
-                        Thread thread = new Thread(OnProcessRequestQueue);
-                        thread.IsBackground = true;
-                        thread.Start(null);
-                        m_totalThreadCount++;
-                        m_activeThreadCount++;  // new threads start in an active state
+                        m_queue.Enqueue(request);
 
-                        Utils.Trace("Thread created: " + Thread.CurrentThread.ManagedThreadId + ". Current thread count: " + m_totalThreadCount + ". Active thread count" + m_activeThreadCount);
+                        // wake up an idle thread to handle the request if there is one
+                        if (m_activeThreadCount < m_totalThreadCount)
+                        {
+                            Monitor.Pulse(m_lock);
+                        }
+                        // start a new thread to handle the request if none are idle and the pool is not full.
+                        else if (m_totalThreadCount < m_maxThreadCount)
+                        {
+                            Thread thread = new Thread(OnProcessRequestQueue);
+                            thread.IsBackground = true;
+                            thread.Start(null);
+                            m_totalThreadCount++;
+                            m_activeThreadCount++;  // new threads start in an active state
+
+                            Utils.Trace("Thread created: " + Thread.CurrentThread.ManagedThreadId + ". Current thread count: " + m_totalThreadCount + ". Active thread count" + m_activeThreadCount);
+                        }
                     }
+                }
+                if(reportTooManyOperations)
+                {
+                    //do this outside of the lock to prevent a deadlock when this call tries to send data, 
+                    //whilst other threads recieving requests hold the channel lock and wait on this lock
+                    request.OperationCompleted(null, StatusCodes.BadTooManyOperations);
                 }
             }
             #endregion
