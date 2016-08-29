@@ -4521,9 +4521,9 @@ namespace Opc.Ua
         /// <summary>
         /// A wrapper for 'ReturnDiagnostics' property in order to use symbolic names instead of magic values.
         /// </summary>
-        public ReturnDiagnostics ReturnDiagnosticsFlags
+        public DiagnosticsMasks ReturnDiagnosticsFlags
         {
-            get { return (ReturnDiagnostics)this.ReturnDiagnostics; }
+            get { return (DiagnosticsMasks)this.ReturnDiagnostics; }
             set { this.ReturnDiagnostics = (uint)value; }
         }
 
