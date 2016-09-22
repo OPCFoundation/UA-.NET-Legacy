@@ -151,6 +151,7 @@ namespace Opc.Ua.Client
             m_publishingEnabled          = false;
             m_timestampsToReturn         = TimestampsToReturn.Both;
             m_maxMessageCount            = 10;
+            m_outstandingMessageWorkers  = 0;
             m_messageCache               = new LinkedList<NotificationMessage>();
             m_monitoredItems             = new SortedDictionary<uint,MonitoredItem>();
             m_deletedItems               = new List<MonitoredItem>(); 
@@ -1570,8 +1571,9 @@ namespace Opc.Ua.Client
 
                     node = next;
                 }
-                
+
                 // process messages.
+                Interlocked.Increment(ref m_outstandingMessageWorkers);
                 ThreadPool.QueueUserWorkItem(OnMessageRecieved, null);
             }
 
@@ -1745,6 +1747,16 @@ namespace Opc.Ua.Client
             catch (Exception e)
             {
                 Utils.Trace(e, "Error while processing incoming messages.");
+            }
+            Interlocked.Decrement(ref m_outstandingMessageWorkers);
+        }
+
+        /// <summary>
+        /// Get the number of outstanding message workers
+        /// </summary>
+        public int OutstandingMessageWorkers {
+            get {
+                return m_outstandingMessageWorkers;
             }
         }
         
@@ -2014,6 +2026,7 @@ namespace Opc.Ua.Client
         private bool m_disableMonitoredItemCache;
         private FastDataChangeNotificationEventHandler m_fastDataChangeCallback;
         private FastEventNotificationEventHandler m_fastEventCallback;
+        private int m_outstandingMessageWorkers;
         
         /// <summary>
         /// A message received from the server cached until is processed or discarded.
