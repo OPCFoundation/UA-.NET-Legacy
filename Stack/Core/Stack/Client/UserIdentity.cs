@@ -258,7 +258,7 @@ namespace Opc.Ua
         {
             if (certificateId == null) throw new ArgumentNullException("certificateId");
 
-            X509Certificate2 certificate = certificateId.Find();
+            X509Certificate2 certificate = certificateId.Find(true);
 
             if (certificate != null)
             {
