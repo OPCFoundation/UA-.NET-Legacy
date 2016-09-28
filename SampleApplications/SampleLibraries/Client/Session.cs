@@ -3967,7 +3967,7 @@ namespace Opc.Ua.Client
                 {
                     foreach (var acknowledgement in acknowledgementsToSend)
                     {
-                        if (!availableSequenceNumbers.Contains(acknowledgement.SequenceNumber))
+                        if (acknowledgement.SubscriptionId == subscriptionId && !availableSequenceNumbers.Contains(acknowledgement.SequenceNumber))
                         {
                             Utils.Trace("Sequence number={0} was not received in the available sequence numbers.", acknowledgement.SequenceNumber);
                         }
