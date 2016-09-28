@@ -479,7 +479,7 @@ namespace Opc.Ua
             #if !SILVERLIGHT
             message.AppendFormat("{0} - ", Process.GetCurrentProcess().Id);
             #endif
-            message.AppendFormat("{0:HH:mm:ss.fff} ", HiResClock.UtcNow.ToLocalTime());
+            message.AppendFormat("{0:d} {0:HH:mm:ss.fff} ", HiResClock.UtcNow.ToLocalTime());
 
             // format message.
             if (args != null && args.Length > 0)
