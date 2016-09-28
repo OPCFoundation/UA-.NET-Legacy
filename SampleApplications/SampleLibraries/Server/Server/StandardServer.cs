@@ -2923,9 +2923,12 @@ namespace Opc.Ua.Server
             // attempt graceful shutdown the server.
             try
             {
-                // unregister from Discovery Server
-                m_registrationInfo.IsOnline = false;
-                RegisterWithDiscoveryServer();
+                if (m_maxRegistrationInterval > 0)
+                {
+                    // unregister from Discovery Server
+                    m_registrationInfo.IsOnline = false;
+                    RegisterWithDiscoveryServer();
+                }
 
                 lock (m_lock)
                 {
