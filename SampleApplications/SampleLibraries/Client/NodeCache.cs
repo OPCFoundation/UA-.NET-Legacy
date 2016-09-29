@@ -642,7 +642,8 @@ namespace Opc.Ua.Client
                     // create a placeholder for the node if it does not already exist.
                     if (!m_nodes.Exists(reference.NodeId))
                     {
-                        Node target = new Node(reference);
+                        // Set the node Id obtained by converting the namespace URI to the server dependent index.
+                        Node target = new Node(localId, reference);
                         m_nodes.Attach(target);
                     }
 
