@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<UANodeSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" LastModified="2015-08-18T00:23:00Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
+<UANodeSet xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" LastModified="2013-12-02T00:00:00Z" xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
   <Models>
-    <Model ModelUri="http://opcfoundation.org/UA/" Version="1.02" PublicationDate="2015-08-17T17:23:51.712701-07:00" />
+    <Model ModelUri="http://opcfoundation.org/UA/" Version="1.02" PublicationDate="2013-12-02T00:00:00Z" />
   </Models>
   <Aliases>
     <Alias Alias="Boolean">i=1</Alias>
@@ -2429,13 +2429,13 @@
       <Reference ReferenceType="HasProperty" IsForward="false">i=13882</Reference>
     </References>
   </UAVariable>
-  <UAObject NodeId="i=13916" BrowseName="&lt;CertificateGroup&gt;" SymbolicName="xCertificateGroupx" ParentNodeId="i=13813">
-    <DisplayName>&lt;CertificateGroup&gt;</DisplayName>
+  <UAObject NodeId="i=13916" BrowseName="&lt;AdditionalGroup&gt;" SymbolicName="AdditionalGroup_Placeholder" ParentNodeId="i=13813">
+    <DisplayName>&lt;AdditionalGroup&gt;</DisplayName>
     <References>
       <Reference ReferenceType="HasComponent">i=13917</Reference>
       <Reference ReferenceType="HasProperty">i=13949</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=12555</Reference>
-      <Reference ReferenceType="HasModellingRule">i=11510</Reference>
+      <Reference ReferenceType="HasModellingRule">i=11508</Reference>
       <Reference ReferenceType="Organizes" IsForward="false">i=13813</Reference>
     </References>
   </UAObject>

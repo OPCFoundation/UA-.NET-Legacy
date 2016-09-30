@@ -40,7 +40,6 @@
         <xs:element name="NodesToDelete" type="NodesToDelete" minOccurs="0"></xs:element>
         <xs:element name="ReferencesToDelete" type="ReferencesToChange" minOccurs="0"></xs:element>
       </xs:sequence>
-      <xs:attribute name="Version" type="xs:string" use="optional"></xs:attribute>
       <xs:attribute name="LastModified" type="xs:dateTime" use="optional"></xs:attribute>
       <xs:attribute name="TransactionId" type="xs:string" use="required"></xs:attribute>
       <xs:attribute name="AcceptAllOrNothing" type="xs:boolean" default="false"></xs:attribute>
@@ -55,7 +54,6 @@
         <xs:element name="NodesToDelete" type="NodeSetStatusList" minOccurs="0"></xs:element>
         <xs:element name="ReferencesToDelete" type="NodeSetStatusList" minOccurs="0"></xs:element>
       </xs:sequence>
-      <xs:attribute name="Version" type="xs:string" use="optional"></xs:attribute>
       <xs:attribute name="LastModified" type="xs:dateTime" use="optional"></xs:attribute>
       <xs:attribute name="TransactionId" type="xs:string" use="required"></xs:attribute>
     </xs:complexType>
@@ -394,6 +392,7 @@
 
   <xs:complexType name="DataTypeField">
     <xs:sequence>
+      <xs:element name="DisplayName" type="LocalizedText" minOccurs="0" maxOccurs="unbounded"></xs:element>
       <xs:element name="Description" type="LocalizedText" minOccurs="0" maxOccurs="unbounded"></xs:element>
       <xs:element name="Definition" type="DataTypeDefinition" minOccurs="0"></xs:element>
     </xs:sequence>

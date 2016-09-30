@@ -3422,7 +3422,7 @@ namespace Opc.Ua
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    public partial class OperationLimitsState : BaseObjectState
+    public partial class OperationLimitsState : FolderState
     {
         #region Constructors
         /// <summary>
@@ -6003,43 +6003,43 @@ namespace Opc.Ua
            "ciB0aGUgbmFtZXNwYWNlLgAuAERjLQAAAA3/////AQH/////AAAAADVgiQoCAAAAAAARAAAASXNOYW1l" +
            "c3BhY2VTdWJzZXQBAGQtAwAAAABAAAAASWYgVFJVRSB0aGVuIHRoZSBzZXJ2ZXIgb25seSBzdXBwb3J0" +
            "cyBhIHN1YnNldCBvZiB0aGUgbmFtZXNwYWNlLgAuAERkLQAAAAH/////AQH/////AAAAADVgiQoCAAAA" +
-           "AAAbAAAAU3RhdGljTm9kZUlkSWRlbnRpZmllclR5cGVzAQBlLQMAAAAAUQAAAEEgbGlzdCBvZiBJZFR5" +
-           "cGVzIGZvciBub2RlcyB3aGljaCBhcmUgdGhlIHNhbWUgaW4gZXZlcnkgc2VydmVyIHRoYXQgZXhwb3Nl" +
-           "cyB0aGVtLgAuAERlLQAAAQAAAQEAAAABAf////8AAAAANWCJCgIAAAAAABgAAABTdGF0aWNOdW1lcmlj" +
-           "Tm9kZUlkUmFuZ2UBAGYtAwAAAABbAAAAQSBsaXN0IG9mIHJhbmdlcyBmb3IgbnVtZXJpYyBub2RlIGlk" +
-           "cyB3aGljaCBhcmUgdGhlIHNhbWUgaW4gZXZlcnkgc2VydmVyIHRoYXQgZXhwb3NlcyB0aGVtLgAuAERm" +
-           "LQAAAQAjAQEAAAABAf////8AAAAANWCJCgIAAAAAABkAAABTdGF0aWNTdHJpbmdOb2RlSWRQYXR0ZXJu" +
-           "AQBnLQMAAAAAYgAAAEEgcmVndWxhciBleHByZXNzaW9uIHdoaWNoIG1hdGNoZXMgc3RyaW5nIG5vZGUg" +
-           "aWRzIGFyZSB0aGUgc2FtZSBpbiBldmVyeSBzZXJ2ZXIgdGhhdCBleHBvc2VzIHRoZW0uAC4ARGctAAAA" +
-           "DAEAAAABAf////8AAAAAJGCACgEAAAAAAA0AAABOYW1lc3BhY2VGaWxlAQBoLQMAAAAALQAAAEEgZmls" +
-           "ZSBjb250YWluaW5nIHRoZSBub2RlcyBvZiB0aGUgbmFtZXNwYWNlLgAvAQBLLWgtAAD/////CgAAADVg" +
-           "iQoCAAAAAAAEAAAAU2l6ZQEAaS0DAAAAAB4AAABUaGUgc2l6ZSBvZiB0aGUgZmlsZSBpbiBieXRlcy4A" +
-           "LgBEaS0AAAAJ/////wEB/////wAAAAA1YIkKAgAAAAAACAAAAFdyaXRhYmxlAQCSMQMAAAAAHQAAAFdo" +
-           "ZXRoZXIgdGhlIGZpbGUgaXMgd3JpdGFibGUuAC4ARJIxAAAAAf////8BAf////8AAAAANWCJCgIAAAAA" +
-           "AAwAAABVc2VyV3JpdGFibGUBAJMxAwAAAAAxAAAAV2hldGhlciB0aGUgZmlsZSBpcyB3cml0YWJsZSBi" +
-           "eSB0aGUgY3VycmVudCB1c2VyLgAuAESTMQAAAAH/////AQH/////AAAAADVgiQoCAAAAAAAJAAAAT3Bl" +
-           "bkNvdW50AQBsLQMAAAAAKAAAAFRoZSBjdXJyZW50IG51bWJlciBvZiBvcGVuIGZpbGUgaGFuZGxlcy4A" +
-           "LgBEbC0AAAAF/////wEB/////wAAAAAEYYIKBAAAAAAABAAAAE9wZW4BAG0tAC8BADwtbS0AAAEB////" +
-           "/wIAAAAVYKkKAgAAAAAADgAAAElucHV0QXJndW1lbnRzAQBuLQAuAERuLQAAlgEAAAABACoBARMAAAAE" +
-           "AAAATW9kZQAD/////wAAAAAAAQAoAQEAAAABAf////8AAAAAFWCpCgIAAAAAAA8AAABPdXRwdXRBcmd1" +
-           "bWVudHMBAG8tAC4ARG8tAACWAQAAAAEAKgEBGQAAAAoAAABGaWxlSGFuZGxlAAf/////AAAAAAABACgB" +
-           "AQAAAAEB/////wAAAAAEYYIKBAAAAAAABQAAAENsb3NlAQBwLQAvAQA/LXAtAAABAf////8BAAAAFWCp" +
-           "CgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAcS0ALgBEcS0AAJYBAAAAAQAqAQEZAAAACgAAAEZpbGVI" +
-           "YW5kbGUAB/////8AAAAAAAEAKAEBAAAAAQH/////AAAAAARhggoEAAAAAAAEAAAAUmVhZAEAci0ALwEA" +
-           "QS1yLQAAAQH/////AgAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAHMtAC4ARHMtAACWAgAA" +
-           "AAEAKgEBGQAAAAoAAABGaWxlSGFuZGxlAAf/////AAAAAAABACoBARUAAAAGAAAATGVuZ3RoAAb/////" +
-           "AAAAAAABACgBAQAAAAEB/////wAAAAAVYKkKAgAAAAAADwAAAE91dHB1dEFyZ3VtZW50cwEAdC0ALgBE" +
-           "dC0AAJYBAAAAAQAqAQETAAAABAAAAERhdGEAD/////8AAAAAAAEAKAEBAAAAAQH/////AAAAAARhggoE" +
-           "AAAAAAAFAAAAV3JpdGUBAHUtAC8BAEQtdS0AAAEB/////wEAAAAVYKkKAgAAAAAADgAAAElucHV0QXJn" +
-           "dW1lbnRzAQB2LQAuAER2LQAAlgIAAAABACoBARkAAAAKAAAARmlsZUhhbmRsZQAH/////wAAAAAAAQAq" +
-           "AQETAAAABAAAAERhdGEAD/////8AAAAAAAEAKAEBAAAAAQH/////AAAAAARhggoEAAAAAAALAAAAR2V0" +
-           "UG9zaXRpb24BAHctAC8BAEYtdy0AAAEB/////wIAAAAVYKkKAgAAAAAADgAAAElucHV0QXJndW1lbnRz" +
-           "AQB4LQAuAER4LQAAlgEAAAABACoBARkAAAAKAAAARmlsZUhhbmRsZQAH/////wAAAAAAAQAoAQEAAAAB" +
-           "Af////8AAAAAFWCpCgIAAAAAAA8AAABPdXRwdXRBcmd1bWVudHMBAHktAC4ARHktAACWAQAAAAEAKgEB" +
-           "FwAAAAgAAABQb3NpdGlvbgAJ/////wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQAAAAAAAsAAABT" +
-           "ZXRQb3NpdGlvbgEAei0ALwEASS16LQAAAQH/////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVu" +
-           "dHMBAHstAC4ARHstAACWAgAAAAEAKgEBGQAAAAoAAABGaWxlSGFuZGxlAAf/////AAAAAAABACoBARcA" +
-           "AAAIAAAAUG9zaXRpb24ACf////8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
+           "AAARAAAAU3RhdGljTm9kZUlkVHlwZXMBAGUtAwAAAABRAAAAQSBsaXN0IG9mIElkVHlwZXMgZm9yIG5v" +
+           "ZGVzIHdoaWNoIGFyZSB0aGUgc2FtZSBpbiBldmVyeSBzZXJ2ZXIgdGhhdCBleHBvc2VzIHRoZW0uAC4A" +
+           "RGUtAAABAAABAQAAAAEB/////wAAAAA1YIkKAgAAAAAAGAAAAFN0YXRpY051bWVyaWNOb2RlSWRSYW5n" +
+           "ZQEAZi0DAAAAAFsAAABBIGxpc3Qgb2YgcmFuZ2VzIGZvciBudW1lcmljIG5vZGUgaWRzIHdoaWNoIGFy" +
+           "ZSB0aGUgc2FtZSBpbiBldmVyeSBzZXJ2ZXIgdGhhdCBleHBvc2VzIHRoZW0uAC4ARGYtAAABACMBAQAA" +
+           "AAEB/////wAAAAA1YIkKAgAAAAAAGQAAAFN0YXRpY1N0cmluZ05vZGVJZFBhdHRlcm4BAGctAwAAAABi" +
+           "AAAAQSByZWd1bGFyIGV4cHJlc3Npb24gd2hpY2ggbWF0Y2hlcyBzdHJpbmcgbm9kZSBpZHMgYXJlIHRo" +
+           "ZSBzYW1lIGluIGV2ZXJ5IHNlcnZlciB0aGF0IGV4cG9zZXMgdGhlbS4ALgBEZy0AAAAM/////wEB////" +
+           "/wAAAAAkYIAKAQAAAAAADQAAAE5hbWVzcGFjZUZpbGUBAGgtAwAAAAAtAAAAQSBmaWxlIGNvbnRhaW5p" +
+           "bmcgdGhlIG5vZGVzIG9mIHRoZSBuYW1lc3BhY2UuAC8BAEstaC0AAP////8KAAAANWCJCgIAAAAAAAQA" +
+           "AABTaXplAQBpLQMAAAAAHgAAAFRoZSBzaXplIG9mIHRoZSBmaWxlIGluIGJ5dGVzLgAuAERpLQAAAAn/" +
+           "////AQH/////AAAAADVgiQoCAAAAAAAIAAAAV3JpdGFibGUBAJIxAwAAAAAdAAAAV2hldGhlciB0aGUg" +
+           "ZmlsZSBpcyB3cml0YWJsZS4ALgBEkjEAAAAB/////wEB/////wAAAAA1YIkKAgAAAAAADAAAAFVzZXJX" +
+           "cml0YWJsZQEAkzEDAAAAADEAAABXaGV0aGVyIHRoZSBmaWxlIGlzIHdyaXRhYmxlIGJ5IHRoZSBjdXJy" +
+           "ZW50IHVzZXIuAC4ARJMxAAAAAf////8BAf////8AAAAANWCJCgIAAAAAAAkAAABPcGVuQ291bnQBAGwt" +
+           "AwAAAAAoAAAAVGhlIGN1cnJlbnQgbnVtYmVyIG9mIG9wZW4gZmlsZSBoYW5kbGVzLgAuAERsLQAAAAX/" +
+           "////AQH/////AAAAAARhggoEAAAAAAAEAAAAT3BlbgEAbS0ALwEAPC1tLQAAAQH/////AgAAABVgqQoC" +
+           "AAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAG4tAC4ARG4tAACWAQAAAAEAKgEBEwAAAAQAAABNb2RlAAP/" +
+           "////AAAAAAABACgBAQAAAAEB/////wAAAAAVYKkKAgAAAAAADwAAAE91dHB1dEFyZ3VtZW50cwEAby0A" +
+           "LgBEby0AAJYBAAAAAQAqAQEZAAAACgAAAEZpbGVIYW5kbGUAB/////8AAAAAAAEAKAEBAAAAAQH/////" +
+           "AAAAAARhggoEAAAAAAAFAAAAQ2xvc2UBAHAtAC8BAD8tcC0AAAEB/////wEAAAAVYKkKAgAAAAAADgAA" +
+           "AElucHV0QXJndW1lbnRzAQBxLQAuAERxLQAAlgEAAAABACoBARkAAAAKAAAARmlsZUhhbmRsZQAH////" +
+           "/wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQAAAAAAAQAAABSZWFkAQByLQAvAQBBLXItAAABAf//" +
+           "//8CAAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAcy0ALgBEcy0AAJYCAAAAAQAqAQEZAAAA" +
+           "CgAAAEZpbGVIYW5kbGUAB/////8AAAAAAAEAKgEBFQAAAAYAAABMZW5ndGgABv////8AAAAAAAEAKAEB" +
+           "AAAAAQH/////AAAAABVgqQoCAAAAAAAPAAAAT3V0cHV0QXJndW1lbnRzAQB0LQAuAER0LQAAlgEAAAAB" +
+           "ACoBARMAAAAEAAAARGF0YQAP/////wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQAAAAAAAUAAABX" +
+           "cml0ZQEAdS0ALwEARC11LQAAAQH/////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAHYt" +
+           "AC4ARHYtAACWAgAAAAEAKgEBGQAAAAoAAABGaWxlSGFuZGxlAAf/////AAAAAAABACoBARMAAAAEAAAA" +
+           "RGF0YQAP/////wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQAAAAAAAsAAABHZXRQb3NpdGlvbgEA" +
+           "dy0ALwEARi13LQAAAQH/////AgAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAHgtAC4ARHgt" +
+           "AACWAQAAAAEAKgEBGQAAAAoAAABGaWxlSGFuZGxlAAf/////AAAAAAABACgBAQAAAAEB/////wAAAAAV" +
+           "YKkKAgAAAAAADwAAAE91dHB1dEFyZ3VtZW50cwEAeS0ALgBEeS0AAJYBAAAAAQAqAQEXAAAACAAAAFBv" +
+           "c2l0aW9uAAn/////AAAAAAABACgBAQAAAAEB/////wAAAAAEYYIKBAAAAAAACwAAAFNldFBvc2l0aW9u" +
+           "AQB6LQAvAQBJLXotAAABAf////8BAAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAey0ALgBE" +
+           "ey0AAJYCAAAAAQAqAQEZAAAACgAAAEZpbGVIYW5kbGUAB/////8AAAAAAAEAKgEBFwAAAAgAAABQb3Np" +
+           "dGlvbgAJ/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
         #endregion
         #endif
         #endregion
@@ -6132,21 +6132,21 @@ namespace Opc.Ua
         /// <summary>
         /// A list of IdTypes for nodes which are the same in every server that exposes them.
         /// </summary>
-        public PropertyState<IdType[]> StaticNodeIdIdentifierTypes
+        public PropertyState<IdType[]> StaticNodeIdTypes
         {
             get
             {
-                return m_staticNodeIdIdentifierTypes;
+                return m_staticNodeIdTypes;
             }
 
             set
             {
-                if (!Object.ReferenceEquals(m_staticNodeIdIdentifierTypes, value))
+                if (!Object.ReferenceEquals(m_staticNodeIdTypes, value))
                 {
                     ChangeMasks |= NodeStateChangeMasks.Children;
                 }
 
-                m_staticNodeIdIdentifierTypes = value;
+                m_staticNodeIdTypes = value;
             }
         }
 
@@ -6174,7 +6174,7 @@ namespace Opc.Ua
         /// <summary>
         /// A regular expression which matches string node ids are the same in every server that exposes them.
         /// </summary>
-        public PropertyState<string[]> StaticStringNodeIdPattern
+        public PropertyState<string> StaticStringNodeIdPattern
         {
             get
             {
@@ -6244,9 +6244,9 @@ namespace Opc.Ua
                 children.Add(m_isNamespaceSubset);
             }
 
-            if (m_staticNodeIdIdentifierTypes != null)
+            if (m_staticNodeIdTypes != null)
             {
-                children.Add(m_staticNodeIdIdentifierTypes);
+                children.Add(m_staticNodeIdTypes);
             }
 
             if (m_staticNumericNodeIdRange != null)
@@ -6369,24 +6369,24 @@ namespace Opc.Ua
                     break;
                 }
 
-                case Opc.Ua.BrowseNames.StaticNodeIdIdentifierTypes:
+                case Opc.Ua.BrowseNames.StaticNodeIdTypes:
                 {
                     if (createOrReplace)
                     {
-                        if (StaticNodeIdIdentifierTypes == null)
+                        if (StaticNodeIdTypes == null)
                         {
                             if (replacement == null)
                             {
-                                StaticNodeIdIdentifierTypes = new PropertyState<IdType[]>(this);
+                                StaticNodeIdTypes = new PropertyState<IdType[]>(this);
                             }
                             else
                             {
-                                StaticNodeIdIdentifierTypes = (PropertyState<IdType[]>)replacement;
+                                StaticNodeIdTypes = (PropertyState<IdType[]>)replacement;
                             }
                         }
                     }
 
-                    instance = StaticNodeIdIdentifierTypes;
+                    instance = StaticNodeIdTypes;
                     break;
                 }
 
@@ -6419,11 +6419,11 @@ namespace Opc.Ua
                         {
                             if (replacement == null)
                             {
-                                StaticStringNodeIdPattern = new PropertyState<string[]>(this);
+                                StaticStringNodeIdPattern = new PropertyState<string>(this);
                             }
                             else
                             {
-                                StaticStringNodeIdPattern = (PropertyState<string[]>)replacement;
+                                StaticStringNodeIdPattern = (PropertyState<string>)replacement;
                             }
                         }
                     }
@@ -6468,9 +6468,9 @@ namespace Opc.Ua
         private PropertyState<string> m_namespaceVersion;
         private PropertyState<DateTime> m_namespacePublicationDate;
         private PropertyState<bool> m_isNamespaceSubset;
-        private PropertyState<IdType[]> m_staticNodeIdIdentifierTypes;
+        private PropertyState<IdType[]> m_staticNodeIdTypes;
         private PropertyState<string[]> m_staticNumericNodeIdRange;
-        private PropertyState<string[]> m_staticStringNodeIdPattern;
+        private PropertyState<string> m_staticStringNodeIdPattern;
         private AddressSpaceFileState m_namespaceFile;
         #endregion
     }
@@ -38132,12 +38132,21 @@ namespace Opc.Ua
         protected override void InitializeOptionalChildren(ISystemContext context)
         {
             base.InitializeOptionalChildren(context);
+
+            if (ExpirationLimit != null)
+            {
+                ExpirationLimit.Initialize(context, ExpirationLimit_InitializationString);
+            }
         }
 
         #region Initialization String
+        private const string ExpirationLimit_InitializationString =
+           "//////////8VYIkKAgAAAAAADwAAAEV4cGlyYXRpb25MaW1pdAEANDoALgBENDoAAAEAIgH/////AQH/" +
+           "////AAAAAA==";
+
         private const string InitializationString =
            "//////////8EYIAAAQAAAAAAJgAAAENlcnRpZmljYXRlRXhwaXJhdGlvbkFsYXJtVHlwZUluc3RhbmNl" +
-           "AQCpMwEAqTP/////HwAAADVgiQoCAAAAAAAHAAAARXZlbnRJZAEAqjMDAAAAACsAAABBIGdsb2JhbGx5" +
+           "AQCpMwEAqTP/////IAAAADVgiQoCAAAAAAAHAAAARXZlbnRJZAEAqjMDAAAAACsAAABBIGdsb2JhbGx5" +
            "IHVuaXF1ZSBpZGVudGlmaWVyIGZvciB0aGUgZXZlbnQuAC4ARKozAAAAD/////8BAf////8AAAAANWCJ" +
            "CgIAAAAAAAkAAABFdmVudFR5cGUBAKszAwAAAAAiAAAAVGhlIGlkZW50aWZpZXIgZm9yIHRoZSBldmVu" +
            "dCB0eXBlLgAuAESrMwAAABH/////AQH/////AAAAADVgiQoCAAAAAAAKAAAAU291cmNlTm9kZQEArDMD" +
@@ -38184,8 +38193,9 @@ namespace Opc.Ua
            "ABVgiQoCAAAAAAATAAAAU3VwcHJlc3NlZE9yU2hlbHZlZAEACjQALgBECjQAAAAB/////wEB/////wAA" +
            "AAAVYIkKAgAAAAAACwAAAE5vcm1hbFN0YXRlAQAMNAAuAEQMNAAAABH/////AQH/////AAAAABVgiQoC" +
            "AAAAAAAOAAAARXhwaXJhdGlvbkRhdGUBAA00AC4ARA00AAAADf////8BAf////8AAAAAFWCJCgIAAAAA" +
-           "AA8AAABDZXJ0aWZpY2F0ZVR5cGUBAA40AC4ARA40AAAAEf////8BAf////8AAAAAFWCJCgIAAAAAAAsA" +
-           "AABDZXJ0aWZpY2F0ZQEADzQALgBEDzQAAAAP/////wEB/////wAAAAA=";
+           "AA8AAABFeHBpcmF0aW9uTGltaXQBADQ6AC4ARDQ6AAABACIB/////wEB/////wAAAAAVYIkKAgAAAAAA" +
+           "DwAAAENlcnRpZmljYXRlVHlwZQEADjQALgBEDjQAAAAR/////wEB/////wAAAAAVYIkKAgAAAAAACwAA" +
+           "AENlcnRpZmljYXRlAQAPNAAuAEQPNAAAAA//////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -38209,6 +38219,27 @@ namespace Opc.Ua
                 }
 
                 m_expirationDate = value;
+            }
+        }
+
+        /// <summary>
+        /// A description for the ExpirationLimit Property.
+        /// </summary>
+        public PropertyState<double> ExpirationLimit
+        {
+            get
+            {
+                return m_expirationLimit;
+            }
+
+            set
+            {
+                if (!Object.ReferenceEquals(m_expirationLimit, value))
+                {
+                    ChangeMasks |= NodeStateChangeMasks.Children;
+                }
+
+                m_expirationLimit = value;
             }
         }
 
@@ -38270,6 +38301,11 @@ namespace Opc.Ua
                 children.Add(m_expirationDate);
             }
 
+            if (m_expirationLimit != null)
+            {
+                children.Add(m_expirationLimit);
+            }
+
             if (m_certificateType != null)
             {
                 children.Add(m_certificateType);
@@ -38319,6 +38355,27 @@ namespace Opc.Ua
                     }
 
                     instance = ExpirationDate;
+                    break;
+                }
+
+                case Opc.Ua.BrowseNames.ExpirationLimit:
+                {
+                    if (createOrReplace)
+                    {
+                        if (ExpirationLimit == null)
+                        {
+                            if (replacement == null)
+                            {
+                                ExpirationLimit = new PropertyState<double>(this);
+                            }
+                            else
+                            {
+                                ExpirationLimit = (PropertyState<double>)replacement;
+                            }
+                        }
+                    }
+
+                    instance = ExpirationLimit;
                     break;
                 }
 
@@ -38376,6 +38433,7 @@ namespace Opc.Ua
 
         #region Private Fields
         private PropertyState<DateTime> m_expirationDate;
+        private PropertyState<double> m_expirationLimit;
         private PropertyState<NodeId> m_certificateType;
         private PropertyState<byte[]> m_certificate;
         #endregion
