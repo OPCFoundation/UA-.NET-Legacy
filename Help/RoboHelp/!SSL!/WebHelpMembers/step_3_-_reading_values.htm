@@ -154,10 +154,10 @@ for Industrial Automation</b></font></span><br />
 </li>
 <li>
 <p>Basically, anywhere within your code you can update the value of your node. Add the following line of code below your node definition (see <a href="step_2_-_address_space.htm">Step 2</a>):<br />
-<span style="font-family: 'Courier New', monospace;">variables[1].Value = (int32)99;</span></p>
+<span style="font-family: 'Courier New', monospace;">variables[0].Value = (Int32)99;</span></p>
 </li>
 </ol>
-<p>Note: we cast the value of 99 to the type In32 because that was the data-type we previously configured.</p>
+<p>Note: we cast the value of 99 to the type Int32 because that was the data-type we previously configured.</p>
 <p>As you can see, updating the value of a node within the address space is very simple. You could implement a timer function and update nodes automatically for example.</p>
 <p>Next, we will look at how to respond to client <a href="step_4_-_handling_write_requests.htm">write requests</a>.</p>
 <p style=" border-top:Solid 1px #000000; font-size:6pt; text-align:right; border-width:4px;"><span style="font-size: 6pt; text-align: right;"><font size="1" style="font-size:6pt;">Copyright OPC Foundation 1995-2013</font></span></p>
