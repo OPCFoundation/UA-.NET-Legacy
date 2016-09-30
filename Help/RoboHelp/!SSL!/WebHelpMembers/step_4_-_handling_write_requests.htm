@@ -150,17 +150,17 @@ for Industrial Automation</b></font></span><br />
 <p>This step is a continuation from <a href="step_3_-_reading_values.htm">Step 3 - Reading Values</a>.</p>
 <ol type="1">
 <li>
-<p>All nodes are maintained within the address space by the UA .NET API automatically. Just as in the last example (step 3) we will assume that our "MyNode" is in <span style="font-family: 'Courier New', monospace;">variables[1]</span> position.</p>
+<p>All nodes are maintained within the address space by the UA .NET API automatically. Just as in the last example (step 3) we will assume that our "MyNode" is in <span style="font-family: 'Courier New', monospace;">variables[0]</span> position.</p>
 </li>
 <li>
-<p>Add the following line of code, which will attach to the OnsimpleWriteValue event handler for this specific node:<br />
-<span style="font-family: 'Courier New', monospace;">variables[1].OnSimpleWriteValue=new NodeValuesimpleEventHandler(OnWriteMyNode);</span></p>
+<p>Add the following line of code, which will attach to the OnSimpleWriteValue event handler for this specific node:<br />
+<span style="font-family: 'Courier New', monospace;">variables[0].OnSimpleWriteValue=new NodeValueSimpleEventHandler(OnWriteMyNode);</span></p>
 </li>
 <li>
 <p>The function "<span style="font-weight: bold;"><b>OnWriteMyNode</b></span>" does not yet exist, so scroll to the bottom of the source code file and add the following code:<br />
 <span style="font-family: 'Courier New', monospace;">private ServiceResult OnWriteMyNode( ISystemContext context, NodeState node, ref object value )<br />
 {<br />
-&#160;&#160;&#160;System.Windows.Forms.MessageBox.Show( "Received '" + value.toString() + "'." )<br />
+&#160;&#160;&#160;System.Windows.Forms.MessageBox.Show( "Received '" + value.toString() + "'." );<br />
 &#160;&#160;&#160;return ServiceResult.Good;<br />
 }</span></p>
 </li>
