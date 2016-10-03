@@ -152,6 +152,16 @@ namespace AmqpSubscriber
                 {
                     Console.WriteLine("DATASET_CLASS_ID: {0}", message.ApplicationProperties["ua-class-id"]);
                     Console.WriteLine("METADATA_NODE_NAME: {0}", message.ApplicationProperties["ua-metadata-node-name"]);
+
+                    Console.WriteLine("--------------------------------------------------------------------------------------");
+
+                    foreach (System.Collections.DictionaryEntry property in message.ApplicationProperties.Map)
+                    {
+                        if (!((string)property.Key).StartsWith("ua-"))
+                        {
+                            Console.WriteLine("{0}: {1}", property.Key, property.Value);
+                        }
+                    }
                 }
 
                 Console.WriteLine("--------------------------------------------------------------------------------------");
