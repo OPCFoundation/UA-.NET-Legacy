@@ -664,6 +664,11 @@ namespace Opc.Ua
                 }
             }
 
+            if (useHttps && clientCertificate == null && configuration != null)
+            {
+                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
+            }
+
             #if !SILVERLIGHT
             // check for a WCF channel.
             if (!useUaTcp && !useHttps && !useAmqps && !useUaTls)

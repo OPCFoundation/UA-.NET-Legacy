@@ -219,6 +219,11 @@ namespace Opc.Ua.Bindings
             HttpWebRequest webRequest = (HttpWebRequest)HttpWebRequest.Create(m_url.ToString());
             webRequest.Method = "POST";
 
+            if (m_settings.ClientCertificate != null)
+            {
+                webRequest.ClientCertificates.Add(m_settings.ClientCertificate);
+            }
+
             if (m_settings.Configuration.UseBinaryEncoding)
             {
                 webRequest.ContentType = "application/octet-stream";
@@ -236,11 +241,11 @@ namespace Opc.Ua.Bindings
                 contentType.Append("\"");
 
                 webRequest.ContentType = contentType.ToString();
-                
-                #if !SILVERLIGHT
-                webRequest.Headers.Add("OPCUA-SecurityPolicy", this.m_settings.Description.SecurityPolicyUri);
-                #endif
             }
+
+#if !SILVERLIGHT
+            webRequest.Headers.Add("OPCUA-SecurityPolicy", this.m_settings.Description.SecurityPolicyUri);
+#endif
 
             AsyncResult result = new AsyncResult(callback, callbackData, m_operationTimeout, request, webRequest);
             webRequest.BeginGetRequestStream(OnGetRequestStreamComplete, result);
