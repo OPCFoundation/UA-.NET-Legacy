@@ -438,9 +438,14 @@ namespace Opc.Ua
             }
 
             // ensure configuration errors don't render the server inoperable.
-            if (maxRequestThreadCount < 100)
+            if (minRequestThreadCount < 1)
             {
-                maxRequestThreadCount = 100;
+                minRequestThreadCount = 1;
+            }
+
+            if (maxRequestThreadCount < minRequestThreadCount)
+            {
+                maxRequestThreadCount = minRequestThreadCount;
             }
 
             if (maxQueuedRequestCount < 100)
