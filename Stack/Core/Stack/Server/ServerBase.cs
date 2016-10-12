@@ -1773,16 +1773,16 @@ namespace Opc.Ua
             /// <param name="request">The request.</param>
             public void ScheduleIncomingRequest(IEndpointIncomingRequest request)
             {
-                // queue the request.
-                lock (m_lock)   // i.e. Monitor.Enter(m_lock)
+                // check able to schedule requests.
+                if (m_stopped || m_queue.Count >= m_maxRequestCount)
                 {
-                    // check able to schedule requests.
-                    if (m_stopped || m_queue.Count >= m_maxRequestCount)
-                    {
-                        request.OperationCompleted(null, StatusCodes.BadTooManyOperations);
-                        return;
-                    }
+                    request.OperationCompleted(null, StatusCodes.BadTooManyOperations);
+                    return;
+                }
 
+                // queue the request.
+                lock (m_lock)
+                {
                     m_queue.Enqueue(request);
 
                     // wake up an idle thread to handle the request if there is one
