@@ -1008,7 +1008,7 @@ namespace Opc.Ua
 
                         for (int ii = 0; ii < dimensionsArray.Length; ii++)
                         {
-                            if (dimensionsArray[ii] == 0)
+                            if (dimensionsArray[ii] == 0 && length >0)
                             {
                                 throw new ServiceResultException(
                                     StatusCodes.BadDecodingError,
