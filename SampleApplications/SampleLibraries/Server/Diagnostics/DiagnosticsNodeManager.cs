@@ -329,7 +329,7 @@ namespace Opc.Ua.Server
                     PublishSubscribeState activeNode = new PublishSubscribeState(passiveNode.Parent);
                     activeNode.Create(context, passiveNode);
 
-                    activeNode.AddAmqpConnection = null;
+                    activeNode.AddBrokerConnection = null;
                     activeNode.AddUadpConnection = null;
                     activeNode.RemoveConnection = null;
                     activeNode.GetSecurityKeys.OnCall += OnGetSecurityKeys;

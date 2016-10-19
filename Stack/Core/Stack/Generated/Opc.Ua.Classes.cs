@@ -5590,7 +5590,7 @@ namespace Opc.Ua
         /// <summary>
         /// A description for the DeleteFileMethodType Method.
         /// </summary>
-        public new DeleteFileMethodState Delete
+        public DeleteFileMethodState Delete
         {
             get
             {
@@ -55154,14 +55154,14 @@ namespace Opc.Ua
            "bWVudHMBAJ08AC4ARJ08AACWAQAAAAEAKgEBKAAAABcAAABOZXdDb25maWd1cmF0aW9uVmVyc2lvbgEA" +
            "ATn/////AAAAAAABACgBAQAAAAEB/////wAAAAA=";
         #endregion
-#endif
+        #endif
         #endregion
 
         #region Public Properties
         /// <summary>
         /// A description for the EventNotifier Property.
         /// </summary>
-        public new PropertyState<NodeId> EventNotifier
+        public PropertyState<NodeId> EventNotifier
         {
             get
             {

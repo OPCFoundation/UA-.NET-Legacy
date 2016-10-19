@@ -3380,6 +3380,11 @@ namespace Opc.Ua
         public const uint Server_ServerCapabilities = 2268;
 
         /// <summary>
+        /// The identifier for the Server_ServerCapabilities_OperationLimits Object.
+        /// </summary>
+        public const uint Server_ServerCapabilities_OperationLimits = 11704;
+
+        /// <summary>
         /// The identifier for the Server_ServerCapabilities_ModellingRules Object.
         /// </summary>
         public const uint Server_ServerCapabilities_ModellingRules = 2996;
@@ -21803,6 +21808,11 @@ namespace Opc.Ua
         /// The identifier for the Server_ServerCapabilities Object.
         /// </summary>
         public static readonly NodeId Server_ServerCapabilities = new NodeId(Opc.Ua.Objects.Server_ServerCapabilities);
+
+        /// <summary>
+        /// The identifier for the Server_ServerCapabilities_OperationLimits Object.
+        /// </summary>
+        public static readonly NodeId Server_ServerCapabilities_OperationLimits = new NodeId(Opc.Ua.Objects.Server_ServerCapabilities_OperationLimits);
 
         /// <summary>
         /// The identifier for the Server_ServerCapabilities_ModellingRules Object.
