@@ -53,11 +53,6 @@ namespace AmqpPublisher
             message.Properties.Subject = header.Subject;
             message.Properties.ContentType = header.ContentType;
 
-            if (!String.IsNullOrEmpty(header.PublisherId))
-            {
-                message.Properties.UserId = new System.Text.UTF8Encoding(false).GetBytes(header.PublisherId);
-            }
-
             if (!String.IsNullOrEmpty(header.DataSetWriterId))
             {
                 message.Properties.GroupId = header.DataSetWriterId;
@@ -69,14 +64,19 @@ namespace AmqpPublisher
                 message.ApplicationProperties = new ApplicationProperties();
             }
 
+            if (!String.IsNullOrEmpty(header.PublisherId))
+            {
+                message.ApplicationProperties["ua-pubid"] = header.PublisherId;
+            }
+
             if (!String.IsNullOrEmpty(header.DataSetClassId))
             {
-                message.ApplicationProperties["ua-class-id"] = header.DataSetClassId;
+                message.ApplicationProperties["ua-clsid"] = header.DataSetClassId;
             }
 
             if (!String.IsNullOrEmpty(header.MetaDataNodeName))
             {
-                message.ApplicationProperties["ua-metadata-node-name"] = header.MetaDataNodeName;
+                message.ApplicationProperties["ua-mdata"] = header.MetaDataNodeName;
             }
         }
 

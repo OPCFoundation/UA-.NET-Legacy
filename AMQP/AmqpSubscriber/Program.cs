@@ -143,15 +143,15 @@ namespace AmqpSubscriber
                 {
                     Console.WriteLine("MESSAGE_ID: {0}", message.Properties.MessageId);
                     Console.WriteLine("SUBJECT: {0}", message.Properties.Subject);
-                    Console.WriteLine("PUBLISHER_ID: {0}", Encoding.UTF8.GetString(message.Properties.UserId));
                     Console.WriteLine("DATASET_WRITER_ID: {0}", message.Properties.GroupId);
                     Console.WriteLine("SEQUENCE_NUMBER: {0}", message.Properties.GroupSequence);
                 }
 
                 if (message.ApplicationProperties != null)
                 {
-                    Console.WriteLine("DATASET_CLASS_ID: {0}", message.ApplicationProperties["ua-class-id"]);
-                    Console.WriteLine("METADATA_NODE_NAME: {0}", message.ApplicationProperties["ua-metadata-node-name"]);
+                    Console.WriteLine("PUBLISHER_ID: {0}", message.ApplicationProperties["ua-pubid"]);
+                    Console.WriteLine("DATASET_CLASS_ID: {0}", message.ApplicationProperties["ua-clsid"]);
+                    Console.WriteLine("METADATA_NODE_NAME: {0}", message.ApplicationProperties["ua-mdata"]);
 
                     Console.WriteLine("--------------------------------------------------------------------------------------");
 
