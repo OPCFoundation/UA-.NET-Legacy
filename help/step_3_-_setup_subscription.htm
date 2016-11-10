@@ -200,7 +200,7 @@ for Industrial Automation</b></font></span></p>
 <span style="font-family: 'Courier New', monospace;">if( monitoredItem == null )<br />
 {<br />
 &#160;monitoredItem = new MonitoredItem( m_subscription.DefaultItem );<br />
-&#160;&#160;monitoredItem.StartNodeId =<br />
+&#160;&#160;monitoredItem.StartNodeId = ExpandedNodeId.ToNodeId( BrowseCTRL.SelectedNodeId, m_session.SystemContext.NamespaceUris );<br />
 &#160;&#160;monitoredItem.AttributeId = Attributes.Value;<br />
 &#160;&#160;monitoredItem.MonitoringMode = MonitoringMode.Reporting;<br />
 &#160;&#160;monitoredItem.SamplingInterval = 1000;<br />
