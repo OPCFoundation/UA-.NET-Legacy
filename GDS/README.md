@@ -88,7 +88,7 @@ On Windows 7 create a new certificate (replace <hostname> with the actual hostna
 ```
 <coderoot>\Bin\Opc.Ua.CertificateGenerator.exe -cmd issue -an <hostname> -dn <hostname> -sp st -hs 256 -ks 2048 
 ```
-then from the certificate manager [mmc | certificates](https://msdn.microsoft.com/en-us/library/ms788967(v=vs.110).aspx) install the certificate in LocalMachine\My (Personal)
+then from the certificate manager ([mmc | certificates](https://msdn.microsoft.com/en-us/library/ms788967(v=vs.110).aspx))install the certificate in LocalMachine\My (Personal)
 
 
 Register the ports (Authorization Service and GDS HTTPS Endpoint):
@@ -115,7 +115,7 @@ new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders
 ```
 After creating the registry keys the machine *must* be rebooted.
 
-On Windows 7 you should confirm that TLS 1.2 is enabled by using Chrome to navigate to ://<hostname>:54333/ and looking at the certificate details.
+On Windows 7 you should confirm that TLS 1.2 is enabled by using Chrome to navigate to https://[hostname]:54333/ and looking at the certificate details.
 
 ## Session-less Service Calls ##
 The GDS supports Session-less calls for the GetSecurityKeys Method defined in the PubSub specification. This allows Clients to request SecurityKeys associated with a PubSub group without creating a Session with the GDS if they first request an OAuth2 token from a Authorization Service. This can be done by either:
