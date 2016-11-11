@@ -88,7 +88,7 @@ On Windows 7 create a new certificate (replace <hostname> with the actual hostna
 ```
 <coderoot>\Bin\Opc.Ua.CertificateGenerator.exe -cmd issue -an <hostname> -dn <hostname> -sp st -hs 256 -ks 2048 
 ```
-then from the certificate manager ([mmc | certificates](https://msdn.microsoft.com/en-us/library/ms788967(v=vs.110).aspx))install the certificate in LocalMachine\My (Personal)
+then from the certificate manager ([mmc | certificates](https://msdn.microsoft.com/en-us/library/ms788967(v=vs.110).aspx)) install the certificate in LocalMachine\My (Personal)
 
 
 Register the ports (Authorization Service and GDS HTTPS Endpoint):
