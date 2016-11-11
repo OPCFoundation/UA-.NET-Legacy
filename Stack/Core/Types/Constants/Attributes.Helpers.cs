@@ -31,7 +31,7 @@ namespace Opc.Ua
 		/// </summary>
         public static bool IsValid(uint attributeId)
 		{
-            return (attributeId >= Attributes.NodeId && attributeId <= Attributes.UserExecutable);
+            return (attributeId >= Attributes.NodeId && attributeId <= Attributes.AccessRestrictions);
         }
 
         /// <summary>
@@ -158,6 +158,10 @@ namespace Opc.Ua
                 case Executable:              return BuiltInType.Boolean;
                 case UserExecutable:          return BuiltInType.Boolean;
                 case ArrayDimensions:         return BuiltInType.UInt32;
+                case DataTypeDefinition:      return BuiltInType.ExtensionObject;
+                case RolePermissions:         return BuiltInType.ExtensionObject;
+                case UserRolePermissions:     return BuiltInType.ExtensionObject;
+                case AccessRestrictions:      return BuiltInType.Byte;
             }
                     
             return BuiltInType.Null;
@@ -192,6 +196,10 @@ namespace Opc.Ua
                 case Executable:              return DataTypes.Boolean;
                 case UserExecutable:          return DataTypes.Boolean;
                 case ArrayDimensions:         return DataTypes.UInt32;
+                case DataTypeDefinition:      return DataTypes.DataTypeDefinition;
+                case RolePermissions:         return DataTypes.RolePermissionType;
+                case UserRolePermissions:     return DataTypes.RolePermissionType;
+                case AccessRestrictions:      return DataTypes.Byte;
             }
                     
             return null;
@@ -226,6 +234,9 @@ namespace Opc.Ua
                 case Executable:              return (writeMask & (uint)AttributeWriteMask.Executable) != 0;
                 case UserExecutable:          return (writeMask & (uint)AttributeWriteMask.UserExecutable) != 0;
                 case ArrayDimensions:         return (writeMask & (uint)AttributeWriteMask.ArrayDimensions) != 0;
+                case DataTypeDefinition:      return (writeMask & (uint)AttributeWriteMask.DataTypeDefinition) != 0;
+                case RolePermissions:         return (writeMask & (uint)AttributeWriteMask.RolePermissions) != 0;
+                case AccessRestrictions:      return (writeMask & (uint)AttributeWriteMask.AccessRestrictions) != 0;
             }
                     
             return false;
@@ -260,6 +271,9 @@ namespace Opc.Ua
                 case Executable:              return writeMask | (uint)AttributeWriteMask.Executable;
                 case UserExecutable:          return writeMask | (uint)AttributeWriteMask.UserExecutable;
                 case ArrayDimensions:         return writeMask | (uint)AttributeWriteMask.ArrayDimensions;
+                case DataTypeDefinition:      return writeMask | (uint)AttributeWriteMask.DataTypeDefinition;
+                case RolePermissions:         return writeMask | (uint)AttributeWriteMask.RolePermissions;
+                case AccessRestrictions:      return writeMask | (uint)AttributeWriteMask.AccessRestrictions;
             }
                     
             return writeMask;
@@ -275,7 +289,7 @@ namespace Opc.Ua
                 return ValueRanks.Any;
             }
             
-            if (attributeId == Attributes.ArrayDimensions)
+            if (attributeId == Attributes.ArrayDimensions || attributeId == Attributes.RolePermissions || attributeId == Attributes.UserRolePermissions)
             {
                 return ValueRanks.OneDimension;
             }
@@ -297,6 +311,9 @@ namespace Opc.Ua
                 case Description:
                 case WriteMask:
                 case UserWriteMask:
+                case RolePermissions:
+                case UserRolePermissions:
+                case AccessRestrictions:
                 {
                     return true;
                 }
@@ -312,7 +329,12 @@ namespace Opc.Ua
                 case IsAbstract:
                 {
                     return (nodeClass & (Opc.Ua.NodeClass.VariableType | Opc.Ua.NodeClass.ObjectType | Opc.Ua.NodeClass.ReferenceType | Opc.Ua.NodeClass.DataType)) != 0;
-                }               
+                }
+
+                case DataTypeDefinition:
+                {
+                    return (nodeClass & Opc.Ua.NodeClass.DataType) != 0;
+                }
 
                 case Symmetric:
                 case InverseName:
@@ -376,6 +398,9 @@ namespace Opc.Ua
                 case Historizing:             return AttributeWriteMask.Historizing;
                 case Executable:              return AttributeWriteMask.Executable;
                 case UserExecutable:          return AttributeWriteMask.UserExecutable;
+                case DataTypeDefinition:      return AttributeWriteMask.DataTypeDefinition;
+                case RolePermissions:         return AttributeWriteMask.RolePermissions;
+                case AccessRestrictions:      return AttributeWriteMask.AccessRestrictions;
             }
 
             return 0;

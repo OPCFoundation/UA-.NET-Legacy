@@ -71,6 +71,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -1131,6 +1137,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -1923,6 +1935,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -2300,6 +2318,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -2498,6 +2522,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -2804,6 +2834,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -2865,6 +2901,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -3015,6 +3057,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -3219,6 +3267,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -3369,6 +3423,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -3522,6 +3582,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -4351,6 +4417,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -4803,22 +4875,18 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
         protected override void InitializeOptionalChildren(ISystemContext context)
         {
             base.InitializeOptionalChildren(context);
-
-            if (Applications != null)
-            {
-                Applications.Initialize(context, Applications_InitializationString);
-            }
-
-            if (Endpoints != null)
-            {
-                Endpoints.Initialize(context, Endpoints_InitializationString);
-            }
 
             if (AddIdentity != null)
             {
@@ -4829,36 +4897,9 @@ namespace Opc.Ua
             {
                 RemoveIdentity.Initialize(context, RemoveIdentity_InitializationString);
             }
-
-            if (AddApplication != null)
-            {
-                AddApplication.Initialize(context, AddApplication_InitializationString);
-            }
-
-            if (RemoveApplication != null)
-            {
-                RemoveApplication.Initialize(context, RemoveApplication_InitializationString);
-            }
-
-            if (AddEndpoint != null)
-            {
-                AddEndpoint.Initialize(context, AddEndpoint_InitializationString);
-            }
-
-            if (RemoveEndpoint != null)
-            {
-                RemoveEndpoint.Initialize(context, RemoveEndpoint_InitializationString);
-            }
         }
 
         #region Initialization String
-        private const string Applications_InitializationString =
-           "//////////8VYIkKAgAAAAAADAAAAEFwcGxpY2F0aW9ucwEABj0ALgBEBj0AAAAMAQAAAAEB/////wAA" +
-           "AAA=";
-
-        private const string Endpoints_InitializationString =
-           "//////////8VYIkKAgAAAAAACQAAAEVuZHBvaW50cwEABz0ALgBEBz0AAAAMAQAAAAEB/////wAAAAA=";
-
         private const string AddIdentity_InitializationString =
            "//////////8EYYIKBAAAAAAACwAAAEFkZElkZW50aXR5AQAIPQAvAQAIPQg9AAABAf////8BAAAAFWCp" +
            "CgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEACT0ALgBECT0AAJYBAAAAAQAqAQEaAAAACQAAAFJ1bGVU" +
@@ -4869,47 +4910,15 @@ namespace Opc.Ua
            "FWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEACz0ALgBECz0AAJYBAAAAAQAqAQEdAAAADAAAAFJ1" +
            "bGVUb1JlbW92ZQEAEj3/////AAAAAAABACgBAQAAAAEB/////wAAAAA=";
 
-        private const string AddApplication_InitializationString =
-           "//////////8EYYIKBAAAAAAADgAAAEFkZEFwcGxpY2F0aW9uAQAMPQAvAQAMPQw9AAABAf////8BAAAA" +
-           "FWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEADT0ALgBEDT0AAJYBAAAAAQAqAQEYAAAACQAAAFJ1" +
-           "bGVUb0FkZAAM/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
-
-        private const string RemoveApplication_InitializationString =
-           "//////////8EYYIKBAAAAAAAEQAAAFJlbW92ZUFwcGxpY2F0aW9uAQAOPQAvAQAOPQ49AAABAf////8B" +
-           "AAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEADz0ALgBEDz0AAJYBAAAAAQAqAQEbAAAADAAA" +
-           "AFJ1bGVUb1JlbW92ZQAM/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
-
-        private const string AddEndpoint_InitializationString =
-           "//////////8EYYIKBAAAAAAACwAAAEFkZEVuZHBvaW50AQCIPgAvAQCIPog+AAABAf////8BAAAAFWCp" +
-           "CgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAiT4ALgBEiT4AAJYBAAAAAQAqAQEYAAAACQAAAFJ1bGVU" +
-           "b0FkZAAM/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
-
-        private const string RemoveEndpoint_InitializationString =
-           "//////////8EYYIKBAAAAAAADgAAAFJlbW92ZUVuZHBvaW50AQCKPgAvAQCKPoo+AAABAf////8BAAAA" +
-           "FWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAiz4ALgBEiz4AAJYBAAAAAQAqAQEbAAAADAAAAFJ1" +
-           "bGVUb1JlbW92ZQAM/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
-
         private const string InitializationString =
-           "//////////8EYIAAAQAAAAAAEAAAAFJvbGVUeXBlSW5zdGFuY2UBAAQ9AQAEPf////8KAAAAFWCJCgIA" +
-           "AAAAAAwAAABTeXN0ZW1Sb2xlSWQBAIc+AC4ARIc+AAAAEgEAAAABAf////8AAAAAFWCJCgIAAAAAAAoA" +
-           "AABJZGVudGl0aWVzAQAFPQAuAEQFPQAAAQASPQEAAAABAf////8AAAAAFWCJCgIAAAAAAAwAAABBcHBs" +
-           "aWNhdGlvbnMBAAY9AC4ARAY9AAAADAEAAAABAf////8AAAAAFWCJCgIAAAAAAAkAAABFbmRwb2ludHMB" +
-           "AAc9AC4ARAc9AAAADAEAAAABAf////8AAAAABGGCCgQAAAAAAAsAAABBZGRJZGVudGl0eQEACD0ALwEA" +
-           "CD0IPQAAAQH/////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAAk9AC4ARAk9AACWAQAA" +
-           "AAEAKgEBGgAAAAkAAABSdWxlVG9BZGQBABI9/////wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQA" +
-           "AAAAAA4AAABSZW1vdmVJZGVudGl0eQEACj0ALwEACj0KPQAAAQH/////AQAAABVgqQoCAAAAAAAOAAAA" +
-           "SW5wdXRBcmd1bWVudHMBAAs9AC4ARAs9AACWAQAAAAEAKgEBHQAAAAwAAABSdWxlVG9SZW1vdmUBABI9" +
-           "/////wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQAAAAAAA4AAABBZGRBcHBsaWNhdGlvbgEADD0A" +
-           "LwEADD0MPQAAAQH/////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAA09AC4ARA09AACW" +
-           "AQAAAAEAKgEBGAAAAAkAAABSdWxlVG9BZGQADP////8AAAAAAAEAKAEBAAAAAQH/////AAAAAARhggoE" +
-           "AAAAAAARAAAAUmVtb3ZlQXBwbGljYXRpb24BAA49AC8BAA49Dj0AAAEB/////wEAAAAVYKkKAgAAAAAA" +
-           "DgAAAElucHV0QXJndW1lbnRzAQAPPQAuAEQPPQAAlgEAAAABACoBARsAAAAMAAAAUnVsZVRvUmVtb3Zl" +
-           "AAz/////AAAAAAABACgBAQAAAAEB/////wAAAAAEYYIKBAAAAAAACwAAAEFkZEVuZHBvaW50AQCIPgAv" +
-           "AQCIPog+AAABAf////8BAAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAiT4ALgBEiT4AAJYB" +
-           "AAAAAQAqAQEYAAAACQAAAFJ1bGVUb0FkZAAM/////wAAAAAAAQAoAQEAAAABAf////8AAAAABGGCCgQA" +
-           "AAAAAA4AAABSZW1vdmVFbmRwb2ludAEAij4ALwEAij6KPgAAAQH/////AQAAABVgqQoCAAAAAAAOAAAA" +
-           "SW5wdXRBcmd1bWVudHMBAIs+AC4ARIs+AACWAQAAAAEAKgEBGwAAAAwAAABSdWxlVG9SZW1vdmUADP//" +
-           "//8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
+           "//////////8EYIAAAQAAAAAAEAAAAFJvbGVUeXBlSW5zdGFuY2UBAAQ9AQAEPf////8EAAAAFWCJCgIA" +
+           "AAAAAAwAAABTeXN0ZW1Sb2xlSWQBAIc+AC4ARIc+AAAAEgEAAAABAf////8AAAAAFWCJCgIAAAAAAAwA" +
+           "AABNYXBwaW5nUnVsZXMBABA/AC4ARBA/AAABABI9AQAAAAEB/////wAAAAAEYYIKBAAAAAAACwAAAEFk" +
+           "ZElkZW50aXR5AQAIPQAvAQAIPQg9AAABAf////8BAAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50" +
+           "cwEACT0ALgBECT0AAJYBAAAAAQAqAQEaAAAACQAAAFJ1bGVUb0FkZAEAEj3/////AAAAAAABACgBAQAA" +
+           "AAEB/////wAAAAAEYYIKBAAAAAAADgAAAFJlbW92ZUlkZW50aXR5AQAKPQAvAQAKPQo9AAABAf////8B" +
+           "AAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEACz0ALgBECz0AAJYBAAAAAQAqAQEdAAAADAAA" +
+           "AFJ1bGVUb1JlbW92ZQEAEj3/////AAAAAAABACgBAQAAAAEB/////wAAAAA=";
         #endregion
         #endif
         #endregion
@@ -4937,65 +4946,23 @@ namespace Opc.Ua
         }
 
         /// <summary>
-        /// A description for the Identities Property.
+        /// A description for the MappingRules Property.
         /// </summary>
-        public PropertyState<IdentityMappingRuleType[]> Identities
+        public PropertyState<IdentityMappingRuleType[]> MappingRules
         {
             get
             {
-                return m_identities;
+                return m_mappingRules;
             }
 
             set
             {
-                if (!Object.ReferenceEquals(m_identities, value))
+                if (!Object.ReferenceEquals(m_mappingRules, value))
                 {
                     ChangeMasks |= NodeStateChangeMasks.Children;
                 }
 
-                m_identities = value;
-            }
-        }
-
-        /// <summary>
-        /// A description for the Applications Property.
-        /// </summary>
-        public PropertyState<string[]> Applications
-        {
-            get
-            {
-                return m_applications;
-            }
-
-            set
-            {
-                if (!Object.ReferenceEquals(m_applications, value))
-                {
-                    ChangeMasks |= NodeStateChangeMasks.Children;
-                }
-
-                m_applications = value;
-            }
-        }
-
-        /// <summary>
-        /// A description for the Endpoints Property.
-        /// </summary>
-        public PropertyState<string[]> Endpoints
-        {
-            get
-            {
-                return m_endpoints;
-            }
-
-            set
-            {
-                if (!Object.ReferenceEquals(m_endpoints, value))
-                {
-                    ChangeMasks |= NodeStateChangeMasks.Children;
-                }
-
-                m_endpoints = value;
+                m_mappingRules = value;
             }
         }
 
@@ -5040,90 +5007,6 @@ namespace Opc.Ua
                 m_removeIdentityMethod = value;
             }
         }
-
-        /// <summary>
-        /// A description for the AddApplicationMethodType Method.
-        /// </summary>
-        public AddApplicationMethodState AddApplication
-        {
-            get
-            {
-                return m_addApplicationMethod;
-            }
-
-            set
-            {
-                if (!Object.ReferenceEquals(m_addApplicationMethod, value))
-                {
-                    ChangeMasks |= NodeStateChangeMasks.Children;
-                }
-
-                m_addApplicationMethod = value;
-            }
-        }
-
-        /// <summary>
-        /// A description for the RemoveApplicationMethodType Method.
-        /// </summary>
-        public RemoveApplicationMethodState RemoveApplication
-        {
-            get
-            {
-                return m_removeApplicationMethod;
-            }
-
-            set
-            {
-                if (!Object.ReferenceEquals(m_removeApplicationMethod, value))
-                {
-                    ChangeMasks |= NodeStateChangeMasks.Children;
-                }
-
-                m_removeApplicationMethod = value;
-            }
-        }
-
-        /// <summary>
-        /// A description for the AddEndpointMethodType Method.
-        /// </summary>
-        public AddEndpointMethodState AddEndpoint
-        {
-            get
-            {
-                return m_addEndpointMethod;
-            }
-
-            set
-            {
-                if (!Object.ReferenceEquals(m_addEndpointMethod, value))
-                {
-                    ChangeMasks |= NodeStateChangeMasks.Children;
-                }
-
-                m_addEndpointMethod = value;
-            }
-        }
-
-        /// <summary>
-        /// A description for the RemoveEndpointMethodType Method.
-        /// </summary>
-        public RemoveEndpointMethodState RemoveEndpoint
-        {
-            get
-            {
-                return m_removeEndpointMethod;
-            }
-
-            set
-            {
-                if (!Object.ReferenceEquals(m_removeEndpointMethod, value))
-                {
-                    ChangeMasks |= NodeStateChangeMasks.Children;
-                }
-
-                m_removeEndpointMethod = value;
-            }
-        }
         #endregion
 
         #region Overridden Methods
@@ -5141,19 +5024,9 @@ namespace Opc.Ua
                 children.Add(m_systemRoleId);
             }
 
-            if (m_identities != null)
+            if (m_mappingRules != null)
             {
-                children.Add(m_identities);
-            }
-
-            if (m_applications != null)
-            {
-                children.Add(m_applications);
-            }
-
-            if (m_endpoints != null)
-            {
-                children.Add(m_endpoints);
+                children.Add(m_mappingRules);
             }
 
             if (m_addIdentityMethod != null)
@@ -5164,26 +5037,6 @@ namespace Opc.Ua
             if (m_removeIdentityMethod != null)
             {
                 children.Add(m_removeIdentityMethod);
-            }
-
-            if (m_addApplicationMethod != null)
-            {
-                children.Add(m_addApplicationMethod);
-            }
-
-            if (m_removeApplicationMethod != null)
-            {
-                children.Add(m_removeApplicationMethod);
-            }
-
-            if (m_addEndpointMethod != null)
-            {
-                children.Add(m_addEndpointMethod);
-            }
-
-            if (m_removeEndpointMethod != null)
-            {
-                children.Add(m_removeEndpointMethod);
             }
 
             base.GetChildren(context, children);
@@ -5228,66 +5081,24 @@ namespace Opc.Ua
                     break;
                 }
 
-                case Opc.Ua.BrowseNames.Identities:
+                case Opc.Ua.BrowseNames.MappingRules:
                 {
                     if (createOrReplace)
                     {
-                        if (Identities == null)
+                        if (MappingRules == null)
                         {
                             if (replacement == null)
                             {
-                                Identities = new PropertyState<IdentityMappingRuleType[]>(this);
+                                MappingRules = new PropertyState<IdentityMappingRuleType[]>(this);
                             }
                             else
                             {
-                                Identities = (PropertyState<IdentityMappingRuleType[]>)replacement;
+                                MappingRules = (PropertyState<IdentityMappingRuleType[]>)replacement;
                             }
                         }
                     }
 
-                    instance = Identities;
-                    break;
-                }
-
-                case Opc.Ua.BrowseNames.Applications:
-                {
-                    if (createOrReplace)
-                    {
-                        if (Applications == null)
-                        {
-                            if (replacement == null)
-                            {
-                                Applications = new PropertyState<string[]>(this);
-                            }
-                            else
-                            {
-                                Applications = (PropertyState<string[]>)replacement;
-                            }
-                        }
-                    }
-
-                    instance = Applications;
-                    break;
-                }
-
-                case Opc.Ua.BrowseNames.Endpoints:
-                {
-                    if (createOrReplace)
-                    {
-                        if (Endpoints == null)
-                        {
-                            if (replacement == null)
-                            {
-                                Endpoints = new PropertyState<string[]>(this);
-                            }
-                            else
-                            {
-                                Endpoints = (PropertyState<string[]>)replacement;
-                            }
-                        }
-                    }
-
-                    instance = Endpoints;
+                    instance = MappingRules;
                     break;
                 }
 
@@ -5332,90 +5143,6 @@ namespace Opc.Ua
                     instance = RemoveIdentity;
                     break;
                 }
-
-                case Opc.Ua.BrowseNames.AddApplication:
-                {
-                    if (createOrReplace)
-                    {
-                        if (AddApplication == null)
-                        {
-                            if (replacement == null)
-                            {
-                                AddApplication = new AddApplicationMethodState(this);
-                            }
-                            else
-                            {
-                                AddApplication = (AddApplicationMethodState)replacement;
-                            }
-                        }
-                    }
-
-                    instance = AddApplication;
-                    break;
-                }
-
-                case Opc.Ua.BrowseNames.RemoveApplication:
-                {
-                    if (createOrReplace)
-                    {
-                        if (RemoveApplication == null)
-                        {
-                            if (replacement == null)
-                            {
-                                RemoveApplication = new RemoveApplicationMethodState(this);
-                            }
-                            else
-                            {
-                                RemoveApplication = (RemoveApplicationMethodState)replacement;
-                            }
-                        }
-                    }
-
-                    instance = RemoveApplication;
-                    break;
-                }
-
-                case Opc.Ua.BrowseNames.AddEndpoint:
-                {
-                    if (createOrReplace)
-                    {
-                        if (AddEndpoint == null)
-                        {
-                            if (replacement == null)
-                            {
-                                AddEndpoint = new AddEndpointMethodState(this);
-                            }
-                            else
-                            {
-                                AddEndpoint = (AddEndpointMethodState)replacement;
-                            }
-                        }
-                    }
-
-                    instance = AddEndpoint;
-                    break;
-                }
-
-                case Opc.Ua.BrowseNames.RemoveEndpoint:
-                {
-                    if (createOrReplace)
-                    {
-                        if (RemoveEndpoint == null)
-                        {
-                            if (replacement == null)
-                            {
-                                RemoveEndpoint = new RemoveEndpointMethodState(this);
-                            }
-                            else
-                            {
-                                RemoveEndpoint = (RemoveEndpointMethodState)replacement;
-                            }
-                        }
-                    }
-
-                    instance = RemoveEndpoint;
-                    break;
-                }
             }
 
             if (instance != null)
@@ -5429,15 +5156,9 @@ namespace Opc.Ua
 
         #region Private Fields
         private PropertyState<ExpandedNodeId[]> m_systemRoleId;
-        private PropertyState<IdentityMappingRuleType[]> m_identities;
-        private PropertyState<string[]> m_applications;
-        private PropertyState<string[]> m_endpoints;
+        private PropertyState<IdentityMappingRuleType[]> m_mappingRules;
         private AddIdentityMethodState m_addIdentityMethod;
         private RemoveIdentityMethodState m_removeIdentityMethod;
-        private AddApplicationMethodState m_addApplicationMethod;
-        private RemoveApplicationMethodState m_removeApplicationMethod;
-        private AddEndpointMethodState m_addEndpointMethod;
-        private RemoveEndpointMethodState m_removeEndpointMethod;
         #endregion
     }
     #endif
@@ -5677,474 +5398,6 @@ namespace Opc.Ua
     #endif
     #endregion
 
-    #region AddApplicationMethodState Class
-    #if (!OPCUA_EXCLUDE_AddApplicationMethodState)
-    /// <summary>
-    /// Stores an instance of the AddApplicationMethodType Method.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    public partial class AddApplicationMethodState : MethodState
-    {
-        #region Constructors
-        /// <summary>
-        /// Initializes the type with its default attribute values.
-        /// </summary>
-        public AddApplicationMethodState(NodeState parent) : base(parent)
-        {
-        }
-
-        /// <summary>
-        /// Constructs an instance of a node.
-        /// </summary>
-        /// <param name="parent">The parent.</param>
-        /// <returns>The new node.</returns>
-        public new static NodeState Construct(NodeState parent)
-        {
-            return new AddApplicationMethodState(parent);
-        }
-
-        #if (!OPCUA_EXCLUDE_InitializationStrings)
-        /// <summary>
-        /// Initializes the instance.
-        /// </summary>
-        protected override void Initialize(ISystemContext context)
-        {
-            Initialize(context, InitializationString);
-            InitializeOptionalChildren(context);
-        }
-
-        /// <summary>
-        /// Initializes the any option children defined for the instance.
-        /// </summary>
-        protected override void InitializeOptionalChildren(ISystemContext context)
-        {
-            base.InitializeOptionalChildren(context);
-        }
-
-        #region Initialization String
-        private const string InitializationString =
-           "//////////8EYYIKBAAAAAAAGAAAAEFkZEFwcGxpY2F0aW9uTWV0aG9kVHlwZQEAGD0ALwEAGD0YPQAA" +
-           "AQH/////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBABk9AC4ARBk9AACWAQAAAAEAKgEB" +
-           "GAAAAAkAAABSdWxlVG9BZGQADP////8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
-        #endregion
-        #endif
-        #endregion
-
-        #region Event Callbacks
-        /// <summary>
-        /// Raised when the the method is called.
-        /// </summary>
-        public AddApplicationMethodStateMethodCallHandler OnCall;
-        #endregion
-
-        #region Public Properties
-        #endregion
-
-        #region Overridden Methods
-        /// <summary>
-        /// Invokes the method, returns the result and output argument.
-        /// </summary>
-        /// <param name="context">The current context.</param>
-        /// <param name="objectId">The id of the object.</param>
-        /// <param name="inputArguments">The input arguments which have been already validated.</param>
-        /// <param name="outputArguments">The output arguments which have initialized with thier default values.</param>
-        /// <returns></returns>
-        protected override ServiceResult Call(
-            ISystemContext context,
-            NodeId objectId,
-            IList<object> inputArguments,
-            IList<object> outputArguments)
-        {
-            if (OnCall == null)
-            {
-                return base.Call(context, objectId, inputArguments, outputArguments);
-            }
-
-            ServiceResult result = null;
-
-            string ruleToAdd = (string)inputArguments[0];
-
-            if (OnCall != null)
-            {
-                result = OnCall(
-                    context,
-                    this,
-                    objectId,
-                    ruleToAdd);
-            }
-
-            return result;
-        }
-        #endregion
-
-        #region Private Fields
-        #endregion
-    }
-
-    /// <summary>
-    /// Used to receive notifications when the method is called.
-    /// </summary>
-    /// <exclude />
-    public delegate ServiceResult AddApplicationMethodStateMethodCallHandler(
-        ISystemContext context,
-        MethodState method,
-        NodeId objectId,
-        string ruleToAdd);
-    #endif
-    #endregion
-
-    #region RemoveApplicationMethodState Class
-    #if (!OPCUA_EXCLUDE_RemoveApplicationMethodState)
-    /// <summary>
-    /// Stores an instance of the RemoveApplicationMethodType Method.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    public partial class RemoveApplicationMethodState : MethodState
-    {
-        #region Constructors
-        /// <summary>
-        /// Initializes the type with its default attribute values.
-        /// </summary>
-        public RemoveApplicationMethodState(NodeState parent) : base(parent)
-        {
-        }
-
-        /// <summary>
-        /// Constructs an instance of a node.
-        /// </summary>
-        /// <param name="parent">The parent.</param>
-        /// <returns>The new node.</returns>
-        public new static NodeState Construct(NodeState parent)
-        {
-            return new RemoveApplicationMethodState(parent);
-        }
-
-        #if (!OPCUA_EXCLUDE_InitializationStrings)
-        /// <summary>
-        /// Initializes the instance.
-        /// </summary>
-        protected override void Initialize(ISystemContext context)
-        {
-            Initialize(context, InitializationString);
-            InitializeOptionalChildren(context);
-        }
-
-        /// <summary>
-        /// Initializes the any option children defined for the instance.
-        /// </summary>
-        protected override void InitializeOptionalChildren(ISystemContext context)
-        {
-            base.InitializeOptionalChildren(context);
-        }
-
-        #region Initialization String
-        private const string InitializationString =
-           "//////////8EYYIKBAAAAAAAGwAAAFJlbW92ZUFwcGxpY2F0aW9uTWV0aG9kVHlwZQEAGj0ALwEAGj0a" +
-           "PQAAAQH/////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBABs9AC4ARBs9AACWAQAAAAEA" +
-           "KgEBGwAAAAwAAABSdWxlVG9SZW1vdmUADP////8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
-        #endregion
-        #endif
-        #endregion
-
-        #region Event Callbacks
-        /// <summary>
-        /// Raised when the the method is called.
-        /// </summary>
-        public RemoveApplicationMethodStateMethodCallHandler OnCall;
-        #endregion
-
-        #region Public Properties
-        #endregion
-
-        #region Overridden Methods
-        /// <summary>
-        /// Invokes the method, returns the result and output argument.
-        /// </summary>
-        /// <param name="context">The current context.</param>
-        /// <param name="objectId">The id of the object.</param>
-        /// <param name="inputArguments">The input arguments which have been already validated.</param>
-        /// <param name="outputArguments">The output arguments which have initialized with thier default values.</param>
-        /// <returns></returns>
-        protected override ServiceResult Call(
-            ISystemContext context,
-            NodeId objectId,
-            IList<object> inputArguments,
-            IList<object> outputArguments)
-        {
-            if (OnCall == null)
-            {
-                return base.Call(context, objectId, inputArguments, outputArguments);
-            }
-
-            ServiceResult result = null;
-
-            string ruleToRemove = (string)inputArguments[0];
-
-            if (OnCall != null)
-            {
-                result = OnCall(
-                    context,
-                    this,
-                    objectId,
-                    ruleToRemove);
-            }
-
-            return result;
-        }
-        #endregion
-
-        #region Private Fields
-        #endregion
-    }
-
-    /// <summary>
-    /// Used to receive notifications when the method is called.
-    /// </summary>
-    /// <exclude />
-    public delegate ServiceResult RemoveApplicationMethodStateMethodCallHandler(
-        ISystemContext context,
-        MethodState method,
-        NodeId objectId,
-        string ruleToRemove);
-    #endif
-    #endregion
-
-    #region AddEndpointMethodState Class
-    #if (!OPCUA_EXCLUDE_AddEndpointMethodState)
-    /// <summary>
-    /// Stores an instance of the AddEndpointMethodType Method.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    public partial class AddEndpointMethodState : MethodState
-    {
-        #region Constructors
-        /// <summary>
-        /// Initializes the type with its default attribute values.
-        /// </summary>
-        public AddEndpointMethodState(NodeState parent) : base(parent)
-        {
-        }
-
-        /// <summary>
-        /// Constructs an instance of a node.
-        /// </summary>
-        /// <param name="parent">The parent.</param>
-        /// <returns>The new node.</returns>
-        public new static NodeState Construct(NodeState parent)
-        {
-            return new AddEndpointMethodState(parent);
-        }
-
-        #if (!OPCUA_EXCLUDE_InitializationStrings)
-        /// <summary>
-        /// Initializes the instance.
-        /// </summary>
-        protected override void Initialize(ISystemContext context)
-        {
-            Initialize(context, InitializationString);
-            InitializeOptionalChildren(context);
-        }
-
-        /// <summary>
-        /// Initializes the any option children defined for the instance.
-        /// </summary>
-        protected override void InitializeOptionalChildren(ISystemContext context)
-        {
-            base.InitializeOptionalChildren(context);
-        }
-
-        #region Initialization String
-        private const string InitializationString =
-           "//////////8EYYIKBAAAAAAAFQAAAEFkZEVuZHBvaW50TWV0aG9kVHlwZQEAjD4ALwEAjD6MPgAAAQH/" +
-           "////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAI0+AC4ARI0+AACWAQAAAAEAKgEBGAAA" +
-           "AAkAAABSdWxlVG9BZGQADP////8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
-        #endregion
-        #endif
-        #endregion
-
-        #region Event Callbacks
-        /// <summary>
-        /// Raised when the the method is called.
-        /// </summary>
-        public AddEndpointMethodStateMethodCallHandler OnCall;
-        #endregion
-
-        #region Public Properties
-        #endregion
-
-        #region Overridden Methods
-        /// <summary>
-        /// Invokes the method, returns the result and output argument.
-        /// </summary>
-        /// <param name="context">The current context.</param>
-        /// <param name="objectId">The id of the object.</param>
-        /// <param name="inputArguments">The input arguments which have been already validated.</param>
-        /// <param name="outputArguments">The output arguments which have initialized with thier default values.</param>
-        /// <returns></returns>
-        protected override ServiceResult Call(
-            ISystemContext context,
-            NodeId objectId,
-            IList<object> inputArguments,
-            IList<object> outputArguments)
-        {
-            if (OnCall == null)
-            {
-                return base.Call(context, objectId, inputArguments, outputArguments);
-            }
-
-            ServiceResult result = null;
-
-            string ruleToAdd = (string)inputArguments[0];
-
-            if (OnCall != null)
-            {
-                result = OnCall(
-                    context,
-                    this,
-                    objectId,
-                    ruleToAdd);
-            }
-
-            return result;
-        }
-        #endregion
-
-        #region Private Fields
-        #endregion
-    }
-
-    /// <summary>
-    /// Used to receive notifications when the method is called.
-    /// </summary>
-    /// <exclude />
-    public delegate ServiceResult AddEndpointMethodStateMethodCallHandler(
-        ISystemContext context,
-        MethodState method,
-        NodeId objectId,
-        string ruleToAdd);
-    #endif
-    #endregion
-
-    #region RemoveEndpointMethodState Class
-    #if (!OPCUA_EXCLUDE_RemoveEndpointMethodState)
-    /// <summary>
-    /// Stores an instance of the RemoveEndpointMethodType Method.
-    /// </summary>
-    /// <exclude />
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
-    public partial class RemoveEndpointMethodState : MethodState
-    {
-        #region Constructors
-        /// <summary>
-        /// Initializes the type with its default attribute values.
-        /// </summary>
-        public RemoveEndpointMethodState(NodeState parent) : base(parent)
-        {
-        }
-
-        /// <summary>
-        /// Constructs an instance of a node.
-        /// </summary>
-        /// <param name="parent">The parent.</param>
-        /// <returns>The new node.</returns>
-        public new static NodeState Construct(NodeState parent)
-        {
-            return new RemoveEndpointMethodState(parent);
-        }
-
-        #if (!OPCUA_EXCLUDE_InitializationStrings)
-        /// <summary>
-        /// Initializes the instance.
-        /// </summary>
-        protected override void Initialize(ISystemContext context)
-        {
-            Initialize(context, InitializationString);
-            InitializeOptionalChildren(context);
-        }
-
-        /// <summary>
-        /// Initializes the any option children defined for the instance.
-        /// </summary>
-        protected override void InitializeOptionalChildren(ISystemContext context)
-        {
-            base.InitializeOptionalChildren(context);
-        }
-
-        #region Initialization String
-        private const string InitializationString =
-           "//////////8EYYIKBAAAAAAAGAAAAFJlbW92ZUVuZHBvaW50TWV0aG9kVHlwZQEAjj4ALwEAjj6OPgAA" +
-           "AQH/////AQAAABVgqQoCAAAAAAAOAAAASW5wdXRBcmd1bWVudHMBAI8+AC4ARI8+AACWAQAAAAEAKgEB" +
-           "GwAAAAwAAABSdWxlVG9SZW1vdmUADP////8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
-        #endregion
-        #endif
-        #endregion
-
-        #region Event Callbacks
-        /// <summary>
-        /// Raised when the the method is called.
-        /// </summary>
-        public RemoveEndpointMethodStateMethodCallHandler OnCall;
-        #endregion
-
-        #region Public Properties
-        #endregion
-
-        #region Overridden Methods
-        /// <summary>
-        /// Invokes the method, returns the result and output argument.
-        /// </summary>
-        /// <param name="context">The current context.</param>
-        /// <param name="objectId">The id of the object.</param>
-        /// <param name="inputArguments">The input arguments which have been already validated.</param>
-        /// <param name="outputArguments">The output arguments which have initialized with thier default values.</param>
-        /// <returns></returns>
-        protected override ServiceResult Call(
-            ISystemContext context,
-            NodeId objectId,
-            IList<object> inputArguments,
-            IList<object> outputArguments)
-        {
-            if (OnCall == null)
-            {
-                return base.Call(context, objectId, inputArguments, outputArguments);
-            }
-
-            ServiceResult result = null;
-
-            string ruleToRemove = (string)inputArguments[0];
-
-            if (OnCall != null)
-            {
-                result = OnCall(
-                    context,
-                    this,
-                    objectId,
-                    ruleToRemove);
-            }
-
-            return result;
-        }
-        #endregion
-
-        #region Private Fields
-        #endregion
-    }
-
-    /// <summary>
-    /// Used to receive notifications when the method is called.
-    /// </summary>
-    /// <exclude />
-    public delegate ServiceResult RemoveEndpointMethodStateMethodCallHandler(
-        ISystemContext context,
-        MethodState method,
-        NodeId objectId,
-        string ruleToRemove);
-    #endif
-    #endregion
-
     #region FileState Class
     #if (!OPCUA_EXCLUDE_FileState)
     /// <summary>
@@ -6178,6 +5431,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -7356,6 +6615,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -7664,6 +6929,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -8355,6 +7626,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -8541,6 +7818,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -8551,6 +7834,21 @@ namespace Opc.Ua
             if (NamespaceFile != null)
             {
                 NamespaceFile.Initialize(context, NamespaceFile_InitializationString);
+            }
+
+            if (DefaultRolePermissions != null)
+            {
+                DefaultRolePermissions.Initialize(context, DefaultRolePermissions_InitializationString);
+            }
+
+            if (DefaultUserRolePermissions != null)
+            {
+                DefaultUserRolePermissions.Initialize(context, DefaultUserRolePermissions_InitializationString);
+            }
+
+            if (DefaultAccessRestrictions != null)
+            {
+                DefaultAccessRestrictions.Initialize(context, DefaultAccessRestrictions_InitializationString);
             }
         }
 
@@ -8586,9 +7884,21 @@ namespace Opc.Ua
            "LgBEey0AAJYCAAAAAQAqAQEZAAAACgAAAEZpbGVIYW5kbGUAB/////8AAAAAAAEAKgEBFwAAAAgAAABQ" +
            "b3NpdGlvbgAJ/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
 
+        private const string DefaultRolePermissions_InitializationString =
+           "//////////8VYIkKAgAAAAAAFgAAAERlZmF1bHRSb2xlUGVybWlzc2lvbnMBAAk/AC4ARAk/AAAAYAEA" +
+           "AAABAf////8AAAAA";
+
+        private const string DefaultUserRolePermissions_InitializationString =
+           "//////////8VYIkKAgAAAAAAGgAAAERlZmF1bHRVc2VyUm9sZVBlcm1pc3Npb25zAQAKPwAuAEQKPwAA" +
+           "AGABAAAAAQH/////AAAAAA==";
+
+        private const string DefaultAccessRestrictions_InitializationString =
+           "//////////8VYIkKAgAAAAAAGQAAAERlZmF1bHRBY2Nlc3NSZXN0cmljdGlvbnMBAAs/AC4ARAs/AAAA" +
+           "A/////8BAf////8AAAAA";
+
         private const string InitializationString =
            "//////////8EYIAAAQAAAAAAHQAAAE5hbWVzcGFjZU1ldGFkYXRhVHlwZUluc3RhbmNlAQBgLQEAYC3/" +
-           "////CAAAADVgiQoCAAAAAAAMAAAATmFtZXNwYWNlVXJpAQBhLQMAAAAAGQAAAFRoZSBVUkkgb2YgdGhl" +
+           "////CwAAADVgiQoCAAAAAAAMAAAATmFtZXNwYWNlVXJpAQBhLQMAAAAAGQAAAFRoZSBVUkkgb2YgdGhl" +
            "IG5hbWVzcGFjZS4ALgBEYS0AAAAM/////wEB/////wAAAAA1YIkKAgAAAAAAEAAAAE5hbWVzcGFjZVZl" +
            "cnNpb24BAGItAwAAAABAAAAAVGhlIGh1bWFuIHJlYWRhYmxlIHN0cmluZyByZXByZXNlbnRpbmcgdmVy" +
            "c2lvbiBvZiB0aGUgbmFtZXNwYWNlLgAuAERiLQAAAAz/////AQH/////AAAAADVgiQoCAAAAAAAYAAAA" +
@@ -8632,7 +7942,10 @@ namespace Opc.Ua
            "c2l0aW9uAAn/////AAAAAAABACgBAQAAAAEB/////wAAAAAEYYIKBAAAAAAACwAAAFNldFBvc2l0aW9u" +
            "AQB6LQAvAQBJLXotAAABAf////8BAAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAey0ALgBE" +
            "ey0AAJYCAAAAAQAqAQEZAAAACgAAAEZpbGVIYW5kbGUAB/////8AAAAAAAEAKgEBFwAAAAgAAABQb3Np" +
-           "dGlvbgAJ/////wAAAAAAAQAoAQEAAAABAf////8AAAAA";
+           "dGlvbgAJ/////wAAAAAAAQAoAQEAAAABAf////8AAAAAFWCJCgIAAAAAABYAAABEZWZhdWx0Um9sZVBl" +
+           "cm1pc3Npb25zAQAJPwAuAEQJPwAAAGABAAAAAQH/////AAAAABVgiQoCAAAAAAAaAAAARGVmYXVsdFVz" +
+           "ZXJSb2xlUGVybWlzc2lvbnMBAAo/AC4ARAo/AAAAYAEAAAABAf////8AAAAAFWCJCgIAAAAAABkAAABE" +
+           "ZWZhdWx0QWNjZXNzUmVzdHJpY3Rpb25zAQALPwAuAEQLPwAAAAP/////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -8805,6 +8118,69 @@ namespace Opc.Ua
                 m_namespaceFile = value;
             }
         }
+
+        /// <summary>
+        /// A description for the DefaultRolePermissions Property.
+        /// </summary>
+        public PropertyState<RolePermissionType[]> DefaultRolePermissions
+        {
+            get
+            {
+                return m_defaultRolePermissions;
+            }
+
+            set
+            {
+                if (!Object.ReferenceEquals(m_defaultRolePermissions, value))
+                {
+                    ChangeMasks |= NodeStateChangeMasks.Children;
+                }
+
+                m_defaultRolePermissions = value;
+            }
+        }
+
+        /// <summary>
+        /// A description for the DefaultUserRolePermissions Property.
+        /// </summary>
+        public PropertyState<RolePermissionType[]> DefaultUserRolePermissions
+        {
+            get
+            {
+                return m_defaultUserRolePermissions;
+            }
+
+            set
+            {
+                if (!Object.ReferenceEquals(m_defaultUserRolePermissions, value))
+                {
+                    ChangeMasks |= NodeStateChangeMasks.Children;
+                }
+
+                m_defaultUserRolePermissions = value;
+            }
+        }
+
+        /// <summary>
+        /// A description for the DefaultAccessRestrictions Property.
+        /// </summary>
+        public PropertyState<byte> DefaultAccessRestrictions
+        {
+            get
+            {
+                return m_defaultAccessRestrictions;
+            }
+
+            set
+            {
+                if (!Object.ReferenceEquals(m_defaultAccessRestrictions, value))
+                {
+                    ChangeMasks |= NodeStateChangeMasks.Children;
+                }
+
+                m_defaultAccessRestrictions = value;
+            }
+        }
         #endregion
 
         #region Overridden Methods
@@ -8855,6 +8231,21 @@ namespace Opc.Ua
             if (m_namespaceFile != null)
             {
                 children.Add(m_namespaceFile);
+            }
+
+            if (m_defaultRolePermissions != null)
+            {
+                children.Add(m_defaultRolePermissions);
+            }
+
+            if (m_defaultUserRolePermissions != null)
+            {
+                children.Add(m_defaultUserRolePermissions);
+            }
+
+            if (m_defaultAccessRestrictions != null)
+            {
+                children.Add(m_defaultAccessRestrictions);
             }
 
             base.GetChildren(context, children);
@@ -9045,6 +8436,69 @@ namespace Opc.Ua
                     instance = NamespaceFile;
                     break;
                 }
+
+                case Opc.Ua.BrowseNames.DefaultRolePermissions:
+                {
+                    if (createOrReplace)
+                    {
+                        if (DefaultRolePermissions == null)
+                        {
+                            if (replacement == null)
+                            {
+                                DefaultRolePermissions = new PropertyState<RolePermissionType[]>(this);
+                            }
+                            else
+                            {
+                                DefaultRolePermissions = (PropertyState<RolePermissionType[]>)replacement;
+                            }
+                        }
+                    }
+
+                    instance = DefaultRolePermissions;
+                    break;
+                }
+
+                case Opc.Ua.BrowseNames.DefaultUserRolePermissions:
+                {
+                    if (createOrReplace)
+                    {
+                        if (DefaultUserRolePermissions == null)
+                        {
+                            if (replacement == null)
+                            {
+                                DefaultUserRolePermissions = new PropertyState<RolePermissionType[]>(this);
+                            }
+                            else
+                            {
+                                DefaultUserRolePermissions = (PropertyState<RolePermissionType[]>)replacement;
+                            }
+                        }
+                    }
+
+                    instance = DefaultUserRolePermissions;
+                    break;
+                }
+
+                case Opc.Ua.BrowseNames.DefaultAccessRestrictions:
+                {
+                    if (createOrReplace)
+                    {
+                        if (DefaultAccessRestrictions == null)
+                        {
+                            if (replacement == null)
+                            {
+                                DefaultAccessRestrictions = new PropertyState<byte>(this);
+                            }
+                            else
+                            {
+                                DefaultAccessRestrictions = (PropertyState<byte>)replacement;
+                            }
+                        }
+                    }
+
+                    instance = DefaultAccessRestrictions;
+                    break;
+                }
             }
 
             if (instance != null)
@@ -9065,6 +8519,9 @@ namespace Opc.Ua
         private PropertyState<string[]> m_staticNumericNodeIdRange;
         private PropertyState<string> m_staticStringNodeIdPattern;
         private AddressSpaceFileState m_namespaceFile;
+        private PropertyState<RolePermissionType[]> m_defaultRolePermissions;
+        private PropertyState<RolePermissionType[]> m_defaultUserRolePermissions;
+        private PropertyState<byte> m_defaultAccessRestrictions;
         #endregion
     }
     #endif
@@ -9103,6 +8560,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -9165,6 +8628,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -9713,6 +9182,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -10078,6 +9553,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -10165,6 +9646,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -10341,6 +9828,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -10770,6 +10263,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -10943,6 +10442,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -11272,6 +10777,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -11454,6 +10965,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -11730,6 +11247,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -11906,6 +11429,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -12078,6 +11607,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -12304,6 +11839,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -12392,6 +11933,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -12484,6 +12031,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -12572,6 +12125,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -12664,6 +12223,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -12754,6 +12319,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -12841,6 +12412,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -13015,6 +12592,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -13192,6 +12775,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -13365,6 +12954,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -13542,6 +13137,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -13628,6 +13229,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -13951,6 +13558,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -14124,6 +13737,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -14349,6 +13968,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -14424,6 +14049,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -14502,6 +14133,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -14668,6 +14305,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -14744,6 +14387,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -14910,6 +14559,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -15073,6 +14728,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -15149,6 +14810,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -15363,6 +15030,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -15442,6 +15115,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -15495,6 +15174,12 @@ namespace Opc.Ua
             Value = default(T);
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
         #endregion
 
@@ -15569,6 +15254,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -16628,6 +16319,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -17414,6 +17111,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -18763,6 +18466,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -18840,6 +18549,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -19313,6 +19028,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -19390,6 +19111,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -22506,6 +22233,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -22583,6 +22316,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -26815,6 +26554,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -26892,6 +26637,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -27961,6 +27712,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -28156,6 +27913,12 @@ namespace Opc.Ua
             Value = default(T);
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
         #endregion
 
@@ -28724,6 +28487,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -28946,6 +28715,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -29282,6 +29057,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -29662,6 +29443,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -29851,6 +29638,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -29999,6 +29792,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -30129,6 +29928,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -30279,6 +30084,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -30340,6 +30151,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -30488,6 +30305,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -31337,6 +31160,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -31598,6 +31427,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -32578,6 +32413,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -32791,6 +32632,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -32864,6 +32711,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -33121,6 +32974,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -33196,6 +33055,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -33249,6 +33114,12 @@ namespace Opc.Ua
             Value = default(T);
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
         #endregion
 
@@ -33323,6 +33194,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -33538,6 +33415,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -33592,6 +33475,12 @@ namespace Opc.Ua
             Value = default(T);
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
         #endregion
 
@@ -33666,6 +33555,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -33857,6 +33752,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -33930,6 +33831,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -34276,6 +34183,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -34349,6 +34262,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -34494,6 +34413,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -34567,6 +34492,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -34735,6 +34666,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -34929,6 +34866,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -35002,6 +34945,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -35245,6 +35194,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -35318,6 +35273,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -35463,6 +35424,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -35536,6 +35503,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -35914,6 +35887,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -36054,6 +36033,12 @@ namespace Opc.Ua
             DataType = TypeInfo.GetDataTypeId(typeof(T));
             ValueRank = TypeInfo.GetValueRank(typeof(T));
         }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
         #endregion
 
         #region Public Members
@@ -36111,6 +36096,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -37239,6 +37230,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -37889,6 +37886,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -38258,6 +38261,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -38758,6 +38767,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -39178,6 +39193,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -39552,6 +39573,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -39614,6 +39641,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -39812,6 +39845,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -40224,6 +40263,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -40330,6 +40375,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -40440,6 +40491,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -40634,6 +40691,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -40832,6 +40895,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -40938,6 +41007,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -41050,6 +41125,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -41155,6 +41236,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -41350,6 +41437,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -41456,6 +41549,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -41808,6 +41907,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -41916,6 +42021,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -41977,6 +42088,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -42042,6 +42159,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -42105,6 +42228,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -42166,6 +42295,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -42258,6 +42393,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -42346,6 +42487,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -42524,6 +42671,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -42698,6 +42851,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -42876,6 +43035,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -43050,6 +43215,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -43228,6 +43399,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -43304,6 +43481,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -43384,6 +43567,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -43460,6 +43649,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -44125,6 +44320,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -44291,6 +44492,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -44469,6 +44676,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -44664,6 +44877,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -45810,6 +46029,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -46471,6 +46696,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -47309,6 +47540,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -47680,6 +47917,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -48002,6 +48245,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -48176,6 +48425,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -48501,6 +48756,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -48724,6 +48985,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -49443,6 +49710,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -49859,6 +50132,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -50086,6 +50365,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -50519,6 +50804,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -50580,6 +50871,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -50645,6 +50942,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -50706,6 +51009,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -50771,6 +51080,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -50832,6 +51147,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -51324,6 +51645,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -51915,6 +52242,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -52140,6 +52473,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -52287,6 +52626,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -52814,6 +53159,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -52988,6 +53339,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -53284,6 +53641,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -54114,6 +54477,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -54317,6 +54686,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -54463,6 +54838,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -55021,6 +55402,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -55289,6 +55676,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -55737,6 +56130,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -56303,6 +56702,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -56330,16 +56735,16 @@ namespace Opc.Ua
            "//////////8EYIAAAQAAAAAAGwAAAFB1Ymxpc2hlZEV2ZW50c1R5cGVJbnN0YW5jZQEA7DgBAOw4////" +
            "/wYAAAAVYIkKAgAAAAAAFAAAAENvbmZpZ3VyYXRpb25WZXJzaW9uAQD2OAAuAET2OAAAAQABOf////8B" +
            "Af////8AAAAAFWCJCgIAAAAAAA8AAABEYXRhU2V0TWV0YURhdGEBAI07AC4ARI07AAABALs4/////wEB" +
-           "/////wAAAAAVYMkKAgAAABAAAABTZWxlY3RlZE5vdGlmaWVyAAANAAAARXZlbnROb3RpZmllcgEA+jgA" +
-           "LgBE+jgAAAAR/////wEB/////wAAAAAVYIkKAgAAAAAADgAAAFNlbGVjdGVkRmllbGRzAQD7OAAuAET7" +
-           "OAAAAQBZAgEAAAABAf////8AAAAAFWCJCgIAAAAAAAYAAABGaWx0ZXIBAPw4AC4ARPw4AAABAEoC////" +
-           "/wEB/////wAAAAAEYYIKBAAAAAAAFAAAAE1vZGlmeUZpZWxkU2VsZWN0aW9uAQDMOgAvAQDMOsw6AAAB" +
-           "Af////8CAAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAzToALgBEzToAAJYEAAAAAQAqAQEl" +
-           "AAAAFAAAAENvbmZpZ3VyYXRpb25WZXJzaW9uAQABOf////8AAAAAAAEAKgEBHwAAABAAAABGaWVsZE5h" +
-           "bWVBbGlhc2VzAAwBAAAAAAAAAAABACoBAR0AAAAOAAAAUHJvbW90ZWRGaWVsZHMAAQEAAAAAAAAAAAEA" +
-           "KgEBHwAAAA4AAABTZWxlY3RlZEZpZWxkcwEAWQIBAAAAAAAAAAABACgBAQAAAAEB/////wAAAAAVYKkK" +
-           "AgAAAAAADwAAAE91dHB1dEFyZ3VtZW50cwEAnTwALgBEnTwAAJYBAAAAAQAqAQEoAAAAFwAAAE5ld0Nv" +
-           "bmZpZ3VyYXRpb25WZXJzaW9uAQABOf////8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
+           "/////wAAAAAVYMkKAgAAABMAAABQdWJTdWJFdmVudE5vdGlmaWVyAAANAAAARXZlbnROb3RpZmllcgEA" +
+           "+jgALgBE+jgAAAAR/////wEB/////wAAAAAVYIkKAgAAAAAADgAAAFNlbGVjdGVkRmllbGRzAQD7OAAu" +
+           "AET7OAAAAQBZAgEAAAABAf////8AAAAAFWCJCgIAAAAAAAYAAABGaWx0ZXIBAPw4AC4ARPw4AAABAEoC" +
+           "/////wEB/////wAAAAAEYYIKBAAAAAAAFAAAAE1vZGlmeUZpZWxkU2VsZWN0aW9uAQDMOgAvAQDMOsw6" +
+           "AAABAf////8CAAAAFWCpCgIAAAAAAA4AAABJbnB1dEFyZ3VtZW50cwEAzToALgBEzToAAJYEAAAAAQAq" +
+           "AQElAAAAFAAAAENvbmZpZ3VyYXRpb25WZXJzaW9uAQABOf////8AAAAAAAEAKgEBHwAAABAAAABGaWVs" +
+           "ZE5hbWVBbGlhc2VzAAwBAAAAAAAAAAABACoBAR0AAAAOAAAAUHJvbW90ZWRGaWVsZHMAAQEAAAAAAAAA" +
+           "AAEAKgEBHwAAAA4AAABTZWxlY3RlZEZpZWxkcwEAWQIBAAAAAAAAAAABACgBAQAAAAEB/////wAAAAAV" +
+           "YKkKAgAAAAAADwAAAE91dHB1dEFyZ3VtZW50cwEAnTwALgBEnTwAAJYBAAAAAQAqAQEoAAAAFwAAAE5l" +
+           "d0NvbmZpZ3VyYXRpb25WZXJzaW9uAQABOf////8AAAAAAAEAKAEBAAAAAQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -56348,21 +56753,21 @@ namespace Opc.Ua
         /// <summary>
         /// A description for the EventNotifier Property.
         /// </summary>
-        public PropertyState<NodeId> SelectedNotifier
+        public PropertyState<NodeId> PubSubEventNotifier
         {
             get
             {
-                return m_selectedNotifier;
+                return m_pubSubEventNotifier;
             }
 
             set
             {
-                if (!Object.ReferenceEquals(m_selectedNotifier, value))
+                if (!Object.ReferenceEquals(m_pubSubEventNotifier, value))
                 {
                     ChangeMasks |= NodeStateChangeMasks.Children;
                 }
 
-                m_selectedNotifier = value;
+                m_pubSubEventNotifier = value;
             }
         }
 
@@ -56440,9 +56845,9 @@ namespace Opc.Ua
             ISystemContext context,
             IList<BaseInstanceState> children)
         {
-            if (m_selectedNotifier != null)
+            if (m_pubSubEventNotifier != null)
             {
-                children.Add(m_selectedNotifier);
+                children.Add(m_pubSubEventNotifier);
             }
 
             if (m_selectedFields != null)
@@ -56481,24 +56886,24 @@ namespace Opc.Ua
 
             switch (browseName.Name)
             {
-                case Opc.Ua.BrowseNames.SelectedNotifier:
+                case Opc.Ua.BrowseNames.PubSubEventNotifier:
                 {
                     if (createOrReplace)
                     {
-                        if (SelectedNotifier == null)
+                        if (PubSubEventNotifier == null)
                         {
                             if (replacement == null)
                             {
-                                SelectedNotifier = new PropertyState<NodeId>(this);
+                                PubSubEventNotifier = new PropertyState<NodeId>(this);
                             }
                             else
                             {
-                                SelectedNotifier = (PropertyState<NodeId>)replacement;
+                                PubSubEventNotifier = (PropertyState<NodeId>)replacement;
                             }
                         }
                     }
 
-                    instance = SelectedNotifier;
+                    instance = PubSubEventNotifier;
                     break;
                 }
 
@@ -56576,7 +56981,7 @@ namespace Opc.Ua
         #endregion
 
         #region Private Fields
-        private PropertyState<NodeId> m_selectedNotifier;
+        private PropertyState<NodeId> m_pubSubEventNotifier;
         private PropertyState<SimpleAttributeOperand[]> m_selectedFields;
         private PropertyState<ContentFilter> m_filter;
         private PublishedEventsTypeModifyFieldSelectionMethodState m_modifyFieldSelectionMethod;
@@ -56757,6 +57162,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -56906,6 +57317,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -57621,6 +58038,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -58044,6 +58467,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -58953,6 +59382,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -59200,6 +59635,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -59356,6 +59797,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -59890,6 +60337,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -60200,6 +60653,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -60396,6 +60855,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -60939,6 +61404,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -61088,6 +61559,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -61352,6 +61829,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -61613,6 +62096,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -61828,6 +62317,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -61992,6 +62487,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -62403,6 +62904,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -63422,6 +63929,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -63569,6 +64082,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -63766,6 +64285,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -64073,6 +64598,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>
@@ -64823,6 +65354,12 @@ namespace Opc.Ua
             InitializeOptionalChildren(context);
         }
 
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
+        }
+
         /// <summary>
         /// Initializes the any option children defined for the instance.
         /// </summary>
@@ -65165,6 +65702,12 @@ namespace Opc.Ua
         {
             Initialize(context, InitializationString);
             InitializeOptionalChildren(context);
+        }
+
+        protected override void Initialize(ISystemContext context, NodeState source)
+        {
+            InitializeOptionalChildren(context);
+            base.Initialize(context, source);
         }
 
         /// <summary>

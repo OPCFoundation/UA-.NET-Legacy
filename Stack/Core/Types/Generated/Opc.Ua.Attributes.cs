@@ -155,18 +155,18 @@ namespace Opc.Ua
         public const uint DataTypeDefinition = 23;
 
         /// <summary>
-        /// The permissions available for the node.
+        /// The permissions for the node granted to roles.
         /// </summary>
-        public const uint Permissions = 24;
+        public const uint RolePermissions = 24;
 
         /// <summary>
-        /// The subset of permissions available for the current user.
+        /// The subset of permissions available for the roles available to the current session.
         /// </summary>
-        public const uint UserPermissions = 25;
+        public const uint UserRolePermissions = 25;
 
         /// <summary>
-        /// The permissions granted to roles.
+        /// The access restrictions assigned to the node.
         /// </summary>
-        public const uint RolePermissions = 26;
+        public const uint AccessRestrictions = 26;
     }
 }

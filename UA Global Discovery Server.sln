@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Core Library", "Stack\Core\UA Core Library.csproj", "{7543AFCB-F5AF-44AF-83C9-23164474C1E9}"
 EndProject
@@ -25,14 +25,24 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UA Client Library", "Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SessionlessMethodCallClient", "GDS\SessionlessMethodCallClient\SessionlessMethodCallClient.csproj", "{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quickstart Library", "SampleApplications\Workshop\Common\Quickstart Library.csproj", "{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess Client", "SampleApplications\Workshop\DataAccess\Client\DataAccess Client.csproj", "{C715BC40-D0F3-4B55-AA1F-88289F79D02A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		AzureWebSites|Any CPU = AzureWebSites|Any CPU
+		AzureWebSites|Mixed Platforms = AzureWebSites|Mixed Platforms
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Release|Any CPU = Release|Any CPU
 		Release|Mixed Platforms = Release|Mixed Platforms
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -41,6 +51,10 @@ Global
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{7543AFCB-F5AF-44AF-83C9-23164474C1E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -49,6 +63,10 @@ Global
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -57,6 +75,10 @@ Global
 		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{8AB4CB8E-E216-425D-B600-350D0B6B59CD}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{80056988-44E7-4EF4-9F59-50BCF215CB03}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{80056988-44E7-4EF4-9F59-50BCF215CB03}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{80056988-44E7-4EF4-9F59-50BCF215CB03}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{80056988-44E7-4EF4-9F59-50BCF215CB03}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{80056988-44E7-4EF4-9F59-50BCF215CB03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{80056988-44E7-4EF4-9F59-50BCF215CB03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80056988-44E7-4EF4-9F59-50BCF215CB03}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -65,6 +87,10 @@ Global
 		{80056988-44E7-4EF4-9F59-50BCF215CB03}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80056988-44E7-4EF4-9F59-50BCF215CB03}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{80056988-44E7-4EF4-9F59-50BCF215CB03}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -73,6 +99,10 @@ Global
 		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2E23571F-9987-4EBD-A9FD-5D5DD639E071}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -81,6 +111,10 @@ Global
 		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{5A647CC0-5FD8-476B-8C14-8A9CED9CF5BE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -89,6 +123,10 @@ Global
 		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{2ADA8796-AC1F-4031-9162-D4ED79D828AF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -97,6 +135,10 @@ Global
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -105,6 +147,10 @@ Global
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Release|Any CPU.Build.0 = Release|Any CPU
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
 		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -113,6 +159,30 @@ Global
 		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{632DD07B-B2B9-4835-9DD6-2BCBA03655D3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.AzureWebSites|Any CPU.ActiveCfg = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.AzureWebSites|Any CPU.Build.0 = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.AzureWebSites|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.AzureWebSites|Mixed Platforms.Build.0 = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,5 +194,7 @@ Global
 		{80056988-44E7-4EF4-9F59-50BCF215CB03} = {3D7AD160-429A-4222-BB9A-7AF0E6BDA0F0}
 		{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A} = {3D7AD160-429A-4222-BB9A-7AF0E6BDA0F0}
 		{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90} = {3D7AD160-429A-4222-BB9A-7AF0E6BDA0F0}
+		{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50} = {3D7AD160-429A-4222-BB9A-7AF0E6BDA0F0}
+		{C715BC40-D0F3-4B55-AA1F-88289F79D02A} = {3D7AD160-429A-4222-BB9A-7AF0E6BDA0F0}
 	EndGlobalSection
 EndGlobal

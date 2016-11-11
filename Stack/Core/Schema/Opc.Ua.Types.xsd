@@ -495,6 +495,8 @@
       <xs:enumeration value="GroupId_4" />
       <xs:enumeration value="Anonymous_5" />
       <xs:enumeration value="Everyone_6" />
+      <xs:enumeration value="Application_7" />
+      <xs:enumeration value="Endpoint_8" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="IdentityCriteriaType" type="tns:IdentityCriteriaType" />
@@ -570,85 +572,6 @@
   </xs:complexType>
   <xs:element name="ListOfTrustListDataType" type="tns:ListOfTrustListDataType" nillable="true"></xs:element>
 
-  <xs:complexType name="DataTypeDefinition">
-    <xs:sequence>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DataTypeDefinition" type="tns:DataTypeDefinition" />
-
-  <xs:complexType name="ListOfDataTypeDefinition">
-    <xs:sequence>
-      <xs:element name="DataTypeDefinition" type="tns:DataTypeDefinition" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfDataTypeDefinition" type="tns:ListOfDataTypeDefinition" nillable="true"></xs:element>
-
-  <xs:simpleType  name="StructureType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Structure_0" />
-      <xs:enumeration value="StructureWithOptionalFields_1" />
-      <xs:enumeration value="Union_2" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="StructureType" type="tns:StructureType" />
-
-  <xs:complexType name="StructureDefinition">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:DataTypeDefinition">
-        <xs:sequence>
-          <xs:element name="DefaultEncodingId" type="ua:NodeId" minOccurs="0" nillable="true" />
-          <xs:element name="BaseDataType" type="ua:NodeId" minOccurs="0" nillable="true" />
-          <xs:element name="StructureType" type="tns:StructureType" minOccurs="0" />
-          <xs:element name="Fields" type="tns:ListOfStructureField" minOccurs="0" nillable="true" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="StructureDefinition" type="tns:StructureDefinition" />
-
-  <xs:complexType name="ListOfStructureDefinition">
-    <xs:sequence>
-      <xs:element name="StructureDefinition" type="tns:StructureDefinition" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfStructureDefinition" type="tns:ListOfStructureDefinition" nillable="true"></xs:element>
-
-  <xs:complexType name="EnumDefinition">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:DataTypeDefinition">
-        <xs:sequence>
-          <xs:element name="Fields" type="tns:ListOfEnumField" minOccurs="0" nillable="true" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="EnumDefinition" type="tns:EnumDefinition" />
-
-  <xs:complexType name="ListOfEnumDefinition">
-    <xs:sequence>
-      <xs:element name="EnumDefinition" type="tns:EnumDefinition" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfEnumDefinition" type="tns:ListOfEnumDefinition" nillable="true"></xs:element>
-
-  <xs:complexType name="StructureField">
-    <xs:sequence>
-      <xs:element name="Name" type="xs:string" minOccurs="0" nillable="true" />
-      <xs:element name="Description" type="ua:LocalizedText" minOccurs="0" nillable="true" />
-      <xs:element name="DataType" type="ua:NodeId" minOccurs="0" nillable="true" />
-      <xs:element name="ValueRank" type="xs:int" minOccurs="0" />
-      <xs:element name="IsOptional" type="xs:boolean" minOccurs="0" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="StructureField" type="tns:StructureField" />
-
-  <xs:complexType name="ListOfStructureField">
-    <xs:sequence>
-      <xs:element name="StructureField" type="tns:StructureField" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfStructureField" type="tns:ListOfStructureField" nillable="true"></xs:element>
-
   <xs:complexType name="ConfigurationVersionDataType">
     <xs:sequence>
       <xs:element name="MajorVersion" type="xs:unsignedInt" minOccurs="0" />
@@ -713,57 +636,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ListOfFieldMetaData" type="tns:ListOfFieldMetaData" nillable="true"></xs:element>
-
-  <xs:complexType name="DataTypeDescription">
-    <xs:sequence>
-      <xs:element name="DataTypeId" type="ua:NodeId" minOccurs="0" nillable="true" />
-      <xs:element name="Name" type="ua:QualifiedName" minOccurs="0" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="DataTypeDescription" type="tns:DataTypeDescription" />
-
-  <xs:complexType name="ListOfDataTypeDescription">
-    <xs:sequence>
-      <xs:element name="DataTypeDescription" type="tns:DataTypeDescription" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfDataTypeDescription" type="tns:ListOfDataTypeDescription" nillable="true"></xs:element>
-
-  <xs:complexType name="StructureDescription">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:DataTypeDescription">
-        <xs:sequence>
-          <xs:element name="StructureDefinition" type="tns:StructureDefinition" minOccurs="0" nillable="true" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="StructureDescription" type="tns:StructureDescription" />
-
-  <xs:complexType name="ListOfStructureDescription">
-    <xs:sequence>
-      <xs:element name="StructureDescription" type="tns:StructureDescription" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfStructureDescription" type="tns:ListOfStructureDescription" nillable="true"></xs:element>
-
-  <xs:complexType name="EnumDescription">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:DataTypeDescription">
-        <xs:sequence>
-          <xs:element name="EnumDefinition" type="tns:EnumDefinition" minOccurs="0" nillable="true" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="EnumDescription" type="tns:EnumDescription" />
-
-  <xs:complexType name="ListOfEnumDescription">
-    <xs:sequence>
-      <xs:element name="EnumDescription" type="tns:EnumDescription" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfEnumDescription" type="tns:ListOfEnumDescription" nillable="true"></xs:element>
 
   <xs:complexType name="KeyValuePair">
     <xs:sequence>
@@ -916,6 +788,70 @@
   </xs:simpleType>
   <xs:element name="NodeClass" type="tns:NodeClass" />
 
+  <xs:complexType name="DataTypeDescription">
+    <xs:sequence>
+      <xs:element name="DataTypeId" type="ua:NodeId" minOccurs="0" nillable="true" />
+      <xs:element name="Name" type="ua:QualifiedName" minOccurs="0" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataTypeDescription" type="tns:DataTypeDescription" />
+
+  <xs:complexType name="ListOfDataTypeDescription">
+    <xs:sequence>
+      <xs:element name="DataTypeDescription" type="tns:DataTypeDescription" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfDataTypeDescription" type="tns:ListOfDataTypeDescription" nillable="true"></xs:element>
+
+  <xs:complexType name="StructureDescription">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DataTypeDescription">
+        <xs:sequence>
+          <xs:element name="StructureDefinition" type="tns:StructureDefinition" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StructureDescription" type="tns:StructureDescription" />
+
+  <xs:complexType name="ListOfStructureDescription">
+    <xs:sequence>
+      <xs:element name="StructureDescription" type="tns:StructureDescription" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfStructureDescription" type="tns:ListOfStructureDescription" nillable="true"></xs:element>
+
+  <xs:complexType name="EnumDescription">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DataTypeDescription">
+        <xs:sequence>
+          <xs:element name="EnumDefinition" type="tns:EnumDefinition" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="EnumDescription" type="tns:EnumDescription" />
+
+  <xs:complexType name="ListOfEnumDescription">
+    <xs:sequence>
+      <xs:element name="EnumDescription" type="tns:EnumDescription" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfEnumDescription" type="tns:ListOfEnumDescription" nillable="true"></xs:element>
+
+  <xs:complexType name="CompleteStructureDefinition">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:StructureDefinition">
+        <xs:sequence>
+          <xs:element name="Name" type="xs:string" minOccurs="0" nillable="true" />
+          <xs:element name="StructureDataTypes" type="tns:ListOfStructureDescription" minOccurs="0" nillable="true" />
+          <xs:element name="EnumDataTypes" type="tns:ListOfEnumDescription" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CompleteStructureDefinition" type="tns:CompleteStructureDefinition" />
+
   <xs:complexType name="Node">
     <xs:annotation>
       <xs:documentation>Specifies the attributes which belong to all nodes.</xs:documentation>
@@ -928,6 +864,9 @@
       <xs:element name="Description" type="ua:LocalizedText" minOccurs="0" nillable="true" />
       <xs:element name="WriteMask" type="xs:unsignedInt" minOccurs="0" />
       <xs:element name="UserWriteMask" type="xs:unsignedInt" minOccurs="0" />
+      <xs:element name="RolePermissions" type="tns:ListOfRolePermissionType" minOccurs="0" nillable="true" />
+      <xs:element name="UserRolePermissions" type="tns:ListOfRolePermissionType" minOccurs="0" nillable="true" />
+      <xs:element name="AccessRestrictions" type="xs:unsignedByte" minOccurs="0" />
       <xs:element name="References" type="tns:ListOfReferenceNode" minOccurs="0" nillable="true" />
     </xs:sequence>
   </xs:complexType>
@@ -1075,6 +1014,7 @@
       <xs:extension base="tns:TypeNode">
         <xs:sequence>
           <xs:element name="IsAbstract" type="xs:boolean" minOccurs="0" />
+          <xs:element name="DataTypeDefinition" type="ua:ExtensionObject" minOccurs="0" nillable="true" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -1139,24 +1079,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ListOfEnumValueType" type="tns:ListOfEnumValueType" nillable="true"></xs:element>
-
-  <xs:complexType name="EnumField">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:EnumValueType">
-        <xs:sequence>
-          <xs:element name="Name" type="xs:string" minOccurs="0" nillable="true" />
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="EnumField" type="tns:EnumField" />
-
-  <xs:complexType name="ListOfEnumField">
-    <xs:sequence>
-      <xs:element name="EnumField" type="tns:EnumField" minOccurs="0" maxOccurs="unbounded" nillable="true" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ListOfEnumField" type="tns:ListOfEnumField" nillable="true"></xs:element>
 
   <xs:complexType name="OptionSet">
     <xs:annotation>
@@ -1862,15 +1784,18 @@
       <xs:enumeration value="ValueRank_524288" />
       <xs:enumeration value="WriteMask_1048576" />
       <xs:enumeration value="Value_2097152" />
-      <xs:enumeration value="All_4194303" />
-      <xs:enumeration value="BaseNode_1335396" />
-      <xs:enumeration value="Object_1335524" />
-      <xs:enumeration value="ObjectTypeOrDataType_1337444" />
-      <xs:enumeration value="Variable_4026999" />
-      <xs:enumeration value="VariableType_3958902" />
-      <xs:enumeration value="Method_1466724" />
-      <xs:enumeration value="ReferenceType_1371236" />
-      <xs:enumeration value="View_1335532" />
+      <xs:enumeration value="DataTypeDefinition_4194304" />
+      <xs:enumeration value="RolePermissions_8388608" />
+      <xs:enumeration value="AccessRestrictions_16777216" />
+      <xs:enumeration value="All_33554431" />
+      <xs:enumeration value="BaseNode_26501220" />
+      <xs:enumeration value="Object_26501348" />
+      <xs:enumeration value="ObjectType_26503268" />
+      <xs:enumeration value="Variable_26571383" />
+      <xs:enumeration value="VariableType_28600438" />
+      <xs:enumeration value="Method_26632548" />
+      <xs:enumeration value="ReferenceType_26537060" />
+      <xs:enumeration value="View_26501356" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="NodeAttributesMask" type="tns:NodeAttributesMask" />
@@ -2238,6 +2163,9 @@
       <xs:enumeration value="ValueRank_524288" />
       <xs:enumeration value="WriteMask_1048576" />
       <xs:enumeration value="ValueForVariableType_2097152" />
+      <xs:enumeration value="DataTypeDefinition_4194304" />
+      <xs:enumeration value="RolePermissions_8388608" />
+      <xs:enumeration value="AccessRestrictions_16777216" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="AttributeWriteMask" type="tns:AttributeWriteMask" />

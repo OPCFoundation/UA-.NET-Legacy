@@ -290,7 +290,7 @@ namespace Opc.Ua.Sample.Controls
                 if (endpoint.UpdateBeforeConnect)
                 {
                     BindingFactory bindingFactory = BindingFactory.Create(m_configuration, m_messageContext);
-                    endpoint.UpdateFromServer(bindingFactory);
+                    endpoint.UpdateFromServer(m_configuration, bindingFactory);
                 }
 
                 SessionClient client = null;

@@ -195,9 +195,9 @@ namespace Opc.Ua
         public const uint Image = 30;
 
         /// <summary>
-        /// The identifier for the Decimal128 DataType.
+        /// The identifier for the Decimal DataType.
         /// </summary>
-        public const uint Decimal128 = 121;
+        public const uint Decimal = 50;
 
         /// <summary>
         /// The identifier for the NamingRuleType DataType.
@@ -255,31 +255,6 @@ namespace Opc.Ua
         public const uint TrustListDataType = 12554;
 
         /// <summary>
-        /// The identifier for the DataTypeDefinition DataType.
-        /// </summary>
-        public const uint DataTypeDefinition = 14526;
-
-        /// <summary>
-        /// The identifier for the StructureType DataType.
-        /// </summary>
-        public const uint StructureType = 14527;
-
-        /// <summary>
-        /// The identifier for the StructureDefinition DataType.
-        /// </summary>
-        public const uint StructureDefinition = 14529;
-
-        /// <summary>
-        /// The identifier for the EnumDefinition DataType.
-        /// </summary>
-        public const uint EnumDefinition = 14530;
-
-        /// <summary>
-        /// The identifier for the StructureField DataType.
-        /// </summary>
-        public const uint StructureField = 14531;
-
-        /// <summary>
         /// The identifier for the ConfigurationVersionDataType DataType.
         /// </summary>
         public const uint ConfigurationVersionDataType = 14593;
@@ -298,21 +273,6 @@ namespace Opc.Ua
         /// The identifier for the FieldMetaData DataType.
         /// </summary>
         public const uint FieldMetaData = 14524;
-
-        /// <summary>
-        /// The identifier for the DataTypeDescription DataType.
-        /// </summary>
-        public const uint DataTypeDescription = 14525;
-
-        /// <summary>
-        /// The identifier for the StructureDescription DataType.
-        /// </summary>
-        public const uint StructureDescription = 15487;
-
-        /// <summary>
-        /// The identifier for the EnumDescription DataType.
-        /// </summary>
-        public const uint EnumDescription = 15488;
 
         /// <summary>
         /// The identifier for the KeyValuePair DataType.
@@ -353,6 +313,66 @@ namespace Opc.Ua
         /// The identifier for the NodeClass DataType.
         /// </summary>
         public const uint NodeClass = 257;
+
+        /// <summary>
+        /// The identifier for the PermissionType DataType.
+        /// </summary>
+        public const uint PermissionType = 94;
+
+        /// <summary>
+        /// The identifier for the AccessRestrictionType DataType.
+        /// </summary>
+        public const uint AccessRestrictionType = 95;
+
+        /// <summary>
+        /// The identifier for the RolePermissionType DataType.
+        /// </summary>
+        public const uint RolePermissionType = 96;
+
+        /// <summary>
+        /// The identifier for the DataTypeDefinition DataType.
+        /// </summary>
+        public const uint DataTypeDefinition = 97;
+
+        /// <summary>
+        /// The identifier for the StructureType DataType.
+        /// </summary>
+        public const uint StructureType = 98;
+
+        /// <summary>
+        /// The identifier for the StructureField DataType.
+        /// </summary>
+        public const uint StructureField = 101;
+
+        /// <summary>
+        /// The identifier for the StructureDefinition DataType.
+        /// </summary>
+        public const uint StructureDefinition = 99;
+
+        /// <summary>
+        /// The identifier for the EnumDefinition DataType.
+        /// </summary>
+        public const uint EnumDefinition = 100;
+
+        /// <summary>
+        /// The identifier for the DataTypeDescription DataType.
+        /// </summary>
+        public const uint DataTypeDescription = 14525;
+
+        /// <summary>
+        /// The identifier for the StructureDescription DataType.
+        /// </summary>
+        public const uint StructureDescription = 15487;
+
+        /// <summary>
+        /// The identifier for the EnumDescription DataType.
+        /// </summary>
+        public const uint EnumDescription = 15488;
+
+        /// <summary>
+        /// The identifier for the CompleteStructureDefinition DataType.
+        /// </summary>
+        public const uint CompleteStructureDefinition = 16153;
 
         /// <summary>
         /// The identifier for the Node DataType.
@@ -427,7 +447,7 @@ namespace Opc.Ua
         /// <summary>
         /// The identifier for the EnumField DataType.
         /// </summary>
-        public const uint EnumField = 14532;
+        public const uint EnumField = 102;
 
         /// <summary>
         /// The identifier for the OptionSet DataType.
@@ -1728,26 +1748,6 @@ namespace Opc.Ua
         /// The identifier for the RoleType_RemoveIdentity Method.
         /// </summary>
         public const uint RoleType_RemoveIdentity = 15626;
-
-        /// <summary>
-        /// The identifier for the RoleType_AddApplication Method.
-        /// </summary>
-        public const uint RoleType_AddApplication = 15628;
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveApplication Method.
-        /// </summary>
-        public const uint RoleType_RemoveApplication = 15630;
-
-        /// <summary>
-        /// The identifier for the RoleType_AddEndpoint Method.
-        /// </summary>
-        public const uint RoleType_AddEndpoint = 16008;
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveEndpoint Method.
-        /// </summary>
-        public const uint RoleType_RemoveEndpoint = 16010;
 
         /// <summary>
         /// The identifier for the FileType_Open Method.
@@ -4285,26 +4285,6 @@ namespace Opc.Ua
         public const uint TrustListDataType_Encoding_DefaultXml = 12676;
 
         /// <summary>
-        /// The identifier for the DataTypeDefinition_Encoding_DefaultXml Object.
-        /// </summary>
-        public const uint DataTypeDefinition_Encoding_DefaultXml = 14797;
-
-        /// <summary>
-        /// The identifier for the StructureDefinition_Encoding_DefaultXml Object.
-        /// </summary>
-        public const uint StructureDefinition_Encoding_DefaultXml = 14798;
-
-        /// <summary>
-        /// The identifier for the EnumDefinition_Encoding_DefaultXml Object.
-        /// </summary>
-        public const uint EnumDefinition_Encoding_DefaultXml = 14799;
-
-        /// <summary>
-        /// The identifier for the StructureField_Encoding_DefaultXml Object.
-        /// </summary>
-        public const uint StructureField_Encoding_DefaultXml = 14800;
-
-        /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultXml Object.
         /// </summary>
         public const uint ConfigurationVersionDataType_Encoding_DefaultXml = 14803;
@@ -4318,6 +4298,46 @@ namespace Opc.Ua
         /// The identifier for the FieldMetaData_Encoding_DefaultXml Object.
         /// </summary>
         public const uint FieldMetaData_Encoding_DefaultXml = 14795;
+
+        /// <summary>
+        /// The identifier for the KeyValuePair_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint KeyValuePair_Encoding_DefaultXml = 14802;
+
+        /// <summary>
+        /// The identifier for the PublishedVariableDataType_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint PublishedVariableDataType_Encoding_DefaultXml = 14319;
+
+        /// <summary>
+        /// The identifier for the DataConnectionDataType_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint DataConnectionDataType_Encoding_DefaultXml = 14804;
+
+        /// <summary>
+        /// The identifier for the RolePermissionType_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint RolePermissionType_Encoding_DefaultXml = 16126;
+
+        /// <summary>
+        /// The identifier for the DataTypeDefinition_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint DataTypeDefinition_Encoding_DefaultXml = 14797;
+
+        /// <summary>
+        /// The identifier for the StructureField_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint StructureField_Encoding_DefaultXml = 14800;
+
+        /// <summary>
+        /// The identifier for the StructureDefinition_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint StructureDefinition_Encoding_DefaultXml = 14798;
+
+        /// <summary>
+        /// The identifier for the EnumDefinition_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint EnumDefinition_Encoding_DefaultXml = 14799;
 
         /// <summary>
         /// The identifier for the DataTypeDescription_Encoding_DefaultXml Object.
@@ -4335,19 +4355,9 @@ namespace Opc.Ua
         public const uint EnumDescription_Encoding_DefaultXml = 15590;
 
         /// <summary>
-        /// The identifier for the KeyValuePair_Encoding_DefaultXml Object.
+        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultXml Object.
         /// </summary>
-        public const uint KeyValuePair_Encoding_DefaultXml = 14802;
-
-        /// <summary>
-        /// The identifier for the PublishedVariableDataType_Encoding_DefaultXml Object.
-        /// </summary>
-        public const uint PublishedVariableDataType_Encoding_DefaultXml = 14319;
-
-        /// <summary>
-        /// The identifier for the DataConnectionDataType_Encoding_DefaultXml Object.
-        /// </summary>
-        public const uint DataConnectionDataType_Encoding_DefaultXml = 14804;
+        public const uint CompleteStructureDefinition_Encoding_DefaultXml = 16154;
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultXml Object.
@@ -5465,26 +5475,6 @@ namespace Opc.Ua
         public const uint TrustListDataType_Encoding_DefaultBinary = 12680;
 
         /// <summary>
-        /// The identifier for the DataTypeDefinition_Encoding_DefaultBinary Object.
-        /// </summary>
-        public const uint DataTypeDefinition_Encoding_DefaultBinary = 14841;
-
-        /// <summary>
-        /// The identifier for the StructureDefinition_Encoding_DefaultBinary Object.
-        /// </summary>
-        public const uint StructureDefinition_Encoding_DefaultBinary = 14842;
-
-        /// <summary>
-        /// The identifier for the EnumDefinition_Encoding_DefaultBinary Object.
-        /// </summary>
-        public const uint EnumDefinition_Encoding_DefaultBinary = 14843;
-
-        /// <summary>
-        /// The identifier for the StructureField_Encoding_DefaultBinary Object.
-        /// </summary>
-        public const uint StructureField_Encoding_DefaultBinary = 14844;
-
-        /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultBinary Object.
         /// </summary>
         public const uint ConfigurationVersionDataType_Encoding_DefaultBinary = 14847;
@@ -5498,6 +5488,46 @@ namespace Opc.Ua
         /// The identifier for the FieldMetaData_Encoding_DefaultBinary Object.
         /// </summary>
         public const uint FieldMetaData_Encoding_DefaultBinary = 14839;
+
+        /// <summary>
+        /// The identifier for the KeyValuePair_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint KeyValuePair_Encoding_DefaultBinary = 14846;
+
+        /// <summary>
+        /// The identifier for the PublishedVariableDataType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint PublishedVariableDataType_Encoding_DefaultBinary = 14323;
+
+        /// <summary>
+        /// The identifier for the DataConnectionDataType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint DataConnectionDataType_Encoding_DefaultBinary = 14848;
+
+        /// <summary>
+        /// The identifier for the RolePermissionType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint RolePermissionType_Encoding_DefaultBinary = 16130;
+
+        /// <summary>
+        /// The identifier for the DataTypeDefinition_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint DataTypeDefinition_Encoding_DefaultBinary = 14841;
+
+        /// <summary>
+        /// The identifier for the StructureField_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint StructureField_Encoding_DefaultBinary = 14844;
+
+        /// <summary>
+        /// The identifier for the StructureDefinition_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint StructureDefinition_Encoding_DefaultBinary = 14842;
+
+        /// <summary>
+        /// The identifier for the EnumDefinition_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint EnumDefinition_Encoding_DefaultBinary = 14843;
 
         /// <summary>
         /// The identifier for the DataTypeDescription_Encoding_DefaultBinary Object.
@@ -5515,19 +5545,9 @@ namespace Opc.Ua
         public const uint EnumDescription_Encoding_DefaultBinary = 15598;
 
         /// <summary>
-        /// The identifier for the KeyValuePair_Encoding_DefaultBinary Object.
+        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultBinary Object.
         /// </summary>
-        public const uint KeyValuePair_Encoding_DefaultBinary = 14846;
-
-        /// <summary>
-        /// The identifier for the PublishedVariableDataType_Encoding_DefaultBinary Object.
-        /// </summary>
-        public const uint PublishedVariableDataType_Encoding_DefaultBinary = 14323;
-
-        /// <summary>
-        /// The identifier for the DataConnectionDataType_Encoding_DefaultBinary Object.
-        /// </summary>
-        public const uint DataConnectionDataType_Encoding_DefaultBinary = 14848;
+        public const uint CompleteStructureDefinition_Encoding_DefaultBinary = 16158;
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultBinary Object.
@@ -7775,6 +7795,21 @@ namespace Opc.Ua
         public const uint OPCUANamespaceMetadata_NamespaceFile_SetPosition_InputArguments = 15985;
 
         /// <summary>
+        /// The identifier for the OPCUANamespaceMetadata_DefaultRolePermissions Variable.
+        /// </summary>
+        public const uint OPCUANamespaceMetadata_DefaultRolePermissions = 16134;
+
+        /// <summary>
+        /// The identifier for the OPCUANamespaceMetadata_DefaultUserRolePermissions Variable.
+        /// </summary>
+        public const uint OPCUANamespaceMetadata_DefaultUserRolePermissions = 16135;
+
+        /// <summary>
+        /// The identifier for the OPCUANamespaceMetadata_DefaultAccessRestrictions Variable.
+        /// </summary>
+        public const uint OPCUANamespaceMetadata_DefaultAccessRestrictions = 16136;
+
+        /// <summary>
         /// The identifier for the NodeVersion Variable.
         /// </summary>
         public const uint NodeVersion = 3068;
@@ -8905,9 +8940,9 @@ namespace Opc.Ua
         public const uint RoleFolderType_RoleName_Placeholder_SystemRoleId = 15992;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_Identities Variable.
+        /// The identifier for the RoleFolderType_RoleName_Placeholder_MappingRules Variable.
         /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_Identities = 15609;
+        public const uint RoleFolderType_RoleName_Placeholder_MappingRules = 16143;
 
         /// <summary>
         /// The identifier for the RoleFolderType_RoleName_Placeholder_AddIdentity_InputArguments Variable.
@@ -8918,26 +8953,6 @@ namespace Opc.Ua
         /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments Variable.
         /// </summary>
         public const uint RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments = 15615;
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_AddApplication_InputArguments = 15617;
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_RemoveApplication_InputArguments = 15619;
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_AddEndpoint_InputArguments = 15994;
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_RemoveEndpoint_InputArguments = 15996;
 
         /// <summary>
         /// The identifier for the RoleFolderType_AddRole_InputArguments Variable.
@@ -8960,19 +8975,9 @@ namespace Opc.Ua
         public const uint RoleType_SystemRoleId = 16007;
 
         /// <summary>
-        /// The identifier for the RoleType_Identities Variable.
+        /// The identifier for the RoleType_MappingRules Variable.
         /// </summary>
-        public const uint RoleType_Identities = 15621;
-
-        /// <summary>
-        /// The identifier for the RoleType_Applications Variable.
-        /// </summary>
-        public const uint RoleType_Applications = 15622;
-
-        /// <summary>
-        /// The identifier for the RoleType_Endpoints Variable.
-        /// </summary>
-        public const uint RoleType_Endpoints = 15623;
+        public const uint RoleType_MappingRules = 16144;
 
         /// <summary>
         /// The identifier for the RoleType_AddIdentity_InputArguments Variable.
@@ -8985,26 +8990,6 @@ namespace Opc.Ua
         public const uint RoleType_RemoveIdentity_InputArguments = 15627;
 
         /// <summary>
-        /// The identifier for the RoleType_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint RoleType_AddApplication_InputArguments = 15629;
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint RoleType_RemoveApplication_InputArguments = 15631;
-
-        /// <summary>
-        /// The identifier for the RoleType_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint RoleType_AddEndpoint_InputArguments = 16009;
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint RoleType_RemoveEndpoint_InputArguments = 16011;
-
-        /// <summary>
         /// The identifier for the IdentityCriteriaType_EnumValues Variable.
         /// </summary>
         public const uint IdentityCriteriaType_EnumValues = 15633;
@@ -9015,9 +9000,9 @@ namespace Opc.Ua
         public const uint WellKnownRole_Anonymous_SystemRoleId = 16016;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_Identities Variable.
+        /// The identifier for the WellKnownRole_Anonymous_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_Anonymous_Identities = 15645;
+        public const uint WellKnownRole_Anonymous_MappingRules = 16145;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Anonymous_AddIdentity_InputArguments Variable.
@@ -9030,34 +9015,14 @@ namespace Opc.Ua
         public const uint WellKnownRole_Anonymous_RemoveIdentity_InputArguments = 15651;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Anonymous_AddApplication_InputArguments = 15653;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Anonymous_RemoveApplication_InputArguments = 15655;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Anonymous_AddEndpoint_InputArguments = 16018;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Anonymous_RemoveEndpoint_InputArguments = 16020;
-
-        /// <summary>
         /// The identifier for the WellKnownRole_AuthenticatedUsers_SystemRoleId Variable.
         /// </summary>
         public const uint WellKnownRole_AuthenticatedUsers_SystemRoleId = 16021;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_Identities Variable.
+        /// The identifier for the WellKnownRole_AuthenticatedUsers_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_Identities = 15657;
+        public const uint WellKnownRole_AuthenticatedUsers_MappingRules = 16146;
 
         /// <summary>
         /// The identifier for the WellKnownRole_AuthenticatedUsers_AddIdentity_InputArguments Variable.
@@ -9070,34 +9035,14 @@ namespace Opc.Ua
         public const uint WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments = 15663;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_AddApplication_InputArguments = 15665;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_RemoveApplication_InputArguments = 15667;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_AddEndpoint_InputArguments = 16023;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_RemoveEndpoint_InputArguments = 16025;
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Observer_SystemRoleId Variable.
         /// </summary>
         public const uint WellKnownRole_Observer_SystemRoleId = 16026;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_Identities Variable.
+        /// The identifier for the WellKnownRole_Observer_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_Observer_Identities = 15669;
+        public const uint WellKnownRole_Observer_MappingRules = 16147;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Observer_AddIdentity_InputArguments Variable.
@@ -9110,34 +9055,14 @@ namespace Opc.Ua
         public const uint WellKnownRole_Observer_RemoveIdentity_InputArguments = 15675;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Observer_AddApplication_InputArguments = 15677;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Observer_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Observer_RemoveApplication_InputArguments = 15679;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Observer_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Observer_AddEndpoint_InputArguments = 16028;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Observer_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Observer_RemoveEndpoint_InputArguments = 16030;
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Operator_SystemRoleId Variable.
         /// </summary>
         public const uint WellKnownRole_Operator_SystemRoleId = 16031;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_Identities Variable.
+        /// The identifier for the WellKnownRole_Operator_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_Operator_Identities = 15681;
+        public const uint WellKnownRole_Operator_MappingRules = 16148;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Operator_AddIdentity_InputArguments Variable.
@@ -9150,34 +9075,14 @@ namespace Opc.Ua
         public const uint WellKnownRole_Operator_RemoveIdentity_InputArguments = 15687;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Operator_AddApplication_InputArguments = 15689;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Operator_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Operator_RemoveApplication_InputArguments = 15691;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Operator_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Operator_AddEndpoint_InputArguments = 16033;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Operator_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Operator_RemoveEndpoint_InputArguments = 16035;
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Engineer_SystemRoleId Variable.
         /// </summary>
         public const uint WellKnownRole_Engineer_SystemRoleId = 16037;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_Identities Variable.
+        /// The identifier for the WellKnownRole_Engineer_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_Engineer_Identities = 16038;
+        public const uint WellKnownRole_Engineer_MappingRules = 16149;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Engineer_AddIdentity_InputArguments Variable.
@@ -9190,34 +9095,14 @@ namespace Opc.Ua
         public const uint WellKnownRole_Engineer_RemoveIdentity_InputArguments = 16044;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Engineer_AddApplication_InputArguments = 16046;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Engineer_RemoveApplication_InputArguments = 16048;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Engineer_AddEndpoint_InputArguments = 16050;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Engineer_RemoveEndpoint_InputArguments = 16052;
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Supervisor_SystemRoleId Variable.
         /// </summary>
         public const uint WellKnownRole_Supervisor_SystemRoleId = 16053;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_Identities Variable.
+        /// The identifier for the WellKnownRole_Supervisor_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_Supervisor_Identities = 15693;
+        public const uint WellKnownRole_Supervisor_MappingRules = 16150;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Supervisor_AddIdentity_InputArguments Variable.
@@ -9230,34 +9115,14 @@ namespace Opc.Ua
         public const uint WellKnownRole_Supervisor_RemoveIdentity_InputArguments = 15699;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Supervisor_AddApplication_InputArguments = 15701;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Supervisor_RemoveApplication_InputArguments = 15703;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Supervisor_AddEndpoint_InputArguments = 16055;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_Supervisor_RemoveEndpoint_InputArguments = 16057;
-
-        /// <summary>
         /// The identifier for the WellKnownRole_SecurityAdmin_SystemRoleId Variable.
         /// </summary>
         public const uint WellKnownRole_SecurityAdmin_SystemRoleId = 16058;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_Identities Variable.
+        /// The identifier for the WellKnownRole_SecurityAdmin_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_SecurityAdmin_Identities = 15705;
+        public const uint WellKnownRole_SecurityAdmin_MappingRules = 16151;
 
         /// <summary>
         /// The identifier for the WellKnownRole_SecurityAdmin_AddIdentity_InputArguments Variable.
@@ -9270,34 +9135,14 @@ namespace Opc.Ua
         public const uint WellKnownRole_SecurityAdmin_RemoveIdentity_InputArguments = 15711;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_SecurityAdmin_AddApplication_InputArguments = 15713;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments = 15715;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments = 16060;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments = 16062;
-
-        /// <summary>
         /// The identifier for the WellKnownRole_ConfigureAdmin_SystemRoleId Variable.
         /// </summary>
         public const uint WellKnownRole_ConfigureAdmin_SystemRoleId = 16063;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_Identities Variable.
+        /// The identifier for the WellKnownRole_ConfigureAdmin_MappingRules Variable.
         /// </summary>
-        public const uint WellKnownRole_ConfigureAdmin_Identities = 15717;
+        public const uint WellKnownRole_ConfigureAdmin_MappingRules = 16152;
 
         /// <summary>
         /// The identifier for the WellKnownRole_ConfigureAdmin_AddIdentity_InputArguments Variable.
@@ -9308,26 +9153,6 @@ namespace Opc.Ua
         /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments Variable.
         /// </summary>
         public const uint WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments = 15723;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_AddApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_ConfigureAdmin_AddApplication_InputArguments = 15725;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments = 15727;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments = 16065;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public const uint WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments = 16067;
 
         /// <summary>
         /// The identifier for the FileType_Size Variable.
@@ -9793,6 +9618,21 @@ namespace Opc.Ua
         /// The identifier for the NamespaceMetadataType_NamespaceFile_SetPosition_InputArguments Variable.
         /// </summary>
         public const uint NamespaceMetadataType_NamespaceFile_SetPosition_InputArguments = 11643;
+
+        /// <summary>
+        /// The identifier for the NamespaceMetadataType_DefaultRolePermissions Variable.
+        /// </summary>
+        public const uint NamespaceMetadataType_DefaultRolePermissions = 16137;
+
+        /// <summary>
+        /// The identifier for the NamespaceMetadataType_DefaultUserRolePermissions Variable.
+        /// </summary>
+        public const uint NamespaceMetadataType_DefaultUserRolePermissions = 16138;
+
+        /// <summary>
+        /// The identifier for the NamespaceMetadataType_DefaultAccessRestrictions Variable.
+        /// </summary>
+        public const uint NamespaceMetadataType_DefaultAccessRestrictions = 16139;
 
         /// <summary>
         /// The identifier for the NamespacesType_NamespaceIdentifier_Placeholder_NamespaceUri Variable.
@@ -16185,11 +16025,6 @@ namespace Opc.Ua
         public const uint AggregateConfigurationType_UseSlopedExtrapolation = 11191;
 
         /// <summary>
-        /// The identifier for the StructureType_EnumStrings Variable.
-        /// </summary>
-        public const uint StructureType_EnumStrings = 14528;
-
-        /// <summary>
         /// The identifier for the DataSetFieldFlags_EnumValues Variable.
         /// </summary>
         public const uint DataSetFieldFlags_EnumValues = 15905;
@@ -16635,9 +16470,9 @@ namespace Opc.Ua
         public const uint PublishedEventsType_ExtensionFields_RemoveExtensionField_InputArguments = 15516;
 
         /// <summary>
-        /// The identifier for the PublishedEventsType_SelectedNotifier Variable.
+        /// The identifier for the PublishedEventsType_PubSubEventNotifier Variable.
         /// </summary>
-        public const uint PublishedEventsType_SelectedNotifier = 14586;
+        public const uint PublishedEventsType_PubSubEventNotifier = 14586;
 
         /// <summary>
         /// The identifier for the PublishedEventsType_SelectedFields Variable.
@@ -17520,6 +17355,21 @@ namespace Opc.Ua
         public const uint NodeClass_EnumValues = 11878;
 
         /// <summary>
+        /// The identifier for the PermissionType_EnumValues Variable.
+        /// </summary>
+        public const uint PermissionType_EnumValues = 16122;
+
+        /// <summary>
+        /// The identifier for the AccessRestrictionType_EnumValues Variable.
+        /// </summary>
+        public const uint AccessRestrictionType_EnumValues = 16124;
+
+        /// <summary>
+        /// The identifier for the StructureType_EnumStrings Variable.
+        /// </summary>
+        public const uint StructureType_EnumStrings = 14528;
+
+        /// <summary>
         /// The identifier for the ApplicationType_EnumStrings Variable.
         /// </summary>
         public const uint ApplicationType_EnumStrings = 7597;
@@ -17640,26 +17490,6 @@ namespace Opc.Ua
         public const uint OpcUa_XmlSchema_TrustListDataType = 12677;
 
         /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_DataTypeDefinition Variable.
-        /// </summary>
-        public const uint OpcUa_XmlSchema_DataTypeDefinition = 14814;
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_StructureDefinition Variable.
-        /// </summary>
-        public const uint OpcUa_XmlSchema_StructureDefinition = 14817;
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_EnumDefinition Variable.
-        /// </summary>
-        public const uint OpcUa_XmlSchema_EnumDefinition = 14820;
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_StructureField Variable.
-        /// </summary>
-        public const uint OpcUa_XmlSchema_StructureField = 14823;
-
-        /// <summary>
         /// The identifier for the OpcUa_XmlSchema_ConfigurationVersionDataType Variable.
         /// </summary>
         public const uint OpcUa_XmlSchema_ConfigurationVersionDataType = 14832;
@@ -17673,6 +17503,46 @@ namespace Opc.Ua
         /// The identifier for the OpcUa_XmlSchema_FieldMetaData Variable.
         /// </summary>
         public const uint OpcUa_XmlSchema_FieldMetaData = 14808;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_KeyValuePair Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_KeyValuePair = 14829;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_PublishedVariableDataType Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_PublishedVariableDataType = 14320;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_DataConnectionDataType Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_DataConnectionDataType = 14835;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_RolePermissionType Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_RolePermissionType = 16127;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_DataTypeDefinition Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_DataTypeDefinition = 14814;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_StructureField Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_StructureField = 14823;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_StructureDefinition Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_StructureDefinition = 14817;
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_EnumDefinition Variable.
+        /// </summary>
+        public const uint OpcUa_XmlSchema_EnumDefinition = 14820;
 
         /// <summary>
         /// The identifier for the OpcUa_XmlSchema_DataTypeDescription Variable.
@@ -17690,19 +17560,9 @@ namespace Opc.Ua
         public const uint OpcUa_XmlSchema_EnumDescription = 15594;
 
         /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_KeyValuePair Variable.
+        /// The identifier for the OpcUa_XmlSchema_CompleteStructureDefinition Variable.
         /// </summary>
-        public const uint OpcUa_XmlSchema_KeyValuePair = 14829;
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_PublishedVariableDataType Variable.
-        /// </summary>
-        public const uint OpcUa_XmlSchema_PublishedVariableDataType = 14320;
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_DataConnectionDataType Variable.
-        /// </summary>
-        public const uint OpcUa_XmlSchema_DataConnectionDataType = 14835;
+        public const uint OpcUa_XmlSchema_CompleteStructureDefinition = 16155;
 
         /// <summary>
         /// The identifier for the OpcUa_XmlSchema_Argument Variable.
@@ -18025,26 +17885,6 @@ namespace Opc.Ua
         public const uint OpcUa_BinarySchema_TrustListDataType = 12681;
 
         /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_DataTypeDefinition Variable.
-        /// </summary>
-        public const uint OpcUa_BinarySchema_DataTypeDefinition = 14858;
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_StructureDefinition Variable.
-        /// </summary>
-        public const uint OpcUa_BinarySchema_StructureDefinition = 14861;
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_EnumDefinition Variable.
-        /// </summary>
-        public const uint OpcUa_BinarySchema_EnumDefinition = 14864;
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_StructureField Variable.
-        /// </summary>
-        public const uint OpcUa_BinarySchema_StructureField = 14867;
-
-        /// <summary>
         /// The identifier for the OpcUa_BinarySchema_ConfigurationVersionDataType Variable.
         /// </summary>
         public const uint OpcUa_BinarySchema_ConfigurationVersionDataType = 14876;
@@ -18058,6 +17898,46 @@ namespace Opc.Ua
         /// The identifier for the OpcUa_BinarySchema_FieldMetaData Variable.
         /// </summary>
         public const uint OpcUa_BinarySchema_FieldMetaData = 14852;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_KeyValuePair Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_KeyValuePair = 14873;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_PublishedVariableDataType Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_PublishedVariableDataType = 14324;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_DataConnectionDataType Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_DataConnectionDataType = 14879;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_RolePermissionType Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_RolePermissionType = 16131;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_DataTypeDefinition Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_DataTypeDefinition = 14858;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_StructureField Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_StructureField = 14867;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_StructureDefinition Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_StructureDefinition = 14861;
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_EnumDefinition Variable.
+        /// </summary>
+        public const uint OpcUa_BinarySchema_EnumDefinition = 14864;
 
         /// <summary>
         /// The identifier for the OpcUa_BinarySchema_DataTypeDescription Variable.
@@ -18075,19 +17955,9 @@ namespace Opc.Ua
         public const uint OpcUa_BinarySchema_EnumDescription = 15602;
 
         /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_KeyValuePair Variable.
+        /// The identifier for the OpcUa_BinarySchema_CompleteStructureDefinition Variable.
         /// </summary>
-        public const uint OpcUa_BinarySchema_KeyValuePair = 14873;
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_PublishedVariableDataType Variable.
-        /// </summary>
-        public const uint OpcUa_BinarySchema_PublishedVariableDataType = 14324;
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_DataConnectionDataType Variable.
-        /// </summary>
-        public const uint OpcUa_BinarySchema_DataConnectionDataType = 14879;
+        public const uint OpcUa_BinarySchema_CompleteStructureDefinition = 16159;
 
         /// <summary>
         /// The identifier for the OpcUa_BinarySchema_Argument Variable.
@@ -18745,9 +18615,9 @@ namespace Opc.Ua
         public static readonly NodeId Image = new NodeId(Opc.Ua.DataTypes.Image);
 
         /// <summary>
-        /// The identifier for the Decimal128 DataType.
+        /// The identifier for the Decimal DataType.
         /// </summary>
-        public static readonly NodeId Decimal128 = new NodeId(Opc.Ua.DataTypes.Decimal128);
+        public static readonly NodeId Decimal = new NodeId(Opc.Ua.DataTypes.Decimal);
 
         /// <summary>
         /// The identifier for the NamingRuleType DataType.
@@ -18805,31 +18675,6 @@ namespace Opc.Ua
         public static readonly NodeId TrustListDataType = new NodeId(Opc.Ua.DataTypes.TrustListDataType);
 
         /// <summary>
-        /// The identifier for the DataTypeDefinition DataType.
-        /// </summary>
-        public static readonly NodeId DataTypeDefinition = new NodeId(Opc.Ua.DataTypes.DataTypeDefinition);
-
-        /// <summary>
-        /// The identifier for the StructureType DataType.
-        /// </summary>
-        public static readonly NodeId StructureType = new NodeId(Opc.Ua.DataTypes.StructureType);
-
-        /// <summary>
-        /// The identifier for the StructureDefinition DataType.
-        /// </summary>
-        public static readonly NodeId StructureDefinition = new NodeId(Opc.Ua.DataTypes.StructureDefinition);
-
-        /// <summary>
-        /// The identifier for the EnumDefinition DataType.
-        /// </summary>
-        public static readonly NodeId EnumDefinition = new NodeId(Opc.Ua.DataTypes.EnumDefinition);
-
-        /// <summary>
-        /// The identifier for the StructureField DataType.
-        /// </summary>
-        public static readonly NodeId StructureField = new NodeId(Opc.Ua.DataTypes.StructureField);
-
-        /// <summary>
         /// The identifier for the ConfigurationVersionDataType DataType.
         /// </summary>
         public static readonly NodeId ConfigurationVersionDataType = new NodeId(Opc.Ua.DataTypes.ConfigurationVersionDataType);
@@ -18848,21 +18693,6 @@ namespace Opc.Ua
         /// The identifier for the FieldMetaData DataType.
         /// </summary>
         public static readonly NodeId FieldMetaData = new NodeId(Opc.Ua.DataTypes.FieldMetaData);
-
-        /// <summary>
-        /// The identifier for the DataTypeDescription DataType.
-        /// </summary>
-        public static readonly NodeId DataTypeDescription = new NodeId(Opc.Ua.DataTypes.DataTypeDescription);
-
-        /// <summary>
-        /// The identifier for the StructureDescription DataType.
-        /// </summary>
-        public static readonly NodeId StructureDescription = new NodeId(Opc.Ua.DataTypes.StructureDescription);
-
-        /// <summary>
-        /// The identifier for the EnumDescription DataType.
-        /// </summary>
-        public static readonly NodeId EnumDescription = new NodeId(Opc.Ua.DataTypes.EnumDescription);
 
         /// <summary>
         /// The identifier for the KeyValuePair DataType.
@@ -18903,6 +18733,66 @@ namespace Opc.Ua
         /// The identifier for the NodeClass DataType.
         /// </summary>
         public static readonly NodeId NodeClass = new NodeId(Opc.Ua.DataTypes.NodeClass);
+
+        /// <summary>
+        /// The identifier for the PermissionType DataType.
+        /// </summary>
+        public static readonly NodeId PermissionType = new NodeId(Opc.Ua.DataTypes.PermissionType);
+
+        /// <summary>
+        /// The identifier for the AccessRestrictionType DataType.
+        /// </summary>
+        public static readonly NodeId AccessRestrictionType = new NodeId(Opc.Ua.DataTypes.AccessRestrictionType);
+
+        /// <summary>
+        /// The identifier for the RolePermissionType DataType.
+        /// </summary>
+        public static readonly NodeId RolePermissionType = new NodeId(Opc.Ua.DataTypes.RolePermissionType);
+
+        /// <summary>
+        /// The identifier for the DataTypeDefinition DataType.
+        /// </summary>
+        public static readonly NodeId DataTypeDefinition = new NodeId(Opc.Ua.DataTypes.DataTypeDefinition);
+
+        /// <summary>
+        /// The identifier for the StructureType DataType.
+        /// </summary>
+        public static readonly NodeId StructureType = new NodeId(Opc.Ua.DataTypes.StructureType);
+
+        /// <summary>
+        /// The identifier for the StructureField DataType.
+        /// </summary>
+        public static readonly NodeId StructureField = new NodeId(Opc.Ua.DataTypes.StructureField);
+
+        /// <summary>
+        /// The identifier for the StructureDefinition DataType.
+        /// </summary>
+        public static readonly NodeId StructureDefinition = new NodeId(Opc.Ua.DataTypes.StructureDefinition);
+
+        /// <summary>
+        /// The identifier for the EnumDefinition DataType.
+        /// </summary>
+        public static readonly NodeId EnumDefinition = new NodeId(Opc.Ua.DataTypes.EnumDefinition);
+
+        /// <summary>
+        /// The identifier for the DataTypeDescription DataType.
+        /// </summary>
+        public static readonly NodeId DataTypeDescription = new NodeId(Opc.Ua.DataTypes.DataTypeDescription);
+
+        /// <summary>
+        /// The identifier for the StructureDescription DataType.
+        /// </summary>
+        public static readonly NodeId StructureDescription = new NodeId(Opc.Ua.DataTypes.StructureDescription);
+
+        /// <summary>
+        /// The identifier for the EnumDescription DataType.
+        /// </summary>
+        public static readonly NodeId EnumDescription = new NodeId(Opc.Ua.DataTypes.EnumDescription);
+
+        /// <summary>
+        /// The identifier for the CompleteStructureDefinition DataType.
+        /// </summary>
+        public static readonly NodeId CompleteStructureDefinition = new NodeId(Opc.Ua.DataTypes.CompleteStructureDefinition);
 
         /// <summary>
         /// The identifier for the Node DataType.
@@ -20278,26 +20168,6 @@ namespace Opc.Ua
         /// The identifier for the RoleType_RemoveIdentity Method.
         /// </summary>
         public static readonly NodeId RoleType_RemoveIdentity = new NodeId(Opc.Ua.Methods.RoleType_RemoveIdentity);
-
-        /// <summary>
-        /// The identifier for the RoleType_AddApplication Method.
-        /// </summary>
-        public static readonly NodeId RoleType_AddApplication = new NodeId(Opc.Ua.Methods.RoleType_AddApplication);
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveApplication Method.
-        /// </summary>
-        public static readonly NodeId RoleType_RemoveApplication = new NodeId(Opc.Ua.Methods.RoleType_RemoveApplication);
-
-        /// <summary>
-        /// The identifier for the RoleType_AddEndpoint Method.
-        /// </summary>
-        public static readonly NodeId RoleType_AddEndpoint = new NodeId(Opc.Ua.Methods.RoleType_AddEndpoint);
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveEndpoint Method.
-        /// </summary>
-        public static readonly NodeId RoleType_RemoveEndpoint = new NodeId(Opc.Ua.Methods.RoleType_RemoveEndpoint);
 
         /// <summary>
         /// The identifier for the FileType_Open Method.
@@ -22835,26 +22705,6 @@ namespace Opc.Ua
         public static readonly NodeId TrustListDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.TrustListDataType_Encoding_DefaultXml);
 
         /// <summary>
-        /// The identifier for the DataTypeDefinition_Encoding_DefaultXml Object.
-        /// </summary>
-        public static readonly NodeId DataTypeDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.DataTypeDefinition_Encoding_DefaultXml);
-
-        /// <summary>
-        /// The identifier for the StructureDefinition_Encoding_DefaultXml Object.
-        /// </summary>
-        public static readonly NodeId StructureDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.StructureDefinition_Encoding_DefaultXml);
-
-        /// <summary>
-        /// The identifier for the EnumDefinition_Encoding_DefaultXml Object.
-        /// </summary>
-        public static readonly NodeId EnumDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.EnumDefinition_Encoding_DefaultXml);
-
-        /// <summary>
-        /// The identifier for the StructureField_Encoding_DefaultXml Object.
-        /// </summary>
-        public static readonly NodeId StructureField_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.StructureField_Encoding_DefaultXml);
-
-        /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultXml Object.
         /// </summary>
         public static readonly NodeId ConfigurationVersionDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.ConfigurationVersionDataType_Encoding_DefaultXml);
@@ -22868,6 +22718,46 @@ namespace Opc.Ua
         /// The identifier for the FieldMetaData_Encoding_DefaultXml Object.
         /// </summary>
         public static readonly NodeId FieldMetaData_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.FieldMetaData_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the KeyValuePair_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId KeyValuePair_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.KeyValuePair_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the PublishedVariableDataType_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId PublishedVariableDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.PublishedVariableDataType_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the DataConnectionDataType_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId DataConnectionDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.DataConnectionDataType_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the RolePermissionType_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId RolePermissionType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.RolePermissionType_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the DataTypeDefinition_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId DataTypeDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.DataTypeDefinition_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the StructureField_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId StructureField_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.StructureField_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the StructureDefinition_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId StructureDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.StructureDefinition_Encoding_DefaultXml);
+
+        /// <summary>
+        /// The identifier for the EnumDefinition_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId EnumDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.EnumDefinition_Encoding_DefaultXml);
 
         /// <summary>
         /// The identifier for the DataTypeDescription_Encoding_DefaultXml Object.
@@ -22885,19 +22775,9 @@ namespace Opc.Ua
         public static readonly NodeId EnumDescription_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.EnumDescription_Encoding_DefaultXml);
 
         /// <summary>
-        /// The identifier for the KeyValuePair_Encoding_DefaultXml Object.
+        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultXml Object.
         /// </summary>
-        public static readonly NodeId KeyValuePair_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.KeyValuePair_Encoding_DefaultXml);
-
-        /// <summary>
-        /// The identifier for the PublishedVariableDataType_Encoding_DefaultXml Object.
-        /// </summary>
-        public static readonly NodeId PublishedVariableDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.PublishedVariableDataType_Encoding_DefaultXml);
-
-        /// <summary>
-        /// The identifier for the DataConnectionDataType_Encoding_DefaultXml Object.
-        /// </summary>
-        public static readonly NodeId DataConnectionDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.DataConnectionDataType_Encoding_DefaultXml);
+        public static readonly NodeId CompleteStructureDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.CompleteStructureDefinition_Encoding_DefaultXml);
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultXml Object.
@@ -24015,26 +23895,6 @@ namespace Opc.Ua
         public static readonly NodeId TrustListDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.TrustListDataType_Encoding_DefaultBinary);
 
         /// <summary>
-        /// The identifier for the DataTypeDefinition_Encoding_DefaultBinary Object.
-        /// </summary>
-        public static readonly NodeId DataTypeDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.DataTypeDefinition_Encoding_DefaultBinary);
-
-        /// <summary>
-        /// The identifier for the StructureDefinition_Encoding_DefaultBinary Object.
-        /// </summary>
-        public static readonly NodeId StructureDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.StructureDefinition_Encoding_DefaultBinary);
-
-        /// <summary>
-        /// The identifier for the EnumDefinition_Encoding_DefaultBinary Object.
-        /// </summary>
-        public static readonly NodeId EnumDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.EnumDefinition_Encoding_DefaultBinary);
-
-        /// <summary>
-        /// The identifier for the StructureField_Encoding_DefaultBinary Object.
-        /// </summary>
-        public static readonly NodeId StructureField_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.StructureField_Encoding_DefaultBinary);
-
-        /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultBinary Object.
         /// </summary>
         public static readonly NodeId ConfigurationVersionDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.ConfigurationVersionDataType_Encoding_DefaultBinary);
@@ -24048,6 +23908,46 @@ namespace Opc.Ua
         /// The identifier for the FieldMetaData_Encoding_DefaultBinary Object.
         /// </summary>
         public static readonly NodeId FieldMetaData_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.FieldMetaData_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the KeyValuePair_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId KeyValuePair_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.KeyValuePair_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the PublishedVariableDataType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId PublishedVariableDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.PublishedVariableDataType_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the DataConnectionDataType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId DataConnectionDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.DataConnectionDataType_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the RolePermissionType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId RolePermissionType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.RolePermissionType_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the DataTypeDefinition_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId DataTypeDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.DataTypeDefinition_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the StructureField_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId StructureField_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.StructureField_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the StructureDefinition_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId StructureDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.StructureDefinition_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the EnumDefinition_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId EnumDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.EnumDefinition_Encoding_DefaultBinary);
 
         /// <summary>
         /// The identifier for the DataTypeDescription_Encoding_DefaultBinary Object.
@@ -24065,19 +23965,9 @@ namespace Opc.Ua
         public static readonly NodeId EnumDescription_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.EnumDescription_Encoding_DefaultBinary);
 
         /// <summary>
-        /// The identifier for the KeyValuePair_Encoding_DefaultBinary Object.
+        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultBinary Object.
         /// </summary>
-        public static readonly NodeId KeyValuePair_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.KeyValuePair_Encoding_DefaultBinary);
-
-        /// <summary>
-        /// The identifier for the PublishedVariableDataType_Encoding_DefaultBinary Object.
-        /// </summary>
-        public static readonly NodeId PublishedVariableDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.PublishedVariableDataType_Encoding_DefaultBinary);
-
-        /// <summary>
-        /// The identifier for the DataConnectionDataType_Encoding_DefaultBinary Object.
-        /// </summary>
-        public static readonly NodeId DataConnectionDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.DataConnectionDataType_Encoding_DefaultBinary);
+        public static readonly NodeId CompleteStructureDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.CompleteStructureDefinition_Encoding_DefaultBinary);
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultBinary Object.
@@ -26325,6 +26215,21 @@ namespace Opc.Ua
         public static readonly NodeId OPCUANamespaceMetadata_NamespaceFile_SetPosition_InputArguments = new NodeId(Opc.Ua.Variables.OPCUANamespaceMetadata_NamespaceFile_SetPosition_InputArguments);
 
         /// <summary>
+        /// The identifier for the OPCUANamespaceMetadata_DefaultRolePermissions Variable.
+        /// </summary>
+        public static readonly NodeId OPCUANamespaceMetadata_DefaultRolePermissions = new NodeId(Opc.Ua.Variables.OPCUANamespaceMetadata_DefaultRolePermissions);
+
+        /// <summary>
+        /// The identifier for the OPCUANamespaceMetadata_DefaultUserRolePermissions Variable.
+        /// </summary>
+        public static readonly NodeId OPCUANamespaceMetadata_DefaultUserRolePermissions = new NodeId(Opc.Ua.Variables.OPCUANamespaceMetadata_DefaultUserRolePermissions);
+
+        /// <summary>
+        /// The identifier for the OPCUANamespaceMetadata_DefaultAccessRestrictions Variable.
+        /// </summary>
+        public static readonly NodeId OPCUANamespaceMetadata_DefaultAccessRestrictions = new NodeId(Opc.Ua.Variables.OPCUANamespaceMetadata_DefaultAccessRestrictions);
+
+        /// <summary>
         /// The identifier for the NodeVersion Variable.
         /// </summary>
         public static readonly NodeId NodeVersion = new NodeId(Opc.Ua.Variables.NodeVersion);
@@ -27455,9 +27360,9 @@ namespace Opc.Ua
         public static readonly NodeId RoleFolderType_RoleName_Placeholder_SystemRoleId = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_Identities Variable.
+        /// The identifier for the RoleFolderType_RoleName_Placeholder_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_Identities = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_Identities);
+        public static readonly NodeId RoleFolderType_RoleName_Placeholder_MappingRules = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_MappingRules);
 
         /// <summary>
         /// The identifier for the RoleFolderType_RoleName_Placeholder_AddIdentity_InputArguments Variable.
@@ -27468,26 +27373,6 @@ namespace Opc.Ua
         /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments Variable.
         /// </summary>
         public static readonly NodeId RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments);
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_RemoveEndpoint_InputArguments);
 
         /// <summary>
         /// The identifier for the RoleFolderType_AddRole_InputArguments Variable.
@@ -27510,19 +27395,9 @@ namespace Opc.Ua
         public static readonly NodeId RoleType_SystemRoleId = new NodeId(Opc.Ua.Variables.RoleType_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the RoleType_Identities Variable.
+        /// The identifier for the RoleType_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId RoleType_Identities = new NodeId(Opc.Ua.Variables.RoleType_Identities);
-
-        /// <summary>
-        /// The identifier for the RoleType_Applications Variable.
-        /// </summary>
-        public static readonly NodeId RoleType_Applications = new NodeId(Opc.Ua.Variables.RoleType_Applications);
-
-        /// <summary>
-        /// The identifier for the RoleType_Endpoints Variable.
-        /// </summary>
-        public static readonly NodeId RoleType_Endpoints = new NodeId(Opc.Ua.Variables.RoleType_Endpoints);
+        public static readonly NodeId RoleType_MappingRules = new NodeId(Opc.Ua.Variables.RoleType_MappingRules);
 
         /// <summary>
         /// The identifier for the RoleType_AddIdentity_InputArguments Variable.
@@ -27535,26 +27410,6 @@ namespace Opc.Ua
         public static readonly NodeId RoleType_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleType_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleType_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleType_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the RoleType_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleType_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the RoleType_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId RoleType_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the IdentityCriteriaType_EnumValues Variable.
         /// </summary>
         public static readonly NodeId IdentityCriteriaType_EnumValues = new NodeId(Opc.Ua.Variables.IdentityCriteriaType_EnumValues);
@@ -27565,9 +27420,9 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Anonymous_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_Identities Variable.
+        /// The identifier for the WellKnownRole_Anonymous_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Anonymous_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_Identities);
+        public static readonly NodeId WellKnownRole_Anonymous_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Anonymous_AddIdentity_InputArguments Variable.
@@ -27580,34 +27435,14 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Anonymous_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Anonymous_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Anonymous_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Anonymous_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Anonymous_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the WellKnownRole_AuthenticatedUsers_SystemRoleId Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_AuthenticatedUsers_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_Identities Variable.
+        /// The identifier for the WellKnownRole_AuthenticatedUsers_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_Identities);
+        public static readonly NodeId WellKnownRole_AuthenticatedUsers_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_AuthenticatedUsers_AddIdentity_InputArguments Variable.
@@ -27620,34 +27455,14 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Observer_SystemRoleId Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_Observer_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_Identities Variable.
+        /// The identifier for the WellKnownRole_Observer_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Observer_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_Identities);
+        public static readonly NodeId WellKnownRole_Observer_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Observer_AddIdentity_InputArguments Variable.
@@ -27660,34 +27475,14 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Observer_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Observer_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Observer_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Observer_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Observer_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Observer_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Observer_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Observer_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Operator_SystemRoleId Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_Operator_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_Identities Variable.
+        /// The identifier for the WellKnownRole_Operator_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Operator_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_Identities);
+        public static readonly NodeId WellKnownRole_Operator_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Operator_AddIdentity_InputArguments Variable.
@@ -27700,34 +27495,14 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Operator_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Operator_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Operator_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Operator_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Operator_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Operator_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Operator_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Operator_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Engineer_SystemRoleId Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_Engineer_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_Identities Variable.
+        /// The identifier for the WellKnownRole_Engineer_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Engineer_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_Identities);
+        public static readonly NodeId WellKnownRole_Engineer_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Engineer_AddIdentity_InputArguments Variable.
@@ -27740,34 +27515,14 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Engineer_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Engineer_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Engineer_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Engineer_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Engineer_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the WellKnownRole_Supervisor_SystemRoleId Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_Supervisor_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_Identities Variable.
+        /// The identifier for the WellKnownRole_Supervisor_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Supervisor_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_Identities);
+        public static readonly NodeId WellKnownRole_Supervisor_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Supervisor_AddIdentity_InputArguments Variable.
@@ -27780,34 +27535,14 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Supervisor_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Supervisor_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Supervisor_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Supervisor_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Supervisor_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the WellKnownRole_SecurityAdmin_SystemRoleId Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_SecurityAdmin_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_Identities Variable.
+        /// The identifier for the WellKnownRole_SecurityAdmin_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_SecurityAdmin_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_Identities);
+        public static readonly NodeId WellKnownRole_SecurityAdmin_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_SecurityAdmin_AddIdentity_InputArguments Variable.
@@ -27820,34 +27555,14 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_SecurityAdmin_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_SecurityAdmin_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments);
-
-        /// <summary>
         /// The identifier for the WellKnownRole_ConfigureAdmin_SystemRoleId Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_ConfigureAdmin_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_SystemRoleId);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_Identities Variable.
+        /// The identifier for the WellKnownRole_ConfigureAdmin_MappingRules Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_ConfigureAdmin_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_Identities);
+        public static readonly NodeId WellKnownRole_ConfigureAdmin_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_MappingRules);
 
         /// <summary>
         /// The identifier for the WellKnownRole_ConfigureAdmin_AddIdentity_InputArguments Variable.
@@ -27858,26 +27573,6 @@ namespace Opc.Ua
         /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_AddApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_ConfigureAdmin_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_AddApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments);
 
         /// <summary>
         /// The identifier for the FileType_Size Variable.
@@ -28343,6 +28038,21 @@ namespace Opc.Ua
         /// The identifier for the NamespaceMetadataType_NamespaceFile_SetPosition_InputArguments Variable.
         /// </summary>
         public static readonly NodeId NamespaceMetadataType_NamespaceFile_SetPosition_InputArguments = new NodeId(Opc.Ua.Variables.NamespaceMetadataType_NamespaceFile_SetPosition_InputArguments);
+
+        /// <summary>
+        /// The identifier for the NamespaceMetadataType_DefaultRolePermissions Variable.
+        /// </summary>
+        public static readonly NodeId NamespaceMetadataType_DefaultRolePermissions = new NodeId(Opc.Ua.Variables.NamespaceMetadataType_DefaultRolePermissions);
+
+        /// <summary>
+        /// The identifier for the NamespaceMetadataType_DefaultUserRolePermissions Variable.
+        /// </summary>
+        public static readonly NodeId NamespaceMetadataType_DefaultUserRolePermissions = new NodeId(Opc.Ua.Variables.NamespaceMetadataType_DefaultUserRolePermissions);
+
+        /// <summary>
+        /// The identifier for the NamespaceMetadataType_DefaultAccessRestrictions Variable.
+        /// </summary>
+        public static readonly NodeId NamespaceMetadataType_DefaultAccessRestrictions = new NodeId(Opc.Ua.Variables.NamespaceMetadataType_DefaultAccessRestrictions);
 
         /// <summary>
         /// The identifier for the NamespacesType_NamespaceIdentifier_Placeholder_NamespaceUri Variable.
@@ -34735,11 +34445,6 @@ namespace Opc.Ua
         public static readonly NodeId AggregateConfigurationType_UseSlopedExtrapolation = new NodeId(Opc.Ua.Variables.AggregateConfigurationType_UseSlopedExtrapolation);
 
         /// <summary>
-        /// The identifier for the StructureType_EnumStrings Variable.
-        /// </summary>
-        public static readonly NodeId StructureType_EnumStrings = new NodeId(Opc.Ua.Variables.StructureType_EnumStrings);
-
-        /// <summary>
         /// The identifier for the DataSetFieldFlags_EnumValues Variable.
         /// </summary>
         public static readonly NodeId DataSetFieldFlags_EnumValues = new NodeId(Opc.Ua.Variables.DataSetFieldFlags_EnumValues);
@@ -35185,9 +34890,9 @@ namespace Opc.Ua
         public static readonly NodeId PublishedEventsType_ExtensionFields_RemoveExtensionField_InputArguments = new NodeId(Opc.Ua.Variables.PublishedEventsType_ExtensionFields_RemoveExtensionField_InputArguments);
 
         /// <summary>
-        /// The identifier for the PublishedEventsType_SelectedNotifier Variable.
+        /// The identifier for the PublishedEventsType_PubSubEventNotifier Variable.
         /// </summary>
-        public static readonly NodeId PublishedEventsType_SelectedNotifier = new NodeId(Opc.Ua.Variables.PublishedEventsType_SelectedNotifier);
+        public static readonly NodeId PublishedEventsType_PubSubEventNotifier = new NodeId(Opc.Ua.Variables.PublishedEventsType_PubSubEventNotifier);
 
         /// <summary>
         /// The identifier for the PublishedEventsType_SelectedFields Variable.
@@ -36070,6 +35775,21 @@ namespace Opc.Ua
         public static readonly NodeId NodeClass_EnumValues = new NodeId(Opc.Ua.Variables.NodeClass_EnumValues);
 
         /// <summary>
+        /// The identifier for the PermissionType_EnumValues Variable.
+        /// </summary>
+        public static readonly NodeId PermissionType_EnumValues = new NodeId(Opc.Ua.Variables.PermissionType_EnumValues);
+
+        /// <summary>
+        /// The identifier for the AccessRestrictionType_EnumValues Variable.
+        /// </summary>
+        public static readonly NodeId AccessRestrictionType_EnumValues = new NodeId(Opc.Ua.Variables.AccessRestrictionType_EnumValues);
+
+        /// <summary>
+        /// The identifier for the StructureType_EnumStrings Variable.
+        /// </summary>
+        public static readonly NodeId StructureType_EnumStrings = new NodeId(Opc.Ua.Variables.StructureType_EnumStrings);
+
+        /// <summary>
         /// The identifier for the ApplicationType_EnumStrings Variable.
         /// </summary>
         public static readonly NodeId ApplicationType_EnumStrings = new NodeId(Opc.Ua.Variables.ApplicationType_EnumStrings);
@@ -36190,26 +35910,6 @@ namespace Opc.Ua
         public static readonly NodeId OpcUa_XmlSchema_TrustListDataType = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_TrustListDataType);
 
         /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_DataTypeDefinition Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_DataTypeDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_DataTypeDefinition);
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_StructureDefinition Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_StructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_StructureDefinition);
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_EnumDefinition Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_EnumDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_EnumDefinition);
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_StructureField Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_StructureField = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_StructureField);
-
-        /// <summary>
         /// The identifier for the OpcUa_XmlSchema_ConfigurationVersionDataType Variable.
         /// </summary>
         public static readonly NodeId OpcUa_XmlSchema_ConfigurationVersionDataType = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_ConfigurationVersionDataType);
@@ -36223,6 +35923,46 @@ namespace Opc.Ua
         /// The identifier for the OpcUa_XmlSchema_FieldMetaData Variable.
         /// </summary>
         public static readonly NodeId OpcUa_XmlSchema_FieldMetaData = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_FieldMetaData);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_KeyValuePair Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_KeyValuePair = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_KeyValuePair);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_PublishedVariableDataType Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_PublishedVariableDataType = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_PublishedVariableDataType);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_DataConnectionDataType Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_DataConnectionDataType = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_DataConnectionDataType);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_RolePermissionType Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_RolePermissionType = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_RolePermissionType);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_DataTypeDefinition Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_DataTypeDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_DataTypeDefinition);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_StructureField Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_StructureField = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_StructureField);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_StructureDefinition Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_StructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_StructureDefinition);
+
+        /// <summary>
+        /// The identifier for the OpcUa_XmlSchema_EnumDefinition Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_XmlSchema_EnumDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_EnumDefinition);
 
         /// <summary>
         /// The identifier for the OpcUa_XmlSchema_DataTypeDescription Variable.
@@ -36240,19 +35980,9 @@ namespace Opc.Ua
         public static readonly NodeId OpcUa_XmlSchema_EnumDescription = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_EnumDescription);
 
         /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_KeyValuePair Variable.
+        /// The identifier for the OpcUa_XmlSchema_CompleteStructureDefinition Variable.
         /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_KeyValuePair = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_KeyValuePair);
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_PublishedVariableDataType Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_PublishedVariableDataType = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_PublishedVariableDataType);
-
-        /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_DataConnectionDataType Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_DataConnectionDataType = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_DataConnectionDataType);
+        public static readonly NodeId OpcUa_XmlSchema_CompleteStructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_CompleteStructureDefinition);
 
         /// <summary>
         /// The identifier for the OpcUa_XmlSchema_Argument Variable.
@@ -36575,26 +36305,6 @@ namespace Opc.Ua
         public static readonly NodeId OpcUa_BinarySchema_TrustListDataType = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_TrustListDataType);
 
         /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_DataTypeDefinition Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_DataTypeDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_DataTypeDefinition);
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_StructureDefinition Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_StructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_StructureDefinition);
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_EnumDefinition Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_EnumDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_EnumDefinition);
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_StructureField Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_StructureField = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_StructureField);
-
-        /// <summary>
         /// The identifier for the OpcUa_BinarySchema_ConfigurationVersionDataType Variable.
         /// </summary>
         public static readonly NodeId OpcUa_BinarySchema_ConfigurationVersionDataType = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_ConfigurationVersionDataType);
@@ -36608,6 +36318,46 @@ namespace Opc.Ua
         /// The identifier for the OpcUa_BinarySchema_FieldMetaData Variable.
         /// </summary>
         public static readonly NodeId OpcUa_BinarySchema_FieldMetaData = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_FieldMetaData);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_KeyValuePair Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_KeyValuePair = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_KeyValuePair);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_PublishedVariableDataType Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_PublishedVariableDataType = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_PublishedVariableDataType);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_DataConnectionDataType Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_DataConnectionDataType = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_DataConnectionDataType);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_RolePermissionType Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_RolePermissionType = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_RolePermissionType);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_DataTypeDefinition Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_DataTypeDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_DataTypeDefinition);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_StructureField Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_StructureField = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_StructureField);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_StructureDefinition Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_StructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_StructureDefinition);
+
+        /// <summary>
+        /// The identifier for the OpcUa_BinarySchema_EnumDefinition Variable.
+        /// </summary>
+        public static readonly NodeId OpcUa_BinarySchema_EnumDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_EnumDefinition);
 
         /// <summary>
         /// The identifier for the OpcUa_BinarySchema_DataTypeDescription Variable.
@@ -36625,19 +36375,9 @@ namespace Opc.Ua
         public static readonly NodeId OpcUa_BinarySchema_EnumDescription = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_EnumDescription);
 
         /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_KeyValuePair Variable.
+        /// The identifier for the OpcUa_BinarySchema_CompleteStructureDefinition Variable.
         /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_KeyValuePair = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_KeyValuePair);
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_PublishedVariableDataType Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_PublishedVariableDataType = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_PublishedVariableDataType);
-
-        /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_DataConnectionDataType Variable.
-        /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_DataConnectionDataType = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_DataConnectionDataType);
+        public static readonly NodeId OpcUa_BinarySchema_CompleteStructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_CompleteStructureDefinition);
 
         /// <summary>
         /// The identifier for the OpcUa_BinarySchema_Argument Variable.
@@ -37154,6 +36894,11 @@ namespace Opc.Ua
         public const string AccessHistoryEventsCapability = "AccessHistoryEventsCapability";
 
         /// <summary>
+        /// The BrowseName for the AccessRestrictionType component.
+        /// </summary>
+        public const string AccessRestrictionType = "AccessRestrictionType";
+
+        /// <summary>
         /// The BrowseName for the AckedState component.
         /// </summary>
         public const string AckedState = "AckedState";
@@ -37199,11 +36944,6 @@ namespace Opc.Ua
         public const string ActualSessionTimeout = "ActualSessionTimeout";
 
         /// <summary>
-        /// The BrowseName for the AddApplication component.
-        /// </summary>
-        public const string AddApplication = "AddApplication";
-
-        /// <summary>
         /// The BrowseName for the AddBrokerConnection component.
         /// </summary>
         public const string AddBrokerConnection = "AddBrokerConnection";
@@ -37232,11 +36972,6 @@ namespace Opc.Ua
         /// The BrowseName for the AddDataSetWriter component.
         /// </summary>
         public const string AddDataSetWriter = "AddDataSetWriter";
-
-        /// <summary>
-        /// The BrowseName for the AddEndpoint component.
-        /// </summary>
-        public const string AddEndpoint = "AddEndpoint";
 
         /// <summary>
         /// The BrowseName for the AddExtensionField component.
@@ -37612,11 +37347,6 @@ namespace Opc.Ua
         /// The BrowseName for the ApplicationInstanceCertificate component.
         /// </summary>
         public const string ApplicationInstanceCertificate = "ApplicationInstanceCertificate";
-
-        /// <summary>
-        /// The BrowseName for the Applications component.
-        /// </summary>
-        public const string Applications = "Applications";
 
         /// <summary>
         /// The BrowseName for the ApplicationType component.
@@ -38269,6 +37999,11 @@ namespace Opc.Ua
         public const string Comment = "Comment";
 
         /// <summary>
+        /// The BrowseName for the CompleteStructureDefinition component.
+        /// </summary>
+        public const string CompleteStructureDefinition = "CompleteStructureDefinition";
+
+        /// <summary>
         /// The BrowseName for the ComplexNumberType component.
         /// </summary>
         public const string ComplexNumberType = "ComplexNumberType";
@@ -38714,14 +38449,19 @@ namespace Opc.Ua
         public const string DeadbandType = "DeadbandType";
 
         /// <summary>
-        /// The BrowseName for the Decimal128 component.
+        /// The BrowseName for the Decimal component.
         /// </summary>
-        public const string Decimal128 = "Decimal128";
+        public const string Decimal = "Decimal";
 
         /// <summary>
         /// The BrowseName for the DecimalString component.
         /// </summary>
         public const string DecimalString = "DecimalString";
+
+        /// <summary>
+        /// The BrowseName for the DefaultAccessRestrictions component.
+        /// </summary>
+        public const string DefaultAccessRestrictions = "DefaultAccessRestrictions";
 
         /// <summary>
         /// The BrowseName for the DefaultApplicationGroup component.
@@ -38747,6 +38487,16 @@ namespace Opc.Ua
         /// The BrowseName for the DefaultResponse component.
         /// </summary>
         public const string DefaultResponse = "DefaultResponse";
+
+        /// <summary>
+        /// The BrowseName for the DefaultRolePermissions component.
+        /// </summary>
+        public const string DefaultRolePermissions = "DefaultRolePermissions";
+
+        /// <summary>
+        /// The BrowseName for the DefaultUserRolePermissions component.
+        /// </summary>
+        public const string DefaultUserRolePermissions = "DefaultUserRolePermissions";
 
         /// <summary>
         /// The BrowseName for the DefaultUserTokenGroup component.
@@ -39689,11 +39439,6 @@ namespace Opc.Ua
         public const string Id = "Id";
 
         /// <summary>
-        /// The BrowseName for the Identities component.
-        /// </summary>
-        public const string Identities = "Identities";
-
-        /// <summary>
         /// The BrowseName for the IdentityCriteriaType component.
         /// </summary>
         public const string IdentityCriteriaType = "IdentityCriteriaType";
@@ -40027,6 +39772,11 @@ namespace Opc.Ua
         /// The BrowseName for the ManufacturerName component.
         /// </summary>
         public const string ManufacturerName = "ManufacturerName";
+
+        /// <summary>
+        /// The BrowseName for the MappingRules component.
+        /// </summary>
+        public const string MappingRules = "MappingRules";
 
         /// <summary>
         /// The BrowseName for the MaxArrayLength component.
@@ -40864,6 +40614,11 @@ namespace Opc.Ua
         public const string PerformUpdateType = "PerformUpdateType";
 
         /// <summary>
+        /// The BrowseName for the PermissionType component.
+        /// </summary>
+        public const string PermissionType = "PermissionType";
+
+        /// <summary>
         /// The BrowseName for the Priority component.
         /// </summary>
         public const string Priority = "Priority";
@@ -41032,6 +40787,11 @@ namespace Opc.Ua
         /// The BrowseName for the PubSubConnectionType component.
         /// </summary>
         public const string PubSubConnectionType = "PubSubConnectionType";
+
+        /// <summary>
+        /// The BrowseName for the PubSubEventNotifier component.
+        /// </summary>
+        public const string PubSubEventNotifier = "EventNotifier";
 
         /// <summary>
         /// The BrowseName for the PubSubGroupType component.
@@ -41354,11 +41114,6 @@ namespace Opc.Ua
         public const string RelativePathElement = "RelativePathElement";
 
         /// <summary>
-        /// The BrowseName for the RemoveApplication component.
-        /// </summary>
-        public const string RemoveApplication = "RemoveApplication";
-
-        /// <summary>
         /// The BrowseName for the RemoveCertificate component.
         /// </summary>
         public const string RemoveCertificate = "RemoveCertificate";
@@ -41382,11 +41137,6 @@ namespace Opc.Ua
         /// The BrowseName for the RemoveDataSetWriter component.
         /// </summary>
         public const string RemoveDataSetWriter = "RemoveDataSetWriter";
-
-        /// <summary>
-        /// The BrowseName for the RemoveEndpoint component.
-        /// </summary>
-        public const string RemoveEndpoint = "RemoveEndpoint";
 
         /// <summary>
         /// The BrowseName for the RemoveExtensionField component.
@@ -41542,6 +41292,11 @@ namespace Opc.Ua
         /// The BrowseName for the RoleName_Placeholder component.
         /// </summary>
         public const string RoleName_Placeholder = "<RoleName>";
+
+        /// <summary>
+        /// The BrowseName for the RolePermissionType component.
+        /// </summary>
+        public const string RolePermissionType = "RolePermissionType";
 
         /// <summary>
         /// The BrowseName for the Roles component.
@@ -41707,11 +41462,6 @@ namespace Opc.Ua
         /// The BrowseName for the SelectedFields component.
         /// </summary>
         public const string SelectedFields = "SelectedFields";
-
-        /// <summary>
-        /// The BrowseName for the SelectedNotifier component.
-        /// </summary>
-        public const string SelectedNotifier = "EventNotifier";
 
         /// <summary>
         /// The BrowseName for the SelectedResponse component.

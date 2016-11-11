@@ -208,6 +208,15 @@ namespace Opc.Ua.Gds
             m_endpointUrl = m_session.ConfiguredEndpoint.EndpointUrl.ToString();
         }
 
+        public void Disconnect()
+        {
+            if (m_session != null)
+            {
+                m_session.Close();
+                m_session = null;
+            }
+        }
+
         private void Session_KeepAlive(Session session, KeepAliveEventArgs e)
         {
             if (ServiceResult.IsBad(e.Status))

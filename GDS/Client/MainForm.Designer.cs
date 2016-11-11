@@ -49,6 +49,7 @@ namespace Opc.Ua.GdsClient
             this.ServerStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ServerStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.LeftPanel = new System.Windows.Forms.Panel();
+            this.LogoutButton = new System.Windows.Forms.Button();
             this.DiscoveryButton = new System.Windows.Forms.Button();
             this.ConfigurationButton = new System.Windows.Forms.Button();
             this.SelectServerButton = new System.Windows.Forms.Button();
@@ -74,13 +75,15 @@ namespace Opc.Ua.GdsClient
             // 
             // BottomStatusStrip
             // 
+            this.BottomStatusStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.BottomStatusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ServerStatusIcon,
             this.ServerStatusLabel,
             this.ServerStatusTime});
-            this.BottomStatusStrip.Location = new System.Drawing.Point(0, 495);
+            this.BottomStatusStrip.Location = new System.Drawing.Point(0, 611);
             this.BottomStatusStrip.Name = "BottomStatusStrip";
-            this.BottomStatusStrip.Size = new System.Drawing.Size(1008, 22);
+            this.BottomStatusStrip.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.BottomStatusStrip.Size = new System.Drawing.Size(1344, 25);
             this.BottomStatusStrip.TabIndex = 3;
             this.BottomStatusStrip.Text = "BottomStatusStrip";
             // 
@@ -92,25 +95,26 @@ namespace Opc.Ua.GdsClient
             this.ServerStatusIcon.Margin = new System.Windows.Forms.Padding(0);
             this.ServerStatusIcon.Name = "ServerStatusIcon";
             this.ServerStatusIcon.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.ServerStatusIcon.Size = new System.Drawing.Size(22, 22);
+            this.ServerStatusIcon.Size = new System.Drawing.Size(26, 25);
             // 
             // ServerStatusLabel
             // 
             this.ServerStatusLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServerStatusLabel.Name = "ServerStatusLabel";
-            this.ServerStatusLabel.Size = new System.Drawing.Size(22, 17);
+            this.ServerStatusLabel.Size = new System.Drawing.Size(27, 20);
             this.ServerStatusLabel.Text = "---";
             // 
             // ServerStatusTime
             // 
             this.ServerStatusTime.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServerStatusTime.Name = "ServerStatusTime";
-            this.ServerStatusTime.Size = new System.Drawing.Size(22, 17);
+            this.ServerStatusTime.Size = new System.Drawing.Size(27, 20);
             this.ServerStatusTime.Text = "---";
             // 
             // LeftPanel
             // 
             this.LeftPanel.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LeftPanel.Controls.Add(this.LogoutButton);
             this.LeftPanel.Controls.Add(this.DiscoveryButton);
             this.LeftPanel.Controls.Add(this.ConfigurationButton);
             this.LeftPanel.Controls.Add(this.SelectServerButton);
@@ -121,10 +125,27 @@ namespace Opc.Ua.GdsClient
             this.LeftPanel.Controls.Add(this.ServerStatusButton);
             this.LeftPanel.Controls.Add(this.RegistrationButton);
             this.LeftPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.LeftPanel.Location = new System.Drawing.Point(0, 3);
+            this.LeftPanel.Location = new System.Drawing.Point(0, 4);
+            this.LeftPanel.Margin = new System.Windows.Forms.Padding(4);
             this.LeftPanel.Name = "LeftPanel";
-            this.LeftPanel.Size = new System.Drawing.Size(129, 492);
+            this.LeftPanel.Size = new System.Drawing.Size(172, 607);
             this.LeftPanel.TabIndex = 5;
+            // 
+            // LogoutButton
+            // 
+            this.LogoutButton.BackColor = System.Drawing.Color.MidnightBlue;
+            this.LogoutButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.LogoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LogoutButton.ForeColor = System.Drawing.Color.White;
+            this.LogoutButton.Location = new System.Drawing.Point(0, 351);
+            this.LogoutButton.Margin = new System.Windows.Forms.Padding(4);
+            this.LogoutButton.Name = "LogoutButton";
+            this.LogoutButton.Size = new System.Drawing.Size(172, 39);
+            this.LogoutButton.TabIndex = 9;
+            this.LogoutButton.Text = "Clear GDS User";
+            this.LogoutButton.UseVisualStyleBackColor = false;
+            this.LogoutButton.Visible = false;
+            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
             // 
             // DiscoveryButton
             // 
@@ -132,9 +153,10 @@ namespace Opc.Ua.GdsClient
             this.DiscoveryButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.DiscoveryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiscoveryButton.ForeColor = System.Drawing.Color.White;
-            this.DiscoveryButton.Location = new System.Drawing.Point(0, 256);
+            this.DiscoveryButton.Location = new System.Drawing.Point(0, 312);
+            this.DiscoveryButton.Margin = new System.Windows.Forms.Padding(4);
             this.DiscoveryButton.Name = "DiscoveryButton";
-            this.DiscoveryButton.Size = new System.Drawing.Size(129, 32);
+            this.DiscoveryButton.Size = new System.Drawing.Size(172, 39);
             this.DiscoveryButton.TabIndex = 6;
             this.DiscoveryButton.Text = "Discovery";
             this.DiscoveryButton.UseVisualStyleBackColor = false;
@@ -146,9 +168,10 @@ namespace Opc.Ua.GdsClient
             this.ConfigurationButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.ConfigurationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConfigurationButton.ForeColor = System.Drawing.Color.White;
-            this.ConfigurationButton.Location = new System.Drawing.Point(0, 224);
+            this.ConfigurationButton.Location = new System.Drawing.Point(0, 273);
+            this.ConfigurationButton.Margin = new System.Windows.Forms.Padding(4);
             this.ConfigurationButton.Name = "ConfigurationButton";
-            this.ConfigurationButton.Size = new System.Drawing.Size(129, 32);
+            this.ConfigurationButton.Size = new System.Drawing.Size(172, 39);
             this.ConfigurationButton.TabIndex = 5;
             this.ConfigurationButton.Text = "Configuration";
             this.ConfigurationButton.UseVisualStyleBackColor = false;
@@ -161,9 +184,10 @@ namespace Opc.Ua.GdsClient
             this.SelectServerButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.SelectServerButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SelectServerButton.ForeColor = System.Drawing.Color.White;
-            this.SelectServerButton.Location = new System.Drawing.Point(0, 192);
+            this.SelectServerButton.Location = new System.Drawing.Point(0, 234);
+            this.SelectServerButton.Margin = new System.Windows.Forms.Padding(4);
             this.SelectServerButton.Name = "SelectServerButton";
-            this.SelectServerButton.Size = new System.Drawing.Size(129, 32);
+            this.SelectServerButton.Size = new System.Drawing.Size(172, 39);
             this.SelectServerButton.TabIndex = 1;
             this.SelectServerButton.Text = "Select Server";
             this.SelectServerButton.UseVisualStyleBackColor = false;
@@ -176,9 +200,10 @@ namespace Opc.Ua.GdsClient
             this.HttpsTrustListButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.HttpsTrustListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HttpsTrustListButton.ForeColor = System.Drawing.Color.White;
-            this.HttpsTrustListButton.Location = new System.Drawing.Point(0, 160);
+            this.HttpsTrustListButton.Location = new System.Drawing.Point(0, 195);
+            this.HttpsTrustListButton.Margin = new System.Windows.Forms.Padding(4);
             this.HttpsTrustListButton.Name = "HttpsTrustListButton";
-            this.HttpsTrustListButton.Size = new System.Drawing.Size(129, 32);
+            this.HttpsTrustListButton.Size = new System.Drawing.Size(172, 39);
             this.HttpsTrustListButton.TabIndex = 7;
             this.HttpsTrustListButton.Text = "HTTPS Trust List";
             this.HttpsTrustListButton.UseVisualStyleBackColor = false;
@@ -190,9 +215,10 @@ namespace Opc.Ua.GdsClient
             this.TrustListButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.TrustListButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TrustListButton.ForeColor = System.Drawing.Color.White;
-            this.TrustListButton.Location = new System.Drawing.Point(0, 128);
+            this.TrustListButton.Location = new System.Drawing.Point(0, 156);
+            this.TrustListButton.Margin = new System.Windows.Forms.Padding(4);
             this.TrustListButton.Name = "TrustListButton";
-            this.TrustListButton.Size = new System.Drawing.Size(129, 32);
+            this.TrustListButton.Size = new System.Drawing.Size(172, 39);
             this.TrustListButton.TabIndex = 4;
             this.TrustListButton.Text = "Trust List";
             this.TrustListButton.UseVisualStyleBackColor = false;
@@ -204,9 +230,10 @@ namespace Opc.Ua.GdsClient
             this.HttpsCertificateButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.HttpsCertificateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.HttpsCertificateButton.ForeColor = System.Drawing.Color.White;
-            this.HttpsCertificateButton.Location = new System.Drawing.Point(0, 96);
+            this.HttpsCertificateButton.Location = new System.Drawing.Point(0, 117);
+            this.HttpsCertificateButton.Margin = new System.Windows.Forms.Padding(4);
             this.HttpsCertificateButton.Name = "HttpsCertificateButton";
-            this.HttpsCertificateButton.Size = new System.Drawing.Size(129, 32);
+            this.HttpsCertificateButton.Size = new System.Drawing.Size(172, 39);
             this.HttpsCertificateButton.TabIndex = 8;
             this.HttpsCertificateButton.Text = "HTTPS Certificate";
             this.HttpsCertificateButton.UseVisualStyleBackColor = false;
@@ -218,9 +245,10 @@ namespace Opc.Ua.GdsClient
             this.CertificateButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.CertificateButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CertificateButton.ForeColor = System.Drawing.Color.White;
-            this.CertificateButton.Location = new System.Drawing.Point(0, 64);
+            this.CertificateButton.Location = new System.Drawing.Point(0, 78);
+            this.CertificateButton.Margin = new System.Windows.Forms.Padding(4);
             this.CertificateButton.Name = "CertificateButton";
-            this.CertificateButton.Size = new System.Drawing.Size(129, 32);
+            this.CertificateButton.Size = new System.Drawing.Size(172, 39);
             this.CertificateButton.TabIndex = 3;
             this.CertificateButton.Text = "Certificate";
             this.CertificateButton.UseVisualStyleBackColor = false;
@@ -232,9 +260,10 @@ namespace Opc.Ua.GdsClient
             this.ServerStatusButton.Dock = System.Windows.Forms.DockStyle.Top;
             this.ServerStatusButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ServerStatusButton.ForeColor = System.Drawing.Color.White;
-            this.ServerStatusButton.Location = new System.Drawing.Point(0, 32);
+            this.ServerStatusButton.Location = new System.Drawing.Point(0, 39);
+            this.ServerStatusButton.Margin = new System.Windows.Forms.Padding(4);
             this.ServerStatusButton.Name = "ServerStatusButton";
-            this.ServerStatusButton.Size = new System.Drawing.Size(129, 32);
+            this.ServerStatusButton.Size = new System.Drawing.Size(172, 39);
             this.ServerStatusButton.TabIndex = 2;
             this.ServerStatusButton.Text = "Server Status";
             this.ServerStatusButton.UseVisualStyleBackColor = false;
@@ -247,8 +276,9 @@ namespace Opc.Ua.GdsClient
             this.RegistrationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.RegistrationButton.ForeColor = System.Drawing.Color.White;
             this.RegistrationButton.Location = new System.Drawing.Point(0, 0);
+            this.RegistrationButton.Margin = new System.Windows.Forms.Padding(4);
             this.RegistrationButton.Name = "RegistrationButton";
-            this.RegistrationButton.Size = new System.Drawing.Size(129, 32);
+            this.RegistrationButton.Size = new System.Drawing.Size(172, 39);
             this.RegistrationButton.TabIndex = 0;
             this.RegistrationButton.Text = "Registration";
             this.RegistrationButton.UseVisualStyleBackColor = false;
@@ -261,18 +291,20 @@ namespace Opc.Ua.GdsClient
             this.ServerUrlPanel.Controls.Add(this.ConnectButton);
             this.ServerUrlPanel.Controls.Add(this.DiscnnectButton);
             this.ServerUrlPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ServerUrlPanel.Location = new System.Drawing.Point(129, 3);
+            this.ServerUrlPanel.Location = new System.Drawing.Point(172, 4);
+            this.ServerUrlPanel.Margin = new System.Windows.Forms.Padding(4);
             this.ServerUrlPanel.Name = "ServerUrlPanel";
-            this.ServerUrlPanel.Padding = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.ServerUrlPanel.Size = new System.Drawing.Size(879, 32);
+            this.ServerUrlPanel.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.ServerUrlPanel.Size = new System.Drawing.Size(1172, 39);
             this.ServerUrlPanel.TabIndex = 0;
             // 
             // ServerUrlTextBox
             // 
-            this.ServerUrlTextBox.Location = new System.Drawing.Point(6, 6);
+            this.ServerUrlTextBox.Location = new System.Drawing.Point(8, 7);
+            this.ServerUrlTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ServerUrlTextBox.Name = "ServerUrlTextBox";
             this.ServerUrlTextBox.ReadOnly = true;
-            this.ServerUrlTextBox.Size = new System.Drawing.Size(802, 20);
+            this.ServerUrlTextBox.Size = new System.Drawing.Size(1068, 22);
             this.ServerUrlTextBox.TabIndex = 0;
             // 
             // ConnectButton
@@ -283,10 +315,10 @@ namespace Opc.Ua.GdsClient
             this.ConnectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ConnectButton.ForeColor = System.Drawing.Color.White;
             this.ConnectButton.Image = global::Opc.Ua.GdsClient.Properties.Resources.media_play_green;
-            this.ConnectButton.Location = new System.Drawing.Point(812, 0);
+            this.ConnectButton.Location = new System.Drawing.Point(1082, 0);
             this.ConnectButton.Margin = new System.Windows.Forms.Padding(0);
             this.ConnectButton.Name = "ConnectButton";
-            this.ConnectButton.Size = new System.Drawing.Size(32, 32);
+            this.ConnectButton.Size = new System.Drawing.Size(43, 39);
             this.ConnectButton.TabIndex = 1;
             this.ConnectButton.UseVisualStyleBackColor = false;
             this.ConnectButton.Click += new System.EventHandler(this.ConnectButton_Click);
@@ -299,10 +331,10 @@ namespace Opc.Ua.GdsClient
             this.DiscnnectButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiscnnectButton.ForeColor = System.Drawing.Color.White;
             this.DiscnnectButton.Image = global::Opc.Ua.GdsClient.Properties.Resources.media_stop_red;
-            this.DiscnnectButton.Location = new System.Drawing.Point(844, 0);
+            this.DiscnnectButton.Location = new System.Drawing.Point(1125, 0);
             this.DiscnnectButton.Margin = new System.Windows.Forms.Padding(0);
             this.DiscnnectButton.Name = "DiscnnectButton";
-            this.DiscnnectButton.Size = new System.Drawing.Size(32, 32);
+            this.DiscnnectButton.Size = new System.Drawing.Size(43, 39);
             this.DiscnnectButton.TabIndex = 2;
             this.DiscnnectButton.UseVisualStyleBackColor = false;
             this.DiscnnectButton.Click += new System.EventHandler(this.DisconnectButton_Click);
@@ -310,38 +342,39 @@ namespace Opc.Ua.GdsClient
             // DiscoveryPanel
             // 
             this.DiscoveryPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DiscoveryPanel.Location = new System.Drawing.Point(129, 35);
+            this.DiscoveryPanel.Location = new System.Drawing.Point(172, 43);
+            this.DiscoveryPanel.Margin = new System.Windows.Forms.Padding(5);
             this.DiscoveryPanel.Name = "DiscoveryPanel";
-            this.DiscoveryPanel.Size = new System.Drawing.Size(879, 460);
-            this.DiscoveryPanel.SplitterDistance = 293;
+            this.DiscoveryPanel.Size = new System.Drawing.Size(1172, 568);
+            this.DiscoveryPanel.SplitterDistance = 390;
             this.DiscoveryPanel.TabIndex = 17;
             // 
             // TrustListPanel
             // 
             this.TrustListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TrustListPanel.Location = new System.Drawing.Point(129, 35);
+            this.TrustListPanel.Location = new System.Drawing.Point(172, 43);
             this.TrustListPanel.Margin = new System.Windows.Forms.Padding(0);
             this.TrustListPanel.Name = "TrustListPanel";
-            this.TrustListPanel.Size = new System.Drawing.Size(879, 460);
+            this.TrustListPanel.Size = new System.Drawing.Size(1172, 568);
             this.TrustListPanel.TabIndex = 16;
             // 
             // CertificatePanel
             // 
             this.CertificatePanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CertificatePanel.Location = new System.Drawing.Point(129, 35);
+            this.CertificatePanel.Location = new System.Drawing.Point(172, 43);
             this.CertificatePanel.Margin = new System.Windows.Forms.Padding(0);
             this.CertificatePanel.Name = "CertificatePanel";
-            this.CertificatePanel.Size = new System.Drawing.Size(879, 460);
+            this.CertificatePanel.Size = new System.Drawing.Size(1172, 568);
             this.CertificatePanel.TabIndex = 15;
             // 
             // RegistrationPanel
             // 
             this.RegistrationPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.RegistrationPanel.Location = new System.Drawing.Point(129, 35);
+            this.RegistrationPanel.Location = new System.Drawing.Point(172, 43);
             this.RegistrationPanel.Margin = new System.Windows.Forms.Padding(0);
             this.RegistrationPanel.Name = "RegistrationPanel";
-            this.RegistrationPanel.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
-            this.RegistrationPanel.Size = new System.Drawing.Size(879, 460);
+            this.RegistrationPanel.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.RegistrationPanel.Size = new System.Drawing.Size(1172, 568);
             this.RegistrationPanel.TabIndex = 1;
             this.RegistrationPanel.SelectServer += new System.EventHandler<Opc.Ua.GdsClient.SelectServerEventArgs>(this.RegistrationPanel_ServerRequired);
             this.RegistrationPanel.RegisteredApplicationChanged += new System.EventHandler<Opc.Ua.GdsClient.RegisteredApplicationChangedEventArgs>(this.RegistrationPanel_RegisteredApplicationChanged);
@@ -349,17 +382,18 @@ namespace Opc.Ua.GdsClient
             // ServerStatusPanel
             // 
             this.ServerStatusPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ServerStatusPanel.Location = new System.Drawing.Point(129, 35);
+            this.ServerStatusPanel.Location = new System.Drawing.Point(172, 43);
+            this.ServerStatusPanel.Margin = new System.Windows.Forms.Padding(5);
             this.ServerStatusPanel.Name = "ServerStatusPanel";
-            this.ServerStatusPanel.Padding = new System.Windows.Forms.Padding(0, 5, 0, 0);
-            this.ServerStatusPanel.Size = new System.Drawing.Size(879, 460);
+            this.ServerStatusPanel.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
+            this.ServerStatusPanel.Size = new System.Drawing.Size(1172, 568);
             this.ServerStatusPanel.TabIndex = 14;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 517);
+            this.ClientSize = new System.Drawing.Size(1344, 636);
             this.Controls.Add(this.DiscoveryPanel);
             this.Controls.Add(this.TrustListPanel);
             this.Controls.Add(this.CertificatePanel);
@@ -368,8 +402,9 @@ namespace Opc.Ua.GdsClient
             this.Controls.Add(this.ServerUrlPanel);
             this.Controls.Add(this.LeftPanel);
             this.Controls.Add(this.BottomStatusStrip);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
-            this.Padding = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.Padding = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.Text = "Global Discovery Client";
             this.BottomStatusStrip.ResumeLayout(false);
             this.BottomStatusStrip.PerformLayout();
@@ -406,5 +441,6 @@ namespace Opc.Ua.GdsClient
         private Opc.Ua.Gds.DiscoveryControl DiscoveryPanel;
         private System.Windows.Forms.Button HttpsTrustListButton;
         private System.Windows.Forms.Button HttpsCertificateButton;
+        private System.Windows.Forms.Button LogoutButton;
     }
 }

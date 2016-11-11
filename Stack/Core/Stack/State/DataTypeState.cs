@@ -44,9 +44,32 @@ namespace Opc.Ua
         #endregion
 
         /// <summary>
+        /// Whether the type is an abstract type.
+        /// </summary>
+        public DataTypeDefinition DataTypeDefinition
+        {
+            get
+            {
+                return m_dataTypeDefinition;
+            }
+
+            set
+            {
+                if (m_dataTypeDefinition != value)
+                {
+                    ChangeMasks |= NodeStateChangeMasks.NonValue;
+                }
+
+                m_dataTypeDefinition = value;
+            }
+        }
+
+        private DataTypeDefinition m_dataTypeDefinition;
+
+        /// <summary>
         /// The abstract definition of the data type.
         /// </summary>
-        public UADataTypeDefinition Definition { get; set; }
+        internal UADataTypeDefinition Definition { get; set; }
     }
 
     /// <summary>

@@ -54,7 +54,7 @@ namespace Opc.Ua.Server
             string securityPolicyUri, 
             DateTime startTime, 
             TimeSpan lifeTime,
-            IList<string> allowedScopes)
+            IList<NodeId> allowedRoles)
         {
             lock (m_lock)
             {
@@ -62,7 +62,7 @@ namespace Opc.Ua.Server
                 {
                     Id = groupId,
                     SecurityPolicyUri = securityPolicyUri,
-                    AllowedScopes = allowedScopes
+                    AllowedRoles = allowedRoles
                 };
 
                 group.Initialize(startTime, lifeTime, m_rng);
@@ -122,13 +122,13 @@ namespace Opc.Ua.Server
             // check access.
             bool allowed = false;
 
-            JwtSecurityToken jwt = context.UserIdentity.GetSecurityToken() as JwtSecurityToken;
+            RoleBasedIdentity identity = context.UserIdentity as RoleBasedIdentity;
 
-            if (jwt != null && group.AllowedScopes != null)
+            if (identity != null && group.AllowedRoles != null)
             {
-                foreach (var claim in jwt.Claims)
+                foreach (var role in group.AllowedRoles)
                 {
-                    if (claim.Type == "scope" && group.AllowedScopes.Contains(claim.Value))
+                    if (identity.Roles != null && identity.Roles.Contains(role))
                     {
                         allowed = true;
                         break;
@@ -171,7 +171,7 @@ namespace Opc.Ua.Server
 
         public string SecurityPolicyUri { get; internal set; }
 
-        public IList<string> AllowedScopes { get; internal set; }
+        public IList<NodeId> AllowedRoles { get; internal set; }
 
         public uint TokenId { get; private set; }
 
@@ -195,8 +195,8 @@ namespace Opc.Ua.Server
                 {
                     case SecurityPolicies.Basic128Rsa15:
                     {
-                            KeySize = 16 * 2 + 4;
-                            break;
+                        KeySize = 16 * 2 + 4;
+                        break;
                     }
 
                     default:

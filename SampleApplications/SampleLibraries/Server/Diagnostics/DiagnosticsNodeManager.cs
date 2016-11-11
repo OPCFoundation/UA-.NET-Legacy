@@ -297,6 +297,38 @@ namespace Opc.Ua.Server
 
             switch ((uint)typeId.Identifier)
             {
+                case ObjectTypes.NamespaceMetadataType:
+                {
+                    if (passiveNode is NamespaceMetadataState || passiveNode.NodeId != ObjectIds.OPCUANamespaceMetadata)
+                    {
+                        break;
+                    }
+
+                    NamespaceMetadataState activeNode = new NamespaceMetadataState(passiveNode.Parent);
+
+                    activeNode.DefaultRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
+                    activeNode.DefaultUserRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
+                    activeNode.DefaultAccessRestrictions = new PropertyState<byte>(activeNode);
+
+                    activeNode.Create(context, passiveNode);
+                    
+                    activeNode.DefaultRolePermissions.NodeId = VariableIds.OPCUANamespaceMetadata_DefaultRolePermissions;
+                    activeNode.DefaultUserRolePermissions.NodeId = VariableIds.OPCUANamespaceMetadata_DefaultUserRolePermissions;
+                    activeNode.DefaultAccessRestrictions.NodeId = VariableIds.OPCUANamespaceMetadata_DefaultAccessRestrictions;
+
+                    activeNode.DefaultRolePermissions.OnSimpleReadValue += ReadDefaultRolePermissions;
+                    activeNode.DefaultUserRolePermissions.OnSimpleReadValue += ReadDefaultUserRolePermissions;
+                    activeNode.DefaultAccessRestrictions.OnSimpleReadValue += ReadDefaultAccessRestrictions;
+
+                    // replace the node in the parent.
+                    if (passiveNode.Parent != null)
+                    {
+                        passiveNode.Parent.ReplaceChild(context, activeNode);
+                    }
+
+                    return activeNode;
+                }
+
                 case ObjectTypes.ServerType:
                 {
                     if (passiveNode is ServerObjectState)
@@ -346,7 +378,7 @@ namespace Opc.Ua.Server
 
             return predefinedNode;
         }
-
+        
         private ServiceResult OnGetSecurityKeys(
            ISystemContext context,
            MethodState method,
@@ -1683,9 +1715,9 @@ namespace Opc.Ua.Server
             string securityPolicyUri, 
             DateTime startTime, 
             TimeSpan lifeTime, 
-            IList<string> allowedScopes)
+            IList<NodeId> allowedRoles)
         {
-            m_securityKeyManager.New(securityGroupId, securityPolicyUri, startTime, lifeTime, allowedScopes);
+            m_securityKeyManager.New(securityGroupId, securityPolicyUri, startTime, lifeTime, allowedRoles);
         }
 
         /// <summary>

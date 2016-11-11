@@ -79,10 +79,17 @@ This implementation uses the database of registered applications to validate cli
 ### Setup ###
 Setting up the GDS OAuth2 Service on a new machine requires that a HTTPS certificate be created and then registered with windows. This can be done with the Windows Power Shell (must be launched with Administrator priviledges). The steps are:
 
-Create a new certificate (replace <hostname> with the actual hostname):
+On Windows 10 create a new certificate (replace <hostname> with the actual hostname):
 ```
 New-SelfSignedCertificate -DnsName <hostname> -CertStoreLocation cert:Localmachine\My -HashAlgorithm SHA256
 ```
+
+On Windows 7 create a new certificate (replace <hostname> with the actual hostname and <coderoot> with the root of the source tree):
+```
+<coderoot>\Bin\Opc.Ua.CertificateGenerator.exe -cmd issue -an COPPER -dn COPPER -sp st -hs 256 -ks 2048 
+```
+then from the certificate manager [mmc | certificates](https://msdn.microsoft.com/en-us/library/ms788967(v=vs.110).aspx) install the certificate in LocalMachine\My (Personal)
+
 
 Register the ports (Authorization Service and GDS HTTPS Endpoint):
 ```
@@ -93,6 +100,22 @@ add sslcert ipport=0.0.0.0:58811 certhash=<thumprint> appid={00112233-4455-6677-
 ```
 The appid can be any valid GUID. 
 The certhash is the thumprint created in the first step.
+
+On Windows 7 and Windows Server 2008 TLS 1.2 must be explicitly enabled by creating following registry keys with powershell:
+
+```
+md "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2"
+md "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server"
+md "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client"
+
+new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server" -name "Enabled" -value 1 -PropertyType "DWord"
+new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server" -name "DisabledByDefault" -value 0 -PropertyType "DWord"
+new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client" -name "Enabled" -value 1 -PropertyType "DWord"
+new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client" -name "DisabledByDefault" -value 0 -PropertyType "DWord"
+```
+After creating the registry keys the machine *must* be rebooted.
+
+On Windows 7 you should confirm that TLS 1.2 is enabled by using Chrome to navigate to https://<hostname>:54333/ and looking at the certificate details.
 
 ## Session-less Service Calls ##
 The GDS supports Session-less calls for the GetSecurityKeys Method defined in the PubSub specification. This allows Clients to request SecurityKeys associated with a PubSub group without creating a Session with the GDS if they first request an OAuth2 token from a Authorization Service. This can be done by either:

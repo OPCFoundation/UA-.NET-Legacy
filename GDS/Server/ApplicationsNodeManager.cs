@@ -37,6 +37,9 @@ namespace Opc.Ua.GdsServer
         private NodeId DefaultApplicationGroupId;
         private NodeId DefaultHttpsGroupId;
 
+        public NodeId PubSubNormalNodeId { get; set; }
+        public NodeId PubSubSecureNodeId { get; set; }
+
         #region Constructors
         /// <summary>
         /// Initializes the node manager.
@@ -116,10 +119,18 @@ namespace Opc.Ua.GdsServer
             {
                 RoleBasedIdentity identity = context.UserIdentity as RoleBasedIdentity;
 
-                if (identity == null || identity.Role != GdsRole.GdsAdmin)
+                if (identity != null)
                 {
-                    throw new ServiceResultException(StatusCodes.BadUserAccessDenied, "GDS Administrator access required.");
+                    foreach (var role in identity.Roles)
+                    {
+                        if (role == ObjectIds.WellKnownRole_SecurityAdmin)
+                        {
+                            return;
+                        }
+                    }
                 }
+
+                throw new ServiceResultException(StatusCodes.BadUserAccessDenied, "GDS Administrator access required.");
             }
         }
 
@@ -129,10 +140,18 @@ namespace Opc.Ua.GdsServer
             {
                 RoleBasedIdentity identity = context.UserIdentity as RoleBasedIdentity;
 
-                if (identity == null || (identity.Role != GdsRole.GdsAdmin && identity.Role != GdsRole.ApplicationAdmin))
+                if (identity != null)
                 {
-                    throw new ServiceResultException(StatusCodes.BadUserAccessDenied, "Application Administrator access required.");
+                    foreach (var role in identity.Roles)
+                    {
+                        if (role == ObjectIds.WellKnownRole_SecurityAdmin || role == ObjectIds.WellKnownRole_Engineer)
+                        {
+                            return;
+                        }
+                    }
                 }
+
+                throw new ServiceResultException(StatusCodes.BadUserAccessDenied, "Application Administrator access required.");
             }
         }
 
@@ -142,10 +161,18 @@ namespace Opc.Ua.GdsServer
             {
                 RoleBasedIdentity identity = context.UserIdentity as RoleBasedIdentity;
 
-                if (identity == null)
+                if (identity != null)
                 {
-                    throw new ServiceResultException(StatusCodes.BadUserAccessDenied, "Application Administrator access required.");
+                    foreach (var role in identity.Roles)
+                    {
+                        if (role == ObjectIds.WellKnownRole_SecurityAdmin || role == ObjectIds.WellKnownRole_Engineer)
+                        {
+                            return;
+                        }
+                    }
                 }
+
+                throw new ServiceResultException(StatusCodes.BadUserAccessDenied, "Application Administrator access required.");
             }
         }
 
@@ -418,6 +445,18 @@ namespace Opc.Ua.GdsServer
             lock (Lock)
             {
                 base.CreateAddressSpace(externalReferences);
+               
+                RoleState pubsub1 = new RoleState(null);
+                pubsub1.Create(Server.DefaultSystemContext, PubSubNormalNodeId, new QualifiedName("PubSubNormal", NamespaceIndex), null, true);
+                pubsub1.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_Roles);
+                AddExternalReference(ObjectIds.Server_Roles, ReferenceTypeIds.Organizes, false, pubsub1.NodeId, externalReferences);
+                AddPredefinedNode(Server.DefaultSystemContext, pubsub1);
+
+                RoleState pubsub2 = new RoleState(null);
+                pubsub2.Create(Server.DefaultSystemContext, PubSubSecureNodeId, new QualifiedName("PubSubSecure", NamespaceIndex), null, true);
+                pubsub2.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_Roles);
+                AddExternalReference(ObjectIds.Server_Roles, ReferenceTypeIds.Organizes, false, pubsub2.NodeId, externalReferences);
+                AddPredefinedNode(Server.DefaultSystemContext, pubsub2);
 
                 m_database.NamespaceIndex = NamespaceIndexes[0];
 
@@ -761,7 +800,7 @@ namespace Opc.Ua.GdsServer
 
             NodeId typeId = passiveNode.TypeDefinitionId;
 
-            if (!IsNodeIdInNamespace(typeId) || typeId.IdType != IdType.Numeric)
+            if (typeId.IdType != IdType.Numeric)
             {
                 return predefinedNode;
             }
@@ -805,6 +844,38 @@ namespace Opc.Ua.GdsServer
                         passiveNode.Parent.ReplaceChild(context, activeNode);
                     }
                     
+                    return activeNode;
+                }
+
+                case ObjectTypes.NamespaceMetadataType:
+                {
+                    if (passiveNode is NamespaceMetadataState || passiveNode.NodeId != ExpandedNodeId.ToNodeId(Opc.Ua.Gds.ObjectIds.OPCUAGDSNamespaceMetadata, context.NamespaceUris))
+                    {
+                        break;
+                    }
+
+                    NamespaceMetadataState activeNode = new NamespaceMetadataState(passiveNode.Parent);
+
+                    activeNode.DefaultRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
+                    activeNode.DefaultUserRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
+                    activeNode.DefaultAccessRestrictions = new PropertyState<byte>(activeNode);
+
+                    activeNode.Create(context, passiveNode);
+
+                    activeNode.DefaultRolePermissions.NodeId = new NodeId(Opc.Ua.Gds.Variables.OPCUAGDSNamespaceMetadata_DefaultRolePermissions, NamespaceIndex);
+                    activeNode.DefaultUserRolePermissions.NodeId = new NodeId(Opc.Ua.Gds.Variables.OPCUAGDSNamespaceMetadata_DefaultUserRolePermissions, NamespaceIndex);
+                    activeNode.DefaultAccessRestrictions.NodeId = new NodeId(Opc.Ua.Gds.Variables.OPCUAGDSNamespaceMetadata_DefaultAccessRestrictions, NamespaceIndex);
+
+                    activeNode.DefaultRolePermissions.OnSimpleReadValue += ReadDefaultRolePermissions;
+                    activeNode.DefaultUserRolePermissions.OnSimpleReadValue += ReadDefaultUserRolePermissions;
+                    activeNode.DefaultAccessRestrictions.OnSimpleReadValue += ReadDefaultAccessRestrictions;
+
+                    // replace the node in the parent.
+                    if (passiveNode.Parent != null)
+                    {
+                        passiveNode.Parent.ReplaceChild(context, activeNode);
+                    }
+
                     return activeNode;
                 }
             }
