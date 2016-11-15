@@ -49,7 +49,7 @@ namespace Opc.Ua.GdsClient
             this.ServerStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.ServerStatusTime = new System.Windows.Forms.ToolStripStatusLabel();
             this.LeftPanel = new System.Windows.Forms.Panel();
-            this.LogoutButton = new System.Windows.Forms.Button();
+            this.SelectGdsButton = new System.Windows.Forms.Button();
             this.DiscoveryButton = new System.Windows.Forms.Button();
             this.ConfigurationButton = new System.Windows.Forms.Button();
             this.SelectServerButton = new System.Windows.Forms.Button();
@@ -114,7 +114,7 @@ namespace Opc.Ua.GdsClient
             // LeftPanel
             // 
             this.LeftPanel.BackColor = System.Drawing.Color.MidnightBlue;
-            this.LeftPanel.Controls.Add(this.LogoutButton);
+            this.LeftPanel.Controls.Add(this.SelectGdsButton);
             this.LeftPanel.Controls.Add(this.DiscoveryButton);
             this.LeftPanel.Controls.Add(this.ConfigurationButton);
             this.LeftPanel.Controls.Add(this.SelectServerButton);
@@ -131,21 +131,20 @@ namespace Opc.Ua.GdsClient
             this.LeftPanel.Size = new System.Drawing.Size(172, 607);
             this.LeftPanel.TabIndex = 5;
             // 
-            // LogoutButton
+            // SelectGdsButton
             // 
-            this.LogoutButton.BackColor = System.Drawing.Color.MidnightBlue;
-            this.LogoutButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.LogoutButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LogoutButton.ForeColor = System.Drawing.Color.White;
-            this.LogoutButton.Location = new System.Drawing.Point(0, 351);
-            this.LogoutButton.Margin = new System.Windows.Forms.Padding(4);
-            this.LogoutButton.Name = "LogoutButton";
-            this.LogoutButton.Size = new System.Drawing.Size(172, 39);
-            this.LogoutButton.TabIndex = 9;
-            this.LogoutButton.Text = "Clear GDS User";
-            this.LogoutButton.UseVisualStyleBackColor = false;
-            this.LogoutButton.Visible = false;
-            this.LogoutButton.Click += new System.EventHandler(this.LogoutButton_Click);
+            this.SelectGdsButton.BackColor = System.Drawing.Color.MidnightBlue;
+            this.SelectGdsButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SelectGdsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SelectGdsButton.ForeColor = System.Drawing.Color.White;
+            this.SelectGdsButton.Location = new System.Drawing.Point(0, 351);
+            this.SelectGdsButton.Margin = new System.Windows.Forms.Padding(4);
+            this.SelectGdsButton.Name = "SelectGdsButton";
+            this.SelectGdsButton.Size = new System.Drawing.Size(172, 39);
+            this.SelectGdsButton.TabIndex = 9;
+            this.SelectGdsButton.Text = "Select GDS";
+            this.SelectGdsButton.UseVisualStyleBackColor = false;
+            this.SelectGdsButton.Click += new System.EventHandler(this.SelectGdsButton_Click);
             // 
             // DiscoveryButton
             // 
@@ -441,6 +440,6 @@ namespace Opc.Ua.GdsClient
         private Opc.Ua.Gds.DiscoveryControl DiscoveryPanel;
         private System.Windows.Forms.Button HttpsTrustListButton;
         private System.Windows.Forms.Button HttpsCertificateButton;
-        private System.Windows.Forms.Button LogoutButton;
+        private System.Windows.Forms.Button SelectGdsButton;
     }
 }

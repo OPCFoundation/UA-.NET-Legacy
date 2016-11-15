@@ -133,8 +133,9 @@ namespace Opc.Ua.AuthorizationService
         {
             return new List<Scope>
             {
-                new Scope { Name = "gdsadmin" },
-                new Scope { Name = "appadmin" },
+                new Scope { Name = "gds:admin" },
+                new Scope { Name = "gds:appadmin" },
+                new Scope { Name = "gds" },
                 new Scope { Name = "pubsub" },
                 new Scope { Name = "pubsub:secret" },
                 new Scope { Name = "observer" }
@@ -195,22 +196,29 @@ namespace Opc.Ua.AuthorizationService
                 }
             }
 
-            var application = m_server.FindApplication(clientId);
-
-            if (application != null)
+            try
             {
-                return Task.FromResult(new Client
+                var application = m_server.FindApplication(clientId);
+
+                if (application != null)
                 {
-                    ClientName = application.ApplicationNames[0].Text,
-                    ClientId = application.ApplicationUri,
-                    Enabled = true,
-                    AccessTokenType = AccessTokenType.Jwt,
-                    Flow = Flows.Custom,
-                    ClientSecrets = new List<Secret>(),
-                    AllowAccessToAllCustomGrantTypes = true,
-                    AllowedCustomGrantTypes = new List<string> { "urn:opcfoundation.org:oauth2:site_token" },
-                    AllowAccessToAllScopes = true
-                });
+                    return Task.FromResult(new Client
+                    {
+                        ClientName = application.ApplicationNames[0].Text,
+                        ClientId = application.ApplicationUri,
+                        Enabled = true,
+                        AccessTokenType = AccessTokenType.Jwt,
+                        Flow = Flows.Custom,
+                        ClientSecrets = new List<Secret>(),
+                        AllowAccessToAllCustomGrantTypes = true,
+                        AllowedCustomGrantTypes = new List<string> { "urn:opcfoundation.org:oauth2:site_token" },
+                        AllowAccessToAllScopes = true
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                Utils.Trace(e, "Error checking if the application has been registerd.");
             }
 
             return Task.FromResult<Client>(null);

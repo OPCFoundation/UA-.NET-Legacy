@@ -20,10 +20,10 @@ The Azure AD instance has 4 test accounts:
 
 | Account | Groups | Password |
 |---------|--------|----------|
-|device1@opcfoundationprototyping.onmicrosoft.com|Producers|Joyo9630|
-|hmi1@opcfoundationprototyping.onmicrosoft.com|Consumers||
-|device2@opcfoundationprototyping.onmicrosoft.com|Consumers||
-|hmi2@opcfoundationprototyping.onmicrosoft.com|Producers||
+|device1@opcfoundationprototyping.onmicrosoft.com|Producers|AGu59HU8|
+|hmi1@opcfoundationprototyping.onmicrosoft.com|Consumers|AGu59HU8|
+|device2@opcfoundationprototyping.onmicrosoft.com|Consumers|AGu59HU8|
+|hmi2@opcfoundationprototyping.onmicrosoft.com|Producers|AGu59HU8|
 
 ### OAuth2 Server Configuration ###
 If a OPC UA Server supports OAuth2 then it will publish a UserTokenPolicy with IssuedTokenType=http://opcfoundation.org/UA/UserTokenPolicy#JWT 
@@ -76,7 +76,29 @@ The IdentityServer3 (https://github.com/IdentityServer/IdentityServer3) C# based
 
 This implementation uses the database of registered applications to validate clients so applications do not have to be registered twice. It also accepts tokens issued by Azure AD in lieu of a username/password known to the GDS.
 
-### Setup ###
+### Setup GDS Database ###
+The GDS requires an instance of SQL server. It can be any instance >SQL Server 1.2.
+A free version can be downloaded [here](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express).
+The Client Tools component must also be installed.
+
+The instance that it connects to is defined in the app.config for the GlobalDiscoveryServer project.
+It can be changed by editing the 'gdsEntities' connection string.
+The default uses the '.\SQLEXPRESS' instance with integrated Windows authentication.
+
+If a new instance is installed the GDS database needs to be created with this command (the exact location depends on the system):
+```
+C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn>sqlcmd -S .\SQLEXPRESS
+1> create database gdsdb
+2> go
+3> exit
+```
+
+Once the DB exists the following command can be used to create or reset the tables:
+```
+C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn>sqlcmd -S .\SQLEXPRESS -i <coderoot>\GDS\Common\DB\Tables.sql
+```
+
+### Setup GDS Certificates ###
 Setting up the GDS OAuth2 Service on a new machine requires that a HTTPS certificate be created and then registered with windows. This can be done with the Windows Power Shell (must be launched with Administrator priviledges). The steps are:
 
 On Windows 10 create a new certificate (replace <hostname> with the actual hostname):

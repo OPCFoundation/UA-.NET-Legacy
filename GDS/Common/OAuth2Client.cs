@@ -101,7 +101,7 @@ namespace Opc.Ua.Gds
                 // log in using site token.
                 OAuth2Client client = new OAuth2Client() { Configuration = configuration };
                 var certificate = client.Configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
-                var gdsAccessToken = await client.RequestTokenWithWithSiteTokenAsync(gdsCredentials, certificate, azureToken.AccessToken, parameters.ResourceId, "gdsadmin");
+                var gdsAccessToken = await client.RequestTokenWithWithSiteTokenAsync(gdsCredentials, certificate, azureToken.AccessToken, parameters.ResourceId, "gds:admin");
                 JwtSecurityToken gdsToken = new JwtSecurityToken(gdsAccessToken.AccessToken);
                 return new UserIdentity(gdsToken);
             }
@@ -115,7 +115,7 @@ namespace Opc.Ua.Gds
                 // TBD - Prompt User to Provide.
 
                 OAuth2Client client = new OAuth2Client() { Configuration = configuration };
-                var gdsAccessToken = await client.RequestTokenWithWithUserNameAsync(gdsCredentials, username, password, parameters.ResourceId, "gdsadmin");
+                var gdsAccessToken = await client.RequestTokenWithWithUserNameAsync(gdsCredentials, username, password, parameters.ResourceId, "gds:admin");
                 JwtSecurityToken gdsToken = new JwtSecurityToken(gdsAccessToken.AccessToken);
                 return new UserIdentity(gdsToken);
             }

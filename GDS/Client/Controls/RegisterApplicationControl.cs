@@ -160,6 +160,7 @@ namespace Opc.Ua.GdsClient
 
             m_application.RegistrationType = (RegistrationType)RegistrationTypeComboBox.SelectedIndex;
             m_application.ServerUrl = SelectServerUrl(DiscoveryUrlsTextBox.Tag as IList<string>);
+            m_application.Domains = DomainsTextBox.Text.Trim();
 
             if (record != null)
             {
@@ -219,6 +220,7 @@ namespace Opc.Ua.GdsClient
         {
             ApplicationIdTextBox.Text = null;
             ApplicationUriTextBox.Text = (m_application != null) ? m_application.ApplicationUri : null;
+            DomainsTextBox.Text = m_application.Domains;
 
             try
             {

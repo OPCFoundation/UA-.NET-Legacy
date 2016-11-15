@@ -78,7 +78,7 @@
         <ua:PolicyId>AuthenticationService</ua:PolicyId>
         <ua:TokenType>IssuedToken_3</ua:TokenType>
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserTokenPolicy#JWT</ua:IssuedTokenType>
-        <ua:IssuerEndpointUrl>{ "authority": "https://localhost:54333", "grantType" : "site_token", "tokenEndpoint" : "/connect/token", "scopes": [ "gdsadmin", "appadmin", "observer" ]}</ua:IssuerEndpointUrl>
+        <ua:IssuerEndpointUrl>{ "authority": "https://localhost:54333", "grantType" : "site_token", "tokenEndpoint" : "/connect/token", "scopes": [ "gds:admin", "gds:appadmin", "observer" ]}</ua:IssuerEndpointUrl>
         <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
       </ua:UserTokenPolicy>
     </UserTokenPolicies>
@@ -151,7 +151,7 @@
         </Clients>
         <Scopes>
           <ScopeMapping>
-            <Scope>gdsadmin</Scope>
+            <Scope>gds:admin</Scope>
             <Clients>
               <ua:String>urn:localhost:OAuth2TestClient</ua:String>
             </Clients>

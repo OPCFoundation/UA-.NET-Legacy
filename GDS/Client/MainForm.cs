@@ -237,7 +237,7 @@ namespace Opc.Ua.GdsClient
                 {
                     SetServer(endpoint);
                     RegistrationPanel.Initialize(m_gds, endpoint, m_configuration);
-                    LogoutButton.Visible = true;
+                    SelectGdsButton.Visible = true;
                     return;
                 }
             }
@@ -394,7 +394,7 @@ namespace Opc.Ua.GdsClient
                     {
                         m_configuration.GlobalDiscoveryServerUrl = m_gds.EndpointUrl;
                         m_gdsConfigured = true;
-                        LogoutButton.Visible = true;
+                        SelectGdsButton.Visible = true;
                     }
                 }
 
@@ -540,16 +540,17 @@ namespace Opc.Ua.GdsClient
 
         }
 
-        private void LogoutButton_Click(object sender, EventArgs e)
+        private void SelectGdsButton_Click(object sender, EventArgs e)
         {
-            if (m_gdsConfigured)
-            {
-                m_gds.AdminCredentials = null;
-                m_gds.Disconnect();
-                m_gdsConfigured = false;
-            }
+            m_gds.AdminCredentials = null;
+            m_gds.Disconnect();
+            m_gdsConfigured = false;
 
-            LogoutButton.Visible = false;
+            if (m_gds.SelectDefaultGds(m_lds))
+            {
+                m_configuration.GlobalDiscoveryServerUrl = m_gds.EndpointUrl;
+                m_gdsConfigured = true;
+            }
         }
     }
 }
