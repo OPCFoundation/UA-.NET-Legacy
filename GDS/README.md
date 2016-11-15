@@ -76,8 +76,8 @@ The IdentityServer3 (https://github.com/IdentityServer/IdentityServer3) C# based
 
 This implementation uses the database of registered applications to validate clients so applications do not have to be registered twice. It also accepts tokens issued by Azure AD in lieu of a username/password known to the GDS.
 
-### Setup GDS Database ###
-The GDS requires an instance of SQL server. It can be any instance >SQL Server 1.2.
+### Setting up the GDS Database ###
+The GDS requires an instance of SQL server. It can be any instance >SQL Server 2012.
 A free version can be downloaded [here](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express).
 The Client Tools component must also be installed.
 
@@ -87,28 +87,29 @@ The default uses the '.\SQLEXPRESS' instance with integrated Windows authenticat
 
 If a new instance is installed the GDS database needs to be created with this command (the exact location depends on the system):
 ```
-C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn>sqlcmd -S .\SQLEXPRESS
+[sqlutilspath]\sqlcmd -S .\SQLEXPRESS
 1> create database gdsdb
 2> go
 3> exit
 ```
+A possible location for [sqlutilspath] is C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn
 
 Once the DB exists the following command can be used to create or reset the tables:
 ```
-C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn>sqlcmd -S .\SQLEXPRESS -i <coderoot>\GDS\Common\DB\Tables.sql
+[sqlutilspath]\sqlcmd -S .\SQLEXPRESS -i [coderoot]\GDS\Common\DB\Tables.sql
 ```
 
-### Setup GDS Certificates ###
+### Setting up the GDS Certificates ###
 Setting up the GDS OAuth2 Service on a new machine requires that a HTTPS certificate be created and then registered with windows. This can be done with the Windows Power Shell (must be launched with Administrator priviledges). The steps are:
 
-On Windows 10 create a new certificate (replace <hostname> with the actual hostname):
+On Windows 10 create a new certificate (replace [hostname] with the actual hostname):
 ```
-New-SelfSignedCertificate -DnsName <hostname> -CertStoreLocation cert:Localmachine\My -HashAlgorithm SHA256
+New-SelfSignedCertificate -DnsName [hostname] -CertStoreLocation cert:Localmachine\My -HashAlgorithm SHA256
 ```
 
-On Windows 7 create a new certificate (replace <hostname> with the actual hostname and <coderoot> with the root of the source tree):
+On Windows 7 create a new certificate (replace [hostname] with the actual hostname and [coderoot] with the root of the source tree):
 ```
-<coderoot>\Bin\Opc.Ua.CertificateGenerator.exe -cmd issue -an <hostname> -dn <hostname> -sp st -hs 256 -ks 2048 
+[coderoot]\Bin\Opc.Ua.CertificateGenerator.exe -cmd issue -an [hostname] -dn [hostname] -sp st -hs 256 -ks 2048 
 ```
 then from the certificate manager ([mmc | certificates](https://msdn.microsoft.com/en-us/library/ms788967(v=vs.110).aspx)) install the certificate in LocalMachine\My (Personal)
 
