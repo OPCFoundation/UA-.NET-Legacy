@@ -83,20 +83,21 @@ The Client Tools component must also be installed.
 
 The instance that it connects to is defined in the app.config for the GlobalDiscoveryServer project.
 It can be changed by editing the 'gdsEntities' connection string.
-The default uses the '.\SQLEXPRESS' instance with integrated Windows authentication.
+The default uses the '.\SQLEXPRESS' named instance with integrated Windows authentication.
+(when installing SQL server make a named instance is created)
 
 If a new instance is installed the GDS database needs to be created with this command (the exact location depends on the system):
 ```
-[sqlutilspath]\sqlcmd -S .\SQLEXPRESS
+[sqlutilspath]\osql -S .\SQLEXPRESS -E
 1> create database gdsdb
 2> go
 3> exit
 ```
-A possible location for [sqlutilspath] is C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn
+A possible location for [sqlutilspath] is C:\Program Files\Microsoft SQL Server\130\Tools\Binn\
 
 Once the DB exists the following command can be used to create or reset the tables:
 ```
-[sqlutilspath]\sqlcmd -S .\SQLEXPRESS -i [coderoot]\GDS\Common\DB\Tables.sql
+[sqlutilspath]\osql -S .\SQLEXPRESS -E -d gdsdb -i [coderoot]\GDS\Common\DB\Tables.sql
 ```
 
 ### Setting up the GDS Certificates ###
