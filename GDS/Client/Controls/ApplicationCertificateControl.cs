@@ -382,10 +382,6 @@ namespace Opc.Ua.GdsClient
                     newPrivateKeyRequired = true;
                 }
 
-                if (m_certificate != null)
-                {
-                }
-
                 byte[] certificateRequest = null;
 
                 if (m_application.RegistrationType == RegistrationType.ServerPush)
