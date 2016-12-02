@@ -298,7 +298,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DB\Tables.sql" />
+    <Content Include="DB\Tables.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Controls\DiscoveryControl.resx">
       <DependentUpon>DiscoveryControl.cs</DependentUpon>
     </EmbeddedResource>

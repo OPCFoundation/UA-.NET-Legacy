@@ -46,6 +46,8 @@ namespace Opc.Ua.GdsServer
             application.ApplicationType = ApplicationType.Server;
             application.ConfigSectionName = "Opc.Ua.ServerConfiguration";
 
+            AppDomain.CurrentDomain.SetData("DataDirectory", new System.IO.FileInfo(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName).DirectoryName);
+
             try
             {
                 System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls;

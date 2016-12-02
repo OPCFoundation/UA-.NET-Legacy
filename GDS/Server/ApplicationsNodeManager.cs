@@ -26,6 +26,7 @@ using System.Security.Cryptography.X509Certificates;
 using Opc.Ua;
 using Opc.Ua.Gds;
 using Opc.Ua.Server;
+using System.Data.SqlClient;
 
 namespace Opc.Ua.GdsServer
 {
@@ -77,6 +78,31 @@ namespace Opc.Ua.GdsServer
 
             m_database = new ApplicationsDatabase();
             m_certificateGroups = new Dictionary<NodeId, CertificateGroup>();
+
+            try
+            {
+                DateTime lastResetTime;
+
+                var results = m_database.QueryServers(0, 5, null, null, null, null, out lastResetTime);
+                Utils.Trace("QueryServers Returned: {0} records", results.Length);
+
+                foreach (var result in results)
+                {
+                    Utils.Trace("Server Found at {0}", result.DiscoveryUrl);
+                }
+            }
+            catch (Exception e)
+            {
+                Utils.Trace(e, "Could not connect to the Database!");
+
+                var ie = e.InnerException;
+
+                while (ie != null)
+                {
+                    Utils.Trace(ie, "");
+                    ie = ie.InnerException;
+                }
+            }
 
             Server.MessageContext.Factory.AddEncodeableTypes(typeof(Opc.Ua.Gds.ObjectIds).Assembly);
         }
