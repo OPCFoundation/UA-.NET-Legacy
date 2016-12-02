@@ -14,7 +14,7 @@ This branch contains code which is used to validate new features added to OPC UA
 
 There are three projects:
  * AMQP - samples that implement the AMQP transport and AMQP pub-sub; 
- * WebSocket - samples that implemengt the WebSocket transport;
+ * WebSockets - samples that implements the WebSockets transport;
  * GDS/OAuth2 - a modified GDS which implements OAuth2 based user authorization.
  
 The sub-folder readme's have more information.
@@ -25,5 +25,3 @@ We strongly encourage community participation and contribution to this project. 
 You must agree to the contributor license agreement before we can accept your changes. The CLA and "I AGREE" button is automatically displayed when you perform the pull request. You can preview CLA [here](https://opcfoundation.org/license/cla/ContributorLicenseAgreementv1.0.pdf).
 
 OPC UA, empowering the Industrial Internet of Things (IIOT) and Industrie 4.0.
-
-10748:error:140C5042:SSL routines:ssl_undefined_function:called a function you should not call:.\ssl\ssl_lib.c:2821:
