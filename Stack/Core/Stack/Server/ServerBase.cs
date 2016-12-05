@@ -363,9 +363,9 @@ namespace Opc.Ua
                         break;
                     }
 
-                    case Utils.UriSchemeOpcTls:
+                    case Utils.UriSchemeOpcWss:
                     {
-                        address.ProfileUri = Profiles.UaTlsTransport;
+                        address.ProfileUri = Profiles.UaWssTransport;
                         address.DiscoveryUrl = address.Url;
                         break;
                     }
@@ -766,7 +766,7 @@ namespace Opc.Ua
                     baseAddresses[ii].StartsWith(Utils.UriSchemeHttps, StringComparison.Ordinal)  ||
                     baseAddresses[ii].StartsWith(Utils.UriSchemeNoSecurityHttp, StringComparison.Ordinal) ||
                     baseAddresses[ii].StartsWith(Utils.UriSchemeOpcAmqp, StringComparison.Ordinal) ||
-                    baseAddresses[ii].StartsWith(Utils.UriSchemeOpcTls, StringComparison.Ordinal))
+                    baseAddresses[ii].StartsWith(Utils.UriSchemeOpcWss, StringComparison.Ordinal))
                 {
                     continue;
                 }
@@ -1037,7 +1037,7 @@ namespace Opc.Ua
         /// <summary>
         /// Create a new service host for UA TCP.
         /// </summary>
-        protected List<EndpointDescription> CreateUaTlsServiceHost(
+        protected List<EndpointDescription> CreateUaWssServiceHost(
             IDictionary<string, ServiceHost> hosts,
             ApplicationConfiguration configuration,
             BindingFactory bindingFactory,
@@ -1069,7 +1069,7 @@ namespace Opc.Ua
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
                 // UA TCP and HTTPS endpoints support multiple policies.
-                if (!baseAddresses[ii].StartsWith(Utils.UriSchemeOpcTls, StringComparison.Ordinal))
+                if (!baseAddresses[ii].StartsWith(Utils.UriSchemeOpcWss, StringComparison.Ordinal))
                 {
                     continue;
                 }
@@ -1096,9 +1096,9 @@ namespace Opc.Ua
                     description.SecurityLevel = policy.SecurityLevel;
                     description.UserIdentityTokens = GetUserTokenPolicies(configuration, description);
 
-                    if (uri.Scheme == Utils.UriSchemeOpcTls)
+                    if (uri.Scheme == Utils.UriSchemeOpcWss)
                     {
-                        description.TransportProfileUri = Profiles.UaTlsTransport;
+                        description.TransportProfileUri = Profiles.UaWssTransport;
                     }
                     else
                     {
@@ -1139,7 +1139,7 @@ namespace Opc.Ua
                     settings.NamespaceUris = this.MessageContext.NamespaceUris;
                     settings.Factory = this.MessageContext.Factory;
 
-                    ITransportListener listener = new Opc.Ua.Bindings.TlsTransportListener();
+                    ITransportListener listener = new Opc.Ua.Bindings.WebSocketTransportListener();
 
                     listener.Open(
                        uri.Uri,

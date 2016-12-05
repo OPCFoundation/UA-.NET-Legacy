@@ -1,5 +1,5 @@
-# OPC Foundation UA .NET
-
+# OPC Foundation UA .NET - Prototyping Branch
+## Overview
 The OPC Foundation has formally released the Unified Architecture .NET Stack and Sample Code to the community.
 
 Please review official site page (http://opcfoundation.github.io/UA-.NET/) for:
@@ -8,6 +8,16 @@ Please review official site page (http://opcfoundation.github.io/UA-.NET/) for:
  * Sample Applications overview
  * Building UA Client/Server Walkthrough
  * Compliance Testing
+
+## Prototyping Branch 
+This branch contains code which is used to validate new features added to OPC UA.
+
+There are three projects:
+ * AMQP - samples that implement the AMQP transport and AMQP pub-sub; 
+ * WebSockets - samples that implements the WebSockets transport;
+ * GDS/OAuth2 - a modified GDS which implements OAuth2 based user authorization.
+ 
+The sub-folder readme's have more information.
 
 ## Contributing
 We strongly encourage community participation and contribution to this project. First, please fork the repository and commit your changes there. Once happy with your changes you can generate a 'pull request'.

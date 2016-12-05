@@ -631,7 +631,7 @@ namespace Opc.Ua
             bool useUaTcp = description.EndpointUrl.StartsWith(Utils.UriSchemeOpcTcp);
             bool useHttps = description.EndpointUrl.StartsWith(Utils.UriSchemeHttps);
             bool useAmqps = description.EndpointUrl.StartsWith(Utils.UriSchemeOpcAmqp);
-            bool useUaTls = description.EndpointUrl.StartsWith(Utils.UriSchemeOpcTls);
+            bool useUaWss = description.EndpointUrl.StartsWith(Utils.UriSchemeOpcWss);
 
             #if !SILVERLIGHT
             bool useAnsiCStack = false;
@@ -664,9 +664,14 @@ namespace Opc.Ua
                 }
             }
 
+            if (useHttps && clientCertificate == null && configuration != null)
+            {
+                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
+            }
+
             #if !SILVERLIGHT
             // check for a WCF channel.
-            if (!useUaTcp && !useHttps && !useAmqps && !useUaTls)
+            if (!useUaTcp && !useHttps && !useAmqps && !useUaWss)
             {
                 // binary channels only need the base class.
                 if (endpointConfiguration.UseBinaryEncoding)
@@ -746,9 +751,9 @@ namespace Opc.Ua
                 channel = new AmqpTransportChannel(configuration);
             }
 
-            else if (useUaTls)
+            else if (useUaWss)
             {
-                channel = new TlsTransportChannel(configuration);
+                channel = new WebSocketTransportChannel(configuration);
             }
 
             channel.Initialize(new Uri(description.EndpointUrl), settings);

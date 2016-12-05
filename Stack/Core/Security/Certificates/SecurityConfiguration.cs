@@ -50,6 +50,11 @@ namespace Opc.Ua
                 throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "ApplicationCertificate must be specified.");
             }
 
+            if (m_applicationCertificate.SubjectName != null)
+            {
+                m_applicationCertificate.SubjectName = m_applicationCertificate.SubjectName.Replace("localhost", System.Net.Dns.GetHostName().ToUpper());
+            }
+
             TrustedIssuerCertificates = CreateDefaultTrustList(TrustedIssuerCertificates);
             TrustedPeerCertificates = CreateDefaultTrustList(TrustedPeerCertificates);
 

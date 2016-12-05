@@ -78,7 +78,7 @@
         <ua:PolicyId>AuthenticationService</ua:PolicyId>
         <ua:TokenType>IssuedToken_3</ua:TokenType>
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserTokenPolicy#JWT</ua:IssuedTokenType>
-        <ua:IssuerEndpointUrl>{ "authority": "https://localhost:54333", "grantType" : "site_token", "tokenEndpoint" : "/connect/token", "scopes": [ "gdsadmin", "appadmin", "observer" ]}</ua:IssuerEndpointUrl>
+        <ua:IssuerEndpointUrl>{ "authority": "https://localhost:54333", "grantType" : "site_token", "tokenEndpoint" : "/connect/token", "scopes": [ "gds:admin", "gds:appadmin", "observer" ]}</ua:IssuerEndpointUrl>
         <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
       </ua:UserTokenPolicy>
     </UserTokenPolicies>
@@ -132,9 +132,57 @@
           <ua:String>cobalt-a</ua:String>
           -->
         </KnownHostNames>
-      
-    </GlobalDiscoveryServerConfiguration>
+      </GlobalDiscoveryServerConfiguration>
     </ua:XmlElement>
+    
+    <ua:XmlElement>
+      <AuthorizationServiceConfiguration xmlns="http://opcfoundation.org/UA/GDS/Configuration.xsd">
+        <Clients>
+          <ClientRegistration>
+            <ClientId>urn:localhost:OAuth2TestClient</ClientId>
+            <ClientSecret>secret</ClientSecret>
+            <ClientName>OAuth2TestClient #1</ClientName>
+          </ClientRegistration>
+          <ClientRegistration>
+            <ClientId>urn:localhost:OAuth2TestClient2</ClientId>
+            <ClientSecret>secret</ClientSecret>
+            <ClientName>OAuth2TestClient #2</ClientName>
+          </ClientRegistration>
+        </Clients>
+        <Scopes>
+          <ScopeMapping>
+            <Scope>gds:admin</Scope>
+            <Clients>
+              <ua:String>urn:localhost:OAuth2TestClient</ua:String>
+            </Clients>
+            <Users>
+              <ua:String>device1@opcfoundationprototyping.onmicrosoft.com</ua:String>
+            </Users>
+          </ScopeMapping>
+          <ScopeMapping>
+            <Scope>pubsub</Scope>
+            <Clients>
+              <ua:String>urn:localhost:OAuth2TestClient</ua:String>
+            </Clients>
+            <Users>
+              <ua:String>device1@opcfoundationprototyping.onmicrosoft.com</ua:String>
+              <ua:String>hmi1@opcfoundationprototyping.onmicrosoft.com</ua:String>
+            </Users>
+          </ScopeMapping>
+          <ScopeMapping>
+            <Scope>pubsub:secret</Scope>
+            <Clients>
+              <ua:String>urn:localhost:OAuth2TestClient2</ua:String>
+            </Clients>
+            <Users>
+              <ua:String>device2@opcfoundationprototyping.onmicrosoft.com</ua:String>
+              <ua:String>hmi2@opcfoundationprototyping.onmicrosoft.com</ua:String>
+            </Users>
+          </ScopeMapping>
+        </Scopes>
+      </AuthorizationServiceConfiguration>
+    </ua:XmlElement>
+  
   </Extensions>
 
   <TraceConfiguration>

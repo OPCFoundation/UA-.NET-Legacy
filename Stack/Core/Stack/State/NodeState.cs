@@ -392,6 +392,48 @@ namespace Opc.Ua
                 m_userWriteMask = value;
             }
         }
+
+        /// <summary>
+        /// RolePermissions
+        /// </summary>
+        public List<RolePermissionType> RolePermissions
+        {
+            get
+            {
+                return m_rolePermissions;
+            }
+
+            set
+            {
+                if (m_rolePermissions != value)
+                {
+                    m_changeMasks |= NodeStateChangeMasks.NonValue;
+                }
+
+                m_rolePermissions = value;
+            }
+        }
+
+        /// <summary>
+        /// AccessRestriction
+        /// </summary>
+        public byte AccessRestriction
+        {
+            get
+            {
+                return m_accessRestrictions;
+            }
+
+            set
+            {
+                if (m_accessRestrictions != value)
+                {
+                    m_changeMasks |= NodeStateChangeMasks.NonValue;
+                }
+
+                m_accessRestrictions = value;
+            }
+        }
         #endregion
 
         #region Serialization Methods
@@ -2113,6 +2155,36 @@ namespace Opc.Ua
         /// Called when the UserWriteMask attribute is written.
         /// </summary>
         public NodeAttributeEventHandler<AttributeWriteMask> OnWriteUserWriteMask;
+
+        /// <summary>
+        /// Called when the RolePermissions attribute is read.
+        /// </summary>
+        public NodeAttributeEventHandler<List<RolePermissionType>> OnReadRolePermissions;
+
+        /// <summary>
+        /// Called when the RolePermissions attribute is written.
+        /// </summary>
+        public NodeAttributeEventHandler<List<RolePermissionType>> OnWriteRolePermissions;
+
+        /// <summary>
+        /// Called when the UserRolePermissions attribute is read.
+        /// </summary>
+        public NodeAttributeEventHandler<List<RolePermissionType>> OnReadUserRolePermissions;
+
+        /// <summary>
+        /// Called when the UserRolePermissions attribute is written.
+        /// </summary>
+        public NodeAttributeEventHandler<List<RolePermissionType>> OnWriteUserRolePermissions;
+
+        /// <summary>
+        /// Called when the OnWriteAccessRestrictions attribute is read.
+        /// </summary>
+        public NodeAttributeEventHandler<byte> OnReadAccessRestrictions;
+
+        /// <summary>
+        /// Called when the OnWriteAccessRestrictions attribute is written.
+        /// </summary>
+        public NodeAttributeEventHandler<byte> OnWriteAccessRestrictions;
         #endregion
 
         #region Public Methods
@@ -3392,6 +3464,73 @@ namespace Opc.Ua
 
                     return result;
                 }
+
+                case Attributes.RolePermissions:
+                {
+                    var rolePermissions = m_rolePermissions;
+
+                    if (OnReadRolePermissions != null)
+                    {
+                        result = OnReadRolePermissions(context, this, ref rolePermissions);
+                    }
+
+                    if (rolePermissions == null)
+                    {
+                        return StatusCodes.BadAttributeIdInvalid;
+                    }
+
+                    if (ServiceResult.IsGood(result))
+                    {
+                        value = m_rolePermissions;
+                    }
+
+                    return result;
+                }
+
+                case Attributes.UserRolePermissions:
+                {
+                    var rolePermissions = m_rolePermissions;
+
+                    if (OnReadUserRolePermissions != null)
+                    {
+                        result = OnReadUserRolePermissions(context, this, ref rolePermissions);
+                    }
+
+                    if (rolePermissions == null)
+                    {
+                        return StatusCodes.BadAttributeIdInvalid;
+                    }
+
+                    if (ServiceResult.IsGood(result))
+                    {
+                        value = rolePermissions;
+                    }
+
+                    return result;
+                }
+
+
+                case Attributes.AccessRestrictions:
+                {
+                    var accessRestrictions = m_accessRestrictions;
+
+                    if (OnReadAccessRestrictions != null)
+                    {
+                        result = OnReadAccessRestrictions(context, this, ref accessRestrictions);
+                    }
+
+                    if (accessRestrictions == 0)
+                    {
+                        return StatusCodes.BadAttributeIdInvalid;
+                    }
+
+                    if (ServiceResult.IsGood(result))
+                    {
+                        value = accessRestrictions;
+                    }
+
+                    return result;
+                }
             }
 
             return StatusCodes.BadAttributeIdInvalid;
@@ -3704,6 +3843,79 @@ namespace Opc.Ua
                     if (ServiceResult.IsGood(result))
                     {
                         m_userWriteMask = userWriteMask;
+                    }
+
+                    return result;
+                }
+
+                case Attributes.RolePermissions:
+                {
+                    var extensions = ExtensionObject.ToArray(value, typeof(RolePermissionType));
+
+                    if (extensions == null)
+                    {
+                        return StatusCodes.BadTypeMismatch;
+                    }
+
+                    List<RolePermissionType> rolePermissions = new List<RolePermissionType>();
+
+                    foreach (var extension in extensions)
+                    {
+                        if (extension == null)
+                        {
+                            return StatusCodes.BadTypeMismatch;
+                        }
+
+                        rolePermissions.Add((RolePermissionType)extension);
+                    }
+
+                    if ((WriteMask & AttributeWriteMask.RolePermissions) == 0)
+                    {
+                        return StatusCodes.BadNotWritable;
+                    }
+
+                    if (OnWriteRolePermissions != null)
+                    {
+                        result = OnWriteRolePermissions(context, this, ref rolePermissions);
+                    }
+
+                    if (ServiceResult.IsGood(result))
+                    {
+                        m_rolePermissions = rolePermissions;
+                    }
+
+                    return result;
+                }
+
+                case Attributes.UserRolePermissions:
+                {
+                    return StatusCodes.BadNotWritable;
+                }
+
+                case Attributes.AccessRestrictions:
+                {
+                    byte? accessRestrictionsRef = value as byte?;
+
+                    if (accessRestrictionsRef == null)
+                    {
+                        return StatusCodes.BadTypeMismatch;
+                    }
+
+                    if ((WriteMask & AttributeWriteMask.AccessRestrictions) == 0)
+                    {
+                        return StatusCodes.BadNotWritable;
+                    }
+
+                    var accessRestrictions = (byte)accessRestrictionsRef.Value;
+
+                    if (OnWriteAccessRestrictions != null)
+                    {
+                        result = OnWriteAccessRestrictions(context, this, ref accessRestrictions);
+                    }
+
+                    if (ServiceResult.IsGood(result))
+                    {
+                        m_accessRestrictions = accessRestrictions;
                     }
 
                     return result;
@@ -4412,6 +4624,8 @@ namespace Opc.Ua
         private LocalizedText m_description;
         private AttributeWriteMask m_writeMask;
         private AttributeWriteMask m_userWriteMask;
+        private List<RolePermissionType> m_rolePermissions;
+        private byte m_accessRestrictions;
         private List<BaseInstanceState> m_children;
         private IReferenceDictionary<object> m_references;
         private NodeStateChangeMasks m_changeMasks;

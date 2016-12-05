@@ -201,7 +201,7 @@ namespace Opc.Ua.Sample.Controls
 
 
             X509Certificate2 clientCertificate = null;
-            X509Certificate2Collection clientCertificateChain = null;
+            // X509Certificate2Collection clientCertificateChain = null;
 
             if (endpoint.Description.SecurityPolicyUri != SecurityPolicies.None)
             {

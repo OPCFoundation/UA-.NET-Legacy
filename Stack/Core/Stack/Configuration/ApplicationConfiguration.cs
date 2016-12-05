@@ -496,6 +496,8 @@ namespace Opc.Ua
                 throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "ApplicationName must be specified.");
             }
 
+            ApplicationName = ApplicationName.Replace("localhost", System.Net.Dns.GetHostName().ToUpper());
+
 #if !SILVERLIGHT
             if (SecurityConfiguration == null)
             {

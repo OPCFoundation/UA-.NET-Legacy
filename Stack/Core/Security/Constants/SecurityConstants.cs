@@ -189,9 +189,9 @@ namespace Opc.Ua
         public const string UaTcpTransport = "http://opcfoundation.org/UA-Profile/Transport/uatcp-uasc-uabinary";
 
         /// <summary>
-        /// Communicates with UA TCP over TLS, UA Security and UA Binary.
+        /// Communicates with UA TCP over secure Websockets, UA Security and UA Binary.
         /// </summary>
-        public const string UaTlsTransport = "http://opcfoundation.org/UA-Profile/Transport/uatls-uasc-uabinary";
+        public const string UaWssTransport = "http://opcfoundation.org/UA-Profile/Transport/uawss-uasc-uabinary";
 
         /// <summary>
         /// Communicates with SOAP 1.2, WS Security and UA XML.

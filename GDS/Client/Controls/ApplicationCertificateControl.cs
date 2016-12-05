@@ -192,6 +192,28 @@ namespace Opc.Ua.GdsClient
         {
             List<string> domainNames = new List<string>();
 
+            if (!String.IsNullOrEmpty(m_application.Domains))
+            {
+                var domains = m_application.Domains.Split(',');
+
+                List<string> trimmedDomains = new List<string>();
+
+                foreach (var domain in domains)
+                {
+                    var d = domain.Trim();
+
+                    if (d.Length > 0)
+                    {
+                        trimmedDomains.Add(d);
+                    }
+                }
+
+                if (trimmedDomains.Count > 0)
+                {
+                    return trimmedDomains.ToArray();
+                }
+            }
+
             if (m_application.DiscoveryUrl != null)
             {
                 foreach (var discoveryUrl in m_application.DiscoveryUrl)
@@ -274,43 +296,62 @@ namespace Opc.Ua.GdsClient
 
         private string GetSubjectName(string[] domainNames)
         {
+            IList<string> fields = null;
+
             if (m_certificate == null)
             {
-                return null;
+                if (domainNames != null && domainNames.Length > 0)
+                {
+                    fields = new string[2];
+                    fields[0] = "CN=" + m_application.ApplicationName;
+                    fields[1] = "DC=" + domainNames[0];
+                }
+                else
+                {
+                    fields = new string[1];
+                    fields[0] = "CN=" + m_application.ApplicationName;
+                }
             }
-
-            if (domainNames != null && domainNames.Length > 0)
+            else
             {
-                StringBuilder buffer = new StringBuilder();
+                fields = Utils.ParseDistinguishedName(m_certificate.Subject);
 
-                var fields = Utils.ParseDistinguishedName(m_certificate.Subject);
-
-                foreach (var field in fields)
+                for (int ii = 0; ii < fields.Count; ii++)
                 {
-                    if (field.StartsWith("DC="))
+                    if (fields[ii].StartsWith("CN="))
                     {
-                        continue;
+                        if (!fields[ii].EndsWith(m_application.ApplicationName))
+                        {
+                            fields[ii] = "CN=" + m_application.ApplicationName;
+                        }
                     }
 
-                    if (buffer.Length > 0)
+                    if (domainNames != null && domainNames.Length > 0)
                     {
-                        buffer.Append("/");
+                        if (fields[ii].StartsWith("DC="))
+                        {
+                            if (!fields[ii].EndsWith(domainNames[0]))
+                            {
+                                fields[ii] = "DC=" + domainNames[0];
+                            }
+                        }
                     }
-
-                    buffer.Append(field);
                 }
-
-                if (buffer.Length > 0)
-                {
-                    buffer.Append("/DC=");
-                }
-
-                buffer.Append(domainNames[0]);
-
-                return buffer.ToString();
             }
 
-            return m_certificate.Subject;
+            StringBuilder builder = new StringBuilder();
+
+            for (int ii = 0; ii < fields.Count; ii++)
+            {
+                if (builder.Length > 0)
+                {
+                    builder.Append("/");
+                }
+
+                builder.Append(fields[ii]);
+            }
+
+            return builder.ToString();
         }
 
         private void RequestNewButton_Click(object sender, EventArgs e)
@@ -395,14 +436,17 @@ namespace Opc.Ua.GdsClient
                             }
                         }
 
+                        string[] domainNames = GetDomainNames();
+                        string subjectName = GetSubjectName(domainNames);
+
                         certificateRequest = CertificateFactory.CreateRequest(
                             certificate,
                             privateKey,
                             isPemKey,
                             null,
-                            null,
-                            null,
-                            null,
+                            subjectName,
+                            m_application.ApplicationUri,
+                            domainNames,
                             256);
                     }
 

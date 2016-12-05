@@ -59,6 +59,8 @@ namespace Quickstarts.DataAccessClient
         {
             this.components = new System.ComponentModel.Container();
             this.MenuBar = new System.Windows.Forms.MenuStrip();
+            this.fILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ServerMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Server_DiscoverMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Server_ConnectMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,19 +82,19 @@ namespace Quickstarts.DataAccessClient
             this.Browse_WriteMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Browse_ReadHistoryMI = new System.Windows.Forms.ToolStripMenuItem();
             this.AttributesLV = new System.Windows.Forms.ListView();
-            this.AttributeNameCH = new System.Windows.Forms.ColumnHeader();
-            this.AttributeDataTypeCH = new System.Windows.Forms.ColumnHeader();
-            this.AttributeValueCH = new System.Windows.Forms.ColumnHeader();
+            this.AttributeNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AttributeDataTypeCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.AttributeValueCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MonitoredItemsLV = new System.Windows.Forms.ListView();
-            this.MonitoredItemIdCH = new System.Windows.Forms.ColumnHeader();
-            this.VariableNameCH = new System.Windows.Forms.ColumnHeader();
-            this.MonitoringModeCH = new System.Windows.Forms.ColumnHeader();
-            this.SamplingIntevalCH = new System.Windows.Forms.ColumnHeader();
-            this.DeadbandCH = new System.Windows.Forms.ColumnHeader();
-            this.ValueCH = new System.Windows.Forms.ColumnHeader();
-            this.QualityCH = new System.Windows.Forms.ColumnHeader();
-            this.TimestampCH = new System.Windows.Forms.ColumnHeader();
-            this.LastOperationStatusCH = new System.Windows.Forms.ColumnHeader();
+            this.MonitoredItemIdCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.VariableNameCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.MonitoringModeCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.SamplingIntevalCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.DeadbandCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.ValueCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.QualityCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.TimestampCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.LastOperationStatusCH = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.MonitoringMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Monitoring_DeleteMI = new System.Windows.Forms.ToolStripMenuItem();
             this.Monitoring_WriteMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,12 +119,12 @@ namespace Quickstarts.DataAccessClient
             this.Monitoring_Deadband_Percentage_10MI = new System.Windows.Forms.ToolStripMenuItem();
             this.ConnectServerCTRL = new Opc.Ua.Client.Controls.ConnectServerCtrl();
             this.clientHeaderBranding1 = new Opc.Ua.Server.Controls.ClientHeaderBranding();
-            this.fILEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBar.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.MainPN)).BeginInit();
             this.MainPN.Panel1.SuspendLayout();
             this.MainPN.Panel2.SuspendLayout();
             this.MainPN.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TopPN)).BeginInit();
             this.TopPN.Panel1.SuspendLayout();
             this.TopPN.Panel2.SuspendLayout();
             this.TopPN.SuspendLayout();
@@ -132,6 +134,7 @@ namespace Quickstarts.DataAccessClient
             // 
             // MenuBar
             // 
+            this.MenuBar.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MenuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fILEToolStripMenuItem,
             this.ServerMI,
@@ -140,9 +143,25 @@ namespace Quickstarts.DataAccessClient
             this.HelpMI});
             this.MenuBar.Location = new System.Drawing.Point(0, 0);
             this.MenuBar.Name = "MenuBar";
-            this.MenuBar.Size = new System.Drawing.Size(884, 24);
+            this.MenuBar.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
+            this.MenuBar.Size = new System.Drawing.Size(1179, 28);
             this.MenuBar.TabIndex = 1;
             this.MenuBar.Text = "menuStrip1";
+            // 
+            // fILEToolStripMenuItem
+            // 
+            this.fILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
+            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(44, 24);
+            this.fILEToolStripMenuItem.Text = "&File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 26);
+            this.exitToolStripMenuItem.Text = "E&xit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // ServerMI
             // 
@@ -153,48 +172,48 @@ namespace Quickstarts.DataAccessClient
             this.Server_SetLocaleMI,
             this.Server_SetUserMI});
             this.ServerMI.Name = "ServerMI";
-            this.ServerMI.Size = new System.Drawing.Size(51, 20);
+            this.ServerMI.Size = new System.Drawing.Size(62, 24);
             this.ServerMI.Text = "Server";
             // 
             // Server_DiscoverMI
             // 
             this.Server_DiscoverMI.Name = "Server_DiscoverMI";
-            this.Server_DiscoverMI.Size = new System.Drawing.Size(148, 22);
+            this.Server_DiscoverMI.Size = new System.Drawing.Size(180, 26);
             this.Server_DiscoverMI.Text = "Discover...";
             this.Server_DiscoverMI.Click += new System.EventHandler(this.Server_DiscoverMI_Click);
             // 
             // Server_ConnectMI
             // 
             this.Server_ConnectMI.Name = "Server_ConnectMI";
-            this.Server_ConnectMI.Size = new System.Drawing.Size(148, 22);
+            this.Server_ConnectMI.Size = new System.Drawing.Size(180, 26);
             this.Server_ConnectMI.Text = "Connect";
             this.Server_ConnectMI.Click += new System.EventHandler(this.Server_ConnectMI_Click);
             // 
             // Server_DisconnectMI
             // 
             this.Server_DisconnectMI.Name = "Server_DisconnectMI";
-            this.Server_DisconnectMI.Size = new System.Drawing.Size(148, 22);
+            this.Server_DisconnectMI.Size = new System.Drawing.Size(180, 26);
             this.Server_DisconnectMI.Text = "Disconnect";
             this.Server_DisconnectMI.Click += new System.EventHandler(this.Server_DisconnectMI_Click);
             // 
             // Server_SetLocaleMI
             // 
             this.Server_SetLocaleMI.Name = "Server_SetLocaleMI";
-            this.Server_SetLocaleMI.Size = new System.Drawing.Size(148, 22);
+            this.Server_SetLocaleMI.Size = new System.Drawing.Size(180, 26);
             this.Server_SetLocaleMI.Text = "Select Locale...";
             this.Server_SetLocaleMI.Click += new System.EventHandler(this.Server_SetLocaleMI_Click);
             // 
             // Server_SetUserMI
             // 
             this.Server_SetUserMI.Name = "Server_SetUserMI";
-            this.Server_SetUserMI.Size = new System.Drawing.Size(148, 22);
+            this.Server_SetUserMI.Size = new System.Drawing.Size(180, 26);
             this.Server_SetUserMI.Text = "Set User...";
             this.Server_SetUserMI.Click += new System.EventHandler(this.Server_SetUserMI_Click);
             // 
             // ViewMI
             // 
             this.ViewMI.Name = "ViewMI";
-            this.ViewMI.Size = new System.Drawing.Size(41, 20);
+            this.ViewMI.Size = new System.Drawing.Size(53, 24);
             this.ViewMI.Text = "View";
             // 
             // FileMI
@@ -203,20 +222,20 @@ namespace Quickstarts.DataAccessClient
             this.File_LoadMI,
             this.File_SaveMI});
             this.FileMI.Name = "FileMI";
-            this.FileMI.Size = new System.Drawing.Size(97, 20);
+            this.FileMI.Size = new System.Drawing.Size(131, 24);
             this.FileMI.Text = "Monitored Items";
             // 
             // File_LoadMI
             // 
             this.File_LoadMI.Name = "File_LoadMI";
-            this.File_LoadMI.Size = new System.Drawing.Size(110, 22);
+            this.File_LoadMI.Size = new System.Drawing.Size(126, 26);
             this.File_LoadMI.Text = "Load...";
             this.File_LoadMI.Click += new System.EventHandler(this.File_LoadMI_Click);
             // 
             // File_SaveMI
             // 
             this.File_SaveMI.Name = "File_SaveMI";
-            this.File_SaveMI.Size = new System.Drawing.Size(110, 22);
+            this.File_SaveMI.Size = new System.Drawing.Size(126, 26);
             this.File_SaveMI.Text = "Save...";
             this.File_SaveMI.Click += new System.EventHandler(this.File_SaveMI_Click);
             // 
@@ -225,27 +244,30 @@ namespace Quickstarts.DataAccessClient
             this.HelpMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Help_ContentsMI});
             this.HelpMI.Name = "HelpMI";
-            this.HelpMI.Size = new System.Drawing.Size(40, 20);
+            this.HelpMI.Size = new System.Drawing.Size(53, 24);
             this.HelpMI.Text = "Help";
             // 
             // Help_ContentsMI
             // 
             this.Help_ContentsMI.Name = "Help_ContentsMI";
-            this.Help_ContentsMI.Size = new System.Drawing.Size(152, 22);
+            this.Help_ContentsMI.Size = new System.Drawing.Size(142, 26);
             this.Help_ContentsMI.Text = "Contents";
             this.Help_ContentsMI.Click += new System.EventHandler(this.Help_ContentsMI_Click);
             // 
             // StatusBar
             // 
-            this.StatusBar.Location = new System.Drawing.Point(0, 524);
+            this.StatusBar.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.StatusBar.Location = new System.Drawing.Point(0, 650);
             this.StatusBar.Name = "StatusBar";
-            this.StatusBar.Size = new System.Drawing.Size(884, 22);
+            this.StatusBar.Padding = new System.Windows.Forms.Padding(1, 0, 19, 0);
+            this.StatusBar.Size = new System.Drawing.Size(1179, 22);
             this.StatusBar.TabIndex = 2;
             // 
             // MainPN
             // 
             this.MainPN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MainPN.Location = new System.Drawing.Point(0, 122);
+            this.MainPN.Location = new System.Drawing.Point(0, 148);
+            this.MainPN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MainPN.Name = "MainPN";
             this.MainPN.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -256,14 +278,16 @@ namespace Quickstarts.DataAccessClient
             // MainPN.Panel2
             // 
             this.MainPN.Panel2.Controls.Add(this.MonitoredItemsLV);
-            this.MainPN.Size = new System.Drawing.Size(884, 402);
-            this.MainPN.SplitterDistance = 278;
+            this.MainPN.Size = new System.Drawing.Size(1179, 502);
+            this.MainPN.SplitterDistance = 347;
+            this.MainPN.SplitterWidth = 5;
             this.MainPN.TabIndex = 1;
             // 
             // TopPN
             // 
             this.TopPN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TopPN.Location = new System.Drawing.Point(0, 0);
+            this.TopPN.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.TopPN.Name = "TopPN";
             // 
             // TopPN.Panel1
@@ -273,8 +297,9 @@ namespace Quickstarts.DataAccessClient
             // TopPN.Panel2
             // 
             this.TopPN.Panel2.Controls.Add(this.AttributesLV);
-            this.TopPN.Size = new System.Drawing.Size(884, 278);
-            this.TopPN.SplitterDistance = 391;
+            this.TopPN.Size = new System.Drawing.Size(1179, 347);
+            this.TopPN.SplitterDistance = 521;
+            this.TopPN.SplitterWidth = 5;
             this.TopPN.TabIndex = 0;
             // 
             // BrowseNodesTV
@@ -282,8 +307,9 @@ namespace Quickstarts.DataAccessClient
             this.BrowseNodesTV.ContextMenuStrip = this.BrowsingMenu;
             this.BrowseNodesTV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.BrowseNodesTV.Location = new System.Drawing.Point(0, 0);
+            this.BrowseNodesTV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.BrowseNodesTV.Name = "BrowseNodesTV";
-            this.BrowseNodesTV.Size = new System.Drawing.Size(391, 278);
+            this.BrowseNodesTV.Size = new System.Drawing.Size(521, 347);
             this.BrowseNodesTV.TabIndex = 0;
             this.BrowseNodesTV.BeforeExpand += new System.Windows.Forms.TreeViewCancelEventHandler(this.BrowseNodesTV_BeforeExpand);
             this.BrowseNodesTV.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.BrowseNodesTV_AfterSelect);
@@ -291,32 +317,33 @@ namespace Quickstarts.DataAccessClient
             // 
             // BrowsingMenu
             // 
+            this.BrowsingMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.BrowsingMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Browse_MonitorMI,
             this.Browse_WriteMI,
             this.Browse_ReadHistoryMI});
             this.BrowsingMenu.Name = "BrowsingMenu";
-            this.BrowsingMenu.Size = new System.Drawing.Size(149, 70);
+            this.BrowsingMenu.Size = new System.Drawing.Size(179, 82);
             this.BrowsingMenu.Opening += new System.ComponentModel.CancelEventHandler(this.BrowsingMenu_Opening);
             // 
             // Browse_MonitorMI
             // 
             this.Browse_MonitorMI.Name = "Browse_MonitorMI";
-            this.Browse_MonitorMI.Size = new System.Drawing.Size(148, 22);
+            this.Browse_MonitorMI.Size = new System.Drawing.Size(178, 26);
             this.Browse_MonitorMI.Text = "Monitor";
             this.Browse_MonitorMI.Click += new System.EventHandler(this.Browse_MonitorMI_Click);
             // 
             // Browse_WriteMI
             // 
             this.Browse_WriteMI.Name = "Browse_WriteMI";
-            this.Browse_WriteMI.Size = new System.Drawing.Size(148, 22);
+            this.Browse_WriteMI.Size = new System.Drawing.Size(178, 26);
             this.Browse_WriteMI.Text = "Write...";
             this.Browse_WriteMI.Click += new System.EventHandler(this.Browse_WriteMI_Click);
             // 
             // Browse_ReadHistoryMI
             // 
             this.Browse_ReadHistoryMI.Name = "Browse_ReadHistoryMI";
-            this.Browse_ReadHistoryMI.Size = new System.Drawing.Size(148, 22);
+            this.Browse_ReadHistoryMI.Size = new System.Drawing.Size(178, 26);
             this.Browse_ReadHistoryMI.Text = "Read History...";
             this.Browse_ReadHistoryMI.Click += new System.EventHandler(this.Browse_ReadHistoryMI_Click);
             // 
@@ -329,8 +356,9 @@ namespace Quickstarts.DataAccessClient
             this.AttributesLV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.AttributesLV.FullRowSelect = true;
             this.AttributesLV.Location = new System.Drawing.Point(0, 0);
+            this.AttributesLV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.AttributesLV.Name = "AttributesLV";
-            this.AttributesLV.Size = new System.Drawing.Size(489, 278);
+            this.AttributesLV.Size = new System.Drawing.Size(653, 347);
             this.AttributesLV.TabIndex = 0;
             this.AttributesLV.UseCompatibleStateImageBehavior = false;
             this.AttributesLV.View = System.Windows.Forms.View.Details;
@@ -366,8 +394,9 @@ namespace Quickstarts.DataAccessClient
             this.MonitoredItemsLV.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MonitoredItemsLV.FullRowSelect = true;
             this.MonitoredItemsLV.Location = new System.Drawing.Point(0, 0);
+            this.MonitoredItemsLV.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MonitoredItemsLV.Name = "MonitoredItemsLV";
-            this.MonitoredItemsLV.Size = new System.Drawing.Size(884, 120);
+            this.MonitoredItemsLV.Size = new System.Drawing.Size(1179, 150);
             this.MonitoredItemsLV.TabIndex = 0;
             this.MonitoredItemsLV.UseCompatibleStateImageBehavior = false;
             this.MonitoredItemsLV.View = System.Windows.Forms.View.Details;
@@ -413,6 +442,7 @@ namespace Quickstarts.DataAccessClient
             // 
             // MonitoringMenu
             // 
+            this.MonitoringMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MonitoringMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Monitoring_DeleteMI,
             this.Monitoring_WriteMI,
@@ -420,19 +450,19 @@ namespace Quickstarts.DataAccessClient
             this.Monitoring_SamplingIntervalMI,
             this.Monitoring_DeadbandMI});
             this.MonitoringMenu.Name = "MonitoringMenu";
-            this.MonitoringMenu.Size = new System.Drawing.Size(156, 114);
+            this.MonitoringMenu.Size = new System.Drawing.Size(202, 134);
             // 
             // Monitoring_DeleteMI
             // 
             this.Monitoring_DeleteMI.Name = "Monitoring_DeleteMI";
-            this.Monitoring_DeleteMI.Size = new System.Drawing.Size(155, 22);
+            this.Monitoring_DeleteMI.Size = new System.Drawing.Size(201, 26);
             this.Monitoring_DeleteMI.Text = "Delete";
             this.Monitoring_DeleteMI.Click += new System.EventHandler(this.Monitoring_DeleteMI_Click);
             // 
             // Monitoring_WriteMI
             // 
             this.Monitoring_WriteMI.Name = "Monitoring_WriteMI";
-            this.Monitoring_WriteMI.Size = new System.Drawing.Size(155, 22);
+            this.Monitoring_WriteMI.Size = new System.Drawing.Size(201, 26);
             this.Monitoring_WriteMI.Text = "Write...";
             this.Monitoring_WriteMI.Click += new System.EventHandler(this.Monitoring_WriteMI_Click);
             // 
@@ -443,27 +473,27 @@ namespace Quickstarts.DataAccessClient
             this.Monitoring_MonitoringMode_SamplingMI,
             this.Monitoring_MonitoringMode_ReportingMI});
             this.Monitoring_MonitoringModeMI.Name = "Monitoring_MonitoringModeMI";
-            this.Monitoring_MonitoringModeMI.Size = new System.Drawing.Size(155, 22);
+            this.Monitoring_MonitoringModeMI.Size = new System.Drawing.Size(201, 26);
             this.Monitoring_MonitoringModeMI.Text = "Monitoring Mode";
             // 
             // Monitoring_MonitoringMode_DisabledMI
             // 
             this.Monitoring_MonitoringMode_DisabledMI.Name = "Monitoring_MonitoringMode_DisabledMI";
-            this.Monitoring_MonitoringMode_DisabledMI.Size = new System.Drawing.Size(121, 22);
+            this.Monitoring_MonitoringMode_DisabledMI.Size = new System.Drawing.Size(150, 26);
             this.Monitoring_MonitoringMode_DisabledMI.Text = "Disabled";
             this.Monitoring_MonitoringMode_DisabledMI.Click += new System.EventHandler(this.Monitoring_MonitoringMode_Click);
             // 
             // Monitoring_MonitoringMode_SamplingMI
             // 
             this.Monitoring_MonitoringMode_SamplingMI.Name = "Monitoring_MonitoringMode_SamplingMI";
-            this.Monitoring_MonitoringMode_SamplingMI.Size = new System.Drawing.Size(121, 22);
+            this.Monitoring_MonitoringMode_SamplingMI.Size = new System.Drawing.Size(150, 26);
             this.Monitoring_MonitoringMode_SamplingMI.Text = "Sampling";
             this.Monitoring_MonitoringMode_SamplingMI.Click += new System.EventHandler(this.Monitoring_MonitoringMode_Click);
             // 
             // Monitoring_MonitoringMode_ReportingMI
             // 
             this.Monitoring_MonitoringMode_ReportingMI.Name = "Monitoring_MonitoringMode_ReportingMI";
-            this.Monitoring_MonitoringMode_ReportingMI.Size = new System.Drawing.Size(121, 22);
+            this.Monitoring_MonitoringMode_ReportingMI.Size = new System.Drawing.Size(150, 26);
             this.Monitoring_MonitoringMode_ReportingMI.Text = "Reporting";
             this.Monitoring_MonitoringMode_ReportingMI.Click += new System.EventHandler(this.Monitoring_MonitoringMode_Click);
             // 
@@ -475,34 +505,34 @@ namespace Quickstarts.DataAccessClient
             this.Monitoring_SamplingInterval_2500MI,
             this.Monitoring_SamplingInterval_5000MI});
             this.Monitoring_SamplingIntervalMI.Name = "Monitoring_SamplingIntervalMI";
-            this.Monitoring_SamplingIntervalMI.Size = new System.Drawing.Size(155, 22);
+            this.Monitoring_SamplingIntervalMI.Size = new System.Drawing.Size(201, 26);
             this.Monitoring_SamplingIntervalMI.Text = "Samping Interval";
             // 
             // Monitoring_SamplingInterval_FastMI
             // 
             this.Monitoring_SamplingInterval_FastMI.Name = "Monitoring_SamplingInterval_FastMI";
-            this.Monitoring_SamplingInterval_FastMI.Size = new System.Drawing.Size(150, 22);
+            this.Monitoring_SamplingInterval_FastMI.Size = new System.Drawing.Size(184, 26);
             this.Monitoring_SamplingInterval_FastMI.Text = "Fast as Possible";
             this.Monitoring_SamplingInterval_FastMI.Click += new System.EventHandler(this.Monitoring_SamplingInterval_Click);
             // 
             // Monitoring_SamplingInterval_1000MI
             // 
             this.Monitoring_SamplingInterval_1000MI.Name = "Monitoring_SamplingInterval_1000MI";
-            this.Monitoring_SamplingInterval_1000MI.Size = new System.Drawing.Size(150, 22);
+            this.Monitoring_SamplingInterval_1000MI.Size = new System.Drawing.Size(184, 26);
             this.Monitoring_SamplingInterval_1000MI.Text = "1000ms";
             this.Monitoring_SamplingInterval_1000MI.Click += new System.EventHandler(this.Monitoring_SamplingInterval_Click);
             // 
             // Monitoring_SamplingInterval_2500MI
             // 
             this.Monitoring_SamplingInterval_2500MI.Name = "Monitoring_SamplingInterval_2500MI";
-            this.Monitoring_SamplingInterval_2500MI.Size = new System.Drawing.Size(150, 22);
+            this.Monitoring_SamplingInterval_2500MI.Size = new System.Drawing.Size(184, 26);
             this.Monitoring_SamplingInterval_2500MI.Text = "2500ms";
             this.Monitoring_SamplingInterval_2500MI.Click += new System.EventHandler(this.Monitoring_SamplingInterval_Click);
             // 
             // Monitoring_SamplingInterval_5000MI
             // 
             this.Monitoring_SamplingInterval_5000MI.Name = "Monitoring_SamplingInterval_5000MI";
-            this.Monitoring_SamplingInterval_5000MI.Size = new System.Drawing.Size(150, 22);
+            this.Monitoring_SamplingInterval_5000MI.Size = new System.Drawing.Size(184, 26);
             this.Monitoring_SamplingInterval_5000MI.Text = "5000ms";
             this.Monitoring_SamplingInterval_5000MI.Click += new System.EventHandler(this.Monitoring_SamplingInterval_Click);
             // 
@@ -513,13 +543,13 @@ namespace Quickstarts.DataAccessClient
             this.Monitoring_Deadband_AbsoluteMI,
             this.Monitoring_Deadband_PercentageMI});
             this.Monitoring_DeadbandMI.Name = "Monitoring_DeadbandMI";
-            this.Monitoring_DeadbandMI.Size = new System.Drawing.Size(155, 22);
+            this.Monitoring_DeadbandMI.Size = new System.Drawing.Size(201, 26);
             this.Monitoring_DeadbandMI.Text = "Deadband";
             // 
             // Monitoring_Deadband_NoneMI
             // 
             this.Monitoring_Deadband_NoneMI.Name = "Monitoring_Deadband_NoneMI";
-            this.Monitoring_Deadband_NoneMI.Size = new System.Drawing.Size(129, 22);
+            this.Monitoring_Deadband_NoneMI.Size = new System.Drawing.Size(157, 26);
             this.Monitoring_Deadband_NoneMI.Text = "None";
             this.Monitoring_Deadband_NoneMI.Click += new System.EventHandler(this.Monitoring_Deadband_Click);
             // 
@@ -530,27 +560,27 @@ namespace Quickstarts.DataAccessClient
             this.Monitoring_Deadband_Absolute_10MI,
             this.Monitoring_Deadband_Absolute_25MI});
             this.Monitoring_Deadband_AbsoluteMI.Name = "Monitoring_Deadband_AbsoluteMI";
-            this.Monitoring_Deadband_AbsoluteMI.Size = new System.Drawing.Size(129, 22);
+            this.Monitoring_Deadband_AbsoluteMI.Size = new System.Drawing.Size(157, 26);
             this.Monitoring_Deadband_AbsoluteMI.Text = "Absolute";
             // 
             // Monitoring_Deadband_Absolute_5MI
             // 
             this.Monitoring_Deadband_Absolute_5MI.Name = "Monitoring_Deadband_Absolute_5MI";
-            this.Monitoring_Deadband_Absolute_5MI.Size = new System.Drawing.Size(86, 22);
+            this.Monitoring_Deadband_Absolute_5MI.Size = new System.Drawing.Size(100, 26);
             this.Monitoring_Deadband_Absolute_5MI.Text = "5";
             this.Monitoring_Deadband_Absolute_5MI.Click += new System.EventHandler(this.Monitoring_Deadband_Click);
             // 
             // Monitoring_Deadband_Absolute_10MI
             // 
             this.Monitoring_Deadband_Absolute_10MI.Name = "Monitoring_Deadband_Absolute_10MI";
-            this.Monitoring_Deadband_Absolute_10MI.Size = new System.Drawing.Size(86, 22);
+            this.Monitoring_Deadband_Absolute_10MI.Size = new System.Drawing.Size(100, 26);
             this.Monitoring_Deadband_Absolute_10MI.Text = "10";
             this.Monitoring_Deadband_Absolute_10MI.Click += new System.EventHandler(this.Monitoring_Deadband_Click);
             // 
             // Monitoring_Deadband_Absolute_25MI
             // 
             this.Monitoring_Deadband_Absolute_25MI.Name = "Monitoring_Deadband_Absolute_25MI";
-            this.Monitoring_Deadband_Absolute_25MI.Size = new System.Drawing.Size(86, 22);
+            this.Monitoring_Deadband_Absolute_25MI.Size = new System.Drawing.Size(100, 26);
             this.Monitoring_Deadband_Absolute_25MI.Text = "25";
             this.Monitoring_Deadband_Absolute_25MI.Click += new System.EventHandler(this.Monitoring_Deadband_Click);
             // 
@@ -561,27 +591,27 @@ namespace Quickstarts.DataAccessClient
             this.Monitoring_Deadband_Percentage_5MI,
             this.Monitoring_Deadband_Percentage_10MI});
             this.Monitoring_Deadband_PercentageMI.Name = "Monitoring_Deadband_PercentageMI";
-            this.Monitoring_Deadband_PercentageMI.Size = new System.Drawing.Size(129, 22);
+            this.Monitoring_Deadband_PercentageMI.Size = new System.Drawing.Size(157, 26);
             this.Monitoring_Deadband_PercentageMI.Text = "Percentage";
             // 
             // Monitoring_Deadband_Percentage_1MI
             // 
             this.Monitoring_Deadband_Percentage_1MI.Name = "Monitoring_Deadband_Percentage_1MI";
-            this.Monitoring_Deadband_Percentage_1MI.Size = new System.Drawing.Size(97, 22);
+            this.Monitoring_Deadband_Percentage_1MI.Size = new System.Drawing.Size(112, 26);
             this.Monitoring_Deadband_Percentage_1MI.Text = "1%";
             this.Monitoring_Deadband_Percentage_1MI.Click += new System.EventHandler(this.Monitoring_Deadband_Click);
             // 
             // Monitoring_Deadband_Percentage_5MI
             // 
             this.Monitoring_Deadband_Percentage_5MI.Name = "Monitoring_Deadband_Percentage_5MI";
-            this.Monitoring_Deadband_Percentage_5MI.Size = new System.Drawing.Size(97, 22);
+            this.Monitoring_Deadband_Percentage_5MI.Size = new System.Drawing.Size(112, 26);
             this.Monitoring_Deadband_Percentage_5MI.Text = "5%";
             this.Monitoring_Deadband_Percentage_5MI.Click += new System.EventHandler(this.Monitoring_Deadband_Click);
             // 
             // Monitoring_Deadband_Percentage_10MI
             // 
             this.Monitoring_Deadband_Percentage_10MI.Name = "Monitoring_Deadband_Percentage_10MI";
-            this.Monitoring_Deadband_Percentage_10MI.Size = new System.Drawing.Size(97, 22);
+            this.Monitoring_Deadband_Percentage_10MI.Size = new System.Drawing.Size(112, 26);
             this.Monitoring_Deadband_Percentage_10MI.Text = "10%";
             this.Monitoring_Deadband_Percentage_10MI.Click += new System.EventHandler(this.Monitoring_Deadband_Click);
             // 
@@ -590,60 +620,49 @@ namespace Quickstarts.DataAccessClient
             this.ConnectServerCTRL.Configuration = null;
             this.ConnectServerCTRL.DisableDomainCheck = false;
             this.ConnectServerCTRL.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ConnectServerCTRL.Location = new System.Drawing.Point(0, 99);
-            this.ConnectServerCTRL.MaximumSize = new System.Drawing.Size(2048, 23);
-            this.ConnectServerCTRL.MinimumSize = new System.Drawing.Size(500, 23);
+            this.ConnectServerCTRL.Location = new System.Drawing.Point(0, 120);
+            this.ConnectServerCTRL.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.ConnectServerCTRL.MaximumSize = new System.Drawing.Size(2731, 28);
+            this.ConnectServerCTRL.MinimumSize = new System.Drawing.Size(667, 28);
             this.ConnectServerCTRL.Name = "ConnectServerCTRL";
             this.ConnectServerCTRL.PreferredLocales = null;
             this.ConnectServerCTRL.ServerUrl = "";
             this.ConnectServerCTRL.SessionName = null;
-            this.ConnectServerCTRL.Size = new System.Drawing.Size(884, 23);
+            this.ConnectServerCTRL.Size = new System.Drawing.Size(1179, 28);
             this.ConnectServerCTRL.StatusStrip = this.StatusBar;
             this.ConnectServerCTRL.TabIndex = 4;
             this.ConnectServerCTRL.UserIdentity = null;
             this.ConnectServerCTRL.UseSecurity = true;
-            this.ConnectServerCTRL.ConnectComplete += new System.EventHandler(this.Server_ConnectComplete);
             this.ConnectServerCTRL.ReconnectStarting += new System.EventHandler(this.Server_ReconnectStarting);
             this.ConnectServerCTRL.ReconnectComplete += new System.EventHandler(this.Server_ReconnectComplete);
+            this.ConnectServerCTRL.ConnectComplete += new System.EventHandler(this.Server_ConnectComplete);
             // 
             // clientHeaderBranding1
             // 
             this.clientHeaderBranding1.BackColor = System.Drawing.Color.White;
             this.clientHeaderBranding1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.clientHeaderBranding1.Location = new System.Drawing.Point(0, 24);
-            this.clientHeaderBranding1.MaximumSize = new System.Drawing.Size(0, 75);
-            this.clientHeaderBranding1.MinimumSize = new System.Drawing.Size(500, 75);
+            this.clientHeaderBranding1.Location = new System.Drawing.Point(0, 28);
+            this.clientHeaderBranding1.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.clientHeaderBranding1.MaximumSize = new System.Drawing.Size(0, 92);
+            this.clientHeaderBranding1.MinimumSize = new System.Drawing.Size(667, 92);
             this.clientHeaderBranding1.Name = "clientHeaderBranding1";
-            this.clientHeaderBranding1.Padding = new System.Windows.Forms.Padding(3);
-            this.clientHeaderBranding1.Size = new System.Drawing.Size(884, 75);
+            this.clientHeaderBranding1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.clientHeaderBranding1.Size = new System.Drawing.Size(1179, 92);
             this.clientHeaderBranding1.TabIndex = 5;
-            // 
-            // fILEToolStripMenuItem
-            // 
-            this.fILEToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exitToolStripMenuItem});
-            this.fILEToolStripMenuItem.Name = "fILEToolStripMenuItem";
-            this.fILEToolStripMenuItem.Size = new System.Drawing.Size(35, 20);
-            this.fILEToolStripMenuItem.Text = "&File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.clientHeaderBranding1.Visible = false;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 546);
+            this.ClientSize = new System.Drawing.Size(1179, 672);
             this.Controls.Add(this.MainPN);
             this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.ConnectServerCTRL);
             this.Controls.Add(this.clientHeaderBranding1);
             this.Controls.Add(this.MenuBar);
             this.MainMenuStrip = this.MenuBar;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "UA Data Access Client";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -651,9 +670,11 @@ namespace Quickstarts.DataAccessClient
             this.MenuBar.PerformLayout();
             this.MainPN.Panel1.ResumeLayout(false);
             this.MainPN.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.MainPN)).EndInit();
             this.MainPN.ResumeLayout(false);
             this.TopPN.Panel1.ResumeLayout(false);
             this.TopPN.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.TopPN)).EndInit();
             this.TopPN.ResumeLayout(false);
             this.BrowsingMenu.ResumeLayout(false);
             this.MonitoringMenu.ResumeLayout(false);

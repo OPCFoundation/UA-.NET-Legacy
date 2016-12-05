@@ -2716,8 +2716,8 @@ namespace Opc.Ua.Server
 
             endpoints.InsertRange(0, endpointsForHost);
 
-            // create TLS host.
-            endpointsForHost = CreateUaTlsServiceHost(
+            // create secure Websockets host.
+            endpointsForHost = CreateUaWssServiceHost(
                 hosts,
                 configuration,
                 bindingFactory,

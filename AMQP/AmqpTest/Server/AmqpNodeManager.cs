@@ -156,7 +156,7 @@ namespace AmqpTestServer
                 true);
 
             dataset.ConfigurationVersion.Value = new ConfigurationVersionDataType() { MinorVersion = 1, MajorVersion = 1 };
-            dataset.EventNotifier.Value = ObjectIds.Server;
+            dataset.SelectedNotifier.Value = ObjectIds.Server;
             dataset.SelectedFields.Value = InternalClient.GetSelectClause().ToArray();
             dataset.Filter.Value = new ContentFilter();
 
@@ -167,13 +167,13 @@ namespace AmqpTestServer
                 Fields = new FieldMetaDataCollection(new FieldMetaData[]
                 {
                     new FieldMetaData() { Name = BrowseNames.EventId, DataType = DataTypeIds.ByteString, ValueRank = ValueRanks.Scalar },
-                    new FieldMetaData() { Name = BrowseNames.EventType, DataType = DataTypeIds.NodeId, ValueRank = ValueRanks.Scalar, PromotedField = true },
+                    new FieldMetaData() { Name = BrowseNames.EventType, DataType = DataTypeIds.NodeId, ValueRank = ValueRanks.Scalar, FieldFlags = DataSetFieldFlags.PromotedField },
                     new FieldMetaData() { Name = BrowseNames.SourceName, DataType = DataTypeIds.String, ValueRank = ValueRanks.Scalar },
                     new FieldMetaData() { Name = BrowseNames.SourceNode, DataType = DataTypeIds.NodeId, ValueRank = ValueRanks.Scalar },
                     new FieldMetaData() { Name = BrowseNames.Message, DataType = DataTypeIds.LocalizedText, ValueRank = ValueRanks.Scalar },
                     new FieldMetaData() { Name = BrowseNames.Time, DataType = DataTypeIds.DateTime, ValueRank = ValueRanks.Scalar  },
                     new FieldMetaData() { Name = BrowseNames.ReceiveTime, DataType = DataTypeIds.DateTime, ValueRank = ValueRanks.Scalar },
-                    new FieldMetaData() { Name = BrowseNames.Severity, DataType = DataTypeIds.UInt16, ValueRank = ValueRanks.Scalar, PromotedField = true  }
+                    new FieldMetaData() { Name = BrowseNames.Severity, DataType = DataTypeIds.UInt16, ValueRank = ValueRanks.Scalar, FieldFlags = DataSetFieldFlags.PromotedField }
                 })
             };
 
@@ -188,7 +188,7 @@ namespace AmqpTestServer
 
             dataset.AddReference(Opc.Ua.ReferenceTypeIds.HasComponent, true, ObjectIds.PublishSubscribe_PublishedDataSets);
 
-            dataset.EventNotifier.Value = Opc.Ua.ObjectIds.Server;
+            dataset.SelectedNotifier.Value = Opc.Ua.ObjectIds.Server;
             dataset.SelectedFields.Value = new SimpleAttributeOperand[] { };
             dataset.Filter.Value = new ContentFilter();
 
@@ -198,7 +198,7 @@ namespace AmqpTestServer
             {
                 foreach (var connection in configuration.Connections)
                 {
-                    var node = new AmqpConnectionState(null);
+                    var node = new BrokerConnectionState(null);
 
                     node.Create(
                         SystemContext,
@@ -221,7 +221,7 @@ namespace AmqpTestServer
 
                     AddPredefinedNode(SystemContext, node);
 
-                    var topic = new AmqpGroupState(null);
+                    var topic = new BrokerGroupState(null);
 
                     topic.Create(
                         SystemContext,
@@ -232,7 +232,7 @@ namespace AmqpTestServer
 
                     node.AddReference(Opc.Ua.ReferenceTypeIds.HasComponent, false, topic.NodeId);
                     topic.AddReference(Opc.Ua.ReferenceTypeIds.HasComponent, true, node.NodeId);
-                    topic.AmqpNodeName.Value = connection.TargetName;
+                    topic.QueueName.Value = connection.TargetName;
                     topic.PublishingInterval.Value = 5000;
                     topic.KeepAliveTime.Value = 50000;
                     topic.EncodingMimeType.Value = "application/opcua+json";

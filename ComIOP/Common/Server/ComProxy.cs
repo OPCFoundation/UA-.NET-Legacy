@@ -613,7 +613,7 @@ namespace Opc.Ua.Com.Server
             // update security information.
             if (endpoint.UpdateBeforeConnect)
             {
-                endpoint.UpdateFromServer(BindingFactory.Default);
+                endpoint.UpdateFromServer(this.Configuration, BindingFactory.Default);
 
                 // check if halted while waiting for a response.
                 if (!m_running)

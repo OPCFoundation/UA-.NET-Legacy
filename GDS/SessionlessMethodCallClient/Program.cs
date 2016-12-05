@@ -28,6 +28,7 @@ namespace SessionlessMethodCallClient
         static void Main(string[] args)
         {
             System.Net.ServicePointManager.ServerCertificateValidationCallback = HttpsCertificateValidation;
+            System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls;
 
             string authorizationUrl = String.Format("https://{0}:54333/connect/token", System.Net.Dns.GetHostName().ToLowerInvariant());
 
@@ -80,7 +81,7 @@ namespace SessionlessMethodCallClient
 
         static void GetSecurityKeys(string groupName, string accessToken)
         {
-            string serverUrl = "https://copper:58811/";
+            string serverUrl = String.Format("https://{0}:58811/", System.Net.Dns.GetHostName().ToLowerInvariant());
 
             var request = new JObject();
             request.Add("ServiceId", 710);

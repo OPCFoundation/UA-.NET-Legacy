@@ -159,9 +159,6 @@ namespace Opc.Ua
             // convert the namespace uri to an index.
             NodeId typeId = ExpandedNodeId.ToNodeId(message.BinaryEncodingId, m_context.NamespaceUris);
 
-            // write the namespace array.
-            WriteStringArray("NamespaceUris", m_context.NamespaceUris.ToArray());
-
             // write the type id.
             WriteNodeId("TypeId", typeId);
 
@@ -652,19 +649,17 @@ namespace Opc.Ua
                 return;
             }
 
-            PushStructure(fieldName);
-
             if (UseReversibleEncoding)
             {
                 WriteSimpleField(fieldName, value.ToString(), true);
             }
             else
             {
+                PushStructure(fieldName);
                 WriteSimpleField("Id", new NodeId(value.Identifier, 0).ToString(), true);
                 WriteNamespaceIndex(value.NamespaceIndex);
+                PopStructure();
             }
-
-            PopStructure();
         }
         
         /// <summary>

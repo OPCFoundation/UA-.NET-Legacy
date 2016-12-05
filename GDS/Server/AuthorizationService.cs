@@ -37,17 +37,19 @@ using Microsoft.IdentityModel.Protocols;
 using Microsoft.Owin;
 using System.IO;
 using IdentityServer3.Core.Services.InMemory;
+using Opc.Ua.GdsServer;
 
 namespace Opc.Ua.AuthorizationService
 {
     public class AuthorizationService
     {
         private IDisposable m_host;
-        private ApplicationInstance m_application;
 
-        public void Start(ApplicationInstance application)
+        public void Start(ApplicationInstance application, GlobalDiscoveryServerServer server)
         {
+            Startup.Server = server;
             Startup.ServiceCertificate = application.ApplicationConfiguration.SecurityConfiguration.ApplicationCertificate.Find();
+            Startup.ServiceConfiguration = application.ApplicationConfiguration.ParseExtension<AuthorizationServiceConfiguration>();
 
             string hostname = System.Net.Dns.GetHostName();
 
@@ -68,13 +70,14 @@ namespace Opc.Ua.AuthorizationService
                 .CreateLogger();
 
             m_host = WebApp.Start<Startup>(String.Format("https://{0}:54333", hostname));
-            m_application = application;
         }
     }
 
     public class Startup
     {
         public static X509Certificate2 ServiceCertificate;
+        public static AuthorizationServiceConfiguration ServiceConfiguration;
+        public static GlobalDiscoveryServerServer Server;
 
         public void Configuration(IAppBuilder app)
         {
@@ -82,10 +85,13 @@ namespace Opc.Ua.AuthorizationService
 
             factory.TokenService = new Registration<ITokenService>(typeof(CustomTokenService));
             factory.CorsPolicyService = new Registration<ICorsPolicyService>(new DefaultCorsPolicyService { AllowAll = true });
-            factory.SecretParsers = new Registration<ISecretParser>[] { new Registration<ISecretParser>(new ApplicationCertificateSecretParser()) };
+            factory.SecretParsers = new Registration<ISecretParser>[] { new Registration<ISecretParser>(new ApplicationCertificateSecretParser(Server)) };
             factory.SecretValidators = new Registration<ISecretValidator>[] { new Registration<ISecretValidator>(new ApplicationCertificateSecretValidator()) };
-            factory.ClientStore = new Registration<IClientStore>(new ApplicationClientStore());
-            factory.CustomGrantValidators.Add(new Registration<ICustomGrantValidator>(typeof(CustomGrantValidator)));
+            factory.ClientStore = new Registration<IClientStore>(new ApplicationClientStore(ServiceConfiguration, Server));
+            factory.CustomGrantValidators.Add(new Registration<ICustomGrantValidator>(new CustomGrantValidator(ServiceConfiguration)));
+
+            CustomTokenService.Server = Startup.Server;
+            CustomTokenService.Configuration = Startup.ServiceConfiguration;
 
             var options = new IdentityServerOptions
             {
@@ -94,7 +100,7 @@ namespace Opc.Ua.AuthorizationService
                 SigningCertificate = LoadCertificate(),
                 Factory = factory,
                 InputLengthRestrictions = new InputLengthRestrictions() { Password = 2048 },
-
+   
                 EventsOptions = new EventsOptions
                 {
                     RaiseSuccessEvents = true,
@@ -127,8 +133,9 @@ namespace Opc.Ua.AuthorizationService
         {
             return new List<Scope>
             {
-                new Scope { Name = "gdsadmin" },
-                new Scope { Name = "appadmin" },
+                new Scope { Name = "gds:admin" },
+                new Scope { Name = "gds:appadmin" },
+                new Scope { Name = "gds" },
                 new Scope { Name = "pubsub" },
                 new Scope { Name = "pubsub:secret" },
                 new Scope { Name = "observer" }
@@ -138,6 +145,9 @@ namespace Opc.Ua.AuthorizationService
 
     public class ApplicationClientStore : IClientStore
     {
+        private AuthorizationServiceConfiguration m_configuration;
+        private GlobalDiscoveryServerServer m_server;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="CachingClientStore"/> class.
         /// </summary>
@@ -148,8 +158,12 @@ namespace Opc.Ua.AuthorizationService
         /// or
         /// cache
         /// </exception>
-        public ApplicationClientStore()
+        public ApplicationClientStore(
+            AuthorizationServiceConfiguration configuration,
+            GlobalDiscoveryServerServer server)
         {
+            m_configuration = configuration;
+            m_server = server;
         }
 
         /// <summary>
@@ -161,35 +175,53 @@ namespace Opc.Ua.AuthorizationService
         /// </returns>
         public Task<Client> FindClientByIdAsync(string clientId)
         {
-            if (clientId == "urn:localhost:OAuth2TestClient")
+            if (m_configuration.Clients != null)
             {
-                return Task.FromResult(new Client
+                foreach (var client in m_configuration.Clients)
                 {
-                    ClientName = "OAuth2TestClient",
-                    ClientId = clientId,
-                    Enabled = true,
-                    AccessTokenType = AccessTokenType.Jwt,
-                    Flow = Flows.ClientCredentials,
-                    ClientSecrets = new List<Secret> { new Secret("secret".Sha256()) },
-                    AllowClientCredentialsOnly = true,
-                    AllowAccessToAllScopes = true
-                });
+                    if (client.ClientId == clientId)
+                    {
+                        return Task.FromResult(new Client
+                        {
+                            ClientName = client.ClientName,
+                            ClientId = client.ClientId,
+                            Enabled = true,
+                            AccessTokenType = AccessTokenType.Jwt,
+                            Flow = Flows.ClientCredentials,
+                            ClientSecrets = new List<Secret> { new Secret(client.ClientSecret.Sha256()) },
+                            AllowClientCredentialsOnly = true,
+                            AllowAccessToAllScopes = true
+                        });
+                    }
+                }
             }
 
-            // TBD - look up ApplicationUri in DB.
-
-            return Task.FromResult(new Client
+            try
             {
-                ClientName = "Global Discovery Client",
-                ClientId = clientId,
-                Enabled = true,
-                AccessTokenType = AccessTokenType.Jwt,
-                Flow = Flows.Custom,
-                ClientSecrets = new List<Secret>(),
-                AllowAccessToAllCustomGrantTypes = true,
-                AllowedCustomGrantTypes = new List<string> { "urn:opcfoundation.org:oauth2:site_token" },
-                AllowAccessToAllScopes = true
-            });
+                var application = m_server.FindApplication(clientId);
+
+                if (application != null)
+                {
+                    return Task.FromResult(new Client
+                    {
+                        ClientName = application.ApplicationNames[0].Text,
+                        ClientId = application.ApplicationUri,
+                        Enabled = true,
+                        AccessTokenType = AccessTokenType.Jwt,
+                        Flow = Flows.Custom,
+                        ClientSecrets = new List<Secret>(),
+                        AllowAccessToAllCustomGrantTypes = true,
+                        AllowedCustomGrantTypes = new List<string> { "urn:opcfoundation.org:oauth2:site_token" },
+                        AllowAccessToAllScopes = true
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                Utils.Trace(e, "Error checking if the application has been registerd.");
+            }
+
+            return Task.FromResult<Client>(null);
         }
     }
 
@@ -198,6 +230,13 @@ namespace Opc.Ua.AuthorizationService
     /// </summary>
     public class ApplicationCertificateSecretParser : ISecretParser
     {
+        private GlobalDiscoveryServerServer m_server;
+
+        public ApplicationCertificateSecretParser(GlobalDiscoveryServerServer server)
+        {
+            m_server = server;
+        }
+
         /// <summary>
         /// Tries to find a secret on the environment that can be used for authentication
         /// </summary>
@@ -253,7 +292,6 @@ namespace Opc.Ua.AuthorizationService
             }
 
             var certificate = Convert.FromBase64String(clientId);
-
             var signature = Convert.FromBase64String(clientSecret);
 
             var data = body.Get("access_token");
@@ -276,10 +314,10 @@ namespace Opc.Ua.AuthorizationService
 
             try
             {
+                // validate the certificate.
                 X509Certificate2 x509 = new X509Certificate2(certificate);
-                // TBD - use a CertificateValidator to verify certificate.
+                m_server.CertificateValidator.Validate(x509);
 
-                // check that the id matches the certificate.
                 var applicationUri = Utils.GetApplicationUriFromCertficate(x509);
 
                 // verify signature.
@@ -354,6 +392,13 @@ namespace Opc.Ua.AuthorizationService
 
     class CustomGrantValidator : ICustomGrantValidator
     {
+        private AuthorizationServiceConfiguration m_configuration;
+
+        public CustomGrantValidator(AuthorizationServiceConfiguration configuration)
+        {
+            m_configuration = configuration;
+        }
+
         public Task<CustomGrantValidationResult> ValidateAsync(ValidatedTokenRequest request)
         {
             var accessToken = request.Raw.Get("access_token");
@@ -387,8 +432,10 @@ namespace Opc.Ua.AuthorizationService
                 }
             }
 
+            // add nonce to protect against replay attacks.
             claims.Add(new Claim("nonce", nonce));
 
+            // make sure new token does not last longer than the original token.
             request.Client.AccessTokenLifetime = (int)(azureToken.ValidTo - now).TotalSeconds;
 
             var result = new CustomGrantValidationResult(
@@ -408,6 +455,9 @@ namespace Opc.Ua.AuthorizationService
 
     class CustomTokenService : DefaultTokenService
     {
+        public static GlobalDiscoveryServerServer Server;
+        public static AuthorizationServiceConfiguration Configuration;
+
         public CustomTokenService(IdentityServerOptions options, IClaimsProvider claimsProvider, ITokenHandleStore tokenHandles, ITokenSigningService signingService, IEventService events) 
             : base(options, claimsProvider, tokenHandles, signingService, events)
         {
@@ -419,39 +469,12 @@ namespace Opc.Ua.AuthorizationService
 
             token.Lifetime = token.Client.AccessTokenLifetime;
 
-            /*
-            var claims = new List<Claim>();
-            claims.AddRange(await _claimsProvider.GetAccessTokenClaimsAsync(
-                request.Subject,
-                request.Client,
-                request.Scopes,
-                request.ValidatedRequest));
-
-            if (request.Client.IncludeJwtId)
-            {
-                claims.Add(new Claim(Constants.ClaimTypes.JwtId, CryptoRandom.CreateUniqueId()));
-            }
-
-            if (request.ProofKey.IsPresent())
-            {
-                claims.Add(new Claim(Constants.ClaimTypes.Confirmation, request.ProofKey, Constants.ClaimValueTypes.Json));
-            }
-
-            var token = new Token(Constants.TokenTypes.AccessToken)
-            {
-                Audience = string.Format(Constants.AccessTokenAudience, IssuerUri.EnsureTrailingSlash()),
-                Issuer = IssuerUri,
-                Lifetime = request.Client.AccessTokenLifetime,
-                Claims = claims.Distinct(new ClaimComparer()).ToList(),
-                Client = request.Client
-            };
-            */
-
+            // ensure a valid resource.
             var resource = request.ValidatedRequest.Raw["resource"];
 
-            if (String.IsNullOrEmpty(resource))
+            if (String.IsNullOrEmpty(resource) || resource == Namespaces.OAuth2SiteResourceUri)
             {
-                token.Audience = Namespaces.OAuth2SiteResourceUri;
+                token.Audience = Server.CurrentInstance.ServerUris.GetString(0);
             }
             else
             {
@@ -461,7 +484,50 @@ namespace Opc.Ua.AuthorizationService
             UriBuilder uri = new UriBuilder(token.Issuer);
             uri.Host = uri.Host.ToLowerInvariant();
             token.Issuer = uri.ToString();
-            
+
+            // remove the non-standard "scope" claim.
+            for (int ii = 0; ii < token.Claims.Count;)
+            {
+                if (token.Claims[ii].Type == "scope")
+                {
+                    token.Claims.RemoveAt(ii);
+                    continue;
+                }
+
+                ii++;
+            }
+
+            // build list of allowed scopes.
+            if (Configuration != null && Configuration.Scopes != null)
+            {
+                foreach (var mapping in Configuration.Scopes)
+                {
+                    if (mapping.Users != null)
+                    {
+                        foreach (var user in mapping.Users)
+                        {
+                            if (user == token.SubjectId)
+                            {
+                                token.Claims.Add(new Claim("scp", mapping.Scope));
+                                break;
+                            }
+                        }
+                    }
+
+                    if (mapping.Clients != null)
+                    {
+                        foreach (var user in mapping.Clients)
+                        {
+                            if (user == token.ClientId)
+                            {
+                                token.Claims.Add(new Claim("scp", mapping.Scope));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
             return token;
         }
     }

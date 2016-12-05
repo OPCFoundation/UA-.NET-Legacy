@@ -221,6 +221,94 @@ namespace Opc.Ua.Server
         #endregion
 
         #region Protected Members
+        protected virtual IList<RolePermissionType> GetDefaultRolePermissions()
+        {
+            var rolePermissions = new RolePermissionType[]
+            {
+                new RolePermissionType()
+                {
+                    RoleId = ObjectIds.WellKnownRole_Anonymous,
+                    Permissions = (uint)(PermissionType.Browse | PermissionType.Read | PermissionType.Call | PermissionType.ReceiveEvents)
+                },
+                new RolePermissionType()
+                {
+                    RoleId = ObjectIds.WellKnownRole_AuthenticatedUsers,
+                    Permissions = (uint)(PermissionType.Browse | PermissionType.Read | PermissionType.Call | PermissionType.ReceiveEvents)
+                },
+                new RolePermissionType()
+                {
+                    RoleId = ObjectIds.WellKnownRole_ConfigureAdmin,
+                    Permissions = (uint)(PermissionType.All)
+                },
+                new RolePermissionType()
+                {
+                    RoleId = ObjectIds.WellKnownRole_SecurityAdmin,
+                    Permissions = (uint)(PermissionType.All)
+                }
+            };
+
+            return rolePermissions;
+        }
+
+        protected virtual ServiceResult ReadDefaultRolePermissions(
+            ISystemContext context,
+            NodeState node,
+            ref object value)
+        {
+            var identity = context.UserIdentity as RoleBasedIdentity;
+
+            if (identity != null)
+            {
+                foreach (var role in identity.Roles)
+                {
+                    if (role == ObjectIds.WellKnownRole_SecurityAdmin || role == ObjectIds.WellKnownRole_ConfigureAdmin)
+                    {
+                        value = GetDefaultRolePermissions();
+                        return StatusCodes.Good;
+                    }
+                }
+            }
+
+            return StatusCodes.BadUserAccessDenied;
+        }
+
+        protected virtual ServiceResult ReadDefaultUserRolePermissions(
+            ISystemContext context,
+            NodeState node,
+            ref object value)
+        {
+            var availableRoles = new List<RolePermissionType>();
+
+            var identity = context.UserIdentity as RoleBasedIdentity;
+
+            if (identity != null)
+            {
+                IList<NodeId> roles = identity.Roles;
+
+                var possibleRoles = GetDefaultRolePermissions();
+
+                foreach (var possibleRole in possibleRoles)
+                {
+                    if (roles.Contains(possibleRole.RoleId))
+                    {
+                        availableRoles.Add(possibleRole);
+                    }
+                }
+            }
+
+            value = availableRoles.ToArray();
+            return StatusCodes.Good;
+        }
+
+        protected virtual ServiceResult ReadDefaultAccessRestrictions(
+            ISystemContext context,
+            NodeState node,
+            ref object value)
+        {
+            value = 0;
+            return StatusCodes.Good;
+        }
+
         /// <summary>
         /// The predefined nodes managed by the node manager.
         /// </summary>
@@ -1528,8 +1616,8 @@ namespace Opc.Ua.Server
                     value.Value           = null;
                     value.ServerTimestamp = DateTime.UtcNow;
                     value.SourceTimestamp = DateTime.MinValue;
-                    value.StatusCode      = StatusCodes.Good;
-
+                    value.StatusCode = StatusCodes.Good;
+ 
                     // check if the node is a area in memory.
                     if (handle.Node == null)
                     {
@@ -1541,7 +1629,7 @@ namespace Opc.Ua.Server
                         
                         continue;
                     }
-
+                
                     // read the attribute value.
                     errors[ii] = handle.Node.ReadAttribute(
                         systemContext,

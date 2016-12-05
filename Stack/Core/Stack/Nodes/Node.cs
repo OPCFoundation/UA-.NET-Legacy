@@ -258,6 +258,27 @@ namespace Opc.Ua
                 {
                     return true;
                 }
+
+                case Attributes.RolePermissions:
+                case Attributes.UserRolePermissions:
+                {
+                    if (m_rolePermissions == null)
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
+
+                case Attributes.AccessRestrictions:
+                {
+                    if (m_accessRestrictions == 0)
+                    {
+                        return false;
+                    }
+
+                    return true;
+                }
             }
 
             return false;
@@ -306,6 +327,7 @@ namespace Opc.Ua
             {
                 case Attributes.NodeId:
                 case Attributes.NodeClass:
+                case Attributes.UserRolePermissions:
                 {
                     return StatusCodes.BadNotWritable;
                 }
@@ -414,13 +436,16 @@ namespace Opc.Ua
         {
             switch (attributeId)
             {
-                case Attributes.NodeId:        return m_nodeId;
-                case Attributes.NodeClass:     return m_nodeClass;
-                case Attributes.BrowseName:    return m_browseName;
-                case Attributes.DisplayName:   return m_displayName;
-                case Attributes.Description:   return m_description;
-                case Attributes.WriteMask:     return m_writeMask;
-                case Attributes.UserWriteMask: return m_userWriteMask;
+                case Attributes.NodeId:              return m_nodeId;
+                case Attributes.NodeClass:           return m_nodeClass;
+                case Attributes.BrowseName:          return m_browseName;
+                case Attributes.DisplayName:         return m_displayName;
+                case Attributes.Description:         return m_description;
+                case Attributes.WriteMask:           return m_writeMask;
+                case Attributes.UserWriteMask:       return m_userWriteMask;
+                case Attributes.RolePermissions:     return m_rolePermissions;
+                case Attributes.UserRolePermissions: return m_userRolePermissions;
+                case Attributes.AccessRestrictions:  return m_accessRestrictions;
             }
 
             return false;
@@ -436,11 +461,47 @@ namespace Opc.Ua
         {
             switch (attributeId)
             {
-                case Attributes.BrowseName:    { m_browseName    = (QualifiedName)value; break; }
-                case Attributes.DisplayName:   { m_displayName   = (LocalizedText)value; break; }
-                case Attributes.Description:   { m_description   = (LocalizedText)value; break; }
-                case Attributes.WriteMask:     { m_writeMask     = (uint)value; break; }
-                case Attributes.UserWriteMask: { m_userWriteMask = (uint)value; break; }
+                case Attributes.BrowseName:         { m_browseName         = (QualifiedName)value; break; }
+                case Attributes.DisplayName:        { m_displayName        = (LocalizedText)value; break; }
+                case Attributes.Description:        { m_description        = (LocalizedText)value; break; }
+                case Attributes.WriteMask:          { m_writeMask          = (uint)value; break; }
+                case Attributes.UserWriteMask:      { m_userWriteMask      = (uint)value; break; }
+                case Attributes.AccessRestrictions: { m_accessRestrictions = (byte)value; break; }
+
+                case Attributes.RolePermissions:
+                {
+                    var rolePermissions = new RolePermissionTypeCollection();
+                    var eo = value as IList<ExtensionObject>;
+
+                    if (eo != null)
+                    {
+                        for (int ii = 0; ii < eo.Count; ii++)
+                        {
+                            var rp = eo[ii].Body as RolePermissionType;
+
+                            if (rp == null)
+                            {
+                                return StatusCodes.BadTypeMismatch;
+                            }
+
+                            rolePermissions.Add(rp);
+                        }
+                    }
+                    else
+                    {
+                        var rps = value as IList<RolePermissionType>;
+
+                        if (rps == null)
+                        {
+                            return StatusCodes.BadTypeMismatch;
+                        }
+
+                        rolePermissions.AddRange(rps);
+                    }
+
+                    m_rolePermissions = rolePermissions;
+                    return ServiceResult.Good;
+                }
 
                 default:
                 {
@@ -1570,6 +1631,7 @@ namespace Opc.Ua
             switch (attributeId)
             {
                 case Attributes.IsAbstract:
+                case Attributes.DataTypeDefinition:
                 {
                     return true;
                 }
@@ -1587,7 +1649,8 @@ namespace Opc.Ua
         {
             switch (attributeId)
             {
-                case Attributes.IsAbstract: return m_isAbstract;
+                case Attributes.IsAbstract:         return m_isAbstract;
+                case Attributes.DataTypeDefinition: return m_dataTypeDefinition;
             }
 
             return base.Read(attributeId);
@@ -1603,7 +1666,27 @@ namespace Opc.Ua
         {
             switch (attributeId)
             {
-                case Attributes.IsAbstract: { m_isAbstract = (bool)value; return ServiceResult.Good; }
+                case Attributes.IsAbstract: { m_isAbstract  = (bool)value; return ServiceResult.Good; }
+
+                case Attributes.DataTypeDefinition:
+                {
+                    ExtensionObject eo = value as ExtensionObject;
+
+                    if (eo != null)
+                    {
+                        value = eo.Body;
+                    }
+
+                    DataTypeDefinition dtd = value as DataTypeDefinition;
+
+                    if (dtd == null)
+                    {
+                        return StatusCodes.BadTypeMismatch;
+                    }
+
+                    m_dataTypeDefinition = new ExtensionObject(dtd);
+                    return ServiceResult.Good;
+                }
             }
 
             return base.Write(attributeId, value);

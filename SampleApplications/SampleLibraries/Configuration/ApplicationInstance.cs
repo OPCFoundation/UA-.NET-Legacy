@@ -1622,7 +1622,7 @@ namespace Opc.Ua.Configuration
                 id.StorePath,
                 configuration.ApplicationUri,
                 configuration.ApplicationName,
-                null,
+                id.SubjectName,
                 serverDomainNames,
                 keySize,
                 lifetimeInMonths);

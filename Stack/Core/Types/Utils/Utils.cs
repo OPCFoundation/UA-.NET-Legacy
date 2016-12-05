@@ -64,9 +64,9 @@ namespace Opc.Ua
         public const string UriSchemeOpcTcp = "opc.tcp";
 
         /// <summary>
-        /// The URI scheme for the UA TCP protocol over TLS/SSL. 
+        /// The URI scheme for the UA TCP protocol over Secure WebSockets. 
         /// </summary>
-        public const string UriSchemeOpcTls = "opc.tls";
+        public const string UriSchemeOpcWss = "opc.wss";
 
         /// <summary>
         /// The URI scheme for the .NET TCP protocol. 
@@ -84,9 +84,9 @@ namespace Opc.Ua
         public const int UaTcpDefaultPort = 4840;
 
         /// <summary>
-        /// The default port for the UA TCP protocol over TLS.
+        /// The default port for the UA TCP protocol over WebSockets.
         /// </summary>
-        public const int UaTlsDefaultPort = 4843;
+        public const int UaWebSocketsDefaultPort = 4843;
 
         /// <summary>
         /// The urls of the discovery servers on a node.

@@ -46,8 +46,12 @@ namespace Opc.Ua.GdsServer
             application.ApplicationType = ApplicationType.Server;
             application.ConfigSectionName = "Opc.Ua.ServerConfiguration";
 
+            AppDomain.CurrentDomain.SetData("DataDirectory", new System.IO.FileInfo(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName).DirectoryName);
+
             try
             {
+                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls11 | System.Net.SecurityProtocolType.Tls;
+
                 // process and command line arguments.
                 if (application.ProcessCommandLine())
                 {
@@ -71,12 +75,13 @@ namespace Opc.Ua.GdsServer
                 application.ApplicationConfiguration.CertificateValidator.CertificateValidation += CertificateValidator_CertificateValidation;
                 ApplicationInstance.SetUaValidationForHttps(application.ApplicationConfiguration.CertificateValidator);
 
+                var server = new GlobalDiscoveryServerServer();
+
                 // start authorization service.
                 var aus = new Opc.Ua.AuthorizationService.AuthorizationService();
-                aus.Start(application);
+                aus.Start(application, server);
 
                 // start the server.
-                var server = new GlobalDiscoveryServerServer();
                 application.Start(server);
 
                 // run the application interactively.

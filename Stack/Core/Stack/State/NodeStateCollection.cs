@@ -166,7 +166,6 @@ namespace Opc.Ua
         public void SaveAsNodeSet2(ISystemContext context, Stream ostrm, string version)
         {
             Opc.Ua.Export.UANodeSet nodeSet = new Opc.Ua.Export.UANodeSet();
-            nodeSet.Version = version;
             nodeSet.LastModified = DateTime.UtcNow;
             nodeSet.LastModifiedSpecified = true;
 

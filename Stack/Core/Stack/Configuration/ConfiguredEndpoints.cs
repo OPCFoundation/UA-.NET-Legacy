@@ -660,9 +660,9 @@ namespace Opc.Ua
                 description.TransportProfileUri = Profiles.UaTcpTransport;
                 description.Server.DiscoveryUrls.Add(description.EndpointUrl);
             }
-            if (description.EndpointUrl.StartsWith(Utils.UriSchemeOpcTls, StringComparison.Ordinal))
+            if (description.EndpointUrl.StartsWith(Utils.UriSchemeOpcWss, StringComparison.Ordinal))
             {
-                description.TransportProfileUri = Profiles.UaTlsTransport;
+                description.TransportProfileUri = Profiles.UaWssTransport;
                 description.Server.DiscoveryUrls.Add(description.EndpointUrl);
             }
             else if (description.EndpointUrl.StartsWith(Utils.UriSchemeHttps, StringComparison.Ordinal))
@@ -868,9 +868,9 @@ namespace Opc.Ua
                         m_description.TransportProfileUri = Profiles.UaTcpTransport;
                     }
 
-                    else if (url.Scheme == Utils.UriSchemeOpcTls)
+                    else if (url.Scheme == Utils.UriSchemeOpcWss)
                     {
-                        m_description.TransportProfileUri = Profiles.UaTlsTransport;
+                        m_description.TransportProfileUri = Profiles.UaWssTransport;
                     }
 
                     else if (url.Scheme == Utils.UriSchemeOpcAmqp)

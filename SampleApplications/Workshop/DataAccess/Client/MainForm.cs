@@ -64,7 +64,7 @@ namespace Quickstarts.DataAccessClient
             this.Icon = ClientUtils.GetAppIcon();
 
             ConnectServerCTRL.Configuration = m_configuration = configuration;
-            ConnectServerCTRL.ServerUrl = "opc.tcp://localhost:62547/Quickstarts/DataAccessServer";
+            ConnectServerCTRL.ServerUrl = "opc.tcp://localhost:58810/";
             this.Text = m_configuration.ApplicationName;
 
             // create the callback.
@@ -288,7 +288,7 @@ namespace Quickstarts.DataAccessClient
                 ReadValueIdCollection nodesToRead = new ReadValueIdCollection();
 
                 // attempt to read all possible attributes.
-                for (uint ii = Attributes.NodeClass; ii <= Attributes.UserExecutable; ii++)
+                for (uint ii = Attributes.NodeClass; ii <= Attributes.AccessRestrictions; ii++)
                 {
                     ReadValueId nodeToRead = new ReadValueId();
                     nodeToRead.NodeId = sourceId;

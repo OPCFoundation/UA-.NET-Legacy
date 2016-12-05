@@ -44,14 +44,16 @@ namespace Opc.Ua.Gds
             m_gds = gds;
 
             ServersListBox.Items.Clear();
-            ServersListBox.Items.Add("opc.tcp://198.101.219.116:58810/GlobalDiscoveryServer");
-
+            ServersListBox.Items.Add("opc.tcp://opcfoundation-prototyping.org:58810/GlobalDiscoveryServer");
+            ServersListBox.Items.Add("opc.tcp://gds.opc.org:58810/GlobalDiscoveryServer");
+             
             foreach (var serverUrl in serverUrls)
             {
                 ServersListBox.Items.Add(serverUrl);
             }
 
             ServerUrlTextBox.Text = gds.EndpointUrl;
+            UserNameCredentialsRB.Checked = true;
             OkButton.Enabled = Uri.IsWellFormedUriString(ServerUrlTextBox.Text.Trim(), UriKind.Absolute);
 
             if (base.ShowDialog(owner) != DialogResult.OK)
@@ -87,7 +89,20 @@ namespace Opc.Ua.Gds
                 {
                     Cursor = Cursors.WaitCursor;
 
-                    m_gds.AdminCredentials = await OAuth2Client.GetIdentityToken(m_gds.Application.ApplicationConfiguration, url);
+                    if (UserNameCredentialsRB.Checked)
+                    {
+                        var identity = new Opc.Ua.Client.Controls.UserNamePasswordDlg().ShowDialog(m_gds.AdminCredentials, "Provide GDS Administartor Credentials");
+
+                        if (identity != null)
+                        {
+                            m_gds.AdminCredentials = identity;
+                        }
+                    }
+                    else
+                    {
+                        m_gds.AdminCredentials = await OAuth2Client.GetIdentityToken(m_gds.Application.ApplicationConfiguration, url);
+                    }
+
                     m_gds.Connect(url);
                 }
                 finally
