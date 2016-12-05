@@ -146,6 +146,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="UA Server Controls.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -154,6 +157,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <!--<Exec Command="..\..\.nuget\nuget pack &quot;UA Core Library.csproj&quot; -Prop Configuration=Release"></Exec>-->
+    <Exec Command="..\..\..\.nuget\nuget pack &quot;UA Server Controls.csproj&quot; -Prop Configuration=$(Configuration) -OutputDirectory ..\..\..\Packages\"></Exec>
+  </Target>
   <PropertyGroup>
     <PreBuildEvent>
     </PreBuildEvent>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://opcfoundation.github.io/UA-.NET/</licenseUrl>
+    <projectUrl>http://opcfoundation.github.io/UA-.NET/</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>$description$</description>
+    <copyright>Copyright 2016</copyright>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="Opc.Ua.Core" version="1.2.336.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Configuration" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Core" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Data" targetFramework="" />
+      <frameworkAssembly assemblyName="System.IdentityModel" targetFramework="" />
+      <frameworkAssembly assemblyName="System.IdentityModel.Selectors" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Runtime.Serialization" targetFramework="" />
+      <frameworkAssembly assemblyName="System.ServiceModel" targetFramework="" />
+      <frameworkAssembly assemblyName="System.Xml" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

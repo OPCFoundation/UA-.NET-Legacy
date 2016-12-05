@@ -120,6 +120,9 @@
       <Name>UA Core Library</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="UA Client Library.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
@@ -128,6 +131,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <!--<Exec Command="..\..\.nuget\nuget pack &quot;UA Core Library.csproj&quot; -Prop Configuration=Release"></Exec>-->
+    <Exec Command="..\..\..\.nuget\nuget pack &quot;UA Client Library.csproj&quot; -Prop Configuration=$(Configuration) -OutputDirectory ..\..\..\Packages\"></Exec>
+  </Target>
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>
