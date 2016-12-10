@@ -237,7 +237,7 @@ namespace Opc.Ua.Bindings
                 await writer.WriteAsync("\r\n");
                 await writer.WriteAsync("Sec-WebSocket-Version: 13");
                 await writer.WriteAsync("\r\n");
-                await writer.WriteAsync("Sec-WebSocket-Protocol: application/opcua+uatcp");
+                await writer.WriteAsync("Sec-WebSocket-Protocol: opcua+uatcp");
                 await writer.WriteAsync("\r\n");
                 await writer.WriteAsync("\r\n");
             }

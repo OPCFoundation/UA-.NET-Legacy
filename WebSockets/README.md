@@ -25,6 +25,8 @@ The baked in tests connect once with security and once without. Connecting with 
 The executables for the .NET prototypes are run from $(UaNetRoot}/bin/$(Configuration).
 The executables for the ANSIC prototypes are run from $(UaAnsiCRoot}/prototypes/websockets/build/Debug.
 
+Note that getting the ANSI C samples and the .NET samples to interoperate requires that the client certificates be copied into the server trust lists. 
+
 ## Browser-based JavaScript Clients ##
 The WebSocketsWebHmi project is a simple ASP .NET project that has been published to [https://opcfoundation-prototyping.org/](https://opcfoundation-prototyping.org/). This page should allow a WebBrowser to connect the C# WebSockets Prototype Server running on any machine that the browser can reach provided the a TLS certificate signed by a trusted authority (from the perspective of the machine running the browser). 
 
