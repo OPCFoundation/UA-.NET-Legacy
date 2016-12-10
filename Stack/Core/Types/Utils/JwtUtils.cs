@@ -169,7 +169,7 @@ namespace Opc.Ua
             encoder.WriteString("resource", ResourceId);
             encoder.WriteStringArray("scopes", Scopes);
 
-            return encoder.Close();
+            return encoder.CloseAndReturnText();
         }
 
         public void FromJson(string json)

@@ -47,7 +47,7 @@ namespace Opc.Ua.Bindings
         private const string g_ImplementationString = "WebSocketTransportListener UA-{0} " + AssemblyVersionInfo.CurrentVersion;
 
         private long m_nextChannelId = 1000;
-        private Dictionary<uint, WebsocketServerChannel> m_channels = new Dictionary<uint, WebsocketServerChannel>();
+        private Dictionary<uint, WebSocketServerChannel> m_channels = new Dictionary<uint, WebSocketServerChannel>();
         #endregion
 
         #region Constructors
@@ -192,7 +192,7 @@ namespace Opc.Ua.Bindings
         #endregion
 
         #region Private Methods
-        private void CleanupChannel(WebsocketServerChannel channel)
+        private void CleanupChannel(WebSocketServerChannel channel)
         {
             if (!channel.IsDisposed)
             {
@@ -202,7 +202,12 @@ namespace Opc.Ua.Bindings
                 }
 
                 channel.IsDisposed = true;
-                channel.Serializer.Dispose();
+
+                if (channel.Serializer != null)
+                {
+                    channel.Serializer.Dispose();
+                }
+
                 channel.Connection.Dispose();
             }
         }
@@ -211,7 +216,7 @@ namespace Opc.Ua.Bindings
         {
             try
             {
-                Queue<WebsocketServerChannel> channelsToCleanup = new Queue<WebsocketServerChannel>();
+                Queue<WebSocketServerChannel> channelsToCleanup = new Queue<WebSocketServerChannel>();
 
                 lock (m_channels)
                 {
@@ -238,9 +243,11 @@ namespace Opc.Ua.Bindings
             }
         }
 
-        private class WebsocketServerChannel
+        private class WebSocketServerChannel
         {
             public uint ChannelId;
+            public uint RequestId;
+            public bool UseJsonEncoding;
             public UaTcpChannelSerializer Serializer;
             public WebSocketConnection Connection;
             public long LastMessageTime;
@@ -250,14 +257,16 @@ namespace Opc.Ua.Bindings
 
         private void Listener_ConnectionOpened(object sender, ConnectionStateEventArgs e)
         {
-            var channel = new WebsocketServerChannel()
+            var channel = new WebSocketServerChannel()
             {
                 ChannelId = (uint)Utils.IncrementIdentifier(ref m_nextChannelId),
-                Serializer = new UaTcpChannelSerializer(m_bufferManager, m_quotas, m_serverCertificate, null, m_descriptions),
                 Connection = e.Connection,
                 LastMessageTime = DateTime.UtcNow.Ticks
             };
 
+            // assume we are using UA TCP until we get the HTTP upgrade request.
+            channel.Serializer = new UaTcpChannelSerializer(m_bufferManager, m_quotas, m_serverCertificate, null, m_descriptions);
+            channel.UseJsonEncoding = false;
             channel.Serializer.ChannelId = channel.ChannelId;
 
             lock (m_channels)
@@ -270,7 +279,7 @@ namespace Opc.Ua.Bindings
 
         private void Listener_ConnectionClosed(object sender, ConnectionStateEventArgs e)
         {
-            var channel = e.Connection.Handle as WebsocketServerChannel;
+            var channel = e.Connection.Handle as WebSocketServerChannel;
 
             if (channel != null)
             {
@@ -285,6 +294,24 @@ namespace Opc.Ua.Bindings
 
         private void Listener_ReceiveMessage(object sender, ReceiveMessageEventArgs e)
         {
+            var channel = e.Connection.Handle as WebSocketServerChannel;
+
+            if (channel.UseJsonEncoding || channel.Connection.MessageEncoding == "opcua+uajson")
+            {
+                // convert channel to a JSON channel if this is the first request.
+                if (!channel.UseJsonEncoding)
+                {
+                    channel.UseJsonEncoding = true;
+                    channel.RequestId = 0;
+                    channel.Serializer.Dispose();
+                    channel.Serializer = null;
+                }
+
+                // no hello/ack or open secure channel when using JSON.
+                ProcessRequest(e.Connection, e.Message);
+                return;
+            }
+
             var message = e.Message;
             var messageType = BitConverter.ToUInt32(message.Array, message.Offset);
 
@@ -330,7 +357,7 @@ namespace Opc.Ua.Bindings
             ServiceResult result = null;
             ArraySegment<byte> message;
 
-            var channel = connection.Handle as WebsocketServerChannel;
+            var channel = connection.Handle as WebSocketServerChannel;
 
             if (channel == null)
             {
@@ -365,7 +392,7 @@ namespace Opc.Ua.Bindings
         {
             ArraySegment<byte> message;
 
-            var channel = connection.Handle as WebsocketServerChannel;
+            var channel = connection.Handle as WebSocketServerChannel;
 
             if (channel == null)
             {
@@ -418,7 +445,7 @@ namespace Opc.Ua.Bindings
         {
             ArraySegment<byte> message;
 
-            var channel = connection.Handle as WebsocketServerChannel;
+            var channel = connection.Handle as WebSocketServerChannel;
 
             if (channel == null)
             {
@@ -443,42 +470,53 @@ namespace Opc.Ua.Bindings
             }
         }
 
-        private class WebsocketProcessRequestAsyncState
+        private class WebSocketProcessRequestAsyncState
         {
             public uint RequestId;
-            public WebsocketServerChannel Channel;
+            public WebSocketServerChannel Channel;
         }   
 
         private void ProcessRequest(WebSocketConnection connection, ArraySegment<byte> chunk)
         {
-            var channel = connection.Handle as WebsocketServerChannel;
+            var channel = connection.Handle as WebSocketServerChannel;
 
-            if (channel == null)
-            {
-                m_bufferManager.ReturnBuffer(chunk.Array, "WebSocketTransportListener.ProcessRequest");
-                var message = channel.Serializer.ConstructErrorMessage(new ServiceResult(StatusCodes.BadSecureChannelIdInvalid));
-                connection.SendMessage(message);
-                return;
-            }
-
+            IServiceRequest request = null;
             channel.LastMessageTime = DateTime.UtcNow.Ticks;
 
             try
             {
                 uint requestId = 0;
-                IServiceRequest request = channel.Serializer.ProcessRequest(chunk, out requestId);
+
+                if (channel.UseJsonEncoding)
+                {
+                    request = JsonDecoder.DecodeMessage(chunk, null, m_quotas.MessageContext) as IServiceRequest;
+
+                    if (request == null)
+                    {
+                        throw new ServiceResultException(ServiceResult.Create(StatusCodes.BadStructureMissing, "Could not parse request body."));
+                    }
+
+                    m_bufferManager.ReturnBuffer(chunk.Array, "WebSocketTransportListener.ProcessRequest");
+                    requestId = ++channel.RequestId;
+                }
+                else
+                {
+                    request = channel.Serializer.ProcessRequest(chunk, out requestId);
+                }
 
                 if (request != null)
                 {
-                    var ad = new WebsocketProcessRequestAsyncState()
+                    var ad = new WebSocketProcessRequestAsyncState()
                     {
                         Channel = channel,
                         RequestId = requestId
                     };
 
+                    var endpoint = (channel.Serializer != null) ? channel.Serializer.EndpointDescription : m_descriptions[0];
+
                     m_callback.QueueRequest(
                         m_listenerId,
-                        channel.Serializer.EndpointDescription,
+                        endpoint,
                         request,
                         OnRequestProcessed,
                         ad);
@@ -495,27 +533,64 @@ namespace Opc.Ua.Bindings
                     {
                         CleanupChannel(channel);
                     }
-
-                    return;
                 }
 
-                var message = channel.Serializer.ConstructErrorMessage(ServiceResult.Create(exception, StatusCodes.BadTcpInternalError, "Could not process request."));
-                connection.SendMessage(message);
+                if (!channel.IsDisposed)
+                {
+                    // send a UATCP error message if not using JSON encoding.
+                    if (!channel.UseJsonEncoding)
+                    {
+                        var message = channel.Serializer.ConstructErrorMessage(ServiceResult.Create(exception, StatusCodes.BadTcpInternalError, "Could not process request."));
+                        connection.SendMessage(message);
+                    }
+
+                    // send a JSON encoded response.
+                    else
+                    {
+                        ServiceFault fault = EndpointBase.CreateFault(request, exception);
+                        SendJsonResponse(channel, fault);
+                    }
+                }
+
                 return;
+            }
+        }
+
+        private void SendJsonResponse(WebSocketServerChannel channel, IServiceResponse response)
+        {
+            var buffer = m_bufferManager.TakeBuffer(m_quotas.MaxBufferSize, "WebSocketTransportListener.SendJsonResponse");
+
+            try
+            {
+                var message = JsonEncoder.EncodeMessage(response, buffer, m_quotas.MessageContext);
+                channel.Connection.SendMessage(message);
+            }
+            catch (Exception e)
+            {
+                m_bufferManager.ReturnBuffer(buffer, "WebSocketTransportListener.SendJsonResponse");
+                Utils.Trace(e, "WEBSOCKET LISTENER - Unexpected error sending JSON response. [{0}] {1}");
             }
         }
 
         private void OnRequestProcessed(IAsyncResult result)
         {
-            WebsocketProcessRequestAsyncState ad = (WebsocketProcessRequestAsyncState)result.AsyncState;
+            WebSocketProcessRequestAsyncState ad = (WebSocketProcessRequestAsyncState)result.AsyncState;
 
             try
             {
                 if (!ad.Channel.IsDisposed)
                 {
                     var response = m_callback.FinishRequest(result);
-                    var message = ad.Channel.Serializer.ConstructResponse(ad.RequestId, response);
-                    ad.Channel.Connection.SendMessage(message);
+
+                    if (!ad.Channel.UseJsonEncoding)
+                    {
+                        var message = ad.Channel.Serializer.ConstructResponse(ad.RequestId, response);
+                        ad.Channel.Connection.SendMessage(message);
+                    }
+                    else
+                    {
+                        SendJsonResponse(ad.Channel, response);
+                    }
                 }
             }
             catch (Exception e)

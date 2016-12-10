@@ -33,6 +33,7 @@ namespace Opc.Ua.Bindings
     {
         private bool m_disposed;
         private X509Certificate2 m_certificate;
+        private X509Certificate2 m_tlsCertificate;
         private TcpListener m_listener;
         private BufferManager m_bufferManager;
         private X509CertificateValidator m_certificateValidator;
@@ -45,7 +46,34 @@ namespace Opc.Ua.Bindings
         public WebSocketListener(Uri endpointUrl, TransportListenerSettings settings)
         {
             m_disposed = false;
-            m_certificate = settings.ServerCertificate;
+            m_tlsCertificate = m_certificate = settings.ServerCertificate;
+
+            // use a certificate that web browser clients would accept if one is available.
+            WindowsCertificateStore store = new WindowsCertificateStore();
+            store.Open("LocalMachine\\My");
+
+            foreach (var certificate in store.Enumerate())
+            {
+                if (certificate.Subject.Contains(endpointUrl.DnsSafeHost) && certificate.HasPrivateKey)
+                {
+                    try
+                    {
+                        // verify private key is accessible.
+                        if (certificate.PrivateKey.KeySize >= 1024)
+                        {
+                            m_tlsCertificate = certificate;
+                            break;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // ignore bad certificates.
+                    }
+                }
+            }
+
+            store.Close();
+
             m_bufferManager = new BufferManager("WebSocketListener", (int)Int32.MaxValue, settings.Configuration.MaxBufferSize);
             m_certificateValidator = settings.CertificateValidator;
         }
@@ -224,9 +252,11 @@ namespace Opc.Ua.Bindings
         {
             do
             {
+                ArraySegment<byte> message = new ArraySegment<byte>();
+
                 try
                 {
-                    var message = await connection.ReceiveMessage();
+                    message = await connection.ReceiveMessage();
 
                     var callback = ReceiveMessage;
 
@@ -244,6 +274,8 @@ namespace Opc.Ua.Bindings
                 }
                 catch (Exception exception)
                 {
+                    m_bufferManager.ReturnBuffer(message.Array, "WebScoketListener.MonitorConnection");
+
                     var callback = ConnectionClosed;
 
                     if (callback != null)
@@ -280,7 +312,7 @@ namespace Opc.Ua.Bindings
             WebSocketConnection connection = new WebSocketConnection(client, stream, m_bufferManager, true);
 
             var authenticator = new SslStreamAuthenticator() { Listener = this };
-            var tlsstream = authenticator.AuthenticateAsServer(connection.TcpClient, m_certificate);
+            var tlsstream = authenticator.AuthenticateAsServer(connection.TcpClient, m_tlsCertificate);
             connection.Upgrade(tlsstream);
 
             var callback = ConnectionOpened;

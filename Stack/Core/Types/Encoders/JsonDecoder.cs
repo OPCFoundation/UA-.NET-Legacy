@@ -103,20 +103,27 @@ namespace Opc.Ua
         /// </summary>
         public static IEncodeable DecodeMessage(byte[] buffer, System.Type expectedType, ServiceMessageContext context)
         {
-            if (buffer == null) throw new ArgumentNullException("buffer");
+            return DecodeMessage(new ArraySegment<byte>(buffer), expectedType, context);
+        }
+
+        /// <summary>
+        /// Decodes a message from a buffer.
+        /// </summary>
+        public static IEncodeable DecodeMessage(ArraySegment<byte> buffer, System.Type expectedType, ServiceMessageContext context)
+        {
             if (context == null) throw new ArgumentNullException("context");
 
             // check that the max message size was not exceeded.
-            if (context.MaxMessageSize > 0 && context.MaxMessageSize < buffer.Length)
+            if (context.MaxMessageSize > 0 && context.MaxMessageSize < buffer.Count)
             {
                 throw ServiceResultException.Create(
                     StatusCodes.BadEncodingLimitsExceeded,
                     "MaxMessageSize {0} < {1}",
                     context.MaxMessageSize,
-                    buffer.Length);
+                    buffer.Count);
             }
 
-            JsonDecoder decoder = new JsonDecoder(UTF8Encoding.UTF8.GetString(buffer), context);
+            JsonDecoder decoder = new JsonDecoder(UTF8Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count), context);
 
             try
             {
