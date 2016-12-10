@@ -30,7 +30,7 @@ Note that getting the ANSI C samples and the .NET samples to interoperate requir
 ## Browser-based JavaScript Clients ##
 The WebSocketsWebHmi project is a simple ASP .NET project that has been published to [https://opcfoundation-prototyping.org/](https://opcfoundation-prototyping.org/). This page should allow a WebBrowser to connect the C# WebSockets Prototype Server running on any machine that the browser can reach provided the a TLS certificate signed by a trusted authority (from the perspective of the machine running the browser). 
 
-The facilitate this requirement C# WebSockets Prototype Server checks the 'LocalMachine\My' store for a valid TLS certificate that matches the domain of the URL with a private key that the process can access. If one exists it uses this certificate as its TLS certificate instead of its application instance certificate. At the application level (i.e. the certificates used in the CreateSession/ActivateSession handshake) the C# WebSockets Prototype Server still uses its application instance certificate. 
+The facilitate this requirement C# WebSockets Prototype Server checks the 'LocalMachine\My' store for a valid TLS certificate that matches the domain of the URL with a private key that the process can access. If one exists it uses this certificate as its TLS certificate instead of its application instance certificate. At the application level (i.e. the certificates used in the CreateSession/ActivateSession handshake) the C# WebSockets Prototype Server still uses its application instance certificate. Note that this feature requires that the Server application be lauched as an adminitrator.
 
 
 
