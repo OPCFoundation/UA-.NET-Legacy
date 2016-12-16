@@ -94,7 +94,7 @@ namespace Opc.Ua.Client
                 m_reconnectFailed = false;
                 m_reconnectPeriod = reconnectPeriod;
                 m_callback = callback;
-                m_reconnectTimer = new System.Threading.Timer(OnReconnect, null, reconnectPeriod, reconnectPeriod);
+                m_reconnectTimer = new System.Threading.Timer(OnReconnect, null, reconnectPeriod, Timeout.Infinite);
             }
         }
         #endregion
@@ -132,6 +132,16 @@ namespace Opc.Ua.Client
             catch (Exception exception)
             {
                 Utils.Trace(exception, "Unexpected error during reconnect.");
+            }
+            finally
+            {
+                lock (m_lock)
+                {
+                    if (m_reconnectTimer != null)
+                    {
+                        m_reconnectTimer.Change(m_reconnectPeriod, Timeout.Infinite);
+                    }
+                }
             }
         }
 
