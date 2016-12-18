@@ -387,7 +387,32 @@ namespace Opc.Ua.Sample.Controls
             }
             catch (Exception exception)
             {
-				GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
+                GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
+            }
+        }
+
+        private void DiscoverServersOnNetworkMI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ServerOnNetwork serverOnNetwork = new DiscoveredServerOnNetworkListDlg().ShowDialog(null, m_configuration);
+
+                if (serverOnNetwork != null)
+                {
+                    ApplicationDescription server = new ApplicationDescription();
+                    server.ApplicationName = serverOnNetwork.ServerName;
+                    server.DiscoveryUrls.Add(serverOnNetwork.DiscoveryUrl);
+
+                    ConfiguredEndpoint endpoint = new ConfiguredEndpoint(server, EndpointConfiguration.Create(m_configuration));
+
+                    this.EndpointSelectorCTRL.SelectedEndpoint = endpoint;
+
+                    return;
+                }
+            }
+            catch (Exception exception)
+            {
+                GuiUtils.HandleException(this.Text, MethodBase.GetCurrentMethod(), exception);
             }
         }
 
