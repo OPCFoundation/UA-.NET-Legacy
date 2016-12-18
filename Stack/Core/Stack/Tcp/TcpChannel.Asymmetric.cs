@@ -236,6 +236,7 @@ namespace Opc.Ua.Bindings
                 }
 
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     return 32;
                 }
@@ -285,6 +286,7 @@ namespace Opc.Ua.Bindings
             switch (SecurityPolicyUri)
             {
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     return Rsa_GetPlainTextBlockSize(receiverCertificate, true);
                 }
@@ -310,6 +312,7 @@ namespace Opc.Ua.Bindings
             switch (SecurityPolicyUri)
             {
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     return Rsa_GetCipherTextBlockSize(receiverCertificate, true);
                 }
@@ -410,8 +413,9 @@ namespace Opc.Ua.Bindings
             {
                 case SecurityPolicies.Basic256:
                 case SecurityPolicies.Basic128Rsa15:
+                case SecurityPolicies.Basic256Sha256:
                 {
-                    return RsaPkcs15Sha1_GetSignatureLength(senderCertificate);
+                    return RsaPkcs15_GetSignatureLength(senderCertificate);
                 }
 
                 default:
@@ -1311,19 +1315,25 @@ namespace Opc.Ua.Bindings
             ArraySegment<byte> dataToSign,
             X509Certificate2   senderCertificate)
         {
+            
             switch (SecurityPolicyUri)
             {
-                default:
-                case SecurityPolicies.None:
-                {
-                    return null;
-                }
-
                 case SecurityPolicies.Basic256:
                 case SecurityPolicies.Basic128Rsa15:
                 {
                     return RsaPkcs15Sha1_Sign(dataToSign, senderCertificate);
                 }
+                case SecurityPolicies.Basic256Sha256:
+                {                    
+                    return RsaPkcs15Sha256_Sign(dataToSign, senderCertificate);
+                }
+                case SecurityPolicies.None:
+                default:
+                {
+                    return null;
+                }
+
+
             }
         }
 
@@ -1343,15 +1353,20 @@ namespace Opc.Ua.Bindings
             // verify signature.
             switch (SecurityPolicyUri)
             {
-                case SecurityPolicies.None:
-                {
-                    return true;
-                }
 
                 case SecurityPolicies.Basic128Rsa15:
                 case SecurityPolicies.Basic256:
                 {
                     return RsaPkcs15Sha1_Verify(dataToVerify, signature, senderCertificate);
+                }
+                case SecurityPolicies.Basic256Sha256:
+                {
+                    return RsaPkcs15Sha256_Verify(dataToVerify, signature, senderCertificate);
+                }
+
+                case SecurityPolicies.None:
+                {
+                    return true;
                 }
 
                 default:
@@ -1388,11 +1403,13 @@ namespace Opc.Ua.Bindings
                 }
 
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     return Rsa_Encrypt(dataToEncrypt, headerToCopy, receiverCertificate, true);
                 }
-
+                
                 case SecurityPolicies.Basic128Rsa15:
+                
                 {
                     return Rsa_Encrypt(dataToEncrypt, headerToCopy, receiverCertificate, false);
                 }
@@ -1425,6 +1442,7 @@ namespace Opc.Ua.Bindings
                 }
 
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     return Rsa_Decrypt(dataToDecrypt, headerToCopy, receiverCertificate, true);
                 }

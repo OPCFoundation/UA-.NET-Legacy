@@ -67,7 +67,7 @@ namespace Opc.Ua
         /// <summary>
         /// Returns the length of a RSA PKCS#1 v1.5 signature of a SHA1 digest.
         /// </summary>
-        public static int RsaPkcs15Sha1_GetSignatureLength(X509Certificate2 signingCertificate)
+        public static int RsaPkcs15_GetSignatureLength(X509Certificate2 signingCertificate)
         {
             RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)signingCertificate.PublicKey.Key;
 
@@ -132,6 +132,74 @@ namespace Opc.Ua
 
             // verify signature.
             return rsa.VerifyHash(digest, "SHA1", signature);
+        }
+
+        /// <summary>
+        /// Computes an RSA/SHA1 PKCS#1 v1.5 signature.
+        /// </summary>
+        public static byte[] RsaPkcs15Sha256_Sign(
+            ArraySegment<byte> dataToSign,
+            X509Certificate2 signingCertificate)
+        {
+            // extract the private key.
+            RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)signingCertificate.PrivateKey;
+
+            if (rsa == null)
+            {
+                throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "No private key for certificate.");
+            }
+			
+			// Instantiate enhanced crypto provider that supports SHA256 
+            byte[] privateKeyBlob = rsa.ExportCspBlob(true);
+            var enhCsp = new RSACryptoServiceProvider().CspKeyContainerInfo;
+            string mKeyContainerName = rsa.CspKeyContainerInfo.KeyContainerName;
+            var cspparams = new CspParameters
+            (
+                enhCsp.ProviderType, enhCsp.ProviderName, mKeyContainerName
+            );
+
+            RSACryptoServiceProvider rsa2 = new RSACryptoServiceProvider(rsa.KeySize, cspparams);
+            rsa2.ImportCspBlob(privateKeyBlob);
+
+            // compute the hash of message.
+            MemoryStream istrm = new MemoryStream(dataToSign.Array, dataToSign.Offset, dataToSign.Count, false);
+
+            SHA256 hash = new SHA256Managed();
+            byte[] digest = hash.ComputeHash(istrm);
+
+            istrm.Close();
+
+            // create the signature.
+            return rsa2.SignHash(digest, "SHA256");
+        }
+
+        /// <summary>
+        /// Verifies an RSA/SHA1 PKCS#1 v1.5 signature.
+        /// </summary>
+        public static bool RsaPkcs15Sha256_Verify(
+            ArraySegment<byte> dataToVerify,
+            byte[] signature,
+            X509Certificate2 signingCertificate)
+        {
+            // extract the private key.
+            RSACryptoServiceProvider rsa = (RSACryptoServiceProvider)signingCertificate.PublicKey.Key;
+
+            if (rsa == null)
+            {
+                throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "No public key for certificate.");
+            }
+
+
+            // compute the hash of message.
+            MemoryStream istrm = new MemoryStream(dataToVerify.Array, dataToVerify.Offset, dataToVerify.Count, false);
+
+            SHA256 hash = new SHA256Managed();
+            byte[] digest = hash.ComputeHash(istrm);
+
+            istrm.Close();
+
+            // verify signature.
+            return rsa.VerifyHash(digest, "SHA256", signature);
         }
 
         /// <summary>

@@ -102,7 +102,7 @@ namespace Workshop
                     configuration.ApplicationName,
                     null,
                     null,
-                    1024,
+                    2048,
                     300);
 
                 Console.WriteLine("Created client certificate: {0}", clientCertificate.Subject);
@@ -194,7 +194,7 @@ namespace Workshop
                     configuration.ApplicationName,
                     null,
                     null,
-                    1024,
+                    2048,
                     300);
 
                 Console.WriteLine("Created server certificate: {0}", serverCertificate.Subject);

@@ -2431,8 +2431,30 @@ namespace Opc.Ua
         public static byte[] PSHA1(byte[] secret, string label, byte[] data, int offset, int length)
         {
             if (secret == null) throw new ArgumentNullException("secret");
-            if (offset < 0)     throw new ArgumentOutOfRangeException("offset");
-            if (length < 0)     throw new ArgumentOutOfRangeException("offset");
+            // create the hmac.
+            HMACSHA1 hmac = new HMACSHA1(secret);
+            return PSHA(hmac, label, data, offset, length);
+        }
+
+        /// <summary>
+        /// Generates a Pseudo random sequence of bits using the P_SHA256 alhorithm.
+        /// </summary>
+        public static byte[] PSHA256(byte[] secret, string label, byte[] data, int offset, int length)
+        {
+            if (secret == null) throw new ArgumentNullException("secret");
+            // create the hmac.
+            HMACSHA256 hmac = new HMACSHA256(secret);
+            return PSHA(hmac, label, data, offset, length);
+        }
+
+        /// <summary>
+        /// Generates a Pseudo random sequence of bits using the HMAC algorithm.
+        /// </summary>
+        private static byte[] PSHA(HMAC hmac, string label, byte[] data, int offset, int length)
+        {
+            if (hmac == null) throw new ArgumentNullException("hmac");
+            if (offset < 0) throw new ArgumentOutOfRangeException("offset");
+            if (length < 0) throw new ArgumentOutOfRangeException("length");
 
             byte[] seed = null;
 
@@ -2447,7 +2469,7 @@ namespace Opc.Ua
             {
                 if (seed != null)
                 {
-                    byte[] seed2 = new byte[seed.Length+data.Length];
+                    byte[] seed2 = new byte[seed.Length + data.Length];
                     seed.CopyTo(seed2, 0);
                     data.CopyTo(seed2, seed.Length);
                     seed = seed2;
@@ -2461,17 +2483,14 @@ namespace Opc.Ua
             // check for a valid seed.
             if (seed == null)
             {
-                throw new ServiceResultException(StatusCodes.BadUnexpectedError, "The PSHA1 algorithm requires a non-null seed.");
+                throw new ServiceResultException(StatusCodes.BadUnexpectedError, "The HMAC algorithm requires a non-null seed.");
             }
 
-            // create the hmac.
-            HMACSHA1 hmac = new HMACSHA1(secret); 
-           
             byte[] keySeed = hmac.ComputeHash(seed);
-            byte[] prfSeed = new byte[hmac.HashSize/8 + seed.Length];
+            byte[] prfSeed = new byte[hmac.HashSize / 8 + seed.Length];
             Array.Copy(keySeed, prfSeed, keySeed.Length);
             Array.Copy(seed, 0, prfSeed, keySeed.Length, seed.Length);
-                        
+
             // create buffer with requested size.
             byte[] output = new byte[length];
 

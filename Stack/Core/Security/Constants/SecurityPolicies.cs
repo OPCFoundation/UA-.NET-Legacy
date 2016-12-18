@@ -147,9 +147,9 @@ namespace Opc.Ua
                 }
 
                 case Basic256Sha256:
-                /*{
+                {
                     return SecurityAlgorithmSuite.Basic256Sha256;
-                }*/
+                }
 
                 default:
                 {
@@ -184,6 +184,7 @@ namespace Opc.Ua
             switch (securityPolicyUri)
             {
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     encryptedData.Algorithm = SecurityAlgorithms.RsaOaep;
                     encryptedData.Data = RsaUtils.Encrypt(plainText, certificate, true);
@@ -235,6 +236,7 @@ namespace Opc.Ua
             switch (securityPolicyUri)
             {
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     if (dataToDecrypt.Algorithm == SecurityAlgorithms.RsaOaep)
                     {
@@ -308,6 +310,12 @@ namespace Opc.Ua
                     signatureData.Signature = RsaUtils.RsaPkcs15Sha1_Sign(new ArraySegment<byte>(dataToSign), certificate);
                     break;
                 }
+                case SecurityPolicies.Basic256Sha256:
+                {
+                    signatureData.Algorithm = SecurityAlgorithms.RsaSha256;
+                    signatureData.Signature = RsaUtils.RsaPkcs15Sha256_Sign(new ArraySegment<byte>(dataToSign), certificate);
+                    break;
+                }
 
                 case SecurityPolicies.None:
                 {
@@ -350,21 +358,24 @@ namespace Opc.Ua
             {
                 case SecurityPolicies.Basic256:
                 case SecurityPolicies.Basic128Rsa15:
+                case SecurityPolicies.Basic256Sha256:
                 {
-                    if (signature.Algorithm == SecurityAlgorithms.RsaSha1)
+                    switch (signature.Algorithm)
                     {
-                        return RsaUtils.RsaPkcs15Sha1_Verify(new ArraySegment<byte>(dataToVerify), signature.Signature, certificate);
+                        case SecurityAlgorithms.RsaSha1:
+                            return RsaUtils.RsaPkcs15Sha1_Verify(new ArraySegment<byte>(dataToVerify), signature.Signature, certificate);
+                        case SecurityAlgorithms.RsaSha256:
+                            return RsaUtils.RsaPkcs15Sha256_Verify(new ArraySegment<byte>(dataToVerify), signature.Signature, certificate);
+                        default:
+                            break;
                     }
-                        
                     break;
                 }
-
                 // always accept signatures if security is not used.
                 case SecurityPolicies.None:
                 {
                     return true;
                 }
-
                 default:
                 {
                     throw ServiceResultException.Create(
