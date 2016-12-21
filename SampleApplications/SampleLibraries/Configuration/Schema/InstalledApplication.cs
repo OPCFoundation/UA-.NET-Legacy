@@ -77,7 +77,7 @@ namespace Opc.Ua.Configuration
             ServicePassword = null;
             ServiceDescription = null;
             LocallyRegisterOIDs = false;
-            MinimumKeySize = 1024;
+            MinimumKeySize = 2048;
             LifeTimeInMonths = 300;
     	}
     	#endregion

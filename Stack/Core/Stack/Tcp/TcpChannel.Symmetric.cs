@@ -147,8 +147,17 @@ namespace Opc.Ua.Bindings
                     break;
                 }
 
-                default:
+                case SecurityPolicies.Basic256Sha256:
+                {
+                    m_hmacHashSize = 32;
+                    m_signatureKeySize = 32;
+                    m_encryptionKeySize = 32;
+                    m_encryptionBlockSize = 16;
+                    break;
+                }
+
                 case SecurityPolicies.None:
+                default:
                 {
                     m_hmacHashSize = 0;
                     m_signatureKeySize = 0;
@@ -168,18 +177,30 @@ namespace Opc.Ua.Bindings
             {
                 return;
             }
-            
-            token.ClientSigningKey           = Utils.PSHA1(token.ServerNonce, null, token.ClientNonce, 0, m_signatureKeySize);
-            token.ClientEncryptingKey        = Utils.PSHA1(token.ServerNonce, null, token.ClientNonce, m_signatureKeySize, m_encryptionKeySize);
-            token.ClientInitializationVector = Utils.PSHA1(token.ServerNonce, null, token.ClientNonce, m_signatureKeySize + m_encryptionKeySize, m_encryptionBlockSize);
-            token.ServerSigningKey           = Utils.PSHA1(token.ClientNonce, null, token.ServerNonce, 0, m_signatureKeySize);
-            token.ServerEncryptingKey        = Utils.PSHA1(token.ClientNonce, null, token.ServerNonce, m_signatureKeySize, m_encryptionKeySize);
-            token.ServerInitializationVector = Utils.PSHA1(token.ClientNonce, null, token.ServerNonce, m_signatureKeySize + m_encryptionKeySize, m_encryptionBlockSize);
+
+            if (SecurityPolicyUri == SecurityPolicies.Basic256Sha256)
+            {
+                token.ClientSigningKey              = Utils.PSHA256(token.ServerNonce, null, token.ClientNonce, 0, m_signatureKeySize);
+                token.ClientEncryptingKey           = Utils.PSHA256(token.ServerNonce, null, token.ClientNonce, m_signatureKeySize, m_encryptionKeySize);
+                token.ClientInitializationVector    = Utils.PSHA256(token.ServerNonce, null, token.ClientNonce, m_signatureKeySize + m_encryptionKeySize, m_encryptionBlockSize);
+                token.ServerSigningKey              = Utils.PSHA256(token.ClientNonce, null, token.ServerNonce, 0, m_signatureKeySize);
+                token.ServerEncryptingKey           = Utils.PSHA256(token.ClientNonce, null, token.ServerNonce, m_signatureKeySize, m_encryptionKeySize);
+                token.ServerInitializationVector    = Utils.PSHA256(token.ClientNonce, null, token.ServerNonce, m_signatureKeySize + m_encryptionKeySize, m_encryptionBlockSize);
+            }
+            else
+            {
+                token.ClientSigningKey              = Utils.PSHA1(token.ServerNonce, null, token.ClientNonce, 0, m_signatureKeySize);
+                token.ClientEncryptingKey           = Utils.PSHA1(token.ServerNonce, null, token.ClientNonce, m_signatureKeySize, m_encryptionKeySize);
+                token.ClientInitializationVector    = Utils.PSHA1(token.ServerNonce, null, token.ClientNonce, m_signatureKeySize + m_encryptionKeySize, m_encryptionBlockSize);
+                token.ServerSigningKey              = Utils.PSHA1(token.ClientNonce, null, token.ServerNonce, 0, m_signatureKeySize);
+                token.ServerEncryptingKey           = Utils.PSHA1(token.ClientNonce, null, token.ServerNonce, m_signatureKeySize, m_encryptionKeySize);
+                token.ServerInitializationVector    = Utils.PSHA1(token.ClientNonce, null, token.ServerNonce, m_signatureKeySize + m_encryptionKeySize, m_encryptionBlockSize);
+            }
 
             switch (SecurityPolicyUri)
             {
                 case SecurityPolicies.Basic128Rsa15:
-                case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256:                
                 {
                     // create encryptors.                    
                     RijndaelManaged encryptor = new RijndaelManaged();
@@ -205,9 +226,35 @@ namespace Opc.Ua.Bindings
                     token.ClientHmac = new HMACSHA1(token.ClientSigningKey);
                     break;
                 }
+                case SecurityPolicies.Basic256Sha256:
+                {
+                    // create encryptors.                    
+                    RijndaelManaged encryptor = new RijndaelManaged();
 
-                default:
-                case SecurityPolicies.None:             
+                    encryptor.Key = token.ClientEncryptingKey;
+                    encryptor.IV = token.ClientInitializationVector;
+                    encryptor.Mode = CipherMode.CBC;
+                    encryptor.Padding = PaddingMode.None;
+
+                    token.ClientEncryptor = encryptor;
+
+                    encryptor = new RijndaelManaged();
+
+                    encryptor.Key = token.ServerEncryptingKey;
+                    encryptor.IV = token.ServerInitializationVector;
+                    encryptor.Mode = CipherMode.CBC;
+                    encryptor.Padding = PaddingMode.None;
+
+                    token.ServerEncryptor = encryptor;
+
+                    // create HMACs.
+                    token.ServerHmac = new HMACSHA256(token.ServerSigningKey);
+                    token.ClientHmac = new HMACSHA256(token.ClientSigningKey);
+                    break;
+                }
+                
+                case SecurityPolicies.None:
+                default:                
                 {
                     break;
                 }
@@ -562,6 +609,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic128Rsa15:
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     return SymmetricSign(token, dataToSign, useClientKeys);
                 }
@@ -587,6 +635,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic128Rsa15:
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     return SymmetricVerify(token, signature, dataToVerify, useClientKeys);
                 }
@@ -613,6 +662,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic256:
                 case SecurityPolicies.Basic128Rsa15:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     SymmetricEncrypt(token, dataToEncrypt, useClientKeys);
                     break;
@@ -635,6 +685,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic256:
                 case SecurityPolicies.Basic128Rsa15:
+                case SecurityPolicies.Basic256Sha256:
                 {
                     SymmetricDecrypt(token, dataToDecrypt, useClientKeys);
                     break;

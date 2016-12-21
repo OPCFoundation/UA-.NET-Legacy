@@ -367,7 +367,7 @@ namespace Opc.Ua.Client.Controls
             }
 
             // check the certificate.
-            X509Certificate2 certificate = CheckApplicationInstanceCertificate(configuration, 1024, interactive, true);
+            X509Certificate2 certificate = CheckApplicationInstanceCertificate(configuration, 2048, interactive, true);
 
             if (certificate == null)
             {
@@ -502,7 +502,7 @@ namespace Opc.Ua.Client.Controls
         /// </summary>
         public static X509Certificate2 CheckApplicationInstanceCertificate(ApplicationConfiguration configuration)
         {
-            return CheckApplicationInstanceCertificate(configuration, 1024, Environment.UserInteractive, true);
+            return CheckApplicationInstanceCertificate(configuration, 2048, Environment.UserInteractive, true);
         }
 
         /// <summary>

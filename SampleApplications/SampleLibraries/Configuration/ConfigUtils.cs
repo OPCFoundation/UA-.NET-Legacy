@@ -1121,7 +1121,7 @@ namespace Opc.Ua.Configuration
                 application.ApplicationName,
                 Utils.Format("CN={0}/DC={1}", application.ApplicationName, domains[0]),
                 domains,
-                1024,
+                2048,
                 300);
 
             CertificateIdentifier applicationCertificate = Opc.Ua.Security.SecuredApplication.FromCertificateIdentifier(application.ApplicationCertificate);
