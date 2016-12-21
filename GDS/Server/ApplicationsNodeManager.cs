@@ -463,7 +463,7 @@ namespace Opc.Ua.GdsServer
         /// </summary>
         /// <remarks>
         /// The externalReferences is an out parameter that allows the node manager to link to nodes
-        /// in other node managers. For example, the 'Objects' node is managed by the CoreNodeManager and
+        /// in other node managers. For example, the 'Objects' node is managed by the CoreNodeManager andServer_ServerCapabilities_Roles
         /// should have a reference to the root folder node(s) exposed by this node manager.  
         /// </remarks>
         public override void CreateAddressSpace(IDictionary<NodeId, IList<IReference>> externalReferences)
@@ -474,14 +474,14 @@ namespace Opc.Ua.GdsServer
                
                 RoleState pubsub1 = new RoleState(null);
                 pubsub1.Create(Server.DefaultSystemContext, PubSubNormalNodeId, new QualifiedName("PubSubNormal", NamespaceIndex), null, true);
-                pubsub1.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_Roles);
-                AddExternalReference(ObjectIds.Server_Roles, ReferenceTypeIds.Organizes, false, pubsub1.NodeId, externalReferences);
+                pubsub1.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_ServerCapabilities_Roles);
+                AddExternalReference(ObjectIds.Server_ServerCapabilities_Roles, ReferenceTypeIds.Organizes, false, pubsub1.NodeId, externalReferences);
                 AddPredefinedNode(Server.DefaultSystemContext, pubsub1);
 
                 RoleState pubsub2 = new RoleState(null);
                 pubsub2.Create(Server.DefaultSystemContext, PubSubSecureNodeId, new QualifiedName("PubSubSecure", NamespaceIndex), null, true);
-                pubsub2.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_Roles);
-                AddExternalReference(ObjectIds.Server_Roles, ReferenceTypeIds.Organizes, false, pubsub2.NodeId, externalReferences);
+                pubsub2.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_ServerCapabilities_Roles);
+                AddExternalReference(ObjectIds.Server_ServerCapabilities_Roles, ReferenceTypeIds.Organizes, false, pubsub2.NodeId, externalReferences);
                 AddPredefinedNode(Server.DefaultSystemContext, pubsub2);
 
                 m_database.NamespaceIndex = NamespaceIndexes[0];

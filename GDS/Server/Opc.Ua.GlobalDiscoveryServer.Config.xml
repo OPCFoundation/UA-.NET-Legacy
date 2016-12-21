@@ -75,10 +75,28 @@
         <ua:TokenType>UserName_1</ua:TokenType>
       </ua:UserTokenPolicy>
       <ua:UserTokenPolicy>
-        <ua:PolicyId>AuthenticationService</ua:PolicyId>
+        <ua:PolicyId>JWT</ua:PolicyId>
         <ua:TokenType>IssuedToken_3</ua:TokenType>
-        <ua:IssuedTokenType>http://opcfoundation.org/UA/UserTokenPolicy#JWT</ua:IssuedTokenType>
-        <ua:IssuerEndpointUrl>{ "authority": "https://localhost:54333", "grantType" : "site_token", "tokenEndpoint" : "/connect/token", "scopes": [ "gds:admin", "gds:appadmin", "observer" ]}</ua:IssuerEndpointUrl>
+        <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
+        <ua:IssuerEndpointUrl>
+          { 
+            "ua:authority": "https://localhost:54333", 
+            "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OAuth2", 
+            "ua:tokenEndpoint" : "/connect/token", 
+            "ua:requestTypes": [ "client_credentials", "site_token" ],
+            "ua:scopes": [ "gds:admin", "gds:appadmin", "observer" ], 
+            "ua:identityProviders": 
+            [
+              { 
+                "ua:identityProvider": "https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com", 
+                "ua:identityProfileUri" : "http://opcfoundation.org/UA/IdentityProvider#Azure", 
+                "ua:authorizationEndpoint" : "/oauth2/authorize",
+                "ua:tokenEndpoint" : "/oauth2/token",
+                "ua:resource" : "https://mycompany.com/gds-prototype"
+              }
+            ]
+          }
+        </ua:IssuerEndpointUrl>
         <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
       </ua:UserTokenPolicy>
     </UserTokenPolicies>

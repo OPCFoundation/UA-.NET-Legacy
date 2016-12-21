@@ -92,7 +92,7 @@ namespace Opc.Ua.Gds
                         token = token.Substring(0, index);
                     }
 
-                    var resourceId = (m_credential.SelectedServer != null) ? m_credential.SelectedServer.ResourceId : null;
+                    var resourceId = (m_credential.ServerResourceId != null) ? m_credential.ServerResourceId : null;
 
                     Browser.Visible = false;
                     m_token = await m_client.RequestTokenWithAuthenticationCodeAsync(m_credential, resourceId, token);

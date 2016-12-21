@@ -370,9 +370,9 @@ namespace Opc.Ua
         public const uint EnumDescription = 15488;
 
         /// <summary>
-        /// The identifier for the CompleteStructureDefinition DataType.
+        /// The identifier for the NestedStructureDefinition DataType.
         /// </summary>
-        public const uint CompleteStructureDefinition = 16153;
+        public const uint NestedStructureDefinition = 16280;
 
         /// <summary>
         /// The identifier for the Node DataType.
@@ -1700,14 +1700,14 @@ namespace Opc.Ua
         public const uint OPCUANamespaceMetadata_NamespaceFile_SetPosition = 15984;
 
         /// <summary>
-        /// The identifier for the ServerType_Roles_AddRole Method.
+        /// The identifier for the ServerType_ServerCapabilities_Roles_AddRole Method.
         /// </summary>
-        public const uint ServerType_Roles_AddRole = 15987;
+        public const uint ServerType_ServerCapabilities_Roles_AddRole = 16290;
 
         /// <summary>
-        /// The identifier for the ServerType_Roles_RemoveRole Method.
+        /// The identifier for the ServerType_ServerCapabilities_Roles_RemoveRole Method.
         /// </summary>
-        public const uint ServerType_Roles_RemoveRole = 15990;
+        public const uint ServerType_ServerCapabilities_Roles_RemoveRole = 16293;
 
         /// <summary>
         /// The identifier for the ServerType_GetMonitoredItems Method.
@@ -1730,14 +1730,24 @@ namespace Opc.Ua
         public const uint ServerType_RequestServerStateChange = 12883;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_AddRole Method.
+        /// The identifier for the ServerCapabilitiesType_Roles_AddRole Method.
         /// </summary>
-        public const uint RoleFolderType_AddRole = 15997;
+        public const uint ServerCapabilitiesType_Roles_AddRole = 16296;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RemoveRole Method.
+        /// The identifier for the ServerCapabilitiesType_Roles_RemoveRole Method.
         /// </summary>
-        public const uint RoleFolderType_RemoveRole = 16000;
+        public const uint ServerCapabilitiesType_Roles_RemoveRole = 16299;
+
+        /// <summary>
+        /// The identifier for the RoleSetType_AddRole Method.
+        /// </summary>
+        public const uint RoleSetType_AddRole = 15997;
+
+        /// <summary>
+        /// The identifier for the RoleSetType_RemoveRole Method.
+        /// </summary>
+        public const uint RoleSetType_RemoveRole = 16000;
 
         /// <summary>
         /// The identifier for the RoleType_AddIdentity Method.
@@ -1748,6 +1758,26 @@ namespace Opc.Ua
         /// The identifier for the RoleType_RemoveIdentity Method.
         /// </summary>
         public const uint RoleType_RemoveIdentity = 15626;
+
+        /// <summary>
+        /// The identifier for the RoleType_AddApplication Method.
+        /// </summary>
+        public const uint RoleType_AddApplication = 16176;
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveApplication Method.
+        /// </summary>
+        public const uint RoleType_RemoveApplication = 16178;
+
+        /// <summary>
+        /// The identifier for the RoleType_AddEndpoint Method.
+        /// </summary>
+        public const uint RoleType_AddEndpoint = 16180;
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveEndpoint Method.
+        /// </summary>
+        public const uint RoleType_RemoveEndpoint = 16182;
 
         /// <summary>
         /// The identifier for the FileType_Open Method.
@@ -1935,14 +1965,14 @@ namespace Opc.Ua
         public const uint NamespacesType_NamespaceIdentifier_Placeholder_NamespaceFile_SetPosition = 11672;
 
         /// <summary>
-        /// The identifier for the Server_Roles_AddRole Method.
+        /// The identifier for the Server_ServerCapabilities_Roles_AddRole Method.
         /// </summary>
-        public const uint Server_Roles_AddRole = 16068;
+        public const uint Server_ServerCapabilities_Roles_AddRole = 16301;
 
         /// <summary>
-        /// The identifier for the Server_Roles_RemoveRole Method.
+        /// The identifier for the Server_ServerCapabilities_Roles_RemoveRole Method.
         /// </summary>
-        public const uint Server_Roles_RemoveRole = 16071;
+        public const uint Server_ServerCapabilities_Roles_RemoveRole = 16304;
 
         /// <summary>
         /// The identifier for the Server_GetMonitoredItems Method.
@@ -3210,11 +3240,6 @@ namespace Opc.Ua
         public const uint ServerType_Namespaces = 11527;
 
         /// <summary>
-        /// The identifier for the ServerType_Roles Object.
-        /// </summary>
-        public const uint ServerType_Roles = 15605;
-
-        /// <summary>
         /// The identifier for the ServerCapabilitiesType_OperationLimits Object.
         /// </summary>
         public const uint ServerCapabilitiesType_OperationLimits = 11551;
@@ -3230,6 +3255,11 @@ namespace Opc.Ua
         public const uint ServerCapabilitiesType_AggregateFunctions = 2754;
 
         /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles Object.
+        /// </summary>
+        public const uint ServerCapabilitiesType_Roles = 16295;
+
+        /// <summary>
         /// The identifier for the ServerDiagnosticsType_SessionsDiagnosticsSummary Object.
         /// </summary>
         public const uint ServerDiagnosticsType_SessionsDiagnosticsSummary = 2744;
@@ -3240,9 +3270,9 @@ namespace Opc.Ua
         public const uint SessionsDiagnosticsSummaryType_ClientName_Placeholder = 12097;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder Object.
+        /// The identifier for the RoleSetType_RoleName_Placeholder Object.
         /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder = 15608;
+        public const uint RoleSetType_RoleName_Placeholder = 15608;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Anonymous Object.
@@ -3250,9 +3280,9 @@ namespace Opc.Ua
         public const uint WellKnownRole_Anonymous = 15644;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers Object.
+        /// The identifier for the WellKnownRole_AuthenticatedUser Object.
         /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers = 15656;
+        public const uint WellKnownRole_AuthenticatedUser = 15656;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Observer Object.
@@ -3410,6 +3440,11 @@ namespace Opc.Ua
         public const uint Server_ServerCapabilities_AggregateFunctions = 2997;
 
         /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles Object.
+        /// </summary>
+        public const uint Server_ServerCapabilities_Roles = 15606;
+
+        /// <summary>
         /// The identifier for the Server_ServerDiagnostics Object.
         /// </summary>
         public const uint Server_ServerDiagnostics = 2274;
@@ -3433,11 +3468,6 @@ namespace Opc.Ua
         /// The identifier for the Server_Namespaces Object.
         /// </summary>
         public const uint Server_Namespaces = 11715;
-
-        /// <summary>
-        /// The identifier for the Server_Roles Object.
-        /// </summary>
-        public const uint Server_Roles = 15606;
 
         /// <summary>
         /// The identifier for the HistoryServerCapabilities Object.
@@ -4355,9 +4385,9 @@ namespace Opc.Ua
         public const uint EnumDescription_Encoding_DefaultXml = 15590;
 
         /// <summary>
-        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultXml Object.
+        /// The identifier for the NestedStructureDefinition_Encoding_DefaultXml Object.
         /// </summary>
-        public const uint CompleteStructureDefinition_Encoding_DefaultXml = 16154;
+        public const uint NestedStructureDefinition_Encoding_DefaultXml = 16281;
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultXml Object.
@@ -5545,9 +5575,9 @@ namespace Opc.Ua
         public const uint EnumDescription_Encoding_DefaultBinary = 15598;
 
         /// <summary>
-        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultBinary Object.
+        /// The identifier for the NestedStructureDefinition_Encoding_DefaultBinary Object.
         /// </summary>
-        public const uint CompleteStructureDefinition_Encoding_DefaultBinary = 16158;
+        public const uint NestedStructureDefinition_Encoding_DefaultBinary = 16285;
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultBinary Object.
@@ -6745,9 +6775,9 @@ namespace Opc.Ua
         public const uint OperationLimitsType = 11564;
 
         /// <summary>
-        /// The identifier for the RoleFolderType ObjectType.
+        /// The identifier for the RoleSetType ObjectType.
         /// </summary>
-        public const uint RoleFolderType = 15607;
+        public const uint RoleSetType = 15607;
 
         /// <summary>
         /// The identifier for the RoleType ObjectType.
@@ -8010,6 +8040,21 @@ namespace Opc.Ua
         public const uint ServerType_ServerCapabilities_SoftwareCertificates = 3092;
 
         /// <summary>
+        /// The identifier for the ServerType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public const uint ServerType_ServerCapabilities_Roles_AddRole_InputArguments = 16291;
+
+        /// <summary>
+        /// The identifier for the ServerType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public const uint ServerType_ServerCapabilities_Roles_AddRole_OutputArguments = 16292;
+
+        /// <summary>
+        /// The identifier for the ServerType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public const uint ServerType_ServerCapabilities_Roles_RemoveRole_InputArguments = 16294;
+
+        /// <summary>
         /// The identifier for the ServerType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
         /// </summary>
         public const uint ServerType_ServerDiagnostics_ServerDiagnosticsSummary = 3095;
@@ -8100,21 +8145,6 @@ namespace Opc.Ua
         public const uint ServerType_ServerRedundancy_RedundancySupport = 3115;
 
         /// <summary>
-        /// The identifier for the ServerType_Roles_AddRole_InputArguments Variable.
-        /// </summary>
-        public const uint ServerType_Roles_AddRole_InputArguments = 15988;
-
-        /// <summary>
-        /// The identifier for the ServerType_Roles_AddRole_OutputArguments Variable.
-        /// </summary>
-        public const uint ServerType_Roles_AddRole_OutputArguments = 15989;
-
-        /// <summary>
-        /// The identifier for the ServerType_Roles_RemoveRole_InputArguments Variable.
-        /// </summary>
-        public const uint ServerType_Roles_RemoveRole_InputArguments = 15991;
-
-        /// <summary>
         /// The identifier for the ServerType_GetMonitoredItems_InputArguments Variable.
         /// </summary>
         public const uint ServerType_GetMonitoredItems_InputArguments = 11490;
@@ -8198,6 +8228,21 @@ namespace Opc.Ua
         /// The identifier for the ServerCapabilitiesType_VendorCapability_Placeholder Variable.
         /// </summary>
         public const uint ServerCapabilitiesType_VendorCapability_Placeholder = 11562;
+
+        /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public const uint ServerCapabilitiesType_Roles_AddRole_InputArguments = 16297;
+
+        /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public const uint ServerCapabilitiesType_Roles_AddRole_OutputArguments = 16298;
+
+        /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public const uint ServerCapabilitiesType_Roles_RemoveRole_InputArguments = 16300;
 
         /// <summary>
         /// The identifier for the ServerDiagnosticsType_ServerDiagnosticsSummary Variable.
@@ -8935,49 +8980,69 @@ namespace Opc.Ua
         public const uint OperationLimitsType_MaxMonitoredItemsPerCall = 11574;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_SystemRoleId Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_Identities Variable.
         /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_SystemRoleId = 15992;
+        public const uint RoleSetType_RoleName_Placeholder_Identities = 16162;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_MappingRules Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_AddIdentity_InputArguments Variable.
         /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_MappingRules = 16143;
+        public const uint RoleSetType_RoleName_Placeholder_AddIdentity_InputArguments = 15613;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_AddIdentity_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_RemoveIdentity_InputArguments Variable.
         /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_AddIdentity_InputArguments = 15613;
+        public const uint RoleSetType_RoleName_Placeholder_RemoveIdentity_InputArguments = 15615;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_AddApplication_InputArguments Variable.
         /// </summary>
-        public const uint RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments = 15615;
+        public const uint RoleSetType_RoleName_Placeholder_AddApplication_InputArguments = 16166;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_AddRole_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public const uint RoleFolderType_AddRole_InputArguments = 15998;
+        public const uint RoleSetType_RoleName_Placeholder_RemoveApplication_InputArguments = 16168;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_AddRole_OutputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_AddEndpoint_InputArguments Variable.
         /// </summary>
-        public const uint RoleFolderType_AddRole_OutputArguments = 15999;
+        public const uint RoleSetType_RoleName_Placeholder_AddEndpoint_InputArguments = 16170;
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RemoveRole_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_RemoveEndpoint_InputArguments Variable.
         /// </summary>
-        public const uint RoleFolderType_RemoveRole_InputArguments = 16001;
+        public const uint RoleSetType_RoleName_Placeholder_RemoveEndpoint_InputArguments = 16172;
 
         /// <summary>
-        /// The identifier for the RoleType_SystemRoleId Variable.
+        /// The identifier for the RoleSetType_AddRole_InputArguments Variable.
         /// </summary>
-        public const uint RoleType_SystemRoleId = 16007;
+        public const uint RoleSetType_AddRole_InputArguments = 15998;
 
         /// <summary>
-        /// The identifier for the RoleType_MappingRules Variable.
+        /// The identifier for the RoleSetType_AddRole_OutputArguments Variable.
         /// </summary>
-        public const uint RoleType_MappingRules = 16144;
+        public const uint RoleSetType_AddRole_OutputArguments = 15999;
+
+        /// <summary>
+        /// The identifier for the RoleSetType_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public const uint RoleSetType_RemoveRole_InputArguments = 16001;
+
+        /// <summary>
+        /// The identifier for the RoleType_Identities Variable.
+        /// </summary>
+        public const uint RoleType_Identities = 16173;
+
+        /// <summary>
+        /// The identifier for the RoleType_Applications Variable.
+        /// </summary>
+        public const uint RoleType_Applications = 16174;
+
+        /// <summary>
+        /// The identifier for the RoleType_Endpoints Variable.
+        /// </summary>
+        public const uint RoleType_Endpoints = 16175;
 
         /// <summary>
         /// The identifier for the RoleType_AddIdentity_InputArguments Variable.
@@ -8990,19 +9055,34 @@ namespace Opc.Ua
         public const uint RoleType_RemoveIdentity_InputArguments = 15627;
 
         /// <summary>
+        /// The identifier for the RoleType_AddApplication_InputArguments Variable.
+        /// </summary>
+        public const uint RoleType_AddApplication_InputArguments = 16177;
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveApplication_InputArguments Variable.
+        /// </summary>
+        public const uint RoleType_RemoveApplication_InputArguments = 16179;
+
+        /// <summary>
+        /// The identifier for the RoleType_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint RoleType_AddEndpoint_InputArguments = 16181;
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint RoleType_RemoveEndpoint_InputArguments = 16183;
+
+        /// <summary>
         /// The identifier for the IdentityCriteriaType_EnumValues Variable.
         /// </summary>
         public const uint IdentityCriteriaType_EnumValues = 15633;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Anonymous_Identities Variable.
         /// </summary>
-        public const uint WellKnownRole_Anonymous_SystemRoleId = 16016;
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_MappingRules Variable.
-        /// </summary>
-        public const uint WellKnownRole_Anonymous_MappingRules = 16145;
+        public const uint WellKnownRole_Anonymous_Identities = 16192;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Anonymous_AddIdentity_InputArguments Variable.
@@ -9015,34 +9095,64 @@ namespace Opc.Ua
         public const uint WellKnownRole_Anonymous_RemoveIdentity_InputArguments = 15651;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Anonymous_AddApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_SystemRoleId = 16021;
+        public const uint WellKnownRole_Anonymous_AddApplication_InputArguments = 16196;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Anonymous_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_MappingRules = 16146;
+        public const uint WellKnownRole_Anonymous_RemoveApplication_InputArguments = 16198;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_AddIdentity_InputArguments Variable.
+        /// The identifier for the WellKnownRole_Anonymous_AddEndpoint_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_AddIdentity_InputArguments = 15661;
+        public const uint WellKnownRole_Anonymous_AddEndpoint_InputArguments = 16200;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments Variable.
+        /// The identifier for the WellKnownRole_Anonymous_RemoveEndpoint_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments = 15663;
+        public const uint WellKnownRole_Anonymous_RemoveEndpoint_InputArguments = 16202;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_AuthenticatedUser_Identities Variable.
         /// </summary>
-        public const uint WellKnownRole_Observer_SystemRoleId = 16026;
+        public const uint WellKnownRole_AuthenticatedUser_Identities = 16203;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_MappingRules Variable.
+        /// The identifier for the WellKnownRole_AuthenticatedUser_AddIdentity_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_Observer_MappingRules = 16147;
+        public const uint WellKnownRole_AuthenticatedUser_AddIdentity_InputArguments = 15661;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_RemoveIdentity_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_AuthenticatedUser_RemoveIdentity_InputArguments = 15663;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_AddApplication_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_AuthenticatedUser_AddApplication_InputArguments = 16207;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_RemoveApplication_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_AuthenticatedUser_RemoveApplication_InputArguments = 16209;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_AuthenticatedUser_AddEndpoint_InputArguments = 16211;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_AuthenticatedUser_RemoveEndpoint_InputArguments = 16213;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Observer_Identities Variable.
+        /// </summary>
+        public const uint WellKnownRole_Observer_Identities = 16214;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Observer_AddIdentity_InputArguments Variable.
@@ -9055,14 +9165,29 @@ namespace Opc.Ua
         public const uint WellKnownRole_Observer_RemoveIdentity_InputArguments = 15675;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Observer_AddApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_Operator_SystemRoleId = 16031;
+        public const uint WellKnownRole_Observer_AddApplication_InputArguments = 16218;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Observer_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_Operator_MappingRules = 16148;
+        public const uint WellKnownRole_Observer_RemoveApplication_InputArguments = 16220;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Observer_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Observer_AddEndpoint_InputArguments = 16222;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Observer_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Observer_RemoveEndpoint_InputArguments = 16224;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Operator_Identities Variable.
+        /// </summary>
+        public const uint WellKnownRole_Operator_Identities = 16225;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Operator_AddIdentity_InputArguments Variable.
@@ -9075,14 +9200,29 @@ namespace Opc.Ua
         public const uint WellKnownRole_Operator_RemoveIdentity_InputArguments = 15687;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Operator_AddApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_Engineer_SystemRoleId = 16037;
+        public const uint WellKnownRole_Operator_AddApplication_InputArguments = 16229;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Operator_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_Engineer_MappingRules = 16149;
+        public const uint WellKnownRole_Operator_RemoveApplication_InputArguments = 16231;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Operator_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Operator_AddEndpoint_InputArguments = 16233;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Operator_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Operator_RemoveEndpoint_InputArguments = 16235;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Engineer_Identities Variable.
+        /// </summary>
+        public const uint WellKnownRole_Engineer_Identities = 16236;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Engineer_AddIdentity_InputArguments Variable.
@@ -9095,14 +9235,29 @@ namespace Opc.Ua
         public const uint WellKnownRole_Engineer_RemoveIdentity_InputArguments = 16044;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Engineer_AddApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_Supervisor_SystemRoleId = 16053;
+        public const uint WellKnownRole_Engineer_AddApplication_InputArguments = 16240;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Engineer_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_Supervisor_MappingRules = 16150;
+        public const uint WellKnownRole_Engineer_RemoveApplication_InputArguments = 16242;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Engineer_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Engineer_AddEndpoint_InputArguments = 16244;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Engineer_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Engineer_RemoveEndpoint_InputArguments = 16246;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Supervisor_Identities Variable.
+        /// </summary>
+        public const uint WellKnownRole_Supervisor_Identities = 16247;
 
         /// <summary>
         /// The identifier for the WellKnownRole_Supervisor_AddIdentity_InputArguments Variable.
@@ -9115,14 +9270,29 @@ namespace Opc.Ua
         public const uint WellKnownRole_Supervisor_RemoveIdentity_InputArguments = 15699;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Supervisor_AddApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_SecurityAdmin_SystemRoleId = 16058;
+        public const uint WellKnownRole_Supervisor_AddApplication_InputArguments = 16251;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Supervisor_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_SecurityAdmin_MappingRules = 16151;
+        public const uint WellKnownRole_Supervisor_RemoveApplication_InputArguments = 16253;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Supervisor_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Supervisor_AddEndpoint_InputArguments = 16255;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Supervisor_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_Supervisor_RemoveEndpoint_InputArguments = 16257;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_SecurityAdmin_Identities Variable.
+        /// </summary>
+        public const uint WellKnownRole_SecurityAdmin_Identities = 16258;
 
         /// <summary>
         /// The identifier for the WellKnownRole_SecurityAdmin_AddIdentity_InputArguments Variable.
@@ -9135,14 +9305,29 @@ namespace Opc.Ua
         public const uint WellKnownRole_SecurityAdmin_RemoveIdentity_InputArguments = 15711;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_SecurityAdmin_AddApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_ConfigureAdmin_SystemRoleId = 16063;
+        public const uint WellKnownRole_SecurityAdmin_AddApplication_InputArguments = 16262;
 
         /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_MappingRules Variable.
+        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public const uint WellKnownRole_ConfigureAdmin_MappingRules = 16152;
+        public const uint WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments = 16264;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments = 16266;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments = 16268;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_Identities Variable.
+        /// </summary>
+        public const uint WellKnownRole_ConfigureAdmin_Identities = 16269;
 
         /// <summary>
         /// The identifier for the WellKnownRole_ConfigureAdmin_AddIdentity_InputArguments Variable.
@@ -9153,6 +9338,26 @@ namespace Opc.Ua
         /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments Variable.
         /// </summary>
         public const uint WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments = 15723;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_AddApplication_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_ConfigureAdmin_AddApplication_InputArguments = 16273;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments = 16275;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments = 16277;
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public const uint WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments = 16279;
 
         /// <summary>
         /// The identifier for the FileType_Size Variable.
@@ -11235,6 +11440,21 @@ namespace Opc.Ua
         public const uint Server_ServerCapabilities_OperationLimits_MaxMonitoredItemsPerCall = 11714;
 
         /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public const uint Server_ServerCapabilities_Roles_AddRole_InputArguments = 16302;
+
+        /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public const uint Server_ServerCapabilities_Roles_AddRole_OutputArguments = 16303;
+
+        /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public const uint Server_ServerCapabilities_Roles_RemoveRole_InputArguments = 16305;
+
+        /// <summary>
         /// The identifier for the Server_ServerDiagnostics_ServerDiagnosticsSummary Variable.
         /// </summary>
         public const uint Server_ServerDiagnostics_ServerDiagnosticsSummary = 2275;
@@ -11328,21 +11548,6 @@ namespace Opc.Ua
         /// The identifier for the Server_ServerRedundancy_RedundancySupport Variable.
         /// </summary>
         public const uint Server_ServerRedundancy_RedundancySupport = 3709;
-
-        /// <summary>
-        /// The identifier for the Server_Roles_AddRole_InputArguments Variable.
-        /// </summary>
-        public const uint Server_Roles_AddRole_InputArguments = 16069;
-
-        /// <summary>
-        /// The identifier for the Server_Roles_AddRole_OutputArguments Variable.
-        /// </summary>
-        public const uint Server_Roles_AddRole_OutputArguments = 16070;
-
-        /// <summary>
-        /// The identifier for the Server_Roles_RemoveRole_InputArguments Variable.
-        /// </summary>
-        public const uint Server_Roles_RemoveRole_InputArguments = 16072;
 
         /// <summary>
         /// The identifier for the Server_GetMonitoredItems_InputArguments Variable.
@@ -17560,9 +17765,9 @@ namespace Opc.Ua
         public const uint OpcUa_XmlSchema_EnumDescription = 15594;
 
         /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_CompleteStructureDefinition Variable.
+        /// The identifier for the OpcUa_XmlSchema_NestedStructureDefinition Variable.
         /// </summary>
-        public const uint OpcUa_XmlSchema_CompleteStructureDefinition = 16155;
+        public const uint OpcUa_XmlSchema_NestedStructureDefinition = 16282;
 
         /// <summary>
         /// The identifier for the OpcUa_XmlSchema_Argument Variable.
@@ -17955,9 +18160,9 @@ namespace Opc.Ua
         public const uint OpcUa_BinarySchema_EnumDescription = 15602;
 
         /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_CompleteStructureDefinition Variable.
+        /// The identifier for the OpcUa_BinarySchema_NestedStructureDefinition Variable.
         /// </summary>
-        public const uint OpcUa_BinarySchema_CompleteStructureDefinition = 16159;
+        public const uint OpcUa_BinarySchema_NestedStructureDefinition = 16286;
 
         /// <summary>
         /// The identifier for the OpcUa_BinarySchema_Argument Variable.
@@ -18790,9 +18995,9 @@ namespace Opc.Ua
         public static readonly NodeId EnumDescription = new NodeId(Opc.Ua.DataTypes.EnumDescription);
 
         /// <summary>
-        /// The identifier for the CompleteStructureDefinition DataType.
+        /// The identifier for the NestedStructureDefinition DataType.
         /// </summary>
-        public static readonly NodeId CompleteStructureDefinition = new NodeId(Opc.Ua.DataTypes.CompleteStructureDefinition);
+        public static readonly NodeId NestedStructureDefinition = new NodeId(Opc.Ua.DataTypes.NestedStructureDefinition);
 
         /// <summary>
         /// The identifier for the Node DataType.
@@ -20120,14 +20325,14 @@ namespace Opc.Ua
         public static readonly NodeId OPCUANamespaceMetadata_NamespaceFile_SetPosition = new NodeId(Opc.Ua.Methods.OPCUANamespaceMetadata_NamespaceFile_SetPosition);
 
         /// <summary>
-        /// The identifier for the ServerType_Roles_AddRole Method.
+        /// The identifier for the ServerType_ServerCapabilities_Roles_AddRole Method.
         /// </summary>
-        public static readonly NodeId ServerType_Roles_AddRole = new NodeId(Opc.Ua.Methods.ServerType_Roles_AddRole);
+        public static readonly NodeId ServerType_ServerCapabilities_Roles_AddRole = new NodeId(Opc.Ua.Methods.ServerType_ServerCapabilities_Roles_AddRole);
 
         /// <summary>
-        /// The identifier for the ServerType_Roles_RemoveRole Method.
+        /// The identifier for the ServerType_ServerCapabilities_Roles_RemoveRole Method.
         /// </summary>
-        public static readonly NodeId ServerType_Roles_RemoveRole = new NodeId(Opc.Ua.Methods.ServerType_Roles_RemoveRole);
+        public static readonly NodeId ServerType_ServerCapabilities_Roles_RemoveRole = new NodeId(Opc.Ua.Methods.ServerType_ServerCapabilities_Roles_RemoveRole);
 
         /// <summary>
         /// The identifier for the ServerType_GetMonitoredItems Method.
@@ -20150,14 +20355,24 @@ namespace Opc.Ua
         public static readonly NodeId ServerType_RequestServerStateChange = new NodeId(Opc.Ua.Methods.ServerType_RequestServerStateChange);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_AddRole Method.
+        /// The identifier for the ServerCapabilitiesType_Roles_AddRole Method.
         /// </summary>
-        public static readonly NodeId RoleFolderType_AddRole = new NodeId(Opc.Ua.Methods.RoleFolderType_AddRole);
+        public static readonly NodeId ServerCapabilitiesType_Roles_AddRole = new NodeId(Opc.Ua.Methods.ServerCapabilitiesType_Roles_AddRole);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RemoveRole Method.
+        /// The identifier for the ServerCapabilitiesType_Roles_RemoveRole Method.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RemoveRole = new NodeId(Opc.Ua.Methods.RoleFolderType_RemoveRole);
+        public static readonly NodeId ServerCapabilitiesType_Roles_RemoveRole = new NodeId(Opc.Ua.Methods.ServerCapabilitiesType_Roles_RemoveRole);
+
+        /// <summary>
+        /// The identifier for the RoleSetType_AddRole Method.
+        /// </summary>
+        public static readonly NodeId RoleSetType_AddRole = new NodeId(Opc.Ua.Methods.RoleSetType_AddRole);
+
+        /// <summary>
+        /// The identifier for the RoleSetType_RemoveRole Method.
+        /// </summary>
+        public static readonly NodeId RoleSetType_RemoveRole = new NodeId(Opc.Ua.Methods.RoleSetType_RemoveRole);
 
         /// <summary>
         /// The identifier for the RoleType_AddIdentity Method.
@@ -20168,6 +20383,26 @@ namespace Opc.Ua
         /// The identifier for the RoleType_RemoveIdentity Method.
         /// </summary>
         public static readonly NodeId RoleType_RemoveIdentity = new NodeId(Opc.Ua.Methods.RoleType_RemoveIdentity);
+
+        /// <summary>
+        /// The identifier for the RoleType_AddApplication Method.
+        /// </summary>
+        public static readonly NodeId RoleType_AddApplication = new NodeId(Opc.Ua.Methods.RoleType_AddApplication);
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveApplication Method.
+        /// </summary>
+        public static readonly NodeId RoleType_RemoveApplication = new NodeId(Opc.Ua.Methods.RoleType_RemoveApplication);
+
+        /// <summary>
+        /// The identifier for the RoleType_AddEndpoint Method.
+        /// </summary>
+        public static readonly NodeId RoleType_AddEndpoint = new NodeId(Opc.Ua.Methods.RoleType_AddEndpoint);
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveEndpoint Method.
+        /// </summary>
+        public static readonly NodeId RoleType_RemoveEndpoint = new NodeId(Opc.Ua.Methods.RoleType_RemoveEndpoint);
 
         /// <summary>
         /// The identifier for the FileType_Open Method.
@@ -20355,14 +20590,14 @@ namespace Opc.Ua
         public static readonly NodeId NamespacesType_NamespaceIdentifier_Placeholder_NamespaceFile_SetPosition = new NodeId(Opc.Ua.Methods.NamespacesType_NamespaceIdentifier_Placeholder_NamespaceFile_SetPosition);
 
         /// <summary>
-        /// The identifier for the Server_Roles_AddRole Method.
+        /// The identifier for the Server_ServerCapabilities_Roles_AddRole Method.
         /// </summary>
-        public static readonly NodeId Server_Roles_AddRole = new NodeId(Opc.Ua.Methods.Server_Roles_AddRole);
+        public static readonly NodeId Server_ServerCapabilities_Roles_AddRole = new NodeId(Opc.Ua.Methods.Server_ServerCapabilities_Roles_AddRole);
 
         /// <summary>
-        /// The identifier for the Server_Roles_RemoveRole Method.
+        /// The identifier for the Server_ServerCapabilities_Roles_RemoveRole Method.
         /// </summary>
-        public static readonly NodeId Server_Roles_RemoveRole = new NodeId(Opc.Ua.Methods.Server_Roles_RemoveRole);
+        public static readonly NodeId Server_ServerCapabilities_Roles_RemoveRole = new NodeId(Opc.Ua.Methods.Server_ServerCapabilities_Roles_RemoveRole);
 
         /// <summary>
         /// The identifier for the Server_GetMonitoredItems Method.
@@ -21630,11 +21865,6 @@ namespace Opc.Ua
         public static readonly NodeId ServerType_Namespaces = new NodeId(Opc.Ua.Objects.ServerType_Namespaces);
 
         /// <summary>
-        /// The identifier for the ServerType_Roles Object.
-        /// </summary>
-        public static readonly NodeId ServerType_Roles = new NodeId(Opc.Ua.Objects.ServerType_Roles);
-
-        /// <summary>
         /// The identifier for the ServerCapabilitiesType_OperationLimits Object.
         /// </summary>
         public static readonly NodeId ServerCapabilitiesType_OperationLimits = new NodeId(Opc.Ua.Objects.ServerCapabilitiesType_OperationLimits);
@@ -21650,6 +21880,11 @@ namespace Opc.Ua
         public static readonly NodeId ServerCapabilitiesType_AggregateFunctions = new NodeId(Opc.Ua.Objects.ServerCapabilitiesType_AggregateFunctions);
 
         /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles Object.
+        /// </summary>
+        public static readonly NodeId ServerCapabilitiesType_Roles = new NodeId(Opc.Ua.Objects.ServerCapabilitiesType_Roles);
+
+        /// <summary>
         /// The identifier for the ServerDiagnosticsType_SessionsDiagnosticsSummary Object.
         /// </summary>
         public static readonly NodeId ServerDiagnosticsType_SessionsDiagnosticsSummary = new NodeId(Opc.Ua.Objects.ServerDiagnosticsType_SessionsDiagnosticsSummary);
@@ -21660,9 +21895,9 @@ namespace Opc.Ua
         public static readonly NodeId SessionsDiagnosticsSummaryType_ClientName_Placeholder = new NodeId(Opc.Ua.Objects.SessionsDiagnosticsSummaryType_ClientName_Placeholder);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder Object.
+        /// The identifier for the RoleSetType_RoleName_Placeholder Object.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder = new NodeId(Opc.Ua.Objects.RoleFolderType_RoleName_Placeholder);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder = new NodeId(Opc.Ua.Objects.RoleSetType_RoleName_Placeholder);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Anonymous Object.
@@ -21670,9 +21905,9 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Anonymous = new NodeId(Opc.Ua.Objects.WellKnownRole_Anonymous);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers Object.
+        /// The identifier for the WellKnownRole_AuthenticatedUser Object.
         /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers = new NodeId(Opc.Ua.Objects.WellKnownRole_AuthenticatedUsers);
+        public static readonly NodeId WellKnownRole_AuthenticatedUser = new NodeId(Opc.Ua.Objects.WellKnownRole_AuthenticatedUser);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Observer Object.
@@ -21830,6 +22065,11 @@ namespace Opc.Ua
         public static readonly NodeId Server_ServerCapabilities_AggregateFunctions = new NodeId(Opc.Ua.Objects.Server_ServerCapabilities_AggregateFunctions);
 
         /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles Object.
+        /// </summary>
+        public static readonly NodeId Server_ServerCapabilities_Roles = new NodeId(Opc.Ua.Objects.Server_ServerCapabilities_Roles);
+
+        /// <summary>
         /// The identifier for the Server_ServerDiagnostics Object.
         /// </summary>
         public static readonly NodeId Server_ServerDiagnostics = new NodeId(Opc.Ua.Objects.Server_ServerDiagnostics);
@@ -21853,11 +22093,6 @@ namespace Opc.Ua
         /// The identifier for the Server_Namespaces Object.
         /// </summary>
         public static readonly NodeId Server_Namespaces = new NodeId(Opc.Ua.Objects.Server_Namespaces);
-
-        /// <summary>
-        /// The identifier for the Server_Roles Object.
-        /// </summary>
-        public static readonly NodeId Server_Roles = new NodeId(Opc.Ua.Objects.Server_Roles);
 
         /// <summary>
         /// The identifier for the HistoryServerCapabilities Object.
@@ -22775,9 +23010,9 @@ namespace Opc.Ua
         public static readonly NodeId EnumDescription_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.EnumDescription_Encoding_DefaultXml);
 
         /// <summary>
-        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultXml Object.
+        /// The identifier for the NestedStructureDefinition_Encoding_DefaultXml Object.
         /// </summary>
-        public static readonly NodeId CompleteStructureDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.CompleteStructureDefinition_Encoding_DefaultXml);
+        public static readonly NodeId NestedStructureDefinition_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.NestedStructureDefinition_Encoding_DefaultXml);
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultXml Object.
@@ -23965,9 +24200,9 @@ namespace Opc.Ua
         public static readonly NodeId EnumDescription_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.EnumDescription_Encoding_DefaultBinary);
 
         /// <summary>
-        /// The identifier for the CompleteStructureDefinition_Encoding_DefaultBinary Object.
+        /// The identifier for the NestedStructureDefinition_Encoding_DefaultBinary Object.
         /// </summary>
-        public static readonly NodeId CompleteStructureDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.CompleteStructureDefinition_Encoding_DefaultBinary);
+        public static readonly NodeId NestedStructureDefinition_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.NestedStructureDefinition_Encoding_DefaultBinary);
 
         /// <summary>
         /// The identifier for the Node_Encoding_DefaultBinary Object.
@@ -25165,9 +25400,9 @@ namespace Opc.Ua
         public static readonly NodeId OperationLimitsType = new NodeId(Opc.Ua.ObjectTypes.OperationLimitsType);
 
         /// <summary>
-        /// The identifier for the RoleFolderType ObjectType.
+        /// The identifier for the RoleSetType ObjectType.
         /// </summary>
-        public static readonly NodeId RoleFolderType = new NodeId(Opc.Ua.ObjectTypes.RoleFolderType);
+        public static readonly NodeId RoleSetType = new NodeId(Opc.Ua.ObjectTypes.RoleSetType);
 
         /// <summary>
         /// The identifier for the RoleType ObjectType.
@@ -26430,6 +26665,21 @@ namespace Opc.Ua
         public static readonly NodeId ServerType_ServerCapabilities_SoftwareCertificates = new NodeId(Opc.Ua.Variables.ServerType_ServerCapabilities_SoftwareCertificates);
 
         /// <summary>
+        /// The identifier for the ServerType_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId ServerType_ServerCapabilities_Roles_AddRole_InputArguments = new NodeId(Opc.Ua.Variables.ServerType_ServerCapabilities_Roles_AddRole_InputArguments);
+
+        /// <summary>
+        /// The identifier for the ServerType_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public static readonly NodeId ServerType_ServerCapabilities_Roles_AddRole_OutputArguments = new NodeId(Opc.Ua.Variables.ServerType_ServerCapabilities_Roles_AddRole_OutputArguments);
+
+        /// <summary>
+        /// The identifier for the ServerType_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId ServerType_ServerCapabilities_Roles_RemoveRole_InputArguments = new NodeId(Opc.Ua.Variables.ServerType_ServerCapabilities_Roles_RemoveRole_InputArguments);
+
+        /// <summary>
         /// The identifier for the ServerType_ServerDiagnostics_ServerDiagnosticsSummary Variable.
         /// </summary>
         public static readonly NodeId ServerType_ServerDiagnostics_ServerDiagnosticsSummary = new NodeId(Opc.Ua.Variables.ServerType_ServerDiagnostics_ServerDiagnosticsSummary);
@@ -26520,21 +26770,6 @@ namespace Opc.Ua
         public static readonly NodeId ServerType_ServerRedundancy_RedundancySupport = new NodeId(Opc.Ua.Variables.ServerType_ServerRedundancy_RedundancySupport);
 
         /// <summary>
-        /// The identifier for the ServerType_Roles_AddRole_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId ServerType_Roles_AddRole_InputArguments = new NodeId(Opc.Ua.Variables.ServerType_Roles_AddRole_InputArguments);
-
-        /// <summary>
-        /// The identifier for the ServerType_Roles_AddRole_OutputArguments Variable.
-        /// </summary>
-        public static readonly NodeId ServerType_Roles_AddRole_OutputArguments = new NodeId(Opc.Ua.Variables.ServerType_Roles_AddRole_OutputArguments);
-
-        /// <summary>
-        /// The identifier for the ServerType_Roles_RemoveRole_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId ServerType_Roles_RemoveRole_InputArguments = new NodeId(Opc.Ua.Variables.ServerType_Roles_RemoveRole_InputArguments);
-
-        /// <summary>
         /// The identifier for the ServerType_GetMonitoredItems_InputArguments Variable.
         /// </summary>
         public static readonly NodeId ServerType_GetMonitoredItems_InputArguments = new NodeId(Opc.Ua.Variables.ServerType_GetMonitoredItems_InputArguments);
@@ -26618,6 +26853,21 @@ namespace Opc.Ua
         /// The identifier for the ServerCapabilitiesType_VendorCapability_Placeholder Variable.
         /// </summary>
         public static readonly NodeId ServerCapabilitiesType_VendorCapability_Placeholder = new NodeId(Opc.Ua.Variables.ServerCapabilitiesType_VendorCapability_Placeholder);
+
+        /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId ServerCapabilitiesType_Roles_AddRole_InputArguments = new NodeId(Opc.Ua.Variables.ServerCapabilitiesType_Roles_AddRole_InputArguments);
+
+        /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public static readonly NodeId ServerCapabilitiesType_Roles_AddRole_OutputArguments = new NodeId(Opc.Ua.Variables.ServerCapabilitiesType_Roles_AddRole_OutputArguments);
+
+        /// <summary>
+        /// The identifier for the ServerCapabilitiesType_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId ServerCapabilitiesType_Roles_RemoveRole_InputArguments = new NodeId(Opc.Ua.Variables.ServerCapabilitiesType_Roles_RemoveRole_InputArguments);
 
         /// <summary>
         /// The identifier for the ServerDiagnosticsType_ServerDiagnosticsSummary Variable.
@@ -27355,49 +27605,69 @@ namespace Opc.Ua
         public static readonly NodeId OperationLimitsType_MaxMonitoredItemsPerCall = new NodeId(Opc.Ua.Variables.OperationLimitsType_MaxMonitoredItemsPerCall);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_SystemRoleId Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_Identities Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_SystemRoleId = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_SystemRoleId);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder_Identities = new NodeId(Opc.Ua.Variables.RoleSetType_RoleName_Placeholder_Identities);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_MappingRules Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_AddIdentity_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_MappingRules = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_MappingRules);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder_AddIdentity_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_RoleName_Placeholder_AddIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_AddIdentity_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_RemoveIdentity_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_AddIdentity_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_AddIdentity_InputArguments);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_RoleName_Placeholder_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_AddApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RoleName_Placeholder_RemoveIdentity_InputArguments);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_RoleName_Placeholder_AddApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_AddRole_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_AddRole_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_AddRole_InputArguments);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_RoleName_Placeholder_RemoveApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_AddRole_OutputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_AddEndpoint_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_AddRole_OutputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_AddRole_OutputArguments);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_RoleName_Placeholder_AddEndpoint_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleFolderType_RemoveRole_InputArguments Variable.
+        /// The identifier for the RoleSetType_RoleName_Placeholder_RemoveEndpoint_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleFolderType_RemoveRole_InputArguments = new NodeId(Opc.Ua.Variables.RoleFolderType_RemoveRole_InputArguments);
+        public static readonly NodeId RoleSetType_RoleName_Placeholder_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_RoleName_Placeholder_RemoveEndpoint_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleType_SystemRoleId Variable.
+        /// The identifier for the RoleSetType_AddRole_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleType_SystemRoleId = new NodeId(Opc.Ua.Variables.RoleType_SystemRoleId);
+        public static readonly NodeId RoleSetType_AddRole_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_AddRole_InputArguments);
 
         /// <summary>
-        /// The identifier for the RoleType_MappingRules Variable.
+        /// The identifier for the RoleSetType_AddRole_OutputArguments Variable.
         /// </summary>
-        public static readonly NodeId RoleType_MappingRules = new NodeId(Opc.Ua.Variables.RoleType_MappingRules);
+        public static readonly NodeId RoleSetType_AddRole_OutputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_AddRole_OutputArguments);
+
+        /// <summary>
+        /// The identifier for the RoleSetType_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId RoleSetType_RemoveRole_InputArguments = new NodeId(Opc.Ua.Variables.RoleSetType_RemoveRole_InputArguments);
+
+        /// <summary>
+        /// The identifier for the RoleType_Identities Variable.
+        /// </summary>
+        public static readonly NodeId RoleType_Identities = new NodeId(Opc.Ua.Variables.RoleType_Identities);
+
+        /// <summary>
+        /// The identifier for the RoleType_Applications Variable.
+        /// </summary>
+        public static readonly NodeId RoleType_Applications = new NodeId(Opc.Ua.Variables.RoleType_Applications);
+
+        /// <summary>
+        /// The identifier for the RoleType_Endpoints Variable.
+        /// </summary>
+        public static readonly NodeId RoleType_Endpoints = new NodeId(Opc.Ua.Variables.RoleType_Endpoints);
 
         /// <summary>
         /// The identifier for the RoleType_AddIdentity_InputArguments Variable.
@@ -27410,19 +27680,34 @@ namespace Opc.Ua
         public static readonly NodeId RoleType_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_RemoveIdentity_InputArguments);
 
         /// <summary>
+        /// The identifier for the RoleType_AddApplication_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId RoleType_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_AddApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveApplication_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId RoleType_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the RoleType_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId RoleType_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the RoleType_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId RoleType_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.RoleType_RemoveEndpoint_InputArguments);
+
+        /// <summary>
         /// The identifier for the IdentityCriteriaType_EnumValues Variable.
         /// </summary>
         public static readonly NodeId IdentityCriteriaType_EnumValues = new NodeId(Opc.Ua.Variables.IdentityCriteriaType_EnumValues);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Anonymous_Identities Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Anonymous_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_SystemRoleId);
-
-        /// <summary>
-        /// The identifier for the WellKnownRole_Anonymous_MappingRules Variable.
-        /// </summary>
-        public static readonly NodeId WellKnownRole_Anonymous_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_MappingRules);
+        public static readonly NodeId WellKnownRole_Anonymous_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_Identities);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Anonymous_AddIdentity_InputArguments Variable.
@@ -27435,34 +27720,64 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Anonymous_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Anonymous_AddApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_SystemRoleId);
+        public static readonly NodeId WellKnownRole_Anonymous_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_AddApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Anonymous_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_MappingRules);
+        public static readonly NodeId WellKnownRole_Anonymous_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_RemoveApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_AddIdentity_InputArguments Variable.
+        /// The identifier for the WellKnownRole_Anonymous_AddEndpoint_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_AddIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_AddIdentity_InputArguments);
+        public static readonly NodeId WellKnownRole_Anonymous_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_AddEndpoint_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments Variable.
+        /// The identifier for the WellKnownRole_Anonymous_RemoveEndpoint_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUsers_RemoveIdentity_InputArguments);
+        public static readonly NodeId WellKnownRole_Anonymous_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Anonymous_RemoveEndpoint_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_AuthenticatedUser_Identities Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Observer_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_SystemRoleId);
+        public static readonly NodeId WellKnownRole_AuthenticatedUser_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUser_Identities);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Observer_MappingRules Variable.
+        /// The identifier for the WellKnownRole_AuthenticatedUser_AddIdentity_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Observer_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_MappingRules);
+        public static readonly NodeId WellKnownRole_AuthenticatedUser_AddIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUser_AddIdentity_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_RemoveIdentity_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_AuthenticatedUser_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUser_RemoveIdentity_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_AddApplication_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_AuthenticatedUser_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUser_AddApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_RemoveApplication_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_AuthenticatedUser_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUser_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_AuthenticatedUser_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUser_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_AuthenticatedUser_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_AuthenticatedUser_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_AuthenticatedUser_RemoveEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Observer_Identities Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Observer_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_Identities);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Observer_AddIdentity_InputArguments Variable.
@@ -27475,14 +27790,29 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Observer_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Observer_AddApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Operator_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_SystemRoleId);
+        public static readonly NodeId WellKnownRole_Observer_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_AddApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Operator_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Observer_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Operator_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_MappingRules);
+        public static readonly NodeId WellKnownRole_Observer_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Observer_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Observer_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Observer_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Observer_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Observer_RemoveEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Operator_Identities Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Operator_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_Identities);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Operator_AddIdentity_InputArguments Variable.
@@ -27495,14 +27825,29 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Operator_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Operator_AddApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Engineer_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_SystemRoleId);
+        public static readonly NodeId WellKnownRole_Operator_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_AddApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Engineer_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Operator_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Engineer_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_MappingRules);
+        public static readonly NodeId WellKnownRole_Operator_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Operator_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Operator_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Operator_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Operator_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Operator_RemoveEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Engineer_Identities Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Engineer_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_Identities);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Engineer_AddIdentity_InputArguments Variable.
@@ -27515,14 +27860,29 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Engineer_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Engineer_AddApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Supervisor_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_SystemRoleId);
+        public static readonly NodeId WellKnownRole_Engineer_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_AddApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_Supervisor_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Engineer_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_Supervisor_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_MappingRules);
+        public static readonly NodeId WellKnownRole_Engineer_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Engineer_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Engineer_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Engineer_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Engineer_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Engineer_RemoveEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Supervisor_Identities Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Supervisor_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_Identities);
 
         /// <summary>
         /// The identifier for the WellKnownRole_Supervisor_AddIdentity_InputArguments Variable.
@@ -27535,14 +27895,29 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_Supervisor_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_Supervisor_AddApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_SecurityAdmin_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_SystemRoleId);
+        public static readonly NodeId WellKnownRole_Supervisor_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_AddApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_SecurityAdmin_MappingRules Variable.
+        /// The identifier for the WellKnownRole_Supervisor_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_SecurityAdmin_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_MappingRules);
+        public static readonly NodeId WellKnownRole_Supervisor_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Supervisor_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Supervisor_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_Supervisor_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_Supervisor_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_Supervisor_RemoveEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_SecurityAdmin_Identities Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_SecurityAdmin_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_Identities);
 
         /// <summary>
         /// The identifier for the WellKnownRole_SecurityAdmin_AddIdentity_InputArguments Variable.
@@ -27555,14 +27930,29 @@ namespace Opc.Ua
         public static readonly NodeId WellKnownRole_SecurityAdmin_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_RemoveIdentity_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_SystemRoleId Variable.
+        /// The identifier for the WellKnownRole_SecurityAdmin_AddApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_ConfigureAdmin_SystemRoleId = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_SystemRoleId);
+        public static readonly NodeId WellKnownRole_SecurityAdmin_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_AddApplication_InputArguments);
 
         /// <summary>
-        /// The identifier for the WellKnownRole_ConfigureAdmin_MappingRules Variable.
+        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments Variable.
         /// </summary>
-        public static readonly NodeId WellKnownRole_ConfigureAdmin_MappingRules = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_MappingRules);
+        public static readonly NodeId WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_SecurityAdmin_RemoveEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_Identities Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_ConfigureAdmin_Identities = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_Identities);
 
         /// <summary>
         /// The identifier for the WellKnownRole_ConfigureAdmin_AddIdentity_InputArguments Variable.
@@ -27573,6 +27963,26 @@ namespace Opc.Ua
         /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments Variable.
         /// </summary>
         public static readonly NodeId WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_RemoveIdentity_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_AddApplication_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_ConfigureAdmin_AddApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_AddApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_RemoveApplication_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_AddEndpoint_InputArguments);
+
+        /// <summary>
+        /// The identifier for the WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments = new NodeId(Opc.Ua.Variables.WellKnownRole_ConfigureAdmin_RemoveEndpoint_InputArguments);
 
         /// <summary>
         /// The identifier for the FileType_Size Variable.
@@ -29655,6 +30065,21 @@ namespace Opc.Ua
         public static readonly NodeId Server_ServerCapabilities_OperationLimits_MaxMonitoredItemsPerCall = new NodeId(Opc.Ua.Variables.Server_ServerCapabilities_OperationLimits_MaxMonitoredItemsPerCall);
 
         /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles_AddRole_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId Server_ServerCapabilities_Roles_AddRole_InputArguments = new NodeId(Opc.Ua.Variables.Server_ServerCapabilities_Roles_AddRole_InputArguments);
+
+        /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles_AddRole_OutputArguments Variable.
+        /// </summary>
+        public static readonly NodeId Server_ServerCapabilities_Roles_AddRole_OutputArguments = new NodeId(Opc.Ua.Variables.Server_ServerCapabilities_Roles_AddRole_OutputArguments);
+
+        /// <summary>
+        /// The identifier for the Server_ServerCapabilities_Roles_RemoveRole_InputArguments Variable.
+        /// </summary>
+        public static readonly NodeId Server_ServerCapabilities_Roles_RemoveRole_InputArguments = new NodeId(Opc.Ua.Variables.Server_ServerCapabilities_Roles_RemoveRole_InputArguments);
+
+        /// <summary>
         /// The identifier for the Server_ServerDiagnostics_ServerDiagnosticsSummary Variable.
         /// </summary>
         public static readonly NodeId Server_ServerDiagnostics_ServerDiagnosticsSummary = new NodeId(Opc.Ua.Variables.Server_ServerDiagnostics_ServerDiagnosticsSummary);
@@ -29748,21 +30173,6 @@ namespace Opc.Ua
         /// The identifier for the Server_ServerRedundancy_RedundancySupport Variable.
         /// </summary>
         public static readonly NodeId Server_ServerRedundancy_RedundancySupport = new NodeId(Opc.Ua.Variables.Server_ServerRedundancy_RedundancySupport);
-
-        /// <summary>
-        /// The identifier for the Server_Roles_AddRole_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId Server_Roles_AddRole_InputArguments = new NodeId(Opc.Ua.Variables.Server_Roles_AddRole_InputArguments);
-
-        /// <summary>
-        /// The identifier for the Server_Roles_AddRole_OutputArguments Variable.
-        /// </summary>
-        public static readonly NodeId Server_Roles_AddRole_OutputArguments = new NodeId(Opc.Ua.Variables.Server_Roles_AddRole_OutputArguments);
-
-        /// <summary>
-        /// The identifier for the Server_Roles_RemoveRole_InputArguments Variable.
-        /// </summary>
-        public static readonly NodeId Server_Roles_RemoveRole_InputArguments = new NodeId(Opc.Ua.Variables.Server_Roles_RemoveRole_InputArguments);
 
         /// <summary>
         /// The identifier for the Server_GetMonitoredItems_InputArguments Variable.
@@ -35980,9 +36390,9 @@ namespace Opc.Ua
         public static readonly NodeId OpcUa_XmlSchema_EnumDescription = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_EnumDescription);
 
         /// <summary>
-        /// The identifier for the OpcUa_XmlSchema_CompleteStructureDefinition Variable.
+        /// The identifier for the OpcUa_XmlSchema_NestedStructureDefinition Variable.
         /// </summary>
-        public static readonly NodeId OpcUa_XmlSchema_CompleteStructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_CompleteStructureDefinition);
+        public static readonly NodeId OpcUa_XmlSchema_NestedStructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_XmlSchema_NestedStructureDefinition);
 
         /// <summary>
         /// The identifier for the OpcUa_XmlSchema_Argument Variable.
@@ -36375,9 +36785,9 @@ namespace Opc.Ua
         public static readonly NodeId OpcUa_BinarySchema_EnumDescription = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_EnumDescription);
 
         /// <summary>
-        /// The identifier for the OpcUa_BinarySchema_CompleteStructureDefinition Variable.
+        /// The identifier for the OpcUa_BinarySchema_NestedStructureDefinition Variable.
         /// </summary>
-        public static readonly NodeId OpcUa_BinarySchema_CompleteStructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_CompleteStructureDefinition);
+        public static readonly NodeId OpcUa_BinarySchema_NestedStructureDefinition = new NodeId(Opc.Ua.Variables.OpcUa_BinarySchema_NestedStructureDefinition);
 
         /// <summary>
         /// The identifier for the OpcUa_BinarySchema_Argument Variable.
@@ -36944,6 +37354,11 @@ namespace Opc.Ua
         public const string ActualSessionTimeout = "ActualSessionTimeout";
 
         /// <summary>
+        /// The BrowseName for the AddApplication component.
+        /// </summary>
+        public const string AddApplication = "AddApplication";
+
+        /// <summary>
         /// The BrowseName for the AddBrokerConnection component.
         /// </summary>
         public const string AddBrokerConnection = "AddBrokerConnection";
@@ -36972,6 +37387,11 @@ namespace Opc.Ua
         /// The BrowseName for the AddDataSetWriter component.
         /// </summary>
         public const string AddDataSetWriter = "AddDataSetWriter";
+
+        /// <summary>
+        /// The BrowseName for the AddEndpoint component.
+        /// </summary>
+        public const string AddEndpoint = "AddEndpoint";
 
         /// <summary>
         /// The BrowseName for the AddExtensionField component.
@@ -37347,6 +37767,11 @@ namespace Opc.Ua
         /// The BrowseName for the ApplicationInstanceCertificate component.
         /// </summary>
         public const string ApplicationInstanceCertificate = "ApplicationInstanceCertificate";
+
+        /// <summary>
+        /// The BrowseName for the Applications component.
+        /// </summary>
+        public const string Applications = "Applications";
 
         /// <summary>
         /// The BrowseName for the ApplicationType component.
@@ -37997,11 +38422,6 @@ namespace Opc.Ua
         /// The BrowseName for the Comment component.
         /// </summary>
         public const string Comment = "Comment";
-
-        /// <summary>
-        /// The BrowseName for the CompleteStructureDefinition component.
-        /// </summary>
-        public const string CompleteStructureDefinition = "CompleteStructureDefinition";
 
         /// <summary>
         /// The BrowseName for the ComplexNumberType component.
@@ -39439,6 +39859,11 @@ namespace Opc.Ua
         public const string Id = "Id";
 
         /// <summary>
+        /// The BrowseName for the Identities component.
+        /// </summary>
+        public const string Identities = "Identities";
+
+        /// <summary>
         /// The BrowseName for the IdentityCriteriaType component.
         /// </summary>
         public const string IdentityCriteriaType = "IdentityCriteriaType";
@@ -39772,11 +40197,6 @@ namespace Opc.Ua
         /// The BrowseName for the ManufacturerName component.
         /// </summary>
         public const string ManufacturerName = "ManufacturerName";
-
-        /// <summary>
-        /// The BrowseName for the MappingRules component.
-        /// </summary>
-        public const string MappingRules = "MappingRules";
 
         /// <summary>
         /// The BrowseName for the MaxArrayLength component.
@@ -40247,6 +40667,11 @@ namespace Opc.Ua
         /// The BrowseName for the NDimensionArrayItemType component.
         /// </summary>
         public const string NDimensionArrayItemType = "NDimensionArrayItemType";
+
+        /// <summary>
+        /// The BrowseName for the NestedStructureDefinition component.
+        /// </summary>
+        public const string NestedStructureDefinition = "NestedStructureDefinition";
 
         /// <summary>
         /// The BrowseName for the NetworkGroupDataType component.
@@ -41114,6 +41539,11 @@ namespace Opc.Ua
         public const string RelativePathElement = "RelativePathElement";
 
         /// <summary>
+        /// The BrowseName for the RemoveApplication component.
+        /// </summary>
+        public const string RemoveApplication = "RemoveApplication";
+
+        /// <summary>
         /// The BrowseName for the RemoveCertificate component.
         /// </summary>
         public const string RemoveCertificate = "RemoveCertificate";
@@ -41137,6 +41567,11 @@ namespace Opc.Ua
         /// The BrowseName for the RemoveDataSetWriter component.
         /// </summary>
         public const string RemoveDataSetWriter = "RemoveDataSetWriter";
+
+        /// <summary>
+        /// The BrowseName for the RemoveEndpoint component.
+        /// </summary>
+        public const string RemoveEndpoint = "RemoveEndpoint";
 
         /// <summary>
         /// The BrowseName for the RemoveExtensionField component.
@@ -41284,11 +41719,6 @@ namespace Opc.Ua
         public const string RevisedSessionTimeout = "RevisedSessionTimeout";
 
         /// <summary>
-        /// The BrowseName for the RoleFolderType component.
-        /// </summary>
-        public const string RoleFolderType = "RoleFolderType";
-
-        /// <summary>
         /// The BrowseName for the RoleName_Placeholder component.
         /// </summary>
         public const string RoleName_Placeholder = "<RoleName>";
@@ -41302,6 +41732,11 @@ namespace Opc.Ua
         /// The BrowseName for the Roles component.
         /// </summary>
         public const string Roles = "Roles";
+
+        /// <summary>
+        /// The BrowseName for the RoleSetType component.
+        /// </summary>
+        public const string RoleSetType = "RoleSetType";
 
         /// <summary>
         /// The BrowseName for the RoleType component.
@@ -42094,11 +42529,6 @@ namespace Opc.Ua
         public const string SystemOffNormalAlarmType = "SystemOffNormalAlarmType";
 
         /// <summary>
-        /// The BrowseName for the SystemRoleId component.
-        /// </summary>
-        public const string SystemRoleId = "SystemRoleId";
-
-        /// <summary>
         /// The BrowseName for the SystemState component.
         /// </summary>
         public const string SystemState = "SystemState";
@@ -42594,9 +43024,9 @@ namespace Opc.Ua
         public const string WellKnownRole_Anonymous = "Anonymous";
 
         /// <summary>
-        /// The BrowseName for the WellKnownRole_AuthenticatedUsers component.
+        /// The BrowseName for the WellKnownRole_AuthenticatedUser component.
         /// </summary>
-        public const string WellKnownRole_AuthenticatedUsers = "AuthenticatedUsers";
+        public const string WellKnownRole_AuthenticatedUser = "AuthenticatedUser";
 
         /// <summary>
         /// The BrowseName for the WellKnownRole_ConfigureAdmin component.

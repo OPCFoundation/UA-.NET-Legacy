@@ -136,11 +136,8 @@ namespace Opc.Ua
         /// <summary>
         /// Finds a token policy that matches the user identity specified.
         /// </summary>
-        public UserTokenPolicy FindUserTokenPolicy(UserTokenType tokenType, string issuedTokenType)
-        {
-            // construct issuer type.
-            string issuedTokenTypeText = issuedTokenType;
-            
+        public UserTokenPolicy FindUserTokenPolicy(UserTokenType tokenType, string issuedTokenType = null)
+        {            
             // find matching policy.
             foreach (UserTokenPolicy policy in m_userIdentityTokens)
             {
@@ -151,7 +148,7 @@ namespace Opc.Ua
                 }
 
                 // check issuer token type.
-                if (issuedTokenTypeText != policy.IssuedTokenType)
+                if (issuedTokenType != null && issuedTokenType != policy.IssuedTokenType)
                 {
                     continue;
                 }

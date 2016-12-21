@@ -59,20 +59,24 @@
       </GlobalDiscoveryClientConfiguration>
     </ua:XmlElement>
     <ua:XmlElement>
+      <!-- this is a list of OAuth2 servers which the client has been given access to. The client secrets must be stored in a client configuration files. -->
       <ListOfOAuth2Credential xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd">
+        <!-- this is used if the client is pre-configured with GDS OAuth2 credentials to use. -->
+        <OAuth2Credential>
+          <AuthorityUrl>https://localhost:54333</AuthorityUrl>
+          <GrantType>client_credentials</GrantType>
+          <ClientId>urn:localhost:OAuth2TestClient</ClientId>
+          <ClientSecret>secret</ClientSecret>
+          <TokenEndpoint>/connect/token</TokenEndpoint>
+        </OAuth2Credential>
+        <!-- this is used to access the Azure OAuth2 service when an identity provider is used. -->
         <OAuth2Credential>
           <AuthorityUrl>https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com</AuthorityUrl>
           <GrantType>authorization_code</GrantType>
           <ClientId>f8b31779-d9a3-43ff-b854-28f27a52e2f2</ClientId>
           <RedirectUrl>https://localhost:62540/prototypeclient</RedirectUrl>
           <TokenEndpoint>/oauth2/token</TokenEndpoint>
-          <AuthorizationEndpoint>/oauth2/authorize</AuthorizationEndpoint>          
-          <Servers>
-            <OAuth2ServerSettings>
-              <ApplicationUri>urn:localhost:somecompany.com:GlobalDiscoveryServer</ApplicationUri>
-              <ResourceId>https://localhost:62540/prototypeserver</ResourceId>
-            </OAuth2ServerSettings>
-          </Servers>
+          <AuthorizationEndpoint>/oauth2/authorize</AuthorizationEndpoint>
         </OAuth2Credential>
       </ListOfOAuth2Credential>
     </ua:XmlElement>

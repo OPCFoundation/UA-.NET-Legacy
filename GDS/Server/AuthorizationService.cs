@@ -99,7 +99,7 @@ namespace Opc.Ua.AuthorizationService
 
                 SigningCertificate = LoadCertificate(),
                 Factory = factory,
-                InputLengthRestrictions = new InputLengthRestrictions() { Password = 2048 },
+                InputLengthRestrictions = new InputLengthRestrictions() { Password = 2048, ClientId = 2048 },
    
                 EventsOptions = new EventsOptions
                 {
@@ -198,23 +198,18 @@ namespace Opc.Ua.AuthorizationService
 
             try
             {
-                var application = m_server.FindApplication(clientId);
-
-                if (application != null)
+                return Task.FromResult(new Client
                 {
-                    return Task.FromResult(new Client
-                    {
-                        ClientName = application.ApplicationNames[0].Text,
-                        ClientId = application.ApplicationUri,
-                        Enabled = true,
-                        AccessTokenType = AccessTokenType.Jwt,
-                        Flow = Flows.Custom,
-                        ClientSecrets = new List<Secret>(),
-                        AllowAccessToAllCustomGrantTypes = true,
-                        AllowedCustomGrantTypes = new List<string> { "urn:opcfoundation.org:oauth2:site_token" },
-                        AllowAccessToAllScopes = true
-                    });
-                }
+                    ClientName = clientId,
+                    ClientId = clientId,
+                    Enabled = true,
+                    AccessTokenType = AccessTokenType.Jwt,
+                    Flow = Flows.Custom,
+                    ClientSecrets = new List<Secret>(),
+                    AllowAccessToAllCustomGrantTypes = true,
+                    AllowedCustomGrantTypes = new List<string> { "urn:opcfoundation.org:oauth2:site_token" },
+                    AllowAccessToAllScopes = true
+                });
             }
             catch (Exception e)
             {
@@ -281,7 +276,7 @@ namespace Opc.Ua.AuthorizationService
                 return null;
             }
 
-            if (grantType == "client_credentials")
+            if (grantType != "urn:opcfoundation.org:oauth2:site_token")
             {
                 return new ParsedSecret
                 {
@@ -402,7 +397,12 @@ namespace Opc.Ua.AuthorizationService
         public Task<CustomGrantValidationResult> ValidateAsync(ValidatedTokenRequest request)
         {
             var accessToken = request.Raw.Get("access_token");
-            var identity = JwtUtils.ValidateToken(new Uri("https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com"), "https://localhost:62540/prototypeserver", accessToken);
+
+            var identity = JwtUtils.ValidateToken(
+                new Uri("https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com"),
+                "https://mycompany.com/gds-prototype", 
+                accessToken);
+
             JwtSecurityToken azureToken = identity.GetSecurityToken() as JwtSecurityToken;
 
             var scope = request.Raw.Get("scope");

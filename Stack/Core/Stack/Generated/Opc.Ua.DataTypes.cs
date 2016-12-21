@@ -292,22 +292,10 @@ namespace Opc.Ua
         Anonymous = 5,
 
         /// <summary>
-        /// A description for the Everyone field.
+        /// A description for the AuthenticatedUser field.
         /// </summary>
-        [EnumMember(Value = "Everyone_6")]
-        Everyone = 6,
-
-        /// <summary>
-        /// A description for the Application field.
-        /// </summary>
-        [EnumMember(Value = "Application_7")]
-        Application = 7,
-
-        /// <summary>
-        /// A description for the Endpoint field.
-        /// </summary>
-        [EnumMember(Value = "Endpoint_8")]
-        Endpoint = 8,
+        [EnumMember(Value = "AuthenticatedUser_6")]
+        AuthenticatedUser = 6,
     }
 
     #region IdentityCriteriaTypeCollection Class
@@ -5614,21 +5602,21 @@ namespace Opc.Ua
     #endif
     #endregion
 
-    #region CompleteStructureDefinition Class
-    #if (!OPCUA_EXCLUDE_CompleteStructureDefinition)
+    #region NestedStructureDefinition Class
+    #if (!OPCUA_EXCLUDE_NestedStructureDefinition)
     /// <summary>
-    /// A description for the CompleteStructureDefinition DataType.
+    /// A description for the NestedStructureDefinition DataType.
     /// </summary>
     /// <exclude />
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Opc.Ua.ModelCompiler", "1.0.0.0")]
     [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaXsd)]
-    public partial class CompleteStructureDefinition : StructureDefinition
+    public partial class NestedStructureDefinition : StructureDefinition
     {
         #region Constructors
         /// <summary>
         /// The default constructor.
         /// </summary>
-        public CompleteStructureDefinition()
+        public NestedStructureDefinition()
         {
             Initialize();
         }
@@ -5648,6 +5636,7 @@ namespace Opc.Ua
         private void Initialize()
         {
             m_name = null;
+            m_description = null;
             m_structureDataTypes = new StructureDescriptionCollection();
             m_enumDataTypes = new EnumDescriptionCollection();
         }
@@ -5665,9 +5654,19 @@ namespace Opc.Ua
         }
 
         /// <summary>
+        /// A description for the Description field.
+        /// </summary>
+        [DataMember(Name = "Description", IsRequired = false, Order = 2)]
+        public LocalizedText Description
+        {
+            get { return m_description;  }
+            set { m_description = value; }
+        }
+
+        /// <summary>
         /// A description for the StructureDataTypes field.
         /// </summary>
-        [DataMember(Name = "StructureDataTypes", IsRequired = false, Order = 2)]
+        [DataMember(Name = "StructureDataTypes", IsRequired = false, Order = 3)]
         public StructureDescriptionCollection StructureDataTypes
         {
             get
@@ -5689,7 +5688,7 @@ namespace Opc.Ua
         /// <summary>
         /// A description for the EnumDataTypes field.
         /// </summary>
-        [DataMember(Name = "EnumDataTypes", IsRequired = false, Order = 3)]
+        [DataMember(Name = "EnumDataTypes", IsRequired = false, Order = 4)]
         public EnumDescriptionCollection EnumDataTypes
         {
             get
@@ -5713,19 +5712,19 @@ namespace Opc.Ua
         /// <summary cref="IEncodeable.TypeId" />
         public override ExpandedNodeId TypeId
         {
-            get { return DataTypeIds.CompleteStructureDefinition; }
+            get { return DataTypeIds.NestedStructureDefinition; }
         }
 
         /// <summary cref="IEncodeable.BinaryEncodingId" />
         public override ExpandedNodeId BinaryEncodingId
         {
-            get { return ObjectIds.CompleteStructureDefinition_Encoding_DefaultBinary; }
+            get { return ObjectIds.NestedStructureDefinition_Encoding_DefaultBinary; }
         }
 
         /// <summary cref="IEncodeable.XmlEncodingId" />
         public override ExpandedNodeId XmlEncodingId
         {
-            get { return ObjectIds.CompleteStructureDefinition_Encoding_DefaultXml; }
+            get { return ObjectIds.NestedStructureDefinition_Encoding_DefaultXml; }
         }
 
         /// <summary cref="IEncodeable.Encode(IEncoder)" />
@@ -5736,6 +5735,7 @@ namespace Opc.Ua
             encoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
 
             encoder.WriteString("Name", Name);
+            encoder.WriteLocalizedText("Description", Description);
             encoder.WriteEncodeableArray("StructureDataTypes", StructureDataTypes.ToArray(), typeof(StructureDescription));
             encoder.WriteEncodeableArray("EnumDataTypes", EnumDataTypes.ToArray(), typeof(EnumDescription));
 
@@ -5750,6 +5750,7 @@ namespace Opc.Ua
             decoder.PushNamespace(Opc.Ua.Namespaces.OpcUaXsd);
 
             Name = decoder.ReadString("Name");
+            Description = decoder.ReadLocalizedText("Description");
             StructureDataTypes = (StructureDescriptionCollection)decoder.ReadEncodeableArray("StructureDataTypes", typeof(StructureDescription));
             EnumDataTypes = (EnumDescriptionCollection)decoder.ReadEncodeableArray("EnumDataTypes", typeof(EnumDescription));
 
@@ -5764,7 +5765,7 @@ namespace Opc.Ua
                 return true;
             }
 
-            CompleteStructureDefinition value = encodeable as CompleteStructureDefinition;
+            NestedStructureDefinition value = encodeable as NestedStructureDefinition;
 
             if (value == null)
             {
@@ -5773,6 +5774,7 @@ namespace Opc.Ua
 
             if (!base.IsEqual(encodeable)) return false;
             if (!Utils.IsEqual(m_name, value.m_name)) return false;
+            if (!Utils.IsEqual(m_description, value.m_description)) return false;
             if (!Utils.IsEqual(m_structureDataTypes, value.m_structureDataTypes)) return false;
             if (!Utils.IsEqual(m_enumDataTypes, value.m_enumDataTypes)) return false;
 
@@ -5783,16 +5785,17 @@ namespace Opc.Ua
         /// <summary cref="ICloneable.Clone" />
         public override object Clone()
         {
-            return (CompleteStructureDefinition)this.MemberwiseClone();
+            return (NestedStructureDefinition)this.MemberwiseClone();
         }
         #endif
 
         /// <summary cref="Object.MemberwiseClone" />
         public new object MemberwiseClone()
         {
-            CompleteStructureDefinition clone = (CompleteStructureDefinition)base.MemberwiseClone();
+            NestedStructureDefinition clone = (NestedStructureDefinition)base.MemberwiseClone();
 
             clone.m_name = (string)Utils.Clone(this.m_name);
+            clone.m_description = (LocalizedText)Utils.Clone(this.m_description);
             clone.m_structureDataTypes = (StructureDescriptionCollection)Utils.Clone(this.m_structureDataTypes);
             clone.m_enumDataTypes = (EnumDescriptionCollection)Utils.Clone(this.m_enumDataTypes);
 
@@ -5802,6 +5805,7 @@ namespace Opc.Ua
 
         #region Private Fields
         private string m_name;
+        private LocalizedText m_description;
         private StructureDescriptionCollection m_structureDataTypes;
         private EnumDescriptionCollection m_enumDataTypes;
         #endregion
