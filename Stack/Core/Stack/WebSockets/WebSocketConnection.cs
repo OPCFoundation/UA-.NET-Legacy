@@ -255,12 +255,6 @@ namespace Opc.Ua.Bindings
             string url = ExtractToken(message, ref ii, ' ', '\t');
             string version = ExtractToken(message, ref ii, '\n');
 
-            if (url != "/")
-            {
-                await SendErrorResponse(HttpStatusCode.NotFound);
-                throw new WebException("URL not found.", WebExceptionStatus.ProtocolError);
-            }
-
             if (method != "GET")
             {
                 await SendErrorResponse(HttpStatusCode.MethodNotAllowed);
