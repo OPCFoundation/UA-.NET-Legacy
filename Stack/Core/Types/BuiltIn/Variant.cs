@@ -63,24 +63,6 @@ namespace Opc.Ua
             m_value = null;
             m_typeInfo = typeInfo;
             Set(value, typeInfo);
-
-            #if DEBUG
-            
-            TypeInfo sanityCheck = TypeInfo.Construct(value);
-
-            System.Diagnostics.Debug.Assert(
-                sanityCheck.BuiltInType == m_typeInfo.BuiltInType, 
-                Utils.Format("{0} != {1}",
-                sanityCheck.BuiltInType,
-                typeInfo.BuiltInType));
-
-            System.Diagnostics.Debug.Assert(
-                sanityCheck.ValueRank == m_typeInfo.ValueRank, 
-                Utils.Format("{0} != {1}",
-                sanityCheck.ValueRank,
-                typeInfo.ValueRank));
-
-            #endif
         }
 
         /// <summary>
