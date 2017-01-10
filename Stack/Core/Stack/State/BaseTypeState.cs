@@ -169,14 +169,16 @@ namespace Opc.Ua
 
             encoder.PushNamespace(Namespaces.OpcUaXsd);
 
-            if (!NodeId.IsNull(m_superTypeId))
+            NodeId superTypeId = this.m_superTypeId;
+            if (!NodeId.IsNull(superTypeId))
             {
-                encoder.WriteNodeId("SuperTypeId", m_superTypeId);
+                encoder.WriteNodeId("SuperTypeId", superTypeId);
             }
 
-            if (m_isAbstract)
+            bool isAbstract = this.m_isAbstract;
+            if (isAbstract)
             {
-                encoder.WriteBoolean("IsAbstract", m_isAbstract);
+                encoder.WriteBoolean("IsAbstract", isAbstract);
             }
 
             encoder.PopNamespace();
@@ -288,9 +290,10 @@ namespace Opc.Ua
                 {
                     bool isAbstract = m_isAbstract;
 
-                    if (OnReadIsAbstract != null)
+                    NodeAttributeEventHandler<bool> onReadIsAbstract = this.OnReadIsAbstract;
+                    if (onReadIsAbstract != null)
                     {
-                        result = OnReadIsAbstract(context, this, ref isAbstract);
+                        result = onReadIsAbstract(context, this, ref isAbstract);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -335,9 +338,10 @@ namespace Opc.Ua
 
                     bool isAbstract = isAbstractRef.Value;
 
-                    if (OnWriteIsAbstract != null)
+                    NodeAttributeEventHandler<bool> onWriteIsAbstract = this.OnWriteIsAbstract;
+                    if (onWriteIsAbstract != null)
                     {
-                        result = OnWriteIsAbstract(context, this, ref isAbstract);
+                        result = onWriteIsAbstract(context, this, ref isAbstract);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -363,11 +367,12 @@ namespace Opc.Ua
         {
             base.PopulateBrowser(context, browser);
 
-            if (!NodeId.IsNull(m_superTypeId))
+            NodeId superTypeId = this.m_superTypeId;
+            if (!NodeId.IsNull(superTypeId))
             {
                 if (browser.IsRequired(ReferenceTypeIds.HasSubtype, true))
                 {
-                    browser.Add(ReferenceTypeIds.HasSubtype, true, m_superTypeId);
+                    browser.Add(ReferenceTypeIds.HasSubtype, true, superTypeId);
                 }
             }
 
