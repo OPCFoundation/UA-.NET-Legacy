@@ -114,7 +114,7 @@ namespace Opc.Ua
             string name = GetNonNullText(this);
             
             NodeState parent = this.m_parent;
-            if (parent == null)
+            if (parent != null)
             {
                 return name;
             }
@@ -267,7 +267,7 @@ namespace Opc.Ua
 
             // recusively notify the parent.
             NodeState parent = this.m_parent;
-            if (parent == null)
+            if (parent != null)
             {
                 parent.ReportEvent(context, e);
             }

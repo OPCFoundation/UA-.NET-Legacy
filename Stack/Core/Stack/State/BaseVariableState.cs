@@ -74,7 +74,11 @@ namespace Opc.Ua
                 m_userAccessLevel = instance.m_userAccessLevel;
                 m_historizing = instance.m_historizing;
                 ReadOnlyList<uint> arrayDimensions = instance.m_arrayDimensions;
-                this.m_arrayDimensions = arrayDimensions == null ? (ReadOnlyList<uint>)null : new ReadOnlyList<uint>((IList<uint>)arrayDimensions, true);
+                m_arrayDimensions = null;
+                if (arrayDimensions != null)
+                {
+                    m_arrayDimensions = new ReadOnlyList<uint>(arrayDimensions, true);
+                }
             }
 
             base.Initialize(context, source);
@@ -866,7 +870,7 @@ namespace Opc.Ua
                 ReadOnlyList<uint> arrayDimensions = this.ArrayDimensions;
                 if (arrayDimensions != null)
                 {
-                    variableNode.ArrayDimensions = new UInt32Collection((IEnumerable<uint>)arrayDimensions);
+                    variableNode.ArrayDimensions = new UInt32Collection(arrayDimensions);
                 }
 
                 variableNode.AccessLevel = this.AccessLevel;
