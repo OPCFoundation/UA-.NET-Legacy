@@ -870,7 +870,7 @@ namespace Opc.Ua
                 ReadOnlyList<uint> arrayDimensions = this.ArrayDimensions;
                 if (arrayDimensions != null)
                 {
-                    variableNode.ArrayDimensions = new UInt32Collection((IEnumerable<uint>)arrayDimensions);
+                    variableNode.ArrayDimensions = new UInt32Collection(arrayDimensions);
                 }
 
                 variableNode.AccessLevel = this.AccessLevel;
