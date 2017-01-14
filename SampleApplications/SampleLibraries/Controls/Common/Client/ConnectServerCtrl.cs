@@ -45,17 +45,6 @@ namespace Opc.Ua.Client.Controls
     /// </summary>
     public partial class ConnectServerCtrl : UserControl
     {
-        #region Constructors
-        /// <summary>
-        /// Initializes the object.
-        /// </summary>
-        public ConnectServerCtrl()
-        {
-            InitializeComponent();
-            m_CertificateValidation = new CertificateValidationEventHandler(CertificateValidator_CertificateValidation);
-        }
-        #endregion
-
         #region Private Fields
         private ApplicationConfiguration m_configuration;
         private Session m_session;
@@ -69,6 +58,19 @@ namespace Opc.Ua.Client.Controls
         private StatusStrip m_StatusStrip;
         private ToolStripItem m_ServerStatusLB;
         private ToolStripItem m_StatusUpateTimeLB;
+        private Dictionary<Uri, EndpointDescription> m_endpoints;
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Initializes the object.
+        /// </summary>
+        public ConnectServerCtrl()
+        {
+            m_endpoints = new Dictionary<Uri, EndpointDescription>();
+            InitializeComponent();
+            m_CertificateValidation = new CertificateValidationEventHandler(CertificateValidator_CertificateValidation);
+        }
         #endregion
 
         #region Public Members
@@ -287,6 +289,46 @@ namespace Opc.Ua.Client.Controls
         /// Creates a new session.
         /// </summary>
         /// <returns>The new session object.</returns>
+        private Session Connect(ITransportWaitingConnection connection, EndpointDescription endpointDescription, bool useSecurity)
+        {
+            // disconnect from existing session.
+            InternalDisconnect();
+
+            // select the best endpoint.
+            if (endpointDescription == null)
+            {
+                endpointDescription = EndpointDescription.SelectEndpoint(m_configuration, connection, useSecurity);
+                return null;
+            }
+
+            EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(m_configuration);
+            ConfiguredEndpoint endpoint = new ConfiguredEndpoint(null, endpointDescription, endpointConfiguration);
+
+            m_session = Session.Create(
+                m_configuration,
+                connection,
+                endpointDescription,
+                endpointConfiguration,
+                !DisableDomainCheck,
+                (String.IsNullOrEmpty(SessionName)) ? m_configuration.ApplicationName : SessionName,
+                60000,
+                UserIdentity,
+                PreferredLocales);
+
+            // set up keep alive callback.
+            m_session.KeepAlive += new KeepAliveEventHandler(Session_KeepAlive);
+
+            // raise an event.
+            DoConnectComplete(null);
+
+            // return the new session.
+            return m_session;
+        }
+
+        /// <summary>
+        /// Creates a new session.
+        /// </summary>
+        /// <returns>The new session object.</returns>
         private Session Connect(string serverUrl, bool useSecurity)
         {
             // disconnect from existing session.
@@ -343,6 +385,29 @@ namespace Opc.Ua.Client.Controls
             }
 
             return await Task.Run(() => Connect(serverUrl, useSecurity));
+        }
+
+        public async Task<Session> ConnectAsync(ITransportWaitingConnection connection, bool useSecurity)
+        {
+            if (connection.EndpointUrl == null)
+            {
+                throw new ArgumentException("Endpoint URL is not valid.");
+            }
+
+            UrlCB.Text = connection.EndpointUrl.ToString();
+            UseSecurityCK.Checked = useSecurity;
+
+            EndpointDescription endpointDescription = null;
+
+            if (!m_endpoints.TryGetValue(connection.EndpointUrl, out endpointDescription))
+            {
+                endpointDescription = EndpointDescription.SelectEndpoint(m_configuration, connection, useSecurity);
+                m_endpoints[connection.EndpointUrl] = endpointDescription;
+                MessageBox.Show("Selected Endpoint. Waiting for reconnect to establish Session.");
+                return null;
+            }
+
+            return await Task.Run(() => Connect(connection, endpointDescription, UseSecurityCK.Checked));
         }
 
         /// <summary>

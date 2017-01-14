@@ -36,20 +36,14 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public EndpointDescription EndpointDescription
         {
-            get 
-            { 
-                lock (DataLock)
-                {
-                    return m_selectedEndpoint;
-                }
+            get
+            {
+                return m_selectedEndpoint;
             }
 
             protected set
             {
-                lock (DataLock)
-                {
-                    m_selectedEndpoint = value;
-                }
+                m_selectedEndpoint = value;
             }
         }
         #endregion

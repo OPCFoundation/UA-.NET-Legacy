@@ -248,6 +248,19 @@ namespace Opc.Ua
         }
 
         /// <summary>
+        /// Initializes a secure channel with the endpoint identified by the URL.
+        /// </summary>
+        /// <param name="connection">The connection to use.</param>
+        /// <param name="settings">The settings to use when creating the channel.</param>
+        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
+        public void Initialize(
+            ITransportWaitingConnection connection,
+            TransportChannelSettings settings)
+        {
+            throw new NotSupportedException("WCF channels must be configured when they are constructed.");
+        }
+
+        /// <summary>
         /// Opens a secure channel with the endpoint identified by the URL.
         /// </summary>
         public void Open()
@@ -611,6 +624,68 @@ namespace Opc.Ua
         #endif
 
         #region Protected Methods
+        /// <summary>
+        /// Creates a new UA-binary transport channel if requested. Null otherwise.
+        /// </summary>
+        public static ITransportChannel CreateUaBinaryChannel(
+            ApplicationConfiguration configuration,
+            ITransportWaitingConnection connection,
+            EndpointDescription description,
+            EndpointConfiguration endpointConfiguration,
+            X509Certificate2 clientCertificate,
+            ServiceMessageContext messageContext)
+        {
+            // check if the server if configured to use the ANSI C stack.
+            bool useUaTcp = description.EndpointUrl.StartsWith(Utils.UriSchemeOpcTcp);
+            bool useHttps = description.EndpointUrl.StartsWith(Utils.UriSchemeHttps);
+            bool useAmqps = description.EndpointUrl.StartsWith(Utils.UriSchemeOpcAmqp);
+            bool useUaWss = description.EndpointUrl.StartsWith(Utils.UriSchemeOpcWss);
+
+            // initialize the channel which will be created with the server.
+            ITransportChannel channel = null;
+
+            // create a UA-TCP channel.
+            TransportChannelSettings settings = new TransportChannelSettings();
+
+            settings.Description = description;
+            settings.Configuration = endpointConfiguration;
+            settings.ClientCertificate = clientCertificate;
+
+            if (description.ServerCertificate != null && description.ServerCertificate.Length > 0)
+            {
+                settings.ServerCertificate = Utils.ParseCertificateBlob(description.ServerCertificate);
+            }
+            
+            #if !SILVERLIGHT
+            if (configuration != null)
+            {
+                settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
+            }
+            #endif
+
+            settings.NamespaceUris = messageContext.NamespaceUris;
+            settings.Factory = messageContext.Factory;
+
+            if (useUaTcp)
+            {
+                channel = new TcpTransportChannel();
+            }
+
+            else if (useAmqps)
+            {
+                channel = new AmqpTransportChannel(configuration);
+            }
+
+            else if (useUaWss)
+            {
+                channel = new WebSocketTransportChannel(configuration);
+            }
+
+            channel.Initialize(connection, settings);
+            channel.Open();
+
+            return channel;
+        }
         /// <summary>
         /// Creates a new UA-binary transport channel if requested. Null otherwise.
         /// </summary>

@@ -32,6 +32,19 @@ namespace Opc.Ua.Bindings
     /// </summary>
     public class TcpAsyncOperation<T> : IAsyncResult, IDisposable
     {
+        #region Private Fields
+        private object m_lock = new object();
+        private AsyncCallback m_callback;
+        private object m_asyncState;
+        private bool m_synchronous;
+        private bool m_completed;
+        private ManualResetEvent m_event;
+        private T m_response;
+        private ServiceResult m_error;
+        private Timer m_timer;
+        private Dictionary<string, object> m_properties;
+        #endregion
+
         #region Constructors
         /// <summary>
         /// Initializes the object with a callback
@@ -364,19 +377,6 @@ namespace Opc.Ua.Bindings
                 }
             }
         }
-        #endregion
-        
-        #region Private Fields
-        private object m_lock = new object();
-        private AsyncCallback m_callback;
-        private object m_asyncState;
-        private bool m_synchronous;
-        private bool m_completed;
-        private ManualResetEvent m_event;
-        private T m_response;
-        private ServiceResult m_error;
-        private Timer m_timer;
-        private Dictionary<string,object> m_properties;
         #endregion
     }
 }

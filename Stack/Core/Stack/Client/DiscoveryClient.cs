@@ -57,7 +57,24 @@ namespace Opc.Ua
             return new DiscoveryClient(channel);
         }
 
-        #if !SILVERLIGHT
+        /// <summary>
+        /// Creates a binding for to use for discovering servers.
+        /// </summary>
+        /// <param name="connection">The connection to use.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns></returns>
+        public static DiscoveryClient Create(ApplicationConfiguration application, ITransportWaitingConnection connection, EndpointConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                configuration = EndpointConfiguration.Create();
+            }
+
+            ITransportChannel channel = DiscoveryChannel.Create(application, connection, configuration, application.CreateMessageContext());
+            return new DiscoveryClient(channel);
+        }
+
+#if !SILVERLIGHT
         /// <summary>
         /// Creates a binding for to use for discovering servers.
         /// </summary>
@@ -164,7 +181,40 @@ namespace Opc.Ua
             return channel;
         }
 
-        #if !SILVERLIGHT
+        /// <summary>
+        /// Creates a new transport channel that supports the ISessionChannel service contract.
+        /// </summary>
+        /// <param name="discoveryUrl">The discovery url.</param>
+        /// <param name="endpointConfiguration">The configuration to use with the endpoint.</param>
+        /// <param name="messageContext">The message context to use when serializing the messages.</param>
+        /// <returns></returns>
+        public static ITransportChannel Create(
+            ApplicationConfiguration configuration,
+            ITransportWaitingConnection connection,
+            EndpointConfiguration endpointConfiguration,
+            ServiceMessageContext messageContext)
+        {
+            // create a dummy description.
+            EndpointDescription endpoint = new EndpointDescription();
+
+            endpoint.EndpointUrl = connection.EndpointUrl.ToString();
+            endpoint.SecurityMode = MessageSecurityMode.None;
+            endpoint.SecurityPolicyUri = SecurityPolicies.None;
+            endpoint.Server.ApplicationUri = endpoint.EndpointUrl;
+            endpoint.Server.ApplicationType = ApplicationType.DiscoveryServer;
+
+            ITransportChannel channel = CreateUaBinaryChannel(
+                configuration,
+                connection, 
+                endpoint,
+                endpointConfiguration,
+                (System.Security.Cryptography.X509Certificates.X509Certificate2)null,
+                messageContext);
+
+            return channel;
+        }
+
+#if !SILVERLIGHT
         /// <summary>
         /// Creates a new transport channel that supports the IDiscoveryChannel service contract.
         /// </summary>

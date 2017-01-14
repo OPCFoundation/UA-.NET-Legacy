@@ -171,8 +171,13 @@ namespace Opc.Ua.Bindings
         {
         }
         #endregion
-        
+
         #region ITransportListener Members
+        /// <summary>
+        /// The URI scheme handled by the listener.
+        /// </summary>
+        public string UriScheme { get { return Utils.UriSchemeOpcAmqp; } }
+
         /// <summary>
         /// Opens the listener and starts accepting connection.
         /// </summary>
@@ -226,6 +231,26 @@ namespace Opc.Ua.Bindings
         public void Close()
         {
             Stop();
+        }
+
+        /// <summary>
+        /// Raised when a new connection is waiting for a client.
+        /// </summary>
+        public event EventHandler<ConnectionWaitingEventArgs> ConnectionWaiting;
+
+        /// <summary>
+        /// Raised when a monitored connection's status changed.
+        /// </summary>
+        public event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
+
+        public void CreateConnection(Uri url)
+        {
+            if (ConnectionStatusChanged == null || ConnectionWaiting == null)
+            {
+                throw new NotImplementedException();
+            }
+
+            throw new NotImplementedException();
         }
         #endregion
 

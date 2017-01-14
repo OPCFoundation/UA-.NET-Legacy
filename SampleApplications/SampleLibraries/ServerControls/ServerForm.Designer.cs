@@ -60,54 +60,39 @@ namespace Opc.Ua.Server.Controls
             this.components = new System.ComponentModel.Container();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.ServerDiagnosticsCTRL = new Opc.Ua.Server.Controls.ServerDiagnosticsCtrl();
-            this.serverHeaderBranding1 = new Opc.Ua.Server.Controls.ServerHeaderBranding();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.TopMenuBar = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.TopMenuBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // TrayIcon
             // 
             this.TrayIcon.Text = "TrayIcon";
             this.TrayIcon.Visible = true;
-            this.TrayIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TrayIcon_MouseMove);
             this.TrayIcon.DoubleClick += new System.EventHandler(this.TrayIcon_DoubleClick);
+            this.TrayIcon.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TrayIcon_MouseMove);
             // 
             // ServerDiagnosticsCTRL
             // 
             this.ServerDiagnosticsCTRL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ServerDiagnosticsCTRL.Location = new System.Drawing.Point(0, 114);
+            this.ServerDiagnosticsCTRL.Location = new System.Drawing.Point(0, 24);
             this.ServerDiagnosticsCTRL.Name = "ServerDiagnosticsCTRL";
-            this.ServerDiagnosticsCTRL.Size = new System.Drawing.Size(739, 368);
+            this.ServerDiagnosticsCTRL.Size = new System.Drawing.Size(739, 458);
             this.ServerDiagnosticsCTRL.TabIndex = 0;
             // 
-            // serverHeaderBranding1
+            // MainMenu
             // 
-            this.serverHeaderBranding1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.serverHeaderBranding1.BackColor = System.Drawing.Color.White;
-            this.serverHeaderBranding1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.serverHeaderBranding1.Location = new System.Drawing.Point(0, 24);
-            this.serverHeaderBranding1.MaximumSize = new System.Drawing.Size(0, 100);
-            this.serverHeaderBranding1.MinimumSize = new System.Drawing.Size(500, 90);
-            this.serverHeaderBranding1.Name = "serverHeaderBranding1";
-            this.serverHeaderBranding1.Padding = new System.Windows.Forms.Padding(3);
-            this.serverHeaderBranding1.Size = new System.Drawing.Size(739, 90);
-            this.serverHeaderBranding1.TabIndex = 1;
-            this.serverHeaderBranding1.Visible = false;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TopMenuBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(739, 24);
-            this.menuStrip1.TabIndex = 2;
-            this.menuStrip1.Text = "menuStrip1";
+            this.TopMenuBar.Location = new System.Drawing.Point(0, 0);
+            this.TopMenuBar.Name = "MainMenu";
+            this.TopMenuBar.Size = new System.Drawing.Size(739, 24);
+            this.TopMenuBar.TabIndex = 2;
+            this.TopMenuBar.Text = "MainMenu";
             // 
             // fileToolStripMenuItem
             // 
@@ -135,7 +120,7 @@ namespace Opc.Ua.Server.Controls
             // contentsToolStripMenuItem
             // 
             this.contentsToolStripMenuItem.Name = "contentsToolStripMenuItem";
-            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.contentsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.contentsToolStripMenuItem.Text = "&Contents";
             this.contentsToolStripMenuItem.Click += new System.EventHandler(this.contentsToolStripMenuItem_Click);
             // 
@@ -145,15 +130,14 @@ namespace Opc.Ua.Server.Controls
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(739, 482);
             this.Controls.Add(this.ServerDiagnosticsCTRL);
-            this.Controls.Add(this.serverHeaderBranding1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.TopMenuBar);
+            this.MainMenuStrip = this.TopMenuBar;
             this.Name = "ServerForm";
             this.Text = "Quickstart Empty Server";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ServerForm_FormClosed);
             this.Resize += new System.EventHandler(this.ServerForm_Resize);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.TopMenuBar.ResumeLayout(false);
+            this.TopMenuBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,12 +147,10 @@ namespace Opc.Ua.Server.Controls
 
         private ServerDiagnosticsCtrl ServerDiagnosticsCTRL;
         private System.Windows.Forms.NotifyIcon TrayIcon;
-        private ServerHeaderBranding serverHeaderBranding1;
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem contentsToolStripMenuItem;
-
+        public System.Windows.Forms.MenuStrip TopMenuBar;
     }
 }
