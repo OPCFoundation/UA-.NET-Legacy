@@ -775,6 +775,7 @@ namespace Opc.Ua.Bindings
             // see if the connection is accepted.
             if (!m_listener.NewReverseConnection(this, approval.ServerUri, approval.EndpointUrl))
             {
+                m_responseRequired = true;
                 ForceChannelFault(StatusCodes.BadTcpMessageTypeInvalid, "The reverse connection was rejected by the server.");
             }
         }

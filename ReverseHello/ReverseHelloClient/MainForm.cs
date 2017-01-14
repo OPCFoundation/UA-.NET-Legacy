@@ -83,31 +83,38 @@ namespace ReverseHelloTestClient
                 return;
             }
 
-            // only require approval once.
-            ConnectionWaitingEventArgs pending = null;
-
-            if (!m_connections.TryGetValue(e.EndpointUrl, out pending))
+            try
             {
-                if (pending != null)
+                // only require approval once.
+                ConnectionWaitingEventArgs pending = null;
+
+                if (!m_connections.TryGetValue(e.EndpointUrl, out pending))
                 {
-                    e.Accepted = false;
-                    return;
+                    if (pending != null)
+                    {
+                        e.Accepted = false;
+                        return;
+                    }
+
+                    m_connections[e.EndpointUrl] = null;
+
+                    if (MessageBox.Show("Server requested a connection. Accept?", "Server Connection", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                    {
+                        e.Accepted = false;
+                        return;
+                    }
                 }
 
-                m_connections[e.EndpointUrl] = null;
+                e.Accepted = true;
 
-                if (MessageBox.Show("Server requested a connection. Accept?", "Server Connection", MessageBoxButtons.YesNo) != DialogResult.Yes)
-                {
-                    e.Accepted = false;
-                    return;
-                }
+                // closing the connection should cause the server to immediately re-connect.
+                m_connections[e.EndpointUrl] = e;
+                m_session = await ConnectServerCTRL.ConnectAsync(e, ConnectServerCTRL.UseSecurity);
             }
-
-            e.Accepted = true;
-
-            // closing the connection should cause the server to immediately re-connect.
-            m_connections[e.EndpointUrl] = e;
-            m_session = await ConnectServerCTRL.ConnectAsync(e, false);
+            catch (Exception exception)
+            {
+                ClientUtils.HandleException(this.Text, exception);
+            }
         }
         #endregion
 

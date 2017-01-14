@@ -87,6 +87,22 @@ namespace ReverseHelloTestServer
             try
             {
                 m_server.StartMonitoringConnection(new Uri("opc.tcp://" + System.Net.Dns.GetHostName().ToLower() + ":65301"));
+                Connect_DotNetTestClientMI.Enabled = false;
+                Disconnect_DotNetTestClientMI.Enabled = true;
+            }
+            catch (Exception exception)
+            {
+                ClientUtils.HandleException(this.Text, exception);
+            }
+        }
+
+        private void Disconnect_DotNetTestClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                m_server.StopMonitoringConnection(new Uri("opc.tcp://" + System.Net.Dns.GetHostName().ToLower() + ":65301"));
+                Connect_DotNetTestClientMI.Enabled = true;
+                Disconnect_DotNetTestClientMI.Enabled = false;
             }
             catch (Exception exception)
             {

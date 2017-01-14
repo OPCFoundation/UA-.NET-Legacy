@@ -210,7 +210,7 @@ namespace Opc.Ua
                 throw new ArgumentException("url", "No suitable listener found.");
             }
 
-            Utils.Trace((int)Utils.TraceMasks.Information, "Reconnecting to Client at {0}!", url);
+            Utils.Trace((int)Utils.TraceMasks.Information, "Connecting to Client at {0}.", url);
             listener.CreateConnection(url);
         }
 

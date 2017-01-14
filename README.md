@@ -12,10 +12,11 @@ Please review official site page (http://opcfoundation.github.io/UA-.NET/) for:
 ## Prototyping Branch 
 This branch contains code which is used to validate new features added to OPC UA.
 
-There are three projects:
+There are four projects:
  * AMQP - samples that implement the AMQP transport and AMQP pub-sub; 
  * WebSockets - samples that implements the WebSockets transport;
  * GDS/OAuth2 - a modified GDS which implements OAuth2 based user authorization.
+ * ReverseHello - samples that implement the ReverseHello message.
  
 The sub-folder readme's have more information.
 

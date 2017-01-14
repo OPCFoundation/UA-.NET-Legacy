@@ -59,9 +59,10 @@ namespace ReverseHelloTestServer
         {
             this.MenuBar = new System.Windows.Forms.MenuStrip();
             this.ConnectMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.Connect_DotNetTestClient = new System.Windows.Forms.ToolStripMenuItem();
+            this.Connect_DotNetTestClientMI = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.ServerDiagnosticsCTRL = new Opc.Ua.Server.Controls.ServerDiagnosticsCtrl();
+            this.Disconnect_DotNetTestClientMI = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuBar.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -78,17 +79,18 @@ namespace ReverseHelloTestServer
             // ConnectMI
             // 
             this.ConnectMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Connect_DotNetTestClient});
+            this.Connect_DotNetTestClientMI,
+            this.Disconnect_DotNetTestClientMI});
             this.ConnectMI.Name = "ConnectMI";
             this.ConnectMI.Size = new System.Drawing.Size(64, 20);
             this.ConnectMI.Text = "Connect";
             // 
-            // Connect_DotNetTestClient
+            // Connect_DotNetTestClientMI
             // 
-            this.Connect_DotNetTestClient.Name = "Connect_DotNetTestClient";
-            this.Connect_DotNetTestClient.Size = new System.Drawing.Size(228, 22);
-            this.Connect_DotNetTestClient.Text = "Connect to .NET Test Client...";
-            this.Connect_DotNetTestClient.Click += new System.EventHandler(this.Connect_DotNetTestClient_Click);
+            this.Connect_DotNetTestClientMI.Name = "Connect_DotNetTestClientMI";
+            this.Connect_DotNetTestClientMI.Size = new System.Drawing.Size(248, 22);
+            this.Connect_DotNetTestClientMI.Text = "Connect to .NET Test Client";
+            this.Connect_DotNetTestClientMI.Click += new System.EventHandler(this.Connect_DotNetTestClient_Click);
             // 
             // StatusBar
             // 
@@ -104,6 +106,14 @@ namespace ReverseHelloTestServer
             this.ServerDiagnosticsCTRL.Name = "ServerDiagnosticsCTRL";
             this.ServerDiagnosticsCTRL.Size = new System.Drawing.Size(884, 500);
             this.ServerDiagnosticsCTRL.TabIndex = 3;
+            // 
+            // Disconnect_DotNetTestClientMI
+            // 
+            this.Disconnect_DotNetTestClientMI.Enabled = false;
+            this.Disconnect_DotNetTestClientMI.Name = "Disconnect_DotNetTestClientMI";
+            this.Disconnect_DotNetTestClientMI.Size = new System.Drawing.Size(248, 22);
+            this.Disconnect_DotNetTestClientMI.Text = "Disconnect from .NET Test Client";
+            this.Disconnect_DotNetTestClientMI.Click += new System.EventHandler(this.Disconnect_DotNetTestClient_Click);
             // 
             // MainForm
             // 
@@ -128,7 +138,8 @@ namespace ReverseHelloTestServer
         private System.Windows.Forms.MenuStrip MenuBar;
         private System.Windows.Forms.StatusStrip StatusBar;
         private System.Windows.Forms.ToolStripMenuItem ConnectMI;
-        private System.Windows.Forms.ToolStripMenuItem Connect_DotNetTestClient;
+        private System.Windows.Forms.ToolStripMenuItem Connect_DotNetTestClientMI;
         private Opc.Ua.Server.Controls.ServerDiagnosticsCtrl ServerDiagnosticsCTRL;
+        private System.Windows.Forms.ToolStripMenuItem Disconnect_DotNetTestClientMI;
     }
 }

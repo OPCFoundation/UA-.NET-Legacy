@@ -402,8 +402,7 @@ namespace Opc.Ua.Client.Controls
             if (!m_endpoints.TryGetValue(connection.EndpointUrl, out endpointDescription))
             {
                 endpointDescription = EndpointDescription.SelectEndpoint(m_configuration, connection, useSecurity);
-                m_endpoints[connection.EndpointUrl] = endpointDescription;
-                MessageBox.Show("Selected Endpoint. Waiting for reconnect to establish Session.");
+                m_endpoints[connection.EndpointUrl] = endpointDescription;                
                 return null;
             }
 
