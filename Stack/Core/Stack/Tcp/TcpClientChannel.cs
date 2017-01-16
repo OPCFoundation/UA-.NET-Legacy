@@ -106,11 +106,6 @@ namespace Opc.Ua.Bindings
 
             lock (DataLock)
             {
-                if (State != TcpChannelState.Closed)
-                {
-                    throw new InvalidOperationException("Channel is already connected.");
-                }
-
                 m_url = url;
                 m_via = url;
 
@@ -126,18 +121,28 @@ namespace Opc.Ua.Bindings
                 WriteOperation operation = BeginOperation(timeout, callback, state);
                 m_handshakeOperation = operation;
 
-                State = TcpChannelState.Connecting;
-                Socket = new TcpMessageSocket(this, BufferManager, Quotas.MaxBufferSize);
+                if (Socket != null)
+                {
+                    State = TcpChannelState.Connecting;
 
-                try
-                {
-                    Socket.BeginConnect(m_via, m_ConnectCallback, operation);
+                    // send the hello message.
+                    SendHelloMessage(operation);
                 }
-                catch (SocketException e)
+                else 
                 {
-                    Shutdown(StatusCodes.Bad);
-                    throw e;
-                }                
+                    State = TcpChannelState.Connecting;
+                    Socket = new TcpMessageSocket(this, BufferManager, Quotas.MaxBufferSize);
+
+                    try
+                    {
+                        Socket.BeginConnect(m_via, m_ConnectCallback, operation);
+                    }
+                    catch (SocketException e)
+                    {
+                        Shutdown(StatusCodes.Bad);
+                        throw e;
+                    }
+                }
 
                 return operation;
             }

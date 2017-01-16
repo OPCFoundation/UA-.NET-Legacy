@@ -211,9 +211,7 @@
     <opc:EnumeratedValue Name="Scope" Value="3" />
     <opc:EnumeratedValue Name="GroupId" Value="4" />
     <opc:EnumeratedValue Name="Anonymous" Value="5" />
-    <opc:EnumeratedValue Name="Everyone" Value="6" />
-    <opc:EnumeratedValue Name="Application" Value="7" />
-    <opc:EnumeratedValue Name="Endpoint" Value="8" />
+    <opc:EnumeratedValue Name="AuthenticatedUser" Value="6" />
   </opc:EnumeratedType>
 
   <opc:StructuredType Name="IdentityMappingRuleType" BaseType="ua:ExtensionObject">
@@ -383,7 +381,7 @@
     <opc:Field Name="EnumDefinition" TypeName="tns:EnumDefinition" />
   </opc:StructuredType>
 
-  <opc:StructuredType Name="CompleteStructureDefinition" BaseType="tns:StructureDefinition">
+  <opc:StructuredType Name="NestedStructureDefinition" BaseType="tns:StructureDefinition">
     <opc:Field Name="NoOfDefaultEncodingId" TypeName="opc:Int32" />
     <opc:Field Name="DefaultEncodingId" TypeName="ua:NodeId" LengthField="NoOfDefaultEncodingId" />
     <opc:Field Name="BaseDataType" TypeName="ua:NodeId" SourceType="tns:StructureDefinition" />
@@ -391,6 +389,7 @@
     <opc:Field Name="NoOfFields" TypeName="opc:Int32" />
     <opc:Field Name="Fields" TypeName="tns:StructureField" LengthField="NoOfFields" />
     <opc:Field Name="Name" TypeName="opc:String" />
+    <opc:Field Name="Description" TypeName="ua:LocalizedText" />
     <opc:Field Name="NoOfStructureDataTypes" TypeName="opc:Int32" />
     <opc:Field Name="StructureDataTypes" TypeName="tns:StructureDescription" LengthField="NoOfStructureDataTypes" />
     <opc:Field Name="NoOfEnumDataTypes" TypeName="opc:Int32" />

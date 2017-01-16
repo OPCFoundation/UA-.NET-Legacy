@@ -90,11 +90,8 @@ namespace Opc.Ua
         [DataMember(Order = 7)]
         public string AuthorizationEndpoint { get; set; }
 
-        [DataMember(Order = 8)]
-        public OAuth2ServerSettingsCollection Servers { get; set; }
+        public string ServerResourceId { get; set; }
         #endregion
-
-        public OAuth2ServerSettings SelectedServer { get; set; }
     }
 
     [CollectionDataContract(Name = "ListOfOAuth2Credential", Namespace = Namespaces.OpcUaConfig, ItemName = "OAuth2Credential")]
@@ -132,51 +129,6 @@ namespace Opc.Ua
             }
 
             return list;
-        }
-
-        public static OAuth2Credential FindByServerUri(ApplicationConfiguration configuration, string serverApplicationUri)
-        {
-            if (serverApplicationUri == null || !Uri.IsWellFormedUriString(serverApplicationUri, UriKind.Absolute))
-            {
-                throw new ArgumentException("serverApplicationUri");
-            }
-
-            OAuth2CredentialCollection list = Load(configuration);
-
-            if (list != null)
-            {
-                foreach (var ii in list)
-                {
-                    if (ii.Servers != null && ii.Servers.Count > 0)
-                    {
-                        foreach (var jj in ii.Servers)
-                        {
-                            // this is too allow generic sample config files to work on any machine. 
-                            // in a real system explicit host names would be used so this would have no effect.
-                            var uri = jj.ApplicationUri.Replace("localhost", System.Net.Dns.GetHostName().ToLowerInvariant());
-
-                            if (uri == serverApplicationUri)
-                            {
-                                var credential = new OAuth2Credential()
-                                {
-                                    AuthorityUrl = ii.AuthorityUrl,
-                                    GrantType = ii.GrantType,
-                                    ClientId = ii.ClientId,
-                                    ClientSecret = ii.ClientSecret,
-                                    RedirectUrl = ii.RedirectUrl,
-                                    TokenEndpoint = ii.TokenEndpoint,
-                                    AuthorizationEndpoint = ii.AuthorizationEndpoint,
-                                    SelectedServer = jj
-                                };
-
-                                return credential;
-                            }
-                        }
-                    }
-                }
-            }
-
-            return null;
         }
 
         public static OAuth2Credential FindByAuthorityUrl(ApplicationConfiguration configuration, string authorityUrl)

@@ -89,8 +89,15 @@ namespace Opc.Ua.Gds
                 {
                     Cursor = Cursors.WaitCursor;
 
+                    var endpoint = EndpointDescription.SelectEndpoint(m_gds.Application.ApplicationConfiguration, url, true);
+
                     if (UserNameCredentialsRB.Checked)
                     {
+                        if (endpoint.FindUserTokenPolicy(UserTokenType.UserName) == null)
+                        {
+                            throw new ArgumentException("Server does not support username/password user identity tokens.");
+                        }
+
                         var identity = new Opc.Ua.Client.Controls.UserNamePasswordDlg().ShowDialog(m_gds.AdminCredentials, "Provide GDS Administartor Credentials");
 
                         if (identity != null)
@@ -100,7 +107,42 @@ namespace Opc.Ua.Gds
                     }
                     else
                     {
-                        m_gds.AdminCredentials = await OAuth2Client.GetIdentityToken(m_gds.Application.ApplicationConfiguration, url);
+                        var policy = endpoint.FindUserTokenPolicy(UserTokenType.IssuedToken, Opc.Ua.JwtConstants.JwtUserTokenPolicy);
+
+                        if (policy == null)
+                        {
+                            throw new ArgumentException("Server does not support JWT user identity tokens.");
+                        }
+
+                        var parameters = new JwtEndpointParameters();
+                        parameters.FromJson(policy.IssuerEndpointUrl);
+
+                        if (IdentityProviderRB.Checked)
+                        {
+                            if (parameters.IdentityProviders == null || parameters.IdentityProviders.Count == 0)
+                            {
+                                throw new ArgumentException("Server does not support direct interactions with identity providers.");
+                            }
+
+                            m_gds.AdminCredentials = await OAuth2Client.GetIdentityToken(
+                                m_gds.Application.ApplicationConfiguration, 
+                                url, 
+                                parameters, 
+                                Opc.Ua.JwtConstants.OAuth2SiteToken);
+                        }
+                        else
+                        {
+                            if (parameters.RequestTypes == null || !parameters.RequestTypes.Contains(Opc.Ua.JwtConstants.OAuth2ClientCredentials))
+                            {
+                                throw new ArgumentException("Server does not support client credential authorization.");
+                            }
+
+                            m_gds.AdminCredentials = await OAuth2Client.GetIdentityToken(
+                                m_gds.Application.ApplicationConfiguration,
+                                url,
+                                parameters,
+                                Opc.Ua.JwtConstants.OAuth2ClientCredentials);
+                        }
                     }
 
                     m_gds.Connect(url);

@@ -32,6 +32,29 @@ namespace Opc.Ua.Bindings
     /// </summary>
     public partial class UaTcpChannelListener : IDisposable, ITransportListener
     {
+        #region Private Fields
+        private object m_lock = new object();
+
+        private string m_listenerId;
+        private Uri m_uri;
+        private EndpointDescriptionCollection m_descriptions;
+        private EndpointConfiguration m_configuration;
+
+        private BufferManager m_bufferManager;
+        private TcpChannelQuotas m_quotas;
+        private X509Certificate2 m_serverCertificate;
+
+        //private X509Certificate2Collection m_serverCertificateChain;
+        private uint m_lastChannelId;
+
+        private Socket m_listeningSocket;
+        private Socket m_listeningSocketIPv6;
+        private Dictionary<uint, TcpServerChannel> m_channels;
+
+        private Timer m_simulator;
+        private ITransportListenerCallback m_callback;
+        #endregion
+
         #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="UaTcpChannelListener"/> class.
@@ -46,7 +69,7 @@ namespace Opc.Ua.Bindings
         /// Frees any unmanaged resources.
         /// </summary>
         public void Dispose()
-        {   
+        {
             Dispose(true);
         }
 
@@ -56,7 +79,7 @@ namespace Opc.Ua.Bindings
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2213:DisposableFieldsShouldBeDisposed", MessageId = "m_simulator")]
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing) 
+            if (disposing)
             {
                 lock (m_lock)
                 {
@@ -70,7 +93,7 @@ namespace Opc.Ua.Bindings
                         {
                             // ignore errors.
                         }
-                        
+
                         m_listeningSocket = null;
                     }
 
@@ -84,14 +107,14 @@ namespace Opc.Ua.Bindings
                         {
                             // ignore errors.
                         }
-                        
+
                         m_listeningSocketIPv6 = null;
                     }
-                    
+
                     if (m_simulator != null)
                     {
                         Utils.SilentDispose(m_simulator);
-                        m_simulator = null; 
+                        m_simulator = null;
                     }
 
                     foreach (TcpServerChannel channel in m_channels.Values)
@@ -102,8 +125,13 @@ namespace Opc.Ua.Bindings
             }
         }
         #endregion
-        
+
         #region ITransportListener Members
+        /// <summary>
+        /// The URI scheme handled by the listener.
+        /// </summary>
+        public string UriScheme { get { return Utils.UriSchemeOpcTcp; } }
+
         /// <summary>
         /// Opens the listener and starts accepting connection.
         /// </summary>
@@ -162,6 +190,70 @@ namespace Opc.Ua.Bindings
         public void Close()
         {
             Stop();
+        }
+
+        /// <summary>
+        /// Raised when a new connection is waiting for a client.
+        /// </summary>
+        public event EventHandler<ConnectionWaitingEventArgs> ConnectionWaiting;
+
+        /// <summary>
+        /// Raised when a monitored connection's status changed.
+        /// </summary>
+        public event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
+
+        public void CreateConnection(Uri url)
+        { 
+            TcpServerChannel channel = new TcpServerChannel(
+                m_listenerId,
+                this,
+                m_bufferManager,
+                m_quotas,
+                m_serverCertificate,
+                m_descriptions);
+
+            uint channelId = ++m_lastChannelId;
+            channel.StatusChanged += Channel_StatusChanged;
+            channel.BeginReverseHello(channelId, url, OnReverseHelloComplete, channel, m_quotas.ChannelLifetime);
+        }
+
+        private void Channel_StatusChanged(TcpServerChannel channel, ServiceResult status, bool closed)
+        {
+            var callback = ConnectionStatusChanged;
+
+            if (callback != null)
+            {
+                callback(this, new ConnectionStatusEventArgs(channel.ReverseConnectionUrl, status, closed));
+            }
+        }
+
+        private void OnReverseHelloComplete(IAsyncResult result)
+        {
+            var channel = (TcpServerChannel)result.AsyncState;
+
+            try
+            {
+                channel.EndReverseHello(result);
+
+                lock (m_lock)
+                {
+                    m_channels.Add(channel.Id, channel);
+                }
+
+                if (m_callback != null)
+                {
+                    channel.SetRequestReceivedCallback(new TcpChannelRequestEventHandler(OnRequestReceived));
+                }
+            }
+            catch (Exception e)
+            {
+                var callback = ConnectionStatusChanged;
+
+                if (callback != null)
+                {
+                    callback(this, new ConnectionStatusEventArgs(channel.ReverseConnectionUrl, new ServiceResult(e), true));
+                }
+            }
         }
         #endregion
 
@@ -275,28 +367,34 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// Binds a new socket to an existing channel.
         /// </summary>
-        internal bool ReconnectToExistingChannel(
-            TcpMessageSocket         socket, 
-            uint                     requestId,
-            uint                     sequenceNumber,
-            uint                     channelId,
-            X509Certificate2         clientCertificate, 
-            TcpChannelToken          token,
-            OpenSecureChannelRequest request)
+        /// <returns>TRUE if the channel should be kept open; FALSE otherwise.</returns>
+        internal bool NewReverseConnection(
+            TcpServerChannel channel,
+            string serverUri,
+            string endpointUrl)
         {            
-            TcpServerChannel channel = null;
-
             lock (m_lock)
             {
-                if (!m_channels.TryGetValue(channelId, out channel))
+                if (!m_channels.TryGetValue(channel.Id, out channel))
                 {
-                    throw ServiceResultException.Create(StatusCodes.BadTcpSecureChannelUnknown, "Could not find secure channel referenced in the OpenSecureChannel request.");
+                    throw ServiceResultException.Create(StatusCodes.BadTcpSecureChannelUnknown, "Could not find secure channel request.");
                 }
+
+                // remove it so it does not get cleaned up as an inactive connection.
+                m_channels.Remove(channel.Id);
             }
-                       
-            channel.Reconnect(socket, requestId, sequenceNumber, clientCertificate, token, request);
-            // Utils.Trace("Channel {0} reconnected", channelId);
-            return true;
+
+            // notify the application.
+            var callback = ConnectionWaiting;
+
+            if (callback != null)
+            {
+                var args = new ConnectionWaitingEventArgs(serverUri, new Uri(endpointUrl), channel.Socket);
+                callback(this, args);
+                return args.Accepted;
+            }
+
+            return false;
         }
 
         /// <summary>
@@ -511,29 +609,6 @@ namespace Opc.Ua.Bindings
                 m_uri = new Uri(baseAddress, relativeAddress);
             }
         }
-        #endregion
-
-        #region Private Fields
-        private object m_lock = new object();
-
-        private string m_listenerId;
-        private Uri m_uri;
-        private EndpointDescriptionCollection m_descriptions;
-        private EndpointConfiguration m_configuration;
-
-        private BufferManager m_bufferManager;
-        private TcpChannelQuotas m_quotas;
-        private X509Certificate2 m_serverCertificate;
-
-        //private X509Certificate2Collection m_serverCertificateChain;
-        private uint m_lastChannelId;
-
-        private Socket m_listeningSocket;
-        private Socket m_listeningSocketIPv6;
-        private Dictionary<uint,TcpServerChannel> m_channels;
-
-        private Timer m_simulator;
-        private ITransportListenerCallback m_callback;
         #endregion
     }    
 }

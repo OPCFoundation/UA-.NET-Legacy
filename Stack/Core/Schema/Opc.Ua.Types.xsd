@@ -494,9 +494,7 @@
       <xs:enumeration value="Scope_3" />
       <xs:enumeration value="GroupId_4" />
       <xs:enumeration value="Anonymous_5" />
-      <xs:enumeration value="Everyone_6" />
-      <xs:enumeration value="Application_7" />
-      <xs:enumeration value="Endpoint_8" />
+      <xs:enumeration value="AuthenticatedUser_6" />
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="IdentityCriteriaType" type="tns:IdentityCriteriaType" />
@@ -839,18 +837,19 @@
   </xs:complexType>
   <xs:element name="ListOfEnumDescription" type="tns:ListOfEnumDescription" nillable="true"></xs:element>
 
-  <xs:complexType name="CompleteStructureDefinition">
+  <xs:complexType name="NestedStructureDefinition">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:StructureDefinition">
         <xs:sequence>
           <xs:element name="Name" type="xs:string" minOccurs="0" nillable="true" />
+          <xs:element name="Description" type="ua:LocalizedText" minOccurs="0" nillable="true" />
           <xs:element name="StructureDataTypes" type="tns:ListOfStructureDescription" minOccurs="0" nillable="true" />
           <xs:element name="EnumDataTypes" type="tns:ListOfEnumDescription" minOccurs="0" nillable="true" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="CompleteStructureDefinition" type="tns:CompleteStructureDefinition" />
+  <xs:element name="NestedStructureDefinition" type="tns:NestedStructureDefinition" />
 
   <xs:complexType name="Node">
     <xs:annotation>

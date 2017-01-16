@@ -1,0 +1,259 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h2>OPC UA WebSocket Client Prototype</h2>
+    <p class="lead">An implementation of the OPC UA WebSocket Transport.</p>
+    <p style="font-size:smaller">This page can connect to any OPC UA server that implements the WebSockets transport with the JSON encoding.<br/>No need for a custom web gateway.</p>
+</div>
+
+<div>
+    <div>
+        <table>
+            <tr>
+                <td>Server URL&nbsp;</td>
+                <td style="min-width:786px"><input type="text" id="url" value="wss://opcfoundation-prototyping.org/ws-demo/" style="min-width:350px"/>
+                <input type="button" id="connect" value="Connect"/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Sequence Number&nbsp;</td>
+                <td><input type="text" id="sequenceNumber" value="" style="min-width:350px"/></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Server Time&nbsp;</td>
+                <td><input type="text" id="currentTime" value="" style="min-width:350px"/></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <br />
+        <textarea id="results" rows="10" style="min-width:768px"></textarea>
+    </div>
+    <div>
+        <br />
+        <textarea id="lastjson" rows="10" style="min-width:768px"></textarea>
+    </div>
+</div>
+<div class="container">
+</div>
+@section scripts {
+    <!--Script references. -->
+    <script>
+        $(function () {
+
+            var CreateSessionRequest = "i=459";
+            var CreateSessionResponse = "i=462";
+            var ActivateSessionRequest = "i=465";
+            var ActivateSessionResponse = "i=468";
+            var CreateSubscriptionRequest = "i=785";
+            var CreateSubscriptionResponse = "i=788";
+            var CreateMonitoredItemsRequest = "i=749";
+            var CreateMonitoredItemsResponse = "i=752";
+            var PublishRequest = "i=824";
+            var PublishResponse = "i=827";
+            var CloseSessionRequest = "i=471";
+            var CloseSessionResponse = "i=474";
+
+            var socket;
+            var nextRequestId = 0;
+            var sessionId;
+            var authenticationToken;
+            var subscriptionId;
+            var monitoredItemId;
+
+            // Set initial focus to message input box.
+            $('#connect').focus();
+            // Start the connection.
+            $('#connect').click(function () {
+
+                if (socket !== undefined) {
+
+                    var request = createRequest(CloseSessionRequest);
+                    request.Body.DeleteSubscriptions = true;
+                    outputMessage('Send CloseSession Request #' + nextRequestId.toString());
+                    socket.send(JSON.stringify(request));
+                    return;
+                }
+
+                $('#connect').val("Disconnect");
+                $('#results').html("");
+                $('#lastjson').val("");
+
+                socket = new WebSocket($('#url').val(), "opcua+uajson");
+                socket.onmessage = function (event) {
+
+                    // parse the response.
+                    var response = JSON.parse(event.data);
+                    $('#lastjson').val(JSON.stringify(response, null, 4));
+
+                    var result = response.Body.ResponseHeader.ServiceResult;
+                    var requestId = response.Body.ResponseHeader.RequestHandle;
+                    var typeId = response.TypeId;
+                    
+                    if (result !== undefined) {
+                        outputMessage('ERROR for Request #' + requestId.toString() + ": " + result.toString(16));
+                        return;
+                    }
+
+                    if (typeId === CloseSessionResponse) {
+
+                        $('#connect').val("Connect");
+                        socket.close();
+                        socket = undefined;
+                        return;
+                    }
+
+                    if (typeId === CreateSessionResponse) {
+
+                        sessionId = response.Body.SessionId;
+                        authenticationToken = response.Body.AuthenticationToken;
+
+                        var request = createRequest(ActivateSessionRequest);
+
+                        outputMessage('Send ActivateSession Request #' + nextRequestId.toString());
+                        $('#lastjson').val(JSON.stringify(request, null, 4));
+                        socket.send(JSON.stringify(request));
+                        return;
+                    }
+
+                    if (typeId === ActivateSessionResponse) {
+
+                        var request = createRequest(CreateSubscriptionRequest);
+
+                        request.Body.RequestedPublishingInterval = 1000;
+                        request.Body.RequestedMaxKeepAliveCount = 10;
+                        request.Body.RequestedLifetimeCount = 10;
+                        request.Body.MaxNotificationsPerPublish = 1000;
+                        request.Body.PublishingEnabled = true;
+                        request.Body.Priority = 255;
+
+                        outputMessage('Send CreateSubscription Request #' + nextRequestId.toString());
+                        $('#lastjson').val(JSON.stringify(request, null, 4));
+                        socket.send(JSON.stringify(request));
+                        return;
+                    }
+
+                    if (typeId === CreateSubscriptionResponse) {
+
+                        subscriptionId = response.Body.SubscriptionId;
+
+                        var request = createRequest(CreateMonitoredItemsRequest);
+
+                        request.Body.SubscriptionId = subscriptionId;
+                        request.Body.TimestampsToReturn = "Source";
+
+                        var item = {};
+                        item.ItemToMonitor = {};
+                        item.ItemToMonitor.NodeId = "i=2258"; // ServerStatus_CurrentTime
+                        item.ItemToMonitor.AttributeId = 13;  // Value
+                        item.MonitoringMode = 2;
+                        item.RequestedParameters = {};
+                        item.RequestedParameters.SamplingInterval = 1000;
+                        item.RequestedParameters.QueueSize = 0;
+                        item.RequestedParameters.DiscardOldest = true;
+                        item.RequestedParameters.ClientHandle = 1;
+
+                        request.Body.ItemsToCreate = [];
+                        request.Body.ItemsToCreate.push(item);
+
+                        outputMessage('Send CreateMonitoredItems Request #' + nextRequestId.toString());
+                        $('#lastjson').val(JSON.stringify(request, null, 4));
+                        socket.send(JSON.stringify(request));
+                        return;
+                    }
+
+                    if (typeId === CreateMonitoredItemsResponse) {
+
+                        monitoredItemId = response.Body.Results[0].MonitoredItemId;
+
+                        var request = createRequest(PublishRequest);
+
+                        outputMessage('Send Publish Request #' + nextRequestId.toString());
+                        $('#lastjson').val(JSON.stringify(request, null, 4));
+                        socket.send(JSON.stringify(request));
+                        return;
+                    }
+
+                    if (typeId === PublishResponse) {
+
+                        $('#sequenceNumber').val(response.Body.NotificationMessage.SequenceNumber)
+                        $('#currentTime').val("***");
+
+                        if (response.Body.NotificationMessage.NotificationData.length > 0) {
+                            if (response.Body.NotificationMessage.NotificationData[0].Body.MonitoredItems.length > 0) {
+                                $('#currentTime').val(response.Body.NotificationMessage.NotificationData[0].Body.MonitoredItems[0].Value.Value.Body);
+                            }
+                        }
+
+                        var request = createRequest(PublishRequest);
+
+                        request.Body.SubscriptionAcknowledgements = [];
+                        var acknowledgement = {};
+                        acknowledgement.SubscriptionId = response.Body.SubscriptionId;
+                        acknowledgement.SequenceNumber = response.Body.NotificationMessage.SequenceNumber;
+                        request.Body.SubscriptionAcknowledgements.push(acknowledgement);
+
+                        outputMessage('Send Publish Request #' + nextRequestId.toString());
+                        socket.send(JSON.stringify(request));
+                        return;
+                    }
+                };
+
+                socket.onerror = function (event) {
+                    $('#results').append('Could not connect to ' + $('#url').val() + '.&#13;&#10;');
+                    $('#connect').val("Connect");
+                };
+
+                socket.onopen = function (event) {
+
+                    var request = createRequest(CreateSessionRequest);
+
+                    request.Body.ClientDescription = {};
+                    request.Body.ClientDescription.ApplicationName = "Prototype Browser Based Client";
+                    request.Body.ClientDescription.ApplicationUri = document.URL;
+                    request.Body.ClientDescription.ProductUri = "urn:opcfoundation.org:prototyping:websockets:webclient";
+                    request.Body.ClientDescription.ApplicationType = 1;
+                    request.Body.SessionName = "Browser";
+                    request.Body.EndpointUrl = $('#url').val();
+                    request.Body.RequestedSessionTimeout = 120000;
+                    request.Body.MaxResponseMessageSize = 1000000;
+
+                    outputMessage('Send CreateSession Request #' + nextRequestId.toString());
+                    $('#lastjson').val(JSON.stringify(request, null, 4));
+                    socket.send(JSON.stringify(request));
+                };
+
+                // This function creates a new request object.
+                function createRequest(typeId) {
+                    var request = {};
+                    request.TypeId = typeId;
+
+                    request.Body = {};
+                    request.Body.RequestHeader = {};
+                    request.Body.RequestHeader.Timestamp = new Date().toISOString();
+                    request.Body.RequestHeader.RequestHandle = ++nextRequestId;
+                    request.Body.RequestHeader.TimeoutHint = 30000;
+                    request.Body.RequestHeader.AuthenticationToken = authenticationToken;
+
+                    return request;
+                }
+
+                // This function updates the request header.
+                function outputMessage(message) {
+                    var area = $('#results');
+                    area.append(message + '.&#13;&#10;');
+                    area.scrollTop = area.scrollHeight - area.height;
+                }
+            });
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        }
+    </script>
+}

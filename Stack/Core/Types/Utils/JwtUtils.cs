@@ -103,7 +103,7 @@ namespace Opc.Ua
                     scope += entry;
                 }
             }
-        
+
             using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
@@ -151,36 +151,110 @@ namespace Opc.Ua
         }
     }
 
+
+    public class JwtIdentityProviderParameters : IEncodeable
+    {
+        public string IdentityProviderUrl;
+        public string IdentityProfileUri;
+        public string TokenEndpoint;
+        public string AuthorizationEndpoint;
+        public string ResourceId;
+
+        #region IEncodeable Members
+        public ExpandedNodeId TypeId { get { return ExpandedNodeId.Null; } }
+        public ExpandedNodeId BinaryEncodingId { get { return ExpandedNodeId.Null; } }
+        public ExpandedNodeId XmlEncodingId { get { return ExpandedNodeId.Null; } }
+
+        public void Encode(IEncoder encoder)
+        {
+            encoder.WriteString("ua:identityProvider", IdentityProviderUrl);
+            encoder.WriteString("ua:identityProfileUri", IdentityProfileUri);
+            encoder.WriteString("ua:authorizationEndpoint", AuthorizationEndpoint);
+            encoder.WriteString("ua:tokenEndpoint", TokenEndpoint);
+            encoder.WriteString("ua:resource", ResourceId);
+        }
+
+        public void Decode(IDecoder decoder)
+        {
+            IdentityProviderUrl = decoder.ReadString("ua:identityProvider");
+            IdentityProfileUri = decoder.ReadString("ua:identityProfileUri");
+            AuthorizationEndpoint = decoder.ReadString("ua:authorizationEndpoint");
+            TokenEndpoint = decoder.ReadString("ua:tokenEndpoint");
+            ResourceId = decoder.ReadString("ua:resource");
+        }
+
+        public bool IsEqual(IEncodeable encodeable)
+        {
+            return base.Equals(encodeable);
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
+        #endregion
+    }
+
     public class JwtEndpointParameters
     {
         public string AuthorityUrl;
-        public string GrantType;
+        public string AuthorityProfileUri;
         public string TokenEndpoint;
+        public List<string> RequestTypes;
         public string ResourceId;
         public List<string> Scopes;
+        public List<JwtIdentityProviderParameters> IdentityProviders;
 
         public string ToJson()
         {
             var encoder = new JsonEncoder(ServiceMessageContext.GlobalContext, true);
 
-            encoder.WriteString("authority", AuthorityUrl);
-            encoder.WriteString("grantType", GrantType);
-            encoder.WriteString("tokenEndpoint", TokenEndpoint);
-            encoder.WriteString("resource", ResourceId);
-            encoder.WriteStringArray("scopes", Scopes);
+            encoder.WriteString("ua:authority", AuthorityUrl);
+            encoder.WriteString("ua:authorityProfileUri", AuthorityProfileUri);
+            encoder.WriteString("ua:tokenEndpoint", TokenEndpoint);
+            encoder.WriteStringArray("ua:requestTypes", RequestTypes);
+            encoder.WriteString("ua:resource", ResourceId);
+            encoder.WriteStringArray("ua:scopes", Scopes);
 
-            return encoder.Close();
+            if (IdentityProviders != null && IdentityProviders.Count > 0)
+            {
+                encoder.WriteEncodeableArray("ua:identityProviders", IdentityProviders.ToArray(), typeof(JwtIdentityProviderParameters));
+            }
+
+            return encoder.CloseAndReturnText();
         }
 
         public void FromJson(string json)
         {
             var decoder = new JsonDecoder(json, ServiceMessageContext.GlobalContext);
 
-            AuthorityUrl = decoder.ReadString("authority");
-            GrantType = decoder.ReadString("grantType");
-            TokenEndpoint = decoder.ReadString("tokenEndpoint");
-            ResourceId = decoder.ReadString("resource");
-            Scopes = decoder.ReadStringArray("scopes");
+            AuthorityUrl = decoder.ReadString("ua:authority");
+            AuthorityProfileUri = decoder.ReadString("ua:authorityProfileUri");
+            TokenEndpoint = decoder.ReadString("ua:tokenEndpoint");
+            RequestTypes = decoder.ReadStringArray("ua:requestTypes");
+            ResourceId = decoder.ReadString("ua:resourceId");
+            Scopes = decoder.ReadStringArray("ua:scopes");
+
+            var providers = (IList<JwtIdentityProviderParameters>)decoder.ReadEncodeableArray("ua:identityProviders", typeof(JwtIdentityProviderParameters));
+
+            if (providers != null && providers.Count > 0)
+            {
+                IdentityProviders = new List<JwtIdentityProviderParameters>(providers);
+            }
+            else
+            {
+                IdentityProviders = new List<JwtIdentityProviderParameters>();
+            }
         }
+    }
+
+    public static class JwtConstants
+    {
+        public const string JwtUserTokenPolicy = "http://opcfoundation.org/UA/UserToken#JWT";
+        public const string OAuth2AuthorizationPolicy = "http://opcfoundation.org/UA/Authorization#OAuth2";
+        public const string AzureIdentityProviderPolicy = "http://opcfoundation.org/UA/IdentityProvider#Azure";
+        public const string OAuth2AuthorizationCode = "authorization_code";
+        public const string OAuth2SiteToken = "site_token";
+        public const string OAuth2ClientCredentials = "client_credentials";
     }
 }

@@ -31,27 +31,22 @@ namespace Opc.Ua.Gds
     {
         public ApplicationConfiguration Configuration { get; set; }
 
-        public static async Task<UserIdentity> GetIdentityToken(ApplicationConfiguration configuration, string endpointUrl)
+        public static async Task<UserIdentity> GetIdentityToken(ApplicationConfiguration configuration, string endpointUrl, JwtEndpointParameters parameters, string grantType)
         {
             // get an endpoint to use.
             var endpoint = EndpointDescription.SelectEndpoint(configuration, endpointUrl, true);
 
-            // find user token policy that supports JWTs.
-            JwtEndpointParameters parameters = null;
-
-            foreach (var policy in endpoint.UserIdentityTokens)
-            {
-                if (policy.IssuedTokenType == "http://opcfoundation.org/UA/UserTokenPolicy#JWT")
-                {
-                    parameters = new JwtEndpointParameters();
-                    parameters.FromJson(policy.IssuerEndpointUrl);
-                    break;
-                }
-            }
-
             if (parameters == null)
             {
-                throw new ServiceResultException(StatusCodes.BadConfigurationError, "No JWT UserTokenPolicy specified for the selected GDS.");
+                var policy = endpoint.FindUserTokenPolicy(UserTokenType.IssuedToken, Opc.Ua.JwtConstants.JwtUserTokenPolicy);
+
+                if (policy == null)
+                {
+                    throw new ArgumentException("Server does not support JWT user identity tokens.");
+                }
+
+                parameters = new JwtEndpointParameters();
+                parameters.FromJson(policy.IssuerEndpointUrl);
             }
 
             // set the default resource.
@@ -67,25 +62,50 @@ namespace Opc.Ua.Gds
             if (gdsCredentials == null)
             {
                 gdsCredentials = new OAuth2Credential();
+                gdsCredentials.ClientId = configuration.ApplicationUri;
             }
 
             // override with settings provided by server.
             gdsCredentials.AuthorityUrl = parameters.AuthorityUrl;
-            gdsCredentials.GrantType = parameters.GrantType;
             gdsCredentials.TokenEndpoint = parameters.TokenEndpoint;
+            gdsCredentials.GrantType = grantType;
 
             JwtSecurityToken jwt = null;
 
             // need to get credentials from an external authority.
-            if (gdsCredentials != null && gdsCredentials.GrantType == "site_token")
+            if (gdsCredentials.GrantType == Opc.Ua.JwtConstants.OAuth2SiteToken)
             {
-                // need to find an OAuth2 server that can supply credentials.
-                var azureCredentials = OAuth2CredentialCollection.FindByServerUri(configuration, parameters.ResourceId);
+                JwtIdentityProviderParameters provider = null;
+
+                if (parameters.IdentityProviders != null)
+                {
+                    foreach (var identityProvider in parameters.IdentityProviders)
+                    {
+                        if (identityProvider.IdentityProfileUri == Opc.Ua.JwtConstants.AzureIdentityProviderPolicy)
+                        {
+                            provider = identityProvider;
+                            break;
+                        }
+                    }
+                }
+
+                if (provider == null)
+                {
+                    throw new ArgumentException("Server does not support Azure identity providers.");
+                }
+
+                // find the client's information needed to connection to the Azure identity provider.
+                var azureCredentials = OAuth2CredentialCollection.FindByAuthorityUrl(configuration, provider.IdentityProviderUrl);
 
                 if (azureCredentials == null)
                 {
                     throw new ServiceResultException(StatusCodes.BadConfigurationError, "No OAuth2 configuration specified for the selected GDS.");
                 }
+
+                // update with information provided by the server.
+                if (!String.IsNullOrEmpty(provider.TokenEndpoint)) azureCredentials.AuthorizationEndpoint = provider.AuthorizationEndpoint;
+                if (!String.IsNullOrEmpty(provider.TokenEndpoint)) azureCredentials.TokenEndpoint = provider.TokenEndpoint;
+                azureCredentials.ServerResourceId = provider.ResourceId;
 
                 // prompt user to provide credentials.
                 var azureToken = new OAuth2CredentialsDialog().ShowDialog(azureCredentials);
@@ -106,19 +126,17 @@ namespace Opc.Ua.Gds
                 return new UserIdentity(gdsToken);
             }
 
-            // attempt to log in directly
-            else
-            {
-                string username = null;
-                string password = null;
-
-                // TBD - Prompt User to Provide.
-
+            // can log in directly with client credentials.
+            if (gdsCredentials.GrantType == Opc.Ua.JwtConstants.OAuth2ClientCredentials)
+            { 
+                // log in using site token.
                 OAuth2Client client = new OAuth2Client() { Configuration = configuration };
-                var gdsAccessToken = await client.RequestTokenWithWithUserNameAsync(gdsCredentials, username, password, parameters.ResourceId, "gds:admin");
+                var gdsAccessToken = await client.RequestTokenWithClientCredentialsAsync(gdsCredentials, parameters.ResourceId, "gds:admin");
                 JwtSecurityToken gdsToken = new JwtSecurityToken(gdsAccessToken.AccessToken);
                 return new UserIdentity(gdsToken);
             }
+
+            throw new ArgumentException("Server does not support the requested grant type.");
         }
 
         public async Task<OAuth2AccessToken> RequestTokenWithAuthenticationCodeAsync(OAuth2Credential credential, string resourceId, string authenticationCode)
@@ -147,6 +165,39 @@ namespace Opc.Ua.Gds
             if (!String.IsNullOrEmpty(resourceId))
             {
                 fields["resource"] = resourceId;
+            }
+
+            var url = new UriBuilder(credential.AuthorityUrl);
+            url.Path += credential.TokenEndpoint;
+            return await RequestTokenAsync(url.Uri, fields);
+        }
+
+        public async Task<OAuth2AccessToken> RequestTokenWithClientCredentialsAsync(OAuth2Credential credential, string resourceId, string scope)
+        {
+            if (credential == null)
+            {
+                throw new ArgumentNullException("credential");
+            }
+
+            Dictionary<string, string> fields = new Dictionary<string, string>();
+
+            fields["grant_type"] = "client_credentials";
+            fields["client_id"] = credential.ClientId;
+            fields["client_secret"] = credential.ClientSecret;
+
+            if (!String.IsNullOrEmpty(credential.RedirectUrl))
+            {
+                fields["redirect_uri"] = credential.RedirectUrl;
+            }
+
+            if (!String.IsNullOrEmpty(resourceId))
+            {
+                fields["resource"] = resourceId;
+            }
+
+            if (!String.IsNullOrEmpty(scope))
+            {
+                fields["scope"] = scope;
             }
 
             var url = new UriBuilder(credential.AuthorityUrl);

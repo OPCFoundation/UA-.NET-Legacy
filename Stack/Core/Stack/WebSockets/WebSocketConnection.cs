@@ -135,6 +135,8 @@ namespace Opc.Ua.Bindings
             m_stream = stream;
         }
 
+        public string MessageEncoding { get; set; }
+
         private async Task<string> ReceiveHttpHeader()
         {
             var chunk = m_bufferManager.TakeBuffer(0, "WebSocketConnection.ReceiveHttpHeader");
@@ -235,7 +237,7 @@ namespace Opc.Ua.Bindings
                 await writer.WriteAsync("\r\n");
                 await writer.WriteAsync("Sec-WebSocket-Version: 13");
                 await writer.WriteAsync("\r\n");
-                await writer.WriteAsync("Sec-WebSocket-Protocol: application/opcua+uatcp");
+                await writer.WriteAsync("Sec-WebSocket-Protocol: opcua+uatcp");
                 await writer.WriteAsync("\r\n");
                 await writer.WriteAsync("\r\n");
             }
@@ -252,12 +254,6 @@ namespace Opc.Ua.Bindings
             string method = ExtractToken(message, ref ii, ' ', '\t');
             string url = ExtractToken(message, ref ii, ' ', '\t');
             string version = ExtractToken(message, ref ii, '\n');
-
-            if (url != "/")
-            {
-                await SendErrorResponse(HttpStatusCode.NotFound);
-                throw new WebException("URL not found.", WebExceptionStatus.ProtocolError);
-            }
 
             if (method != "GET")
             {
@@ -305,11 +301,19 @@ namespace Opc.Ua.Bindings
 
             string subprotocol = null;
 
-            if (!headers.TryGetValue("Sec-WebSocket-Protocol", out subprotocol) || !subprotocol.ToLower().Contains("application/opcua+uatcp"))
+            if (!headers.TryGetValue("Sec-WebSocket-Protocol", out subprotocol))
             {
                 await SendErrorResponse(HttpStatusCode.NotImplemented);
-                throw new WebException("WebSocket protocol header missing or not supported.", WebExceptionStatus.ProtocolError);
+                throw new WebException("WebSocket protocol header missing.", WebExceptionStatus.ProtocolError);
             }
+
+            if (!subprotocol.ToLower().Contains("opcua+uatcp") && !subprotocol.ToLower().Contains("opcua+uajson"))
+            {
+                await SendErrorResponse(HttpStatusCode.NotImplemented);
+                throw new WebException("WebSocket protocol is not supported.", WebExceptionStatus.ProtocolError);
+            }
+
+            MessageEncoding = subprotocol;
 
             string origin = null;
 
@@ -342,7 +346,8 @@ namespace Opc.Ua.Bindings
                 await writer.WriteAsync("Sec-WebSocket-Accept: ");
                 await writer.WriteAsync(Convert.ToBase64String(hash));
                 await writer.WriteAsync("\r\n");
-                await writer.WriteAsync("Sec-WebSocket-Protocol: application/opcua+uatcp");
+                await writer.WriteAsync("Sec-WebSocket-Protocol: ");
+                await writer.WriteAsync(MessageEncoding);
                 await writer.WriteAsync("\r\n");
 
                 if (origin != null)
@@ -410,10 +415,17 @@ namespace Opc.Ua.Bindings
 
             string subprotocol = null;
 
-            if (!headers.TryGetValue("Sec-WebSocket-Protocol", out subprotocol) || !subprotocol.ToLower().Contains("application/opcua+uatcp"))
+            if (!headers.TryGetValue("Sec-WebSocket-Protocol", out subprotocol))
             {
-                throw new WebException("WebSocket protocol header missing or not supported.", WebExceptionStatus.ProtocolError);
+                throw new WebException("WebSocket protocol header missing.", WebExceptionStatus.ProtocolError);
             }
+
+            if (!subprotocol.ToLower().Contains("opcua+uatcp") && !subprotocol.ToLower().Contains("opcua+uajson"))
+            {
+                throw new WebException("WebSocket protocol is not supported.", WebExceptionStatus.ProtocolError);
+            }
+
+            MessageEncoding = subprotocol;
             
             string encodedKey = null;
 
@@ -717,7 +729,7 @@ namespace Opc.Ua.Bindings
 
                     frame = await ReceiveFrameAsync(m_stream, chunk, 0, chunk.Length);
 
-                    if (frame.OpCode == 0x2)
+                    if (frame.OpCode == 0x1 || frame.OpCode == 0x2)
                     {
                         break;
                     }
@@ -734,12 +746,15 @@ namespace Opc.Ua.Bindings
                 }
                 while (true);
 
-                var messageType = BitConverter.ToUInt32(frame.Payload, frame.Offset);
-                var messageSize = BitConverter.ToUInt32(frame.Payload, frame.Offset + 4);
-
-                if (messageSize > frame.Length)
+                if (MessageEncoding == "opcua+uatcp")
                 {
-                    throw new ServiceResultException(StatusCodes.BadTcpMessageTooLarge);
+                    var messageType = BitConverter.ToUInt32(frame.Payload, frame.Offset);
+                    var messageSize = BitConverter.ToUInt32(frame.Payload, frame.Offset + 4);
+
+                    if (messageSize > frame.Length)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadTcpMessageTooLarge);
+                    }
                 }
 
                 return new ArraySegment<byte>(frame.Payload, frame.Offset, frame.Length);
@@ -820,7 +835,7 @@ namespace Opc.Ua.Bindings
 
                     frame.Final = true;
                     frame.Masked = !m_isServerSide;
-                    frame.OpCode = 0x2;
+                    frame.OpCode = (byte)((MessageEncoding == "opcua+uajson") ? 0x1 : 0x2);
                     frame.Payload = message.Array;
                     frame.Offset = message.Offset;
                     frame.Length = message.Count;

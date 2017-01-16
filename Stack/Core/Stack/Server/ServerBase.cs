@@ -151,6 +151,70 @@ namespace Opc.Ua
 
         #region Public Methods
         /// <summary>
+        /// Raised when a new connection is waiting for a client.
+        /// </summary>
+        public event EventHandler<ConnectionWaitingEventArgs> ConnectionWaiting;
+
+        /// <summary>
+        /// Raised when the status of a monitored connection changes.
+        /// </summary>
+        public event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
+
+        /// <summary>
+        /// Raised when a connection arrives and is waiting for a callback.
+        /// </summary>
+        protected virtual void OnConnectionWaiting(object sender, ConnectionWaitingEventArgs e)
+        {
+            var callback = ConnectionWaiting;
+
+            if (callback != null)
+            {
+                callback(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// Raised when a connection arrives and is waiting for a callback.
+        /// </summary>
+        protected virtual void OnConnectionStatusChanged(object sender, ConnectionStatusEventArgs e)
+        {
+            var callback = ConnectionStatusChanged;
+
+            if (callback != null)
+            {
+                callback(sender, e);
+            }
+        }
+
+        /// <summary>
+        /// Creates a new connection with a client.
+        /// </summary>
+        public void CreateConnection(Uri url)
+        {
+            ITransportListener listener = null;
+
+            if (TransportListeners != null)
+            {
+                foreach (var ii in TransportListeners)
+                {
+                    if (ii.UriScheme == url.Scheme)
+                    {
+                        listener = ii;
+                        break;
+                    }
+                }
+            }
+
+            if (listener == null)
+            {
+                throw new ArgumentException("url", "No suitable listener found.");
+            }
+
+            Utils.Trace((int)Utils.TraceMasks.Information, "Connecting to Client at {0}.", url);
+            listener.CreateConnection(url);
+        }
+
+        /// <summary>
         /// Starts the server (called from a IIS host process).
         /// </summary>
         /// <param name="configuration">The object that stores the configurable configuration information 
@@ -1022,6 +1086,9 @@ namespace Opc.Ua
                        GetEndpointInstance(this));
 
                     TransportListeners.Add(listener);
+
+                    listener.ConnectionWaiting += OnConnectionWaiting;
+                    listener.ConnectionStatusChanged += OnConnectionStatusChanged;
                 }
                 catch (Exception e)
                 {
@@ -1031,6 +1098,11 @@ namespace Opc.Ua
             }
 
             return endpoints;
+        }
+
+        private void Listener_ConnectionStatusChanged(object sender, ConnectionStatusEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
 
@@ -1147,6 +1219,8 @@ namespace Opc.Ua
                        GetEndpointInstance(this));
 
                     TransportListeners.Add(listener);
+                    listener.ConnectionWaiting += OnConnectionWaiting;
+                    listener.ConnectionStatusChanged += OnConnectionStatusChanged;
                 }
                 catch (Exception e)
                 {
@@ -1309,6 +1383,8 @@ namespace Opc.Ua
                        GetEndpointInstance(this));
 
                     TransportListeners.Add(listener);
+                    listener.ConnectionWaiting += OnConnectionWaiting;
+                    listener.ConnectionStatusChanged += OnConnectionStatusChanged;
                 }
                 catch (Exception e)
                 {
@@ -1397,6 +1473,8 @@ namespace Opc.Ua
                        GetEndpointInstance(this));
 
                     TransportListeners.Add(listener);
+                    listener.ConnectionWaiting += OnConnectionWaiting;
+                    listener.ConnectionStatusChanged += OnConnectionStatusChanged;
                 }
                 catch (Exception e)
                 {

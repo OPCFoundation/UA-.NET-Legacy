@@ -30,6 +30,16 @@ namespace Opc.Ua.Bindings
     /// </summary>
     public class TcpTransportChannel : ITransportChannel
     {
+        #region Private Fields
+        private object m_lock = new object();
+        private Uri m_url;
+        private int m_operationTimeout;
+        private TransportChannelSettings m_settings;
+        private TcpChannelQuotas m_quotas;
+        private BufferManager m_bufferManager;
+        private TcpClientChannel m_channel;
+        #endregion
+
         #region IDisposable Members
         /// <summary>
         /// Frees any unmanaged resources.
@@ -97,6 +107,38 @@ namespace Opc.Ua.Bindings
             TransportChannelSettings settings)
         {
             SaveSettings(url, settings);
+
+            m_channel = new TcpClientChannel(
+                Guid.NewGuid().ToString(),
+                m_bufferManager,
+                m_quotas,
+                m_settings.ClientCertificate,
+                m_settings.ServerCertificate,
+                m_settings.Description);
+        }
+
+        /// <summary>
+        /// Initializes a secure channel with the endpoint identified by the URL.
+        /// </summary>
+        /// <param name="connection">The connection to use.</param>
+        /// <param name="settings">The settings to use when creating the channel.</param>
+        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
+        public void Initialize(
+            ITransportWaitingConnection connection,
+            TransportChannelSettings settings)
+        {
+            SaveSettings(connection.EndpointUrl, settings);
+
+            m_channel = new TcpClientChannel(
+                Guid.NewGuid().ToString(),
+                m_bufferManager,
+                m_quotas,
+                m_settings.ClientCertificate,
+                m_settings.ServerCertificate,
+                m_settings.Description);
+
+            m_channel.Socket = (TcpMessageSocket)connection.Handle;
+            m_channel.Socket.ChangeSink(m_channel);
         }
 
         /// <summary>
@@ -122,14 +164,7 @@ namespace Opc.Ua.Bindings
         {
             lock (m_lock)
             {
-                // create the channel.
-                m_channel = new TcpClientChannel(
-                    Guid.NewGuid().ToString(),
-                    m_bufferManager,
-                    m_quotas,
-                    m_settings.ClientCertificate,
-                    m_settings.ServerCertificate,
-                    m_settings.Description);
+
                 //((TcpClientChannel)m_connection).ClientCertificateChain = m_settings.ClientCertificateChain;
 
                 // begin connect operation.
@@ -311,16 +346,6 @@ namespace Opc.Ua.Bindings
             // IAsyncResult result = m_connection.BeginConnect(m_url, m_operationTimeout, null, null);
             // m_connection.EndConnect(result);
         }
-        #endregion
-
-        #region Private Fields
-        private object m_lock = new object();
-        private Uri m_url;
-        private int m_operationTimeout;
-        private TransportChannelSettings m_settings;
-        private TcpChannelQuotas m_quotas;
-        private BufferManager m_bufferManager;
-        private TcpClientChannel m_channel;
         #endregion
     }
 }

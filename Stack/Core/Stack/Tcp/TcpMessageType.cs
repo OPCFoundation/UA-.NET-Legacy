@@ -84,6 +84,11 @@ namespace Opc.Ua.Bindings
         public const uint Hello = 0x464C4548;
 
         /// <summary>
+        /// A reverse hello message.
+        /// </summary>
+        public const uint ReverseHello = 0x52464C48;
+
+        /// <summary>
         /// An acknowledge message.
         /// </summary>
         public const uint Acknowledge = 0x464B4341;
@@ -125,6 +130,7 @@ namespace Opc.Ua.Bindings
             switch (messageType)
             {
                 case Hello:
+                case ReverseHello:
                 case Acknowledge:
                 case Error:
                 {

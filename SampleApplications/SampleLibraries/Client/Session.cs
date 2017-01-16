@@ -690,6 +690,62 @@ namespace Opc.Ua.Client
         #endregion
 
         #region Public Methods
+        public static Session Create(
+            ApplicationConfiguration configuration,
+            ITransportWaitingConnection connection,
+            EndpointDescription endpointDescription,
+            EndpointConfiguration endpointConfiguration,
+            bool checkDomains,
+            string sessionName,
+            uint sessionTimeout,
+            IUserIdentity identity,
+            IList<string> preferredLocales)
+        {
+            X509Certificate2 clientCertificate = null;
+
+            if (endpointDescription.SecurityPolicyUri != SecurityPolicies.None)
+            {
+                if (configuration.SecurityConfiguration.ApplicationCertificate == null)
+                {
+                    throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "ApplicationCertificate must be specified.");
+                }
+
+                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
+
+                if (clientCertificate == null)
+                {
+                    throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "ApplicationCertificate cannot be found.");
+                }
+            }
+
+            // create message context.
+            ServiceMessageContext messageContext = configuration.CreateMessageContext();
+
+            // initialize the channel which will be created with the server.
+            ITransportChannel channel = SessionChannel.CreateUaBinaryChannel(
+                configuration,
+                connection,
+                endpointDescription,
+                endpointConfiguration,
+                clientCertificate,
+                messageContext);
+
+            // create the session object.
+            Session session = new Session(channel, configuration, new ConfiguredEndpoint(null, endpointDescription, endpointConfiguration), null);
+
+            // create the session.
+            try
+            {
+                session.Open(sessionName, sessionTimeout, identity, preferredLocales, checkDomains);
+            }
+            catch
+            {
+                session.Dispose();
+                throw;
+            }
+
+            return session;
+        }
 
         /// <summary>
         /// Creates a new communication session with a server by invoking the CreateSession service

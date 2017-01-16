@@ -61,7 +61,6 @@ namespace Opc.Ua.Bindings
             m_bufferManager = bufferManager;
             m_receiveBufferSize = receiveBufferSize;
             m_incomingMessageSize = -1;
-            m_ReadComplete = new AsyncCallback(OnReadComplete);
             m_writeQueue = new LinkedList<WriteOperation>();
             m_readQueue = new LinkedList<ArraySegment<byte>>();
         }
@@ -83,7 +82,6 @@ namespace Opc.Ua.Bindings
             m_bufferManager = bufferManager;
             m_receiveBufferSize = receiveBufferSize;
             m_incomingMessageSize = -1;
-            m_ReadComplete = new AsyncCallback(OnReadComplete);
             m_writeQueue = new LinkedList<WriteOperation>();
             m_readQueue = new LinkedList<ArraySegment<byte>>();
         }
@@ -423,10 +421,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public void ChangeSink(IMessageSink sink)
         {
-            lock (m_readLock)
-            {
-                m_sink = sink;
-            }
+            m_sink = sink;
         }
 
         /// <summary>
@@ -631,7 +626,7 @@ namespace Opc.Ua.Bindings
                     m_bytesReceived,
                     m_bytesToReceive - m_bytesReceived,
                     SocketFlags.None,
-                    m_ReadComplete,
+                    new AsyncCallback(OnReadComplete),
                     null);
             }
             catch (Exception e)
@@ -960,7 +955,6 @@ namespace Opc.Ua.Bindings
         private IMessageSink m_sink; 
         private BufferManager m_bufferManager;
         private int m_receiveBufferSize;
-        private AsyncCallback m_ReadComplete;
         
         private object m_socketLock = new object();
         private Socket m_socket;

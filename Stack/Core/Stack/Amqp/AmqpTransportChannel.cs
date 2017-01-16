@@ -138,6 +138,19 @@ namespace Opc.Ua.Bindings
         }
 
         /// <summary>
+        /// Initializes a secure channel with the endpoint identified by the URL.
+        /// </summary>
+        /// <param name="connection">The URL for the endpoint.</param>
+        /// <param name="settings">The settings to use when creating the channel.</param>
+        /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
+        public void Initialize(
+            ITransportWaitingConnection connection,
+            TransportChannelSettings settings)
+        {
+            SaveSettings(connection.EndpointUrl, settings);
+        }
+
+        /// <summary>
         /// Opens a secure channel with the endpoint identified by the URL.
         /// </summary>
         /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>

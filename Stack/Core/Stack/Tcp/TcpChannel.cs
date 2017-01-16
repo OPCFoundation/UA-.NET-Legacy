@@ -563,7 +563,7 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// The socket for the channel.
         /// </summary>
-        protected TcpMessageSocket Socket
+        internal TcpMessageSocket Socket
         {
             get { return m_socket;  }            
             

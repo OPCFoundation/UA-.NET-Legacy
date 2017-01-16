@@ -232,7 +232,7 @@ namespace Opc.Ua.Server
                 },
                 new RolePermissionType()
                 {
-                    RoleId = ObjectIds.WellKnownRole_AuthenticatedUsers,
+                    RoleId = ObjectIds.WellKnownRole_AuthenticatedUser,
                     Permissions = (uint)(PermissionType.Browse | PermissionType.Read | PermissionType.Call | PermissionType.ReceiveEvents)
                 },
                 new RolePermissionType()

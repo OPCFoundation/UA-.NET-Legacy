@@ -4,7 +4,7 @@
   xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
   xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd"
 >
-  <ApplicationName>WebSocket Test Client</ApplicationName>
+  <ApplicationName>WebSockets Test Client</ApplicationName>
   <ApplicationUri>urn:localhost:Quickstarts:WebSocketTestClient</ApplicationUri>
   <ProductUri>uri:opcfoundation.org:Quickstarts:WebSocketTestClient</ProductUri>
   <ApplicationType>Client_1</ApplicationType>

@@ -43,5 +43,82 @@ namespace Opc.Ua
         /// </summary>
         /// <exception cref="ServiceResultException">Thrown if any communication error occurs.</exception>
         void Close();
+
+        /// <summary>
+        /// Raised when a new connection is waiting for a client.
+        /// </summary>
+        event EventHandler<ConnectionWaitingEventArgs> ConnectionWaiting;
+
+        /// <summary>
+        /// Raised when a monitored connection's status changed.
+        /// </summary>
+        event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
+
+        /// <summary>
+        /// Creates a connection to a client. 
+        /// </summary>
+        void CreateConnection(Uri url);
+
+        /// <summary>
+        /// The protocol supported by the listener.
+        /// </summary>
+        string UriScheme { get; }
+    }
+
+    /// <summary>
+    /// The arguments passed to the ConnectionWaiting event. 
+    /// </summary>
+    public interface ITransportWaitingConnection 
+    {
+        string ServerUri { get; }
+
+        Uri EndpointUrl { get; }
+
+        object Handle { get; set; }
+    }
+
+    /// <summary>
+    /// The arguments passed to the ConnectionWaiting event. 
+    /// </summary>
+    public class ConnectionWaitingEventArgs : EventArgs, ITransportWaitingConnection
+    {
+        internal ConnectionWaitingEventArgs(string serverUrl, Uri endpointUrl, object socket)
+        {
+            ServerUri = serverUrl;
+            EndpointUrl = endpointUrl;
+            Socket = socket;
+            Accepted = false;
+        }
+
+        public string ServerUri { get; private set; }
+
+        public Uri EndpointUrl { get; private set; }
+
+        public EndpointDescription Endpoint { get; set; }
+
+        public object Handle { get { return Socket; } set { } }
+
+        internal object Socket { get; }
+
+        public bool Accepted { get; set; }
+    }
+
+    /// <summary>
+    /// The arguments passed to the ConnectionStatus event. 
+    /// </summary>
+    public class ConnectionStatusEventArgs : EventArgs
+    {
+        internal ConnectionStatusEventArgs(Uri endpointUrl, ServiceResult channelStatus, bool closed)
+        {
+            EndpointUrl = endpointUrl;
+            ChannelStatus = channelStatus;
+            Closed = closed;
+        }
+
+        public Uri EndpointUrl { get; private set; }
+
+        public ServiceResult ChannelStatus { get; private set; }
+
+        public bool Closed { get; private set; }
     }
 }

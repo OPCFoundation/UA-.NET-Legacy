@@ -397,7 +397,7 @@ namespace Opc.Ua
                 }
 
                 m_tokenType = UserTokenType.IssuedToken;
-                m_issuedTokenType = new XmlQualifiedName("", "http://opcfoundation.org/UA/UserTokenPolicy#JWT");
+                m_issuedTokenType = new XmlQualifiedName("", JwtConstants.JwtUserTokenPolicy);
                 return;
             }
 
