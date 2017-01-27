@@ -1,0 +1,44 @@
+OPC Foundation OPC UA .NET Stack
+====================================
+
+Current Version
+	
+	
+Version 1.03.341
+	
+	Highlights: 
+		- OPC UA 1.03 compatible.
+		- Added support FindServersOnNetwork and RegisterServer2 services.
+		- Added support for Basic256Sha256 security policy.
+
+	Github issues resolved:
+		- Issue #2  - The OPC UA .NET 1.02.336.0 stack don't support Global Discovery Server 1.0-beta
+		- Issue #13 - IDictionary contract broken in implementation of NodeIdDictionary
+		- Issue #20 - ServerBase unregister from the UALDS even if never registered
+		- Issue #21 - False warning messages from .NET OPC UA client session
+		- Issue #23 - Opc.Ua.ConfiguredEndpoint Constructor does not respect provided configuration
+		- Issue #29 - Add date information in trace messages
+		- Issue #30 - Wrong Min/MaxRequestThreadCount configuration parameters validation
+		- Issue #31 - Scalability problem within request queue with multiple request threads
+		- Issue #32 - Use after free in RequestQueue thread pool after Dispose
+		- Issue #43 - Session Certificate private key is not loaded	
+		- Issue #47 - Verify / follow improved rules for multi dimensional arrays (Mantis 2819/2859)
+		- Issue #50 - Constructor 'NodeId(object, ushort)' does not throw an exception
+		- Issue #58 - Deadlock in ScheduleIncomingRequest. Regression from 335 build.
+		- Issue #62 - Bug in ServerSystemContext.cs
+		- Issue #64 - Update the nodeset to NodeSet Version 1.03 Errata 2016-08-24.txt
+		- Issue #65 - Add support for GDS
+		- Issue #80 - Support for Security Policy Basic256Sha256 is missing
+
+
+Version 1.03.340
+
+	Github issues resolved:
+		- Issue #1 - Handle leak in Tcp/TcpAsyncOperation.cs and Transport/AsyncResultBase.cs
+		- Issue #6 - How to detect that status and timestamp is writable (CTT also)
+		- Issue #3 - Set property ConfiguredEndpoint.SelectedUserTokenPolicy always sets to 'null'
+		- Issue #4 - When OPC UA server Registers with LDS will always recieve a BadSecureChannelClosed exception
+		- Issue #8 - InvalidCastException in DataTypes.GetBrowseName
+		- Issue #9 - Added gitignore file / Fix for designer exception
+		- Issue #15 - Update CertificateFactory.cs		
+		- Issue #16 - Add support to Stack for OPC UA specification version 1.03.
