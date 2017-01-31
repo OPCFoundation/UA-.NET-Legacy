@@ -233,7 +233,6 @@
   <ItemGroup>
     <Content Include="Common\BuildDesign.bat" />
     <Content Include="Common\ModelDesign.csv" />
-    <Content Include="Opc.Ua.Client.dll" />
     <EmbeddedResource Include="Common\Opc.Ua.Com.PredefinedNodes.uanodes" />
   </ItemGroup>
   <ItemGroup>
@@ -268,9 +267,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="OPC Key Pair.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
