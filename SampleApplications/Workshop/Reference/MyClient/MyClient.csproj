@@ -5,21 +5,21 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{7C43C547-EA5B-4371-9500-9A008EAB244A}</ProjectGuid>
+    <ProjectGuid>{68302E43-55A5-43A1-BF3D-18C0B628F10B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Quickstarts.HistoricalEvents.Server</RootNamespace>
-    <AssemblyName>Quickstarts.HistoricalEventsServer</AssemblyName>
+    <RootNamespace>Quickstarts.MyClient</RootNamespace>
+    <AssemblyName>Quickstarts.MyClient</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>App.ico</ApplicationIcon>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -32,7 +32,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -43,7 +42,7 @@
     <OutputPath>..\..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <WarningLevel>0</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
@@ -65,21 +64,29 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Runtime.Serialization">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.ServiceModel">
-      <RequiredTargetFramework>3.0</RequiredTargetFramework>
-    </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HistoricalEventsServerConfiguration.cs" />
-    <Compile Include="HistoricalEventsNodeManager.cs" />
-    <Compile Include="HistoricalEventsServer.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubscriptionOutput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubscriptionOutput.Designer.cs">
+      <DependentUpon>SubscriptionOutput.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -92,45 +99,42 @@
     </Compile>
     <Content Include="App.config" />
     <Content Include="App.ico" />
-    <EmbeddedResource Include="InstallConfig.xml" />
-    <Content Include="Model\ModelDesign.csv" />
-    <Content Include="Model\ModelDesign.xml" />
-    <Content Include="Quickstarts.HistoricalEventsServer.Config.xml">
+    <EmbeddedResource Include="InstallConfig.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Content Include="Quickstarts.MyClient.Config.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="BuildDesign.bat" />
-    <None Include="app.manifest" />
+    <EmbeddedResource Include="SubscriptionOutput.resx">
+      <DependentUpon>SubscriptionOutput.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <EmbeddedResource Include="Model\Quickstarts.HistoricalEvents.PredefinedNodes.uanodes" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Model\Quickstarts.HistoricalEvents.Classes.cs" />
-    <Compile Include="Model\Quickstarts.HistoricalEvents.Constants.cs" />
-    <Compile Include="Model\Quickstarts.HistoricalEvents.DataTypes.cs" />
-    <Compile Include="ReportGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Stack\Core\UA Core Library.csproj">
       <Project>{7543AFCB-F5AF-44AF-83C9-23164474C1E9}</Project>
       <Name>UA Core Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\SampleLibraries\Client\UA Client Library.csproj">
+      <Project>{42E9198C-ED2C-4BC8-B0A1-55D91D8F1E90}</Project>
+      <Name>UA Client Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\SampleLibraries\Configuration\UA Configuration Library.csproj">
       <Project>{8AB4CB8E-E216-425D-B600-350D0B6B59CD}</Project>
       <Name>UA Configuration Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\SampleLibraries\ServerControls\UA Server Controls.csproj">
-      <Project>{80056988-44E7-4EF4-9F59-50BCF215CB03}</Project>
-      <Name>UA Server Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\SampleLibraries\Server\UA Server Library.csproj">
-      <Project>{E16F908B-C338-4B0C-9E72-2ADAD8FB98D5}</Project>
-      <Name>UA Server Library</Name>
+    <ProjectReference Include="..\..\..\SampleLibraries\Controls\UA Client Controls.csproj">
+      <Project>{A247D2EE-14FC-463D-A9BA-6CFF1EF22B7A}</Project>
+      <Name>UA Client Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Common\Quickstart Library.csproj">
       <Project>{D8D0F7BC-BD73-4BE4-98E1-7ABDECAE4C50}</Project>
