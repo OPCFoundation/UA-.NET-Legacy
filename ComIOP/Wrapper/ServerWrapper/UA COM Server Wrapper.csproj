@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <ApplicationIcon>App.ico</ApplicationIcon>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>OPC Key Pair.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\..\Key\OPC Key Pair.snk</AssemblyOriginatorKeyFile>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -135,7 +135,6 @@
     <Compile Include="ServerForm.Designer.cs">
       <DependentUpon>ServerForm.cs</DependentUpon>
     </Compile>
-    <None Include="OPC Key Pair.snk" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="InstallConfig.xml" />

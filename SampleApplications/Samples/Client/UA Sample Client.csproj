@@ -34,7 +34,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>OPC Key Pair.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\..\Key\OPC Key Pair.snk</AssemblyOriginatorKeyFile>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -181,9 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.manifest" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="OPC Key Pair.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

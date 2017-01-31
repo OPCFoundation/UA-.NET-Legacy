@@ -61,7 +61,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>OPC Key Pair.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\..\..\Key\OPC Key Pair.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -120,7 +120,6 @@
     <Content Include="BuildDesign.bat" />
     <EmbeddedResource Include="Model\DsatsDemo.PredefinedNodes.uanodes" />
     <Content Include="Model\ModelDesign.csv" />
-    <None Include="OPC Key Pair.snk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -11,7 +11,7 @@
     <RootNamespace>Opc.Ua.Com</RootNamespace>
     <AssemblyName>Opc.Ua.ComInterop</AssemblyName>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>OPC Key Pair.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\Key\OPC Key Pair.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
