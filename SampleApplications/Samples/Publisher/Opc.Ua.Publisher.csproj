@@ -19,9 +19,8 @@
     </UpgradeBackupLocation>
     <IsWebBootstrapper>true</IsWebBootstrapper>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>
-    </AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>OPC Key Pair.snk</AssemblyOriginatorKeyFile>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <TargetFrameworkProfile />
     <PublishUrl>http://localhost/Opc.Ua.SampleClient/</PublishUrl>
@@ -203,6 +202,7 @@
     <Content Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="OPC Key Pair.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
