@@ -69,6 +69,9 @@ namespace Opc.Ua.GdsServer
 
         [DataMember(Order = 5)]
         public StringCollection KnownHostNames { get; set; }
+
+        [DataMember(Order = 6)]
+        public GdsServerAuthorizationServiceConfigurationCollection AuthorizationServices { get; set; }
         #endregion
 
         #region Private Members
@@ -150,5 +153,73 @@ namespace Opc.Ua.GdsServer
         /// </summary>
         /// <param name="capacity">The capacity.</param>
         public CertificateGroupConfigurationCollection(int capacity) : base(capacity) { }
+    }
+
+    /// <summary>
+    /// Stores the configuration the data access node manager.
+    /// </summary>
+    [DataContract(Name = "AuthorizationService", Namespace = Opc.Ua.Gds.Namespaces.OpcUaGds + "Configuration.xsd")]
+    public class GdsServerAuthorizationServiceConfiguration
+    {
+        #region Constructors
+        /// <summary>
+        /// The default constructor.
+        /// </summary>
+        public GdsServerAuthorizationServiceConfiguration()
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Initializes the object during deserialization.
+        /// </summary>
+        [OnDeserializing()]
+        private void Initialize(StreamingContext context)
+        {
+            Initialize();
+        }
+
+        /// <summary>
+        /// Sets private members to default values.
+        /// </summary>
+        private void Initialize()
+        {
+        }
+        #endregion
+
+        #region Public Properties
+        [DataMember(Order = 1)]
+        public string ServiceName { get; set; }
+
+        [DataMember(Order = 2)]
+        public UserTokenPolicyCollection UserTokenPolicies { get; set; }
+        #endregion
+
+        #region Private Members
+        #endregion
+    }
+
+    [CollectionDataContract(Name = "ListOfAuthorizationService", Namespace = Opc.Ua.Gds.Namespaces.OpcUaGds + "Configuration.xsd", ItemName = "AuthorizationService")]
+    public partial class GdsServerAuthorizationServiceConfigurationCollection : List<GdsServerAuthorizationServiceConfiguration>
+    {
+        /// <summary>
+        /// Initializes an empty collection.
+        /// </summary>
+        public GdsServerAuthorizationServiceConfigurationCollection() { }
+
+        /// <summary>
+        /// Initializes the collection from another collection.
+        /// </summary>
+        /// <param name="collection">A collection of values to add to this new collection</param>
+        /// <exception cref="T:System.ArgumentNullException">
+        /// 	<paramref name="collection"/> is null.
+        /// </exception>
+        public GdsServerAuthorizationServiceConfigurationCollection(IEnumerable<GdsServerAuthorizationServiceConfiguration> collection) : base(collection) { }
+
+        /// <summary>
+        /// Initializes the collection with the specified capacity.
+        /// </summary>
+        /// <param name="capacity">The capacity.</param>
+        public GdsServerAuthorizationServiceConfigurationCollection(int capacity) : base(capacity) { }
     }
 }

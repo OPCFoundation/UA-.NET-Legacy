@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationConfiguration
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd"
+>
+  <ApplicationName>Authorization Client</ApplicationName>
+  <ApplicationUri>urn:localhost:OPCFoundation:AuthorizationClient</ApplicationUri>
+  <ProductUri>http://opcfoundation.org/UA/AuthorizationClient/</ProductUri>
+  <ApplicationType>Client_1</ApplicationType>
+
+  <SecurityConfiguration>
+
+    <ApplicationCertificate>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\GDS\PKI\own</StorePath>
+      <SubjectName>CN=AuthorizationClient/O=OPC Foundation/DC=localhost</SubjectName>
+    </ApplicationCertificate>
+
+    <TrustedIssuerCertificates>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\GDS\PKI\issuers</StorePath>
+    </TrustedIssuerCertificates>
+
+    <TrustedPeerCertificates>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\GDS\PKI\trusted</StorePath>
+    </TrustedPeerCertificates>
+
+    <RejectedCertificateStore>
+      <StoreType>Directory</StoreType>
+      <StorePath>%CommonApplicationData%\OPC Foundation\GDS\PKI\rejected</StorePath>
+    </RejectedCertificateStore>
+
+  </SecurityConfiguration>
+
+  <TransportQuotas>
+    <OperationTimeout>120000</OperationTimeout>
+    <MaxStringLength>1048576</MaxStringLength>
+    <MaxByteStringLength>4194304</MaxByteStringLength>
+    <MaxArrayLength>65535</MaxArrayLength>
+    <MaxMessageSize>4194304</MaxMessageSize>
+    <MaxBufferSize>65535</MaxBufferSize>
+    <ChannelLifetime>300000</ChannelLifetime>
+    <SecurityTokenLifetime>3600000</SecurityTokenLifetime>
+  </TransportQuotas>
+
+  <ClientConfiguration>
+    <DefaultSessionTimeout>600000</DefaultSessionTimeout>
+    <MinSubscriptionLifetime>10000</MinSubscriptionLifetime>
+  </ClientConfiguration>
+
+  <Extensions>
+    <ua:XmlElement>
+      <!-- this is a list of OAuth2 servers which the client has been given access to. The client secrets must be stored in a client configuration files. -->
+      <ListOfOAuth2Credential xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd">
+        <!-- this is used to access the Azure OAuth2 service when an identity provider is used. -->
+        <OAuth2Credential>
+          <AuthorityUrl>https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com</AuthorityUrl>
+          <GrantType>authorization_code</GrantType>
+          <ClientId>f8b31779-d9a3-43ff-b854-28f27a52e2f2</ClientId>
+          <RedirectUrl>https://localhost:62540/prototypeclient</RedirectUrl>
+          <TokenEndpoint>/oauth2/token</TokenEndpoint>
+          <AuthorizationEndpoint>/oauth2/authorize</AuthorizationEndpoint>
+        </OAuth2Credential>
+        <!-- this is used to access the GDS OAuth2 authorization service -->
+        <OAuth2Credential>
+          <AuthorityUrl>https://localhost:54333</AuthorityUrl>
+          <GrantType>client_credentials</GrantType>
+          <ClientId>urn:localhost:OAuth2TestClient2</ClientId>
+          <ClientSecret>secret</ClientSecret>
+        </OAuth2Credential>
+        <!-- this is used to access the GDS OPC UA authorization service -->
+        <OAuth2Credential>
+          <AuthorityUrl>opc.tcp://localhost:58810</AuthorityUrl>
+          <GrantType>client_credentials</GrantType>
+          <ClientId>gdsadmin</ClientId>
+          <ClientSecret>demo</ClientSecret>
+        </OAuth2Credential>
+      </ListOfOAuth2Credential>
+    </ua:XmlElement>
+  </Extensions>
+  
+  <TraceConfiguration>
+    <OutputFilePath>Logs\Opc.Ua.GdsClient.log.txt</OutputFilePath>
+    <DeleteOnLoad>true</DeleteOnLoad>
+    <!-- Show Only Errors -->
+    <!-- <TraceMasks>1</TraceMasks> -->
+    <!-- Show Only Security and Errors -->
+    <!-- <TraceMasks>513</TraceMasks> -->
+    <!-- Show Only Security, Errors and Trace -->
+    <TraceMasks>515</TraceMasks>
+    <!-- Show Only Security, COM Calls, Errors and Trace -->
+    <!-- <TraceMasks>771</TraceMasks> -->
+    <!-- Show Only Security, Service Calls, Errors and Trace -->
+    <!-- <TraceMasks>523</TraceMasks> -->
+    <!-- Show Only Security, ServiceResultExceptions, Errors and Trace -->
+    <!-- <TraceMasks>519</TraceMasks> -->
+  </TraceConfiguration>
+
+</ApplicationConfiguration>

@@ -59,7 +59,7 @@ namespace Opc.Ua.GdsServer
         public ClientRegistrationCollection Clients { get; set; }
 
         [DataMember(Order = 2)]
-        public ScopeMappingCollection Scopes { get; set; }
+        public ClientRegistrationCollection Users { get; set; }
 
         [DataMember(Order = 3)]
         public string DefaultScope { get; set; }
@@ -80,6 +80,12 @@ namespace Opc.Ua.GdsServer
 
         [DataMember(Order = 3)]
         public string ClientName;
+
+        [DataMember(Order = 4)]
+        public StringCollection AllowedScopes;
+
+        [DataMember(Order = 5)]
+        public StringCollection AllowedRoles;
     }
 
     [CollectionDataContract(Name = "ListOfClientRegistration", Namespace = Opc.Ua.Gds.Namespaces.OpcUaGds + "Configuration.xsd", ItemName = "ClientRegistration")]
@@ -104,42 +110,5 @@ namespace Opc.Ua.GdsServer
         /// </summary>
         /// <param name="capacity">The capacity.</param>
         public ClientRegistrationCollection(int capacity) : base(capacity) { }
-    }
-
-    [DataContract(Namespace = Opc.Ua.Gds.Namespaces.OpcUaGds + "Configuration.xsd")]
-    public class ScopeMapping
-    {
-        [DataMember(Order = 1)]
-        public string Scope;
-
-        [DataMember(Order = 2)]
-        public StringCollection Clients;
-
-        [DataMember(Order = 3)]
-        public StringCollection Users;
-    }
-
-    [CollectionDataContract(Name = "ListOfScopeMapping", Namespace = Opc.Ua.Gds.Namespaces.OpcUaGds + "Configuration.xsd", ItemName = "ScopeMapping")]
-    public partial class ScopeMappingCollection : List<ScopeMapping>
-    {
-        /// <summary>
-        /// Initializes an empty collection.
-        /// </summary>
-        public ScopeMappingCollection() { }
-
-        /// <summary>
-        /// Initializes the collection from another collection.
-        /// </summary>
-        /// <param name="collection">A collection of values to add to this new collection</param>
-        /// <exception cref="T:System.ArgumentNullException">
-        /// 	<paramref name="collection"/> is null.
-        /// </exception>
-        public ScopeMappingCollection(IEnumerable<ScopeMapping> collection) : base(collection) { }
-
-        /// <summary>
-        /// Initializes the collection with the specified capacity.
-        /// </summary>
-        /// <param name="capacity">The capacity.</param>
-        public ScopeMappingCollection(int capacity) : base(capacity) { }
     }
 }

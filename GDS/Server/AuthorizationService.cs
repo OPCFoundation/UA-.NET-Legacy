@@ -85,10 +85,7 @@ namespace Opc.Ua.AuthorizationService
 
             factory.TokenService = new Registration<ITokenService>(typeof(CustomTokenService));
             factory.CorsPolicyService = new Registration<ICorsPolicyService>(new DefaultCorsPolicyService { AllowAll = true });
-            factory.SecretParsers = new Registration<ISecretParser>[] { new Registration<ISecretParser>(new ApplicationCertificateSecretParser(Server)) };
-            factory.SecretValidators = new Registration<ISecretValidator>[] { new Registration<ISecretValidator>(new ApplicationCertificateSecretValidator()) };
             factory.ClientStore = new Registration<IClientStore>(new ApplicationClientStore(ServiceConfiguration, Server));
-            factory.CustomGrantValidators.Add(new Registration<ICustomGrantValidator>(new CustomGrantValidator(ServiceConfiguration)));
 
             CustomTokenService.Server = Startup.Server;
             CustomTokenService.Configuration = Startup.ServiceConfiguration;
@@ -133,12 +130,8 @@ namespace Opc.Ua.AuthorizationService
         {
             return new List<Scope>
             {
-                new Scope { Name = "gds:admin" },
-                new Scope { Name = "gds:appadmin" },
-                new Scope { Name = "gds" },
-                new Scope { Name = "pubsub" },
-                new Scope { Name = "pubsub:secret" },
-                new Scope { Name = "observer" }
+                new Scope { Name = "UAPubSub" },
+                new Scope { Name = "UAServer" }
             };
         }
     }
@@ -220,239 +213,6 @@ namespace Opc.Ua.AuthorizationService
         }
     }
 
-    /// <summary>
-    /// Parses the environment for an X509 client certificate
-    /// </summary>
-    public class ApplicationCertificateSecretParser : ISecretParser
-    {
-        private GlobalDiscoveryServerServer m_server;
-
-        public ApplicationCertificateSecretParser(GlobalDiscoveryServerServer server)
-        {
-            m_server = server;
-        }
-
-        /// <summary>
-        /// Tries to find a secret on the environment that can be used for authentication
-        /// </summary>
-        /// <param name="environment">The environment.</param>
-        /// <returns>
-        /// A parsed secret
-        /// </returns>
-        public async Task<ParsedSecret> ParseAsync(IDictionary<string, object> environment)
-        {
-            var context = new OwinContext(environment);
-
-            if (!context.Request.Body.CanSeek)
-            {
-                var copy = new MemoryStream();
-                await context.Request.Body.CopyToAsync(copy);
-                copy.Seek(0L, SeekOrigin.Begin);
-                context.Request.Body = copy;
-            }
-
-            context.Request.Body.Seek(0L, SeekOrigin.Begin);
-            var body = await context.Request.ReadFormAsync();
-            context.Request.Body.Seek(0L, SeekOrigin.Begin);
-
-            var grantType = body.Get("grant_type");
-
-            if (String.IsNullOrEmpty(grantType))
-            {
-                return null;
-            }
-
-            var clientId = body.Get("client_id");
-
-            if (String.IsNullOrEmpty(clientId))
-            {
-                return null;
-            }
-
-            var clientSecret = body.Get("client_secret");
-
-            if (String.IsNullOrEmpty(clientSecret))
-            {
-                return null;
-            }
-
-            if (grantType != "urn:opcfoundation.org:oauth2:site_token")
-            {
-                return new ParsedSecret
-                {
-                    Id = clientId,
-                    Credential = clientSecret.Sha256(),
-                    Type = "SharedSecret"
-                };
-            }
-
-            var certificate = Convert.FromBase64String(clientId);
-            var signature = Convert.FromBase64String(clientSecret);
-
-            var data = body.Get("access_token");
-
-            if (String.IsNullOrEmpty(data))
-            {
-                return null;
-            }
-
-            var accessToken = data;
-
-            data = body.Get("nonce");
-
-            if (String.IsNullOrEmpty(data))
-            {
-                return null;
-            }
-
-            var nonce = Convert.FromBase64String(data);
-
-            try
-            {
-                // validate the certificate.
-                X509Certificate2 x509 = new X509Certificate2(certificate);
-                m_server.CertificateValidator.Validate(x509);
-
-                var applicationUri = Utils.GetApplicationUriFromCertficate(x509);
-
-                // verify signature.
-                var dataToVerify = Utils.Append(new UTF8Encoding(false).GetBytes(accessToken), nonce);
-
-                if (!RsaUtils.RsaPkcs15Sha1_Verify(new ArraySegment<byte>(dataToVerify), signature, x509))
-                {
-                    return null;
-                }
-
-                return new ParsedSecret
-                {
-                    Id = applicationUri,
-                    Credential = x509,
-                    Type = "ApplicationSignature"
-                };
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Validates a secret based on the thumbprint of an X509 Certificate
-    /// </summary>
-    public class ApplicationCertificateSecretValidator : ISecretValidator
-    {
-        /// <summary>
-        /// Validates a secret
-        /// </summary>
-        /// <param name="secrets">The stored secrets.</param>
-        /// <param name="parsedSecret">The received secret.</param>
-        /// <returns>
-        /// A validation result
-        /// </returns>
-        /// <exception cref="System.ArgumentException">ParsedSecret.Credential is not an X509 Certificate</exception>
-        public Task<SecretValidationResult> ValidateAsync(IEnumerable<Secret> secrets, ParsedSecret parsedSecret)
-        {
-            var fail = Task.FromResult(new SecretValidationResult { Success = false });
-            var success = Task.FromResult(new SecretValidationResult { Success = true });
-
-            if (parsedSecret.Type == "SharedSecret")
-            {
-                foreach (var secret in secrets)
-                {
-                    if (secret.Value.Equals(parsedSecret.Credential))
-                    {
-                        return success;
-                    }
-                }
-
-                return fail;
-            }
-
-            if (parsedSecret.Type != "ApplicationSignature")
-            {
-                return fail;
-            }
-
-            var certificate = parsedSecret.Credential as X509Certificate2;
-
-            if (certificate == null)
-            {
-                throw new ArgumentException("ParsedSecret.Credential is not an X509 Certificate");
-            }
-
-            return success;
-        }
-    }
-
-    class CustomGrantValidator : ICustomGrantValidator
-    {
-        private AuthorizationServiceConfiguration m_configuration;
-
-        public CustomGrantValidator(AuthorizationServiceConfiguration configuration)
-        {
-            m_configuration = configuration;
-        }
-
-        public Task<CustomGrantValidationResult> ValidateAsync(ValidatedTokenRequest request)
-        {
-            var accessToken = request.Raw.Get("access_token");
-
-            var identity = JwtUtils.ValidateToken(
-                new Uri("https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com"),
-                "https://mycompany.com/gds-prototype", 
-                accessToken);
-
-            JwtSecurityToken azureToken = identity.GetSecurityToken() as JwtSecurityToken;
-
-            var scope = request.Raw.Get("scope");
-            var nonce = request.Raw.Get("nonce");
-
-            DateTime now = DateTime.UtcNow;
-            double maxClockSkewInMinutes = 10;
-
-            if (azureToken.ValidFrom.AddMinutes(-maxClockSkewInMinutes) > now || azureToken.ValidTo.AddMinutes(maxClockSkewInMinutes) < now)
-            {
-                return Task.FromResult(new CustomGrantValidationResult(
-                    "Access token provided with the request has expired (" + 
-                    azureToken.ValidTo.ToLocalTime().ToString("yyy-MM-dd HH:mm:ss") + 
-                    ") or is not yet valid (" + 
-                    azureToken.ValidFrom.ToLocalTime().ToString("yyy-MM-dd HH:mm:ss") + ")."));
-            }
-            
-            List<Claim> claims = new List<Claim>();
-            string subject = request.Client.ClientId;
-
-            foreach (var claim in azureToken.Claims)
-            {
-                switch (claim.Type)
-                {
-                    case "unique_name": { subject = claim.Value; claims.Add(claim); break; }
-                    case "name": { claims.Add(claim); break; }
-                }
-            }
-
-            // add nonce to protect against replay attacks.
-            claims.Add(new Claim("nonce", nonce));
-
-            // make sure new token does not last longer than the original token.
-            request.Client.AccessTokenLifetime = (int)(azureToken.ValidTo - now).TotalSeconds;
-
-            var result = new CustomGrantValidationResult(
-                subject,
-                "site_token",
-                claims,
-                "gds");
-
-            return Task.FromResult(result);
-        }
-
-        public string GrantType
-        {
-            get { return "urn:opcfoundation.org:oauth2:site_token"; }
-        }
-    }
-
     class CustomTokenService : DefaultTokenService
     {
         public static GlobalDiscoveryServerServer Server;
@@ -485,46 +245,88 @@ namespace Opc.Ua.AuthorizationService
             uri.Host = uri.Host.ToLowerInvariant();
             token.Issuer = uri.ToString();
 
-            // remove the non-standard "scope" claim.
-            for (int ii = 0; ii < token.Claims.Count;)
-            {
-                if (token.Claims[ii].Type == "scope")
-                {
-                    token.Claims.RemoveAt(ii);
-                    continue;
-                }
+            List<string> scopes = new List<string>();
+            List<string> roles = new List<string>();
 
-                ii++;
+            // build list of allowed scopes and roles for the client.
+            if (Configuration != null && Configuration.Clients != null)
+            {
+                foreach (var mapping in Configuration.Clients)
+                {
+                    if (mapping.ClientId == token.ClientId)
+                    {
+                        if (mapping.AllowedScopes != null)
+                        {
+                            foreach (var scope in mapping.AllowedScopes)
+                            {
+                                if (!scopes.Contains(scope))
+                                {
+                                    scopes.Add(scope);
+                                }
+                            }
+                        }
+
+                        if (mapping.AllowedRoles != null)
+                        {
+                            foreach (var role in mapping.AllowedRoles)
+                            {
+                                if (!roles.Contains(role))
+                                {
+                                    roles.Add(role);
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
-            // build list of allowed scopes.
-            if (Configuration != null && Configuration.Scopes != null)
+            // build list of allowed scopes and roles for the user.
+            if (Configuration != null && Configuration.Users != null)
             {
-                foreach (var mapping in Configuration.Scopes)
+                foreach (var mapping in Configuration.Users)
                 {
-                    if (mapping.Users != null)
+                    if (mapping.ClientId == token.SubjectId)
                     {
-                        foreach (var user in mapping.Users)
+                        if (mapping.AllowedScopes != null)
                         {
-                            if (user == token.SubjectId)
+                            foreach (var scope in mapping.AllowedScopes)
                             {
-                                token.Claims.Add(new Claim("scp", mapping.Scope));
-                                break;
+                                if (!scopes.Contains(scope))
+                                {
+                                    scopes.Add(scope);
+                                }
                             }
                         }
-                    }
 
-                    if (mapping.Clients != null)
-                    {
-                        foreach (var user in mapping.Clients)
+                        if (mapping.AllowedRoles != null)
                         {
-                            if (user == token.ClientId)
+                            foreach (var role in mapping.AllowedRoles)
                             {
-                                token.Claims.Add(new Claim("scp", mapping.Scope));
-                                break;
+                                if (!roles.Contains(role))
+                                {
+                                    roles.Add(role);
+                                }
                             }
                         }
                     }
+                }
+            }
+
+            // add scopes.
+            if (scopes.Count > 0)
+            {
+                foreach (var scope in scopes)
+                {
+                    token.Claims.Add(new Claim("scp", scope));
+                }
+            }
+
+            // add roles.
+            if (roles.Count > 0)
+            {
+                foreach (var role in roles)
+                {
+                    token.Claims.Add(new Claim("roles", role));
                 }
             }
 

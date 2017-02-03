@@ -27,7 +27,7 @@ using System.IdentityModel.Tokens;
 
 namespace Opc.Ua.Gds
 {
-    public class OAuth2Client
+    public class AuthorizationClient
     {
         public ApplicationConfiguration Configuration { get; set; }
 
@@ -70,10 +70,11 @@ namespace Opc.Ua.Gds
             gdsCredentials.TokenEndpoint = parameters.TokenEndpoint;
             gdsCredentials.GrantType = grantType;
 
+            /*
             JwtSecurityToken jwt = null;
 
             // need to get credentials from an external authority.
-            if (gdsCredentials.GrantType == Opc.Ua.JwtConstants.OAuth2SiteToken)
+            if (parameters.AuthorityProfileUri == "")
             {
                 JwtIdentityProviderParameters provider = null;
 
@@ -119,18 +120,19 @@ namespace Opc.Ua.Gds
                 var azureIdentity = new UserIdentity(jwt);
 
                 // log in using site token.
-                OAuth2Client client = new OAuth2Client() { Configuration = configuration };
+                AuthorizationClient client = new AuthorizationClient() { Configuration = configuration };
                 var certificate = client.Configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
                 var gdsAccessToken = await client.RequestTokenWithWithSiteTokenAsync(gdsCredentials, certificate, azureToken.AccessToken, parameters.ResourceId, "gds:admin");
                 JwtSecurityToken gdsToken = new JwtSecurityToken(gdsAccessToken.AccessToken);
                 return new UserIdentity(gdsToken);
             }
+            */
 
             // can log in directly with client credentials.
             if (gdsCredentials.GrantType == Opc.Ua.JwtConstants.OAuth2ClientCredentials)
             { 
                 // log in using site token.
-                OAuth2Client client = new OAuth2Client() { Configuration = configuration };
+                AuthorizationClient client = new AuthorizationClient() { Configuration = configuration };
                 var gdsAccessToken = await client.RequestTokenWithClientCredentialsAsync(gdsCredentials, parameters.ResourceId, "gds:admin");
                 JwtSecurityToken gdsToken = new JwtSecurityToken(gdsAccessToken.AccessToken);
                 return new UserIdentity(gdsToken);

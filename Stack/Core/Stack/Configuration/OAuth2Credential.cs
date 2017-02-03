@@ -168,7 +168,8 @@ namespace Opc.Ua
                             ClientSecret = ii.ClientSecret,
                             RedirectUrl = ii.RedirectUrl,
                             TokenEndpoint = ii.TokenEndpoint,
-                            AuthorizationEndpoint = ii.AuthorizationEndpoint
+                            AuthorizationEndpoint = ii.AuthorizationEndpoint,
+                            ServerResourceId = ii.ServerResourceId
                         };
 
                         return credential;

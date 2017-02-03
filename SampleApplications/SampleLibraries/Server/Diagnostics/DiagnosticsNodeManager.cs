@@ -308,7 +308,7 @@ namespace Opc.Ua.Server
 
                     activeNode.DefaultRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
                     activeNode.DefaultUserRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
-                    activeNode.DefaultAccessRestrictions = new PropertyState<byte>(activeNode);
+                    activeNode.DefaultAccessRestrictions = new PropertyState<ushort>(activeNode);
 
                     activeNode.Create(context, passiveNode);
                     

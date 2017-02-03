@@ -27,6 +27,8 @@ using Opc.Ua;
 using Opc.Ua.Gds;
 using Opc.Ua.Server;
 using System.Data.SqlClient;
+using System.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace Opc.Ua.GdsServer
 {
@@ -484,6 +486,35 @@ namespace Opc.Ua.GdsServer
                 AddExternalReference(ObjectIds.Server_ServerCapabilities_Roles, ReferenceTypeIds.Organizes, false, pubsub2.NodeId, externalReferences);
                 AddPredefinedNode(Server.DefaultSystemContext, pubsub2);
 
+                if (m_configuration.AuthorizationServices != null)
+                {
+                    foreach (var service in m_configuration.AuthorizationServices)
+                    {
+                        AuthorizationServiceState node = new AuthorizationServiceState(null);
+                        node.RequestAccessToken = new RequestAccessTokenMethodState(node);
+
+                        node.Create(
+                            Server.DefaultSystemContext, 
+                            new NodeId(service.ServiceName, NamespaceIndex), 
+                            new QualifiedName(service.ServiceName, NamespaceIndex), 
+                            null, 
+                            true);
+
+                        node.RequestAccessToken.OnCall = new RequestAccessTokenMethodStateMethodCallHandler(OnRequestAccessToken);
+                        node.ServiceUri.Value = Server.ServerUris.GetString(0);
+                        node.ServiceProfileUri.Value = Profiles.UaTcpTransport;
+                        node.ServiceEndpointUrls.Value = new string[1];
+                        node.UserTokenPolicies.Value = service.UserTokenPolicies.ToArray();
+
+                        AddPredefinedNode(Server.DefaultSystemContext, node);
+
+                        NodeId sourceId = ExpandedNodeId.ToNodeId(Opc.Ua.Gds.ObjectIds.AuthorizationServices, Server.NamespaceUris);
+                        node.AddReference(ReferenceTypeIds.Organizes, true, sourceId);
+                        var source = Find(sourceId);
+                        source.AddReference(ReferenceTypeIds.Organizes, false, node.NodeId);
+                    }
+                }
+
                 m_database.NamespaceIndex = NamespaceIndexes[0];
 
                 foreach (var certificateGroupConfiguration in m_configuration.CertificateGroups)
@@ -884,7 +915,7 @@ namespace Opc.Ua.GdsServer
 
                     activeNode.DefaultRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
                     activeNode.DefaultUserRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
-                    activeNode.DefaultAccessRestrictions = new PropertyState<byte>(activeNode);
+                    activeNode.DefaultAccessRestrictions = new PropertyState<ushort>(activeNode);
 
                     activeNode.Create(context, passiveNode);
 
@@ -909,6 +940,115 @@ namespace Opc.Ua.GdsServer
             return predefinedNode;
         }
 
+        private ServiceResult OnRequestAccessToken(
+            ISystemContext context,
+            MethodState method,
+            NodeId objectId,
+            string resourceId,
+            UserIdentityToken identityToken,
+            DateTime creationTime,
+            byte[] signature,
+            ref string accessToken)
+        {
+            // check for a valid identity token.
+            if (identityToken == null)
+            {
+                identityToken = new AnonymousIdentityToken();
+            }
+
+            var service = method.Parent as AuthorizationServiceState;
+            UserTokenPolicy selectedPolicy = null;
+
+            foreach (var policy in service.UserTokenPolicies.Value)
+            {
+                if (policy.PolicyId == identityToken.PolicyId)
+                {
+                    selectedPolicy = policy;
+                    break;
+                }
+            }
+
+            if (selectedPolicy == null)
+            {
+                throw new ServiceResultException(StatusCodes.BadIdentityTokenInvalid);
+            }
+
+            // protect against reply attacks.
+            if ((DateTime.Now - creationTime) > new TimeSpan(0, 5, 0))
+            {
+                throw new ServiceResultException(StatusCodes.BadIdentityTokenInvalid);
+            }
+
+            // decrypt or verify the credentials.
+            long ticks = creationTime.Ticks - Utils.TimeBase.Ticks;
+            var nonce = Utils.Append(BitConverter.GetBytes(ticks), SecureChannelContext.Current.EndpointDescription.ServerCertificate);
+
+            // check possession of a certificate.
+            if (identityToken is X509IdentityToken)
+            {
+                 identityToken.Verify(
+                    nonce,
+                    new SignatureData() {  Signature = signature },
+                    selectedPolicy.SecurityPolicyUri);
+            }
+
+            // decrypt the token if required.
+            else
+            {
+                identityToken.Decrypt(
+                    Server.Configuration.SecurityConfiguration.ApplicationCertificate.Certificate,
+                    nonce,
+                    selectedPolicy.SecurityPolicyUri);
+            }
+
+            IUserIdentity identity = new UserIdentity(identityToken, selectedPolicy);
+
+            // check for an issued token.
+            IssuedIdentityToken issuedToken = identityToken as IssuedIdentityToken;
+
+            if (issuedToken != null)
+            {
+                if (selectedPolicy.IssuedTokenType == JwtConstants.JwtUserTokenPolicy)
+                {
+                    JwtEndpointParameters parameters = new JwtEndpointParameters();
+                    parameters.FromJson(selectedPolicy.IssuerEndpointUrl);
+                    var jwt = new UTF8Encoding().GetString(issuedToken.DecryptedTokenData);
+
+                    identity = JwtUtils.ValidateToken(new Uri(parameters.AuthorityUrl), null, null, parameters.ResourceId, jwt);
+                }
+            }
+
+            var signingKey = new X509SecurityKey(Server.Configuration.SecurityConfiguration.ApplicationCertificate.Certificate);
+
+            var claimsIdentity = new ClaimsIdentity(new List<Claim>()
+                    {
+                        new Claim("name", identity.DisplayName),
+                        new Claim("scp", "UAServer"),
+                        new Claim("roles", "admin"),
+                    }, "Custom");
+
+            var signingCredentials = new SigningCredentials(
+                signingKey,
+                System.IdentityModel.Tokens.SecurityAlgorithms.RsaSha256Signature,
+                System.IdentityModel.Tokens.SecurityAlgorithms.Sha256Digest);
+
+            var securityTokenDescriptor = new SecurityTokenDescriptor()
+            {
+                AppliesToAddress = resourceId,
+                TokenIssuerName = Server.Configuration.ApplicationUri,
+                Subject = claimsIdentity,
+                SigningCredentials = signingCredentials,
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var plainToken = tokenHandler.CreateToken(securityTokenDescriptor);
+            var signedAndEncodedToken = tokenHandler.WriteToken(plainToken);
+
+            accessToken = signedAndEncodedToken;
+
+            return ServiceResult.Good;
+        }
+ 
         private ServiceResult OnQueryServers(
             ISystemContext context,
             MethodState method,

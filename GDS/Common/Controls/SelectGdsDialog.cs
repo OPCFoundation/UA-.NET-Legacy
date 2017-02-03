@@ -119,16 +119,13 @@ namespace Opc.Ua.Gds
 
                         if (IdentityProviderRB.Checked)
                         {
-                            if (parameters.IdentityProviders == null || parameters.IdentityProviders.Count == 0)
-                            {
-                                throw new ArgumentException("Server does not support direct interactions with identity providers.");
-                            }
-
-                            m_gds.AdminCredentials = await OAuth2Client.GetIdentityToken(
+                            /*
+                            m_gds.AdminCredentials = await AuthorizationClient.GetIdentityToken(
                                 m_gds.Application.ApplicationConfiguration, 
                                 url, 
                                 parameters, 
                                 Opc.Ua.JwtConstants.OAuth2SiteToken);
+                            */
                         }
                         else
                         {
@@ -137,7 +134,7 @@ namespace Opc.Ua.Gds
                                 throw new ArgumentException("Server does not support client credential authorization.");
                             }
 
-                            m_gds.AdminCredentials = await OAuth2Client.GetIdentityToken(
+                            m_gds.AdminCredentials = await AuthorizationClient.GetIdentityToken(
                                 m_gds.Application.ApplicationConfiguration,
                                 url,
                                 parameters,

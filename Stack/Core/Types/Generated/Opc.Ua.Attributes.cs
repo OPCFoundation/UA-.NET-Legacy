@@ -168,5 +168,10 @@ namespace Opc.Ua
         /// The access restrictions assigned to the node.
         /// </summary>
         public const uint AccessRestrictions = 26;
+
+        /// <summary>
+        /// How a variable may be accessed.
+        /// </summary>
+        public const uint AccessLevelEx = 27;
     }
 }

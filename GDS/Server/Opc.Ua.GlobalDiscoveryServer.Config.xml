@@ -53,13 +53,13 @@
     <SecurityPolicies>
       <ServerSecurityPolicy>
         <SecurityMode>SignAndEncrypt_3</SecurityMode>
-        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicyUri>
         <SecurityLevel>3</SecurityLevel>
       </ServerSecurityPolicy>
       <ServerSecurityPolicy>
-        <SecurityMode>Sign_2</SecurityMode>
-        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</SecurityPolicyUri>
-        <SecurityLevel>2</SecurityLevel>
+        <SecurityMode>SignAndEncrypt_3</SecurityMode>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <SecurityLevel>1</SecurityLevel>
       </ServerSecurityPolicy>
       <ServerSecurityPolicy>
         <SecurityMode>None_1</SecurityMode>
@@ -75,7 +75,8 @@
         <ua:TokenType>UserName_1</ua:TokenType>
       </ua:UserTokenPolicy>
       <ua:UserTokenPolicy>
-        <ua:PolicyId>JWT</ua:PolicyId>
+        <!-- GDS accepts JWTs from its associated OAuth2 server -->
+        <ua:PolicyId>OAuth2:JWT</ua:PolicyId>
         <ua:TokenType>IssuedToken_3</ua:TokenType>
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
         <ua:IssuerEndpointUrl>
@@ -83,18 +84,22 @@
             "ua:authority": "https://localhost:54333", 
             "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OAuth2", 
             "ua:tokenEndpoint" : "/connect/token", 
-            "ua:requestTypes": [ "client_credentials", "site_token" ],
-            "ua:scopes": [ "gds:admin", "gds:appadmin", "observer" ], 
-            "ua:identityProviders": 
-            [
-              { 
-                "ua:identityProvider": "https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com", 
-                "ua:identityProfileUri" : "http://opcfoundation.org/UA/IdentityProvider#Azure", 
-                "ua:authorizationEndpoint" : "/oauth2/authorize",
-                "ua:tokenEndpoint" : "/oauth2/token",
-                "ua:resource" : "https://mycompany.com/gds-prototype"
-              }
-            ]
+            "ua:requestTypes": [ "client_credentials" ],
+            "ua:scopes": [ "UAPubSub", "UAServer" ]
+          }
+        </ua:IssuerEndpointUrl>
+        <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
+      </ua:UserTokenPolicy>
+      <ua:UserTokenPolicy>
+        <!-- GDS accepts JWTs from an AuthorizationService object -->
+        <ua:PolicyId>OPCUA:JWT</ua:PolicyId>
+        <ua:TokenType>IssuedToken_3</ua:TokenType>
+        <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
+        <ua:IssuerEndpointUrl>
+          {
+            "ua:authority": "opc.tcp://localhost:58810",
+            "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OPCUA",
+            "ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=Local"
           }
         </ua:IssuerEndpointUrl>
         <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
@@ -144,12 +149,41 @@
             <DefaultCertificateKeySize>2048</DefaultCertificateKeySize>
           </CertificateGroupConfiguration>
         </CertificateGroups>
-        <KnownHostNames>
-          <!--
-          <ua:String>localhost</ua:String>
-          <ua:String>cobalt-a</ua:String>
-          -->
-        </KnownHostNames>
+        <KnownHostNames></KnownHostNames>
+        <AuthorizationServices>
+          <AuthorizationService>
+            <ServiceName>Local</ServiceName>
+            <UserTokenPolicies>
+              <!-- This policy says the GDS accepts Azure AD JWTs converts them to JWTs that other servers accept -->
+              <ua:UserTokenPolicy>
+                <ua:PolicyId>GDS-AS:AzureAD</ua:PolicyId>
+                <ua:TokenType>IssuedToken_3</ua:TokenType>
+                <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
+                <ua:IssuerEndpointUrl>
+                  {
+                    "ua:authority": "https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com",
+                    "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#Azure",
+                    "ua:authorizationEndpoint" : "/oauth2/authorize",
+                    "ua:tokenEndpoint" : "/oauth2/token",
+                    "ua:requestTypes": [ "authorization_code" ],
+                    "ua:resourceId" : "https://mycompany.com/gds-prototype"
+                  }
+                </ua:IssuerEndpointUrl>
+                <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
+              </ua:UserTokenPolicy>
+              <!-- This policy says the GDS accepts username/passwords and converts them to JWTs that other servers accept -->
+              <ua:UserTokenPolicy>
+                <ua:PolicyId>GDS-AS:UserName</ua:PolicyId>
+                <ua:TokenType>UserName_1</ua:TokenType>
+              </ua:UserTokenPolicy>
+              <!-- This policy says the GDS accepts the application certificate and converts them to JWTs that other servers accept -->
+              <ua:UserTokenPolicy>
+                <ua:PolicyId>GDS-AS:ApplicationCertificate</ua:PolicyId>
+                <ua:TokenType>Anonymous_0</ua:TokenType>
+              </ua:UserTokenPolicy>
+            </UserTokenPolicies>
+          </AuthorizationService>
+        </AuthorizationServices>
       </GlobalDiscoveryServerConfiguration>
     </ua:XmlElement>
     
@@ -160,44 +194,49 @@
             <ClientId>urn:localhost:OAuth2TestClient</ClientId>
             <ClientSecret>secret</ClientSecret>
             <ClientName>OAuth2TestClient #1</ClientName>
+            <AllowedScopes>
+              <ua:String>UAServer</ua:String>
+            </AllowedScopes>
+            <AllowedRoles>
+              <ua:String>gds:admin</ua:String>
+            </AllowedRoles>
           </ClientRegistration>
           <ClientRegistration>
             <ClientId>urn:localhost:OAuth2TestClient2</ClientId>
             <ClientSecret>secret</ClientSecret>
             <ClientName>OAuth2TestClient #2</ClientName>
+            <AllowedScopes>
+              <ua:String>UAServer</ua:String>
+            </AllowedScopes>
+            <AllowedRoles>
+              <ua:String>gds:admin</ua:String>
+            </AllowedRoles>
           </ClientRegistration>
         </Clients>
-        <Scopes>
-          <ScopeMapping>
-            <Scope>gds:admin</Scope>
-            <Clients>
-              <ua:String>urn:localhost:OAuth2TestClient</ua:String>
-            </Clients>
-            <Users>
-              <ua:String>device1@opcfoundationprototyping.onmicrosoft.com</ua:String>
-            </Users>
-          </ScopeMapping>
-          <ScopeMapping>
-            <Scope>pubsub</Scope>
-            <Clients>
-              <ua:String>urn:localhost:OAuth2TestClient</ua:String>
-            </Clients>
-            <Users>
-              <ua:String>device1@opcfoundationprototyping.onmicrosoft.com</ua:String>
-              <ua:String>hmi1@opcfoundationprototyping.onmicrosoft.com</ua:String>
-            </Users>
-          </ScopeMapping>
-          <ScopeMapping>
-            <Scope>pubsub:secret</Scope>
-            <Clients>
-              <ua:String>urn:localhost:OAuth2TestClient2</ua:String>
-            </Clients>
-            <Users>
-              <ua:String>device2@opcfoundationprototyping.onmicrosoft.com</ua:String>
-              <ua:String>hmi2@opcfoundationprototyping.onmicrosoft.com</ua:String>
-            </Users>
-          </ScopeMapping>
-        </Scopes>
+        <Users>
+          <ClientRegistration>
+            <ClientId>device1@opcfoundationprototyping.onmicrosoft.com</ClientId>
+            <AllowedScopes>
+              <ua:String>UAPubSub</ua:String>
+            </AllowedScopes>
+            <AllowedRoles>
+              <ua:String>gds:admin</ua:String>
+              <ua:String>pubsub:normal</ua:String>
+              <ua:String>pubsub:secret</ua:String>
+            </AllowedRoles>
+          </ClientRegistration>
+          <ClientRegistration>
+            <ClientId>hmi1@opcfoundationprototyping.onmicrosoft.com</ClientId>
+            <AllowedScopes>
+              <ua:String>UAPubSub</ua:String>
+              <ua:String>UAServer</ua:String>
+            </AllowedScopes>
+            <AllowedRoles>
+              <ua:String>gds:admin</ua:String>
+              <ua:String>pubsub:normal</ua:String>
+            </AllowedRoles>
+          </ClientRegistration>
+        </Users>
       </AuthorizationServiceConfiguration>
     </ua:XmlElement>
   

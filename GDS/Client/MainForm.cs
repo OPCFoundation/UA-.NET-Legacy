@@ -134,7 +134,7 @@ namespace Opc.Ua.GdsClient
         {
             try
             {
-                e.Credentials = await OAuth2Client.GetIdentityToken(m_gds.Application.ApplicationConfiguration, m_gds.EndpointUrl, null, Opc.Ua.JwtConstants.OAuth2ClientCredentials);
+                e.Credentials = await AuthorizationClient.GetIdentityToken(m_gds.Application.ApplicationConfiguration, m_gds.EndpointUrl, null, Opc.Ua.JwtConstants.OAuth2ClientCredentials);
                 e.CacheCredentials = true;
             }
             catch (Exception exception)

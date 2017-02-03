@@ -46,6 +46,11 @@ namespace Opc.Ua.Server
     public interface IServerInternal
     {
         /// <summary>
+        /// The configuration of the server.
+        /// </summary>
+        ApplicationConfiguration Configuration { get; }
+
+        /// <summary>
         /// The endpoint addresses used by the server.
         /// </summary>
         /// <value>The endpoint addresses.</value>
