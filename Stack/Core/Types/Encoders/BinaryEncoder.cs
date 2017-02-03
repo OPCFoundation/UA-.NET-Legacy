@@ -37,6 +37,7 @@ namespace Opc.Ua
             m_ostrm   = new MemoryStream();
             m_writer  = new BinaryWriter(m_ostrm);
             m_context = context;
+            m_nestingLevel = 0;
         }
         
         /// <summary>
@@ -49,6 +50,7 @@ namespace Opc.Ua
             m_ostrm   = new MemoryStream(buffer, start, count);
             m_writer  = new BinaryWriter(m_ostrm);
             m_context = context;
+            m_nestingLevel = 0;
         }
         
         /// <summary>
@@ -61,6 +63,7 @@ namespace Opc.Ua
             m_ostrm   = stream;
             m_writer  = new BinaryWriter(m_ostrm);
             m_context = context;
+            m_nestingLevel = 0;
         }
         #endregion
         
@@ -596,6 +599,17 @@ namespace Opc.Ua
         /// </summary>
         public void WriteDiagnosticInfo(string fieldName, DiagnosticInfo value)
         {
+            // check the nesting level for avoiding a stack overflow.
+            if (m_nestingLevel > m_context.MaxEncodingNestingLevels)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadEncodingLimitsExceeded,
+                    "Maximum nesting level of {0} was exceeded",
+                    m_context.MaxEncodingNestingLevels);
+            }
+
+            m_nestingLevel++;
+
             // check for null.
             if (value == null)
             {
@@ -679,6 +693,8 @@ namespace Opc.Ua
             {
                 WriteDiagnosticInfo(null, value.InnerDiagnosticInfo);
             }
+
+            m_nestingLevel--;
         }
         
         /// <summary>
@@ -1110,6 +1126,15 @@ namespace Opc.Ua
         /// </summary>
         public void WriteEncodeable(string fieldName, IEncodeable value, System.Type systemType)
         {
+            // check the nesting level for avoiding a stack overflow.
+            if (m_nestingLevel > m_context.MaxEncodingNestingLevels)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadEncodingLimitsExceeded,
+                    "Maximum nesting level of {0} was exceeded",
+                    m_context.MaxEncodingNestingLevels);
+            }
+
             // create a default object if a null object specified.
             if (value == null)
             {
@@ -1117,11 +1142,15 @@ namespace Opc.Ua
                 value = Activator.CreateInstance(systemType) as IEncodeable;
             }
 
+            m_nestingLevel++;
+
             // encode the object.
             if (value != null)
             {
                 value.Encode(this);
             }
+
+            m_nestingLevel--;
         }
 
         /// <summary>
@@ -1826,6 +1855,7 @@ namespace Opc.Ua
         private ServiceMessageContext m_context;
         private ushort[] m_namespaceMappings;
         private ushort[] m_serverMappings;
+        private uint m_nestingLevel;
         #endregion
     }
         

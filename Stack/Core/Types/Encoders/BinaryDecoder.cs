@@ -45,6 +45,7 @@ namespace Opc.Ua
             m_istrm   = new MemoryStream(buffer, start, count, false);
             m_reader  = new BinaryReader(m_istrm);
             m_context = context;
+            m_nestingLevel = 0;
         }
         
         /// <summary>
@@ -57,6 +58,7 @@ namespace Opc.Ua
             m_istrm   = stream;
             m_reader  = new BinaryReader(m_istrm);
             m_context = context;
+            m_nestingLevel = 0;
         }
         #endregion
        
@@ -543,11 +545,22 @@ namespace Opc.Ua
         /// </summary>
         public DiagnosticInfo ReadDiagnosticInfo(string fieldName)
         {
+            // check the nesting level for avoiding a stack overflow.
+            if (m_nestingLevel > m_context.MaxEncodingNestingLevels)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadEncodingLimitsExceeded,
+                    "Maximum nesting level of {0} was exceeded",
+                    m_context.MaxEncodingNestingLevels);
+            }
+
+            m_nestingLevel++;
+
             // read the encoding byte.
             byte encodingByte = m_reader.ReadByte();
 
             DiagnosticInfo value = new DiagnosticInfo();
-                        
+
             // read the fields of the diagnostic info structure.
             if ((encodingByte & (byte)DiagnosticInfoEncodingBits.SymbolicId) != 0)
             {
@@ -583,6 +596,8 @@ namespace Opc.Ua
             {
                 value.InnerDiagnosticInfo = ReadDiagnosticInfo(null);
             }
+
+            m_nestingLevel--;
 
             return value;
         }
@@ -1269,7 +1284,20 @@ namespace Opc.Ua
                     Utils.Format("Cannot decode type '{0}'.", systemType.FullName));
             }
 
+            // check the nesting level for avoiding a stack overflow.
+            if (m_nestingLevel > m_context.MaxEncodingNestingLevels)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadEncodingLimitsExceeded,
+                    "Maximum nesting level of {0} was exceeded",
+                    m_context.MaxEncodingNestingLevels);
+            }
+
+            m_nestingLevel++;
+
             encodeable.Decode(this);
+
+            m_nestingLevel--;
 
             return encodeable;
         }
@@ -2083,6 +2111,7 @@ namespace Opc.Ua
         private ServiceMessageContext m_context;
         private ushort[] m_namespaceMappings;
         private ushort[] m_serverMappings;
+        private uint m_nestingLevel;
         #endregion
     }
 }
