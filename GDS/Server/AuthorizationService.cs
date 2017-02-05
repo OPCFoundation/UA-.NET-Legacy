@@ -51,18 +51,7 @@ namespace Opc.Ua.AuthorizationService
             Startup.ServiceCertificate = application.ApplicationConfiguration.SecurityConfiguration.ApplicationCertificate.Find();
             Startup.ServiceConfiguration = application.ApplicationConfiguration.ParseExtension<AuthorizationServiceConfiguration>();
 
-            string hostname = System.Net.Dns.GetHostName();
-
-            foreach (var baseAddress in application.ApplicationConfiguration.ServerConfiguration.BaseAddresses)
-            {
-                Uri url = new Uri(baseAddress);
-
-                if (url.Scheme == "https" && url.DnsSafeHost != "localhost")
-                {
-                    hostname = url.DnsSafeHost;
-                    break;
-                }
-            }
+            string hostname = application.ApplicationConfiguration.GetDefaultHostName();
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -310,6 +299,23 @@ namespace Opc.Ua.AuthorizationService
                         }
                     }
                 }
+            }
+
+            // add name.
+            bool nameFound = false;
+
+            foreach (var claim in token.Claims)
+            {
+                if (claim.Type == "name" || claim.Type == "unique_name")
+                {
+                    nameFound = true;
+                    break;
+                }
+            }
+
+            if (!nameFound)
+            {
+                token.Claims.Add(new Claim("name", token.Client.ClientName));
             }
 
             // add scopes.

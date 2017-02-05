@@ -464,66 +464,6 @@ namespace Opc.Ua.Gds
         /// The identifier for the Directory_GetCertificateStatus Method.
         /// </summary>
         public const uint Directory_GetCertificateStatus = 225;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest Method.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest = 867;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest Method.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest = 870;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest Method.
-        /// </summary>
-        public const uint AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest = 877;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest Method.
-        /// </summary>
-        public const uint AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest = 880;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_StartCredentialRequest Method.
-        /// </summary>
-        public const uint CredentialManagementType_StartCredentialRequest = 786;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_FinishCredentialRequest Method.
-        /// </summary>
-        public const uint CredentialManagementType_FinishCredentialRequest = 789;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_RevokeCredential Method.
-        /// </summary>
-        public const uint CredentialManagementType_RevokeCredential = 792;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_StartCredentialRequest Method.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement_StartCredentialRequest = 890;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_FinishCredentialRequest Method.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement_FinishCredentialRequest = 893;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_StartCredentialRequest Method.
-        /// </summary>
-        public const uint AuthorizationServiceType_CredentialManagement_StartCredentialRequest = 903;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_FinishCredentialRequest Method.
-        /// </summary>
-        public const uint AuthorizationServiceType_CredentialManagement_FinishCredentialRequest = 906;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_RequestAccessToken Method.
-        /// </summary>
-        public const uint AuthorizationServiceType_RequestAccessToken = 912;
     }
     #endregion
 
@@ -616,21 +556,6 @@ namespace Opc.Ua.Gds
         public const uint Directory_CertificateGroups_DefaultUserTokenGroup_TrustList = 684;
 
         /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder Object.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder = 866;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices Object.
-        /// </summary>
-        public const uint AuthorizationServices = 875;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement Object.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement = 889;
-
-        /// <summary>
         /// The identifier for the ApplicationRecordDataType_Encoding_DefaultXml Object.
         /// </summary>
         public const uint ApplicationRecordDataType_Encoding_DefaultXml = 127;
@@ -674,41 +599,6 @@ namespace Opc.Ua.Gds
         /// The identifier for the CertificateDeliveredAuditEventType ObjectType.
         /// </summary>
         public const uint CertificateDeliveredAuditEventType = 109;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType ObjectType.
-        /// </summary>
-        public const uint NetworkServiceFolderType = 865;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType ObjectType.
-        /// </summary>
-        public const uint CredentialManagementType = 783;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType ObjectType.
-        /// </summary>
-        public const uint NetworkServiceType = 885;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType ObjectType.
-        /// </summary>
-        public const uint AuthorizationServiceType = 898;
-
-        /// <summary>
-        /// The identifier for the CredentialRequestedAuditEventType ObjectType.
-        /// </summary>
-        public const uint CredentialRequestedAuditEventType = 808;
-
-        /// <summary>
-        /// The identifier for the CredentialDeliveredAuditEventType ObjectType.
-        /// </summary>
-        public const uint CredentialDeliveredAuditEventType = 826;
-
-        /// <summary>
-        /// The identifier for the CredentialRevokedAuditEventType ObjectType.
-        /// </summary>
-        public const uint CredentialRevokedAuditEventType = 844;
     }
     #endregion
 
@@ -1756,176 +1646,6 @@ namespace Opc.Ua.Gds
         public const uint Directory_GetCertificateStatus_OutputArguments = 227;
 
         /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_InputArguments = 868;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_OutputArguments = 869;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_InputArguments = 871;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments = 872;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceFolderType_ServiceName_Placeholder_RevokeCredential_InputArguments = 874;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_InputArguments = 878;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_OutputArguments = 879;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_InputArguments = 881;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments = 882;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServices_ServiceName_Placeholder_RevokeCredential_InputArguments = 884;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint CredentialManagementType_StartCredentialRequest_InputArguments = 787;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint CredentialManagementType_StartCredentialRequest_OutputArguments = 788;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint CredentialManagementType_FinishCredentialRequest_InputArguments = 790;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint CredentialManagementType_FinishCredentialRequest_OutputArguments = 791;
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public const uint CredentialManagementType_RevokeCredential_InputArguments = 793;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_ServiceUri Variable.
-        /// </summary>
-        public const uint NetworkServiceType_ServiceUri = 886;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_ServiceProfileUri Variable.
-        /// </summary>
-        public const uint NetworkServiceType_ServiceProfileUri = 887;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_ServiceEndpointUrls Variable.
-        /// </summary>
-        public const uint NetworkServiceType_ServiceEndpointUrls = 888;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement_StartCredentialRequest_InputArguments = 891;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement_StartCredentialRequest_OutputArguments = 892;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement_FinishCredentialRequest_InputArguments = 894;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments = 895;
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public const uint NetworkServiceType_CredentialManagement_RevokeCredential_InputArguments = 897;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_CredentialManagement_StartCredentialRequest_InputArguments = 904;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_CredentialManagement_StartCredentialRequest_OutputArguments = 905;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_InputArguments = 907;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments = 908;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_CredentialManagement_RevokeCredential_InputArguments = 910;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_UserTokenPolicies Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_UserTokenPolicies = 911;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_RequestAccessToken_InputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_RequestAccessToken_InputArguments = 913;
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_RequestAccessToken_OutputArguments Variable.
-        /// </summary>
-        public const uint AuthorizationServiceType_RequestAccessToken_OutputArguments = 914;
-
-        /// <summary>
-        /// The identifier for the CredentialRequestedAuditEventType_ServiceUri Variable.
-        /// </summary>
-        public const uint CredentialRequestedAuditEventType_ServiceUri = 825;
-
-        /// <summary>
-        /// The identifier for the CredentialDeliveredAuditEventType_ServiceUri Variable.
-        /// </summary>
-        public const uint CredentialDeliveredAuditEventType_ServiceUri = 843;
-
-        /// <summary>
-        /// The identifier for the CredentialRevokedAuditEventType_ServiceUri Variable.
-        /// </summary>
-        public const uint CredentialRevokedAuditEventType_ServiceUri = 861;
-
-        /// <summary>
         /// The identifier for the OpcUaGds_XmlSchema Variable.
         /// </summary>
         public const uint OpcUaGds_XmlSchema = 128;
@@ -2384,66 +2104,6 @@ namespace Opc.Ua.Gds
         /// The identifier for the Directory_GetCertificateStatus Method.
         /// </summary>
         public static readonly ExpandedNodeId Directory_GetCertificateStatus = new ExpandedNodeId(Opc.Ua.Gds.Methods.Directory_GetCertificateStatus, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_StartCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_StartCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.CredentialManagementType_StartCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_FinishCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_FinishCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.CredentialManagementType_FinishCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_RevokeCredential Method.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_RevokeCredential = new ExpandedNodeId(Opc.Ua.Gds.Methods.CredentialManagementType_RevokeCredential, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_StartCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement_StartCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.NetworkServiceType_CredentialManagement_StartCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_FinishCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement_FinishCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.NetworkServiceType_CredentialManagement_FinishCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_StartCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_CredentialManagement_StartCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.AuthorizationServiceType_CredentialManagement_StartCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_FinishCredentialRequest Method.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_CredentialManagement_FinishCredentialRequest = new ExpandedNodeId(Opc.Ua.Gds.Methods.AuthorizationServiceType_CredentialManagement_FinishCredentialRequest, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_RequestAccessToken Method.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_RequestAccessToken = new ExpandedNodeId(Opc.Ua.Gds.Methods.AuthorizationServiceType_RequestAccessToken, Opc.Ua.Gds.Namespaces.OpcUaGds);
     }
     #endregion
 
@@ -2536,21 +2196,6 @@ namespace Opc.Ua.Gds
         public static readonly ExpandedNodeId Directory_CertificateGroups_DefaultUserTokenGroup_TrustList = new ExpandedNodeId(Opc.Ua.Gds.Objects.Directory_CertificateGroups_DefaultUserTokenGroup_TrustList, Opc.Ua.Gds.Namespaces.OpcUaGds);
 
         /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder Object.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder = new ExpandedNodeId(Opc.Ua.Gds.Objects.NetworkServiceFolderType_ServiceName_Placeholder, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices Object.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices = new ExpandedNodeId(Opc.Ua.Gds.Objects.AuthorizationServices, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement Object.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement = new ExpandedNodeId(Opc.Ua.Gds.Objects.NetworkServiceType_CredentialManagement, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
         /// The identifier for the ApplicationRecordDataType_Encoding_DefaultXml Object.
         /// </summary>
         public static readonly ExpandedNodeId ApplicationRecordDataType_Encoding_DefaultXml = new ExpandedNodeId(Opc.Ua.Gds.Objects.ApplicationRecordDataType_Encoding_DefaultXml, Opc.Ua.Gds.Namespaces.OpcUaGds);
@@ -2594,41 +2239,6 @@ namespace Opc.Ua.Gds
         /// The identifier for the CertificateDeliveredAuditEventType ObjectType.
         /// </summary>
         public static readonly ExpandedNodeId CertificateDeliveredAuditEventType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.CertificateDeliveredAuditEventType, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType ObjectType.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.NetworkServiceFolderType, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType ObjectType.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.CredentialManagementType, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType ObjectType.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.NetworkServiceType, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType ObjectType.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.AuthorizationServiceType, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialRequestedAuditEventType ObjectType.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialRequestedAuditEventType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.CredentialRequestedAuditEventType, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialDeliveredAuditEventType ObjectType.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialDeliveredAuditEventType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.CredentialDeliveredAuditEventType, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialRevokedAuditEventType ObjectType.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialRevokedAuditEventType = new ExpandedNodeId(Opc.Ua.Gds.ObjectTypes.CredentialRevokedAuditEventType, Opc.Ua.Gds.Namespaces.OpcUaGds);
     }
     #endregion
 
@@ -3676,176 +3286,6 @@ namespace Opc.Ua.Gds
         public static readonly ExpandedNodeId Directory_GetCertificateStatus_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.Directory_GetCertificateStatus_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
 
         /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceFolderType_ServiceName_Placeholder_StartCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceFolderType_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceFolderType_ServiceName_Placeholder_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceFolderType_ServiceName_Placeholder_RevokeCredential_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceFolderType_ServiceName_Placeholder_RevokeCredential_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServices_ServiceName_Placeholder_StartCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServices_ServiceName_Placeholder_FinishCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServices_ServiceName_Placeholder_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServices_ServiceName_Placeholder_RevokeCredential_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServices_ServiceName_Placeholder_RevokeCredential_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_StartCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialManagementType_StartCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_StartCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialManagementType_StartCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_FinishCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialManagementType_FinishCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_FinishCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialManagementType_FinishCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialManagementType_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialManagementType_RevokeCredential_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialManagementType_RevokeCredential_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_ServiceUri Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_ServiceUri = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_ServiceUri, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_ServiceProfileUri Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_ServiceProfileUri = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_ServiceProfileUri, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_ServiceEndpointUrls Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_ServiceEndpointUrls = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_ServiceEndpointUrls, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement_StartCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_CredentialManagement_StartCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement_StartCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_CredentialManagement_StartCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement_FinishCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_CredentialManagement_FinishCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the NetworkServiceType_CredentialManagement_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId NetworkServiceType_CredentialManagement_RevokeCredential_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.NetworkServiceType_CredentialManagement_RevokeCredential_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_StartCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_CredentialManagement_StartCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_CredentialManagement_StartCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_StartCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_CredentialManagement_StartCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_CredentialManagement_StartCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_CredentialManagement_FinishCredentialRequest_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_CredentialManagement_RevokeCredential_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_CredentialManagement_RevokeCredential_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_CredentialManagement_RevokeCredential_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_UserTokenPolicies Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_UserTokenPolicies = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_UserTokenPolicies, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_RequestAccessToken_InputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_RequestAccessToken_InputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_RequestAccessToken_InputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the AuthorizationServiceType_RequestAccessToken_OutputArguments Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId AuthorizationServiceType_RequestAccessToken_OutputArguments = new ExpandedNodeId(Opc.Ua.Gds.Variables.AuthorizationServiceType_RequestAccessToken_OutputArguments, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialRequestedAuditEventType_ServiceUri Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialRequestedAuditEventType_ServiceUri = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialRequestedAuditEventType_ServiceUri, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialDeliveredAuditEventType_ServiceUri Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialDeliveredAuditEventType_ServiceUri = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialDeliveredAuditEventType_ServiceUri, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
-        /// The identifier for the CredentialRevokedAuditEventType_ServiceUri Variable.
-        /// </summary>
-        public static readonly ExpandedNodeId CredentialRevokedAuditEventType_ServiceUri = new ExpandedNodeId(Opc.Ua.Gds.Variables.CredentialRevokedAuditEventType_ServiceUri, Opc.Ua.Gds.Namespaces.OpcUaGds);
-
-        /// <summary>
         /// The identifier for the OpcUaGds_XmlSchema Variable.
         /// </summary>
         public static readonly ExpandedNodeId OpcUaGds_XmlSchema = new ExpandedNodeId(Opc.Ua.Gds.Variables.OpcUaGds_XmlSchema, Opc.Ua.Gds.Namespaces.OpcUaGds);
@@ -3900,16 +3340,6 @@ namespace Opc.Ua.Gds
         public const string Applications = "Applications";
 
         /// <summary>
-        /// The BrowseName for the AuthorizationServices component.
-        /// </summary>
-        public const string AuthorizationServices = "AuthorizationServices";
-
-        /// <summary>
-        /// The BrowseName for the AuthorizationServiceType component.
-        /// </summary>
-        public const string AuthorizationServiceType = "AuthorizationServiceType";
-
-        /// <summary>
         /// The BrowseName for the CertificateDeliveredAuditEventType component.
         /// </summary>
         public const string CertificateDeliveredAuditEventType = "CertificateDeliveredAuditEventType";
@@ -3940,31 +3370,6 @@ namespace Opc.Ua.Gds
         public const string CertificateType = "CertificateType";
 
         /// <summary>
-        /// The BrowseName for the CredentialDeliveredAuditEventType component.
-        /// </summary>
-        public const string CredentialDeliveredAuditEventType = "CredentialDeliveredAuditEventType";
-
-        /// <summary>
-        /// The BrowseName for the CredentialManagement component.
-        /// </summary>
-        public const string CredentialManagement = "CredentialManagement";
-
-        /// <summary>
-        /// The BrowseName for the CredentialManagementType component.
-        /// </summary>
-        public const string CredentialManagementType = "CredentialManagementType";
-
-        /// <summary>
-        /// The BrowseName for the CredentialRequestedAuditEventType component.
-        /// </summary>
-        public const string CredentialRequestedAuditEventType = "CredentialRequestedAuditEventType";
-
-        /// <summary>
-        /// The BrowseName for the CredentialRevokedAuditEventType component.
-        /// </summary>
-        public const string CredentialRevokedAuditEventType = "CredentialRevokedAuditEventType";
-
-        /// <summary>
         /// The BrowseName for the DefaultAccessRestrictions component.
         /// </summary>
         public const string DefaultAccessRestrictions = "DefaultAccessRestrictions";
@@ -3993,11 +3398,6 @@ namespace Opc.Ua.Gds
         /// The BrowseName for the FindApplications component.
         /// </summary>
         public const string FindApplications = "FindApplications";
-
-        /// <summary>
-        /// The BrowseName for the FinishCredentialRequest component.
-        /// </summary>
-        public const string FinishCredentialRequest = "FinishCredentialRequest";
 
         /// <summary>
         /// The BrowseName for the FinishRequest component.
@@ -4045,16 +3445,6 @@ namespace Opc.Ua.Gds
         public const string NamespaceVersion = "NamespaceVersion";
 
         /// <summary>
-        /// The BrowseName for the NetworkServiceFolderType component.
-        /// </summary>
-        public const string NetworkServiceFolderType = "NetworkServiceFolderType";
-
-        /// <summary>
-        /// The BrowseName for the NetworkServiceType component.
-        /// </summary>
-        public const string NetworkServiceType = "NetworkServiceType";
-
-        /// <summary>
         /// The BrowseName for the OpcUaGds_BinarySchema component.
         /// </summary>
         public const string OpcUaGds_BinarySchema = "Opc.Ua.Gds";
@@ -4078,41 +3468,6 @@ namespace Opc.Ua.Gds
         /// The BrowseName for the RegisterApplication component.
         /// </summary>
         public const string RegisterApplication = "RegisterApplication";
-
-        /// <summary>
-        /// The BrowseName for the RequestAccessToken component.
-        /// </summary>
-        public const string RequestAccessToken = "RequestAccessToken";
-
-        /// <summary>
-        /// The BrowseName for the RevokeCredential component.
-        /// </summary>
-        public const string RevokeCredential = "RevokeCredential";
-
-        /// <summary>
-        /// The BrowseName for the ServiceEndpointUrls component.
-        /// </summary>
-        public const string ServiceEndpointUrls = "ServiceEndpointUrls";
-
-        /// <summary>
-        /// The BrowseName for the ServiceName_Placeholder component.
-        /// </summary>
-        public const string ServiceName_Placeholder = "<ServiceName>";
-
-        /// <summary>
-        /// The BrowseName for the ServiceProfileUri component.
-        /// </summary>
-        public const string ServiceProfileUri = "ServiceProfileUri";
-
-        /// <summary>
-        /// The BrowseName for the ServiceUri component.
-        /// </summary>
-        public const string ServiceUri = "ServiceUri";
-
-        /// <summary>
-        /// The BrowseName for the StartCredentialRequest component.
-        /// </summary>
-        public const string StartCredentialRequest = "StartCredentialRequest";
 
         /// <summary>
         /// The BrowseName for the StartNewKeyPairRequest component.
@@ -4148,11 +3503,6 @@ namespace Opc.Ua.Gds
         /// The BrowseName for the UpdateApplication component.
         /// </summary>
         public const string UpdateApplication = "UpdateApplication";
-
-        /// <summary>
-        /// The BrowseName for the UserTokenPolicies component.
-        /// </summary>
-        public const string UserTokenPolicies = "UserTokenPolicies";
     }
     #endregion
 

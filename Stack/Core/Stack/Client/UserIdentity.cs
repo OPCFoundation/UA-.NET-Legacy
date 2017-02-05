@@ -387,7 +387,7 @@ namespace Opc.Ua
                 {
                     m_displayName = uniqueName;
                 }
-                else if (!String.IsNullOrEmpty(uniqueName))
+                else if (!String.IsNullOrEmpty(name))
                 {
                     m_displayName = name;
                 }

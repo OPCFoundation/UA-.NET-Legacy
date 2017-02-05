@@ -49,6 +49,7 @@ namespace Opc.Ua.Gds
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.UserNameCredentialsRB = new System.Windows.Forms.RadioButton();
             this.IdentityProviderRB = new System.Windows.Forms.RadioButton();
+            this.ClientCredentialsRB = new System.Windows.Forms.RadioButton();
             this.CloseButton = new System.Windows.Forms.Button();
             this.OkButton = new System.Windows.Forms.Button();
             this.MainPanel = new System.Windows.Forms.Panel();
@@ -56,7 +57,6 @@ namespace Opc.Ua.Gds
             this.ServersListBox = new System.Windows.Forms.ListBox();
             this.SelectedServerGroupBox = new System.Windows.Forms.GroupBox();
             this.ServerUrlTextBox = new System.Windows.Forms.TextBox();
-            this.ClientCredentialsRB = new System.Windows.Forms.RadioButton();
             this.ButtonPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.MainPanel.SuspendLayout();
@@ -112,6 +112,7 @@ namespace Opc.Ua.Gds
             // IdentityProviderRB
             // 
             this.IdentityProviderRB.AutoSize = true;
+            this.IdentityProviderRB.Enabled = false;
             this.IdentityProviderRB.Location = new System.Drawing.Point(84, 2);
             this.IdentityProviderRB.Margin = new System.Windows.Forms.Padding(2);
             this.IdentityProviderRB.Name = "IdentityProviderRB";
@@ -120,6 +121,19 @@ namespace Opc.Ua.Gds
             this.IdentityProviderRB.TabStop = true;
             this.IdentityProviderRB.Text = "Identity Provider";
             this.IdentityProviderRB.UseVisualStyleBackColor = true;
+            // 
+            // ClientCredentialsRB
+            // 
+            this.ClientCredentialsRB.AutoSize = true;
+            this.ClientCredentialsRB.Enabled = false;
+            this.ClientCredentialsRB.Location = new System.Drawing.Point(189, 2);
+            this.ClientCredentialsRB.Margin = new System.Windows.Forms.Padding(2);
+            this.ClientCredentialsRB.Name = "ClientCredentialsRB";
+            this.ClientCredentialsRB.Size = new System.Drawing.Size(106, 17);
+            this.ClientCredentialsRB.TabIndex = 3;
+            this.ClientCredentialsRB.TabStop = true;
+            this.ClientCredentialsRB.Text = "Client Credentials";
+            this.ClientCredentialsRB.UseVisualStyleBackColor = true;
             // 
             // CloseButton
             // 
@@ -205,18 +219,6 @@ namespace Opc.Ua.Gds
             this.ServerUrlTextBox.Size = new System.Drawing.Size(620, 20);
             this.ServerUrlTextBox.TabIndex = 3;
             this.ServerUrlTextBox.TextChanged += new System.EventHandler(this.ServerUrlTextBox_TextChanged);
-            // 
-            // ClientCredentialsRB
-            // 
-            this.ClientCredentialsRB.AutoSize = true;
-            this.ClientCredentialsRB.Location = new System.Drawing.Point(189, 2);
-            this.ClientCredentialsRB.Margin = new System.Windows.Forms.Padding(2);
-            this.ClientCredentialsRB.Name = "ClientCredentialsRB";
-            this.ClientCredentialsRB.Size = new System.Drawing.Size(106, 17);
-            this.ClientCredentialsRB.TabIndex = 3;
-            this.ClientCredentialsRB.TabStop = true;
-            this.ClientCredentialsRB.Text = "Client Credentials";
-            this.ClientCredentialsRB.UseVisualStyleBackColor = true;
             // 
             // SelectGdsDialog
             // 

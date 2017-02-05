@@ -821,7 +821,7 @@ namespace Opc.Ua
             // build list of uris.
             List<Uri> uris = new List<Uri>();
             List<EndpointDescription> endpoints = new List<EndpointDescription>();
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = configuration.GetDefaultHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
@@ -984,7 +984,7 @@ namespace Opc.Ua
 
             // create the endpoint configuration to use.
             EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = configuration.GetDefaultHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
@@ -1136,7 +1136,7 @@ namespace Opc.Ua
 
             // create the endpoint configuration to use.
             EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = configuration.GetDefaultHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
@@ -1262,7 +1262,7 @@ namespace Opc.Ua
 
             // create the endpoint configuration to use.
             EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = configuration.GetDefaultHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
@@ -1413,7 +1413,7 @@ namespace Opc.Ua
 
             // create the endpoint configuration to use.
             EndpointConfiguration endpointConfiguration = EndpointConfiguration.Create(configuration);
-            string computerName = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string computerName = configuration.GetDefaultHostName();
 
             for (int ii = 0; ii < baseAddresses.Count; ii++)
             {
@@ -1517,7 +1517,7 @@ namespace Opc.Ua
 
                 if (policy.IssuerEndpointUrl != null)
                 {
-                    policy.IssuerEndpointUrl = policy.IssuerEndpointUrl.Replace("localhost", System.Net.Dns.GetHostName().ToLowerInvariant());
+                    policy.IssuerEndpointUrl = policy.IssuerEndpointUrl.Replace("localhost", configuration.GetDefaultHostName());
                 }
                  
                 policies.Add(policy);

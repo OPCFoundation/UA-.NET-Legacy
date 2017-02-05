@@ -180,7 +180,7 @@ namespace Opc.Ua
         {
             var encoder = new JsonEncoder(ServiceMessageContext.GlobalContext, true);
 
-            encoder.WriteString("ua:authority", AuthorityUrl);
+            encoder.WriteString("ua:authorityUrl", AuthorityUrl);
             encoder.WriteString("ua:authorityProfileUri", AuthorityProfileUri);
             encoder.WriteString("ua:tokenEndpoint", TokenEndpoint);
             encoder.WriteString("ua:authorizationEndpoint", AuthorizationEndpoint);
@@ -195,7 +195,7 @@ namespace Opc.Ua
         {
             var decoder = new JsonDecoder(json, ServiceMessageContext.GlobalContext);
 
-            AuthorityUrl = decoder.ReadString("ua:authority");
+            AuthorityUrl = decoder.ReadString("ua:authorityUrl");
             AuthorityProfileUri = decoder.ReadString("ua:authorityProfileUri");
             TokenEndpoint = decoder.ReadString("ua:tokenEndpoint");
             AuthorizationEndpoint = decoder.ReadString("ua:authorizationEndpoint");

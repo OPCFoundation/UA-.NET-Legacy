@@ -473,18 +473,21 @@ namespace Opc.Ua.GdsServer
             lock (Lock)
             {
                 base.CreateAddressSpace(externalReferences);
-               
+
+                var context = new ServerSystemContext(Server);
+                context.NodeIdFactory = this;
+
                 RoleState pubsub1 = new RoleState(null);
-                pubsub1.Create(Server.DefaultSystemContext, PubSubNormalNodeId, new QualifiedName("PubSubNormal", NamespaceIndex), null, true);
+                pubsub1.Create(context, PubSubNormalNodeId, new QualifiedName("PubSubNormal", NamespaceIndex), null, true);
                 pubsub1.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_ServerCapabilities_Roles);
                 AddExternalReference(ObjectIds.Server_ServerCapabilities_Roles, ReferenceTypeIds.Organizes, false, pubsub1.NodeId, externalReferences);
-                AddPredefinedNode(Server.DefaultSystemContext, pubsub1);
+                AddPredefinedNode(context, pubsub1);
 
                 RoleState pubsub2 = new RoleState(null);
-                pubsub2.Create(Server.DefaultSystemContext, PubSubSecureNodeId, new QualifiedName("PubSubSecure", NamespaceIndex), null, true);
+                pubsub2.Create(context, PubSubSecureNodeId, new QualifiedName("PubSubSecure", NamespaceIndex), null, true);
                 pubsub2.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.Server_ServerCapabilities_Roles);
                 AddExternalReference(ObjectIds.Server_ServerCapabilities_Roles, ReferenceTypeIds.Organizes, false, pubsub2.NodeId, externalReferences);
-                AddPredefinedNode(Server.DefaultSystemContext, pubsub2);
+                AddPredefinedNode(context, pubsub2);
 
                 if (m_configuration.AuthorizationServices != null)
                 {
@@ -494,7 +497,7 @@ namespace Opc.Ua.GdsServer
                         node.RequestAccessToken = new RequestAccessTokenMethodState(node);
 
                         node.Create(
-                            Server.DefaultSystemContext, 
+                            context, 
                             new NodeId(service.ServiceName, NamespaceIndex), 
                             new QualifiedName(service.ServiceName, NamespaceIndex), 
                             null, 
@@ -503,15 +506,19 @@ namespace Opc.Ua.GdsServer
                         node.RequestAccessToken.OnCall = new RequestAccessTokenMethodStateMethodCallHandler(OnRequestAccessToken);
                         node.ServiceUri.Value = Server.ServerUris.GetString(0);
                         node.ServiceProfileUri.Value = Profiles.UaTcpTransport;
-                        node.ServiceEndpointUrls.Value = new string[1];
                         node.UserTokenPolicies.Value = service.UserTokenPolicies.ToArray();
 
-                        AddPredefinedNode(Server.DefaultSystemContext, node);
+                        AddPredefinedNode(context, node);
+                        node.AddReference(ReferenceTypeIds.Organizes, true, Opc.Ua.ObjectIds.AuthorizationServices);
 
-                        NodeId sourceId = ExpandedNodeId.ToNodeId(Opc.Ua.Gds.ObjectIds.AuthorizationServices, Server.NamespaceUris);
-                        node.AddReference(ReferenceTypeIds.Organizes, true, sourceId);
-                        var source = Find(sourceId);
-                        source.AddReference(ReferenceTypeIds.Organizes, false, node.NodeId);
+                        IList<IReference> references = null;
+
+                        if (!externalReferences.TryGetValue(Opc.Ua.ObjectIds.AuthorizationServices, out references))
+                        {
+                            externalReferences[Opc.Ua.ObjectIds.AuthorizationServices] = references = new List<IReference>();
+                        }
+
+                        references.Add(new ReferenceNode(Opc.Ua.ReferenceTypeIds.Organizes, false, node.NodeId));
                     }
                 }
 
@@ -944,8 +951,8 @@ namespace Opc.Ua.GdsServer
             ISystemContext context,
             MethodState method,
             NodeId objectId,
-            string resourceId,
             UserIdentityToken identityToken,
+            string resourceId,
             DateTime creationTime,
             byte[] signature,
             ref string accessToken)
@@ -974,18 +981,19 @@ namespace Opc.Ua.GdsServer
             }
 
             // protect against reply attacks.
-            if ((DateTime.Now - creationTime) > new TimeSpan(0, 5, 0))
+            if (Math.Abs((DateTime.UtcNow - creationTime).TotalMinutes) > new TimeSpan(0, 5, 0).TotalMinutes)
             {
                 throw new ServiceResultException(StatusCodes.BadIdentityTokenInvalid);
             }
 
             // decrypt or verify the credentials.
-            long ticks = creationTime.Ticks - Utils.TimeBase.Ticks;
-            var nonce = Utils.Append(BitConverter.GetBytes(ticks), SecureChannelContext.Current.EndpointDescription.ServerCertificate);
+            var nonce = BitConverter.GetBytes(creationTime.Ticks - Utils.TimeBase.Ticks);
 
             // check possession of a certificate.
             if (identityToken is X509IdentityToken)
             {
+                var dataToVerify = Utils.Append(SecureChannelContext.Current.EndpointDescription.ServerCertificate, nonce);
+
                  identityToken.Verify(
                     nonce,
                     new SignatureData() {  Signature = signature },

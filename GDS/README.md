@@ -1,6 +1,6 @@
 # OAuth2 Prototype Readme #
 ## Overview ##
-The OAuth2 Prototype codebase includes 5 elements:
+The OAuth2 Prototype codebase includes these elements:
 
 * Modified C# Stack that supports OAuth2 UserIdentityTokens;
 * A GDS Server that supports OAuth2 UserIdentityTokens and the new Role-base Authorization model;
@@ -8,6 +8,8 @@ The OAuth2 Prototype codebase includes 5 elements:
 * A C# Client that requests OAuth2 token and uses it to make a Session-less Service via HTTPS;
 * A basic ANSI C Client able to request OAuth2 tokens via HTTPS and call GetSecurityKeys as a Session-less service call; 
 * A basic ANSI C Client able to request OAuth2 tokens via HTTPS and call GetSecurityKeys as a regular Method call via OPC UA TCP; 
+* A C# Server that accepts different types of UserIdentityTokens;
+* A C# Client allows users to interactively choose different ways to provide and UserIdentityToken for the Server.
 
 ## OAuth2 ##
 ### OAuth2 Authorization Services ###
@@ -28,118 +30,82 @@ The Azure AD instance has 4 test accounts:
 ### OAuth2 Server Configuration ###
 If a OPC UA Server supports OAuth2 then it will publish a UserTokenPolicy with IssuedTokenType=http://opcfoundation.org/UA/UserTokenPolicy#JWT 
 
-The IssuerEndpointUrl is a JSON object that looks like this:
+The IssuerEndpointUrl for a basic OAuth2 service is a JSON object that looks like this:
 
 ```json
 { 
-	"authority": "https://localhost:54333", 
-	"grantType" : "site_token", 
-	"resource" : "urn:localhost:somecompany.com:GlobalDiscoveryServer",
-	"tokenEndpoint" : "/connect/token", 
-	"scopes": [ "gdsadmin", "appadmin", "observer" ], 
-	"sources": [ "https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com" ]
+	"ua:authorityUrl": "https://localhost:54333", 
+	"ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OAuth2", 
+	"ua:tokenEndpoint" : "/connect/token", 
+	"ua:requestTypes": [ "client_credentials" ],
+	"ua:scopes": [ "UAPubSub", "UAServer" ]
 }
 ```
-where the authority specifies the URL of the Authorization Service which provides JWTs that that the Server accepts. The scopes are used to by the Server to determine what priviledges to grant to the Client that provided the JWT. The resource is the string that identifies the Server to the Authorization Service. If not specified the resource is the Server ApplicationUri.
+where the authorityUrl specifies the URL of the Authorization Service which provides JWTs that that the Server accepts. The scopes are used to by the Server to determine what type of access to grant to the Client that provided the JWT. The resource is the string that identifies the Server to the Authorization Service. If not specified the resource is the Server ApplicationUri.
 
-The grantType 'site_token' indicates that the Server accepts JWTs issued by other Authorization Services. In these cases, the 'sources' must be specified which provide the base URL for the external Authorization Services which the Server accepts. 
+The IssuerEndpointUrl for an Azure OAuth2 service looks like this:
+
+```json                  
+{
+	"ua:authorityUrl": "https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com",
+	"ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#Azure",
+	"ua:authorizationEndpoint" : "/oauth2/authorize",
+	"ua:tokenEndpoint" : "/oauth2/token",
+	"ua:requestTypes": [ "authorization_code" ],
+	"ua:resourceId" : "https://mycompany.com/gds-prototype"
+}
+```
+where authorizationEndpoint is the endpoint which supports an Azure API used to request an authorization code. Accessing this API requires that a web browser window be displayed which allows a human user to provide credentials to Azure AD which teh application cannot see (or absuse). This API returns and authorization code which is passed to the tokenEndpoint using standard OAuth2 calls. 
+
+Lastly, this JSON object specifies a OPC-UA Authorization Service Object that can provide JWTs:
+
+```json    
+{
+	"ua:authorityUrl": "opc.tcp://localhost:58810",
+	"ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OPCUA",
+	"ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=Local"
+}
+```
+where the tokenEndpoint is a UA JSON encoded NodeId (see Part 6). Authorization Service Object is configured in the GDS with the AuthorizationServices XML element. Each AuthorizationService may specify 1 or more UserIdentityTokens which can be used to request a new JWT. These UserIdentityTokens may refer another OAuth2 service such as Azure AD which allows AuthorizationServices to be chained together. This would allow a service like Azure to manage the users while the GDS managed the Roles assigned to the users.
+
+A number of sequence diagrams that illustrate the different scenarios can be found [here](AuthorizationClient/AuthorizationClient.pdf).
 
 ### OAuth2 Client Configuration ###
 Clients can call GetEndpoints to read to the UserTokenPolicies from the Server.
 
-To request a token from an Authorization Service a Client must be registered with that Service. These credentials are specified in the Client configuration with an XML element that looks like this:
+To request a token from an OAuth2 service a Client must be registered with that Service. These credentials are specified in the Client configuration with an XML element that looks like this:
 
 ```xml
 <OAuth2Credential>
   <AuthorityUrl>https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com</AuthorityUrl>
   <GrantType>authorization_code</GrantType>
-  <ClientId>f8b31779-d9a3-43ff-b854-28f27a52e2f2</ClientId>
+  <ClientId>f8b31779-XXXX-XXXX-XXXX-28f27a52e2f2</ClientId>
   <RedirectUrl>https://localhost:62540/prototypeclient</RedirectUrl>
   <TokenEndpoint>/oauth2/token</TokenEndpoint>
-  <AuthorizationEndpoint>/oauth2/authorize</AuthorizationEndpoint>          
-  <Servers>
-    <OAuth2ServerSettings>
-      <ApplicationUri>urn:localhost:somecompany.com:GlobalDiscoveryServer</ApplicationUri>
-      <ResourceId>https://localhost:62540/prototypeserver</ResourceId>
-    </OAuth2ServerSettings>
-  </Servers>
+  <AuthorizationEndpoint>/oauth2/authorize</AuthorizationEndpoint>
+</OAuth2Credential>
+<OAuth2Credential>
+  <AuthorityUrl>https://localhost:54333</AuthorityUrl>
+  <GrantType>client_credentials</GrantType>
+  <ClientId>urn:localhost:OAuth2TestClient2</ClientId>
+  <ClientSecret>---</ClientSecret>
 </OAuth2Credential>
 ```
-
-The OAuth2ServerSettings element allows the administrator to specify additional parameters needed to identify the Server to the Authorization Service. If this element is missing the Client should use the resource provided by the Server in the UserTokenPolicy.
-
-If the Server accepts the site_token GrantType then the OPC UA Application Certificate is used to identify the Client to the Authorization Service.
+The information required depends on the GrantType. 
 
 ## GDS OAuth2 Authorization Service ##
-### Overview ###
 The IdentityServer3 (https://github.com/IdentityServer/IdentityServer3) C# based framework which is incorporated into the GDS.
 
-This implementation uses the database of registered applications to validate clients so applications do not have to be registered twice. It also accepts tokens issued by Azure AD in lieu of a username/password known to the GDS.
+This implementation uses the database of registered applications to validate clients so applications do not have to be registered twice. 
+It also accepts tokens issued by Azure AD in lieu of a username/password known to the GDS.
 
-### Setting up the GDS Database ###
-The GDS requires an instance of SQL server. It can be any instance >SQL Server 2012.
-A free version can be downloaded [here](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express).
-The Client Tools component must also be installed.
+The setup of the GDS DB can be found [here](gdsdb_setup.md).
 
-The instance that it connects to is defined in the app.config for the GlobalDiscoveryServer project.
-It can be changed by editing the 'gdsEntities' connection string.
-The default uses the '.\SQLEXPRESS' named instance with integrated Windows authentication.
-(when installing SQL server make a named instance is created)
+## GDS OPC-UA Authorization Service ##
+The GDS provides one AuthorizationService Object (Local) which allows Clients that do not support OAuth2 to request JWTs.
 
-If a new instance is installed the GDS database needs to be created with this command (the exact location depends on the system):
-```
-[sqlutilspath]\osql -S .\SQLEXPRESS -E
-1> create database gdsdb
-2> go
-3> exit
-```
-A possible location for [sqlutilspath] is C:\Program Files\Microsoft SQL Server\130\Tools\Binn\
-
-Once the DB exists the following command can be used to create or reset the tables:
-```
-[sqlutilspath]\osql -S .\SQLEXPRESS -E -d gdsdb -i [coderoot]\GDS\Common\DB\Tables.sql
-```
-
-### Setting up the GDS Certificates ###
-Setting up the GDS OAuth2 Service on a new machine requires that a HTTPS certificate be created and then registered with windows. This can be done with the Windows Power Shell (must be launched with Administrator priviledges). The steps are:
-
-On Windows 10 create a new certificate (replace [hostname] with the actual hostname):
-```
-New-SelfSignedCertificate -DnsName [hostname] -CertStoreLocation cert:Localmachine\My -HashAlgorithm SHA256
-```
-
-On Windows 7 create a new certificate (replace [hostname] with the actual hostname and [coderoot] with the root of the source tree):
-```
-[coderoot]\Bin\Opc.Ua.CertificateGenerator.exe -cmd issue -an [hostname] -dn [hostname] -sp st -hs 256 -ks 2048 
-```
-then from the certificate manager ([mmc | certificates](https://msdn.microsoft.com/en-us/library/ms788967(v=vs.110).aspx)) install the certificate in LocalMachine\My (Personal)
-
-
-Register the ports (Authorization Service and GDS HTTPS Endpoint):
-```
-netsh
-http
-add sslcert ipport=0.0.0.0:54333 certhash=<thumprint> appid={00112233-4455-6677-8899-AABBCCDDEEFF}
-add sslcert ipport=0.0.0.0:58811 certhash=<thumprint> appid={00112233-4455-6677-8899-AABBCCDDEEFF}
-```
-The appid can be any valid GUID. 
-The certhash is the thumprint created in the first step.
-
-On Windows 7 and Windows Server 2008 TLS 1.2 must be explicitly enabled by creating following registry keys with powershell:
-
-```
-md "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2"
-md "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server"
-md "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client"
-
-new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server" -name "Enabled" -value 1 -PropertyType "DWord"
-new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Server" -name "DisabledByDefault" -value 0 -PropertyType "DWord"
-new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client" -name "Enabled" -value 1 -PropertyType "DWord"
-new-itemproperty -path "HKLM:\SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client" -name "DisabledByDefault" -value 0 -PropertyType "DWord"
-```
-After creating the registry keys the machine *must* be rebooted.
-
-On Windows 7 you should confirm that TLS 1.2 is enabled by using Chrome to navigate to https://[hostname]:54333/ and looking at the certificate details.
+The Authorization Server provides an example of a Server with a UserTokenPolcy that references the GDS OPC-UA AuthorizationService.
+The Authorization Client provides an example of Client that requests a JWT from this AuthorizationService.
 
 ## Session-less Service Calls ##
 The GDS supports Session-less calls for the GetSecurityKeys Method defined in the PubSub specification. This allows Clients to request SecurityKeys associated with a PubSub group without creating a Session with the GDS if they first request an OAuth2 token from a Authorization Service. This can be done by either:
@@ -149,5 +115,10 @@ The GDS supports Session-less calls for the GetSecurityKeys Method defined in th
 
 The SessionlessMethodCallClient project is simple C# application that uses the second option.
 
-## Simple OAuth2 Client ##
-The oauth2_client solution is a simple application written in ANSI C that calls the GetSecurityKeys Method on the GDS using Session-less Service calls. The application simple calls GetSecurityKeys twice using OPC UA TCP and HTTPS. 
+## Authorization Server ##
+The AuthorizationServer project is a simple Server that accepts JWTs as UserIdentityTokens. It is used with the AuthorizationClient project to illustrate the process of discovering and requesting JWTs.
+
+## Authorization Client ##
+The AuthorizationClient project is a console Server that queries a Server for its supported UserIdentityToken and allows the user to pick one. If the UserIdentityToken requires a JWT issued by an Authorization Service it connects to the Authorization Service and requests the JWT.
+
+  

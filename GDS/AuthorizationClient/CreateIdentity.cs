@@ -134,7 +134,7 @@ namespace AuthorizationClient
                 // encrypt or sign the credentials.
                 DateTime now = DateTime.UtcNow;
                 long ticks = now.Ticks - Utils.TimeBase.Ticks;
-                var nonce = Utils.Append(BitConverter.GetBytes(ticks), endpoint.ServerCertificate);
+                var nonce = BitConverter.GetBytes(ticks);
 
                 var token = identity.GetIdentityToken();
                 SignatureData signature = null;
@@ -142,25 +142,24 @@ namespace AuthorizationClient
                 // prove possession of a certificiate.
                 if (token is X509IdentityToken)
                 {
-                    signature = token.Sign(
-                        nonce,
-                        selectedPolicy.SecurityPolicyUri);
+                    var dataToSign = Utils.Append(endpoint.ServerCertificate, nonce);
+                    signature = token.Sign(dataToSign, selectedPolicy.SecurityPolicyUri);
                 }
 
                 // encrypt the token if required.
                 else
                 {
                     token.Encrypt(
-                        new X509Certificate2(session.ConfiguredEndpoint.Description.ServerCertificate),
+                        new X509Certificate2(endpoint.ServerCertificate),
                         nonce,
                         selectedPolicy.SecurityPolicyUri);
                 }
 
                 var outputArguments = session.Call(
                     nid,
-                    ExpandedNodeId.ToNodeId(Opc.Ua.Gds.MethodIds.AuthorizationServiceType_RequestAccessToken, session.NamespaceUris),
-                    parameters.ResourceId,
+                    ExpandedNodeId.ToNodeId(Opc.Ua.MethodIds.AuthorizationServiceType_RequestAccessToken, session.NamespaceUris),
                     token,
+                    parameters.ResourceId,
                     now,
                     (signature != null) ? signature.Signature : new byte[0]);
 

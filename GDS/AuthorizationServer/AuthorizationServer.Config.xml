@@ -72,7 +72,7 @@
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
         <ua:IssuerEndpointUrl>
           { 
-            "ua:authority": "https://localhost:54333", 
+            "ua:authorityUrl": "https://localhost:54333", 
             "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OAuth2", 
             "ua:tokenEndpoint" : "/connect/token", 
             "ua:requestTypes": [ "client_credentials" ],
@@ -88,7 +88,7 @@
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
         <ua:IssuerEndpointUrl>
           {
-            "ua:authority": "opc.tcp://localhost:58810",
+            "ua:authorityUrl": "opc.tcp://localhost:58810",
             "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OPCUA",
             "ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=Local"
           }

@@ -82,7 +82,7 @@
   </Extensions>
   
   <TraceConfiguration>
-    <OutputFilePath>Logs\Opc.Ua.GdsClient.log.txt</OutputFilePath>
+    <OutputFilePath>Logs\Opc.Ua.AuthorizationClient.log.txt</OutputFilePath>
     <DeleteOnLoad>true</DeleteOnLoad>
     <!-- Show Only Errors -->
     <!-- <TraceMasks>1</TraceMasks> -->

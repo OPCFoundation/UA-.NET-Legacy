@@ -22548,78 +22548,159 @@
     <DisplayName>NetworkServiceFolderType</DisplayName>
     <References>
       <Reference ReferenceType="Organizes">i=16074</Reference>
-      <Reference ReferenceType="HasProperty">i=16082</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">i=61</Reference>
     </References>
   </UAObjectType>
   <UAObject NodeId="i=16074" BrowseName="&lt;ServiceName&gt;" SymbolicName="ServiceName_Placeholder" ParentNodeId="i=16073">
     <DisplayName>&lt;ServiceName&gt;</DisplayName>
     <References>
-      <Reference ReferenceType="HasProperty">i=16075</Reference>
-      <Reference ReferenceType="HasProperty">i=16076</Reference>
-      <Reference ReferenceType="HasProperty">i=16077</Reference>
-      <Reference ReferenceType="HasProperty">i=16078</Reference>
-      <Reference ReferenceType="HasProperty">i=16079</Reference>
-      <Reference ReferenceType="HasComponent">i=16080</Reference>
-      <Reference ReferenceType="HasTypeDefinition">i=16093</Reference>
+      <Reference ReferenceType="HasComponent">i=17724</Reference>
+      <Reference ReferenceType="HasComponent">i=17727</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=17742</Reference>
       <Reference ReferenceType="HasModellingRule">i=11508</Reference>
       <Reference ReferenceType="Organizes" IsForward="false">i=16073</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="i=16075" BrowseName="ServiceUri" ParentNodeId="i=16074" DataType="String">
-    <DisplayName>ServiceUri</DisplayName>
+  <UAMethod NodeId="i=17724" BrowseName="StartCredentialRequest" ParentNodeId="i=16074" MethodDeclarationId="i=17743">
+    <DisplayName>StartCredentialRequest</DisplayName>
     <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16074</Reference>
-    </References>
-  </UAVariable>
-  <UAVariable NodeId="i=16076" BrowseName="Enabled" ParentNodeId="i=16074" DataType="Boolean">
-    <DisplayName>Enabled</DisplayName>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16074</Reference>
-    </References>
-  </UAVariable>
-  <UAVariable NodeId="i=16077" BrowseName="ServiceStatus" ParentNodeId="i=16074" DataType="StatusCode">
-    <DisplayName>ServiceStatus</DisplayName>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16074</Reference>
-    </References>
-  </UAVariable>
-  <UAVariable NodeId="i=16078" BrowseName="TransportProfiles" ParentNodeId="i=16074" DataType="String" ValueRank="1">
-    <DisplayName>TransportProfiles</DisplayName>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16074</Reference>
-    </References>
-  </UAVariable>
-  <UAVariable NodeId="i=16079" BrowseName="Endpoints" ParentNodeId="i=16074" DataType="i=312" ValueRank="1">
-    <DisplayName>Endpoints</DisplayName>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16074</Reference>
-    </References>
-  </UAVariable>
-  <UAMethod NodeId="i=16080" BrowseName="UpdateCredential" ParentNodeId="i=16074" MethodDeclarationId="i=16099">
-    <DisplayName>UpdateCredential</DisplayName>
-    <References>
-      <Reference ReferenceType="HasProperty">i=16081</Reference>
+      <Reference ReferenceType="HasProperty">i=17725</Reference>
+      <Reference ReferenceType="HasProperty">i=17726</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">i=16074</Reference>
     </References>
   </UAMethod>
-  <UAVariable NodeId="i=16081" BrowseName="InputArguments" ParentNodeId="i=16080" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="i=17725" BrowseName="InputArguments" ParentNodeId="i=17724" DataType="i=296" ValueRank="1">
     <DisplayName>InputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16080</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17724</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>Certificate</Name>
+              <DataType>
+                <Identifier>i=15</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>SecurityPolicyUri</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=17726" BrowseName="OutputArguments" ParentNodeId="i=17724" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17724</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>RequestId</Name>
+              <DataType>
+                <Identifier>i=17</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAMethod NodeId="i=17727" BrowseName="FinishCredentialRequest" ParentNodeId="i=16074" MethodDeclarationId="i=17746">
+    <DisplayName>FinishCredentialRequest</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17728</Reference>
+      <Reference ReferenceType="HasProperty">i=17729</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=16074</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="i=17728" BrowseName="InputArguments" ParentNodeId="i=17727" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17727</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>RequestId</Name>
+              <DataType>
+                <Identifier>i=17</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CancelRequest</Name>
+              <DataType>
+                <Identifier>i=1</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=17729" BrowseName="OutputArguments" ParentNodeId="i=17727" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17727</Reference>
     </References>
     <Value>
       <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
@@ -22690,38 +22771,274 @@
       </ListOfExtensionObject>
     </Value>
   </UAVariable>
-  <UAVariable NodeId="i=16082" BrowseName="CredentialSecurityPolicies" ParentNodeId="i=16073" DataType="String" ValueRank="1">
-    <DisplayName>CredentialSecurityPolicies</DisplayName>
+  <UAObject NodeId="i=17732" BrowseName="AuthorizationServices">
+    <DisplayName>AuthorizationServices</DisplayName>
     <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16073</Reference>
-    </References>
-  </UAVariable>
-  <UAObject NodeId="i=16083" BrowseName="NetworkServices">
-    <DisplayName>NetworkServices</DisplayName>
-    <References>
-      <Reference ReferenceType="HasProperty">i=16092</Reference>
-      <Reference ReferenceType="Organizes" IsForward="false">i=12637</Reference>
       <Reference ReferenceType="HasTypeDefinition">i=16073</Reference>
     </References>
   </UAObject>
-  <UAVariable NodeId="i=16092" BrowseName="CredentialSecurityPolicies" ParentNodeId="i=16083" DataType="String" ValueRank="1">
-    <DisplayName>CredentialSecurityPolicies</DisplayName>
+  <UAObjectType NodeId="i=17742" BrowseName="CredentialManagementType">
+    <DisplayName>CredentialManagementType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasComponent">i=17743</Reference>
+      <Reference ReferenceType="HasComponent">i=17746</Reference>
+      <Reference ReferenceType="HasComponent">i=17749</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAMethod NodeId="i=17743" BrowseName="StartCredentialRequest" ParentNodeId="i=17742">
+    <DisplayName>StartCredentialRequest</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17744</Reference>
+      <Reference ReferenceType="HasProperty">i=17745</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=17742</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="i=17744" BrowseName="InputArguments" ParentNodeId="i=17743" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16083</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17743</Reference>
     </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>Certificate</Name>
+              <DataType>
+                <Identifier>i=15</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>SecurityPolicyUri</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=17745" BrowseName="OutputArguments" ParentNodeId="i=17743" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17743</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>RequestId</Name>
+              <DataType>
+                <Identifier>i=17</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAMethod NodeId="i=17746" BrowseName="FinishCredentialRequest" ParentNodeId="i=17742">
+    <DisplayName>FinishCredentialRequest</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17747</Reference>
+      <Reference ReferenceType="HasProperty">i=17748</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=17742</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="i=17747" BrowseName="InputArguments" ParentNodeId="i=17746" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17746</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>RequestId</Name>
+              <DataType>
+                <Identifier>i=17</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CancelRequest</Name>
+              <DataType>
+                <Identifier>i=1</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=17748" BrowseName="OutputArguments" ParentNodeId="i=17746" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17746</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CredentialId</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CredentialSecret</Name>
+              <DataType>
+                <Identifier>i=15</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CertificateThumbprint</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>SecurityPolicyUri</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAMethod NodeId="i=17749" BrowseName="RevokeCredential" ParentNodeId="i=17742">
+    <DisplayName>RevokeCredential</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17750</Reference>
+      <Reference ReferenceType="HasModellingRule">i=80</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=17742</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="i=17750" BrowseName="InputArguments" ParentNodeId="i=17749" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17749</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CredentialId</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
   </UAVariable>
   <UAObjectType NodeId="i=16093" BrowseName="NetworkServiceType">
     <DisplayName>NetworkServiceType</DisplayName>
     <References>
       <Reference ReferenceType="HasProperty">i=16094</Reference>
-      <Reference ReferenceType="HasProperty">i=16095</Reference>
-      <Reference ReferenceType="HasProperty">i=16096</Reference>
-      <Reference ReferenceType="HasProperty">i=16097</Reference>
-      <Reference ReferenceType="HasProperty">i=16098</Reference>
-      <Reference ReferenceType="HasComponent">i=16099</Reference>
+      <Reference ReferenceType="HasProperty">i=17759</Reference>
+      <Reference ReferenceType="HasProperty">i=17760</Reference>
+      <Reference ReferenceType="HasComponent">i=17761</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
     </References>
   </UAObjectType>
@@ -22733,52 +23050,172 @@
       <Reference ReferenceType="HasProperty" IsForward="false">i=16093</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="i=16095" BrowseName="Enabled" ParentNodeId="i=16093" DataType="Boolean">
-    <DisplayName>Enabled</DisplayName>
+  <UAVariable NodeId="i=17759" BrowseName="ServiceProfileUri" ParentNodeId="i=16093" DataType="String">
+    <DisplayName>ServiceProfileUri</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">i=16093</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="i=16096" BrowseName="ServiceStatus" ParentNodeId="i=16093" DataType="StatusCode">
-    <DisplayName>ServiceStatus</DisplayName>
+  <UAVariable NodeId="i=17760" BrowseName="ServiceEndpointUrls" ParentNodeId="i=16093" DataType="String" ValueRank="1">
+    <DisplayName>ServiceEndpointUrls</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasModellingRule">i=80</Reference>
       <Reference ReferenceType="HasProperty" IsForward="false">i=16093</Reference>
     </References>
   </UAVariable>
-  <UAVariable NodeId="i=16097" BrowseName="TransportProfiles" ParentNodeId="i=16093" DataType="String" ValueRank="1">
-    <DisplayName>TransportProfiles</DisplayName>
+  <UAObject NodeId="i=17761" BrowseName="CredentialManagement" ParentNodeId="i=16093">
+    <DisplayName>CredentialManagement</DisplayName>
     <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16093</Reference>
-    </References>
-  </UAVariable>
-  <UAVariable NodeId="i=16098" BrowseName="Endpoints" ParentNodeId="i=16093" DataType="i=312" ValueRank="1">
-    <DisplayName>Endpoints</DisplayName>
-    <References>
-      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16093</Reference>
-    </References>
-  </UAVariable>
-  <UAMethod NodeId="i=16099" BrowseName="UpdateCredential" ParentNodeId="i=16093">
-    <DisplayName>UpdateCredential</DisplayName>
-    <References>
-      <Reference ReferenceType="HasProperty">i=16100</Reference>
-      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent">i=17762</Reference>
+      <Reference ReferenceType="HasComponent">i=17765</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=17742</Reference>
+      <Reference ReferenceType="HasModellingRule">i=80</Reference>
       <Reference ReferenceType="HasComponent" IsForward="false">i=16093</Reference>
     </References>
+  </UAObject>
+  <UAMethod NodeId="i=17762" BrowseName="StartCredentialRequest" ParentNodeId="i=17761" MethodDeclarationId="i=17743">
+    <DisplayName>StartCredentialRequest</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17763</Reference>
+      <Reference ReferenceType="HasProperty">i=17764</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=17761</Reference>
+    </References>
   </UAMethod>
-  <UAVariable NodeId="i=16100" BrowseName="InputArguments" ParentNodeId="i=16099" DataType="i=296" ValueRank="1">
+  <UAVariable NodeId="i=17763" BrowseName="InputArguments" ParentNodeId="i=17762" DataType="i=296" ValueRank="1">
     <DisplayName>InputArguments</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16099</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17762</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>Certificate</Name>
+              <DataType>
+                <Identifier>i=15</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>SecurityPolicyUri</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=17764" BrowseName="OutputArguments" ParentNodeId="i=17762" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17762</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>RequestId</Name>
+              <DataType>
+                <Identifier>i=17</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAMethod NodeId="i=17765" BrowseName="FinishCredentialRequest" ParentNodeId="i=17761" MethodDeclarationId="i=17746">
+    <DisplayName>FinishCredentialRequest</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17766</Reference>
+      <Reference ReferenceType="HasProperty">i=17767</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=17761</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="i=17766" BrowseName="InputArguments" ParentNodeId="i=17765" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17765</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>RequestId</Name>
+              <DataType>
+                <Identifier>i=17</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CancelRequest</Name>
+              <DataType>
+                <Identifier>i=1</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=17767" BrowseName="OutputArguments" ParentNodeId="i=17765" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17765</Reference>
     </References>
     <Value>
       <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
@@ -22849,19 +23286,336 @@
       </ListOfExtensionObject>
     </Value>
   </UAVariable>
-  <UAObjectType NodeId="i=16103" BrowseName="CredentialUpdatedAuditEventType" IsAbstract="true">
-    <DisplayName>CredentialUpdatedAuditEventType</DisplayName>
+  <UAObjectType NodeId="i=17770" BrowseName="AuthorizationServiceType">
+    <DisplayName>AuthorizationServiceType</DisplayName>
     <References>
-      <Reference ReferenceType="HasProperty">i=16120</Reference>
+      <Reference ReferenceType="HasProperty">i=17783</Reference>
+      <Reference ReferenceType="HasComponent">i=17784</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=16093</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=17783" BrowseName="UserTokenPolicies" ParentNodeId="i=17770" DataType="i=304" ValueRank="1">
+    <DisplayName>UserTokenPolicies</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17770</Reference>
+    </References>
+  </UAVariable>
+  <UAMethod NodeId="i=17784" BrowseName="RequestAccessToken" ParentNodeId="i=17770">
+    <DisplayName>RequestAccessToken</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17785</Reference>
+      <Reference ReferenceType="HasProperty">i=17786</Reference>
+      <Reference ReferenceType="HasModellingRule">i=80</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=17770</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="i=17785" BrowseName="InputArguments" ParentNodeId="i=17784" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17784</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>Identity</Name>
+              <DataType>
+                <Identifier>i=316</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>ResourceId</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CreationTime</Name>
+              <DataType>
+                <Identifier>i=294</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>Signature</Name>
+              <DataType>
+                <Identifier>i=15</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAVariable NodeId="i=17786" BrowseName="OutputArguments" ParentNodeId="i=17784" DataType="i=296" ValueRank="1">
+    <DisplayName>OutputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17784</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>AccessToken</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAObjectType NodeId="i=17790" BrowseName="CredentialRequestedAuditEventType" IsAbstract="true">
+    <DisplayName>CredentialRequestedAuditEventType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17807</Reference>
       <Reference ReferenceType="HasSubtype" IsForward="false">i=2127</Reference>
     </References>
   </UAObjectType>
-  <UAVariable NodeId="i=16120" BrowseName="ServiceUri" ParentNodeId="i=16103" DataType="String">
+  <UAVariable NodeId="i=17807" BrowseName="ServiceUri" ParentNodeId="i=17790" DataType="String">
     <DisplayName>ServiceUri</DisplayName>
     <References>
       <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
       <Reference ReferenceType="HasModellingRule">i=78</Reference>
-      <Reference ReferenceType="HasProperty" IsForward="false">i=16103</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17790</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="i=17808" BrowseName="CredentialDeliveredAuditEventType" IsAbstract="true">
+    <DisplayName>CredentialDeliveredAuditEventType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17825</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=2127</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=17825" BrowseName="ServiceUri" ParentNodeId="i=17808" DataType="String">
+    <DisplayName>ServiceUri</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17808</Reference>
+    </References>
+  </UAVariable>
+  <UAObjectType NodeId="i=17826" BrowseName="CredentialRevokedAuditEventType" IsAbstract="true">
+    <DisplayName>CredentialRevokedAuditEventType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17843</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=2127</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=17843" BrowseName="ServiceUri" ParentNodeId="i=17826" DataType="String">
+    <DisplayName>ServiceUri</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17826</Reference>
+    </References>
+  </UAVariable>
+  <UAObject NodeId="i=16083" BrowseName="NetworkServices">
+    <DisplayName>NetworkServices</DisplayName>
+    <References>
+      <Reference ReferenceType="Organizes" IsForward="false">i=12637</Reference>
+      <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+    </References>
+  </UAObject>
+  <UAObjectType NodeId="i=17844" BrowseName="NetworkServiceConfigurationType">
+    <DisplayName>NetworkServiceConfigurationType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17845</Reference>
+      <Reference ReferenceType="HasProperty">i=17846</Reference>
+      <Reference ReferenceType="HasProperty">i=17847</Reference>
+      <Reference ReferenceType="HasProperty">i=17848</Reference>
+      <Reference ReferenceType="HasProperty">i=17849</Reference>
+      <Reference ReferenceType="HasComponent">i=17850</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=58</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=17845" BrowseName="ServiceUri" ParentNodeId="i=17844" DataType="String">
+    <DisplayName>ServiceUri</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17844</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=17846" BrowseName="ServiceProfileUri" ParentNodeId="i=17844" DataType="String">
+    <DisplayName>ServiceProfileUri</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17844</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=17847" BrowseName="ServiceEndpointUrls" ParentNodeId="i=17844" DataType="String" ValueRank="1">
+    <DisplayName>ServiceEndpointUrls</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=80</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17844</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=17848" BrowseName="Enabled" ParentNodeId="i=17844" DataType="Boolean">
+    <DisplayName>Enabled</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17844</Reference>
+    </References>
+  </UAVariable>
+  <UAVariable NodeId="i=17849" BrowseName="ServiceStatus" ParentNodeId="i=17844" DataType="StatusCode">
+    <DisplayName>ServiceStatus</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17844</Reference>
+    </References>
+  </UAVariable>
+  <UAMethod NodeId="i=17850" BrowseName="UpdateCredential" ParentNodeId="i=17844">
+    <DisplayName>UpdateCredential</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17851</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasComponent" IsForward="false">i=17844</Reference>
+    </References>
+  </UAMethod>
+  <UAVariable NodeId="i=17851" BrowseName="InputArguments" ParentNodeId="i=17850" DataType="i=296" ValueRank="1">
+    <DisplayName>InputArguments</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17850</Reference>
+    </References>
+    <Value>
+      <ListOfExtensionObject xmlns="http://opcfoundation.org/UA/2008/02/Types.xsd">
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CredentialId</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CredentialSecret</Name>
+              <DataType>
+                <Identifier>i=15</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>CertificateThumbprint</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+        <ExtensionObject>
+          <TypeId>
+            <Identifier>i=297</Identifier>
+          </TypeId>
+          <Body>
+            <Argument>
+              <Name>SecurityPolicyUri</Name>
+              <DataType>
+                <Identifier>i=12</Identifier>
+              </DataType>
+              <ValueRank>-1</ValueRank>
+              <ArrayDimensions />
+              <Description p5:nil="true" xmlns:p5="http://www.w3.org/2001/XMLSchema-instance" />
+            </Argument>
+          </Body>
+        </ExtensionObject>
+      </ListOfExtensionObject>
+    </Value>
+  </UAVariable>
+  <UAObjectType NodeId="i=17852" BrowseName="AuthorizationServiceConfigurationType">
+    <DisplayName>AuthorizationServiceConfigurationType</DisplayName>
+    <References>
+      <Reference ReferenceType="HasProperty">i=17860</Reference>
+      <Reference ReferenceType="HasSubtype" IsForward="false">i=17844</Reference>
+    </References>
+  </UAObjectType>
+  <UAVariable NodeId="i=17860" BrowseName="ServiceCertificate" ParentNodeId="i=17852" DataType="ByteString">
+    <DisplayName>ServiceCertificate</DisplayName>
+    <References>
+      <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+      <Reference ReferenceType="HasModellingRule">i=78</Reference>
+      <Reference ReferenceType="HasProperty" IsForward="false">i=17852</Reference>
     </References>
   </UAVariable>
   <UAObjectType NodeId="i=11187" BrowseName="AggregateConfigurationType">

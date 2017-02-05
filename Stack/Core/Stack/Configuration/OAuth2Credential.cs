@@ -151,7 +151,7 @@ namespace Opc.Ua
                 {
                     // this is too allow generic sample config files to work on any machine. 
                     // in a real system explicit host names would be used so this would have no effect.
-                    var uri = ii.AuthorityUrl.Replace("localhost", System.Net.Dns.GetHostName().ToLowerInvariant());
+                    var uri = ii.AuthorityUrl.Replace("localhost", configuration.GetDefaultHostName());
 
                     if (!uri.EndsWith("/"))
                     {

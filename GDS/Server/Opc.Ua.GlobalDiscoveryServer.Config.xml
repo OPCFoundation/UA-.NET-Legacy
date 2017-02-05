@@ -81,7 +81,7 @@
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
         <ua:IssuerEndpointUrl>
           { 
-            "ua:authority": "https://localhost:54333", 
+            "ua:authorityUrl": "https://localhost:54333", 
             "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OAuth2", 
             "ua:tokenEndpoint" : "/connect/token", 
             "ua:requestTypes": [ "client_credentials" ],
@@ -97,7 +97,7 @@
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
         <ua:IssuerEndpointUrl>
           {
-            "ua:authority": "opc.tcp://localhost:58810",
+            "ua:authorityUrl": "opc.tcp://localhost:58810",
             "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OPCUA",
             "ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=Local"
           }
@@ -161,7 +161,7 @@
                 <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
                 <ua:IssuerEndpointUrl>
                   {
-                    "ua:authority": "https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com",
+                    "ua:authorityUrl": "https://login.microsoftonline.com/opcfoundationprototyping.onmicrosoft.com",
                     "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#Azure",
                     "ua:authorizationEndpoint" : "/oauth2/authorize",
                     "ua:tokenEndpoint" : "/oauth2/token",
@@ -169,12 +169,13 @@
                     "ua:resourceId" : "https://mycompany.com/gds-prototype"
                   }
                 </ua:IssuerEndpointUrl>
-                <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
+                <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</ua:SecurityPolicyUri>
               </ua:UserTokenPolicy>
               <!-- This policy says the GDS accepts username/passwords and converts them to JWTs that other servers accept -->
               <ua:UserTokenPolicy>
                 <ua:PolicyId>GDS-AS:UserName</ua:PolicyId>
                 <ua:TokenType>UserName_1</ua:TokenType>
+                <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256</ua:SecurityPolicyUri>
               </ua:UserTokenPolicy>
               <!-- This policy says the GDS accepts the application certificate and converts them to JWTs that other servers accept -->
               <ua:UserTokenPolicy>
