@@ -8,8 +8,9 @@ Version 1.03.341
 	
 	Highlights: 
 		- OPC UA 1.03 compatible.
-		- Added support FindServersOnNetwork and RegisterServer2 services.
-		- Added support for Basic256Sha256 security policy.
+		- Added support FindServersOnNetwork and RegisterServer2 services
+		- Added support for Basic256Sha256 security policy
+		- Maximum allowed nesting levels set to 100 for Encoding and Decoding
 
 	Github issues resolved:
 		- Issue #2  - The OPC UA .NET 1.02.336.0 stack don't support Global Discovery Server 1.0-beta
