@@ -601,51 +601,49 @@ namespace Opc.Ua
             WriteSimpleField(fieldName, Convert.ToBase64String(bytes), true);
         }
 
-        private void WriteNamespaceIndex(ushort namespaceIndex)
+        private void EncodeNodeId(IdType idType, object identifer, ushort namespaceIndex)
         {
-            if (namespaceIndex > 1)
+            switch (idType)
             {
-                var uri = m_context.NamespaceUris.GetString(namespaceIndex);
-
-                if (!String.IsNullOrEmpty(uri))
+                case IdType.Numeric:
                 {
-                    WriteSimpleField("Uri", uri, true);
-                    return;
+                    WriteUInt32("i", (uint)identifer);
+                    break;
+                }
+
+                case IdType.String:
+                {
+                    WriteString("s", (string)identifer);
+                    break;
+                }
+
+                case IdType.Guid:
+                {
+                    WriteGuid("g", (Guid)identifer);
+                    break;
+                }
+
+                case IdType.Opaque:
+                {
+                    WriteByteString("b", (byte[])identifer);
+                    break;
                 }
             }
 
-            if (m_namespaceMappings != null && m_namespaceMappings.Length > namespaceIndex)
+            if (namespaceIndex > 0)
             {
-                namespaceIndex = m_namespaceMappings[namespaceIndex];
-            }
-
-            if (namespaceIndex != 0)
-            {
-                WriteSimpleField("Index", namespaceIndex.ToString(CultureInfo.InvariantCulture), false);
-            }
-        }
-
-        private void WriteServerIndex(uint serverIndex)
-        {
-            if (serverIndex > 1)
-            {
-                var uri = m_context.ServerUris.GetString(serverIndex);
-
-                if (!String.IsNullOrEmpty(uri))
+                if (!UseReversibleEncoding && namespaceIndex > 1)
                 {
-                    WriteSimpleField("ServerUri", uri, true);
-                    return;
+                    var uri = m_context.NamespaceUris.GetString(namespaceIndex);
+
+                    if (!String.IsNullOrEmpty(uri))
+                    {
+                        WriteString("u", uri);
+                        return;
+                    }
                 }
-            }
 
-            if (m_serverMappings != null && m_serverMappings.Length > serverIndex)
-            {
-                serverIndex = m_serverMappings[serverIndex];
-            }
-
-            if (serverIndex != 0)
-            {
-                WriteSimpleField("ServerIndex", serverIndex.ToString(CultureInfo.InvariantCulture), false);
+                WriteUInt16("u", namespaceIndex);
             }
         }
 
@@ -660,19 +658,11 @@ namespace Opc.Ua
                 return;
             }
 
-            if (UseReversibleEncoding)
-            {
-                WriteSimpleField(fieldName, value.ToString(), true);
-            }
-            else
-            {
-                PushStructure(fieldName);
-                WriteSimpleField("Id", new NodeId(value.Identifier, 0).ToString(), true);
-                WriteNamespaceIndex(value.NamespaceIndex);
-                PopStructure();
-            }
+            PushStructure(fieldName);
+            EncodeNodeId(value.IdType, value.Identifier, value.NamespaceIndex);
+            PopStructure();
         }
-        
+
         /// <summary>
         /// Writes an ExpandedNodeId to the stream.
         /// </summary>
@@ -684,17 +674,32 @@ namespace Opc.Ua
                 return;
             }
 
-            if (UseReversibleEncoding)
+            PushStructure(fieldName);
+            EncodeNodeId(value.IdType, value.Identifier, value.NamespaceIndex);
+
+            if (!String.IsNullOrEmpty(value.NamespaceUri))
             {
-                WriteSimpleField(fieldName, value.ToString(), true);
-                return;
+                WriteString("u", value.NamespaceUri);
             }
 
-            PushStructure(fieldName);
+            if (value.ServerIndex > 0)
+            {
+                string uri = null;
 
-            WriteSimpleField("Id", new NodeId(value.Identifier, 0).ToString(), true);
-            WriteNamespaceIndex(value.NamespaceIndex);
-            WriteServerIndex(value.ServerIndex);
+                if (!UseReversibleEncoding)
+                {
+                    uri = m_context.ServerUris.GetString(value.ServerIndex);
+                }
+
+                if (String.IsNullOrEmpty(uri))
+                {
+                    WriteUInt32("v", value.ServerIndex);
+                }
+                else
+                {
+                    WriteString("v", uri);
+                }
+            }
 
             PopStructure();
         }
@@ -788,19 +793,25 @@ namespace Opc.Ua
 
             PushStructure(fieldName);
 
-            if (UseReversibleEncoding)
-            {
-                WriteSimpleField("Name", value.Name.ToString(CultureInfo.InvariantCulture), false);
+            WriteSimpleField("n", value.Name.ToString(CultureInfo.InvariantCulture), false);
 
-                if (value.NamespaceIndex > 0)
-                {
-                    WriteSimpleField("Uri", value.NamespaceIndex.ToString(CultureInfo.InvariantCulture), false);
-                }
-            }
-            else
+            if (value.NamespaceIndex > 0)
             {
-                WriteSimpleField("Name", value.Name.ToString(CultureInfo.InvariantCulture), false);
-                WriteNamespaceIndex(value.NamespaceIndex);
+                string uri = null;
+
+                if (!UseReversibleEncoding && value.NamespaceIndex > 1)
+                {
+                    uri = m_context.NamespaceUris.GetString(value.NamespaceIndex);
+                }
+
+                if (String.IsNullOrEmpty(uri))
+                {
+                    WriteSimpleField("u", value.NamespaceIndex.ToString(CultureInfo.InvariantCulture), false);
+                }
+                else
+                {
+                    WriteSimpleField("u", uri, true);
+                }
             }
 
             PopStructure();

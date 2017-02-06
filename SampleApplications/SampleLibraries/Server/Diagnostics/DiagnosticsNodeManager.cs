@@ -47,7 +47,7 @@ namespace Opc.Ua.Server
         /// Initializes the node manager.
         /// </summary>
         public DiagnosticsNodeManager(
-            IServerInternal server, 
+            IServerInternal server,
             ApplicationConfiguration configuration)
         :
             base(server, configuration)
@@ -69,13 +69,13 @@ namespace Opc.Ua.Server
             m_securityKeyManager = new SecurityKeyManager();
         }
         #endregion
-        
+
         #region IDisposable Members
         /// <summary>
         /// An overrideable version of the Dispose.
         /// </summary>
         protected override void Dispose(bool disposing)
-        {  
+        {
             if (disposing)
             {
                 lock (Lock)
@@ -120,12 +120,12 @@ namespace Opc.Ua.Server
             lock (Lock)
             {
                 base.CreateAddressSpace(externalReferences);
-                      
+
                 // sampling interval diagnostics not supported by the server.
                 ServerDiagnosticsState serverDiagnosticsNode = (ServerDiagnosticsState)FindPredefinedNode(
                     ObjectIds.Server_ServerDiagnostics,
                     typeof(ServerDiagnosticsState));
-                                
+
                 if (serverDiagnosticsNode != null)
                 {
                     NodeState samplingDiagnosticsArrayNode = serverDiagnosticsNode.FindChild(
@@ -137,12 +137,12 @@ namespace Opc.Ua.Server
                         serverDiagnosticsNode.SamplingIntervalDiagnosticsArray = null;
                     }
                 }
-                
+
                 // The nodes are now loaded by the DiagnosticsNodeManager from the file
                 // output by the ModelDesigner V2. These nodes are added to the CoreNodeManager
                 // via the AttachNode() method when the DiagnosticsNodeManager starts.
                 Server.CoreNodeManager.ImportNodes(SystemContext, PredefinedNodes.Values, true);
-                
+
                 // hook up the server GetMonitoredItems method.
                 MethodState getMonitoredItems = (MethodState)FindPredefinedNode(
                     MethodIds.Server_GetMonitoredItems,
@@ -152,9 +152,26 @@ namespace Opc.Ua.Server
                 {
                     getMonitoredItems.OnCallMethod = OnGetMonitoredItems;
                 }
+
+                if (EnableAuthorizationServices)
+                {
+                    var folder = (BaseObjectState)FindPredefinedNode(ObjectIds.AuthorizationServices, typeof(BaseObjectState));
+
+                    if (folder != null)
+                    {
+                        folder.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.ObjectsFolder);
+                    }
+
+                    folder = (BaseObjectState)FindPredefinedNode(ObjectIds.ObjectsFolder, typeof(BaseObjectState));
+
+                    if (folder != null)
+                    {
+                        folder.AddReference(ReferenceTypeIds.Organizes, false, ObjectIds.AuthorizationServices);
+                    }
+                }
             }
         }
-        
+
         /// <summary>
         /// Called when a client locks the server.
         /// </summary>
@@ -205,7 +222,7 @@ namespace Opc.Ua.Server
             IList<object> outputArguments)
         {
             ServerSystemContext systemContext = context as ServerSystemContext;
-            
+
             if (m_serverLockHolder != null)
             {
                 if (m_serverLockHolder != systemContext.SessionId)
@@ -308,10 +325,10 @@ namespace Opc.Ua.Server
 
                     activeNode.DefaultRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
                     activeNode.DefaultUserRolePermissions = new PropertyState<RolePermissionType[]>(activeNode);
-                    activeNode.DefaultAccessRestrictions = new PropertyState<byte>(activeNode);
+                    activeNode.DefaultAccessRestrictions = new PropertyState<ushort>(activeNode);
 
                     activeNode.Create(context, passiveNode);
-                    
+
                     activeNode.DefaultRolePermissions.NodeId = VariableIds.OPCUANamespaceMetadata_DefaultRolePermissions;
                     activeNode.DefaultUserRolePermissions.NodeId = VariableIds.OPCUANamespaceMetadata_DefaultUserRolePermissions;
                     activeNode.DefaultAccessRestrictions.NodeId = VariableIds.OPCUANamespaceMetadata_DefaultAccessRestrictions;
@@ -378,7 +395,7 @@ namespace Opc.Ua.Server
 
             return predefinedNode;
         }
-        
+
         private ServiceResult OnGetSecurityKeys(
            ISystemContext context,
            MethodState method,
@@ -394,12 +411,12 @@ namespace Opc.Ua.Server
         {
             return m_securityKeyManager.GetSecurityKeys(
                 context,
-                securityGroupId, 
-                futureKeyCount, 
+                securityGroupId,
+                futureKeyCount,
                 ref securityPolicyUri,
-                ref currentTokenId, 
-                ref currentKey, 
-                ref nextKeys, 
+                ref currentTokenId,
+                ref currentKey,
+                ref nextKeys,
                 ref timeToNextKey,
                 ref keyLifetime);
         }
@@ -449,7 +466,7 @@ namespace Opc.Ua.Server
 
             return true;
         }
-        
+
         /// <summary>
         /// Returns true of the node is a diagnostics node.
         /// </summary>
@@ -487,7 +504,7 @@ namespace Opc.Ua.Server
 
             return false;
         }
-        
+
         /// <summary>
         /// True is diagnostics are currently enabled.
         /// </summary>
@@ -495,7 +512,7 @@ namespace Opc.Ua.Server
         {
             get { return m_diagnosticsEnabled; }
         }
-        
+
         /// <summary>
         /// Sets the flag controlling whether diagnostics is enabled for the server.
         /// </summary>
@@ -546,9 +563,9 @@ namespace Opc.Ua.Server
                     {
                         m_serverDiagnostics.Value = null;
                         m_serverDiagnostics.Error = StatusCodes.BadOutOfService;
-                        m_serverDiagnostics.Timestamp = DateTime.UtcNow; 
+                        m_serverDiagnostics.Timestamp = DateTime.UtcNow;
                     }
-                                        
+
                     // get the node.
                     ServerDiagnosticsState diagnosticsNode = (ServerDiagnosticsState)FindPredefinedNode(
                         ObjectIds.Server_ServerDiagnostics,
@@ -563,25 +580,25 @@ namespace Opc.Ua.Server
                             diagnosticsNode.SamplingIntervalDiagnosticsArray.StatusCode = StatusCodes.BadOutOfService;
                             diagnosticsNode.SamplingIntervalDiagnosticsArray.Timestamp = DateTime.UtcNow;
                         }
-                        
+
                         if (diagnosticsNode.SubscriptionDiagnosticsArray != null)
                         {
                             diagnosticsNode.SubscriptionDiagnosticsArray.Value = null;
-                            diagnosticsNode.SubscriptionDiagnosticsArray.StatusCode = StatusCodes.BadOutOfService; 
+                            diagnosticsNode.SubscriptionDiagnosticsArray.StatusCode = StatusCodes.BadOutOfService;
                             diagnosticsNode.SubscriptionDiagnosticsArray.Timestamp = DateTime.UtcNow;
                         }
 
                         if (diagnosticsNode.SessionsDiagnosticsSummary != null)
                         {
                             diagnosticsNode.SessionsDiagnosticsSummary.SessionDiagnosticsArray.Value = null;
-                            diagnosticsNode.SessionsDiagnosticsSummary.SessionDiagnosticsArray.StatusCode = StatusCodes.BadOutOfService; 
+                            diagnosticsNode.SessionsDiagnosticsSummary.SessionDiagnosticsArray.StatusCode = StatusCodes.BadOutOfService;
                             diagnosticsNode.SessionsDiagnosticsSummary.SessionDiagnosticsArray.Timestamp = DateTime.UtcNow;
                         }
 
                         if (diagnosticsNode.SessionsDiagnosticsSummary != null)
                         {
                             diagnosticsNode.SessionsDiagnosticsSummary.SessionSecurityDiagnosticsArray.Value = null;
-                            diagnosticsNode.SessionsDiagnosticsSummary.SessionSecurityDiagnosticsArray.StatusCode = StatusCodes.BadOutOfService; 
+                            diagnosticsNode.SessionsDiagnosticsSummary.SessionSecurityDiagnosticsArray.StatusCode = StatusCodes.BadOutOfService;
                             diagnosticsNode.SessionsDiagnosticsSummary.SessionSecurityDiagnosticsArray.Timestamp = DateTime.UtcNow;
                         }
                     }
@@ -598,7 +615,7 @@ namespace Opc.Ua.Server
         /// Creates the diagnostics node for the server.
         /// </summary>
         public void CreateServerDiagnostics(
-            ServerSystemContext systemContext, 
+            ServerSystemContext systemContext,
             ServerDiagnosticsSummaryDataType diagnostics,
             NodeValueSimpleEventHandler updateCallback)
         {
@@ -608,47 +625,47 @@ namespace Opc.Ua.Server
                 ServerDiagnosticsSummaryState diagnosticsNode = (ServerDiagnosticsSummaryState)FindPredefinedNode(
                     VariableIds.Server_ServerDiagnostics_ServerDiagnosticsSummary,
                     typeof(ServerDiagnosticsSummaryState));
-                                
+
                 // wrap diagnostics in a thread safe object.
                 ServerDiagnosticsSummaryValue diagnosticsValue = new ServerDiagnosticsSummaryValue(
-                    diagnosticsNode, 
-                    diagnostics, 
+                    diagnosticsNode,
+                    diagnostics,
                     Lock);
-                
+
                 // must ensure the first update gets sent.
                 diagnosticsValue.Value = null;
                 diagnosticsValue.Error = StatusCodes.BadWaitingForInitialData;
                 diagnosticsValue.CopyPolicy = Opc.Ua.VariableCopyPolicy.Never;
                 diagnosticsValue.OnBeforeRead = OnBeforeReadDiagnostics;
-                
+
                 m_serverDiagnostics = diagnosticsValue;
                 m_serverDiagnosticsCallback = updateCallback;
-                
+
                 // set up handler for session diagnostics array.
                 SessionDiagnosticsArrayState array1 = (SessionDiagnosticsArrayState)FindPredefinedNode(
                     VariableIds.Server_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray,
                     typeof(SessionDiagnosticsArrayState));
-                                            
+
                 if (array1 != null)
                 {
                     array1.OnSimpleReadValue = OnReadDiagnosticsArray;
                 }
-                
+
                 // set up handler for session security diagnostics array.
                 SessionSecurityDiagnosticsArrayState array2 = (SessionSecurityDiagnosticsArrayState)FindPredefinedNode(
                     VariableIds.Server_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray,
                     typeof(SessionSecurityDiagnosticsArrayState));
-                                            
+
                 if (array2 != null)
                 {
                     array2.OnSimpleReadValue = OnReadDiagnosticsArray;
                 }
-                
+
                 // set up handler for subscription security diagnostics array.
                 SubscriptionDiagnosticsArrayState array3 = (SubscriptionDiagnosticsArrayState)FindPredefinedNode(
                     VariableIds.Server_ServerDiagnostics_SubscriptionDiagnosticsArray,
                     typeof(SubscriptionDiagnosticsArrayState));
-                                            
+
                 if (array3 != null)
                 {
                     array3.OnSimpleReadValue = OnReadDiagnosticsArray;
@@ -658,12 +675,12 @@ namespace Opc.Ua.Server
                 DoScan(true);
             }
         }
-        
+
         /// <summary>
         /// Creates the diagnostics node for a subscription.
         /// </summary>
         public NodeId CreateSessionDiagnostics(
-            ServerSystemContext systemContext, 
+            ServerSystemContext systemContext,
             SessionDiagnosticsDataType diagnostics,
             NodeValueSimpleEventHandler updateCallback,
             SessionSecurityDiagnosticsDataType securityDiagnostics,
@@ -674,7 +691,7 @@ namespace Opc.Ua.Server
             lock (Lock)
             {
                 SessionDiagnosticsObjectState sessionNode = new SessionDiagnosticsObjectState(null);
-                
+
                 // create a new instance and assign ids.
                 nodeId = CreateNode(
                     systemContext,
@@ -685,7 +702,7 @@ namespace Opc.Ua.Server
 
                 diagnostics.SessionId = nodeId;
                 securityDiagnostics.SessionId = nodeId;
-                
+
                 // check if diagnostics have been enabled.
                 if (!m_diagnosticsEnabled)
                 {
@@ -697,12 +714,12 @@ namespace Opc.Ua.Server
                     ReferenceTypeIds.HasComponent,
                     true,
                     ObjectIds.Server_ServerDiagnostics_SessionsDiagnosticsSummary);
-                
+
                 // add reference from session summary object.
                 SessionsDiagnosticsSummaryState summary = (SessionsDiagnosticsSummaryState)FindPredefinedNode(
                     ObjectIds.Server_ServerDiagnostics_SessionsDiagnosticsSummary,
                     typeof(SessionsDiagnosticsSummaryState));
-                                            
+
                 if (summary != null)
                 {
                     summary.AddReference(ReferenceTypeIds.HasComponent, false, sessionNode.NodeId);
@@ -712,42 +729,42 @@ namespace Opc.Ua.Server
                 SessionDiagnosticsVariableState diagnosticsNode = sessionNode.CreateChild(
                    systemContext,
                    BrowseNames.SessionDiagnostics) as SessionDiagnosticsVariableState;
-                
+
                 // wrap diagnostics in a thread safe object.
                 SessionDiagnosticsVariableValue diagnosticsValue = new SessionDiagnosticsVariableValue(
-                    diagnosticsNode, 
-                    diagnostics, 
+                    diagnosticsNode,
+                    diagnostics,
                     Lock);
-                
+
                 // must ensure the first update gets sent.
                 diagnosticsValue.Value = null;
                 diagnosticsValue.Error = StatusCodes.BadWaitingForInitialData;
                 diagnosticsValue.CopyPolicy = Opc.Ua.VariableCopyPolicy.Never;
                 diagnosticsValue.OnBeforeRead = OnBeforeReadDiagnostics;
-                
+
                 // initialize security diagnostics node.
                 SessionSecurityDiagnosticsState securityDiagnosticsNode = sessionNode.CreateChild(
                    systemContext,
                    BrowseNames.SessionSecurityDiagnostics) as SessionSecurityDiagnosticsState;
-                
+
                 // wrap diagnostics in a thread safe object.
                 SessionSecurityDiagnosticsValue securityDiagnosticsValue = new SessionSecurityDiagnosticsValue(
-                    securityDiagnosticsNode, 
-                    securityDiagnostics, 
+                    securityDiagnosticsNode,
+                    securityDiagnostics,
                     Lock);
-                
+
                 // must ensure the first update gets sent.
                 securityDiagnosticsValue.Value = null;
                 securityDiagnosticsValue.Error = StatusCodes.BadWaitingForInitialData;
                 securityDiagnosticsValue.CopyPolicy = Opc.Ua.VariableCopyPolicy.Never;
                 securityDiagnosticsValue.OnBeforeRead = OnBeforeReadDiagnostics;
-                
+
                 // save the session.
                 SessionDiagnosticsData sessionData = new SessionDiagnosticsData(
                     sessionNode,
-                    diagnosticsValue, 
-                    updateCallback, 
-                    securityDiagnosticsValue, 
+                    diagnosticsValue,
+                    updateCallback,
+                    securityDiagnosticsValue,
                     updateSecurityCallback);
 
                 m_sessions.Add(sessionData);
@@ -763,15 +780,15 @@ namespace Opc.Ua.Server
         /// Delete the diagnostics node for a session.
         /// </summary>
         public void DeleteSessionDiagnostics(
-            ServerSystemContext systemContext, 
+            ServerSystemContext systemContext,
             NodeId nodeId)
-        {            
+        {
             lock (Lock)
             {
                 for (int ii = 0; ii < m_sessions.Count; ii++)
                 {
                     SessionDiagnosticsObjectState summary = m_sessions[ii].Summary;
-                    
+
                     if (summary.NodeId == nodeId)
                     {
                         m_sessions.RemoveAt(ii);
@@ -793,7 +810,7 @@ namespace Opc.Ua.Server
         /// Creates the diagnostics node for a subscription.
         /// </summary>
         public NodeId CreateSubscriptionDiagnostics(
-            ServerSystemContext systemContext, 
+            ServerSystemContext systemContext,
             SubscriptionDiagnosticsDataType diagnostics,
             NodeValueSimpleEventHandler updateCallback)
         {
@@ -827,7 +844,7 @@ namespace Opc.Ua.Server
                 SubscriptionDiagnosticsValue diagnosticsValue = new SubscriptionDiagnosticsValue(diagnosticsNode, diagnostics, Lock);
                 diagnosticsValue.CopyPolicy = Opc.Ua.VariableCopyPolicy.Never;
                 diagnosticsValue.OnBeforeRead = OnBeforeReadDiagnostics;
-                
+
                 // must ensure the first update gets sent.
                 diagnosticsValue.Value = null;
                 diagnosticsValue.Error = StatusCodes.BadWaitingForInitialData;
@@ -838,12 +855,12 @@ namespace Opc.Ua.Server
                 SubscriptionDiagnosticsArrayState array = (SubscriptionDiagnosticsArrayState)FindPredefinedNode(
                     VariableIds.Server_ServerDiagnostics_SubscriptionDiagnosticsArray,
                     typeof(SubscriptionDiagnosticsArrayState));
-                                            
+
                 if (array != null)
                 {
                     array.AddReference(ReferenceTypeIds.HasComponent, false, diagnosticsNode.NodeId);
                 }
-                
+
                 // add reference to session subscription array.
                 diagnosticsNode.AddReference(
                     ReferenceTypeIds.HasComponent,
@@ -854,14 +871,14 @@ namespace Opc.Ua.Server
                 SessionDiagnosticsObjectState sessionNode = (SessionDiagnosticsObjectState)FindPredefinedNode(
                     diagnostics.SessionId,
                     typeof(SessionDiagnosticsObjectState));
-                                            
+
                 if (sessionNode != null)
                 {
                     // add reference from subscription array.
                     array = (SubscriptionDiagnosticsArrayState)sessionNode.CreateChild(
                         systemContext,
                         BrowseNames.SubscriptionDiagnosticsArray);
-                                                
+
                     if (array != null)
                     {
                         array.AddReference(ReferenceTypeIds.HasComponent, false, diagnosticsNode.NodeId);
@@ -874,20 +891,20 @@ namespace Opc.Ua.Server
 
             return nodeId;
         }
-        
+
         /// <summary>
         /// Delete the diagnostics node for a subscription.
         /// </summary>
         public void DeleteSubscriptionDiagnostics(
-            ServerSystemContext systemContext, 
+            ServerSystemContext systemContext,
             NodeId nodeId)
-        {            
+        {
             lock (Lock)
             {
                 for (int ii = 0; ii < m_subscriptions.Count; ii++)
                 {
                     SubscriptionDiagnosticsData diagnostics = m_subscriptions[ii];
-                    
+
                     if (diagnostics.Value.Variable.NodeId == nodeId)
                     {
                         m_subscriptions.RemoveAt(ii);
@@ -981,7 +998,7 @@ namespace Opc.Ua.Server
                     HistoryServerCapabilitiesState capabilities = GetDefaultHistoryCapabilities();
 
                     folder = capabilities.AggregateFunctions;
-                    
+
                     if (folder != null)
                     {
                         folder.AddReference(ReferenceTypes.Organizes, false, state.NodeId);
@@ -989,7 +1006,7 @@ namespace Opc.Ua.Server
                     }
                 }
 
-                AddPredefinedNode(SystemContext, state);               
+                AddPredefinedNode(SystemContext, state);
             }
         }
 
@@ -997,13 +1014,13 @@ namespace Opc.Ua.Server
         /// Updates the server diagnostics summary structure.
         /// </summary>
         private bool UpdateServerDiagnosticsSummary()
-        { 
+        {
             // get the latest snapshot.
             object value = null;
-            
+
             ServiceResult result = m_serverDiagnosticsCallback(
-                SystemContext, 
-                m_serverDiagnostics.Variable, 
+                SystemContext,
+                m_serverDiagnostics.Variable,
                 ref value);
 
             ServerDiagnosticsSummaryDataType newValue = value as ServerDiagnosticsSummaryDataType;
@@ -1013,9 +1030,9 @@ namespace Opc.Ua.Server
             {
                 return false;
             }
-            
+
             m_serverDiagnostics.Error = null;
-            
+
             // check for bad value.
             if (ServiceResult.IsNotBad(result) && newValue == null)
             {
@@ -1028,32 +1045,32 @@ namespace Opc.Ua.Server
                 m_serverDiagnostics.Error = result;
                 newValue = null;
             }
-            
+
             // update the value.
             m_serverDiagnostics.Value = newValue;
             m_serverDiagnostics.Timestamp = DateTime.UtcNow;
 
             // notify any monitored items.
             m_serverDiagnostics.ChangesComplete(SystemContext);
-            
+
 
             return true;
         }
-        
+
         /// <summary>
         /// Updates the session diagnostics summary structure.
         /// </summary>
         private bool UpdateSessionDiagnostics(
-            SessionDiagnosticsData diagnostics, 
-            SessionDiagnosticsDataType[] sessionArray, 
+            SessionDiagnosticsData diagnostics,
+            SessionDiagnosticsDataType[] sessionArray,
             int index)
-        {  
+        {
             // get the latest snapshot.
             object value = null;
-            
+
             ServiceResult result = diagnostics.UpdateCallback(
-                SystemContext, 
-                diagnostics.Value.Variable, 
+                SystemContext,
+                diagnostics.Value.Variable,
                 ref value);
 
             SessionDiagnosticsDataType newValue = value as SessionDiagnosticsDataType;
@@ -1064,9 +1081,9 @@ namespace Opc.Ua.Server
             {
                 return false;
             }
-            
+
             diagnostics.Value.Error = null;
-            
+
             // check for bad value.
             if (ServiceResult.IsNotBad(result) && newValue == null)
             {
@@ -1079,7 +1096,7 @@ namespace Opc.Ua.Server
                 diagnostics.Value.Error = result;
                 newValue = null;
             }
-            
+
             // update the value.
             diagnostics.Value.Value = newValue;
             diagnostics.Value.Timestamp = DateTime.UtcNow;
@@ -1089,21 +1106,21 @@ namespace Opc.Ua.Server
 
             return true;
         }
-        
+
         /// <summary>
         /// Updates the session diagnostics summary structure.
         /// </summary>
         private bool UpdateSessionSecurityDiagnostics(
-            SessionDiagnosticsData diagnostics, 
-            SessionSecurityDiagnosticsDataType[] sessionArray, 
+            SessionDiagnosticsData diagnostics,
+            SessionSecurityDiagnosticsDataType[] sessionArray,
             int index)
-        {  
+        {
             // get the latest snapshot.
             object value = null;
-            
+
             ServiceResult result = diagnostics.SecurityUpdateCallback(
-                SystemContext, 
-                diagnostics.SecurityValue.Variable, 
+                SystemContext,
+                diagnostics.SecurityValue.Variable,
                 ref value);
 
             SessionSecurityDiagnosticsDataType newValue = value as SessionSecurityDiagnosticsDataType;
@@ -1114,9 +1131,9 @@ namespace Opc.Ua.Server
             {
                 return false;
             }
-            
+
             diagnostics.SecurityValue.Error = null;
-            
+
             // check for bad value.
             if (ServiceResult.IsNotBad(result) && newValue == null)
             {
@@ -1129,7 +1146,7 @@ namespace Opc.Ua.Server
                 diagnostics.SecurityValue.Error = result;
                 newValue = null;
             }
-            
+
             // update the value.
             diagnostics.SecurityValue.Value = newValue;
             diagnostics.SecurityValue.Timestamp = DateTime.UtcNow;
@@ -1139,21 +1156,21 @@ namespace Opc.Ua.Server
 
             return true;
         }
-        
+
         /// <summary>
         /// Updates the subscription diagnostics summary structure.
         /// </summary>
         private bool UpdateSubscriptionDiagnostics(
-            SubscriptionDiagnosticsData diagnostics, 
-            SubscriptionDiagnosticsDataType[] subscriptionArray, 
+            SubscriptionDiagnosticsData diagnostics,
+            SubscriptionDiagnosticsDataType[] subscriptionArray,
             int index)
-        {  
+        {
             // get the latest snapshot.
             object value = null;
-            
+
             ServiceResult result = diagnostics.UpdateCallback(
-                SystemContext, 
-                diagnostics.Value.Variable, 
+                SystemContext,
+                diagnostics.Value.Variable,
                 ref value);
 
             SubscriptionDiagnosticsDataType newValue = value as SubscriptionDiagnosticsDataType;
@@ -1164,9 +1181,9 @@ namespace Opc.Ua.Server
             {
                 return false;
             }
-            
+
             diagnostics.Value.Error = null;
-            
+
             // check for bad value.
             if (ServiceResult.IsNotBad(result) && newValue == null)
             {
@@ -1179,7 +1196,7 @@ namespace Opc.Ua.Server
                 diagnostics.Value.Error = result;
                 newValue = null;
             }
-            
+
             // update the value.
             diagnostics.Value.Value = newValue;
             diagnostics.Value.Timestamp = DateTime.UtcNow;
@@ -1189,7 +1206,7 @@ namespace Opc.Ua.Server
 
             return true;
         }
-        
+
         /// <summary>
         /// Does a scan before the diagnostics are read.
         /// </summary>
@@ -1243,7 +1260,7 @@ namespace Opc.Ua.Server
                 {
                     value = variable.Value;
                 }
-                    
+
                 return ServiceResult.Good;
             }
         }
@@ -1263,10 +1280,10 @@ namespace Opc.Ua.Server
                     }
 
                     m_lastDiagnosticsScanTime = DateTime.UtcNow;
-                
+
                     // update server diagnostics.
                     UpdateServerDiagnosticsSummary();
-                   
+
                     // update session diagnostics.
                     bool sessionsChanged = alwaysUpdateArrays != null;
                     SessionDiagnosticsDataType[] sessionArray = new SessionDiagnosticsDataType[m_sessions.Count];
@@ -1285,18 +1302,18 @@ namespace Opc.Ua.Server
                     SessionDiagnosticsArrayState sessionsNode = (SessionDiagnosticsArrayState)FindPredefinedNode(
                         VariableIds.Server_ServerDiagnostics_SessionsDiagnosticsSummary_SessionDiagnosticsArray,
                         typeof(SessionDiagnosticsArrayState));
-                                                
+
                     if (sessionsNode != null && (sessionsNode.Value == null || StatusCode.IsBad(sessionsNode.StatusCode) || sessionsChanged))
                     {
                         sessionsNode.Value = sessionArray;
                         sessionsNode.ClearChangeMasks(SystemContext, false);
                     }
-                      
+
                     bool sessionsSecurityChanged = alwaysUpdateArrays != null;
                     SessionSecurityDiagnosticsDataType[] sessionSecurityArray = new SessionSecurityDiagnosticsDataType[m_sessions.Count];
 
                     for (int ii = 0; ii < m_sessions.Count; ii++)
-                    {                        
+                    {
                         SessionDiagnosticsData diagnostics = m_sessions[ii];
 
                         if (UpdateSessionSecurityDiagnostics(diagnostics, sessionSecurityArray, ii))
@@ -1309,7 +1326,7 @@ namespace Opc.Ua.Server
                     SessionSecurityDiagnosticsArrayState sessionsSecurityNode = (SessionSecurityDiagnosticsArrayState)FindPredefinedNode(
                         VariableIds.Server_ServerDiagnostics_SessionsDiagnosticsSummary_SessionSecurityDiagnosticsArray,
                         typeof(SessionSecurityDiagnosticsArrayState));
-                                                
+
                     if (sessionsSecurityNode != null && (sessionsSecurityNode.Value == null || StatusCode.IsBad(sessionsSecurityNode.StatusCode) || sessionsSecurityChanged))
                     {
                         sessionsSecurityNode.Value = sessionSecurityArray;
@@ -1322,7 +1339,7 @@ namespace Opc.Ua.Server
                     for (int ii = 0; ii < m_subscriptions.Count; ii++)
                     {
                         SubscriptionDiagnosticsData diagnostics = m_subscriptions[ii];
-                        
+
                         if (UpdateSubscriptionDiagnostics(diagnostics, subscriptionArray, ii))
                         {
                             sessionsChanged = true;
@@ -1333,8 +1350,8 @@ namespace Opc.Ua.Server
                     SubscriptionDiagnosticsArrayState subscriptionsNode = (SubscriptionDiagnosticsArrayState)FindPredefinedNode(
                         VariableIds.Server_ServerDiagnostics_SubscriptionDiagnosticsArray,
                         typeof(SubscriptionDiagnosticsArrayState));
-                                                   
-                    if (subscriptionsNode != null && (subscriptionsNode.Value == null || StatusCode.IsBad(subscriptionsNode.StatusCode) || subscriptionsChanged)) 
+
+                    if (subscriptionsNode != null && (subscriptionsNode.Value == null || StatusCode.IsBad(subscriptionsNode.StatusCode) || subscriptionsChanged))
                     {
                         subscriptionsNode.Value = subscriptionArray;
                         subscriptionsNode.ClearChangeMasks(SystemContext, false);
@@ -1368,7 +1385,7 @@ namespace Opc.Ua.Server
                         subscriptionsNode = (SubscriptionDiagnosticsArrayState)diagnostics.Summary.CreateChild(
                             SystemContext,
                             BrowseNames.SubscriptionDiagnosticsArray);
-                                    
+
                         if (subscriptionsNode != null && (subscriptionsNode.Value == null || StatusCode.IsBad(subscriptionsNode.StatusCode) || subscriptionsChanged))
                         {
                             subscriptionsNode.Value = subscriptionDiagnosticsArray.ToArray();
@@ -1382,7 +1399,7 @@ namespace Opc.Ua.Server
                 Utils.Trace(e, "Unexpected error during diagnostics scan.");
             }
         }
-        
+
         /// <summary>
         /// Validates the view description passed to a browse request (throws on error).
         /// </summary>
@@ -1412,12 +1429,12 @@ namespace Opc.Ua.Server
                     CreateSampledItem(monitoredItem.SamplingInterval, monitoredItem);
                 }
             }
-            
+
             // check if diagnostics collection needs to be turned one.
             if (IsDiagnosticsNode(handle.Node))
             {
                 monitoredItem.AlwaysReportUpdates = IsDiagnosticsStructureNode(handle.Node);
-  
+
                 if (monitoredItem.MonitoringMode != MonitoringMode.Disabled)
                 {
                     m_diagnosticsMonitoringCount++;
@@ -1499,7 +1516,7 @@ namespace Opc.Ua.Server
             {
                 m_diagnosticsMonitoringCount++;
             }
-                
+
             if (m_diagnosticsMonitoringCount == 0 && m_diagnosticsScanTimer != null)
             {
                 if (m_diagnosticsScanTimer != null)
@@ -1659,7 +1676,7 @@ namespace Opc.Ua.Server
         }
 #endif
         #endregion
-        
+
         #region SessionDiagnosticsData Class
         /// <summary>
         /// Stores the callback information for a session diagnostics structures.
@@ -1706,6 +1723,11 @@ namespace Opc.Ua.Server
             public NodeValueSimpleEventHandler UpdateCallback;
         }
         #endregion
+
+        /// <summary>
+        /// If TRUE before startup the AuthorizationServices folder is made visible.
+        /// </summary>
+        public bool EnableAuthorizationServices { get; set; }
 
         /// <summary>
         /// Adds a security group.

@@ -68,11 +68,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="IdentityModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IdentityModel.1.11.0\lib\net45\IdentityModel.dll</HintPath>
+      <HintPath>..\..\packages\IdentityModel.1.13.1\lib\net45\IdentityModel.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="IdentityServer3, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\IdentityServer3.2.5.4\lib\net45\IdentityServer3.dll</HintPath>
+    <Reference Include="IdentityServer3, Version=2.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\IdentityServer3.2.6.0\lib\net45\IdentityServer3.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
@@ -158,6 +158,7 @@
     <Compile Include="ApplicationsDatabase.cs" />
     <Compile Include="AuthorizationService.cs" />
     <Compile Include="AuthorizationServiceConfiguration.cs" />
+    <Compile Include="GdsServerUtils.cs" />
     <Compile Include="Model\Opc.Ua.Gds.Classes.cs" />
     <Compile Include="GlobalDiscoveryServerConfiguration.cs" />
     <Compile Include="ApplicationsNodeManager.cs" />

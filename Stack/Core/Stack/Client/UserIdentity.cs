@@ -84,9 +84,9 @@ namespace Opc.Ua
         /// Initializes the object with a UA identity token.
         /// </summary>
         /// <param name="token">The user identity token.</param>
-        public UserIdentity(UserIdentityToken token)
+        public UserIdentity(UserIdentityToken token, UserTokenPolicy policy = null)
         {
-            Initialize(token);
+            Initialize(token, policy);
         }
 
         /// <summary>
@@ -387,7 +387,7 @@ namespace Opc.Ua
                 {
                     m_displayName = uniqueName;
                 }
-                else if (!String.IsNullOrEmpty(uniqueName))
+                else if (!String.IsNullOrEmpty(name))
                 {
                     m_displayName = name;
                 }
@@ -408,7 +408,7 @@ namespace Opc.Ua
         /// <summary>
         /// Initializes the object with a UA identity token
         /// </summary>
-        private void Initialize(UserIdentityToken token)
+        private void Initialize(UserIdentityToken token, UserTokenPolicy policy = null)
         {
             if (token == null) throw new ArgumentNullException("token");
 
@@ -435,7 +435,7 @@ namespace Opc.Ua
 
             if (issuedToken != null)
             {
-                if (issuedToken.IssuedTokenType == Ua.IssuedTokenType.JWT)
+                if ((policy != null && policy.IssuedTokenType == "http://opcfoundation.org/UA/UserToken#JWT") || issuedToken.IssuedTokenType == Ua.IssuedTokenType.JWT)
                 {
                     if (issuedToken.DecryptedTokenData == null || issuedToken.DecryptedTokenData.Length == 0)
                     {

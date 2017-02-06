@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using System.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System.IdentityModel.Selectors;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.IdentityModel.Protocols;
 using System.Net.Http;
 
@@ -27,14 +28,14 @@ namespace Opc.Ua
 {
     public class JwtUtils
     {
-        public static IUserIdentity ValidateToken(Uri authorityUrl, string audiance, string jwt)
+        public static IUserIdentity ValidateToken(Uri authorityUrl, X509Certificate2 authorityCertificate, string issuerUri, string audiance, string jwt)
         {
-            var task = ValidateTokenAsync(authorityUrl, audiance, jwt);
+            var task = ValidateTokenAsync(authorityUrl, authorityCertificate, issuerUri, audiance, jwt);
             task.Wait();
             return task.Result;
         }
 
-        public static async Task<IUserIdentity> ValidateTokenAsync(Uri authorityUrl, string audiance, string jwt)
+        public static async Task<IUserIdentity> ValidateTokenAsync(Uri authorityUrl, X509Certificate2 authorityCertificate, string issuerUri, string audiance, string jwt)
         {
             JwtSecurityToken token = new JwtSecurityToken(jwt);
 
@@ -43,16 +44,30 @@ namespace Opc.Ua
 
             TokenValidationParameters validationParameters = new TokenValidationParameters
             {
+                ValidateAudience = true,
                 ValidAudience = audiance,
+                ValidateLifetime = true,
+                ClockSkew = new TimeSpan(0, 5, 0),
                 CertificateValidator = X509CertificateValidator.None
             };
 
-            ConfigurationManager<OpenIdConnectConfiguration> configManager = new ConfigurationManager<OpenIdConnectConfiguration>(authorityUrl.ToString() + "/.well-known/openid-configuration");
-            OpenIdConnectConfiguration config = await configManager.GetConfigurationAsync();
-            validationParameters.ValidIssuer = new Uri(config.Issuer).ToString();
-            validationParameters.IssuerSigningTokens = new List<SecurityToken>(config.SigningTokens);
+            if (authorityCertificate != null)
+            {
+                validationParameters.ValidateIssuer = true;
+                validationParameters.ValidIssuer = issuerUri;
+                validationParameters.IssuerSigningKey = new X509AsymmetricSecurityKey(authorityCertificate);
 
-            tokenHandler.ValidateToken(jwt, validationParameters, out validatedToken);
+                tokenHandler.ValidateToken(jwt, validationParameters, out validatedToken);
+            }
+            else
+            {
+                ConfigurationManager<OpenIdConnectConfiguration> configManager = new ConfigurationManager<OpenIdConnectConfiguration>(authorityUrl.ToString() + "/.well-known/openid-configuration");
+                OpenIdConnectConfiguration config = await configManager.GetConfigurationAsync();
+                validationParameters.ValidIssuer = new Uri(config.Issuer).ToString();
+                validationParameters.IssuerSigningTokens = new List<SecurityToken>(config.SigningTokens);
+
+                tokenHandler.ValidateToken(jwt, validationParameters, out validatedToken);
+            }
 
             return new UserIdentity(validatedToken);
         }
@@ -151,75 +166,27 @@ namespace Opc.Ua
         }
     }
 
-
-    public class JwtIdentityProviderParameters : IEncodeable
-    {
-        public string IdentityProviderUrl;
-        public string IdentityProfileUri;
-        public string TokenEndpoint;
-        public string AuthorizationEndpoint;
-        public string ResourceId;
-
-        #region IEncodeable Members
-        public ExpandedNodeId TypeId { get { return ExpandedNodeId.Null; } }
-        public ExpandedNodeId BinaryEncodingId { get { return ExpandedNodeId.Null; } }
-        public ExpandedNodeId XmlEncodingId { get { return ExpandedNodeId.Null; } }
-
-        public void Encode(IEncoder encoder)
-        {
-            encoder.WriteString("ua:identityProvider", IdentityProviderUrl);
-            encoder.WriteString("ua:identityProfileUri", IdentityProfileUri);
-            encoder.WriteString("ua:authorizationEndpoint", AuthorizationEndpoint);
-            encoder.WriteString("ua:tokenEndpoint", TokenEndpoint);
-            encoder.WriteString("ua:resource", ResourceId);
-        }
-
-        public void Decode(IDecoder decoder)
-        {
-            IdentityProviderUrl = decoder.ReadString("ua:identityProvider");
-            IdentityProfileUri = decoder.ReadString("ua:identityProfileUri");
-            AuthorizationEndpoint = decoder.ReadString("ua:authorizationEndpoint");
-            TokenEndpoint = decoder.ReadString("ua:tokenEndpoint");
-            ResourceId = decoder.ReadString("ua:resource");
-        }
-
-        public bool IsEqual(IEncodeable encodeable)
-        {
-            return base.Equals(encodeable);
-        }
-
-        public object Clone()
-        {
-            return MemberwiseClone();
-        }
-        #endregion
-    }
-
     public class JwtEndpointParameters
     {
         public string AuthorityUrl;
         public string AuthorityProfileUri;
         public string TokenEndpoint;
+        public string AuthorizationEndpoint;
         public List<string> RequestTypes;
         public string ResourceId;
         public List<string> Scopes;
-        public List<JwtIdentityProviderParameters> IdentityProviders;
 
         public string ToJson()
         {
             var encoder = new JsonEncoder(ServiceMessageContext.GlobalContext, true);
 
-            encoder.WriteString("ua:authority", AuthorityUrl);
+            encoder.WriteString("ua:authorityUrl", AuthorityUrl);
             encoder.WriteString("ua:authorityProfileUri", AuthorityProfileUri);
             encoder.WriteString("ua:tokenEndpoint", TokenEndpoint);
+            encoder.WriteString("ua:authorizationEndpoint", AuthorizationEndpoint);
             encoder.WriteStringArray("ua:requestTypes", RequestTypes);
             encoder.WriteString("ua:resource", ResourceId);
             encoder.WriteStringArray("ua:scopes", Scopes);
-
-            if (IdentityProviders != null && IdentityProviders.Count > 0)
-            {
-                encoder.WriteEncodeableArray("ua:identityProviders", IdentityProviders.ToArray(), typeof(JwtIdentityProviderParameters));
-            }
 
             return encoder.CloseAndReturnText();
         }
@@ -228,23 +195,13 @@ namespace Opc.Ua
         {
             var decoder = new JsonDecoder(json, ServiceMessageContext.GlobalContext);
 
-            AuthorityUrl = decoder.ReadString("ua:authority");
+            AuthorityUrl = decoder.ReadString("ua:authorityUrl");
             AuthorityProfileUri = decoder.ReadString("ua:authorityProfileUri");
             TokenEndpoint = decoder.ReadString("ua:tokenEndpoint");
+            AuthorizationEndpoint = decoder.ReadString("ua:authorizationEndpoint");
             RequestTypes = decoder.ReadStringArray("ua:requestTypes");
             ResourceId = decoder.ReadString("ua:resourceId");
             Scopes = decoder.ReadStringArray("ua:scopes");
-
-            var providers = (IList<JwtIdentityProviderParameters>)decoder.ReadEncodeableArray("ua:identityProviders", typeof(JwtIdentityProviderParameters));
-
-            if (providers != null && providers.Count > 0)
-            {
-                IdentityProviders = new List<JwtIdentityProviderParameters>(providers);
-            }
-            else
-            {
-                IdentityProviders = new List<JwtIdentityProviderParameters>();
-            }
         }
     }
 
@@ -254,7 +211,6 @@ namespace Opc.Ua
         public const string OAuth2AuthorizationPolicy = "http://opcfoundation.org/UA/Authorization#OAuth2";
         public const string AzureIdentityProviderPolicy = "http://opcfoundation.org/UA/IdentityProvider#Azure";
         public const string OAuth2AuthorizationCode = "authorization_code";
-        public const string OAuth2SiteToken = "site_token";
         public const string OAuth2ClientCredentials = "client_credentials";
     }
 }

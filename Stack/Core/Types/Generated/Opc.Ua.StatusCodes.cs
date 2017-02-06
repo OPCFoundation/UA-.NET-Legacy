@@ -740,6 +740,11 @@ namespace Opc.Ua
         public const uint BadArgumentsMissing = 0x80760000;
 
         /// <summary>
+        /// The executable attribute does not allow the execution of the method.
+        /// </summary>
+        public const uint BadNotExecutable = 0x81110000;
+
+        /// <summary>
         /// The server has reached its  maximum number of subscriptions.
         /// </summary>
         public const uint BadTooManySubscriptions = 0x80770000;

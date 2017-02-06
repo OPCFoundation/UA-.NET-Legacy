@@ -143,6 +143,14 @@ namespace Opc.Ua.Server
 
         #region Public Interface
         /// <summary>
+        /// The application configuration.
+        /// </summary>
+        public ApplicationConfiguration Configuration
+        {
+            get { return m_configuration; }
+        }
+
+        /// <summary>
         /// The session manager to use with the server.
         /// </summary>
         /// <value>The session manager.</value>

@@ -33,7 +33,7 @@ namespace Opc.Ua.Gds
     {
         private OAuth2Credential m_credential;
         private OAuth2AccessToken m_token;
-        private OAuth2Client m_client;
+        private AuthorizationClient m_client;
 
         public OAuth2CredentialsDialog()
         {
@@ -48,7 +48,7 @@ namespace Opc.Ua.Gds
             }
 
             m_credential = credential;
-            m_client = new OAuth2Client();
+            m_client = new AuthorizationClient();
 
             var url = new UriBuilder(m_credential.AuthorityUrl);
             url.Path += m_credential.AuthorizationEndpoint;

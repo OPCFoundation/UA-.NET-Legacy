@@ -885,14 +885,36 @@ namespace Opc.Ua
                 return null;
             }
 
-            var value = token as string;
+            var value = token as Dictionary<string, object>;
 
             if (value == null)
             {
                 return null;
             }
 
-            return NodeId.Parse(value);
+            var namespaceIndex = ReadUInt16("u");
+
+            if (value.ContainsKey("i"))
+            {
+                return new NodeId(ReadUInt32("i"), namespaceIndex);
+            }
+
+            if (value.ContainsKey("s"))
+            {
+                return new NodeId(ReadString("s"), namespaceIndex);
+            }
+
+            if (value.ContainsKey("g"))
+            {
+                return new NodeId(ReadGuid("g"), namespaceIndex);
+            }
+
+            if (value.ContainsKey("b"))
+            {
+                return new NodeId(ReadByteString("b"), namespaceIndex);
+            }
+
+            return new NodeId(0U, namespaceIndex);
         }
              
         /// <summary>
@@ -907,14 +929,53 @@ namespace Opc.Ua
                 return null;
             }
 
-            var value = token as string;
+            var value = token as Dictionary<string, object>;
 
             if (value == null)
             {
                 return null;
             }
 
-            return ExpandedNodeId.Parse(value);
+            ushort namespaceIndex = 0;
+            string namespaceUri = null;
+            var serverIndex = ReadUInt32("v");
+
+            object ns = null;
+
+            if (value.TryGetValue("u", out ns))
+            {
+                namespaceUri = ns as string;
+
+                if (namespaceUri == null)
+                {
+                    if (!UInt16.TryParse(ns.ToString(), out namespaceIndex))
+                    {
+                        namespaceIndex = 0;
+                    }
+                }
+            }
+
+            if (value.ContainsKey("i"))
+            {
+                return new ExpandedNodeId(ReadUInt32("i"), namespaceIndex, namespaceUri, serverIndex);
+            }
+
+            if (value.ContainsKey("s"))
+            {
+                return new ExpandedNodeId(ReadString("s"), namespaceIndex, namespaceUri, serverIndex);
+            }
+
+            if (value.ContainsKey("g"))
+            {
+                return new ExpandedNodeId(ReadGuid("g"), namespaceIndex, namespaceUri, serverIndex);
+            }
+
+            if (value.ContainsKey("b"))
+            {
+                return new ExpandedNodeId(ReadByteString("b"), namespaceIndex, namespaceUri, serverIndex);
+            }
+
+            return new ExpandedNodeId(0U, namespaceIndex, namespaceUri, serverIndex);
         }
 
         /// <summary>
@@ -1012,8 +1073,8 @@ namespace Opc.Ua
                 return null;
             }
 
-            var name = ReadString("Name");
-            var namespaceIndex = ReadUInt16("Uri");
+            var name = ReadString("n");
+            var namespaceIndex = ReadUInt16("u");
 
             return new QualifiedName(name, namespaceIndex);
         }

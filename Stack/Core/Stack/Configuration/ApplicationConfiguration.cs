@@ -173,7 +173,7 @@ namespace Opc.Ua
 
                 if (String.Compare(domainName, "localhost", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    domainName = System.Net.Dns.GetHostName().ToLowerInvariant();
+                    domainName = GetDefaultHostName();
                 }
 
                 if (!Utils.FindStringIgnoreCase(domainNames, domainName))
@@ -184,13 +184,37 @@ namespace Opc.Ua
 
             return domainNames;
         }
-        
-        #if !SILVERLIGHT
+
         /// <summary>
-        /// Gets or sets a value indicating whether the native (ANSI C) implementation of UA-TCP should be used.
+        /// Gets the default host name checking the endpoint URLs. 
         /// </summary>
-        /// <value><c>true</c> if the native stack is used; otherwise, <c>false</c>.</value>
-        public bool UseNativeStack
+        public string GetDefaultHostName()
+        { 
+            string hostname = System.Net.Dns.GetHostName().ToLowerInvariant();
+
+            if (ServerConfiguration != null && ServerConfiguration.BaseAddresses != null)
+            {
+                foreach (var baseAddress in ServerConfiguration.BaseAddresses)
+                {
+                    Uri url = new Uri(baseAddress);
+
+                    if (url.DnsSafeHost != "localhost")
+                    {
+                        hostname = url.DnsSafeHost;
+                        break;
+                    }
+                }
+            }
+
+            return hostname;
+        }
+
+#if !SILVERLIGHT
+/// <summary>
+/// Gets or sets a value indicating whether the native (ANSI C) implementation of UA-TCP should be used.
+/// </summary>
+/// <value><c>true</c> if the native stack is used; otherwise, <c>false</c>.</value>
+public bool UseNativeStack
         {
             get
             {
@@ -496,7 +520,7 @@ namespace Opc.Ua
                 throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "ApplicationName must be specified.");
             }
 
-            ApplicationName = ApplicationName.Replace("localhost", System.Net.Dns.GetHostName().ToUpper());
+            ApplicationName = ApplicationName.Replace("localhost", GetDefaultHostName());
 
 #if !SILVERLIGHT
             if (SecurityConfiguration == null)
@@ -517,7 +541,7 @@ namespace Opc.Ua
 
             if (ApplicationUri != null)
             {
-                ApplicationUri = ApplicationUri.Replace("localhost", System.Net.Dns.GetHostName().ToLowerInvariant());
+                ApplicationUri = ApplicationUri.Replace("localhost", GetDefaultHostName());
             }
 
             //  generate a default uri.
@@ -526,7 +550,7 @@ namespace Opc.Ua
                 StringBuilder buffer = new StringBuilder();
 
                 buffer.Append("urn:");
-                buffer.Append(System.Net.Dns.GetHostName().ToLowerInvariant());
+                buffer.Append(GetDefaultHostName());
                 buffer.Append(":");
                 buffer.Append(ApplicationName);
 
