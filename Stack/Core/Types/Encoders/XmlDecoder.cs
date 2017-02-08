@@ -1354,6 +1354,17 @@ namespace Opc.Ua
         /// </summary>
         public Variant ReadVariant(string fieldName)
         {
+            // check the nesting level for avoiding a stack overflow.
+            if (m_nestingLevel > m_context.MaxEncodingNestingLevels)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadEncodingLimitsExceeded,
+                    "Maximum nesting level of {0} was exceeded",
+                    m_context.MaxEncodingNestingLevels);
+            }
+
+            m_nestingLevel++;
+
             Variant value = new Variant();
 
             if (BeginField(fieldName, true))
@@ -1380,6 +1391,8 @@ namespace Opc.Ua
                 
                 EndField(fieldName);
             }
+
+            m_nestingLevel--;
 
             return value;
         }

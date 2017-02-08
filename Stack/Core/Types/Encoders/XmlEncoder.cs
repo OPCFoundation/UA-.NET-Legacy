@@ -704,18 +704,31 @@ namespace Opc.Ua
         /// </summary>
         public void WriteVariant(string fieldName, Variant value)
         {
+            // check the nesting level for avoiding a stack overflow.
+            if (m_nestingLevel > m_context.MaxEncodingNestingLevels)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadEncodingLimitsExceeded,
+                    "Maximum nesting level of {0} was exceeded",
+                    m_context.MaxEncodingNestingLevels);
+            }
+
+            m_nestingLevel++;
+
             if (BeginField(fieldName, false, false))
             {
                 PushNamespace(Namespaces.OpcUaXsd);
                 
-                m_writer.WriteStartElement("Value", Namespaces.OpcUaXsd);                
-                WriteVariantContents(value.Value, value.TypeInfo);                
+                m_writer.WriteStartElement("Value", Namespaces.OpcUaXsd);
+                WriteVariantContents(value.Value, value.TypeInfo);
                 m_writer.WriteEndElement();
-                
+
                 PopNamespace();
-                
+
                 EndField(fieldName);
             }
+
+            m_nestingLevel--;
         }
         
         /// <summary>

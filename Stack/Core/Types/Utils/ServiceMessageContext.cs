@@ -42,7 +42,7 @@ namespace Opc.Ua
             m_namespaceUris            = new NamespaceTable();
             m_serverUris               = new StringTable();
             m_factory                  = EncodeableFactory.GlobalFactory;
-            m_maxEncodingNestingLevels = 100;
+            m_maxEncodingNestingLevels = 200;
         }
 
         private ServiceMessageContext(bool shared) : this()
@@ -54,7 +54,7 @@ namespace Opc.Ua
             m_namespaceUris            = new NamespaceTable(shared);
             m_serverUris               = new StringTable(shared);
             m_factory                  = EncodeableFactory.GlobalFactory;
-            m_maxEncodingNestingLevels = 100;
+            m_maxEncodingNestingLevels = 200;
         }
         #endregion
         
