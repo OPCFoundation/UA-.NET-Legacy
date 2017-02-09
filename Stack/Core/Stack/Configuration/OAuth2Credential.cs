@@ -21,24 +21,30 @@ using System.Runtime.Serialization;
 
 namespace Opc.Ua
 {
+    /// <remarks/>
     [DataContract(Namespace = Namespaces.OpcUaConfig)]
     public class OAuth2ServerSettings
     {
+        /// <remarks/>
         [DataMember(Order = 1)]
         public string ApplicationUri { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 2)]
         public string ResourceId { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 3)]
         public StringCollection Scopes { get; set; }
     }
 
+    /// <remarks/>
     [CollectionDataContract(Name = "ListOfOAuth2ServerSettings", Namespace = Namespaces.OpcUaConfig, ItemName = "OAuth2ServerSettings")]
     public partial class OAuth2ServerSettingsCollection : List<OAuth2ServerSettings>
     {
     }
 
+    /// <remarks/>
     [DataContract(Namespace = Namespaces.OpcUaConfig)]
     public class OAuth2Credential
     {
@@ -69,34 +75,44 @@ namespace Opc.Ua
         #endregion
 
         #region Public Properties
+        /// <remarks/>
         [DataMember(Order = 1)]
         public string AuthorityUrl { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 2)]
         public string GrantType { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 3)]
         public string ClientId { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 4)]
         public string ClientSecret { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 5)]
         public string RedirectUrl { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 6)]
         public string TokenEndpoint { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 7)]
         public string AuthorizationEndpoint { get; set; }
 
+        /// <remarks/>
         public string ServerResourceId { get; set; }
         #endregion
     }
 
+    /// <remarks/>
     [CollectionDataContract(Name = "ListOfOAuth2Credential", Namespace = Namespaces.OpcUaConfig, ItemName = "OAuth2Credential")]
     public partial class OAuth2CredentialCollection : List<OAuth2Credential>
     {
+        /// <remarks/>
         public static OAuth2CredentialCollection Load(ApplicationConfiguration configuration)
         {
             if (configuration == null)
@@ -131,6 +147,7 @@ namespace Opc.Ua
             return list;
         }
 
+        /// <remarks/>
         public static OAuth2Credential FindByAuthorityUrl(ApplicationConfiguration configuration, string authorityUrl)
         {
             if (authorityUrl == null || !Uri.IsWellFormedUriString(authorityUrl, UriKind.Absolute))

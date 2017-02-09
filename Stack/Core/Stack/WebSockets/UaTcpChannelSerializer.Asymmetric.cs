@@ -322,6 +322,7 @@ namespace Opc.Ua.Bindings
             return headerSize;
         }
 
+        /// <remarks/>
         protected int GetAsymmetricHeaderSize(
             string securityPolicyUri,
             X509Certificate2 senderCertificate,
@@ -357,7 +358,8 @@ namespace Opc.Ua.Bindings
 
             return headerSize;
         }
-                
+
+        /// <remarks/>
         protected int GetAsymmetricSignatureSize(X509Certificate2 senderCertificate)
         {
             switch (SecurityPolicyUri)
@@ -376,6 +378,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         protected void WriteAsymmetricMessageHeader(
             BinaryEncoder      encoder,
             uint               messageType,
@@ -435,6 +438,7 @@ namespace Opc.Ua.Bindings
             return SendBufferSize - occupiedSize;
         }
 
+        /// <remarks/>
         protected BufferCollection WriteAsymmetricMessage(
             uint               messageType,
             uint               requestId, 
@@ -607,7 +611,8 @@ namespace Opc.Ua.Bindings
             }
         }
 
-         protected void ReadAsymmetricMessageHeader(
+        /// <remarks/>
+        protected void ReadAsymmetricMessageHeader(
             BinaryDecoder        decoder,
             X509Certificate2     receiverCertificate,
             out uint             secureChannelId,            
@@ -682,6 +687,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         protected void ReviseSecurityMode(bool firstCall, MessageSecurityMode requestedMode)
         {
              bool supported = false;
@@ -709,7 +715,8 @@ namespace Opc.Ua.Bindings
                 throw ServiceResultException.Create(StatusCodes.BadSecurityModeRejected, "Security mode is not acceptable to the server.");
             }
         }
-        
+
+        /// <remarks/>
         protected bool SetEndpointUrl(string endpointUrl)
         {
             Uri url = Utils.ParseUri(endpointUrl);

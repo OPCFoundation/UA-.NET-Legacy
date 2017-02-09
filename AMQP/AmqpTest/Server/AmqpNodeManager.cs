@@ -156,7 +156,7 @@ namespace AmqpTestServer
                 true);
 
             dataset.ConfigurationVersion.Value = new ConfigurationVersionDataType() { MinorVersion = 1, MajorVersion = 1 };
-            dataset.SelectedNotifier.Value = ObjectIds.Server;
+            dataset.PubSubEventNotifier.Value = ObjectIds.Server;
             dataset.SelectedFields.Value = InternalClient.GetSelectClause().ToArray();
             dataset.Filter.Value = new ContentFilter();
 
@@ -188,7 +188,7 @@ namespace AmqpTestServer
 
             dataset.AddReference(Opc.Ua.ReferenceTypeIds.HasComponent, true, ObjectIds.PublishSubscribe_PublishedDataSets);
 
-            dataset.SelectedNotifier.Value = Opc.Ua.ObjectIds.Server;
+            dataset.PubSubEventNotifier.Value = Opc.Ua.ObjectIds.Server;
             dataset.SelectedFields.Value = new SimpleAttributeOperand[] { };
             dataset.Filter.Value = new ContentFilter();
 
@@ -221,7 +221,7 @@ namespace AmqpTestServer
 
                     AddPredefinedNode(SystemContext, node);
 
-                    var topic = new BrokerGroupState(null);
+                    var topic = new BrokerWriterGroupState(null);
 
                     topic.Create(
                         SystemContext,

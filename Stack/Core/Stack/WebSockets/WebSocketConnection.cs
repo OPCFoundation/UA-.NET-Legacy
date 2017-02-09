@@ -27,6 +27,7 @@ using System.Security.Cryptography;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks/>
     public sealed class WebSocketConnection : IDisposable
     {
         private bool m_disposed;
@@ -49,6 +50,7 @@ namespace Opc.Ua.Bindings
             public int Length;
         }
 
+        /// <remarks/>
         public WebSocketConnection(TcpClient client, Stream stream, BufferManager bufferManager, bool isServerSide)
         {
             if (client == null)
@@ -98,43 +100,54 @@ namespace Opc.Ua.Bindings
             }
         }
 
-        // This code added to correctly implement the disposable pattern.
+        /// <remarks/>
         public void Dispose()
         {
             Dispose(true);
         }
         #endregion
 
+        /// <remarks/>
         public object Handle { get; set; }
 
+        /// <remarks/>
         public enum ConnectionState
         {
+            /// <remarks/>
             WaitingForHttpUpgrade,
+            /// <remarks/>
             WaitingForHello,
+            /// <remarks/>
             Open,
+            /// <remarks/>
             Closed
         }
 
+        /// <remarks/>
         public ConnectionState State
         {
             get; internal set;
         }
 
+        /// <remarks/>
         public TcpClient TcpClient
         {
             get { return m_client; }
         }
 
+        /// <remarks/>
         public Stream Stream
         {
             get { return m_stream; }
         }
 
+        /// <remarks/>
         public void Upgrade(Stream stream)
         {
             m_stream = stream;
         }
 
+        /// <remarks/>
         public string MessageEncoding { get; set; }
 
         private async Task<string> ReceiveHttpHeader()
@@ -691,17 +704,20 @@ namespace Opc.Ua.Bindings
             return frame;
         }
 
+        /// <remarks/>
         public async Task ConnectAsync()
         {
             var response = await SendHttpUpgradeRequest(null);
             ProcessHttpUpgradeResponse(response);
         }
 
+        /// <remarks/>
         public async Task DisconnectAsync()
         {
             await SendCloseAsync((ushort)HttpStatusCode.ServiceUnavailable, null, !m_isServerSide);
         }
 
+        /// <remarks/>
         public async Task<ArraySegment<byte>> ReceiveMessage()
         {
             if (m_disposed)
@@ -765,8 +781,8 @@ namespace Opc.Ua.Bindings
                 throw;
             }
         }
-        
 
+        /// <remarks/>
         public void SendMessage(IList<ArraySegment<byte>> buffers)
         {
             if (m_disposed)
@@ -790,7 +806,8 @@ namespace Opc.Ua.Bindings
 
             Task.Run(() => Dequeue());
         }
-    
+
+        /// <remarks/>
         public void SendMessage(ArraySegment<byte> buffer)
         {
             if (m_disposed)

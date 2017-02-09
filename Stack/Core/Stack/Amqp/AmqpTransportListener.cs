@@ -133,7 +133,7 @@ namespace Opc.Ua.Bindings
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="AmqpChannelListener"/> class.
+        /// Initializes a new instance of the <see cref="AmqpTransportListener"/> class.
         /// </summary>
         public AmqpTransportListener(ApplicationConfiguration configuration, X509Certificate2 serverCertificate, EndpointDescriptionCollection endpoints)
         {
@@ -243,6 +243,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
 
+        /// <remarks />
         public void CreateConnection(Uri url)
         {
             if (ConnectionStatusChanged == null || ConnectionWaiting == null)
@@ -349,6 +350,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public async void OnMessage(object sender, AmqpReceiveMessageEventArgs e)
         {
             // Utils.Trace("[AmqpTransportListener.Listener_ReceiveMessage] {0} {1} {2}", e.MessageId, e.CorrelationId, e.GroupId);

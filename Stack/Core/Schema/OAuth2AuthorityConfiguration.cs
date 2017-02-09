@@ -21,6 +21,7 @@ using System.Collections.Generic;
 
 namespace Opc.Ua
 {
+    /// <remarks/>
     [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaConfig)]
     public class OAuth2AuthorityConfiguration
     {
@@ -51,29 +52,36 @@ namespace Opc.Ua
         #endregion
 
         #region Public Properties
+        /// <remarks/>
         [DataMember(Order = 1)]
         public OAuth2AuthorityCollection KnownAuthorities { get; set; }
         #endregion
     }
 
+    /// <remarks/>
     [CollectionDataContract(Name = "ListOfOAuth2Authority", Namespace = Namespaces.OpcUaConfig, ItemName = "OAuth2Authority")]
     public class OAuth2AuthorityCollection : List<OAuth2Authority>
     {
+        /// <remarks/>
         public OAuth2AuthorityCollection()
         {
         }
     }
 
+    /// <remarks/>
     [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaConfig)]
     public enum OAuth2AuthorityType
     {
+        /// <remarks/>
         [EnumMember()]
         ClientCredentials,
 
+        /// <remarks/>
         [EnumMember()]
         AzureAD
     }
 
+    /// <remarks/>
     [DataContract(Namespace = Opc.Ua.Namespaces.OpcUaConfig)]
     public class OAuth2Authority
     {
@@ -104,18 +112,23 @@ namespace Opc.Ua
         #endregion
 
         #region Public Properties
+        /// <remarks/>
         [DataMember(Order = 1)]
         public string AuthorityUrl { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 2)]
         public OAuth2AuthorityType AuthorityType { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 3)]
         public string ClientId { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 4)]
         public string ClientSecret { get; set; }
 
+        /// <remarks/>
         [DataMember(Order = 5)]
         public string RedirectUrl { get; set; }
         #endregion

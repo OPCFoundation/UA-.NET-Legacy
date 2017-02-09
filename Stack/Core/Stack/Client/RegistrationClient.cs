@@ -58,35 +58,6 @@ namespace Opc.Ua
 
             return new RegistrationClient(channel);
         }
-
-        /// <summary>
-        /// Creates a binding for to use for discovering servers.
-        /// </summary>
-        /// <param name="configuration">The configuration.</param>
-        /// <param name="description">The description.</param>
-        /// <param name="endpointConfiguration">The endpoint configuration.</param>
-        /// <param name="bindingFactory">The binding factory.</param>
-        /// <param name="instanceCertificates">The instance certificate chain.</param>
-        /// <returns></returns>
-        /*public static RegistrationClient Create(
-            ApplicationConfiguration configuration,
-            EndpointDescription description,
-            EndpointConfiguration endpointConfiguration,
-            BindingFactory bindingFactory,
-            X509Certificate2Collection instanceCertificates )
-        {
-            if (configuration == null) throw new ArgumentNullException( "configuration" );
-            if (description == null) throw new ArgumentNullException( "description" );
-
-            ITransportChannel channel = RegistrationChannel.Create(
-                configuration,
-                description,
-                endpointConfiguration,
-                instanceCertificates,
-                new ServiceMessageContext() );
-
-            return new RegistrationClient( channel );
-        }*/
         #endregion
     }
     
@@ -142,54 +113,6 @@ namespace Opc.Ua
 
             return channel;
         }
-
-        /// <summary>
-        ///  Creates a new transport channel that supports the IRegistrationChannel service contract.
-        /// </summary>
-        /// <param name="configuration">The application configuration.</param>
-        /// <param name="description">The description for the endpoint.</param>
-        /// <param name="endpointConfiguration">The endpoint configuration.</param>
-        /// <param name="clientCertificates">The client certificates.</param>
-        /// <param name="messageContext">The message context to use when serializing the messages.</param>
-        /// <returns></returns>
-        /*public static ITransportChannel Create(
-            ApplicationConfiguration configuration,
-            EndpointDescription description,
-            EndpointConfiguration endpointConfiguration,
-            X509Certificate2Collection clientCertificates,
-            ServiceMessageContext messageContext )
-        {
-            // create a UA binary channel.
-            ITransportChannel channel = CreateUaBinaryChannel(
-                configuration,
-                description,
-                endpointConfiguration,
-                clientCertificates,
-                messageContext );
-
-            // create a WCF XML channel.
-            if (channel == null)
-            {
-                Uri endpointUrl = new Uri( description.EndpointUrl );
-                BindingFactory bindingFactory = BindingFactory.Create( configuration, messageContext );
-                Binding binding = bindingFactory.Create( endpointUrl.Scheme, description, endpointConfiguration );
-
-                RegistrationChannel wcfXmlChannel = new RegistrationChannel();
-
-                wcfXmlChannel.Initialize(
-                    configuration,
-                    description,
-                    endpointConfiguration,
-                    binding,
-                    clientCertificates,
-                    null );
-
-                channel = wcfXmlChannel;
-            }
-
-            return channel;
-        }
-         */
 
         /// <summary>
         /// Creates a discovery channel that uses the specified binding.

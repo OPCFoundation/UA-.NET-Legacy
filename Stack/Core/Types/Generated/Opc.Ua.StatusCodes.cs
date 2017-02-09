@@ -490,6 +490,11 @@ namespace Opc.Ua
         public const uint BadNodeNotInView = 0x804E0000;
 
         /// <summary>
+        /// The number was not accepted because of a numeric overflow.
+        /// </summary>
+        public const uint BadNumericOverflow = 0x81120000;
+
+        /// <summary>
         /// The ServerUri is not a valid URI.
         /// </summary>
         public const uint BadServerUriInvalid = 0x804F0000;

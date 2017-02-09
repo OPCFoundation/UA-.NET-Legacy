@@ -21,37 +21,47 @@ using System.Runtime.Serialization;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks />
     [DataContract(Namespace = Namespaces.OpcUaConfig)]
     public class AmqpBrokerKeySet
     {
+        /// <remarks />
         [DataMember(Order = 1)]
         public string AmqpNode { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 2)]
         public string KeyName { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 3)]
         public string KeyValue { get; set; }
     }
 
+    /// <remarks />
     [CollectionDataContract(Name = "ListOfAmqpBrokerKeySet", Namespace = Namespaces.OpcUaConfig, ItemName = "AmqpBrokerKeySet")]
     public partial class AmqpBrokerKeySetCollection : List<AmqpBrokerKeySet>
     {
     }
 
+    /// <remarks />
     [DataContract(Namespace = Namespaces.OpcUaConfig)]
     public enum BrokerTransport
-    { 
+    {
+        /// <remarks />
         [EnumMember()]
         Amqps,
 
+        /// <remarks />
         [EnumMember()]
         Amqp,
 
+        /// <remarks />
         [EnumMember()]
         Wss
     }
 
+    /// <remarks />
     [DataContract(Namespace = Namespaces.OpcUaConfig)]
     public class AmqpBrokerConfiguration
     {
@@ -82,49 +92,67 @@ namespace Opc.Ua.Bindings
         #endregion
 
         #region Public Properties
+        /// <remarks />
         [DataMember(Order = 1)]
         public string BrokerAddress { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 2)]
         public BrokerTransport BrokerTransport { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 3)]
         public string IncomingAmqpNode { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 4)]
         public bool UseSasl { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 5)]
         public string ReceiveKeyName { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 6)]
         public string ReceiveKeyValue { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 7)]
         public string SendKeyName { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 8)]
         public string SendKeyValue { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 9)]
         public AmqpBrokerKeySetCollection ServerKeys { get; set; }
 
+        /// <remarks />
         public IAmqpListener Listener { get; set; }
         #endregion
     }
 
+    /// <remarks />
     public class TargetKey
     {
+        /// <remarks />
         public string TargetName;
+        /// <remarks />
         public BrokerTransport BrokerTransport;
+        /// <remarks />
         public bool UseSasl;
+        /// <remarks />
         public string KeyName;
+        /// <remarks />
         public string KeyValue;
     }
 
+    /// <remarks />
     [CollectionDataContract(Name = "ListOfAmqpBrokerConfiguration", Namespace = Namespaces.OpcUaConfig, ItemName = "AmqpBrokerConfiguration")]
     public partial class AmqpBrokerConfigurationCollection : List<AmqpBrokerConfiguration>
     {
+        /// <remarks />
         public static AmqpBrokerConfigurationCollection Load(ApplicationConfiguration configuration)
         {
             if (configuration == null)
@@ -159,6 +187,7 @@ namespace Opc.Ua.Bindings
             return brokers;
         }
 
+        /// <remarks />
         public TargetKey FindTargetKeys(Uri brokerUrl, string amqpNodeName)
         {
             TargetKey target = new TargetKey();
@@ -201,6 +230,7 @@ namespace Opc.Ua.Bindings
             return null;
         }
 
+        /// <remarks />
         public async Task<IAmqpListener> SelectListenerAsync(Uri endpointUrl, TcpChannelQuotas quotas)
         {
             IAmqpListener listener = null;

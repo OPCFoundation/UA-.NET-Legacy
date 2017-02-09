@@ -92,25 +92,13 @@ namespace Opc.Ua.Bindings
             get { return m_clientCertificate;  }
             set { m_clientCertificate = value; }
         }
-
-        /// <summary>
-        /// Gets or sets the client certificate chain.
-        /// </summary>
-        /// <value>
-        /// The client certificate chain.
-        /// </value>
+        
         //internal X509Certificate2Collection ClientCertificateChain
         //{
         //    get { return m_clientCertificateChain; }
         //    set { m_clientCertificateChain = value; }
         //}
-
-        /// <summary>
-        /// Gets or sets the server certificate chain.
-        /// </summary>
-        /// <value>
-        /// The server certificate chain.
-        /// </value>
+        
         //internal X509Certificate2Collection ServerCertificateChain
         //{
         //    get { return m_serverCertificateChain; }
@@ -359,6 +347,7 @@ namespace Opc.Ua.Bindings
             return headerSize;
         }
 
+        /// <remarks/>
         protected int GetAsymmetricHeaderSize(
             string securityPolicyUri,
             X509Certificate2 senderCertificate,

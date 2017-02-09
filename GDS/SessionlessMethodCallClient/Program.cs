@@ -30,15 +30,16 @@ namespace SessionlessMethodCallClient
             System.Net.ServicePointManager.ServerCertificateValidationCallback = HttpsCertificateValidation;
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls;
 
-            string authorizationUrl = String.Format("https://{0}:54333/connect/token", System.Net.Dns.GetHostName().ToLowerInvariant());
+            string hostname = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string authorizationUrl = String.Format("https://{0}:54333/connect/token", hostname);
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
 
             parameters["grant_type"] = "client_credentials";
             parameters["client_id"] = "urn:localhost:OAuth2TestClient";
             parameters["client_secret"] = "secret";
-            parameters["scope"] = "pubsub";
-            parameters["resource"] = "urn:opcfoundation.org:ua:oauth2:resource:site";
+            parameters["scope"] = "UAPubSub";
+            parameters["resource"] = String.Format("urn:{0}:somecompany.com:GlobalDiscoveryServer", hostname);
 
             HttpClient client = new HttpClient();
             FormUrlEncodedContent content = new FormUrlEncodedContent(parameters);
@@ -77,7 +78,7 @@ namespace SessionlessMethodCallClient
 
         static JObject ToUInt32(uint value) { return JObject.Parse("{\"Type\":7,\"Body\":" + value.ToString() + "}"); }
         static JObject ToString(string value) { return JObject.Parse("{\"Type\":12,\"Body\":\"" + value.ToString() + "\"}"); }
-        static JToken ToNodeId(uint value) { return "i=" + value.ToString(); }
+        static JToken ToNodeId(uint value) { var item = new JObject(); item.Add("i", value); return item; }
 
         static void GetSecurityKeys(string groupName, string accessToken)
         {

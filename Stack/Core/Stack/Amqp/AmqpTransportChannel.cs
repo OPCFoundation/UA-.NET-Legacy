@@ -45,6 +45,7 @@ namespace Opc.Ua.Bindings
         private const string g_ImplementationString = "AmqpTransportChannel UA-AMQP " + AssemblyVersionInfo.CurrentVersion;
         #endregion
 
+        /// <remarks />
         public AmqpTransportChannel(ApplicationConfiguration configuration)
         {
             m_brokers = AmqpBrokerConfigurationCollection.Load(configuration);
@@ -429,6 +430,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public async void OnMessage(object sender, AmqpReceiveMessageEventArgs e)
         {                        
             // extract the request id from the correlation id.

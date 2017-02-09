@@ -26,8 +26,10 @@ using System.Net.Http;
 
 namespace Opc.Ua
 {
+    /// <remark />
     public class JwtUtils
     {
+        /// <remark />
         public static IUserIdentity ValidateToken(Uri authorityUrl, X509Certificate2 authorityCertificate, string issuerUri, string audiance, string jwt)
         {
             var task = ValidateTokenAsync(authorityUrl, authorityCertificate, issuerUri, audiance, jwt);
@@ -35,6 +37,7 @@ namespace Opc.Ua
             return task.Result;
         }
 
+        /// <remark />
         public static async Task<IUserIdentity> ValidateTokenAsync(Uri authorityUrl, X509Certificate2 authorityCertificate, string issuerUri, string audiance, string jwt)
         {
             JwtSecurityToken token = new JwtSecurityToken(jwt);
@@ -72,6 +75,7 @@ namespace Opc.Ua
             return new UserIdentity(validatedToken);
         }
 
+        /// <remark />
         public static OpenIdConnectConfiguration Discover(Uri authorityUrl)
         {
             var task = DiscoverAsync(authorityUrl);
@@ -79,12 +83,14 @@ namespace Opc.Ua
             return task.Result;
         }
 
+        /// <remark />
         public static async Task<OpenIdConnectConfiguration> DiscoverAsync(Uri authorityUrl)
         {
             ConfigurationManager<OpenIdConnectConfiguration> configManager = new ConfigurationManager<OpenIdConnectConfiguration>(authorityUrl.ToString());
             return await configManager.GetConfigurationAsync();
         }
 
+        /// <remark />
         public static string RequestTokenForApplication(UserTokenPolicy policy, string clientId, string clientSecret, string scope = null)
         {
             var task = RequestTokenForApplicationAsync(policy, clientId, clientSecret, scope);
@@ -92,6 +98,7 @@ namespace Opc.Ua
             return task.Result;
         }
 
+        /// <remark />
         public static async Task<string> RequestTokenForApplicationAsync(UserTokenPolicy policy, string clientId, string clientSecret, string scope = null)
         {
             if (policy == null)
@@ -166,16 +173,25 @@ namespace Opc.Ua
         }
     }
 
+    /// <remark />
     public class JwtEndpointParameters
     {
+        /// <remark />
         public string AuthorityUrl;
+        /// <remark />
         public string AuthorityProfileUri;
+        /// <remark />
         public string TokenEndpoint;
+        /// <remark />
         public string AuthorizationEndpoint;
+        /// <remark />
         public List<string> RequestTypes;
+        /// <remark />
         public string ResourceId;
+        /// <remark />
         public List<string> Scopes;
 
+        /// <remark />
         public string ToJson()
         {
             var encoder = new JsonEncoder(ServiceMessageContext.GlobalContext, true);
@@ -191,6 +207,7 @@ namespace Opc.Ua
             return encoder.CloseAndReturnText();
         }
 
+        /// <remark />
         public void FromJson(string json)
         {
             var decoder = new JsonDecoder(json, ServiceMessageContext.GlobalContext);
@@ -205,12 +222,18 @@ namespace Opc.Ua
         }
     }
 
+    /// <remark />
     public static class JwtConstants
     {
+        /// <remark />
         public const string JwtUserTokenPolicy = "http://opcfoundation.org/UA/UserToken#JWT";
+        /// <remark />
         public const string OAuth2AuthorizationPolicy = "http://opcfoundation.org/UA/Authorization#OAuth2";
+        /// <remark />
         public const string AzureIdentityProviderPolicy = "http://opcfoundation.org/UA/IdentityProvider#Azure";
+        /// <remark />
         public const string OAuth2AuthorizationCode = "authorization_code";
+        /// <remark />
         public const string OAuth2ClientCredentials = "client_credentials";
     }
 }

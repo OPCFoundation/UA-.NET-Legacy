@@ -587,6 +587,14 @@
   </xs:complexType>
   <xs:element name="ListOfTrustListDataType" type="tns:ListOfTrustListDataType" nillable="true"></xs:element>
 
+  <xs:complexType name="DecimalDataType">
+    <xs:sequence>
+      <xs:element name="Scale" type="xs:short" minOccurs="0" />
+      <xs:element name="Value" type="xs:base64Binary" minOccurs="0" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DecimalDataType" type="tns:DecimalDataType" />
+
   <xs:complexType name="ConfigurationVersionDataType">
     <xs:sequence>
       <xs:element name="MajorVersion" type="xs:unsignedInt" minOccurs="0" />

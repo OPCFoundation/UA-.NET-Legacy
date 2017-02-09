@@ -198,7 +198,7 @@ namespace Opc.Ua
                 {
                     Uri url = new Uri(baseAddress);
 
-                    if (url.DnsSafeHost != "localhost")
+                    if (url.Scheme == "opc.tcp" && url.DnsSafeHost != "localhost")
                     {
                         hostname = url.DnsSafeHost;
                         break;

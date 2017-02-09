@@ -260,6 +260,11 @@
     <opc:Field Name="IssuerCrls" TypeName="opc:ByteString" LengthField="NoOfIssuerCrls" />
   </opc:StructuredType>
 
+  <opc:StructuredType Name="DecimalDataType" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Scale" TypeName="opc:Int16" />
+    <opc:Field Name="Value" TypeName="opc:ByteString" />
+  </opc:StructuredType>
+
   <opc:StructuredType Name="ConfigurationVersionDataType" BaseType="ua:ExtensionObject">
     <opc:Field Name="MajorVersion" TypeName="opc:UInt32" />
     <opc:Field Name="MinorVersion" TypeName="opc:UInt32" />

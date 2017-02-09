@@ -31,9 +31,12 @@ using Amqp.Types;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks />
     public class GenericAmqpConnection : IAmqpConnection, IDisposable
     {
+        /// <remarks />
         public Uri BrokerUrl;
+        /// <remarks />
         public Address Address;
 
         private int m_refs;
@@ -52,6 +55,7 @@ namespace Opc.Ua.Bindings
         private int m_tokenLifetime;
         private DateTime m_currentExpiryTime;
 
+        /// <remarks />
         public GenericAmqpConnection(
             string brokerUrl,
             AmqpListenerSettings settings)
@@ -65,11 +69,13 @@ namespace Opc.Ua.Bindings
             m_tokenLifetime = Math.Max((int)settings.TokenRenewalInterval, 60000);
         }
 
+        /// <remarks />
         public void Dispose()
         {
             Dispose(true);
         }
 
+        /// <remarks />
         public void Dispose(bool disposing)
         {
             if (disposing)
@@ -102,6 +108,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public async Task RenewTokenAsync(int expiryTime)
         {
             if (m_disposed)
@@ -127,6 +134,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public async Task UpdateTokenAsync(string tokenUri, string accessToken)
         {
             if (m_disposed)
@@ -155,18 +163,22 @@ namespace Opc.Ua.Bindings
             m_link.Closed += new ClosedCallback(OnLinkClosed);
         }
 
+        /// <remarks />
         public event EventHandler<AmqpConnectionEventArgs> ConnectionClosed;
 
+        /// <remarks />
         internal bool IsDisposed
         {
             get { return m_disposed; }
         }
 
+        /// <remarks />
         public int AddRef()
         {
             return Interlocked.Increment(ref m_refs);
         }
 
+        /// <remarks />
         public int Release()
         {
             var refs = Interlocked.Decrement(ref m_refs);
@@ -179,6 +191,7 @@ namespace Opc.Ua.Bindings
             return refs;
         }
 
+        /// <remarks />
         public async Task OpenAsync(string amqpNodeName, string sendKeyName, string sendKeyValue)
         {
             if (m_disposed)
@@ -278,6 +291,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public void Close()
         {
             Dispose(true);
@@ -292,6 +306,7 @@ namespace Opc.Ua.Bindings
             m_currentExpiryTime = DateTime.UtcNow + lifetime;
         }
 
+        /// <remarks />
         public async Task SendAsync(AmqpServiceMessageSettings settings, ArraySegment<byte> body)
         {
             if (m_disposed)
@@ -343,6 +358,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public async Task SendAsync(AmqpPubSubMessageSettings settings, ArraySegment<byte> body)
         {
             if (m_disposed)

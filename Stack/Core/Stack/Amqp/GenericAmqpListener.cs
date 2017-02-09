@@ -32,6 +32,7 @@ using Amqp.Types;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks />
     public class GenericAmqpListener : IAmqpListener, IDisposable
     {
         private ConnectionManager m_connections;
@@ -44,21 +45,28 @@ namespace Opc.Ua.Bindings
         private static HashSet<Connection> m_cbsSessions = new HashSet<Connection>();
         private Dictionary<string, IAmqpMessageSink> m_sinks = new Dictionary<string, IAmqpMessageSink>();
 
+        /// <remarks />
         public Address Address { get; set; }
+        /// <remarks />
         public int MessageSize { get; set; }
+        /// <remarks />
         public int ChunkSize { get; set; }
+        /// <remarks />
         public string AmqpNodeName { get; set; }
 
+        /// <remarks />
         public GenericAmqpListener()
         {
             m_connections = new ConnectionManager();
         }
 
+        /// <remarks />
         public void Dispose()
         {
             Dispose(true);
         }
 
+        /// <remarks />
         public void Dispose(bool disposing)
         {
             if (disposing)
@@ -128,6 +136,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public void RegisterSink(string groupId, IAmqpMessageSink sink)
         {
             if (groupId == null)
@@ -146,6 +155,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public void UnregisterSink(string groupId)
         {
             if (groupId != null)
@@ -157,6 +167,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public async Task ListenAsync(AmqpListenerSettings settings, string amqpNodeName)
         {
             m_connections = new ConnectionManager();
@@ -253,6 +264,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public static async Task AssociateNamespaceEntityTokenAsync(Connection connection, Uri entityUri, string sharedAccessToken)
         {
             var session = new Session(connection);
@@ -303,6 +315,7 @@ namespace Opc.Ua.Bindings
             await session.CloseAsync();
         }
 
+        /// <remarks />
         public static DateTime GetTokenExpiryTime(string accessToken)
         {
             if (String.IsNullOrEmpty(accessToken))
@@ -339,6 +352,7 @@ namespace Opc.Ua.Bindings
             return new DateTime(ticks, DateTimeKind.Utc);
         }
 
+        /// <remarks />
         public static string GenerateSharedAccessToken(string keyName, string keyValue, Uri requestUri, TimeSpan ttl)
         {
             // http://msdn.microsoft.com/en-us/library/azure/dn170477.aspx
@@ -363,6 +377,7 @@ namespace Opc.Ua.Bindings
                 encodedUri);
         }
 
+        /// <remarks />
         public async Task<IAmqpConnection> ConnectAsync(string amqpNodeName, string serverKeyName = null, string serverKeyValue = null)
         {
             var connection = m_connections.Find(amqpNodeName) as GenericAmqpConnection;
@@ -508,6 +523,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public void Close()
         {
             Dispose(true);

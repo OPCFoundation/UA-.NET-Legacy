@@ -22,6 +22,7 @@ using System.Threading;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks />
     public class ConnectionManager : IDisposable
     {
         private class CachedConnection
@@ -66,6 +67,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public ConnectionManager()
         {
             m_connections = new Dictionary<string, CachedConnection>();
@@ -73,11 +75,13 @@ namespace Opc.Ua.Bindings
             m_cleanupTimer = new Timer(OnCleanupTimerExpired, null, m_connectionExpiryTime, m_connectionExpiryTime / 2);
         }
 
+        /// <remarks />
         public void Dispose()
         {
             Dispose(true);
         }
 
+        /// <remarks />
         public void Dispose(bool disposing)
         {
             if (disposing)
@@ -100,6 +104,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public IAmqpConnection Find(string amqpNodeName)
         {
             lock (m_connections)
@@ -117,6 +122,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public void Save(string amqpNodeName, IAmqpConnection connection)
         {
             lock (m_connections)
@@ -150,6 +156,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public void Remove(string amqpNodeName)
         {
             lock (m_connections)
@@ -158,6 +165,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
         public void RenewTokens()
         {
             List<CachedConnection> connectionsToRenew = new List<CachedConnection>();

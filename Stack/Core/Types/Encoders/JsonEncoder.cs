@@ -38,6 +38,7 @@ namespace Opc.Ua
         private ushort[] m_serverMappings;
         #endregion
 
+        /// <remark />
         public bool UseReversibleEncoding { get; private set; }
 
         #region Constructors

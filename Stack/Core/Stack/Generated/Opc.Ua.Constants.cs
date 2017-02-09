@@ -265,6 +265,11 @@ namespace Opc.Ua
         public const uint TrustListDataType = 12554;
 
         /// <summary>
+        /// The identifier for the DecimalDataType DataType.
+        /// </summary>
+        public const uint DecimalDataType = 17861;
+
+        /// <summary>
         /// The identifier for the ConfigurationVersionDataType DataType.
         /// </summary>
         public const uint ConfigurationVersionDataType = 14593;
@@ -4520,6 +4525,11 @@ namespace Opc.Ua
         public const uint TrustListDataType_Encoding_DefaultXml = 12676;
 
         /// <summary>
+        /// The identifier for the DecimalDataType_Encoding_DefaultXml Object.
+        /// </summary>
+        public const uint DecimalDataType_Encoding_DefaultXml = 17862;
+
+        /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultXml Object.
         /// </summary>
         public const uint ConfigurationVersionDataType_Encoding_DefaultXml = 14803;
@@ -5713,6 +5723,11 @@ namespace Opc.Ua
         /// The identifier for the TrustListDataType_Encoding_DefaultBinary Object.
         /// </summary>
         public const uint TrustListDataType_Encoding_DefaultBinary = 12680;
+
+        /// <summary>
+        /// The identifier for the DecimalDataType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public const uint DecimalDataType_Encoding_DefaultBinary = 17863;
 
         /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultBinary Object.
@@ -20255,6 +20270,11 @@ namespace Opc.Ua
         public static readonly NodeId TrustListDataType = new NodeId(Opc.Ua.DataTypes.TrustListDataType);
 
         /// <summary>
+        /// The identifier for the DecimalDataType DataType.
+        /// </summary>
+        public static readonly NodeId DecimalDataType = new NodeId(Opc.Ua.DataTypes.DecimalDataType);
+
+        /// <summary>
         /// The identifier for the ConfigurationVersionDataType DataType.
         /// </summary>
         public static readonly NodeId ConfigurationVersionDataType = new NodeId(Opc.Ua.DataTypes.ConfigurationVersionDataType);
@@ -24510,6 +24530,11 @@ namespace Opc.Ua
         public static readonly NodeId TrustListDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.TrustListDataType_Encoding_DefaultXml);
 
         /// <summary>
+        /// The identifier for the DecimalDataType_Encoding_DefaultXml Object.
+        /// </summary>
+        public static readonly NodeId DecimalDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.DecimalDataType_Encoding_DefaultXml);
+
+        /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultXml Object.
         /// </summary>
         public static readonly NodeId ConfigurationVersionDataType_Encoding_DefaultXml = new NodeId(Opc.Ua.Objects.ConfigurationVersionDataType_Encoding_DefaultXml);
@@ -25703,6 +25728,11 @@ namespace Opc.Ua
         /// The identifier for the TrustListDataType_Encoding_DefaultBinary Object.
         /// </summary>
         public static readonly NodeId TrustListDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.TrustListDataType_Encoding_DefaultBinary);
+
+        /// <summary>
+        /// The identifier for the DecimalDataType_Encoding_DefaultBinary Object.
+        /// </summary>
+        public static readonly NodeId DecimalDataType_Encoding_DefaultBinary = new NodeId(Opc.Ua.Objects.DecimalDataType_Encoding_DefaultBinary);
 
         /// <summary>
         /// The identifier for the ConfigurationVersionDataType_Encoding_DefaultBinary Object.
@@ -41807,6 +41837,11 @@ namespace Opc.Ua
         /// The BrowseName for the Decimal component.
         /// </summary>
         public const string Decimal = "Decimal";
+
+        /// <summary>
+        /// The BrowseName for the DecimalDataType component.
+        /// </summary>
+        public const string DecimalDataType = "DecimalDataType";
 
         /// <summary>
         /// The BrowseName for the DecimalString component.

@@ -149,6 +149,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
 
+        /// <remarks/>
         public void CreateConnection(Uri url)
         {
             if (ConnectionStatusChanged == null || ConnectionWaiting == null)
@@ -170,147 +171,13 @@ namespace Opc.Ua.Bindings
             get { return m_uri; }
         }
 
-        /*
-        [ServiceContract]
-        private interface ICrossDomainPolicy
-        {
-            [OperationContract]
-            [WebGet(UriTemplate = "ClientAccessPolicy.xml")]
-            Message ProvidePolicyFile();
-        }
-
-        [ServiceContract]
-        private interface IInvokeService
-        {
-            [OperationContract, WebInvoke(UriTemplate = "*")]
-            Stream Post(Stream istrm);
-        }
-
-        [ServiceBehavior(Namespace = Namespaces.OpcUaWsdl, ConcurrencyMode = ConcurrencyMode.Multiple, InstanceContextMode=InstanceContextMode.Single)]
-        private class Service : IInvokeService, ICrossDomainPolicy
-        {
-            public Service()
-            {
-            }
-
-            public UaHttpsChannelListener Listener
-            {
-                get { return m_listener; }
-                set { m_listener = value; }
-            }
-
-            private UaHttpsChannelListener m_listener;
-
-            public System.ServiceModel.Channels.Message ProvidePolicyFile()
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                Stream istrm = assembly.GetManifestResourceStream("Opc.Ua.Stack.Server.ClientAccessPolicy.xml");
-
-                if (istrm != null)
-                {
-                    XmlReader reader = XmlReader.Create(istrm);
-                    System.ServiceModel.Channels.Message result = Message.CreateMessage(MessageVersion.None, "", reader);
-                    return result;
-                }
-
-                return null;
-            }
-
-            public Stream Post(Stream istrm)
-            {
-                MemoryStream mstrm = new MemoryStream();
-
-                int bytesRead = 0;
-                byte[] buffer = new byte[4096];
-
-                do
-                {
-                    bytesRead = istrm.Read(buffer, 0, buffer.Length);
-                    mstrm.Write(buffer, 0, bytesRead);
-                }
-                while (bytesRead != 0);
-                mstrm.Position = 0;
-
-                Dictionary<string, string> options = Parse(WebOperationContext.Current.IncomingRequest.ContentType);
-                string securityPolicyUri = WebOperationContext.Current.IncomingRequest.Headers["OPCUA-SecurityPolicy"];
-
-                StringBuilder contentType2 = new StringBuilder();
-                string action = null;
-
-                if (options[String.Empty] == "application/octet-stream")
-                {
-                    contentType2.Append("application/octet-stream");
-                }
-
-                else if (options[String.Empty] == "application/soap+xml")
-                {
-                    action = options["action"];
-
-                    if (action == null)
-                    {
-                        throw new WebException("SOAP Action not specified.");
-                    }
-
-                    action = action.Substring(Namespaces.OpcUaWsdl.Length+1);
-
-                    contentType2.Append("application/soap+xml; charset=\"utf-8\"; action=\"");
-                    contentType2.Append(Namespaces.OpcUaWsdl);
-                    contentType2.Append("/");
-                    contentType2.Append(action);
-                    contentType2.Append("Response");
-                }
-
-                else
-                {
-                    throw new WebException("ContentType not supported.");
-                }
-
-                WebOperationContext.Current.OutgoingResponse.ContentType = contentType2.ToString();
-
-                IAsyncResult result = m_listener.BeginProcessRequest(mstrm, action, securityPolicyUri, null);
-                Stream ostrm = m_listener.EndProcessRequest(result);
-
-                return ostrm;
-            }
-
-            /// <summary>
-            /// Parses the content type.
-            /// </summary>
-            private Dictionary<string, string> Parse(string contentType)
-            {
-                Dictionary<string, string> options = new Dictionary<string, string>();
-
-                string[] fields = contentType.Split(';');
-
-                for (int ii = 0; ii < fields.Length; ii++)
-                {
-                    string key = String.Empty;
-                    string value = null;
-
-                    int index = fields[ii].IndexOf('=');
-
-                    if (index != -1)
-                    {
-                        key = fields[ii].Substring(0, index).Trim();
-                        value = fields[ii].Substring(index + 1).Trim();
-                        value = value.Trim('"');
-                    }
-                    else
-                    {
-                        value = fields[ii].Trim();
-                    }
-
-                    options[key] = value;
-                }
-
-                return options;
-            }
-        }
-        */
+        /// <remarks/>
         public class DefaultHttpHandler : DelegatingHandler
         {
+            /// <remarks/>
             public UaHttpsChannelListener Listener { get; set; }
 
+            /// <remarks/>
             protected async override Task<HttpResponseMessage> SendAsync(
                 HttpRequestMessage request,
                 CancellationToken cancellationToken)
@@ -324,12 +191,13 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public class Startup
         {
+            /// <remarks/>
             public static UaHttpsChannelListener Listener { get; set; }
-      
-            // This code configures Web API. The Startup class is specified as a type
-            // parameter in the WebApp.Start method.
+
+            /// <remarks/>
             public void Configuration(IAppBuilder appBuilder)
             {
                 HttpConfiguration config = new HttpConfiguration();
@@ -345,33 +213,6 @@ namespace Opc.Ua.Bindings
         {
             Startup.Listener = this;
             WebApp.Start<Startup>(url: m_uri.ToString());
-
-            /*
-            lock (m_lock)
-            {
-
-                string path = root.Path;
-                root.Path = String.Empty;
-
-                WebHttpBinding binding = null;
-
-                if (root.Scheme == Utils.UriSchemeHttps)
-                {
-                    binding = new WebHttpBinding(WebHttpSecurityMode.Transport);
-                }
-                else
-                {
-                    binding = new WebHttpBinding();
-                }
-
-                Service service = new Service();
-                service.Listener = this;
-                m_host = new System.ServiceModel.ServiceHost(service, m_uri);
-                m_host.AddServiceEndpoint(typeof(ICrossDomainPolicy), binding, root.Uri).Behaviors.Add(new WebHttpBehavior());
-                m_host.AddServiceEndpoint(typeof(IInvokeService), binding, "").Behaviors.Add(new WebHttpBehavior());
-                m_host.Open();
-            }
-            */
         }
 
         /// <summary>
@@ -379,16 +220,6 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public void Stop()
         {
-            /*
-            lock (m_lock)
-            {
-                if (m_host != null)
-                {
-                    m_host.Close();
-                    m_host = null;
-                }
-            }
-            */
         }
         #endregion
 

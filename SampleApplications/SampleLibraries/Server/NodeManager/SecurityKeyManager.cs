@@ -37,18 +37,21 @@ using System.Threading.Tasks;
 
 namespace Opc.Ua.Server
 {
+    /// <remarks />
     public class SecurityKeyManager
     {
         private object m_lock = new object();
         private Dictionary<string, SecurityGroup> m_groups;
         private RandomNumberGenerator m_rng;
 
+        /// <remarks />
         public SecurityKeyManager()
         {
             m_groups = new Dictionary<string, SecurityGroup>();
             m_rng = new RNGCryptoServiceProvider();
         }
 
+        /// <remarks />
         public SecurityGroup New(
             string groupId, 
             string securityPolicyUri, 
@@ -72,6 +75,7 @@ namespace Opc.Ua.Server
             }
         }
 
+        /// <remarks />
         public void Delete(string groupId)
         {
             lock (m_lock)
@@ -80,6 +84,7 @@ namespace Opc.Ua.Server
             }
         }
 
+        /// <remarks />
         public SecurityGroup Find(string groupId)
         {
             SecurityGroup group = null;
@@ -92,6 +97,7 @@ namespace Opc.Ua.Server
             return group;
         }
 
+        /// <remarks />
         public StatusCode GetSecurityKeys(
            ISystemContext context,
            string securityGroupId,
@@ -161,28 +167,38 @@ namespace Opc.Ua.Server
         }
     }
 
+    /// <remarks />
     public class SecurityGroup
     {
         private object m_lock = new object();
         private LinkedList<byte[]> m_keys;
         private RandomNumberGenerator m_rng;
 
+        /// <remarks />
         public string Id { get; internal set; }
 
+        /// <remarks />
         public string SecurityPolicyUri { get; internal set; }
 
+        /// <remarks />
         public IList<NodeId> AllowedRoles { get; internal set; }
 
+        /// <remarks />
         public uint TokenId { get; private set; }
 
+        /// <remarks />
         public uint KeySize { get; private set; }
 
+        /// <remarks />
         public byte[] CurrentKey { get; private set; }
 
+        /// <remarks />
         public TimeSpan KeyLifetime { get; private set; }
 
+        /// <remarks />
         public DateTime CurrentKeyIssueTime { get; private set; }
 
+        /// <remarks />
         public void Initialize(DateTime startTime, TimeSpan lifeTime, RandomNumberGenerator rng)
         {
             lock (m_lock)
@@ -215,6 +231,7 @@ namespace Opc.Ua.Server
             }
         }
 
+        /// <remarks />
         public void GetFutureKeys(byte[][] keys)
         {
             lock (m_lock)
@@ -231,6 +248,7 @@ namespace Opc.Ua.Server
             }
         }
 
+        /// <remarks />
         public void GenerateKeys(uint count)
         {
             lock (m_lock)

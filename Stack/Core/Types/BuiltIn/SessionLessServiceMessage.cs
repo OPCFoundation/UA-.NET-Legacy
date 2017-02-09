@@ -25,29 +25,37 @@ using System.Runtime.Serialization;
 
 namespace Opc.Ua
 {
+    /// <remark />
     public struct SessionLessServiceMessage : IEncodeable
     {
+        /// <remark />
         public NamespaceTable NamespaceUris;
 
+        /// <remark />
         public StringTable ServerUris;
 
+        /// <remark />
         public IEncodeable Message;
 
+        /// <remark />
         public ExpandedNodeId TypeId
         {
             get { return DataTypeIds.SessionLessServiceMessageType; }
         }
 
+        /// <remark />
         public ExpandedNodeId BinaryEncodingId
         {
             get { return ObjectIds.SessionLessServiceMessageType_Encoding_DefaultBinary; }
         }
 
+        /// <remark />
         public ExpandedNodeId XmlEncodingId
         {
             get { return ObjectIds.SessionLessServiceMessageType_Encoding_DefaultXml; }
         }
 
+        /// <remark />
         public void Encode(IEncoder encoder)
         {
             if (NamespaceUris != null && NamespaceUris.Count > 1)
@@ -100,6 +108,7 @@ namespace Opc.Ua
             }
         }
 
+        /// <remark />
         public void Decode(IDecoder decoder)
         {
             NamespaceUris = new NamespaceTable();
@@ -142,11 +151,13 @@ namespace Opc.Ua
             }
         }
 
+        /// <remark />
         public bool IsEqual(IEncodeable encodeable)
         {
             throw new NotImplementedException();
         }
 
+        /// <remark />
         public object Clone()
         {
             throw new NotImplementedException();

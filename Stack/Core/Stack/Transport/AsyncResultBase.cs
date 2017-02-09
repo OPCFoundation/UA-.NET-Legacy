@@ -43,9 +43,6 @@ namespace Opc.Ua
         /// <summary>
         /// Initializes a new instance of the <see cref="AsyncResultBase"/> class.
         /// </summary>
-        /// <param name="callback">The callback to use when the operation completes.</param>
-        /// <param name="callbackData">The callback data.</param>
-        /// <param name="timeout">The timeout for the operation.</param>
         public AsyncResultBase(AsyncCallback callback, object callbackData, int timeout, CancellationTokenSource cts = null)
         {
             m_callback = callback;

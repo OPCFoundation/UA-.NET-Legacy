@@ -63,13 +63,7 @@ namespace Opc.Ua
             get { return m_tlsCertificate; }
             set { m_tlsCertificate = value; }
         }
-
-        /// <summary>
-        /// Gets or sets the server certificate chain.
-        /// </summary>
-        /// <value>
-        /// The server certificate chain.
-        /// </value>
+        
         //public X509Certificate2Collection ServerCertificateChain
         //{
         //    get { return m_serverCertificateChain; }
