@@ -32,9 +32,28 @@ The WebSocketsWebHmi project is a simple ASP .NET project that has been publishe
 
 The facilitate this requirement C# WebSockets Prototype Server checks the 'LocalMachine\My' store for a valid TLS certificate that matches the domain of the URL with a private key that the process can access. If one exists it uses this certificate as its TLS certificate instead of its application instance certificate. At the application level (i.e. the certificates used in the CreateSession/ActivateSession handshake) the C# WebSockets Prototype Server still uses its application instance certificate. Note that this feature requires that the Server application be lauched as an adminitrator.
 
+Note that setting up a certificate to get the WebSocket samples to work in a development environment takes a little fiddling:
+* 1) Create a Root CA certificate and install it in LocalMachine\Root certificate store;
+* 2) Create a HTTPS certificate with a common name (CN=) equal to the machine name that was issued by the Root CA and install in LocalMachine\My;
+* 3) Use Windows powershell to assign the certificate created in 2) to the websocket port used by the server (65200); 
 
+The command to create the CA certificate is:
+```
+Opc.Ua.CertificateGenerator.exe -sp pki -cmd issue -sn "CN=Prototyping 2017/O=My Company" -ca true -ks 2048 -lm 12 -st 131277024000000000
+```
 
+The command to create the HTTPS certificate is:
+```
+Opc.Ua.CertificateGenerator.exe -sp pki -cmd issue -sn CN=mycomputer -dn mycomputer,localhost -au urn:mycomputer -ks 2048 -st 131277024000000000 -lm 12 -ikf "pki\private\Prototyping 2017 [<thumprint of root ca certificate>].pfx"
+```
 
+The command to assign the HTTPS certificate to a port is (from power shell prompt):
+```
+netsh
+http
+add sslcert ipport=0.0.0.0:65200 certhash=<thumprint of HTTPS certificate> appid={<any valid guid>}
+```
 
+This has not been tested on Windows 7 and may require that TLS 1.2 be enabled. See [GDS setup](https://github.com/OPCFoundation/UA-.NET/blob/prototyping/GDS/gdsdb_setup.md) for more information.
 
 
