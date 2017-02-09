@@ -661,10 +661,7 @@ namespace Opc.Ua
                 m_instanceCertificate = value;
             }
         }
-
-        /// <summary>
-        /// Gets the instance certificate chain.
-        /// </summary>
+        
         /*protected X509Certificate2Collection InstanceCertificateChain
         {
             get

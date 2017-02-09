@@ -21,27 +21,34 @@ using System.Runtime.Serialization;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks />
     [DataContract(Namespace = Namespaces.OpcUaConfig)]
     public class AmqpConnectionConfiguration
     {
+        /// <remarks />
         [DataMember(Order = 1)]
         public string ConnectionName { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 2)]
         public string BrokerUrl { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 3)]
         public string GroupName { get; set; }
-       
+
+        /// <remarks />
         [DataMember(Order = 4)]
         public string TargetName { get; set; }
     }
 
+    /// <remarks />
     [CollectionDataContract(Name = "ListOfAmqpConnectionConfiguration", Namespace = Namespaces.OpcUaConfig, ItemName = "AmqpConnectionConfiguration")]
     public partial class AmqpConnectionConfigurationCollection : List<AmqpConnectionConfiguration>
     {
     }
 
+    /// <remarks />
     [DataContract(Namespace = Namespaces.OpcUaConfig)]
     public class AmqpDataSetConfiguration
     {
@@ -72,23 +79,29 @@ namespace Opc.Ua.Bindings
         #endregion
 
         #region Public Properties
+        /// <remarks />
         [DataMember(Order = 1)]
         public string Name { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 2)]
         public NodeId NotifierId { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 3)]
         public NodeId EventTypeId { get; set; }
 
+        /// <remarks />
         [DataMember(Order = 4)]
         public AmqpConnectionConfigurationCollection Connections { get; set; }
         #endregion
     }
 
+    /// <remarks />
     [CollectionDataContract(Name = "ListOfAmqpDataSetConfiguration", Namespace = Namespaces.OpcUaConfig, ItemName = "AmqpDataSetConfiguration")]
     public partial class AmqpDataSetConfigurationCollection : List<AmqpDataSetConfiguration>
     {
+        /// <remarks />
         public static AmqpDataSetConfigurationCollection Load(ApplicationConfiguration configuration)
         {
             if (configuration == null)

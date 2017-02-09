@@ -59,7 +59,7 @@ namespace JsonTester
 
             encoder.WriteDataValue("DataValue", dv);
 
-            var json = encoder.Close();
+            var json = encoder.CloseAndReturnText();
 
             JsonDecoder decoder = new JsonDecoder(json, ServiceMessageContext.GlobalContext);
 

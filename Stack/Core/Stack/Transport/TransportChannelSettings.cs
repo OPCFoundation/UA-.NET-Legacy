@@ -56,13 +56,7 @@ namespace Opc.Ua
             get { return m_clientCertificate; }
             set { m_clientCertificate = value; }
         }
-
-        /// <summary>
-        /// Gets or sets the client certificate chain.
-        /// </summary>
-        /// <value>
-        /// The client certificate chain.
-        /// </value>
+        
         //public X509Certificate2Collection ClientCertificateChain
         //{
         //    get { return m_clientCertificateChain; }

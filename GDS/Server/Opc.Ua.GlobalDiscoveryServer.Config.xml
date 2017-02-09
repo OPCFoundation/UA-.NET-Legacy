@@ -196,10 +196,10 @@
             <ClientSecret>secret</ClientSecret>
             <ClientName>OAuth2TestClient #1</ClientName>
             <AllowedScopes>
-              <ua:String>UAServer</ua:String>
+              <ua:String>UAPubSub</ua:String>
             </AllowedScopes>
             <AllowedRoles>
-              <ua:String>gds:admin</ua:String>
+              <ua:String>applications</ua:String>
             </AllowedRoles>
           </ClientRegistration>
           <ClientRegistration>
@@ -208,9 +208,12 @@
             <ClientName>OAuth2TestClient #2</ClientName>
             <AllowedScopes>
               <ua:String>UAServer</ua:String>
+              <ua:String>UAPubSub</ua:String>
             </AllowedScopes>
             <AllowedRoles>
-              <ua:String>gds:admin</ua:String>
+              <ua:String>applications</ua:String>
+              <ua:String>publishers</ua:String>
+              <ua:String>subscribers</ua:String>
             </AllowedRoles>
           </ClientRegistration>
         </Clients>

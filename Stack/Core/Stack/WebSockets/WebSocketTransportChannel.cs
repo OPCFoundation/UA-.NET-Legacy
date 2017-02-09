@@ -43,6 +43,7 @@ namespace Opc.Ua.Bindings
         private const string g_ImplementationString = "WebSocketTransportChannel UA-{0} " + AssemblyVersionInfo.CurrentVersion;
         #endregion
 
+        /// <remarks/>
         public WebSocketTransportChannel(ApplicationConfiguration configuration)
         {
             m_requests = new Dictionary<uint, SendRequestAsyncResult>();

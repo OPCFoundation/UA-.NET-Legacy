@@ -45,18 +45,18 @@
     <script>
         $(function () {
 
-            var CreateSessionRequest = "i=459";
-            var CreateSessionResponse = "i=462";
-            var ActivateSessionRequest = "i=465";
-            var ActivateSessionResponse = "i=468";
-            var CreateSubscriptionRequest = "i=785";
-            var CreateSubscriptionResponse = "i=788";
-            var CreateMonitoredItemsRequest = "i=749";
-            var CreateMonitoredItemsResponse = "i=752";
-            var PublishRequest = "i=824";
-            var PublishResponse = "i=827";
-            var CloseSessionRequest = "i=471";
-            var CloseSessionResponse = "i=474";
+            var CreateSessionRequest = JSON.parse("{\"i\":459}");
+            var CreateSessionResponse = JSON.parse("{\"i\":462}");
+            var ActivateSessionRequest = JSON.parse("{\"i\":465}");
+            var ActivateSessionResponse = JSON.parse("{\"i\":468}");
+            var CreateSubscriptionRequest = JSON.parse("{\"i\":785}");
+            var CreateSubscriptionResponse = JSON.parse("{\"i\":788}");
+            var CreateMonitoredItemsRequest = JSON.parse("{\"i\":749}");
+            var CreateMonitoredItemsResponse = JSON.parse("{\"i\":752}");
+            var PublishRequest = JSON.parse("{\"i\":824}");
+            var PublishResponse = JSON.parse("{\"i\":827}");
+            var CloseSessionRequest = JSON.parse("{\"i\":471}");
+            var CloseSessionResponse = JSON.parse("{\"i\":474}");
 
             var socket;
             var nextRequestId = 0;
@@ -99,15 +99,15 @@
                         return;
                     }
 
-                    if (typeId === CloseSessionResponse) {
+                    if (typeId.i === CloseSessionResponse.i) {
 
                         $('#connect').val("Connect");
                         socket.close();
                         socket = undefined;
                         return;
                     }
-
-                    if (typeId === CreateSessionResponse) {
+                    
+                    if (typeId.i === CreateSessionResponse.i) {
 
                         sessionId = response.Body.SessionId;
                         authenticationToken = response.Body.AuthenticationToken;
@@ -119,8 +119,8 @@
                         socket.send(JSON.stringify(request));
                         return;
                     }
-
-                    if (typeId === ActivateSessionResponse) {
+                    
+                    if (typeId.i === ActivateSessionResponse.i) {
 
                         var request = createRequest(CreateSubscriptionRequest);
 
@@ -136,8 +136,8 @@
                         socket.send(JSON.stringify(request));
                         return;
                     }
-
-                    if (typeId === CreateSubscriptionResponse) {
+                        
+                    if (typeId.i === CreateSubscriptionResponse.i) {
 
                         subscriptionId = response.Body.SubscriptionId;
 
@@ -148,7 +148,7 @@
 
                         var item = {};
                         item.ItemToMonitor = {};
-                        item.ItemToMonitor.NodeId = "i=2258"; // ServerStatus_CurrentTime
+                        item.ItemToMonitor.NodeId = JSON.parse("{\"i\":2258}"); // ServerStatus_CurrentTime
                         item.ItemToMonitor.AttributeId = 13;  // Value
                         item.MonitoringMode = 2;
                         item.RequestedParameters = {};
@@ -165,8 +165,8 @@
                         socket.send(JSON.stringify(request));
                         return;
                     }
-
-                    if (typeId === CreateMonitoredItemsResponse) {
+                        
+                    if (typeId.i === CreateMonitoredItemsResponse.i) {
 
                         monitoredItemId = response.Body.Results[0].MonitoredItemId;
 
@@ -177,8 +177,8 @@
                         socket.send(JSON.stringify(request));
                         return;
                     }
-
-                    if (typeId === PublishResponse) {
+                        
+                    if (typeId.i === PublishResponse.i) {
 
                         $('#sequenceNumber').val(response.Body.NotificationMessage.SequenceNumber)
                         $('#currentTime').val("***");

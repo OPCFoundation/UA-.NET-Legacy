@@ -365,12 +365,6 @@ namespace Opc.Ua.Server
             get { return m_diagnostics; }
         }
 
-        /// <summary>
-        /// Gets or sets the server certificate chain.
-        /// </summary>
-        /// <value>
-        /// The server certificate chain.
-        /// </value>
         //public byte[] ServerCertificateChain
         //{
         //    get { return m_serverCertificateChain; }

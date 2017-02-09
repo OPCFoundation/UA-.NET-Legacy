@@ -23,22 +23,26 @@ using System.IdentityModel.Tokens;
 
 namespace Opc.Ua
 {
+    /// <remarks/>
     public class RoleBasedIdentity : IUserIdentity
     {
         private IUserIdentity m_identity;
         private IList<NodeId> m_roles;
 
+        /// <remarks/>
         public RoleBasedIdentity(IUserIdentity identity, IList<NodeId> roles)
         {
             m_identity = identity;
             m_roles = roles;
         }
 
+        /// <remarks/>
         public IList<NodeId> Roles
         { 
             get { return m_roles; }
         }
 
+        /// <remarks/>
         public string DisplayName
         {
             get { return m_identity.DisplayName; }
@@ -53,26 +57,31 @@ namespace Opc.Ua
             get { return m_identity.PolicyId; }
         }
 
+        /// <remarks/>
         public UserTokenType TokenType
         {
             get { return m_identity.TokenType; }
         }
 
+        /// <remarks/>
         public XmlQualifiedName IssuedTokenType
         {
             get { return m_identity.IssuedTokenType; }
         }
 
+        /// <remarks/>
         public bool SupportsSignatures
         {
             get { return m_identity.SupportsSignatures; }
         }
 
+        /// <remarks/>
         public SecurityToken GetSecurityToken()
         {
             return m_identity.GetSecurityToken();
         }
 
+        /// <remarks/>
         public UserIdentityToken GetIdentityToken()
         {
             return m_identity.GetIdentityToken();

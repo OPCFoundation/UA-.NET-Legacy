@@ -29,54 +29,82 @@ using Amqp.Types;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks />
     public interface IAmqpConnection
     {
+        /// <remarks />
         event EventHandler<AmqpConnectionEventArgs> ConnectionClosed;
 
+        /// <remarks />
         int AddRef();
 
+        /// <remarks />
         int Release();
 
+        /// <remarks />
         void Close();
 
+        /// <remarks />
         Task SendAsync(AmqpServiceMessageSettings settings, ArraySegment<byte> body);
 
+        /// <remarks />
         Task SendAsync(AmqpPubSubMessageSettings settings, ArraySegment<byte> body);
 
+        /// <remarks />
         Task RenewTokenAsync(int expiryTime);
 
+        /// <remarks />
         Task UpdateTokenAsync(string tokenUri, string accessToken);
     }
 
+    /// <remarks />
     public class AmqpConnectionEventArgs
     {
+        /// <remarks />
         public AmqpConnectionEventArgs(string amqpNodeName)
         {
             AmqpNodeName = amqpNodeName;
         }
 
+        /// <remarks />
         public string AmqpNodeName { get; private set; }
     }
 
+    /// <remarks />
     public class AmqpServiceMessageSettings
     {
+        /// <remarks />
         public string MessageId;
+        /// <remarks />
         public string CorrelationId;
+        /// <remarks />
         public string TokenUri;
+        /// <remarks />
         public string TokenData;
+        /// <remarks />
         public string ChannelId;
+        /// <remarks />
         public uint SequenceNumber;
     }
 
+    /// <remarks />
     public class AmqpPubSubMessageSettings
     {
+        /// <remarks />
         public string MessageId;
+        /// <remarks />
         public string ContentType;
+        /// <remarks />
         public string PublisherId;
+        /// <remarks />
         public string Subject;
+        /// <remarks />
         public string DataSetWriterId;
+        /// <remarks />
         public uint SequenceNumber;
+        /// <remarks />
         public string DataSetClassId;
+        /// <remarks />
         public string MetadataNodeName;
     }
 }

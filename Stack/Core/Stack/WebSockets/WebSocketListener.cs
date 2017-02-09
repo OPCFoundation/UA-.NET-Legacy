@@ -29,6 +29,7 @@ using System.Text;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks/>
     public sealed class WebSocketListener : IDisposable
     {
         private bool m_disposed;
@@ -39,10 +40,14 @@ namespace Opc.Ua.Bindings
         private X509CertificateValidator m_certificateValidator;
         private CancellationTokenSource m_cts = new CancellationTokenSource();
 
+        /// <remarks/>
         public EventHandler<ReceiveMessageEventArgs> ReceiveMessage;
+        /// <remarks/>
         public EventHandler<ConnectionStateEventArgs> ConnectionOpened;
+        /// <remarks/>
         public EventHandler<ConnectionStateEventArgs> ConnectionClosed;
 
+        /// <remarks/>
         public WebSocketListener(Uri endpointUrl, TransportListenerSettings settings)
         {
             m_disposed = false;
@@ -78,6 +83,7 @@ namespace Opc.Ua.Bindings
             m_certificateValidator = settings.CertificateValidator;
         }
 
+        /// <remarks/>
         public WebSocketListener(TransportChannelSettings settings)
         {
             m_disposed = false;
@@ -109,13 +115,14 @@ namespace Opc.Ua.Bindings
             }
         }
 
-        // This code added to correctly implement the disposable pattern.
+        /// <remarks/>
         public void Dispose()
         {
             Dispose(true);
         }
         #endregion
 
+        /// <remarks/>
         public async Task ListenAsync(IPAddress address, int port)
         {
             m_listener = new TcpListener(IPAddress.IPv6Any, port);
@@ -198,6 +205,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public async Task<WebSocketConnection> ConnectAsync(
             string targetHost,
             IPAddress address,
@@ -241,6 +249,7 @@ namespace Opc.Ua.Bindings
             return connection;
         }
 
+        /// <remarks/>
         public Task CloseAsync()
         {
             m_cts.Cancel();
@@ -335,36 +344,48 @@ namespace Opc.Ua.Bindings
         }
     }
 
+    /// <remarks/>
     public sealed class ReceiveMessageEventArgs : EventArgs
     {
+        /// <remarks/>
         public ReceiveMessageEventArgs(WebSocketConnection connection, ArraySegment<byte> message)
         {
             Connection = connection;
             Message = message;
         }
 
+        /// <remarks/>
         public WebSocketConnection Connection { get; private set; }
 
+        /// <remarks/>
         public ArraySegment<byte> Message { get; private set; }
     }
 
+    /// <remarks/>
     public sealed class ConnectionStateEventArgs : EventArgs
     {
+        /// <remarks/>
         public ConnectionStateEventArgs(WebSocketConnection connection, ServiceResult error)
         {
             Connection = connection;
             Error = error;
         }
 
+        /// <remarks/>
         public WebSocketConnection Connection { get; private set; }
 
+        /// <remarks/>
         public ServiceResult Error { get; private set; }
     }
 
+    /// <remarks/>
     public enum TlsProtocol
     {
+        /// <remarks/>
         None,
+        /// <remarks/>
         TlsBestAvailable,
+        /// <remarks/>
         Tls12
     }
 }

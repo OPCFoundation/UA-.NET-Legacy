@@ -834,6 +834,9 @@ namespace Opc.Ua.Gds
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -1303,6 +1306,9 @@ namespace Opc.Ua.Gds
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -2211,6 +2217,9 @@ namespace Opc.Ua.Gds
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -2751,6 +2760,9 @@ namespace Opc.Ua.Gds
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);
@@ -2983,6 +2995,9 @@ namespace Opc.Ua.Gds
             InitializeOptionalChildren(context);
         }
 
+        /// <summary>
+        /// Initializes the instance with a node.
+        /// </summary>
         protected override void Initialize(ISystemContext context, NodeState source)
         {
             InitializeOptionalChildren(context);

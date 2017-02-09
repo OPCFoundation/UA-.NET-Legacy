@@ -165,7 +165,7 @@ namespace AmqpPublisher
 
                     body.Append("{ \"EventId\": \"");
                     body.Append(Convert.ToBase64String(Guid.NewGuid().ToByteArray()));
-                    body.Append("\", \"SourceNode\": { \"Id\": \"i=2253\" }, \"SourceName\": \"System\", \"EventType\": { \"Id\": \"i=11446\" }, \"Time\": \"");
+                    body.Append("\", \"SourceNode\": { \"i\":2253 }, \"SourceName\": \"System\", \"EventType\": { \"i\":11446 }, \"Time\": \"");
                     body.Append(DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));
                     body.Append("\", \"ReceiveTime\": \"");
                     body.Append(DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ss.fffZ"));

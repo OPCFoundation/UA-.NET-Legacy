@@ -221,7 +221,7 @@ namespace Opc.Ua.AuthorizationService
             // ensure a valid resource.
             var resource = request.ValidatedRequest.Raw["resource"];
 
-            if (String.IsNullOrEmpty(resource) || resource == Namespaces.OAuth2SiteResourceUri)
+            if (String.IsNullOrEmpty(resource))
             {
                 token.Audience = Server.CurrentInstance.ServerUris.GetString(0);
             }
@@ -316,6 +316,16 @@ namespace Opc.Ua.AuthorizationService
             if (!nameFound)
             {
                 token.Claims.Add(new Claim("name", token.Client.ClientName));
+            }
+
+            // remove non-compliant scope clame.
+            foreach (var claim in token.Claims)
+            {
+                if (claim.Type == "scope")
+                {
+                    token.Claims.Remove(claim);
+                    break;
+                }
             }
 
             // add scopes.

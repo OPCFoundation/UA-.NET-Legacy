@@ -160,6 +160,7 @@ namespace Opc.Ua
             return null;
         }
 
+        /// <remarks/>
         public static readonly string[] s_SupportedProfiles = new string[]
         {
             SecurityPolicies.None,
@@ -170,10 +171,6 @@ namespace Opc.Ua
         /// <summary>
         /// Finds the endpoint that best matches the current settings.
         /// </summary>
-        /// <param name="application">The application configuration.</param>
-        /// <param name="discoveryUrl">The discovery URL.</param>
-        /// <param name="useSecurity">if set to <c>true</c> select an endpoint that uses security.</param>
-        /// <returns>The best available endpoint.</returns>
         public static EndpointDescription SelectEndpoint(ApplicationConfiguration application, ITransportWaitingConnection connection, bool useSecurity)
         {
             // set a short timeout because this is happening in the drop down event.

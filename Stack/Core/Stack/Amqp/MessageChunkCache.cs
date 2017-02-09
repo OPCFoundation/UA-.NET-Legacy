@@ -28,6 +28,7 @@ using Amqp.Types;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks/>
     public class MessageChunkCache
     {
         private long m_messageExpiryTime;
@@ -64,6 +65,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public MessageChunkCache()
         {
             m_messages = new Dictionary<string, MessageBody>();
@@ -71,11 +73,13 @@ namespace Opc.Ua.Bindings
             m_cleanupTimer = new Timer(OnCleanupTimerExpired, null, m_messageExpiryTime, m_messageExpiryTime / 2);
         }
 
+        /// <remarks/>
         public void Dispose()
         {
             Dispose(true);
         }
 
+        /// <remarks/>
         public void Dispose(bool disposing)
         {
             if (disposing)
@@ -93,6 +97,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public MemoryStream Process(string sourceName, Stream input)
         {
             MessageChunk chunk = new MessageChunk();
@@ -152,12 +157,17 @@ namespace Opc.Ua.Bindings
         }
     }
 
+    /// <remarks/>
     public class MessageBody
     {
+        /// <remarks/>
         public uint MessageId;
+        /// <remarks/>
         public long CreationTime;
+        /// <remarks/>
         public List<MessageChunk> Chunks;
 
+        /// <remarks/>
         public void Encode(ArraySegment<byte> message, uint messageId, int maxChunkSize)
         {
             MessageId = messageId;
@@ -184,6 +194,7 @@ namespace Opc.Ua.Bindings
             Chunks[Chunks.Count - 1].IsFinalChunk = true;
         }
 
+        /// <remarks/>
         public void Encode(Stream istrm, uint messageId, int maxChunkSize)
         {
             MessageId = messageId;
@@ -216,6 +227,7 @@ namespace Opc.Ua.Bindings
             Chunks[Chunks.Count - 1].IsFinalChunk = true;
         }
 
+        /// <remarks/>
         public void Append(MessageChunk chunk)
         {
             if (Chunks == null)
@@ -236,17 +248,24 @@ namespace Opc.Ua.Bindings
         }
     }
 
+    /// <remarks/>
     public class MessageChunk
     {
+        /// <remarks/>
         public uint MessageId;
+        /// <remarks/>
         public int ChunkId;
+        /// <remarks/>
         public bool IsFinalChunk;
+        /// <remarks/>
         public ArraySegment<byte> Buffer;
-        
+
+        /// <remarks/>
         public MessageChunk()
         {
         }
 
+        /// <remarks/>
         public void Encode(MemoryStream ostrm)
         {
             var bits = BitConverter.GetBytes(MessageId);
@@ -265,6 +284,7 @@ namespace Opc.Ua.Bindings
             ostrm.Write(Buffer.Array, Buffer.Offset, Buffer.Count);
         }
 
+        /// <remarks/>
         public byte[] Encode()
         {
             int length = 8 + Buffer.Count;
@@ -288,6 +308,7 @@ namespace Opc.Ua.Bindings
             return buffer;
         }
 
+        /// <remarks/>
         public void Decode(Stream istrm)
         {
             MessageId = 0;
@@ -335,6 +356,7 @@ namespace Opc.Ua.Bindings
             Buffer = new ArraySegment<byte>(ostrm.ToArray());
         }
 
+        /// <remarks/>
         public void Decode(byte[] buffer)
         {
             MessageId = 0;

@@ -68,12 +68,15 @@ namespace Opc.Ua
     /// <summary>
     /// The arguments passed to the ConnectionWaiting event. 
     /// </summary>
-    public interface ITransportWaitingConnection 
+    public interface ITransportWaitingConnection
     {
+        /// <remarks/>
         string ServerUri { get; }
 
+        /// <remarks/>
         Uri EndpointUrl { get; }
 
+        /// <remarks/>
         object Handle { get; set; }
     }
 
@@ -90,16 +93,22 @@ namespace Opc.Ua
             Accepted = false;
         }
 
+        /// <remarks/>
         public string ServerUri { get; private set; }
 
+        /// <remarks/>
         public Uri EndpointUrl { get; private set; }
 
+        /// <remarks/>
         public EndpointDescription Endpoint { get; set; }
 
+        /// <remarks/>
         public object Handle { get { return Socket; } set { } }
 
+        /// <remarks/>
         internal object Socket { get; }
 
+        /// <remarks/>
         public bool Accepted { get; set; }
     }
 
@@ -115,10 +124,13 @@ namespace Opc.Ua
             Closed = closed;
         }
 
+        /// <remarks/>
         public Uri EndpointUrl { get; private set; }
 
+        /// <remarks/>
         public ServiceResult ChannelStatus { get; private set; }
 
+        /// <remarks/>
         public bool Closed { get; private set; }
     }
 }

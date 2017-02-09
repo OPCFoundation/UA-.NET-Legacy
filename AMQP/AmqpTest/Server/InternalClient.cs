@@ -492,7 +492,7 @@ namespace AmqpTestServer
                     encoder.WriteVariant(buffer.ToString(), notification.EventFields[ii]);
                 }
 
-                var json = encoder.Close();
+                var json = encoder.CloseAndReturnText();
                 var bytes = new UTF8Encoding(false).GetBytes(json);
 
                 foreach (var writer in m_writers)

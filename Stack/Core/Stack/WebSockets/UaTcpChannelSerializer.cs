@@ -364,8 +364,9 @@ namespace Opc.Ua.Bindings
             // defined by the sub-class. 
         }
         #endregion
-        
+
         #region Outgoing Message Support Functions
+        /// <remarks/>
         public ArraySegment<byte> ConstructHelloMessage()
         {
             byte[] buffer = BufferManager.TakeBuffer(SendBufferSize, "ConstructHelloMessage");
@@ -410,6 +411,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public ServiceResult ProcessHelloMessage(ArraySegment<byte> buffer)
         {
             using (BinaryDecoder decoder = new BinaryDecoder(buffer.Array, buffer.Offset, buffer.Count, Quotas.MessageContext))
@@ -496,6 +498,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public ArraySegment<byte> ConstructAcknowledgeMessage()
         {
             // send acknowledge.
@@ -529,7 +532,8 @@ namespace Opc.Ua.Bindings
                 }
             }
         }
-   
+
+        /// <remarks/>
         public void ProcessAcknowledgeMessage(ArraySegment<byte> buffer)
         {
             BinaryDecoder decoder = new BinaryDecoder(buffer.Array, buffer.Offset, buffer.Count, Quotas.MessageContext);
@@ -589,6 +593,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public ArraySegment<byte> ConstructOpenSecureChannelRequest(bool renew)
         {
             BufferCollection chunksToSend = null;
@@ -635,6 +640,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public uint ProcessOpenSecureChannelRequest(ArraySegment<byte> buffer)
         {
             using (BinaryDecoder decoder = new BinaryDecoder(buffer.Array, buffer.Offset, buffer.Count, Quotas.MessageContext))
@@ -776,6 +782,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public ArraySegment<byte> ConstructOpenSecureChannelResponse(uint requestId)
         {
             BufferCollection chunksToSend = null;
@@ -815,6 +822,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public void ProcessOpenSecureChannelResponse(ArraySegment<byte> buffer)
         {
             using (BinaryDecoder decoder = new BinaryDecoder(buffer.Array, buffer.Offset, buffer.Count, Quotas.MessageContext))
@@ -900,6 +908,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public ArraySegment<byte> ConstructCloseSecureChannelRequest(uint requestId)
         {
             // check for valid token.
@@ -959,6 +968,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public bool ProcessCloseSecureChannelRequest(ArraySegment<byte> buffer)
         {
             // validate security on the message.
@@ -1009,6 +1019,7 @@ namespace Opc.Ua.Bindings
             return true;
         }
 
+        /// <remarks/>
         public BufferCollection ConstructRequest(uint requestId, IServiceRequest request)
         {
             BufferCollection buffers = null;
@@ -1057,7 +1068,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
-
+        /// <remarks/>
         public IServiceRequest ProcessRequest(ArraySegment<byte> buffer, out uint requestId)
         {
             using (BinaryDecoder decoder = new BinaryDecoder(buffer.Array, buffer.Offset, buffer.Count, Quotas.MessageContext))
@@ -1144,6 +1155,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public BufferCollection ConstructResponse(uint requestId, IServiceResponse response)
         {
             BufferCollection buffers = null;
@@ -1278,6 +1290,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks/>
         public ArraySegment<byte> ConstructErrorMessage(ServiceResult error)
         {
             byte[] buffer = BufferManager.TakeBuffer(SendBufferSize, "ConstructErrorMessage");

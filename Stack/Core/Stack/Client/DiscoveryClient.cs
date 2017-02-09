@@ -31,8 +31,6 @@ namespace Opc.Ua
         /// <summary>
         /// Creates a binding for to use for discovering servers.
         /// </summary>
-        /// <param name="discoveryUrl">The discovery URL.</param>
-        /// <returns></returns>
         public static DiscoveryClient Create(ApplicationConfiguration application, Uri discoveryUrl)
         {
             EndpointConfiguration configuration = EndpointConfiguration.Create();
@@ -43,9 +41,6 @@ namespace Opc.Ua
         /// <summary>
         /// Creates a binding for to use for discovering servers.
         /// </summary>
-        /// <param name="discoveryUrl">The discovery URL.</param>
-        /// <param name="configuration">The configuration.</param>
-        /// <returns></returns>
         public static DiscoveryClient Create(ApplicationConfiguration application, Uri discoveryUrl, EndpointConfiguration configuration)
         {
             if (configuration == null)
@@ -60,9 +55,6 @@ namespace Opc.Ua
         /// <summary>
         /// Creates a binding for to use for discovering servers.
         /// </summary>
-        /// <param name="connection">The connection to use.</param>
-        /// <param name="configuration">The configuration.</param>
-        /// <returns></returns>
         public static DiscoveryClient Create(ApplicationConfiguration application, ITransportWaitingConnection connection, EndpointConfiguration configuration)
         {
             if (configuration == null)
@@ -78,10 +70,6 @@ namespace Opc.Ua
         /// <summary>
         /// Creates a binding for to use for discovering servers.
         /// </summary>
-        /// <param name="discoveryUrl">The discovery URL.</param>
-        /// <param name="bindingFactory">The binding factory.</param>
-        /// <param name="configuration">The configuration.</param>
-        /// <returns></returns>
         public static DiscoveryClient Create(ApplicationConfiguration application, Uri discoveryUrl, BindingFactory bindingFactory, EndpointConfiguration configuration)
         {
             if (discoveryUrl == null) throw new ArgumentNullException("discoveryUrl");
@@ -152,10 +140,6 @@ namespace Opc.Ua
         /// <summary>
         /// Creates a new transport channel that supports the ISessionChannel service contract.
         /// </summary>
-        /// <param name="discoveryUrl">The discovery url.</param>
-        /// <param name="endpointConfiguration">The configuration to use with the endpoint.</param>
-        /// <param name="messageContext">The message context to use when serializing the messages.</param>
-        /// <returns></returns>
         public static ITransportChannel Create(
             ApplicationConfiguration configuration, 
             Uri discoveryUrl,
@@ -184,10 +168,6 @@ namespace Opc.Ua
         /// <summary>
         /// Creates a new transport channel that supports the ISessionChannel service contract.
         /// </summary>
-        /// <param name="discoveryUrl">The discovery url.</param>
-        /// <param name="endpointConfiguration">The configuration to use with the endpoint.</param>
-        /// <param name="messageContext">The message context to use when serializing the messages.</param>
-        /// <returns></returns>
         public static ITransportChannel Create(
             ApplicationConfiguration configuration,
             ITransportWaitingConnection connection,
@@ -218,11 +198,6 @@ namespace Opc.Ua
         /// <summary>
         /// Creates a new transport channel that supports the IDiscoveryChannel service contract.
         /// </summary>
-        /// <param name="discoveryUrl">The discovery URL.</param>
-        /// <param name="bindingFactory">The binding factory.</param>
-        /// <param name="endpointConfiguration">The endpoint configuration.</param>
-        /// <param name="messageContext">The message context.</param>
-        /// <returns></returns>
         public static ITransportChannel Create(
             ApplicationConfiguration configuration, 
             Uri discoveryUrl,

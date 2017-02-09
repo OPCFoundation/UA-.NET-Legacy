@@ -52,7 +52,7 @@ namespace Opc.Ua.Bindings
 
         #region Constructors
         /// <summary>
-        /// Initializes a new instance of the <see cref="AmqpChannelListener"/> class.
+        /// Initializes a new instance of the <see cref="WebSocketTransportListener"/> class.
         /// </summary>
         public WebSocketTransportListener()
         {
@@ -160,6 +160,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
 
+        /// <remarks/>
         public void CreateConnection(Uri url)
         {
             if (ConnectionStatusChanged == null || ConnectionWaiting == null)

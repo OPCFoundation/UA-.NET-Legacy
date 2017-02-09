@@ -221,6 +221,7 @@ namespace Opc.Ua.Server
         #endregion
 
         #region Protected Members
+        /// <remarks />
         protected virtual IList<RolePermissionType> GetDefaultRolePermissions()
         {
             var rolePermissions = new RolePermissionType[]
@@ -250,6 +251,7 @@ namespace Opc.Ua.Server
             return rolePermissions;
         }
 
+        /// <remarks />
         protected virtual ServiceResult ReadDefaultRolePermissions(
             ISystemContext context,
             NodeState node,
@@ -272,6 +274,7 @@ namespace Opc.Ua.Server
             return StatusCodes.BadUserAccessDenied;
         }
 
+        /// <remarks />
         protected virtual ServiceResult ReadDefaultUserRolePermissions(
             ISystemContext context,
             NodeState node,
@@ -300,6 +303,7 @@ namespace Opc.Ua.Server
             return StatusCodes.Good;
         }
 
+        /// <remarks />
         protected virtual ServiceResult ReadDefaultAccessRestrictions(
             ISystemContext context,
             NodeState node,

@@ -54,8 +54,6 @@ namespace Opc.Ua.Server
         /// <summary>
         /// Initializes the context with a session.
         /// </summary>
-        /// <param name="requestHeader">The request header.</param>
-        /// <param name="requestType">Type of the request.</param>
         public OperationContext(RequestHeader requestHeader, RequestType requestType, IUserIdentity identity = null)
         {
             if (requestHeader == null) throw new ArgumentNullException("requestHeader");

@@ -39,6 +39,7 @@ namespace Opc.Ua
         #endregion
 
         #region Constructors
+        /// <remark />
         public JsonDecoder(string json, ServiceMessageContext context)
         {
             if (context == null) throw new ArgumentNullException("context");
@@ -52,6 +53,7 @@ namespace Opc.Ua
             m_stack.Push(m_root);
         }
 
+        /// <remark />
         public JsonDecoder(System.Type systemType, JsonTextReader reader, ServiceMessageContext context)
         {
             Initialize();
@@ -374,6 +376,7 @@ namespace Opc.Ua
         {
         }
 
+        /// <remark />
         public bool ReadField(string fieldName, out object token)
         {
             token = null;
@@ -892,29 +895,38 @@ namespace Opc.Ua
                 return null;
             }
 
-            var namespaceIndex = ReadUInt16("u");
-
-            if (value.ContainsKey("i"))
+            try
             {
-                return new NodeId(ReadUInt32("i"), namespaceIndex);
-            }
+                m_stack.Push(value);
 
-            if (value.ContainsKey("s"))
+                var namespaceIndex = ReadUInt16("u");
+
+                if (value.ContainsKey("i"))
+                {
+                    return new NodeId(ReadUInt32("i"), namespaceIndex);
+                }
+
+                if (value.ContainsKey("s"))
+                {
+                    return new NodeId(ReadString("s"), namespaceIndex);
+                }
+
+                if (value.ContainsKey("g"))
+                {
+                    return new NodeId(ReadGuid("g"), namespaceIndex);
+                }
+
+                if (value.ContainsKey("b"))
+                {
+                    return new NodeId(ReadByteString("b"), namespaceIndex);
+                }
+
+                return new NodeId(0U, namespaceIndex);
+            }
+            finally
             {
-                return new NodeId(ReadString("s"), namespaceIndex);
+                m_stack.Pop();
             }
-
-            if (value.ContainsKey("g"))
-            {
-                return new NodeId(ReadGuid("g"), namespaceIndex);
-            }
-
-            if (value.ContainsKey("b"))
-            {
-                return new NodeId(ReadByteString("b"), namespaceIndex);
-            }
-
-            return new NodeId(0U, namespaceIndex);
         }
              
         /// <summary>
@@ -936,46 +948,55 @@ namespace Opc.Ua
                 return null;
             }
 
-            ushort namespaceIndex = 0;
-            string namespaceUri = null;
-            var serverIndex = ReadUInt32("v");
-
-            object ns = null;
-
-            if (value.TryGetValue("u", out ns))
+            try
             {
-                namespaceUri = ns as string;
+                m_stack.Push(value);
 
-                if (namespaceUri == null)
+                ushort namespaceIndex = 0;
+                string namespaceUri = null;
+                var serverIndex = ReadUInt32("v");
+
+                object ns = null;
+
+                if (value.TryGetValue("u", out ns))
                 {
-                    if (!UInt16.TryParse(ns.ToString(), out namespaceIndex))
+                    namespaceUri = ns as string;
+
+                    if (namespaceUri == null)
                     {
-                        namespaceIndex = 0;
+                        if (!UInt16.TryParse(ns.ToString(), out namespaceIndex))
+                        {
+                            namespaceIndex = 0;
+                        }
                     }
                 }
-            }
 
-            if (value.ContainsKey("i"))
+                if (value.ContainsKey("i"))
+                {
+                    return new ExpandedNodeId(ReadUInt32("i"), namespaceIndex, namespaceUri, serverIndex);
+                }
+
+                if (value.ContainsKey("s"))
+                {
+                    return new ExpandedNodeId(ReadString("s"), namespaceIndex, namespaceUri, serverIndex);
+                }
+
+                if (value.ContainsKey("g"))
+                {
+                    return new ExpandedNodeId(ReadGuid("g"), namespaceIndex, namespaceUri, serverIndex);
+                }
+
+                if (value.ContainsKey("b"))
+                {
+                    return new ExpandedNodeId(ReadByteString("b"), namespaceIndex, namespaceUri, serverIndex);
+                }
+
+                return new ExpandedNodeId(0U, namespaceIndex, namespaceUri, serverIndex);
+            }
+            finally
             {
-                return new ExpandedNodeId(ReadUInt32("i"), namespaceIndex, namespaceUri, serverIndex);
+                m_stack.Pop();
             }
-
-            if (value.ContainsKey("s"))
-            {
-                return new ExpandedNodeId(ReadString("s"), namespaceIndex, namespaceUri, serverIndex);
-            }
-
-            if (value.ContainsKey("g"))
-            {
-                return new ExpandedNodeId(ReadGuid("g"), namespaceIndex, namespaceUri, serverIndex);
-            }
-
-            if (value.ContainsKey("b"))
-            {
-                return new ExpandedNodeId(ReadByteString("b"), namespaceIndex, namespaceUri, serverIndex);
-            }
-
-            return new ExpandedNodeId(0U, namespaceIndex, namespaceUri, serverIndex);
         }
 
         /// <summary>

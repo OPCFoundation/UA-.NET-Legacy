@@ -98,6 +98,7 @@ namespace Opc.Ua.Bindings
             public TcpMessageSocket Socket;
         }
 
+        /// <remarks/>
         public IAsyncResult BeginReverseHello(uint channelId, Uri endpointUrl, AsyncCallback callback, object callbackData, int timeout)
         {
             ChannelId = channelId;
@@ -112,6 +113,7 @@ namespace Opc.Ua.Bindings
             return ar;
         }
 
+        /// <remarks/>
         public void EndReverseHello(IAsyncResult result)
         {
             var ar = result as ReverseHelloAsyncResult;

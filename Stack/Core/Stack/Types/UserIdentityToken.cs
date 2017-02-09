@@ -260,11 +260,16 @@ namespace Opc.Ua
         #endregion
     }
 
+    /// <remark />
     public enum IssuedTokenType
     {
+        /// <remark />
         GenericWSS,
+        /// <remark />
         SAML,
+        /// <remark />
         JWT,
+        /// <remark />
         KerberosBinary
     };
 

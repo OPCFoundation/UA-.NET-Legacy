@@ -202,6 +202,7 @@ namespace Opc.Ua.Bindings
         /// </summary>
         public event EventHandler<ConnectionStatusEventArgs> ConnectionStatusChanged;
 
+        /// <remarks/>
         public void CreateConnection(Uri url)
         { 
             TcpServerChannel channel = new TcpServerChannel(

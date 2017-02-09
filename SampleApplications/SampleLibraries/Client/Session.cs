@@ -86,6 +86,7 @@ namespace Opc.Ua.Client
             Initialize(channel, configuration, endpoint, clientCertificate); 
         }
 
+        /// <remarks />
         public Session(
             ITransportChannel channel,
             ApplicationConfiguration configuration,
@@ -690,6 +691,7 @@ namespace Opc.Ua.Client
         #endregion
 
         #region Public Methods
+        /// <remarks />
         public static Session Create(
             ApplicationConfiguration configuration,
             ITransportWaitingConnection connection,

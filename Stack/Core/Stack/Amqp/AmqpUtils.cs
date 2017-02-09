@@ -24,11 +24,15 @@ using System.Threading.Tasks;
 
 namespace Opc.Ua.Bindings
 {
+    /// <remarks />
     public static class AmqpUtils
     {
+        /// <remarks />
         public static int AmqpDefaultPort = 5672;
+        /// <remarks />
         public static int AmqpsDefaultPort = 5679;
 
+        /// <remarks />
         public static byte[] CreateMessage(string prefix, int size)
         {
             foreach (var resourceName in Assembly.GetExecutingAssembly().GetManifestResourceNames())
@@ -63,12 +67,14 @@ namespace Opc.Ua.Bindings
         }
     }
 
+    /// <remarks />
     public static class TimeUtils
     {
         private static object m_lock = new object();
         private static long m_epoch;
         private static long m_lastTick;
 
+        /// <remarks />
         public static long GetTickCount()
         {
             long ticks = System.Environment.TickCount;
