@@ -822,7 +822,7 @@ namespace Opc.Ua
         /// <param name="clientCertificates">The client certificates.</param>
         /// <param name="messageContext">The message context.</param>
         /// <returns></returns>
-        /*public static ITransportChannel CreateUaBinaryChannel(
+        public static ITransportChannel CreateUaBinaryChannel(
             ApplicationConfiguration configuration,
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
@@ -916,8 +916,8 @@ namespace Opc.Ua
             settings.Configuration = endpointConfiguration;
             if (clientCertificates != null && clientCertificates.Count > 0)
             {
-                settings.ClientCertificate = clientCertificates[0];
-                //settings.ClientCertificateChain = clientCertificates;
+                //settings.ClientCertificate = clientCertificates[0];
+                settings.ClientCertificateChain = clientCertificates;
             }
 
             if (description.ServerCertificate != null && description.ServerCertificate.Length > 0)
@@ -966,7 +966,7 @@ namespace Opc.Ua
 
             return channel;
         }
-        */
+        
 
         /// <summary>
         /// Handles the Opened event of the InnerChannel control.
@@ -1358,7 +1358,7 @@ namespace Opc.Ua
         /// <param name="binding">The binding.</param>
         /// <param name="clientCertificates">The client certificates.</param>
         /// <param name="configurationName">Name of the configuration.</param>
-        /*public void Initialize(
+        public void Initialize(
             ApplicationConfiguration configuration,
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
@@ -1525,7 +1525,7 @@ namespace Opc.Ua
                 communicationObject.Opened += new EventHandler(InnerChannel_Opened);
             }
         }
-        */
+        
 #endif
         #endregion
 

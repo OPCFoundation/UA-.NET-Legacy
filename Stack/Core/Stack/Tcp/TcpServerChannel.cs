@@ -975,15 +975,29 @@ namespace Opc.Ua.Bindings
             response.SecurityToken.RevisedLifetime = (uint)token.Lifetime;
             response.ServerNonce = token.ServerNonce;
             
-            byte[] buffer = BinaryEncoder.EncodeMessage(response, Quotas.MessageContext); 
-            
-            BufferCollection chunksToSend = WriteAsymmetricMessage(
-                TcpMessageType.Open,
-                requestId,
-                //ServerCertificateChain,
-                ServerCertificate,
-                ClientCertificate,
-                new ArraySegment<byte>(buffer, 0, buffer.Length));
+            byte[] buffer = BinaryEncoder.EncodeMessage(response, Quotas.MessageContext);
+            BufferCollection chunksToSend = null;
+            if (ServerCertificateChain != null)
+            {
+                chunksToSend = WriteAsymmetricMessage(
+                    TcpMessageType.Open,
+                    requestId,
+                    ServerCertificateChain,
+                    //ServerCertificate,
+                    ClientCertificate,
+                    new ArraySegment<byte>(buffer, 0, buffer.Length));
+            }
+            else
+            {
+                chunksToSend = WriteAsymmetricMessage(
+                                    TcpMessageType.Open,
+                                    requestId,
+                                    //ServerCertificateChain,
+                                    ServerCertificate,
+                                    ClientCertificate,
+                                    new ArraySegment<byte>(buffer, 0, buffer.Length));
+
+            }
 
             // write the message to the server.
             try

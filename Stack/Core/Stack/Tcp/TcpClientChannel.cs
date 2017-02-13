@@ -481,15 +481,29 @@ namespace Opc.Ua.Bindings
             // encode the request.            
             byte[] buffer = BinaryEncoder.EncodeMessage(request, Quotas.MessageContext); 
 
+			BufferCollection chunksToSend;
+			
             // write the asymmetric message.
-            BufferCollection chunksToSend = WriteAsymmetricMessage(
+             if (ClientCertificateChain != null)
+            {
+                chunksToSend = WriteAsymmetricMessage(
+                TcpMessageType.Open,
+                m_handshakeOperation.RequestId,
+                ClientCertificateChain,
+                //ClientCertificate,
+                ServerCertificate,
+                new ArraySegment<byte>(buffer, 0, buffer.Length));
+            }else
+            {
+                chunksToSend = WriteAsymmetricMessage(
                 TcpMessageType.Open,
                 m_handshakeOperation.RequestId,
                 //ClientCertificateChain,
                 ClientCertificate,
                 ServerCertificate,
                 new ArraySegment<byte>(buffer, 0, buffer.Length));
-
+            }
+            
             // save token.
             m_requestedToken = token;
             

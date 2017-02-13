@@ -380,11 +380,11 @@ namespace Opc.Ua.Bindings
                 Guid.NewGuid().ToString(),
                 m_bufferManager,
                 m_quotas,
-                m_settings.ClientCertificate,
+                m_settings.ClientCertificateChain==null? m_settings.ClientCertificate: m_settings.ClientCertificateChain[0],
                 m_settings.ServerCertificate,
                 m_settings.Description);
 
-            //((TcpClientChannel)m_channel).ClientCertificateChain = m_settings.ClientCertificateChain;
+            ((TcpClientChannel)m_channel).ClientCertificateChain = m_settings.ClientCertificateChain;
 
             // begin connect operation.
             // IAsyncResult result = m_channel.BeginConnect(m_url, m_operationTimeout, null, null);

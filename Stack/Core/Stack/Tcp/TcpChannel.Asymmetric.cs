@@ -105,11 +105,11 @@ namespace Opc.Ua.Bindings
         /// <value>
         /// The client certificate chain.
         /// </value>
-        //internal X509Certificate2Collection ClientCertificateChain
-        //{
-        //    get { return m_clientCertificateChain; }
-        //    set { m_clientCertificateChain = value; }
-        //}
+        internal X509Certificate2Collection ClientCertificateChain
+        {
+            get { return m_clientCertificateChain; }
+            set { m_clientCertificateChain = value; }
+        }
 
         /// <summary>
         /// Gets or sets the server certificate chain.
@@ -117,11 +117,11 @@ namespace Opc.Ua.Bindings
         /// <value>
         /// The server certificate chain.
         /// </value>
-        //internal X509Certificate2Collection ServerCertificateChain
-        //{
-        //    get { return m_serverCertificateChain; }
-        //    set { m_serverCertificateChain = value; }
-        //}
+        internal X509Certificate2Collection ServerCertificateChain
+        {
+            get { return m_serverCertificateChain; }
+            set { m_serverCertificateChain = value; }
+        }
                 
         /// <summary>
         /// Creates a new nonce.
@@ -466,7 +466,7 @@ namespace Opc.Ua.Bindings
         }
 
 
-        /*protected void WriteAsymmetricMessageHeader(
+        protected void WriteAsymmetricMessageHeader(
             BinaryEncoder encoder,
             uint messageType,
             uint secureChannelId,
@@ -522,7 +522,7 @@ namespace Opc.Ua.Bindings
                     encoder.Position - start,
                     SendBufferSize);
             }
-        }*/
+        }
 
         private int GetMaxSenderCertificateSize(X509Certificate2 senderCertificate, string securityPolicyUri)
         {
@@ -723,7 +723,7 @@ namespace Opc.Ua.Bindings
         }
 
 
-        /*protected BufferCollection WriteAsymmetricMessage(
+        protected BufferCollection WriteAsymmetricMessage(
             uint messageType,
             uint requestId,
             X509Certificate2Collection senderCertificates,
@@ -901,7 +901,7 @@ namespace Opc.Ua.Bindings
                     chunksToSend.Release(BufferManager, "WriteAsymmetricMessage");
                 }
             }
-        }*/
+        }
 
         /// <summary>
         /// Reads the asymmetric security header to the buffer.
@@ -982,7 +982,7 @@ namespace Opc.Ua.Bindings
             }
         }
 
-        /*protected void ReadAsymmetricMessageHeader(
+        protected void ReadAsymmetricMessageHeader(
             BinaryDecoder decoder,
             X509Certificate2 receiverCertificate,
             out uint secureChannelId,
@@ -1056,7 +1056,7 @@ namespace Opc.Ua.Bindings
                 }
             }
         }
-        */
+        
         
         /// <summary>
         /// Checks if it is possible to revise the security mode.
@@ -1146,26 +1146,27 @@ namespace Opc.Ua.Bindings
             
             string securityPolicyUri = null;
 
-            //X509Certificate2Collection senderCertificateChain;
+            X509Certificate2Collection senderCertificateChain;
             // parse the security header.
             ReadAsymmetricMessageHeader(
                 decoder,
                 receiverCertificate,
                 out channelId,
-                out senderCertificate,
+				out senderCertificateChain,
+                //out senderCertificate,
                 out securityPolicyUri);
 
-            /*senderCertificate = null;
+            senderCertificate = null;
             if (senderCertificateChain != null && senderCertificateChain.Count > 0)
             {
                 senderCertificate = senderCertificateChain[0];
-            }*/
+            }
 
             // validate the sender certificate.
             if (senderCertificate != null && Quotas.CertificateValidator != null && securityPolicyUri != SecurityPolicies.None)
             {
-                //(Quotas.CertificateValidator as Opc.Ua.CertificateValidator.WcfValidatorWrapper).Validate(senderCertificateChain);
-                Quotas.CertificateValidator.Validate(senderCertificate);
+                (Quotas.CertificateValidator as Opc.Ua.CertificateValidator.WcfValidatorWrapper).Validate(senderCertificateChain);
+                //Quotas.CertificateValidator.Validate(senderCertificate);
             }
                  
             // check if this is the first open secure channel request.
@@ -1463,8 +1464,8 @@ namespace Opc.Ua.Bindings
         private EndpointDescription m_selectedEndpoint;
         private X509Certificate2 m_serverCertificate;   
         private X509Certificate2 m_clientCertificate;
-        //private X509Certificate2Collection m_serverCertificateChain;
-        //private X509Certificate2Collection m_clientCertificateChain;
+        private X509Certificate2Collection m_serverCertificateChain;
+        private X509Certificate2Collection m_clientCertificateChain;
         private RNGCryptoServiceProvider m_random;
         private bool m_uninitialized;
         #endregion
