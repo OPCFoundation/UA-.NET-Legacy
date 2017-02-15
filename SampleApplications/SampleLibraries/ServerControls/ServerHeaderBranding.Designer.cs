@@ -34,15 +34,10 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.appName = new System.Windows.Forms.Label();
             this.labelBuild = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -92,40 +87,6 @@
             this.label2.Text = "Unified Architecture demonstration Server";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(73, 71);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 5;
-            this.pictureBox2.TabStop = false;
-            this.toolTip1.SetToolTip(this.pictureBox2, "Learn about the importance of OPC Certification");
-            this.pictureBox2.Click += new System.EventHandler(this.pictureBox2_Click);
-            // 
-            // linkLabel2
-            // 
-            this.linkLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.linkLabel2.Location = new System.Drawing.Point(0, 71);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(73, 13);
-            this.linkLabel2.TabIndex = 6;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Learn more";
-            this.linkLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.pictureBox2);
-            this.panel1.Controls.Add(this.linkLabel2);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(548, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(73, 84);
-            this.panel1.TabIndex = 7;
-            // 
             // appName
             // 
             this.appName.BackColor = System.Drawing.Color.White;
@@ -140,7 +101,7 @@
             // 
             this.labelBuild.Dock = System.Windows.Forms.DockStyle.Right;
             this.labelBuild.Font = new System.Drawing.Font("Arial", 8F);
-            this.labelBuild.Location = new System.Drawing.Point(350, 3);
+            this.labelBuild.Location = new System.Drawing.Point(423, 3);
             this.labelBuild.Name = "labelBuild";
             this.labelBuild.Size = new System.Drawing.Size(198, 84);
             this.labelBuild.TabIndex = 16;
@@ -156,7 +117,6 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.appName);
             this.Controls.Add(this.labelBuild);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.pictureBox1);
             this.MaximumSize = new System.Drawing.Size(0, 100);
@@ -166,8 +126,6 @@
             this.Size = new System.Drawing.Size(624, 90);
             this.Load += new System.EventHandler(this.ServerHeaderBranding_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -179,10 +137,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.LinkLabel linkLabel2;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label appName;
         private System.Windows.Forms.Label labelBuild;
     }

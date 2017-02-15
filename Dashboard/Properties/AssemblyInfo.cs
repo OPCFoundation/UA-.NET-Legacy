@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("OPC Foundation")]
 [assembly: AssemblyProduct("Unified Architecture")]
-[assembly: AssemblyCopyright("Copyright © OPC Foundation 1995-2016")]
+[assembly: AssemblyCopyright("Copyright © OPC Foundation 1995-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

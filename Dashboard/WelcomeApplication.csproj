@@ -130,9 +130,6 @@
     <None Include="OPCLogo.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="OPCCertification.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Symbol_Play_2.png" />
   </ItemGroup>
   <ItemGroup>

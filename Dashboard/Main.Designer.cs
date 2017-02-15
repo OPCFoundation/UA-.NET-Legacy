@@ -51,7 +51,6 @@
             this.lnkAskForHelp = new System.Windows.Forms.LinkLabel();
             this.labelSdkBuild = new System.Windows.Forms.Label();
             this.imgOPCLogo = new System.Windows.Forms.PictureBox();
-            this.imgOPCCertification = new System.Windows.Forms.PictureBox();
             this.lblTopLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.lnkOPCCertification = new System.Windows.Forms.LinkLabel();
@@ -91,10 +90,10 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgOPCLogo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgOPCCertification)).BeginInit();
             this.pnlLeft.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -109,7 +108,6 @@
             this.pnlTop.Controls.Add(this.lnkAskForHelp);
             this.pnlTop.Controls.Add(this.labelSdkBuild);
             this.pnlTop.Controls.Add(this.imgOPCLogo);
-            this.pnlTop.Controls.Add(this.imgOPCCertification);
             this.pnlTop.Controls.Add(this.lblTopLabel);
             this.pnlTop.Controls.Add(this.label1);
             this.pnlTop.Controls.Add(this.lnkOPCCertification);
@@ -190,19 +188,6 @@
             this.toolTip1.SetToolTip(this.imgOPCLogo, "Click to learn more about the OPC Foundation");
             this.imgOPCLogo.Click += new System.EventHandler(this.imgOPCLogo_Click);
             // 
-            // imgOPCCertification
-            // 
-            this.imgOPCCertification.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.imgOPCCertification.Image = global::WelcomeApplication.Properties.Resources.OPCCertification;
-            this.imgOPCCertification.Location = new System.Drawing.Point(696, 3);
-            this.imgOPCCertification.Name = "imgOPCCertification";
-            this.imgOPCCertification.Padding = new System.Windows.Forms.Padding(6);
-            this.imgOPCCertification.Size = new System.Drawing.Size(90, 84);
-            this.imgOPCCertification.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgOPCCertification.TabIndex = 2;
-            this.imgOPCCertification.TabStop = false;
-            this.toolTip1.SetToolTip(this.imgOPCCertification, "Click to learn more about OPC Certification");
-            // 
             // lblTopLabel
             // 
             this.lblTopLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
@@ -280,8 +265,8 @@
             this.appRefClient.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.RefClientAppDescription;
             this.appRefClient.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.RefClientAppName;
             applicationState1.ApplicationDescription = "The Reference Client is a very light-weight Client that offers minimal functional" +
-                "ity. It is a purpose-built Client for connecting directly to the Reference Serve" +
-                "r to consume data.";
+    "ity. It is a purpose-built Client for connecting directly to the Reference Serve" +
+    "r to consume data.";
             applicationState1.ApplicationName = "Reference Client";
             applicationState1.ExeFilePath = "quickstarts.referenceclient.exe";
             applicationState1.HelpFile = "webhelp\\overview_-_reference_client.htm";
@@ -303,7 +288,7 @@
             this.appRefServer.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.RefServerAppDescription;
             this.appRefServer.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.RefServerAppName;
             applicationState2.ApplicationDescription = "The Reference Server is a purpose built server used during the development and te" +
-                "sting of the Unified Architecture";
+    "sting of the Unified Architecture";
             applicationState2.ApplicationName = "Reference Server";
             applicationState2.ExeFilePath = "quickstarts.referenceserver.exe";
             applicationState2.HelpFile = "webhelp\\overview_referenceServer.htm";
@@ -365,7 +350,7 @@
             this.appDiscoveryServer.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.LDSAppDescription;
             this.appDiscoveryServer.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.LDSAppName;
             applicationState5.ApplicationDescription = "Discover Server provides a list of available OPC UA applications to any OPC appli" +
-                "cation that queries it";
+    "cation that queries it";
             applicationState5.ApplicationName = "Discovery Server";
             applicationState5.ExeFilePath = "OPC.ua.discoveryserver.exe";
             applicationState5.HelpFile = "webhelp\\local_discovery_server_(lds).htm";
@@ -381,7 +366,7 @@
             this.appDiscoveryServer.Size = new System.Drawing.Size(224, 30);
             this.appDiscoveryServer.TabIndex = 30;
             this.toolTip1.SetToolTip(this.appDiscoveryServer, "Discovery Servers provide a list of OPC UA Servers and/or Clients that are availa" +
-                    "ble.");
+        "ble.");
             // 
             // label5
             // 
@@ -400,7 +385,7 @@
             this.appACClient.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.ACClientAppDescription;
             this.appACClient.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.ACClientAppName;
             applicationState6.ApplicationDescription = "Alarms and Condition Client is a purpose-built client for demonstrating OPC UA Al" +
-                "arms & Conditions.";
+    "arms & Conditions.";
             applicationState6.ApplicationName = "AC Client";
             applicationState6.ExeFilePath = "quickstarts.alarmconditionclient.exe";
             applicationState6.HelpFile = "webhelp\\acclientoverview.htm";
@@ -422,7 +407,7 @@
             this.appACServer.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.ACServerAppDescription;
             this.appACServer.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.ACServerAppName;
             applicationState7.ApplicationDescription = "This Alarms & Conditions Server is a purpose-built application raises alarms and " +
-                "events information to clients";
+    "events information to clients";
             applicationState7.ApplicationName = "AC Server";
             applicationState7.ExeFilePath = "quickstarts.alarmconditionserver.exe";
             applicationState7.HelpFile = "webhelp\\acserveroverview.htm";
@@ -456,7 +441,7 @@
             this.appHEClient.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.HAEClientAppDescription;
             this.appHEClient.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.HAEClientAppName;
             applicationState8.ApplicationDescription = "The Historical Events Client is a purpose-built client that demonstrates the use " +
-                "of Historical Events.";
+    "of Historical Events.";
             applicationState8.ApplicationName = "HE Data Client";
             applicationState8.ExeFilePath = "quickstarts.historicaleventsclient.exe";
             applicationState8.HelpFile = "webhelp\\haeventsclientoverview.htm";
@@ -478,7 +463,7 @@
             this.appHEServer.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.HAServerAppDescription;
             this.appHEServer.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.HAServerAppName;
             applicationState9.ApplicationDescription = "This Historical Events Server is a purpose-built application that serves historic" +
-                "al events information to clients.";
+    "al events information to clients.";
             applicationState9.ApplicationName = "HE Data Server";
             applicationState9.ExeFilePath = "quickstarts.historicaleventsserver.exe";
             applicationState9.HelpFile = "webhelp\\haeventsserveroverview.htm";
@@ -500,7 +485,7 @@
             this.appHAClient.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.HADClientAppDescription;
             this.appHAClient.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.HADClientAppName;
             applicationState10.ApplicationDescription = "The HA Data Client is a purpose-built application for demonstrating OPC Historica" +
-                "l Data.";
+    "l Data.";
             applicationState10.ApplicationName = "HA Data Client";
             applicationState10.ExeFilePath = "quickstarts.historicalaccessclient.exe";
             applicationState10.HelpFile = "webhelp\\haclientoverview.htm";
@@ -522,7 +507,7 @@
             this.appHAServer.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.HADServerAppDescription;
             this.appHAServer.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.HADServerAppName;
             applicationState11.ApplicationDescription = "This Historical Data Server is a purpose-built application that serves static and" +
-                "/or dynamic historical data to clients.";
+    "/or dynamic historical data to clients.";
             applicationState11.ApplicationName = "HA Data Server";
             applicationState11.ExeFilePath = "quickstarts.historicalaccessserver.exe";
             applicationState11.HelpFile = "webhelp\\haserveroverview.htm";
@@ -556,7 +541,7 @@
             this.appDAClient.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.DAClientAppDescription;
             this.appDAClient.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.DAClientAppName;
             applicationState12.ApplicationDescription = "OPC UA DA Client is a light-weight application that provides minimal capabilities" +
-                " and merely demonstrates the simple data-acquisition from an OPC UA DA Server.";
+    " and merely demonstrates the simple data-acquisition from an OPC UA DA Server.";
             applicationState12.ApplicationName = "DA Client";
             applicationState12.ExeFilePath = "quickstarts.dataaccessclient.exe";
             applicationState12.HelpFile = "webhelp\\daclientoverview.htm";
@@ -578,7 +563,7 @@
             this.appDAServer.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.DAServerAppDescription;
             this.appDAServer.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.DAServerAppName;
             applicationState13.ApplicationDescription = "OPC UA DA Server is a light-weight application that provides access to readable/w" +
-                "riteble data.";
+    "riteble data.";
             applicationState13.ApplicationName = "DA Server";
             applicationState13.ExeFilePath = "quickstarts.dataaccessserver.exe";
             applicationState13.HelpFile = "webhelp\\daserveroverview.htm";
@@ -612,7 +597,7 @@
             this.appUaConfigTool.ApplicationDescription = global::WelcomeApplication.Properties.Settings.Default.ConfigAppDescription;
             this.appUaConfigTool.ApplicationName = global::WelcomeApplication.Properties.Settings.Default.ConfigAppName;
             applicationState14.ApplicationDescription = "The UA Configuration Tool provides options for managing applications, certificate" +
-                " trusts, and COM/UA interoperability.";
+    " trusts, and COM/UA interoperability.";
             applicationState14.ApplicationName = "UA Configuration Tool";
             applicationState14.ExeFilePath = "Opc.Ua.ConfigurationTool.exe";
             applicationState14.HelpFile = "webhelp\\ua_configuration_tool.htm";
@@ -701,8 +686,8 @@
             // 
             // lblState
             // 
-            this.lblState.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblState.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblState.Location = new System.Drawing.Point(60, 29);
             this.lblState.Name = "lblState";
@@ -723,9 +708,9 @@
             // 
             // lblInfo
             // 
-            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblInfo.Location = new System.Drawing.Point(60, 57);
             this.lblInfo.Name = "lblInfo";
@@ -797,7 +782,6 @@
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgOPCLogo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgOPCCertification)).EndInit();
             this.pnlLeft.ResumeLayout(false);
             this.pnlLeft.PerformLayout();
             this.pnlMain.ResumeLayout(false);
@@ -806,6 +790,7 @@
             this.pnlInfo.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -816,7 +801,6 @@
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Label lblTopLabel;
         private System.Windows.Forms.PictureBox imgOPCLogo;
-        private System.Windows.Forms.PictureBox imgOPCCertification;
         private System.Windows.Forms.LinkLabel lnkOpc;
         private System.Windows.Forms.LinkLabel lnkOPCCertification;
         private System.Windows.Forms.Panel pnlLeft;
