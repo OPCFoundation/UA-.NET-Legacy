@@ -608,14 +608,14 @@ namespace Opc.Ua
                     m_context.MaxEncodingNestingLevels);
             }
 
-            m_nestingLevel++;
-
             // check for null.
             if (value == null)
             {
                 WriteByte(null, 0);
                 return;
             }
+
+            m_nestingLevel++;
 
             // calculate the encoding.
             byte encoding = 0;
