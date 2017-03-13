@@ -216,7 +216,7 @@ namespace Opc.Ua
                 keySize,
                 DateTime.MinValue,
                 lifetimeInMonths,
-                0,
+                (ushort)256,
                 false,
                 false, 
                 null, 
@@ -1968,9 +1968,9 @@ namespace Opc.Ua
             ref ushort lifetimeInMonths)
         {
             // enforce minimum keysize.
-            if (keySize < 1024)
+            if (keySize < 2048)
             {
-                keySize = 1024;
+                keySize = 2048;
             }
 
             if (keySize%1024 != 0)
