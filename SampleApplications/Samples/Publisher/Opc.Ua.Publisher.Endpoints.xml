@@ -9,14 +9,14 @@
       <ua:Endpoint>
         <EndpointUrl>opc.tcp://localhost:61210/UA/Publisher</EndpointUrl>
         <SecurityMode>SignAndEncrypt_3</SecurityMode>
-        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256</SecurityPolicyUri>
         <UserIdentityTokens>
           <UserTokenPolicy>
             <TokenType>Anonymous_0</TokenType>
           </UserTokenPolicy>
         </UserIdentityTokens>
         <TransportProfileUri>http://opcfoundation.org/UA/profiles/transport/wsxmlorbinary</TransportProfileUri>
-        <SecurityLevel>0</SecurityLevel>
+        <SecurityLevel>5</SecurityLevel>
       </ua:Endpoint>
       <ua:UpdateBeforeConnect>true</ua:UpdateBeforeConnect>
       <ua:SelectedUserTokenPolicy>0</ua:SelectedUserTokenPolicy>
@@ -25,14 +25,14 @@
       <ua:Endpoint>
         <EndpointUrl>opc.tcp://192.168.2.101:51210/UA/SampleServer</EndpointUrl>
         <SecurityMode>SignAndEncrypt_3</SecurityMode>
-        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic128Rsa15</SecurityPolicyUri>
+        <SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#Basic256Sha256</SecurityPolicyUri>
         <UserIdentityTokens>
           <UserTokenPolicy>
             <TokenType>Anonymous_0</TokenType>
           </UserTokenPolicy>
         </UserIdentityTokens>
         <TransportProfileUri>http://opcfoundation.org/UA/profiles/transport/wsxmlorbinary</TransportProfileUri>
-        <SecurityLevel>0</SecurityLevel>
+        <SecurityLevel>5</SecurityLevel>
       </ua:Endpoint>
       <ua:UpdateBeforeConnect>true</ua:UpdateBeforeConnect>
       <ua:SelectedUserTokenPolicy>0</ua:SelectedUserTokenPolicy>

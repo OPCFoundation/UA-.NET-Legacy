@@ -231,8 +231,8 @@ namespace Workshop
             ServerSecurityPolicy policy1 = new ServerSecurityPolicy();
 
             policy1.SecurityMode      = MessageSecurityMode.SignAndEncrypt;
-            policy1.SecurityPolicyUri = SecurityPolicies.Basic128Rsa15;
-            policy1.SecurityLevel     = 1;
+            policy1.SecurityPolicyUri = SecurityPolicies.Basic256Sha256;
+            policy1.SecurityLevel     = 5;
 
             configuration.ServerConfiguration.SecurityPolicies.Add(policy1);
 
@@ -279,7 +279,7 @@ namespace Workshop
             // specify the security policy to use.
             // endpointDescription.SecurityPolicyUri = SecurityPolicies.None;
             // endpointDescription.SecurityMode      = MessageSecurityMode.None;;
-            endpointDescription.SecurityPolicyUri = SecurityPolicies.Basic128Rsa15;
+            endpointDescription.SecurityPolicyUri = SecurityPolicies.Basic256Sha256;
             endpointDescription.SecurityMode      = MessageSecurityMode.SignAndEncrypt;
             
             // specify the transport profile.
