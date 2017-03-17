@@ -46,6 +46,20 @@ font-size:12pt; }
 /*]]>*/
 </style>
 
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+        origWidth = innerWidth;
+        origHeight = innerHeight;
+        onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
 <style type="text/css">
 /*<![CDATA[*/
 <!--
@@ -54,7 +68,6 @@ left:0px;
 top:0px;
 z-index:4;
 visibility:hidden; }
-p.WebHelpNavBar { text-align:right; }
 -->
 /*]]>*/
 </style>
@@ -71,6 +84,8 @@ p.WebHelpNavBar { text-align:right; }
 </script>
 <script type="text/javascript" language="javascript1.2" src="whtopic.js">
 </script>
+</head>
+<body>
 <script type="text/javascript" language="javascript1.2">
 //<![CDATA[
 <!--
@@ -85,16 +100,19 @@ if (window.gbWhTopic)
                 bc = strUrl.substring(n+3);
         }
 
-        if (window.setRelStartPage)
+        if (window.addTocInfo)
         {
         addTocInfo("Technology Samples\nHistorical Access\nEvents\nClient\nOverview");
-addButton("show",BTN_TEXT,"Show","","","","",0,0,"whd_show0.gif","whd_show2.gif","whd_show1.gif");
-addButton("hide",BTN_TEXT,"Hide","","","","",0,0,"whd_hide0.gif","whd_hide2.gif","whd_hide1.gif");
-addButton("prev",BTN_TEXT,"<<","","","","",0,0,"whd_prev0.gif","whd_prev2.gif","whd_prev1.gif");
-addButton("next",BTN_TEXT,">>","","","","",0,0,"whd_next0.gif","whd_next2.gif","whd_next1.gif");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 
         }
+        if (window.writeBtnStyle)
+                writeBtnStyle();
 
+        if (window.writeIntopicBar)
+                writeIntopicBar(1);
+
+        
         document.write("<p style=\"font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\"> ");
 AddMasterBreadcrumbs("index.htm", "font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right", "&gt;", "Home", "welcome.htm");
 document.write("<a style=\"font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\" href=\"data_access_overview.htm\">Technology Samples<\/a> &gt; <a style=\"font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\" href=\"historical_access_overview.htm\">Historical Access<\/a> &gt; <a style=\"font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\" href=\"haeventsserveroverview.htm\">Events<\/a> &gt; <a style=\"font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\" href=\"haeventsclientoverview.htm\">Client<\/a> &gt; Overview<\/p>");
@@ -104,41 +122,30 @@ document.write("<a style=\"font-family: Arial; font-size: 8pt; font-weight: 400;
         {
         setRelStartPage("index.htm");
 
-                autoSync(0);
+                autoSync(1);
                 sendSyncInfo();
                 sendAveInfoOut();
         }
-
 }
 else
         if (window.gbIE4)
                 document.location.reload();
+
 //-->
 //]]>
-</script>
-</head>
-<body>
-<script type="text/javascript" language="javascript1.2">
-//<![CDATA[
-<!--
-if (window.writeIntopicBar)
-        writeIntopicBar(4);
-//-->
-//]]>
-</script>
-<div style="width: 100%; position: relative;" id="header">
-<p><span style="font-weight: bold; font-size: 10pt;"><font size="2" style="font-size:10pt;"><b><a href="http://www.opcfoundation.org" style="color: #0000ff; font-size: 10pt; text-decoration: underline;" title="http://www.opcfoundation.org"><img src="opcfoundation.jpg" alt="opcfoundation.jpg" style="border: none;" width="189" height="61" align="left" border="0" /></a>The Interoperability Standard<br />
-for Industrial Automation</b></font></span></p>
+</script><span style="font-weight: bold; font-size: 10pt;"><font size="2" style="font-size:10pt;"><b><a href="http://www.opcfoundation.org" style="color: #0000ff; font-size: 10pt; text-decoration: underline;"><img src="opcfoundation.jpg" alt="opcfoundation.jpg" style="border: none;" width="189" height="61" align="left" border="0" /></a>The Interoperability Standard<br />
+for Industrial Automation</b></font></span><br />
+&#160;<br />
+&#160;
 <table cellspacing="0" width="100%" align="center">
 <tr>
-<td style="vertical-align: top;"><span style="font-size: 8pt;"><font size="1" style="font-size:8pt;"><a href="welcome.htm" title="welcome.htm">Welcome</a> | <a href="http://www.opcfoundation.org" target="_blank" style="color: #0000ff; text-decoration: underline;" title="http://www.opcfoundation.org">OPC Foundation Online</a> | <a href="https://opcfoundation.org/certification/overview-benefits/" target="_blank" title="https://opcfoundation.org/certification/overview-benefits/">Certification</a> | <a href="https://opcfoundation.org/about/opc-technologies/opc-ua/" target="_blank" title="https://opcfoundation.org/about/opc-technologies/opc-ua/">Technology</a> | <a href="https://opcfoundation.org/news/opc-foundation-news/" target="_blank" title="https://opcfoundation.org/news/opc-foundation-news/">News</a></font></span></td>
-<td style="vertical-align: top; text-align: right; font-size: 8pt;"><a href="https://github.com/OPCFoundation" title="https://github.com/OPCFoundation">https://gitHub.com/OPCFoundation</a></td>
+<td style="vertical-align: top;"><span style="font-size: 8pt;"><font size="1" style="font-size:8pt;"><a href="http://www.opcfoundation.org" target="_blank" style="color: #0000ff; text-decoration: underline;">OPC Foundation Online</a> | <a href="http://www.opcfoundation.org/certification" target="_blank">Certification</a> | <a href="http://www.opcfoundation.org/technology" target="_blank">Technology</a> | <a href="https://www.opcfoundation.org/news" target="_blank">News</a></font></span></td>
+<td style="vertical-align: top; text-align: right; font-size: 8pt;"><a href="welcome.htm" style="color: #0000ff; text-decoration: underline;">Home</a> | <a href="getting_started.htm">Getting Started</a></td>
 </tr>
 </table>
 <p style=" border-bottom:Solid 1px #000000; font-weight:bold; text-align:center; border-width:4px;"><span style="font-weight: bold; text-align: center;"><b><span style="font-weight: bold;"><b>Unified Architecture Technology Sample Applications</b></span></b></span></p>
-</div>
 <h1>Historical Events Client Overview</h1>
-<p>The Historical Events Client is a purpose-built client that demonstrates the use of Historical Events as described in <a href="http://www.opcfoundation.org/ua/part11" title="http://www.opcfoundation.org/ua/part11">UA Specifications Part 11 - Historical Access</a>.</p>
+<p>The Historical Events Client is a purpose-built client that demonstrates the use of Historical Events as described in <a href="http://www.opcfoundation.org/ua/part11">UA Specifications Part 11 - Historical Access (http://www.opcfoundation.org/ua/part11)</a>.</p>
 <h2>User Interface</h2>
 <p class="Picture"><img src="image95.gif" alt="image95.gif" style="border: none;" border="0" /></p>
 <h2>Screen Elements</h2>
@@ -167,7 +174,7 @@ for Industrial Automation</b></font></span></p>
 <li style="list-style: none; display: inline">
 <ul type="disc">
 <li>
-<p><span style="font-weight: bold;"><b>Discover</b></span>: See <a href="uagenericclientdiscovery.htm" title="uagenericclientdiscovery.htm">UA Discovery</a>.</p>
+<p><span style="font-weight: bold;"><b>Discover</b></span>: See <a href="uagenericclientdiscovery.htm">UA Discovery</a>.</p>
 </li>
 <li>
 <p><span style="font-weight: bold;"><b>Connect</b></span>: Connects to the currently selected endpoint.</p>
@@ -189,16 +196,16 @@ for Industrial Automation</b></font></span></p>
 <p><span style="font-weight: bold;"><b>Enable Subscription</b></span>: Enables/disables the subscription.</p>
 </li>
 <li>
-<p><span style="font-weight: bold;"><b>Select Event Type</b></span>: See <a href="#Select_Event_Type" title="#Select_Event_Type">Select Event Type</a> (below).</p>
+<p><span style="font-weight: bold;"><b>Select Event Type</b></span>: See <a href="#Select_Event_Type">Select Event Type</a> (below).</p>
 </li>
 <li>
-<p><span style="font-weight: bold;"><b>Select Event Area</b></span>: See <a href="#Select_Event_Area" title="#Select_Event_Area">Select Event Area</a> (below).</p>
+<p><span style="font-weight: bold;"><b>Select Event Area</b></span>: See <a href="#Select_Event_Area">Select Event Area</a> (below).</p>
 </li>
 <li>
-<p><span style="font-weight: bold;"><b>Modify Event Filter</b></span>: See <a href="#Modify_Event_Filter" title="#Modify_Event_Filter">Modify Event Filter</a> (below).</p>
+<p><span style="font-weight: bold;"><b>Modify Event Filter</b></span>: See <a href="#Modify_Event_Filter">Modify Event Filter</a> (below).</p>
 </li>
 <li>
-<p><span style="font-weight: bold;"><b>Edit Event History</b></span>: See <a href="#Edit_Event_History" title="#Edit_Event_History">Edit Event History</a> (below).</p>
+<p><span style="font-weight: bold;"><b>Edit Event History</b></span>: See <a href="#Edit_Event_History">Edit Event History</a> (below).</p>
 </li>
 </ul>
 </li>
@@ -252,15 +259,15 @@ for Industrial Automation</b></font></span></p>
 </td>
 </tr>
 </table>
-<h3><a name="Select_Event_Type" title="Select_Event_Type" id="Select_Event_Type"></a>Select Event Type</h3>
+<h3><a name="Select_Event_Type" id="Select_Event_Type"></a>Select Event Type</h3>
 <p>There are many, many different types of event (category) that are defined. You can elect to filter all event notifications to a specific type of event using this window.</p>
 <p class="Picture"><img src="image96.gif" alt="image96.gif" style="border: none;" border="0" /></p>
 <p>Simply locate the event type (Node) and then click the <span style="font-weight: bold;"><b>OK</b></span> <span>button.</span></p>
-<h3><a name="Select_Event_Area" title="Select_Event_Area" id="Select_Event_Area"></a>Select Event Area</h3>
+<h3><a name="Select_Event_Area" id="Select_Event_Area"></a>Select Event Area</h3>
 <p>You may elect to receive only the event notifications that apply to a specific area (areas are defined within the UA Server as a means of organizing events spatially).</p>
 <p class="Picture"><img src="image97.gif" alt="image97.gif" style="border: none;" border="0" /></p>
 <p>Simply locate the area (Node) and click the <span style="font-weight: bold;"><b>OK</b></span> button.</p>
-<h3><a name="Modify_Event_Filter" title="Modify_Event_Filter" id="Modify_Event_Filter"></a>Modify Event Filter</h3>
+<h3><a name="Modify_Event_Filter" id="Modify_Event_Filter"></a>Modify Event Filter</h3>
 <p>You can further fine-tune the event filter from this dialog.</p>
 <p class="Picture"><img src="image99.gif" alt="image99.gif" style="border: none;" border="0" /></p>
 <p>Simple right-click in the area to reveal the following context menu:</p>
@@ -311,18 +318,16 @@ for Industrial Automation</b></font></span></p>
 </tr>
 </table>
 <p>Click the <span style="font-weight: bold;"><b>OK</b></span> <span>button to apply the changes.</span></p>
-<h3><a name="Edit_Event_History" title="Edit_Event_History" id="Edit_Event_History"></a>Edit Event History</h3>
+<h3><a name="Edit_Event_History" id="Edit_Event_History"></a>Edit Event History</h3>
 <p>From this dialog you can locate events within the historian and then delete them by using the right-click context-sensitive help menu options.</p>
 <p class="Picture"><img src="image100.gif" alt="image100.gif" style="border: none;" border="0" /></p>
-<div style="width: 100%; position: relative;" id="footer">
-<p style=" border-top:Solid 1px #000000; text-align:right; font-size:8pt; border-width:4px;"><span style="text-align: right; font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright OPC Foundation 1995-2015<br />
-Author: <a href="mailto:nathan.pocock@opcfoundation.org" style="font-size: 8pt;" title="mailto:nathan.pocock@opcfoundation.org">Nathan Pocock</a>; Last Update: August 28, 2015</font></span></p>
-</div>
+<p style=" border-top:Solid 1px #000000; font-size:6pt; text-align:right; border-width:4px;"><span style="font-size: 6pt; text-align: right;"><font size="1" style="font-size:6pt;">Copyright OPC Foundation 1995-2013</font></span></p>
 <script type="text/javascript" language="javascript1.2">
 //<![CDATA[
 <!--
 if (window.writeIntopicBar)
         writeIntopicBar(0);
+
 
 highlightSearch();
 //-->

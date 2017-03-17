@@ -46,6 +46,20 @@ font-size:12pt; }
 /*]]>*/
 </style>
 
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+        origWidth = innerWidth;
+        origHeight = innerHeight;
+        onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
 <style type="text/css">
 /*<![CDATA[*/
 <!--
@@ -54,7 +68,6 @@ left:0px;
 top:0px;
 z-index:4;
 visibility:hidden; }
-p.WebHelpNavBar { text-align:right; }
 -->
 /*]]>*/
 </style>
@@ -71,6 +84,8 @@ p.WebHelpNavBar { text-align:right; }
 </script>
 <script type="text/javascript" language="javascript1.2" src="whtopic.js">
 </script>
+</head>
+<body>
 <script type="text/javascript" language="javascript1.2">
 //<![CDATA[
 <!--
@@ -85,16 +100,19 @@ if (window.gbWhTopic)
                 bc = strUrl.substring(n+3);
         }
 
-        if (window.setRelStartPage)
+        if (window.addTocInfo)
         {
         addTocInfo("License Agreement");
-addButton("show",BTN_TEXT,"Show","","","","",0,0,"whd_show0.gif","whd_show2.gif","whd_show1.gif");
-addButton("hide",BTN_TEXT,"Hide","","","","",0,0,"whd_hide0.gif","whd_hide2.gif","whd_hide1.gif");
-addButton("prev",BTN_TEXT,"<<","","","","",0,0,"whd_prev0.gif","whd_prev2.gif","whd_prev1.gif");
-addButton("next",BTN_TEXT,">>","","","","",0,0,"whd_next0.gif","whd_next2.gif","whd_next1.gif");
+addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 
         }
+        if (window.writeBtnStyle)
+                writeBtnStyle();
 
+        if (window.writeIntopicBar)
+                writeIntopicBar(1);
+
+        
         document.write("<p style=\"font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\"> ");
 AddMasterBreadcrumbs("index.htm", "font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right", "&gt;", "Home", "welcome.htm");
 document.write("License Agreement<\/p>");
@@ -104,62 +122,80 @@ document.write("License Agreement<\/p>");
         {
         setRelStartPage("index.htm");
 
-                autoSync(0);
+                autoSync(1);
                 sendSyncInfo();
                 sendAveInfoOut();
         }
-
 }
 else
         if (window.gbIE4)
                 document.location.reload();
+
 //-->
 //]]>
-</script>
-</head>
-<body>
-<script type="text/javascript" language="javascript1.2">
-//<![CDATA[
-<!--
-if (window.writeIntopicBar)
-        writeIntopicBar(4);
-//-->
-//]]>
-</script>
-<div style="width: 100%; position: relative;" id="header">
-<p><span style="font-weight: bold; font-size: 10pt;"><font size="2" style="font-size:10pt;"><b><a href="http://www.opcfoundation.org" style="color: #0000ff; font-size: 10pt; text-decoration: underline;" title="http://www.opcfoundation.org"><img src="opcfoundation.jpg" alt="opcfoundation.jpg" style="border: none;" width="189" height="61" align="left" border="0" /></a>The Interoperability Standard<br />
-for Industrial Automation</b></font></span></p>
+</script><span style="font-weight: bold; font-size: 10pt;"><font size="2" style="font-size:10pt;"><b><a href="http://www.opcfoundation.org" style="color: #0000ff; font-size: 10pt; text-decoration: underline;"><img src="opcfoundation.jpg" alt="opcfoundation.jpg" style="border: none;" width="189" height="61" align="left" border="0" /></a>The Interoperability Standard<br />
+for Industrial Automation</b></font></span><br />
+&#160;<br />
+&#160;
 <table cellspacing="0" width="100%" align="center">
 <tr>
-<td style="vertical-align: top;"><span style="font-size: 8pt;"><font size="1" style="font-size:8pt;"><a href="welcome.htm" title="welcome.htm">Welcome</a> | <a href="http://www.opcfoundation.org" target="_blank" style="color: #0000ff; text-decoration: underline;" title="http://www.opcfoundation.org">OPC Foundation Online</a> | <a href="https://opcfoundation.org/certification/overview-benefits/" target="_blank" title="https://opcfoundation.org/certification/overview-benefits/">Certification</a> | <a href="https://opcfoundation.org/about/opc-technologies/opc-ua/" target="_blank" title="https://opcfoundation.org/about/opc-technologies/opc-ua/">Technology</a> | <a href="https://opcfoundation.org/news/opc-foundation-news/" target="_blank" title="https://opcfoundation.org/news/opc-foundation-news/">News</a></font></span></td>
-<td style="vertical-align: top; text-align: right; font-size: 8pt;"><a href="https://github.com/OPCFoundation" title="https://github.com/OPCFoundation">https://gitHub.com/OPCFoundation</a></td>
+<td style="vertical-align: top;"><span style="font-size: 8pt;"><font size="1" style="font-size:8pt;"><a href="http://www.opcfoundation.org" target="_blank" style="color: #0000ff; text-decoration: underline;">OPC Foundation Online</a> | <a href="http://www.opcfoundation.org/certification" target="_blank">Certification</a> | <a href="http://www.opcfoundation.org/technology" target="_blank">Technology</a> | <a href="https://www.opcfoundation.org/news" target="_blank">News</a></font></span></td>
+<td style="vertical-align: top; text-align: right; font-size: 8pt;"><a href="welcome.htm" style="color: #0000ff; text-decoration: underline;">Home</a> | <a href="getting_started.htm">Getting Started</a></td>
 </tr>
 </table>
 <p style=" border-bottom:Solid 1px #000000; font-weight:bold; text-align:center; border-width:4px;"><span style="font-weight: bold; text-align: center;"><b><span style="font-weight: bold;"><b>Unified Architecture Technology Sample Applications</b></span></b></span></p>
-</div>
 <h1>License Agreement</h1>
-<p class="MsoNormal"><span style="font-size: 11.0pt; font-family: 'Courier New';"><font size="3" style="font-size:11pt;">Copyright (c) 1996-2015, OPC Foundation. All rights reserved.</font></span></p>
-<p class="MsoNormal"><span style="font-size: 11.0pt; font-family: 'Courier New';"><font size="3" style="font-size:11pt;">The source code associated with this help documentation is covered under a dual-license scenario:</font></span></p>
-<ul type="disc">
-<li>
-<p class="MsoNormal" style="font-size: 11.0pt; font-family: 'Courier New';">RCL: for OPC Foundation members in good-standing</p>
+<ol style="list-style-type: upper-roman;" type="I">
+<li>Introduction<br />
+<br />
+The OPC Foundation is an international organization in which users, vendors and consortia cooperate to develop standards for multivendor, multiplatform, secure and reliable interoperability in industrial automation.<br />
+<br />
+As such, the OPC Foundation provides the OPC Foundation members with unique opportunities to use the Specifications, Technology and Certification required to develop and apply OPC-based products. This licensing strategy is in place to protect the OPC Foundation and its members by providing them the legal infrastructure necessary to build OPC-based products and bring them to market.<br /></li>
+<li>Agreement of Use<br />
+<br />
+The following sections apply to all OPC Specifications:
+<ol style="list-style-type: upper-alpha;" type="A">
+<li>Copyright Restrictions<br />
+<br />
+Any unauthorized use of OPC Foundation Specifications may violate copyright laws, trademark laws, and communications regulations and statutes. All OPC Foundation Specifications contain information that is protected by copyright, with all rights reserved. No part of the work covered by the copyright herein may be reproduced or used in any form or by any means—graphic, electronic, or mechanical, including photocopying, recording, taping, or information storage and retrieval systems—without permission of the copyright owner.<br />
+<br />
+OPC Foundation members and non-members are prohibited from copying and redistributing any copyrighted OPC Foundation Specifications. All copies of the Specifications must be obtained on an individual basis, directly from the OPC Foundation Website.<br /></li>
+<li>Patents<br />
+<br />
+Adopters are directed to the possibility that compliance with or adoption of OPC Specifications may require use of an invention covered by patent rights. OPC Foundation shall not be responsible for identifying patents for which a license may be required by any OPC specification, or for conducting legal inquiries into the legal validity or scope of those patents that are brought to its attention. OPC Specifications are prospective and advisory only. Prospective users are responsible for protecting themselves against liability for infringement of patents.<br /></li>
+<li>Warranty and Liability Disclaimers<br />
+<br />
+While OPC Specifications are believed to be accurate, they are provided "as is" and may contain errors or misprints. The OPC Foundation makes no warranty of any kind, expressed or implied, with regard to their publication, including but not limited to any warranty of title or ownership, implied warranty of merchantability, or warranty of fitness for a particular purpose or use. In no event shall the OPC Foundation be liable for errors contained therein or for direct, indirect, incidental, special, consequential, reliance or cover damages, including loss of profits, revenue, data, or use, incurred by any user or any third party in connection with the furnishing, performance, or use of this material, even if advised of the possibility of such damages. The entire risk as to the quality and performance of software developed using OPC Specifications is borne by the user.<br />
+<br /></li>
+<li>Restricted Rights Legend<br />
+<br />
+All OPC Specifications are provided with Restricted Rights. Use, duplication or disclosure by the U.S. government is subject to restrictions as set forth in (a) this Agreement pursuant to DFARs 227.7202-3(a); (b) subparagraph (c)(1)(i) of the Rights in Technical Data and Computer Software clause at DFARs 252.227-7013; or (c) the Commercial Computer Software Restricted Rights clause at FAR 52.227-19 subdivision (c)(1) and (2), as applicable. The Contractor/manufacturer is the OPC Foundation, 16101 N. 82nd Street, Suite 3B, Scottsdale, AZ, 85260-1830.<br />
+<br /></li>
+<li>Compliance and Certification<br />
+<br />
+The OPC Foundation shall at all times be the sole entity that may authorize developers, suppliers and sellers of hardware and software to use Certification marks, trademarks or other special designations to indicate compliance with these materials. Products developed using the Specifications may claim compliance or conformance with the Specifications if and only if the software satisfactorily meets the Certification requirements set by the OPC Foundation Certification Program. Products that do not meet these requirements may claim only that the product was based on the Specifications and must not claim compliance or conformance with the Specifications. The OPC Foundation reserves the right to arbitrarily change the rules for Certification according to market demand. Use of all Certification marks, trademarks and other special designations to indicate compliance to be OPC Foundation-certified must have written approval from the OPC Foundation.<br />
+<br /></li>
+<li>Trademarks<br />
+<br />
+Most computer and software brand names have trademarks or registered trademarks. The individual trademarks have not been listed here. OPC Foundation has specifically identified and trademarked its Specification names and logos and has registered the trademarks accordingly.<br />
+<br /></li>
+</ol>
 </li>
-<li>
-<p class="MsoNormal"><span style="font-size: 11.0pt; font-family: 'Courier New';"><font size="3" style="font-size:11pt;">GPL V2: everybody else</font></span></p>
-</li>
-</ul>
-<p class="MsoNormal"><span style="font-size: 11.0pt; font-family: 'Courier New';"><font size="3" style="font-size:11pt;">RCL license terms accompanied with this source code. See <a href="http://opcfoundation.org/License/RCL/1.00/" title="http://opcfoundation.org/License/RCL/1.00/">http://opcfoundation.org/License/RCL/1.00/</a></font></span></p>
-<p class="MsoNormal"><span style="font-size: 11.0pt; font-family: 'Courier New';"><font size="3" style="font-size:11pt;">GNU General Public License as published by the Free Software Foundation; version 2 of the License are accompanied with this source code. See <a href="http://opcfoundation.org/License/GPLv2" title="http://opcfoundation.org/License/GPLv2">http://opcfoundation.org/License/GPLv2</a></font></span></p>
-<p class="MsoNormal"><span style="font-size: 11.0pt; font-family: 'Courier New';"><font size="3" style="font-size:11pt;">This source code is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</font></span></p>
-<div style="width: 100%; position: relative;" id="footer">
-<p style=" border-top:Solid 1px #000000; text-align:right; font-size:8pt; border-width:4px;"><span style="text-align: right; font-size: 8pt;"><font size="1" style="font-size:8pt;">Copyright OPC Foundation 1995-2015<br />
-Author: <a href="mailto:nathan.pocock@opcfoundation.org" style="font-size: 8pt;" title="mailto:nathan.pocock@opcfoundation.org">Nathan Pocock</a>; Last Update: August 28, 2015</font></span></p>
-</div>
+<li>General Provisions<br />
+<br />
+Should any provision of this Agreement be held to be void, invalid, unenforceable or illegal by a court, the validity and enforceability of the other provisions shall not be affected thereby.<br />
+<br />
+The OPC Foundation is incorporated in the state of Minnesota. This Agreement shall be governed by and construed under the laws of the State of Minnesota, excluding its choice or law rules. OPC Foundation is an international organization and may also be governed by rules subject to the laws of other countries outside of the United States.<br />
+<br />
+This Agreement embodies the entire understanding between the parties with respect to, and supersedes any prior understanding or agreement (oral or written) relating to the OPC Specifications.</li>
+</ol>
+<p style=" border-top:Solid 1px #000000; font-size:6pt; text-align:right; border-width:4px;"><span style="font-size: 6pt; text-align: right;"><font size="1" style="font-size:6pt;">Copyright OPC Foundation 1995-2013</font></span></p>
 <script type="text/javascript" language="javascript1.2">
 //<![CDATA[
 <!--
 if (window.writeIntopicBar)
         writeIntopicBar(0);
+
 
 highlightSearch();
 //-->

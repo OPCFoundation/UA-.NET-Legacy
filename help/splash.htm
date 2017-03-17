@@ -8,6 +8,20 @@
 <meta name="generator" content="Adobe RoboHelp 9" />
 <title>Splash</title>
 <link rel="StyleSheet" href="ms_help.css" type="text/css" />
+<script type="text/javascript" language="JavaScript">
+//<![CDATA[
+function reDo() {
+  if (innerWidth != origWidth || innerHeight != origHeight)
+     location.reload();
+}
+if ((parseInt(navigator.appVersion) == 4) && (navigator.appName == "Netscape")) {
+        origWidth = innerWidth;
+        origHeight = innerHeight;
+        onresize = reDo;
+}
+onerror = null; 
+//]]>
+</script>
 <style type="text/css">
 /*<![CDATA[*/
 <!--
@@ -16,7 +30,6 @@ left:0px;
 top:0px;
 z-index:4;
 visibility:hidden; }
-p.WebHelpNavBar { text-align:right; }
 -->
 /*]]>*/
 </style>
@@ -33,6 +46,8 @@ p.WebHelpNavBar { text-align:right; }
 </script>
 <script type="text/javascript" language="javascript1.2" src="whtopic.js">
 </script>
+</head>
+<body>
 <script type="text/javascript" language="javascript1.2">
 //<![CDATA[
 <!--
@@ -47,15 +62,18 @@ if (window.gbWhTopic)
                 bc = strUrl.substring(n+3);
         }
 
-        if (window.setRelStartPage)
+        if (window.addTocInfo)
         {
-        addButton("show",BTN_TEXT,"Show","","","","",0,0,"whd_show0.gif","whd_show2.gif","whd_show1.gif");
-addButton("hide",BTN_TEXT,"Hide","","","","",0,0,"whd_hide0.gif","whd_hide2.gif","whd_hide1.gif");
-addButton("prev",BTN_TEXT,"<<","","","","",0,0,"whd_prev0.gif","whd_prev2.gif","whd_prev1.gif");
-addButton("next",BTN_TEXT,">>","","","","",0,0,"whd_next0.gif","whd_next2.gif","whd_next1.gif");
+        addButton("show",BTN_TEXT,"Show","","","","",0,0,"","","");
 
         }
+        if (window.writeBtnStyle)
+                writeBtnStyle();
 
+        if (window.writeIntopicBar)
+                writeIntopicBar(1);
+
+        
         document.write("<p style=\"font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right\"> ");
 AddMasterBreadcrumbs("index.htm", "font-family: Arial; font-size: 8pt; font-weight: 400;  font-style:normal; color: rgb(0, 0, 255); text-decoration:none; text-align: right", "&gt;", "Home", "welcome.htm");
 document.write("Splash<\/p>");
@@ -65,25 +83,15 @@ document.write("Splash<\/p>");
         {
         setRelStartPage("index.htm");
 
-                autoSync(0);
+                autoSync(1);
                 sendSyncInfo();
                 sendAveInfoOut();
         }
-
 }
 else
         if (window.gbIE4)
                 document.location.reload();
-//-->
-//]]>
-</script>
-</head>
-<body>
-<script type="text/javascript" language="javascript1.2">
-//<![CDATA[
-<!--
-if (window.writeIntopicBar)
-        writeIntopicBar(4);
+
 //-->
 //]]>
 </script>
@@ -106,6 +114,7 @@ if (window.writeIntopicBar)
 <!--
 if (window.writeIntopicBar)
         writeIntopicBar(0);
+
 
 highlightSearch();
 //-->

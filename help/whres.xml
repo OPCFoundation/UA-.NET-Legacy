@@ -201,69 +201,69 @@
   </stems>
 
 	<paneskin>
-		<background color="" img="" />
-		<font name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
+		<background color="#ffffff" img="" />
+		<font name="Microsoft Sans Serif" size="8pt" color="#000080" style="Normal" weight="Normal" decoration="none" />
 		<toc>
-			<background color="" img="" />
+			<background color="#ffffff" img="" />
 			<icons>
-				<book open="whd_toc2.gif" close="whd_toc1.gif" />
-				<item  local="whd_toc3.gif" remote="whd_toc4.gif" />
-				<newbook open="whd_toc2.gif" close="whd_toc1.gif" />
-				<newitem  local="whd_toc3.gif" remote="whd_toc4.gif" />
+				<book open="wht_toc2.gif" close="wht_toc1.gif" />
+				<item  local="wht_toc3.gif" remote="wht_toc4.gif" />
+				<newbook open="" close="" />
+				<newitem  local="" remote="" />
 			</icons>
 			<fonts>
-				<normal name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
-				<hover name="Arial" size="9pt" color="#007f00" style="normal" weight="normal" decoration="underline" />
+				<normal name="Microsoft Sans Serif" size="8pt" color="#000000" style="Normal" weight="Normal" decoration="none" />
+				<hover name="Microsoft Sans Serif" size="8pt" color="#000080" style="Normal" weight="Normal" decoration="underline" />
 			</fonts>
-			<activebackgroundcolor attr="#cccccc" />
-			<margin attr="0pt" />
-			<indent attr="9pt" />
+			<activebackgroundcolor attr="#c0c0c0" />
+			<margin attr="" />
+			<indent attr="" />
 		</toc>
 		<index>
 			<form>
 				<fonts>
-					<title name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
+					<title name="Microsoft Sans Serif" size="8pt" color="#000080" style="Normal" weight="Normal" decoration="none" />
 				</fonts>
 				<button normal="" hover="" />
-				<editwith value="28" />
+				<editwith value="20" />
 			</form>
-			<background color="" img="" />
+			<background color="#ffffff" img="" />
 			<fonts>
-				<normal name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
-				<hover name="Arial" size="9pt" color="#007f00" style="normal" weight="normal" decoration="underline" />
-				<empty name="Arial" size="9pt" color="#666666" style="normal" weight="normal" decoration="none" />
+				<normal name="Microsoft Sans Serif" size="8pt" color="#000000" style="Normal" weight="Normal" decoration="none" />
+				<hover name="Microsoft Sans Serif" size="8pt" color="#000080" style="Normal" weight="Normal" decoration="underline" />
+				<empty name="" size="8pt" color="" style="" weight="" decoration="" />
 			</fonts>
-			<activebackgroundcolor attr="#cccccc" />
-			<margin attr="0pt" />
-			<indent attr="9pt" />
+			<activebackgroundcolor attr="#c0c0c0" />
+			<margin attr="" />
+			<indent attr="" />
 		</index>
 		<fts>
 			<form>
 				<fonts>
-					<title name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
+					<title name="Microsoft Sans Serif" size="8pt" color="#000080" style="Normal" weight="Normal" decoration="none" />
 				</fonts>
 				<button normal="" hover="" />
-				<editwith value="28" />
+				<editwith value="20" />
 			</form>
-			<background color="" img="" />
+			<background color="#ffffff" img="" />
 			<fonts>
-				<normal name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
-				<hover name="Arial" size="9pt" color="#007f00" style="normal" weight="normal" decoration="underline" />
-				<error name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
+				<normal name="Microsoft Sans Serif" size="8pt" color="#000000" style="Normal" weight="Normal" decoration="none" />
+				<hover name="Microsoft Sans Serif" size="8pt" color="#000080" style="Normal" weight="Normal" decoration="underline" />
+				<error name="Microsoft Sans Serif" size="8pt" color="#000000" style="Normal" weight="Normal" decoration="none" />
 			</fonts>
-			<activebackgroundcolor attr="#cccccc" />
-			<margin attr="0pt" />
-			<indent attr="9pt" />
+			<activebackgroundcolor attr="#c0c0c0" />
+			<margin attr="" />
+			<indent attr="" />
 		</fts>
 		<glossary>
-			<background color="" img="" />
+			<background color="#ffffff" img="" />
 			<fonts>
-				<normal name="Arial" size="9pt" color="#000000" style="normal" weight="normal" decoration="none" />
-				<hover name="Arial" size="9pt" color="#007f00" style="normal" weight="normal" decoration="underline" />
+				<normal name="Microsoft Sans Serif" size="8pt" color="#000000" style="Normal" weight="Normal" decoration="none" />
+				<hover name="Microsoft Sans Serif" size="8pt" color="#000080" style="Normal" weight="Normal" decoration="underline" />
 			</fonts>
-			<activebackgroundcolor attr="#cccccc" />
-			<margin attr="0pt" />
-			<indent attr="9pt" />
+			<activebackgroundcolor attr="#c0c0c0" />
+			<margin attr="" />
+			<indent attr="" />
 		</glossary>
 	</paneskin>
 </resource>

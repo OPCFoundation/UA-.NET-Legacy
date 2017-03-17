@@ -31,8 +31,8 @@ function delayReload()
 	}
 }
 
-var gsToolbarOrder = "";
-var gsMinibarOrder = "";
+var gsToolbarOrder = "toc|idx|fts|blankblock";
+var gsMinibarOrder = "blankblock|hide2|";
 
 var gsTopic = "welcome.htm";
 var PANE_OPT_SEARCH = 1;

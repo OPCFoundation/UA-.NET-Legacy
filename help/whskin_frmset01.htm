@@ -1,0 +1,173 @@
+﻿
+<html>
+<head>
+</head>
+
+<script type="text/javascript" language="javascript" src="whver.js"></script>
+<script type="text/javascript" language="javascript" src="whutils.js"></script>
+<script type="text/javascript" language="javascript" src="whmsg.js"></script>
+<script type="text/javascript" language="javascript" >
+<!--
+if (!window.gbWhVer||!window.gbWhUtil||!window.gbWhMsg)
+	document.location.reload();
+//-->
+</script>
+
+<script type="text/javascript" language="javascript" src="whproxy.js"></script>
+<script type="text/javascript" language="javascript">
+<!--
+if (!window.gbWhProxy)
+	document.location.reload();
+//-->
+</script>
+
+
+<script language="javascript">
+<!--
+var gsPane="";
+var gnType=3;
+
+var oMsgPane = new whMessage(WH_MSG_GETPANETYPE, this, 1, null);
+if (SendMessage(oMsgPane))
+{
+	gsPane = oMsgPane.oParam.sPaneURL;
+	gnType = oMsgPane.oParam.nType;
+}
+
+	var strDefaultTopic = "about:blank";
+	var oParam = new Object();
+	oParam.sTopic = "";
+	var oMsg = new whMessage(WH_MSG_GETDEFAULTTOPIC, this, 1, oParam);
+	if (SendMessage(oMsg) && oParam.sTopic != "")
+		strDefaultTopic =  oParam.sTopic;
+var strHTML = "";
+if (gnType == 4)
+{
+	//no navipane at all
+	strHTML += "<frameset border=\"0\" cols=\"100%,*\">";
+	strHTML += "<frame src=\"" + strDefaultTopic + "\" name=\"bsscright\" framespacing=\"0\" frameborder=\"0\" border=\"0\" scrolling=\"auto\">";
+	strHTML += "<frame src=\"whskin_blank.htm\" noresize>";
+	strHTML += "</frameset>";
+}
+else
+	strHTML += "<frameset cols=\"220,*\" hostof=\"parent:minibar_navpane|topic!startpage:no\" frameborder=\"1\" id=\"whPfset\"> <frame src=\"whskin_frmset010.htm\" id=\"minibar_navpane\" frameborder=\"0\" border=\"0\" scrolling=\"auto\" marginheight=\"0\" marginwidth=\"0\"></frame> <frame src=\""+strDefaultTopic+"\" id=\"topic\" frameborder=\"1\" border=\"1\" scrolling=\"auto\" title=\"Topic\" name=\"bsscright\"></frame></frameset>";
+document.write(strHTML);
+// handle show pane, hide pane and query pane status message.
+RegisterListener2(this, WH_MSG_RESIZEPANE);
+RegisterListener2(this, WH_MSG_SHOWPANE);
+RegisterListener2(this, WH_MSG_HIDEPANE);
+RegisterListener2(this, WH_MSG_ISPANEVISIBLE);
+
+function window_unload()
+{
+	UnRegisterListener2(this, WH_MSG_RESIZEPANE);
+	UnRegisterListener2(this, WH_MSG_SHOWPANE);
+	UnRegisterListener2(this, WH_MSG_HIDEPANE);
+	UnRegisterListener2(this, WH_MSG_ISPANEVISIBLE);
+}
+
+window.onunload=window_unload;
+
+var gbShow=false;
+var gstrFrameLastSetting="";
+function onSendMessage(oMsg)
+{
+	var oMsgout = null;
+	var nMsgId = oMsg.nMessageId;
+	var oFrameset = null;
+	if (nMsgId == WH_MSG_SHOWPANE)
+	{
+		if (!gbShow)
+		{
+			oFrameset = getElement("whPfset");
+			if (oFrameset)
+			{
+				if (gstrFrameLastSetting)
+					oFrameset.cols= gstrFrameLastSetting;
+				else
+ 					oFrameset.cols= "220,*";
+			}
+			gbShow=true;
+			oMsgout = new whMessage(WH_MSG_PANESTATUE, this, 1, "visible");
+			SendMessage(oMsgout);
+		}
+		return false;
+	}
+	else if (nMsgId == WH_MSG_HIDEPANE)
+	{
+		oFrameset = getElement("whPfset");
+		if (oFrameset)
+		{
+			gstrFrameLastSetting=oFrameset.cols; 
+			var oWnd=frames[0];
+			if (oWnd && oWnd.document && oWnd.document.body)
+			{
+				var nPos=0;
+				if ("cols"=="cols")
+					nPos=oWnd.document.body.offsetWidth;
+				else
+					nPos=oWnd.document.body.offsetHeight;
+				if(0==0)
+					gstrFrameLastSetting=nPos+",*";
+				else
+					gstrFrameLastSetting="*,"+nPos;
+			}
+	 		oFrameset.cols = "0,*";
+		}
+		gbShow=false;
+		oMsgout = new whMessage(WH_MSG_PANESTATUE, this, 1, "invisible");
+		SendMessage(oMsgout);
+		return false;
+	}
+	else if (nMsgId == WH_MSG_RESIZEPANE)
+	{
+		if (!gbShow)
+		{
+			gbShow=true;
+			oMsgout = new whMessage(WH_MSG_PANESTATUE, this, 1, "visible");
+			SendMessage(oMsgout);
+		}
+		return false;
+	}
+	else if (nMsgId == WH_MSG_ISPANEVISIBLE)
+	{
+		oMsg.oParam.bVisible = isNavPaneVisible();
+		return false;
+	}
+	return true;
+}
+
+function isNavPaneVisible()
+{
+	var bVisible = false;
+	var sSplit = getElement("whPfset").cols;
+	var nSplit = sSplit.indexOf(",");
+	if (nSplit != -1)
+	{
+		var sPart1 = sSplit.substring(0, nSplit);
+		var sPart2 = sSplit.substring(nSplit + 1);
+		if ("minibar_navpane" == "navpane")
+		{
+			var sTemp = sPart1;
+			sPart1 = sPart2;
+			sPart2 = sTemp;
+		}
+
+		if (sPart2 != "*")
+		{
+			var n = parseInt(sPart2);
+			if (n>0)
+				bVisible = true;
+		}
+		else
+		{
+			if (sPart1 != "100%")
+				bVisible = true;
+		}
+	}
+	return bVisible;
+}
+//-->
+</script>
+
+</html>
