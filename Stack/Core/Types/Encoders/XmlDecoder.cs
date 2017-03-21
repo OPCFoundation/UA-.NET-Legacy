@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml;
 using System.Globalization;
+using System.IO;
 
 namespace Opc.Ua
 {    
@@ -550,10 +551,18 @@ namespace Opc.Ua
 
             // check for empty body.
             XmlDocument document = new XmlDocument();
+            string xmlString = null;
 
             if (m_reader.IsEmptyElement)
-            {        
-                document.InnerXml = m_reader.ReadOuterXml();                        
+            {
+                xmlString = m_reader.ReadOuterXml();
+
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings() 
+                    { DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None }))
+                {
+                    document.Load(reader);
+                }
+
                 return document.DocumentElement;
             }
 
@@ -572,8 +581,15 @@ namespace Opc.Ua
                 return encodeable;
             }
             
-            // return undecoded xml body.                 
-            document.InnerXml = m_reader.ReadOuterXml();                        
+            // return undecoded xml body.
+            xmlString = m_reader.ReadOuterXml();
+
+            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings() 
+                { DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None }))
+            {
+                document.Load(reader);
+            }
+
             return document.DocumentElement;
         }
         #endregion
