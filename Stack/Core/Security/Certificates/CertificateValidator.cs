@@ -186,7 +186,7 @@ namespace Opc.Ua
 
             try
             {
-                InternalValidate(chain);
+                InternalValidateWithChainSupportEnabled(chain);
 
                 // add to list of validated certificates.
                 lock (m_lock)
@@ -535,6 +535,100 @@ namespace Opc.Ua
             return isTrusted;
         }
 
+		
+        /// <summary>
+        /// Returns the issuers for the certificates.
+        /// </summary>
+        public bool GetIssuersWithChainSupportEnabled(X509Certificate2Collection certificates, List<CertificateIdentifier> issuers)
+        {
+            bool isTrusted = false;
+            bool isChainComplete = false;
+            CertificateIdentifier issuer = null;
+            X509Certificate2 certificate = certificates[0];
+
+            // application certificate is trusted
+            CertificateIdentifier trustedCertificate = GetTrustedCertificate(certificate);
+            if (trustedCertificate != null) isTrusted = true;
+
+            if (Utils.CompareDistinguishedName(certificate.Subject, certificate.Issuer))
+            {
+                if (!isTrusted)
+                {
+                    throw ServiceResultException.Create(
+                        StatusCodes.BadCertificateUntrusted,
+                        "Self Signed Certificate is not trusted.\r\nIssuerName: {0}",
+                        certificate.IssuerName.Name);
+
+                }
+                return isTrusted;
+            }
+
+            CertificateIdentifierCollection collection = new CertificateIdentifierCollection();
+
+            for (int ii = 1; ii < certificates.Count; ii++)
+            {
+                collection.Add(new CertificateIdentifier(certificates[ii]));
+            }
+
+            do
+            {
+                issuer = GetIssuer(certificate, m_trustedCertificateList, m_trustedCertificateStore, true);
+                if (issuer != null) isTrusted = true;
+
+                if (issuer == null)
+                {
+                    issuer = GetIssuer(certificate, m_issuerCertificateList, m_issuerCertificateStore, true);
+
+                    if (issuer == null)
+                    {
+                        issuer = GetIssuer(certificate, collection, null, true);
+                    }
+                }
+
+                if (issuer != null)
+                {
+                    //isTrusted = true;
+
+                    issuers.Add(issuer);
+                    certificate = issuer.Find(false);
+
+                    // check for root.
+                    if (Utils.CompareDistinguishedName(certificate.Subject, certificate.Issuer))
+                    {
+                        isChainComplete = true;
+                        break;
+                    }
+                }
+                else
+                {
+                    isTrusted = false;
+                }
+            }
+            while (issuer != null);
+            if (!isChainComplete)
+            {
+                throw ServiceResultException.Create(
+                StatusCodes.BadSecurityChecksFailed,
+                "Certificate chain not complete.\r\nSubjectName: {0}\r\nIssuerName: {1}",
+                    certificates[0].SubjectName.Name,
+                    certificates[0].IssuerName.Name);
+            }
+            if (!isTrusted)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadCertificateUntrusted,
+                    "Certificate issuer is not trusted.\r\nSubjectName: {0}\r\nIssuerName: {1}",
+                            certificates[0].SubjectName.Name,
+                            certificates[0].IssuerName.Name);
+
+            }
+            return isTrusted;
+        }
+
+
+
+
+		
         /// <summary>
         /// Returns the certificate information for a trusted issuer certificate.
         /// </summary>
@@ -867,6 +961,100 @@ namespace Opc.Ua
             }
         }
 
+		
+		        /// <summary>
+        /// Throws an exception if validation fails.
+        /// </summary>
+        /// <param name="certificates">The certificates to be checked.</param>
+        /// <exception cref="ServiceResultException">If certificate[0] cannot be accepted</exception>
+        protected virtual void InternalValidateWithChainSupportEnabled(X509Certificate2Collection certificates)
+        {
+            lock (m_lock)
+            {
+                X509Certificate2 certificate = certificates[0];
+
+                // check for previously validated certificate.
+                X509Certificate2 certificate2 = null;
+
+                if (m_validatedCertificates.TryGetValue(certificate.Thumbprint, out certificate2))
+                {
+                    if (Utils.IsEqual(certificate2.RawData, certificate.RawData))
+                    {
+                        return;
+                    }
+                }
+
+                CertificateIdentifier trustedCertificate = GetTrustedCertificate(certificate);
+
+                // get the issuers (checks the revocation lists if using directory stores).
+                List<CertificateIdentifier> issuers = new List<CertificateIdentifier>();
+                bool isIssuerTrusted = GetIssuersWithChainSupportEnabled(certificates, issuers);
+                // setup policy chain
+                X509ChainPolicy policy = new X509ChainPolicy();
+
+                policy.RevocationFlag = X509RevocationFlag.EntireChain;
+                policy.RevocationMode = X509RevocationMode.NoCheck;
+                policy.VerificationFlags = X509VerificationFlags.NoFlag;
+
+                foreach (CertificateIdentifier issuer in issuers)
+                {
+                    if ((issuer.ValidationOptions & CertificateValidationOptions.SuppressRevocationStatusUnknown) != 0)
+                    {
+                        policy.VerificationFlags |= X509VerificationFlags.IgnoreCertificateAuthorityRevocationUnknown;
+                        policy.VerificationFlags |= X509VerificationFlags.IgnoreCtlSignerRevocationUnknown;
+                        policy.VerificationFlags |= X509VerificationFlags.IgnoreEndRevocationUnknown;
+                        policy.VerificationFlags |= X509VerificationFlags.IgnoreRootRevocationUnknown;
+                    }
+
+                    // we did the revocation check in the GetIssuers call. No need here.
+                    policy.RevocationMode = X509RevocationMode.NoCheck;
+                    policy.ExtraStore.Add(issuer.Certificate);
+                }
+
+                // build chain.
+                X509Chain chain = new X509Chain();
+                chain.ChainPolicy = policy;
+                chain.Build(certificate);
+
+                // check the chain results.
+                CertificateIdentifier target = trustedCertificate;
+
+                if (target == null)
+                {
+                    target = new CertificateIdentifier(certificate);
+                }
+
+                for (int ii = 0; ii < chain.ChainElements.Count; ii++)
+                {
+                    X509ChainElement element = chain.ChainElements[ii];
+
+                    CertificateIdentifier issuer = null;
+
+                    if (ii < issuers.Count)
+                    {
+                        issuer = issuers[ii];
+                    }
+
+                    // check for chain status errors.
+                    foreach (X509ChainStatus status in element.ChainElementStatus)
+                    {
+                        ServiceResult result = CheckChainStatus(status, target, issuer, (ii != 0));
+
+                        if (ServiceResult.IsBad(result))
+                        {
+                            throw new ServiceResultException(result);
+                        }
+                    }
+
+                    if (issuer != null)
+                    {
+                        target = issuer;
+                    }
+                }
+            }
+        }
+		
+		
         /// <summary>
         /// Returns an object that can be used with WCF channel.
         /// </summary>

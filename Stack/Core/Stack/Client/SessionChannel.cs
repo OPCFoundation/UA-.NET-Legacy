@@ -88,7 +88,7 @@ namespace Opc.Ua
         /// <param name="clientCertificates">The client certificates.</param>
         /// <param name="messageContext">The message context.</param>
         /// <returns></returns>
-        /*public static ITransportChannel Create(
+        public static ITransportChannel Create(
             ApplicationConfiguration configuration,
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
@@ -127,7 +127,7 @@ namespace Opc.Ua
 
             return channel;
         }
-        */
+        
 
         #if !SILVERLIGHT
         /// <summary>
