@@ -1136,17 +1136,21 @@ namespace Opc.Ua
                     {
                         List<byte> certificateChainList = new List<byte>();
 
-                        System.Xml.XmlElement configExtension = configuration.Extensions.Find(e => e.Name.Equals("SendCertificateChain"));
-                        if ((configExtension == null || (configExtension != null && configExtension.InnerText.Equals("False"))))
-                        {
-                            certificateChainList.AddRange(InstanceCertificateChain[0].RawData);
+                        System.Xml.XmlElement configExtension = null;
+                        if (configuration.Extensions != null)
+												{
+                            configExtension = configuration.Extensions.Find(e => "SendCertificateChain".Equals(e.Name, StringComparison.InvariantCultureIgnoreCase));
                         }
-                        else
+                        if (configExtension != null && "true".Equals(configExtension.InnerText, StringComparison.InvariantCultureIgnoreCase))
                         {
                             for (int i = 0; i < InstanceCertificateChain.Count; i++)
                             {
                                 certificateChainList.AddRange(InstanceCertificateChain[i].RawData);
                             }
+                        }
+                        else
+                        {
+                            certificateChainList.AddRange(InstanceCertificateChain[0].RawData);
                         }
                         
                         description.ServerCertificate = certificateChainList.ToArray();
