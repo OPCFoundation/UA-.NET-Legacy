@@ -779,10 +779,11 @@ namespace Opc.Ua.Client
 
                 clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find( true );
 
-				if( clientCertificate == null )
-				{
+                if ( clientCertificate == null )
+                {
                     throw ServiceResultException.Create( StatusCodes.BadConfigurationError, "ApplicationCertificate cannot be found." );
-                }else
+                }
+                else
                 {
                     //load certificate chain
                     List<CertificateIdentifier> issuers = new List<CertificateIdentifier>();
@@ -803,40 +804,46 @@ namespace Opc.Ua.Client
             ITransportChannel channel = null;
 
             //read sendCertificateChain option from configuration
-            string sendCertificateChainOption = (configuration.Extensions.Find(e => e.Name.Equals("sendCertificateChain")).InnerText);
-
-            if (clientCertificateChain != null && sendCertificateChainOption.Equals("True"))
+            if (clientCertificateChain != null)
             {
-                
-                 channel = SessionChannel.Create(
-                 configuration,
-                 endpointDescription,
-                 endpointConfiguration,
-                 clientCertificateChain,
-                 messageContext);
-            }else
-            {                
+                XmlElement configExtension = null;
+                if (configuration.Extensions != null)
+                {
+                    configExtension = configuration.Extensions.Find(e => "SendCertificateChain".Equals(e.Name, StringComparison.InvariantCultureIgnoreCase));
+                }
+                if (configExtension != null && "true".Equals(configExtension.InnerText, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    channel = SessionChannel.Create(
+                        configuration,
+                        endpointDescription,
+                        endpointConfiguration,
+                        clientCertificateChain,
+                        messageContext);
+                }
+            }
+
+            if (channel == null) {
                 channel = SessionChannel.Create(
-                configuration,
-                endpointDescription,
-                endpointConfiguration,
-                clientCertificate,
-                messageContext);
+                    configuration,
+                    endpointDescription,
+                    endpointConfiguration,
+                    clientCertificate,
+                    messageContext);
             }
 
             // create the session object.
             Session session = new Session(channel, configuration, endpoint, null);
 
             // create the session.
-			try
-			{
-				session.Open( sessionName, sessionTimeout, identity, preferredLocales, checkDomain );
-			}
-			catch
-			{
-				session.Dispose();
-				throw;
-			}
+            try
+            {
+                session.Open( sessionName, sessionTimeout, identity, preferredLocales, checkDomain );
+            }
+            catch
+            {
+                session.Dispose();
+                throw;
+            }
 
             return session;
         }
