@@ -61,6 +61,21 @@ namespace Opc.Ua
         }
 
         /// <summary>
+        /// Creates a node from the local node id and a reference desciption.
+        /// </summary>
+        /// <param name="localId">The local node id.</param>
+        /// <param name="reference">The reference.</param>
+        public Node(NodeId localId, ReferenceDescription reference)
+        {
+            Initialize();
+
+            m_nodeId = localId;
+            m_nodeClass = reference.NodeClass;
+            m_browseName = reference.BrowseName;
+            m_displayName = reference.DisplayName;
+        }
+
+        /// <summary>
         /// Returns a copy of the node
         /// </summary>
         /// <param name="source">The source.</param>
