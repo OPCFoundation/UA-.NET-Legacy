@@ -3063,15 +3063,21 @@ namespace Opc.Ua
         public string IssuerUri { get; set; }
 
         /// <summary>
+        /// The configuration information provided in the UserTokenPolicies.
+        /// </summary>
+        [DataMember(Name = "IssuerEndpointUrl", Order = 3, IsRequired = false)]
+        public string IssuerEndpointUrl { get; set; }
+
+        /// <summary>
         /// The authority certificate used to validate user tokens.
         /// </summary>
-        [DataMember(Name = "AuthorityCertificate", Order = 3, IsRequired = false)]
+        [DataMember(Name = "AuthorityCertificate", Order = 4, IsRequired = false)]
         public CertificateIdentifier AuthorityCertificate { get; set; }
 
         /// <summary>
         /// The store containing the issuer certificates for the authority.
         /// </summary>
-        [DataMember(Name = "IssuerCertificates", Order = 4, IsRequired = false)]
+        [DataMember(Name = "IssuerCertificates", Order = 5, IsRequired = false)]
         public CertificateTrustList IssuerCertificates { get; set; }
         #endregion
     }

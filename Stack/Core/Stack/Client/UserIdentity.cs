@@ -396,7 +396,7 @@ namespace Opc.Ua
                 }
 
                 m_tokenType = UserTokenType.IssuedToken;
-                m_issuedTokenType = new XmlQualifiedName("", JwtConstants.JwtUserTokenPolicy);
+                m_issuedTokenType = new XmlQualifiedName("", Opc.Ua.Profiles.JwtUserToken);
                 return;
             }
 

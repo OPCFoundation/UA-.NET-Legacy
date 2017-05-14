@@ -226,12 +226,6 @@ namespace Opc.Ua
     public static class JwtConstants
     {
         /// <remark />
-        public const string JwtUserTokenPolicy = "http://opcfoundation.org/UA/UserToken#JWT";
-        /// <remark />
-        public const string OAuth2AuthorizationPolicy = "http://opcfoundation.org/UA/Authorization#OAuth2";
-        /// <remark />
-        public const string AzureIdentityProviderPolicy = "http://opcfoundation.org/UA/IdentityProvider#Azure";
-        /// <remark />
         public const string OAuth2AuthorizationCode = "authorization_code";
         /// <remark />
         public const string OAuth2ClientCredentials = "client_credentials";

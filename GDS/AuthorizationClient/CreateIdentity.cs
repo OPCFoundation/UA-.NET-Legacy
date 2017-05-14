@@ -41,13 +41,13 @@ namespace AuthorizationClient
                     }
 
                     // check if target server expects clients to use an OAuth2 service. 
-                    if (parameters.AuthorityProfileUri == "http://opcfoundation.org/UA/Authorization#OAuth2")
+                    if (parameters.AuthorityProfileUri == Profiles.OAuth2Authorization)
                     {
                         return await GetJwtWithOAuth2(application, policy, parameters);
                     }
 
                     // check if target server expects clients to use an OPCUA authorization service. 
-                    if (parameters.AuthorityProfileUri == "http://opcfoundation.org/UA/Authorization#OPCUA")
+                    if (parameters.AuthorityProfileUri == Profiles.OpcUaAuthorization)
                     {
                         return await GetJwtWithOpcUa(application, policy, parameters);
                     }
@@ -115,7 +115,14 @@ namespace AuthorizationClient
 
                 if (references != null || references.Count > 0)
                 {
-                    policiesNodeId = ExpandedNodeId.ToNodeId(references[0].NodeId, session.NamespaceUris);
+                    foreach (var reference in references)
+                    {
+                        if (reference.BrowseName.Name == Opc.Ua.Gds.BrowseNames.UserTokenPolicies)
+                        {
+                            policiesNodeId = ExpandedNodeId.ToNodeId(reference.NodeId, session.NamespaceUris);
+                            break;
+                        }
+                    }
                 }
 
                 var dv = session.ReadValue(policiesNodeId);
@@ -132,36 +139,19 @@ namespace AuthorizationClient
                 }
 
                 // encrypt or sign the credentials.
-                DateTime now = DateTime.UtcNow;
-                long ticks = now.Ticks - Utils.TimeBase.Ticks;
-                var nonce = BitConverter.GetBytes(ticks);
-
                 var token = identity.GetIdentityToken();
-                SignatureData signature = null;
 
-                // prove possession of a certificiate.
-                if (token is X509IdentityToken)
-                {
-                    var dataToSign = Utils.Append(endpoint.ServerCertificate, nonce);
-                    signature = token.Sign(dataToSign, selectedPolicy.SecurityPolicyUri);
-                }
-
-                // encrypt the token if required.
-                else
-                {
-                    token.Encrypt(
-                        new X509Certificate2(endpoint.ServerCertificate),
-                        nonce,
-                        selectedPolicy.SecurityPolicyUri);
-                }
+                // hack until part 4 is finialized.
+                token.Encrypt(
+                    new X509Certificate2(endpoint.ServerCertificate),
+                    endpoint.ServerCertificate,
+                    selectedPolicy.SecurityPolicyUri);
 
                 var outputArguments = session.Call(
                     nid,
-                    ExpandedNodeId.ToNodeId(Opc.Ua.MethodIds.AuthorizationServiceType_RequestAccessToken, session.NamespaceUris),
+                    ExpandedNodeId.ToNodeId(Opc.Ua.Gds.MethodIds.AuthorizationServiceType_RequestAccessToken, session.NamespaceUris),
                     token,
-                    parameters.ResourceId,
-                    now,
-                    (signature != null) ? signature.Signature : new byte[0]);
+                    parameters.ResourceId);
 
                 // return the new access token.
                 var accessToken = outputArguments[0] as string;

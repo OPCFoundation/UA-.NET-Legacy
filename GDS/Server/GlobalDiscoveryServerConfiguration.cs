@@ -193,6 +193,9 @@ namespace Opc.Ua.GdsServer
 
         [DataMember(Order = 2)]
         public UserTokenPolicyCollection UserTokenPolicies { get; set; }
+
+        [DataMember(Order = 3)]
+        public bool SupportsCredentialManagement { get; set; }
         #endregion
 
         #region Private Members

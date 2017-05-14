@@ -71,13 +71,6 @@
         <ua:TokenType>IssuedToken_3</ua:TokenType>
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
         <ua:IssuerEndpointUrl>
-          { 
-            "ua:authorityUrl": "https://localhost:54333", 
-            "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OAuth2", 
-            "ua:tokenEndpoint" : "/connect/token", 
-            "ua:requestTypes": [ "client_credentials" ],
-            "ua:scopes": [ "UAPubSub", "UAServer" ]
-          }
         </ua:IssuerEndpointUrl>
         <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
       </ua:UserTokenPolicy>
@@ -86,13 +79,6 @@
         <ua:PolicyId>OPCUA:JWT</ua:PolicyId>
         <ua:TokenType>IssuedToken_3</ua:TokenType>
         <ua:IssuedTokenType>http://opcfoundation.org/UA/UserToken#JWT</ua:IssuedTokenType>
-        <ua:IssuerEndpointUrl>
-          {
-            "ua:authorityUrl": "opc.tcp://localhost:58810",
-            "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OPCUA",
-            "ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=Local"
-          }
-        </ua:IssuerEndpointUrl>
         <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
       </ua:UserTokenPolicy>
     </UserTokenPolicies>
@@ -118,13 +104,35 @@
     <MaxRegistrationInterval>0</MaxRegistrationInterval>
   </ServerConfiguration>
 
-
   <Extensions>
     <ua:XmlElement>
       <UserTokenValidators xmlns="http://opcfoundation.org/UA/SDK/Configuration.xsd">
         <UserTokenValidator>
+          <PolicyId>OAuth2:JWT</PolicyId>
+          <IssuerUri>https://localhost:54333/</IssuerUri>
+          <IssuerEndpointUrl> {
+            "ua:authorityUrl": "https://localhost:54333/",
+            "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OAuth2",
+            "ua:tokenEndpoint" : "/connect/token",
+            "ua:requestTypes": [ "client_credentials" ],
+            "ua:scopes": [ "UAPubSub", "UAServer" ]
+          }
+          </IssuerEndpointUrl>
+          <AuthorityCertificate>
+            <StoreType>Directory</StoreType>
+            <StorePath>%CommonApplicationData%\OPC Foundation\GDS\PKI\own</StorePath>
+            <SubjectName>CN=Global Discovery Server@localhost/O=OPC Foundation</SubjectName>
+          </AuthorityCertificate>
+        </UserTokenValidator>
+        <UserTokenValidator>
           <PolicyId>OPCUA:JWT</PolicyId>
           <IssuerUri>urn:localhost:somecompany.com:GlobalDiscoveryServer</IssuerUri>
+          <IssuerEndpointUrl>{
+            "ua:authorityUrl": "opc.tcp://localhost:58810",
+            "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OPCUA",
+            "ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=AS:Local"
+          }
+          </IssuerEndpointUrl>
           <AuthorityCertificate>
             <StoreType>Directory</StoreType>
             <StorePath>%CommonApplicationData%\OPC Foundation\GDS\PKI\own</StorePath>

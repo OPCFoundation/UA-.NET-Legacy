@@ -38,7 +38,7 @@ namespace Opc.Ua.Gds
 
             if (parameters == null)
             {
-                var policy = endpoint.FindUserTokenPolicy(UserTokenType.IssuedToken, Opc.Ua.JwtConstants.JwtUserTokenPolicy);
+                var policy = endpoint.FindUserTokenPolicy(UserTokenType.IssuedToken, Profiles.JwtUserToken);
 
                 if (policy == null)
                 {

@@ -22,10 +22,10 @@ The Azure AD instance has 4 test accounts:
 
 | Account | Groups | Password |
 |---------|--------|----------|
-|device1@opcfoundationprototyping.onmicrosoft.com|Producers|AGu59HU8|
-|hmi1@opcfoundationprototyping.onmicrosoft.com|Consumers|AGu59HU8|
-|device2@opcfoundationprototyping.onmicrosoft.com|Consumers|AGu59HU8|
-|hmi2@opcfoundationprototyping.onmicrosoft.com|Producers|AGu59HU8|
+|device1@opcfoundationprototyping.onmicrosoft.com|Producers|AGu59HU9|
+|hmi1@opcfoundationprototyping.onmicrosoft.com|Consumers|AGu59HU9|
+|device2@opcfoundationprototyping.onmicrosoft.com|Consumers|AGu59HU9|
+|hmi2@opcfoundationprototyping.onmicrosoft.com|Producers|AGu59HU9|
 
 ### OAuth2 Server Configuration ###
 If a OPC UA Server supports OAuth2 then it will publish a UserTokenPolicy with IssuedTokenType=http://opcfoundation.org/UA/UserTokenPolicy#JWT 

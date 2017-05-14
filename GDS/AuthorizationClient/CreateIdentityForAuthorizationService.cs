@@ -39,7 +39,7 @@ namespace AuthorizationClient
                     JwtEndpointParameters parameters = new JwtEndpointParameters();
                     parameters.FromJson(policy.IssuerEndpointUrl);
 
-                    if (parameters.AuthorityProfileUri == "http://opcfoundation.org/UA/Authorization#Azure")
+                    if (parameters.AuthorityProfileUri == Profiles.AzureAuthorization)
                     {
                         return await GetTokenFromAzure(application, resourceId, policy, parameters);
                     }

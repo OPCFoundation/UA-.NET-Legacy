@@ -625,7 +625,6 @@ namespace Opc.Ua.GdsServer
                         }
                     }
 
-
                     records.Add(new ServerOnNetwork()
                     {
                         RecordId = (uint)result.ID,
@@ -633,6 +632,131 @@ namespace Opc.Ua.GdsServer
                         DiscoveryUrl = result.DiscoveryUrl,
                         ServerCapabilities = capabilities
                     });
+
+                    if (maxRecordsToReturn <= records.Count)
+                    {
+                        break;
+                    }
+                }
+
+                return records.ToArray();
+            }
+        }
+
+        public ApplicationDescription[] QueryApplications(
+            uint startingRecordId,
+            uint maxRecordsToReturn,
+            string applicationName,
+            string applicationUri,
+            string productUri,
+            string[] serverCapabilities,
+            out DateTime lastCounterResetTime,
+            out uint lastRecordId)
+        {
+            lastCounterResetTime = DateTime.MinValue;
+            lastRecordId = 0;
+
+            using (Opc.Ua.Gds.gdsdbEntities entities = new Opc.Ua.Gds.gdsdbEntities())
+            {
+                var results = from x in entities.Applications 
+                              where ((int)startingRecordId == 0 || (int)startingRecordId < x.ID)
+                              orderby x.ID
+                              select new
+                              {
+                                  x.ID,
+                                  x.ApplicationUri,
+                                  x.ApplicationName,
+                                  x.ApplicationType,
+                                  x.ProductUri,
+                                  x.ServerCapabilities
+                              };
+
+                List<ApplicationDescription> records = new List<ApplicationDescription>();
+
+                foreach (var result in results)
+                {
+                    if (!String.IsNullOrEmpty(applicationName))
+                    {
+                        if (!Match(result.ApplicationName, applicationName))
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (!String.IsNullOrEmpty(applicationUri))
+                    {
+                        if (!Match(result.ApplicationUri, applicationUri))
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (!String.IsNullOrEmpty(productUri))
+                    {
+                        if (!Match(result.ProductUri, productUri))
+                        {
+                            continue;
+                        }
+                    }
+
+                    string[] capabilities = null;
+
+                    if (result.ServerCapabilities != null)
+                    {
+                        capabilities = result.ServerCapabilities.Split(',');
+                    }
+
+                    if (serverCapabilities != null && serverCapabilities.Length > 0)
+                    {
+                        bool match = true;
+
+                        for (int ii = 0; ii < serverCapabilities.Length; ii++)
+                        {
+                            if (capabilities == null || !capabilities.Contains(serverCapabilities[ii]))
+                            {
+                                match = false;
+                                break;
+                            }
+                        }
+
+                        if (!match)
+                        {
+                            continue;
+                        }
+                    }
+
+                    var record = new ApplicationDescription()
+                    {
+                        ApplicationUri = result.ApplicationUri,
+                        ApplicationName = result.ApplicationName,
+                        ApplicationType = (ApplicationType)result.ApplicationType,
+                        ProductUri = result.ProductUri,
+                        DiscoveryProfileUri = null,
+                        GatewayServerUri = null,
+                        DiscoveryUrls = new StringCollection()
+                    };
+
+                    var endpoints = from x in entities.ServerEndpoints where x.ApplicationId == result.ID
+                                    select new
+                                    {
+                                        x.DiscoveryUrl
+                                    };
+
+                    if (endpoints != null)
+                    {
+                        foreach (var endpoint in endpoints)
+                        {
+                            record.DiscoveryUrls.Add(endpoint.DiscoveryUrl);
+                        }
+                    }
+
+                    lastRecordId = (uint)result.ID;
+                    records.Add(record);
+
+                    if (maxRecordsToReturn <= records.Count)
+                    {
+                        break;
+                    }
                 }
 
                 return records.ToArray();

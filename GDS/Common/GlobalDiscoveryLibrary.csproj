@@ -164,6 +164,12 @@
     <Compile Include="Controls\OAuth2CredentialsDialog.Designer.cs">
       <DependentUpon>OAuth2CredentialsDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RequestCredentialsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\RequestCredentialsDialog.Designer.cs">
+      <DependentUpon>RequestCredentialsDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\SelectGdsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +229,12 @@
     </Compile>
     <Compile Include="Controls\ViewApplicationRecordsDialog.Designer.cs">
       <DependentUpon>ViewApplicationRecordsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\QueryApplicationsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\QueryApplicationsDialog.Designer.cs">
+      <DependentUpon>QueryApplicationsDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Controls\ViewServersOnNetworkDialog.cs">
       <SubType>Form</SubType>
@@ -322,6 +334,9 @@
     <EmbeddedResource Include="Controls\OAuth2CredentialsDialog.resx">
       <DependentUpon>OAuth2CredentialsDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\RequestCredentialsDialog.resx">
+      <DependentUpon>RequestCredentialsDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\SelectGdsDialog.resx">
       <DependentUpon>SelectGdsDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,6 +366,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ViewApplicationRecordsDialog.resx">
       <DependentUpon>ViewApplicationRecordsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\QueryApplicationsDialog.resx">
+      <DependentUpon>QueryApplicationsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\ViewServersOnNetworkDialog.resx">
       <DependentUpon>ViewServersOnNetworkDialog.cs</DependentUpon>
