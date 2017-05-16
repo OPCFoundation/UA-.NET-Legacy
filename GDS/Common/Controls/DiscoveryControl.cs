@@ -68,7 +68,8 @@ namespace Opc.Ua.Gds
         {
             LocalMachine,
             LocalNetwork,
-            GlobalDiscovery,
+            QueryServers,
+            QueryApplications,
             CustomDiscovery,
             Add
         }
@@ -100,7 +101,7 @@ namespace Opc.Ua.Gds
 
                 if (node != null)
                 {
-                    if (RootFolders.LocalMachine.Equals(node.Tag) || RootFolders.LocalNetwork.Equals(node.Tag) || RootFolders.GlobalDiscovery.Equals(node.Tag))
+                    if (RootFolders.LocalMachine.Equals(node.Tag) || RootFolders.LocalNetwork.Equals(node.Tag) || RootFolders.QueryServers.Equals(node.Tag) || RootFolders.QueryApplications.Equals(node.Tag))
                     {
                         if (ServersGridView.SelectedRows.Count > 0)
                         {
@@ -260,9 +261,15 @@ namespace Opc.Ua.Gds
             node.Nodes.Add(new TreeNode());
             DiscoveryTreeView.Nodes.Add(node);
 
-            node = new TreeNode("Global Discovery");
+            node = new TreeNode("Query Servers");
             node.SelectedImageIndex = node.ImageIndex = ImageIndex.GlobalNetwork;
-            node.Tag = RootFolders.GlobalDiscovery;
+            node.Tag = RootFolders.QueryServers;
+            node.Nodes.Add(new TreeNode());
+            DiscoveryTreeView.Nodes.Add(node);
+
+            node = new TreeNode("Query Applications");
+            node.SelectedImageIndex = node.ImageIndex = ImageIndex.GlobalNetwork;
+            node.Tag = RootFolders.QueryApplications;
             node.Nodes.Add(new TreeNode());
             DiscoveryTreeView.Nodes.Add(node);
 
@@ -361,7 +368,7 @@ namespace Opc.Ua.Gds
                 return;
             }
 
-            if (RootFolders.GlobalDiscovery.Equals(e.Node.Tag))
+            if (RootFolders.QueryServers.Equals(e.Node.Tag))
             {
                 var servers = new ViewServersOnNetworkDialog(m_gds).ShowDialog(this, ref m_filters);
 
@@ -372,6 +379,25 @@ namespace Opc.Ua.Gds
                         TreeNode node = new TreeNode(String.Format("{0}", server.ServerName));
                         node.SelectedImageIndex = node.ImageIndex = ImageIndex.Server;
                         node.Tag = server;
+                        node.Nodes.Add(new TreeNode());
+                        e.Node.Nodes.Add(node);
+                    }
+                }
+
+                return;
+            }
+
+            if (RootFolders.QueryApplications.Equals(e.Node.Tag))
+            {
+                var applications = new QueryApplicationsDialog(m_gds).ShowDialog(this, ref m_filters);
+
+                if (applications != null)
+                {
+                    foreach (var application in applications)
+                    {
+                        TreeNode node = new TreeNode(String.Format("{0}", application.ApplicationName));
+                        node.SelectedImageIndex = node.ImageIndex = ImageIndex.Server;
+                        node.Tag = application;
                         node.Nodes.Add(new TreeNode());
                         e.Node.Nodes.Add(node);
                     }
@@ -875,7 +901,7 @@ namespace Opc.Ua.Gds
                     return;
                 }
 
-                if (RootFolders.GlobalDiscovery.Equals(e.Node.Tag))
+                if (RootFolders.QueryServers.Equals(e.Node.Tag))
                 {
                     ServersTable.Rows.Clear();
                     ShowPanel(true);
@@ -901,6 +927,34 @@ namespace Opc.Ua.Gds
                        
                     ShowServerOnNetworks(e.Node.Nodes);
 
+                    return;
+                }
+
+                if (RootFolders.QueryApplications.Equals(e.Node.Tag))
+                {
+                    ServersTable.Rows.Clear();
+                    ShowPanel(true);
+
+                    if (e.Node.Nodes.Count == 1 && String.IsNullOrEmpty(e.Node.Nodes[0].Text))
+                    {
+                        e.Node.Nodes.Clear();
+
+                        var applications = new QueryApplicationsDialog(m_gds).ShowDialog(this, ref m_filters);
+
+                        if (applications != null)
+                        {
+                            foreach (var application in applications)
+                            {
+                                TreeNode node = new TreeNode(String.Format("{0}", application.ApplicationName));
+                                node.SelectedImageIndex = node.ImageIndex = ImageIndex.Server;
+                                node.Tag = application;
+                                node.Nodes.Add(new TreeNode());
+                                e.Node.Nodes.Add(node);
+                            }
+                        }
+                    }
+
+                    ShowApplicationDescriptions(e.Node.Nodes);
                     return;
                 }
 

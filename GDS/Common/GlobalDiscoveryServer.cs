@@ -465,6 +465,211 @@ namespace Opc.Ua.Gds
         #endregion
 
         /// <summary>
+        /// Queries the GDS for any applications matching the criteria.
+        /// </summary>
+        /// <param name="maxRecordsToReturn">The max records to return.</param>
+        /// <param name="applicationName">The filter applied to the application name.</param>
+        /// <param name="applicationUri">The filter applied to the application uri.</param>
+        /// <param name="productUri">The filter applied to the product uri.</param>
+        /// <param name="serverCapabilities">The filter applied to the server capabilities.</param>
+        /// <returns>A enumarator used to access the results.</returns>
+        public IEnumerable<ApplicationDescription> QueryApplications(
+            uint maxRecordsToReturn,
+            string applicationName,
+            string applicationUri,
+            string productUri,
+            IList<string> serverCapabilities)
+        {
+            return new ApplicationDescriptionCollection(new ApplicationDescriptionEnumerator(
+                this,
+                maxRecordsToReturn,
+                applicationName,
+                applicationUri,
+                productUri,
+                serverCapabilities));
+        }
+
+        #region Query Application Helpers
+        internal ApplicationDescription[] QueryApplications(
+            ref DateTime lastResetTime,
+            ref uint startingRecordId,
+            uint maxRecordsToReturn,
+            string applicationName,
+            string applicationUri,
+            string productUri,
+            IList<string> serverCapabilities)
+        {
+            if (!IsConnected)
+            {
+                Connect(null);
+            }
+
+            var outputArguments = m_session.Call(
+                ExpandedNodeId.ToNodeId(Opc.Ua.Gds.ObjectIds.Directory, m_session.NamespaceUris),
+                ExpandedNodeId.ToNodeId(Opc.Ua.Gds.MethodIds.Directory_QueryApplications, m_session.NamespaceUris),
+                startingRecordId,
+                maxRecordsToReturn,
+                applicationName,
+                applicationUri,
+                productUri,
+                serverCapabilities);
+
+            ApplicationDescription[] applications = null;
+
+            if (outputArguments.Count > 0)
+            {
+                if (lastResetTime != DateTime.MinValue && lastResetTime < (DateTime)outputArguments[0])
+                {
+                    throw new InvalidOperationException("Enumeration cannot continue because the Application has reset its index.");
+                }
+
+                lastResetTime = (DateTime)outputArguments[0];
+            }
+
+            startingRecordId = 0;
+
+            if (outputArguments.Count > 1)
+            {
+                startingRecordId = (uint)outputArguments[1];
+            }
+
+            if (outputArguments.Count > 2)
+            {
+                applications = (ApplicationDescription[])ExtensionObject.ToArray(outputArguments[2] as ExtensionObject[], typeof(ApplicationDescription));
+            }
+
+            return applications;
+        }
+
+        #region ApplicationEnumerator Class
+        internal class ApplicationDescriptionEnumerator : IEnumerator<ApplicationDescription>
+        {
+            internal ApplicationDescriptionEnumerator(
+                GlobalDiscoveryServer gds,
+                uint maxRecordsToReturn,
+                string applicationName,
+                string applicationUri,
+                string productUri,
+                IList<string> serverCapabilities)
+            {
+                m_gds = gds;
+                m_maxRecordsToReturn = maxRecordsToReturn;
+                m_applicationName = applicationName;
+                m_applicationUri = applicationUri;
+                m_productUri = productUri;
+                m_serverCapabilities = serverCapabilities;
+                m_lastResetTime = DateTime.MinValue;
+            }
+
+            #region IEnumerator<ApplicationOnNetwork> Members
+            public ApplicationDescription Current
+            {
+                get
+                {
+                    if (m_applications != null && m_index >= 0 && m_index < m_applications.Count)
+                    {
+                        return m_applications[m_index];
+                    }
+
+                    return null;
+                }
+            }
+
+            public void Dispose()
+            {
+                // nothing to do.
+            }
+
+            object System.Collections.IEnumerator.Current
+            {
+                get
+                {
+                    return this.Current;
+                }
+            }
+
+            public bool MoveNext()
+            {
+                m_index++;
+
+                if (m_applications != null && m_index >= 0 && m_index < m_applications.Count)
+                {
+                    return true;
+                }
+
+                var applications = m_gds.QueryApplications(
+                    ref m_lastResetTime,
+                    ref m_startingRecordId,
+                    m_maxRecordsToReturn,
+                    m_applicationName,
+                    m_applicationUri,
+                    m_productUri,
+                    m_serverCapabilities);
+
+                if (applications != null)
+                {
+                    if (m_applications == null)
+                    {
+                        m_index = 0;
+                        m_applications = new List<ApplicationDescription>();
+                    }
+
+                    m_applications.AddRange(applications);
+
+                    if (m_index < m_applications.Count)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            public void Reset()
+            {
+                m_index = 0;
+            }
+            #endregion
+
+            #region Private Fields
+            private GlobalDiscoveryServer m_gds;
+            private uint m_maxRecordsToReturn;
+            private string m_applicationName;
+            private string m_applicationUri;
+            private string m_productUri;
+            private IList<string> m_serverCapabilities;
+            private uint m_startingRecordId;
+            private DateTime m_lastResetTime;
+            private List<ApplicationDescription> m_applications;
+            private int m_index;
+            #endregion
+        }
+        #endregion
+
+        #region ApplicationOnNetworkCollection Class
+        internal class ApplicationDescriptionCollection : IEnumerable<ApplicationDescription>
+        {
+            public ApplicationDescriptionCollection(ApplicationDescriptionEnumerator enumerator)
+            {
+                m_enumerator = enumerator;
+            }
+
+            public IEnumerator<ApplicationDescription> GetEnumerator()
+            {
+                return m_enumerator;
+            }
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                return m_enumerator;
+            }
+
+            private ApplicationDescriptionEnumerator m_enumerator;
+        }
+        #endregion
+        #endregion
+
+        /// <summary>
         /// Get the application record.
         /// </summary>
         /// <param name="applicationId">The application id.</param>

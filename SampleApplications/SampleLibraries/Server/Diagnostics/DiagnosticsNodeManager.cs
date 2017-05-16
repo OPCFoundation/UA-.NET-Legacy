@@ -152,23 +152,6 @@ namespace Opc.Ua.Server
                 {
                     getMonitoredItems.OnCallMethod = OnGetMonitoredItems;
                 }
-
-                if (EnableAuthorizationServices)
-                {
-                    var folder = (BaseObjectState)FindPredefinedNode(ObjectIds.AuthorizationServices, typeof(BaseObjectState));
-
-                    if (folder != null)
-                    {
-                        folder.AddReference(ReferenceTypeIds.Organizes, true, ObjectIds.ObjectsFolder);
-                    }
-
-                    folder = (BaseObjectState)FindPredefinedNode(ObjectIds.ObjectsFolder, typeof(BaseObjectState));
-
-                    if (folder != null)
-                    {
-                        folder.AddReference(ReferenceTypeIds.Organizes, false, ObjectIds.AuthorizationServices);
-                    }
-                }
             }
         }
 
@@ -608,6 +591,41 @@ namespace Opc.Ua.Server
             for (int ii = 0; ii < nodesToDelete.Count; ii++)
             {
                 DeleteNode(context, nodesToDelete[ii].NodeId);
+            }
+        }
+
+        /// <summary>
+        /// Creates the diagnostics node for the server.
+        /// </summary>
+        public void CreateAuthorizationService(
+            ServerSystemContext systemContext,
+            UserTokenValidators validators)
+        {
+            lock (Lock)
+            {
+                var context = systemContext.Copy();
+                context.NodeIdFactory = this;
+
+                var folder = FindPredefinedNode(Opc.Ua.ObjectIds.AuthorizationServices, null);
+
+                foreach (var validator in validators)
+                {
+                    var node = new AuthorizationServiceConfigurationState(folder);
+
+                    node.Create(
+                        context,
+                        new NodeId(validator.PolicyId, 1),
+                        new QualifiedName(validator.PolicyId, 1),
+                        null,
+                        true);
+
+                    node.ServiceUri.Value = validator.IssuerUri;
+                    node.ServiceCertificate.Value = validator.AuthorityCertificate.Find().RawData;
+                    node.IssuerEndpointUrl.Value = validator.IssuerEndpointUrl;
+
+                    AddPredefinedNode(context, node);
+                    folder.AddReference(ReferenceTypeIds.HasComponent, false, node.NodeId);
+                }
             }
         }
 
@@ -1723,11 +1741,6 @@ namespace Opc.Ua.Server
             public NodeValueSimpleEventHandler UpdateCallback;
         }
         #endregion
-
-        /// <summary>
-        /// If TRUE before startup the AuthorizationServices folder is made visible.
-        /// </summary>
-        public bool EnableAuthorizationServices { get; set; }
 
         /// <summary>
         /// Adds a security group.

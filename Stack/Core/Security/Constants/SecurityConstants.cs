@@ -222,7 +222,27 @@ namespace Opc.Ua
         /// Communicates with UA Binary over AMQPS.
         /// </summary>
         public const string AmqpsBinaryTransport = "http://opcfoundation.org/UA-Profile/Transport/amqps-uabinary";
-        
+
+        /// <summary>
+        /// Uses OAuth2 over HTTPS to request access tokens.
+        /// </summary>
+        public const string OAuth2Authorization = "http://opcfoundation.org/UA/Authorization#OAuth2";
+
+        /// <summary>
+        /// Uses OPCUA methods to request access tokens.
+        /// </summary>
+        public const string OpcUaAuthorization = "http://opcfoundation.org/UA/Authorization#OPCUA";
+
+        /// <summary>
+        /// Uses the Azure identity provider.
+        /// </summary>
+        public const string AzureAuthorization = "http://opcfoundation.org/UA/Authorization#Azure";
+
+        /// <summary>
+        /// An Issued User Token that complies with the JWT specification.
+        /// </summary>
+        public const string JwtUserToken = "http://opcfoundation.org/UA/UserToken#JWT";
+
         /// <summary>
         /// Converts the URI to a URI that can be used for comparison.
         /// </summary>

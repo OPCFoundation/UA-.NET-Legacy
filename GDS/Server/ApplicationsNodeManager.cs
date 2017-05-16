@@ -491,34 +491,34 @@ namespace Opc.Ua.GdsServer
 
                 if (m_configuration.AuthorizationServices != null)
                 {
+                    var folder = FindPredefinedNode(new NodeId(Opc.Ua.Gds.Objects.AuthorizationServices, NamespaceIndexes[1]), null);
+
                     foreach (var service in m_configuration.AuthorizationServices)
                     {
                         AuthorizationServiceState node = new AuthorizationServiceState(null);
-                        node.RequestAccessToken = new RequestAccessTokenMethodState(node);
+                        node.RequestAccessToken = new Opc.Ua.Gds.RequestAccessTokenMethodState(node);
 
                         node.Create(
                             context, 
-                            new NodeId(service.ServiceName, NamespaceIndex), 
+                            new NodeId("AS:" + service.ServiceName, NamespaceIndex), 
                             new QualifiedName(service.ServiceName, NamespaceIndex), 
                             null, 
                             true);
 
+                        node.GetServiceDescription.OnCall = new GetServiceDescriptionMethodStateMethodCallHandler(OnGetServiceDescription);
                         node.RequestAccessToken.OnCall = new RequestAccessTokenMethodStateMethodCallHandler(OnRequestAccessToken);
                         node.ServiceUri.Value = Server.ServerUris.GetString(0);
-                        node.ServiceProfileUri.Value = Profiles.UaTcpTransport;
+                        node.ServiceCertificate.Value = Server.Configuration.SecurityConfiguration.ApplicationCertificate.Certificate.RawData;
                         node.UserTokenPolicies.Value = service.UserTokenPolicies.ToArray();
 
                         AddPredefinedNode(context, node);
-                        node.AddReference(ReferenceTypeIds.Organizes, true, Opc.Ua.ObjectIds.AuthorizationServices);
+                        folder.AddReference(ReferenceTypeIds.HasComponent, false, node.NodeId);
+                        node.AddReference(ReferenceTypeIds.HasComponent, true, folder.NodeId);
 
-                        IList<IReference> references = null;
-
-                        if (!externalReferences.TryGetValue(Opc.Ua.ObjectIds.AuthorizationServices, out references))
+                        if (service.SupportsCredentialManagement)
                         {
-                            externalReferences[Opc.Ua.ObjectIds.AuthorizationServices] = references = new List<IReference>();
+                            SetupCredentialManagement(context, service);
                         }
-
-                        references.Add(new ReferenceNode(Opc.Ua.ReferenceTypeIds.Organizes, false, node.NodeId));
                     }
                 }
 
@@ -537,6 +537,73 @@ namespace Opc.Ua.GdsServer
                     }
                 }
             }
+        }
+
+        private void SetupCredentialManagement(
+            ServerSystemContext context,
+            GdsServerAuthorizationServiceConfiguration service)
+        {
+            var folder = FindPredefinedNode(new NodeId(Opc.Ua.Gds.Objects.KeyCredentialManagement, NamespaceIndexes[1]), null);
+            var node = new KeyCredentialServiceState(null);
+
+            node.Create(
+                context,
+                new NodeId("CS:" + service.ServiceName, NamespaceIndex),
+                new QualifiedName(service.ServiceName, NamespaceIndex),
+                null,
+                true);
+
+            node.ResourceUri.Value = Server.ServerUris.GetString(0);
+            node.ProfileUris.Value = new string[] { Opc.Ua.Profiles.OAuth2Authorization };
+            node.StartRequest.OnCall = new KeyCredentialStartRequestMethodStateMethodCallHandler(OnStartCredentialRequest);
+            node.FinishRequest.OnCall = new KeyCredentialFinishRequestMethodStateMethodCallHandler(OnFinishCredentialRequest);
+            node.Revoke.OnCall = new KeyCredentialRevokeMethodStateMethodCallHandler(OnRevokeCredential);
+
+            AddPredefinedNode(context, node);
+            folder.AddReference(ReferenceTypeIds.HasComponent, false, node.NodeId);
+            node.AddReference(ReferenceTypeIds.HasComponent, true, folder.NodeId);
+        }
+
+        private ServiceResult OnStartCredentialRequest(
+            ISystemContext context,
+            MethodState method,
+            NodeId objectId,
+            string applicationUri,
+            byte[] certificate,
+            string securityPolicyUri,
+            NodeId[] requestedRoles,
+            ref NodeId requestId)
+        {
+            if (securityPolicyUri != SecurityPolicies.None)
+            {
+                return StatusCodes.BadSecurityPolicyRejected;
+            }
+
+            return ServiceResult.Good;
+        }
+
+        private ServiceResult OnFinishCredentialRequest(
+            ISystemContext context,
+            MethodState method,
+            NodeId objectId,
+            NodeId requestId,
+            bool cancelRequest,
+            ref string credentialId,
+            ref byte[] credentialSecret,
+            ref string certificateThumbprint,
+            ref string securityPolicyUri,
+            ref NodeId[] grantedRoles)
+        {
+            return ServiceResult.Good;
+        }
+
+        private ServiceResult OnRevokeCredential(
+            ISystemContext context,
+            MethodState method,
+            NodeId objectId,
+            string credentialId)
+        {
+            return ServiceResult.Good;
         }
 
         #region TrustList Class
@@ -881,6 +948,7 @@ namespace Opc.Ua.GdsServer
                     Opc.Ua.Gds.CertificateDirectoryState activeNode = new Opc.Ua.Gds.CertificateDirectoryState(passiveNode.Parent);
 
                     activeNode.Create(context, passiveNode);
+                    activeNode.QueryApplications.OnCall = new QueryApplicationsMethodStateMethodCallHandler(OnQueryApplications);
                     activeNode.QueryServers.OnCall = new QueryServersMethodStateMethodCallHandler(OnQueryServers);
                     activeNode.RegisterApplication.OnCall = new RegisterApplicationMethodStateMethodCallHandler(OnRegisterApplication);
                     activeNode.UpdateApplication.OnCall = new UpdateApplicationMethodStateMethodCallHandler(OnUpdateApplication);
@@ -953,8 +1021,6 @@ namespace Opc.Ua.GdsServer
             NodeId objectId,
             UserIdentityToken identityToken,
             string resourceId,
-            DateTime creationTime,
-            byte[] signature,
             ref string accessToken)
         {
             // check for a valid identity token.
@@ -980,34 +1046,12 @@ namespace Opc.Ua.GdsServer
                 throw new ServiceResultException(StatusCodes.BadIdentityTokenInvalid);
             }
 
-            // protect against reply attacks.
-            if (Math.Abs((DateTime.UtcNow - creationTime).TotalMinutes) > new TimeSpan(0, 5, 0).TotalMinutes)
-            {
-                throw new ServiceResultException(StatusCodes.BadIdentityTokenInvalid);
-            }
+            var certificate = Server.Configuration.SecurityConfiguration.ApplicationCertificate.Certificate;
 
-            // decrypt or verify the credentials.
-            var nonce = BitConverter.GetBytes(creationTime.Ticks - Utils.TimeBase.Ticks);
-
-            // check possession of a certificate.
-            if (identityToken is X509IdentityToken)
-            {
-                var dataToVerify = Utils.Append(SecureChannelContext.Current.EndpointDescription.ServerCertificate, nonce);
-
-                 identityToken.Verify(
-                    nonce,
-                    new SignatureData() {  Signature = signature },
-                    selectedPolicy.SecurityPolicyUri);
-            }
-
-            // decrypt the token if required.
-            else
-            {
-                identityToken.Decrypt(
-                    Server.Configuration.SecurityConfiguration.ApplicationCertificate.Certificate,
-                    nonce,
-                    selectedPolicy.SecurityPolicyUri);
-            }
+            identityToken.Decrypt(
+               certificate,
+               certificate.RawData,
+               selectedPolicy.SecurityPolicyUri);
 
             IUserIdentity identity = new UserIdentity(identityToken, selectedPolicy);
 
@@ -1016,7 +1060,7 @@ namespace Opc.Ua.GdsServer
 
             if (issuedToken != null)
             {
-                if (selectedPolicy.IssuedTokenType == JwtConstants.JwtUserTokenPolicy)
+                if (selectedPolicy.IssuedTokenType == Profiles.JwtUserToken)
                 {
                     JwtEndpointParameters parameters = new JwtEndpointParameters();
                     parameters.FromJson(selectedPolicy.IssuerEndpointUrl);
@@ -1029,11 +1073,11 @@ namespace Opc.Ua.GdsServer
             var signingKey = new X509SecurityKey(Server.Configuration.SecurityConfiguration.ApplicationCertificate.Certificate);
 
             var claimsIdentity = new ClaimsIdentity(new List<Claim>()
-                    {
-                        new Claim("name", identity.DisplayName),
-                        new Claim("scp", "UAServer"),
-                        new Claim("roles", "admin"),
-                    }, "Custom");
+            {
+                new Claim("name", identity.DisplayName),
+                new Claim("scp", "UAServer"),
+                new Claim("roles", "admin"),
+            }, "Custom");
 
             var signingCredentials = new SigningCredentials(
                 signingKey,
@@ -1056,7 +1100,51 @@ namespace Opc.Ua.GdsServer
 
             return ServiceResult.Good;
         }
- 
+
+        private ServiceResult OnGetServiceDescription(
+            ISystemContext context,
+            MethodState method,
+            NodeId objectId,
+            ref string serviceUri,
+            ref byte[] serviceCertificate,
+            ref UserTokenPolicy[] policies)
+        {
+            var service = method.Parent as AuthorizationServiceState;
+
+            serviceUri = service.ServiceUri.Value;
+            serviceCertificate = service.ServiceCertificate.Value;
+            policies = service.UserTokenPolicies.Value;
+
+            return ServiceResult.Good;
+        }
+
+        private ServiceResult OnQueryApplications(
+            ISystemContext context,
+            MethodState method,
+            NodeId objectId,
+            uint startingRecordId,
+            uint maxRecordsToReturn,
+            string applicationName,
+            string applicationUri,
+            string productUri,
+            string[] serverCapabilities,
+            ref DateTime lastCounterResetTime,
+            ref uint lastRecordId,
+            ref ApplicationDescription[] appplications)
+        {
+            appplications = m_database.QueryApplications(
+                startingRecordId,
+                maxRecordsToReturn,
+                applicationName,
+                applicationUri,
+                productUri,
+                serverCapabilities,
+                out lastCounterResetTime,
+                out lastRecordId);
+
+            return ServiceResult.Good;
+        }
+
         private ServiceResult OnQueryServers(
             ISystemContext context,
             MethodState method,

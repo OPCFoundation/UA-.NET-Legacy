@@ -552,5 +552,10 @@ namespace Opc.Ua.GdsClient
                 m_gdsConfigured = true;
             }
         }
+
+        private void GetCredentialsButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

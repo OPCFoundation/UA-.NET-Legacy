@@ -99,7 +99,7 @@
           {
             "ua:authorityUrl": "opc.tcp://localhost:58810",
             "ua:authorityProfileUri" : "http://opcfoundation.org/UA/Authorization#OPCUA",
-            "ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=Local"
+            "ua:tokenEndpoint" : "nsu=http://opcfoundation.org/UA/GDS/applications/;s=AS:Local"
           }
         </ua:IssuerEndpointUrl>
         <ua:SecurityPolicyUri>http://opcfoundation.org/UA/SecurityPolicy#None</ua:SecurityPolicyUri>
@@ -183,6 +183,7 @@
                 <ua:TokenType>Anonymous_0</ua:TokenType>
               </ua:UserTokenPolicy>
             </UserTokenPolicies>
+            <SupportsCredentialManagement>true</SupportsCredentialManagement>
           </AuthorizationService>
         </AuthorizationServices>
       </GlobalDiscoveryServerConfiguration>
