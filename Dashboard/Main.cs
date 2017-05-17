@@ -118,7 +118,7 @@ namespace WelcomeApplication
         {
             try
             {
-                Process.Start("http://www.opcfoundation.org");
+                Process.Start("https://www.opcfoundation.org");
             }
             catch (System.Exception ex)
             {
@@ -143,7 +143,7 @@ namespace WelcomeApplication
         {
             try
             {
-                Process.Start( "http://www.opcfoundation.org/mantis" );
+                Process.Start("https://github.com/OPCFoundation/UA-.NET/issues");
             }
             catch (System.Exception ex)
             {
