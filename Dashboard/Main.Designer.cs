@@ -46,9 +46,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.pnlTop = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.lnkReportABug = new System.Windows.Forms.LinkLabel();
-            this.lnkAskForHelp = new System.Windows.Forms.LinkLabel();
             this.labelSdkBuild = new System.Windows.Forms.Label();
             this.imgOPCLogo = new System.Windows.Forms.PictureBox();
             this.lblTopLabel = new System.Windows.Forms.Label();
@@ -56,24 +54,10 @@
             this.lnkOPCCertification = new System.Windows.Forms.LinkLabel();
             this.lnkOpc = new System.Windows.Forms.LinkLabel();
             this.pnlLeft = new System.Windows.Forms.Panel();
-            this.appRefClient = new WelcomeApplication.ApplicationUserControl();
-            this.appRefServer = new WelcomeApplication.ApplicationUserControl();
-            this.appGnClient = new WelcomeApplication.ApplicationUserControl();
-            this.appGnServer = new WelcomeApplication.ApplicationUserControl();
-            this.appDiscoveryServer = new WelcomeApplication.ApplicationUserControl();
             this.label5 = new System.Windows.Forms.Label();
-            this.appACClient = new WelcomeApplication.ApplicationUserControl();
-            this.appACServer = new WelcomeApplication.ApplicationUserControl();
             this.label4 = new System.Windows.Forms.Label();
-            this.appHEClient = new WelcomeApplication.ApplicationUserControl();
-            this.appHEServer = new WelcomeApplication.ApplicationUserControl();
-            this.appHAClient = new WelcomeApplication.ApplicationUserControl();
-            this.appHAServer = new WelcomeApplication.ApplicationUserControl();
             this.label3 = new System.Windows.Forms.Label();
-            this.appDAClient = new WelcomeApplication.ApplicationUserControl();
-            this.appDAServer = new WelcomeApplication.ApplicationUserControl();
             this.label2 = new System.Windows.Forms.Label();
-            this.appUaConfigTool = new WelcomeApplication.ApplicationUserControl();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.labelTip = new System.Windows.Forms.Label();
             this.wbOPCFoundation = new System.Windows.Forms.WebBrowser();
@@ -88,6 +72,20 @@
             this.pnlInfo = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.appRefClient = new WelcomeApplication.ApplicationUserControl();
+            this.appRefServer = new WelcomeApplication.ApplicationUserControl();
+            this.appGnClient = new WelcomeApplication.ApplicationUserControl();
+            this.appGnServer = new WelcomeApplication.ApplicationUserControl();
+            this.appDiscoveryServer = new WelcomeApplication.ApplicationUserControl();
+            this.appACClient = new WelcomeApplication.ApplicationUserControl();
+            this.appACServer = new WelcomeApplication.ApplicationUserControl();
+            this.appHEClient = new WelcomeApplication.ApplicationUserControl();
+            this.appHEServer = new WelcomeApplication.ApplicationUserControl();
+            this.appHAClient = new WelcomeApplication.ApplicationUserControl();
+            this.appHAServer = new WelcomeApplication.ApplicationUserControl();
+            this.appDAClient = new WelcomeApplication.ApplicationUserControl();
+            this.appDAServer = new WelcomeApplication.ApplicationUserControl();
+            this.appUaConfigTool = new WelcomeApplication.ApplicationUserControl();
             this.pnlTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgOPCLogo)).BeginInit();
             this.pnlLeft.SuspendLayout();
@@ -103,9 +101,7 @@
             // 
             this.pnlTop.BackColor = System.Drawing.Color.White;
             this.pnlTop.Controls.Add(this.label7);
-            this.pnlTop.Controls.Add(this.label6);
             this.pnlTop.Controls.Add(this.lnkReportABug);
-            this.pnlTop.Controls.Add(this.lnkAskForHelp);
             this.pnlTop.Controls.Add(this.labelSdkBuild);
             this.pnlTop.Controls.Add(this.imgOPCLogo);
             this.pnlTop.Controls.Add(this.lblTopLabel);
@@ -114,63 +110,43 @@
             this.pnlTop.Controls.Add(this.lnkOpc);
             this.pnlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTop.Location = new System.Drawing.Point(0, 0);
+            this.pnlTop.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pnlTop.Name = "pnlTop";
-            this.pnlTop.Size = new System.Drawing.Size(792, 110);
+            this.pnlTop.Size = new System.Drawing.Size(1056, 135);
             this.pnlTop.TabIndex = 0;
             // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(684, 90);
+            this.label7.Location = new System.Drawing.Point(912, 111);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(9, 13);
+            this.label7.Size = new System.Drawing.Size(11, 17);
             this.label7.TabIndex = 35;
             this.label7.Text = "|";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(593, 90);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(9, 13);
-            this.label6.TabIndex = 34;
-            this.label6.Text = "|";
-            this.label6.Visible = false;
             // 
             // lnkReportABug
             // 
             this.lnkReportABug.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lnkReportABug.AutoSize = true;
-            this.lnkReportABug.Location = new System.Drawing.Point(608, 90);
+            this.lnkReportABug.Location = new System.Drawing.Point(733, 111);
+            this.lnkReportABug.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkReportABug.Name = "lnkReportABug";
-            this.lnkReportABug.Size = new System.Drawing.Size(70, 13);
+            this.lnkReportABug.Size = new System.Drawing.Size(171, 17);
             this.lnkReportABug.TabIndex = 33;
             this.lnkReportABug.TabStop = true;
-            this.lnkReportABug.Text = "Report a Bug";
+            this.lnkReportABug.Text = "Need Help / Report a Bug";
             this.toolTip1.SetToolTip(this.lnkReportABug, "Click to submit a bug-report or feature-request");
             this.lnkReportABug.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkReportABug_LinkClicked);
-            // 
-            // lnkAskForHelp
-            // 
-            this.lnkAskForHelp.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lnkAskForHelp.AutoSize = true;
-            this.lnkAskForHelp.Location = new System.Drawing.Point(522, 90);
-            this.lnkAskForHelp.Name = "lnkAskForHelp";
-            this.lnkAskForHelp.Size = new System.Drawing.Size(65, 13);
-            this.lnkAskForHelp.TabIndex = 32;
-            this.lnkAskForHelp.TabStop = true;
-            this.lnkAskForHelp.Text = "Ask for Help";
-            this.lnkAskForHelp.Visible = false;
-            this.lnkAskForHelp.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkAskForHelp_LinkClicked);
             // 
             // labelSdkBuild
             // 
             this.labelSdkBuild.AutoSize = true;
-            this.labelSdkBuild.Location = new System.Drawing.Point(202, 66);
+            this.labelSdkBuild.Location = new System.Drawing.Point(269, 81);
+            this.labelSdkBuild.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelSdkBuild.Name = "labelSdkBuild";
-            this.labelSdkBuild.Size = new System.Drawing.Size(99, 13);
+            this.labelSdkBuild.Size = new System.Drawing.Size(127, 17);
             this.labelSdkBuild.TabIndex = 31;
             this.labelSdkBuild.Text = "UA .NET API Build:";
             // 
@@ -178,10 +154,11 @@
             // 
             this.imgOPCLogo.BackColor = System.Drawing.Color.White;
             this.imgOPCLogo.Image = global::WelcomeApplication.Properties.Resources.OPCFoundation1;
-            this.imgOPCLogo.Location = new System.Drawing.Point(4, 4);
+            this.imgOPCLogo.Location = new System.Drawing.Point(5, 5);
+            this.imgOPCLogo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.imgOPCLogo.Name = "imgOPCLogo";
-            this.imgOPCLogo.Padding = new System.Windows.Forms.Padding(6);
-            this.imgOPCLogo.Size = new System.Drawing.Size(194, 75);
+            this.imgOPCLogo.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.imgOPCLogo.Size = new System.Drawing.Size(259, 92);
             this.imgOPCLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgOPCLogo.TabIndex = 1;
             this.imgOPCLogo.TabStop = false;
@@ -191,18 +168,20 @@
             // lblTopLabel
             // 
             this.lblTopLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.lblTopLabel.Location = new System.Drawing.Point(200, 35);
+            this.lblTopLabel.Location = new System.Drawing.Point(267, 43);
+            this.lblTopLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTopLabel.Name = "lblTopLabel";
-            this.lblTopLabel.Size = new System.Drawing.Size(319, 26);
+            this.lblTopLabel.Size = new System.Drawing.Size(425, 32);
             this.lblTopLabel.TabIndex = 0;
             this.lblTopLabel.Text = "Welcome Dashboard";
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.label1.Location = new System.Drawing.Point(200, 3);
+            this.label1.Location = new System.Drawing.Point(267, 4);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(465, 32);
+            this.label1.Size = new System.Drawing.Size(620, 39);
             this.label1.TabIndex = 5;
             this.label1.Text = "OPC Unified Architecture Technology Samples";
             // 
@@ -210,9 +189,10 @@
             // 
             this.lnkOPCCertification.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lnkOPCCertification.AutoSize = true;
-            this.lnkOPCCertification.Location = new System.Drawing.Point(699, 90);
+            this.lnkOPCCertification.Location = new System.Drawing.Point(932, 111);
+            this.lnkOPCCertification.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkOPCCertification.Name = "lnkOPCCertification";
-            this.lnkOPCCertification.Size = new System.Drawing.Size(87, 13);
+            this.lnkOPCCertification.Size = new System.Drawing.Size(115, 17);
             this.lnkOPCCertification.TabIndex = 4;
             this.lnkOPCCertification.TabStop = true;
             this.lnkOPCCertification.Text = "OPC Certification";
@@ -221,12 +201,13 @@
             // 
             // lnkOpc
             // 
-            this.lnkOpc.Location = new System.Drawing.Point(16, 78);
+            this.lnkOpc.Location = new System.Drawing.Point(21, 96);
+            this.lnkOpc.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkOpc.Name = "lnkOpc";
-            this.lnkOpc.Size = new System.Drawing.Size(151, 13);
+            this.lnkOpc.Size = new System.Drawing.Size(201, 16);
             this.lnkOpc.TabIndex = 3;
             this.lnkOpc.TabStop = true;
-            this.lnkOpc.Text = "http://www.opcfoundation.org";
+            this.lnkOpc.Text = "https://www.opcfoundation.org";
             this.lnkOpc.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.lnkOpc, "Click to learn more about the OPC Foundation");
             this.lnkOpc.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkOpc_LinkClicked);
@@ -253,12 +234,228 @@
             this.pnlLeft.Controls.Add(this.label2);
             this.pnlLeft.Controls.Add(this.appUaConfigTool);
             this.pnlLeft.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlLeft.Location = new System.Drawing.Point(10, 10);
-            this.pnlLeft.Margin = new System.Windows.Forms.Padding(6);
+            this.pnlLeft.Location = new System.Drawing.Point(13, 12);
+            this.pnlLeft.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.pnlLeft.Name = "pnlLeft";
-            this.pnlLeft.Padding = new System.Windows.Forms.Padding(6);
-            this.pnlLeft.Size = new System.Drawing.Size(253, 307);
+            this.pnlLeft.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.pnlLeft.Size = new System.Drawing.Size(338, 421);
             this.pnlLeft.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(8, 463);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Name = "label5";
+            this.label5.Padding = new System.Windows.Forms.Padding(0, 18, 0, 6);
+            this.label5.Size = new System.Drawing.Size(142, 41);
+            this.label5.TabIndex = 46;
+            this.label5.Text = "Other Applications";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(8, 348);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(0, 18, 0, 6);
+            this.label4.Size = new System.Drawing.Size(153, 41);
+            this.label4.TabIndex = 45;
+            this.label4.Text = "Alarms && Conditions";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(8, 159);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(0, 18, 0, 6);
+            this.label3.Size = new System.Drawing.Size(252, 41);
+            this.label3.TabIndex = 44;
+            this.label3.Text = "Historical Access (Data && Events)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(8, 44);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(0, 18, 0, 6);
+            this.label2.Size = new System.Drawing.Size(98, 41);
+            this.label2.TabIndex = 43;
+            this.label2.Text = "Data Access";
+            // 
+            // pnlMain
+            // 
+            this.pnlMain.Controls.Add(this.labelTip);
+            this.pnlMain.Controls.Add(this.wbOPCFoundation);
+            this.pnlMain.Controls.Add(this.wbInfo);
+            this.pnlMain.Controls.Add(this.lnkLaunchBrowser);
+            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlMain.Location = new System.Drawing.Point(364, 135);
+            this.pnlMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlMain.Name = "pnlMain";
+            this.pnlMain.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.pnlMain.Size = new System.Drawing.Size(692, 632);
+            this.pnlMain.TabIndex = 2;
+            // 
+            // labelTip
+            // 
+            this.labelTip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTip.AutoSize = true;
+            this.labelTip.Location = new System.Drawing.Point(453, 7);
+            this.labelTip.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTip.Name = "labelTip";
+            this.labelTip.Size = new System.Drawing.Size(235, 17);
+            this.labelTip.TabIndex = 3;
+            this.labelTip.Text = "Tip: click \'show\' for table of contents";
+            // 
+            // wbOPCFoundation
+            // 
+            this.wbOPCFoundation.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wbOPCFoundation.Location = new System.Drawing.Point(8, 32);
+            this.wbOPCFoundation.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wbOPCFoundation.MinimumSize = new System.Drawing.Size(27, 25);
+            this.wbOPCFoundation.Name = "wbOPCFoundation";
+            this.wbOPCFoundation.Size = new System.Drawing.Size(676, 593);
+            this.wbOPCFoundation.TabIndex = 1;
+            this.wbOPCFoundation.Url = new System.Uri("", System.UriKind.Relative);
+            // 
+            // wbInfo
+            // 
+            this.wbInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.wbInfo.Location = new System.Drawing.Point(8, 32);
+            this.wbInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.wbInfo.MinimumSize = new System.Drawing.Size(27, 25);
+            this.wbInfo.Name = "wbInfo";
+            this.wbInfo.Size = new System.Drawing.Size(676, 593);
+            this.wbInfo.TabIndex = 0;
+            // 
+            // lnkLaunchBrowser
+            // 
+            this.lnkLaunchBrowser.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lnkLaunchBrowser.Location = new System.Drawing.Point(8, 7);
+            this.lnkLaunchBrowser.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lnkLaunchBrowser.Name = "lnkLaunchBrowser";
+            this.lnkLaunchBrowser.Size = new System.Drawing.Size(676, 25);
+            this.lnkLaunchBrowser.TabIndex = 2;
+            this.lnkLaunchBrowser.TabStop = true;
+            this.lnkLaunchBrowser.Text = "Launch help in Browser";
+            this.toolTip1.SetToolTip(this.lnkLaunchBrowser, "TIP: Click \'Show\' below to show the Table of Contents");
+            this.lnkLaunchBrowser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLaunchBrowser_LinkClicked);
+            // 
+            // timerRefresh
+            // 
+            this.timerRefresh.Enabled = true;
+            this.timerRefresh.Tick += new System.EventHandler(this.timerRefresh_Tick);
+            // 
+            // lblStateText
+            // 
+            this.lblStateText.AutoSize = true;
+            this.lblStateText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStateText.Location = new System.Drawing.Point(25, 36);
+            this.lblStateText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStateText.Name = "lblStateText";
+            this.lblStateText.Size = new System.Drawing.Size(45, 17);
+            this.lblStateText.TabIndex = 0;
+            this.lblStateText.Text = "State:";
+            this.lblStateText.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblState
+            // 
+            this.lblState.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblState.Location = new System.Drawing.Point(80, 36);
+            this.lblState.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblState.Name = "lblState";
+            this.lblState.Size = new System.Drawing.Size(256, 30);
+            this.lblState.TabIndex = 1;
+            this.lblState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblInfoText
+            // 
+            this.lblInfoText.AutoSize = true;
+            this.lblInfoText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblInfoText.Location = new System.Drawing.Point(31, 70);
+            this.lblInfoText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInfoText.Name = "lblInfoText";
+            this.lblInfoText.Size = new System.Drawing.Size(39, 17);
+            this.lblInfoText.TabIndex = 2;
+            this.lblInfoText.Text = "Info: ";
+            this.lblInfoText.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // lblInfo
+            // 
+            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblInfo.Location = new System.Drawing.Point(80, 70);
+            this.lblInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblInfo.Name = "lblInfo";
+            this.lblInfo.Size = new System.Drawing.Size(256, 81);
+            this.lblInfo.TabIndex = 3;
+            // 
+            // lblStatusTitle
+            // 
+            this.lblStatusTitle.AutoSize = true;
+            this.lblStatusTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblStatusTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatusTitle.Location = new System.Drawing.Point(8, 7);
+            this.lblStatusTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblStatusTitle.Name = "lblStatusTitle";
+            this.lblStatusTitle.Size = new System.Drawing.Size(96, 17);
+            this.lblStatusTitle.TabIndex = 4;
+            this.lblStatusTitle.Text = "Info / Status";
+            this.lblStatusTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pnlInfo
+            // 
+            this.pnlInfo.Controls.Add(this.lblStatusTitle);
+            this.pnlInfo.Controls.Add(this.lblInfo);
+            this.pnlInfo.Controls.Add(this.lblInfoText);
+            this.pnlInfo.Controls.Add(this.lblState);
+            this.pnlInfo.Controls.Add(this.lblStateText);
+            this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlInfo.Location = new System.Drawing.Point(8, 7);
+            this.pnlInfo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlInfo.Name = "pnlInfo";
+            this.pnlInfo.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.pnlInfo.Size = new System.Drawing.Size(348, 168);
+            this.pnlInfo.TabIndex = 29;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 135);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.pnlLeft);
+            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(13, 12, 13, 12);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.pnlInfo);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.splitContainer1.Size = new System.Drawing.Size(364, 632);
+            this.splitContainer1.SplitterDistance = 445;
+            this.splitContainer1.SplitterWidth = 5;
+            this.splitContainer1.TabIndex = 30;
             // 
             // appRefClient
             // 
@@ -276,10 +473,11 @@
             this.appRefClient.Dock = System.Windows.Forms.DockStyle.Top;
             this.appRefClient.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.RefClientProcess;
             this.appRefClient.HelpFile = global::WelcomeApplication.Properties.Settings.Default.RefClientHelp;
-            this.appRefClient.Location = new System.Drawing.Point(6, 528);
+            this.appRefClient.Location = new System.Drawing.Point(8, 652);
+            this.appRefClient.Margin = new System.Windows.Forms.Padding(5);
             this.appRefClient.Name = "appRefClient";
             this.appRefClient.PendingRefresh = false;
-            this.appRefClient.Size = new System.Drawing.Size(224, 30);
+            this.appRefClient.Size = new System.Drawing.Size(301, 37);
             this.appRefClient.TabIndex = 36;
             this.toolTip1.SetToolTip(this.appRefClient, "Reference client for use with the reference server");
             // 
@@ -298,10 +496,11 @@
             this.appRefServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.appRefServer.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.RefServerProcess;
             this.appRefServer.HelpFile = global::WelcomeApplication.Properties.Settings.Default.RefServerHelp;
-            this.appRefServer.Location = new System.Drawing.Point(6, 498);
+            this.appRefServer.Location = new System.Drawing.Point(8, 615);
+            this.appRefServer.Margin = new System.Windows.Forms.Padding(5);
             this.appRefServer.Name = "appRefServer";
             this.appRefServer.PendingRefresh = false;
-            this.appRefServer.Size = new System.Drawing.Size(224, 30);
+            this.appRefServer.Size = new System.Drawing.Size(301, 37);
             this.appRefServer.TabIndex = 35;
             this.toolTip1.SetToolTip(this.appRefServer, "Reference server for use with the UA CTT");
             // 
@@ -319,10 +518,11 @@
             this.appGnClient.Dock = System.Windows.Forms.DockStyle.Top;
             this.appGnClient.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.GenClientProcess;
             this.appGnClient.HelpFile = global::WelcomeApplication.Properties.Settings.Default.GenClientHelp;
-            this.appGnClient.Location = new System.Drawing.Point(6, 468);
+            this.appGnClient.Location = new System.Drawing.Point(8, 578);
+            this.appGnClient.Margin = new System.Windows.Forms.Padding(5);
             this.appGnClient.Name = "appGnClient";
             this.appGnClient.PendingRefresh = false;
-            this.appGnClient.Size = new System.Drawing.Size(224, 30);
+            this.appGnClient.Size = new System.Drawing.Size(301, 37);
             this.appGnClient.TabIndex = 34;
             // 
             // appGnServer
@@ -339,10 +539,11 @@
             this.appGnServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.appGnServer.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.GenServerProcess;
             this.appGnServer.HelpFile = global::WelcomeApplication.Properties.Settings.Default.GenServerHelp;
-            this.appGnServer.Location = new System.Drawing.Point(6, 438);
+            this.appGnServer.Location = new System.Drawing.Point(8, 541);
+            this.appGnServer.Margin = new System.Windows.Forms.Padding(5);
             this.appGnServer.Name = "appGnServer";
             this.appGnServer.PendingRefresh = false;
-            this.appGnServer.Size = new System.Drawing.Size(224, 30);
+            this.appGnServer.Size = new System.Drawing.Size(301, 37);
             this.appGnServer.TabIndex = 33;
             // 
             // appDiscoveryServer
@@ -360,25 +561,14 @@
             this.appDiscoveryServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.appDiscoveryServer.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.LDSProcess;
             this.appDiscoveryServer.HelpFile = global::WelcomeApplication.Properties.Settings.Default.LDSHelp;
-            this.appDiscoveryServer.Location = new System.Drawing.Point(6, 408);
+            this.appDiscoveryServer.Location = new System.Drawing.Point(8, 504);
+            this.appDiscoveryServer.Margin = new System.Windows.Forms.Padding(5);
             this.appDiscoveryServer.Name = "appDiscoveryServer";
             this.appDiscoveryServer.PendingRefresh = false;
-            this.appDiscoveryServer.Size = new System.Drawing.Size(224, 30);
+            this.appDiscoveryServer.Size = new System.Drawing.Size(301, 37);
             this.appDiscoveryServer.TabIndex = 30;
             this.toolTip1.SetToolTip(this.appDiscoveryServer, "Discovery Servers provide a list of OPC UA Servers and/or Clients that are availa" +
         "ble.");
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(6, 375);
-            this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(0, 15, 0, 5);
-            this.label5.Size = new System.Drawing.Size(111, 33);
-            this.label5.TabIndex = 46;
-            this.label5.Text = "Other Applications";
             // 
             // appACClient
             // 
@@ -395,10 +585,11 @@
             this.appACClient.Dock = System.Windows.Forms.DockStyle.Top;
             this.appACClient.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.ACClientProcess;
             this.appACClient.HelpFile = global::WelcomeApplication.Properties.Settings.Default.ACClientHelp;
-            this.appACClient.Location = new System.Drawing.Point(6, 345);
+            this.appACClient.Location = new System.Drawing.Point(8, 426);
+            this.appACClient.Margin = new System.Windows.Forms.Padding(5);
             this.appACClient.Name = "appACClient";
             this.appACClient.PendingRefresh = false;
-            this.appACClient.Size = new System.Drawing.Size(224, 30);
+            this.appACClient.Size = new System.Drawing.Size(301, 37);
             this.appACClient.TabIndex = 38;
             this.toolTip1.SetToolTip(this.appACClient, "Alarms sample client");
             // 
@@ -417,24 +608,13 @@
             this.appACServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.appACServer.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.ACServerProcess;
             this.appACServer.HelpFile = global::WelcomeApplication.Properties.Settings.Default.ACServerHelp;
-            this.appACServer.Location = new System.Drawing.Point(6, 315);
+            this.appACServer.Location = new System.Drawing.Point(8, 389);
+            this.appACServer.Margin = new System.Windows.Forms.Padding(5);
             this.appACServer.Name = "appACServer";
             this.appACServer.PendingRefresh = false;
-            this.appACServer.Size = new System.Drawing.Size(224, 30);
+            this.appACServer.Size = new System.Drawing.Size(301, 37);
             this.appACServer.TabIndex = 37;
             this.toolTip1.SetToolTip(this.appACServer, "Alarms sample server");
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 282);
-            this.label4.Name = "label4";
-            this.label4.Padding = new System.Windows.Forms.Padding(0, 15, 0, 5);
-            this.label4.Size = new System.Drawing.Size(118, 33);
-            this.label4.TabIndex = 45;
-            this.label4.Text = "Alarms && Conditions";
             // 
             // appHEClient
             // 
@@ -451,10 +631,11 @@
             this.appHEClient.Dock = System.Windows.Forms.DockStyle.Top;
             this.appHEClient.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.HAEClientProcess;
             this.appHEClient.HelpFile = global::WelcomeApplication.Properties.Settings.Default.HAEClientHelp;
-            this.appHEClient.Location = new System.Drawing.Point(6, 252);
+            this.appHEClient.Location = new System.Drawing.Point(8, 311);
+            this.appHEClient.Margin = new System.Windows.Forms.Padding(5);
             this.appHEClient.Name = "appHEClient";
             this.appHEClient.PendingRefresh = false;
-            this.appHEClient.Size = new System.Drawing.Size(224, 30);
+            this.appHEClient.Size = new System.Drawing.Size(301, 37);
             this.appHEClient.TabIndex = 42;
             this.toolTip1.SetToolTip(this.appHEClient, "Events historian sample client");
             // 
@@ -473,10 +654,11 @@
             this.appHEServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.appHEServer.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.HAEServerProcess;
             this.appHEServer.HelpFile = global::WelcomeApplication.Properties.Settings.Default.HAEServerHelp;
-            this.appHEServer.Location = new System.Drawing.Point(6, 222);
+            this.appHEServer.Location = new System.Drawing.Point(8, 274);
+            this.appHEServer.Margin = new System.Windows.Forms.Padding(5);
             this.appHEServer.Name = "appHEServer";
             this.appHEServer.PendingRefresh = false;
-            this.appHEServer.Size = new System.Drawing.Size(224, 30);
+            this.appHEServer.Size = new System.Drawing.Size(301, 37);
             this.appHEServer.TabIndex = 41;
             this.toolTip1.SetToolTip(this.appHEServer, "Events historian sample server");
             // 
@@ -495,10 +677,11 @@
             this.appHAClient.Dock = System.Windows.Forms.DockStyle.Top;
             this.appHAClient.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.HADClientProcess;
             this.appHAClient.HelpFile = global::WelcomeApplication.Properties.Settings.Default.HADClientHelp;
-            this.appHAClient.Location = new System.Drawing.Point(6, 192);
+            this.appHAClient.Location = new System.Drawing.Point(8, 237);
+            this.appHAClient.Margin = new System.Windows.Forms.Padding(5);
             this.appHAClient.Name = "appHAClient";
             this.appHAClient.PendingRefresh = false;
-            this.appHAClient.Size = new System.Drawing.Size(224, 30);
+            this.appHAClient.Size = new System.Drawing.Size(301, 37);
             this.appHAClient.TabIndex = 40;
             this.toolTip1.SetToolTip(this.appHAClient, "Historian sample client");
             // 
@@ -517,24 +700,13 @@
             this.appHAServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.appHAServer.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.HADServerProcess;
             this.appHAServer.HelpFile = global::WelcomeApplication.Properties.Settings.Default.HADServerHelp;
-            this.appHAServer.Location = new System.Drawing.Point(6, 162);
+            this.appHAServer.Location = new System.Drawing.Point(8, 200);
+            this.appHAServer.Margin = new System.Windows.Forms.Padding(5);
             this.appHAServer.Name = "appHAServer";
             this.appHAServer.PendingRefresh = false;
-            this.appHAServer.Size = new System.Drawing.Size(224, 30);
+            this.appHAServer.Size = new System.Drawing.Size(301, 37);
             this.appHAServer.TabIndex = 39;
             this.toolTip1.SetToolTip(this.appHAServer, "Historian sample server");
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 129);
-            this.label3.Name = "label3";
-            this.label3.Padding = new System.Windows.Forms.Padding(0, 15, 0, 5);
-            this.label3.Size = new System.Drawing.Size(198, 33);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "Historical Access (Data && Events)";
             // 
             // appDAClient
             // 
@@ -551,10 +723,11 @@
             this.appDAClient.Dock = System.Windows.Forms.DockStyle.Top;
             this.appDAClient.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.DAClient;
             this.appDAClient.HelpFile = global::WelcomeApplication.Properties.Settings.Default.DAClientHelp;
-            this.appDAClient.Location = new System.Drawing.Point(6, 99);
+            this.appDAClient.Location = new System.Drawing.Point(8, 122);
+            this.appDAClient.Margin = new System.Windows.Forms.Padding(5);
             this.appDAClient.Name = "appDAClient";
             this.appDAClient.PendingRefresh = false;
-            this.appDAClient.Size = new System.Drawing.Size(224, 30);
+            this.appDAClient.Size = new System.Drawing.Size(301, 37);
             this.appDAClient.TabIndex = 32;
             this.toolTip1.SetToolTip(this.appDAClient, "Continuous data acquisition sample client");
             // 
@@ -573,24 +746,13 @@
             this.appDAServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.appDAServer.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.DAServer;
             this.appDAServer.HelpFile = global::WelcomeApplication.Properties.Settings.Default.DAServerHelp;
-            this.appDAServer.Location = new System.Drawing.Point(6, 69);
+            this.appDAServer.Location = new System.Drawing.Point(8, 85);
+            this.appDAServer.Margin = new System.Windows.Forms.Padding(5);
             this.appDAServer.Name = "appDAServer";
             this.appDAServer.PendingRefresh = false;
-            this.appDAServer.Size = new System.Drawing.Size(224, 30);
+            this.appDAServer.Size = new System.Drawing.Size(301, 37);
             this.appDAServer.TabIndex = 31;
             this.toolTip1.SetToolTip(this.appDAServer, "Continuous data acquisition sample server");
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 36);
-            this.label2.Name = "label2";
-            this.label2.Padding = new System.Windows.Forms.Padding(0, 15, 0, 5);
-            this.label2.Size = new System.Drawing.Size(79, 33);
-            this.label2.TabIndex = 43;
-            this.label2.Text = "Data Access";
             // 
             // appUaConfigTool
             // 
@@ -607,175 +769,26 @@
             this.appUaConfigTool.Dock = System.Windows.Forms.DockStyle.Top;
             this.appUaConfigTool.ExeFilePath = global::WelcomeApplication.Properties.Settings.Default.ConfigProcess;
             this.appUaConfigTool.HelpFile = global::WelcomeApplication.Properties.Settings.Default.ConfigHelp;
-            this.appUaConfigTool.Location = new System.Drawing.Point(6, 6);
+            this.appUaConfigTool.Location = new System.Drawing.Point(8, 7);
+            this.appUaConfigTool.Margin = new System.Windows.Forms.Padding(5);
             this.appUaConfigTool.Name = "appUaConfigTool";
             this.appUaConfigTool.PendingRefresh = false;
-            this.appUaConfigTool.Size = new System.Drawing.Size(224, 30);
+            this.appUaConfigTool.Size = new System.Drawing.Size(301, 37);
             this.appUaConfigTool.TabIndex = 47;
             this.toolTip1.SetToolTip(this.appUaConfigTool, "UA Application Management and Configuration");
             // 
-            // pnlMain
-            // 
-            this.pnlMain.Controls.Add(this.labelTip);
-            this.pnlMain.Controls.Add(this.wbOPCFoundation);
-            this.pnlMain.Controls.Add(this.wbInfo);
-            this.pnlMain.Controls.Add(this.lnkLaunchBrowser);
-            this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlMain.Location = new System.Drawing.Point(273, 110);
-            this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Padding = new System.Windows.Forms.Padding(6);
-            this.pnlMain.Size = new System.Drawing.Size(519, 513);
-            this.pnlMain.TabIndex = 2;
-            // 
-            // labelTip
-            // 
-            this.labelTip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTip.AutoSize = true;
-            this.labelTip.Location = new System.Drawing.Point(340, 6);
-            this.labelTip.Name = "labelTip";
-            this.labelTip.Size = new System.Drawing.Size(179, 13);
-            this.labelTip.TabIndex = 3;
-            this.labelTip.Text = "Tip: click \'show\' for table of contents";
-            // 
-            // wbOPCFoundation
-            // 
-            this.wbOPCFoundation.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wbOPCFoundation.Location = new System.Drawing.Point(6, 26);
-            this.wbOPCFoundation.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbOPCFoundation.Name = "wbOPCFoundation";
-            this.wbOPCFoundation.Size = new System.Drawing.Size(507, 481);
-            this.wbOPCFoundation.TabIndex = 1;
-            this.wbOPCFoundation.Url = new System.Uri("", System.UriKind.Relative);
-            // 
-            // wbInfo
-            // 
-            this.wbInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wbInfo.Location = new System.Drawing.Point(6, 26);
-            this.wbInfo.MinimumSize = new System.Drawing.Size(20, 20);
-            this.wbInfo.Name = "wbInfo";
-            this.wbInfo.Size = new System.Drawing.Size(507, 481);
-            this.wbInfo.TabIndex = 0;
-            // 
-            // lnkLaunchBrowser
-            // 
-            this.lnkLaunchBrowser.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lnkLaunchBrowser.Location = new System.Drawing.Point(6, 6);
-            this.lnkLaunchBrowser.Name = "lnkLaunchBrowser";
-            this.lnkLaunchBrowser.Size = new System.Drawing.Size(507, 20);
-            this.lnkLaunchBrowser.TabIndex = 2;
-            this.lnkLaunchBrowser.TabStop = true;
-            this.lnkLaunchBrowser.Text = "Launch help in Browser";
-            this.toolTip1.SetToolTip(this.lnkLaunchBrowser, "TIP: Click \'Show\' below to show the Table of Contents");
-            this.lnkLaunchBrowser.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkLaunchBrowser_LinkClicked);
-            // 
-            // timerRefresh
-            // 
-            this.timerRefresh.Enabled = true;
-            this.timerRefresh.Tick += new System.EventHandler(this.timerRefresh_Tick);
-            // 
-            // lblStateText
-            // 
-            this.lblStateText.AutoSize = true;
-            this.lblStateText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStateText.Location = new System.Drawing.Point(19, 29);
-            this.lblStateText.Name = "lblStateText";
-            this.lblStateText.Size = new System.Drawing.Size(35, 13);
-            this.lblStateText.TabIndex = 0;
-            this.lblStateText.Text = "State:";
-            this.lblStateText.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblState
-            // 
-            this.lblState.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblState.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblState.Location = new System.Drawing.Point(60, 29);
-            this.lblState.Name = "lblState";
-            this.lblState.Size = new System.Drawing.Size(192, 24);
-            this.lblState.TabIndex = 1;
-            this.lblState.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // lblInfoText
-            // 
-            this.lblInfoText.AutoSize = true;
-            this.lblInfoText.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInfoText.Location = new System.Drawing.Point(23, 57);
-            this.lblInfoText.Name = "lblInfoText";
-            this.lblInfoText.Size = new System.Drawing.Size(31, 13);
-            this.lblInfoText.TabIndex = 2;
-            this.lblInfoText.Text = "Info: ";
-            this.lblInfoText.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
-            // lblInfo
-            // 
-            this.lblInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblInfo.Location = new System.Drawing.Point(60, 57);
-            this.lblInfo.Name = "lblInfo";
-            this.lblInfo.Size = new System.Drawing.Size(192, 99);
-            this.lblInfo.TabIndex = 3;
-            // 
-            // lblStatusTitle
-            // 
-            this.lblStatusTitle.AutoSize = true;
-            this.lblStatusTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblStatusTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatusTitle.Location = new System.Drawing.Point(6, 6);
-            this.lblStatusTitle.Name = "lblStatusTitle";
-            this.lblStatusTitle.Size = new System.Drawing.Size(79, 13);
-            this.lblStatusTitle.TabIndex = 4;
-            this.lblStatusTitle.Text = "Info / Status";
-            this.lblStatusTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pnlInfo
-            // 
-            this.pnlInfo.Controls.Add(this.lblStatusTitle);
-            this.pnlInfo.Controls.Add(this.lblInfo);
-            this.pnlInfo.Controls.Add(this.lblInfoText);
-            this.pnlInfo.Controls.Add(this.lblState);
-            this.pnlInfo.Controls.Add(this.lblStateText);
-            this.pnlInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlInfo.Location = new System.Drawing.Point(6, 6);
-            this.pnlInfo.Name = "pnlInfo";
-            this.pnlInfo.Padding = new System.Windows.Forms.Padding(6);
-            this.pnlInfo.Size = new System.Drawing.Size(261, 170);
-            this.pnlInfo.TabIndex = 29;
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 110);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.pnlLeft);
-            this.splitContainer1.Panel1.Padding = new System.Windows.Forms.Padding(10);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.pnlInfo);
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(6);
-            this.splitContainer1.Size = new System.Drawing.Size(273, 513);
-            this.splitContainer1.SplitterDistance = 327;
-            this.splitContainer1.TabIndex = 30;
-            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(792, 623);
+            this.ClientSize = new System.Drawing.Size(1056, 767);
             this.Controls.Add(this.pnlMain);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.pnlTop);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(715, 530);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.MinimumSize = new System.Drawing.Size(947, 641);
             this.Name = "frmMain";
             this.Text = "OPC Unified Architecture Technology";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
@@ -839,9 +852,7 @@
         private System.Windows.Forms.Label labelSdkBuild;
         private System.Windows.Forms.Label labelTip;
         private System.Windows.Forms.LinkLabel lnkReportABug;
-        private System.Windows.Forms.LinkLabel lnkAskForHelp;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
     }
 }
 
