@@ -2908,7 +2908,7 @@ namespace Opc.Ua
         { }
 
         /// <summary>
-        /// Internal Singleton Instance getter.
+        /// Public Singleton Instance getter.
         /// </summary>
         public static Tracing Instance
         {
