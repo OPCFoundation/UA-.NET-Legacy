@@ -3218,6 +3218,18 @@ namespace Opc.Ua.Client
         /// <returns>The list of output argument values.</returns>
         public IList<object> Call(NodeId objectId, NodeId methodId, params object[] args)
         {
+            return this.Call(null,objectId, methodId, args);
+        }
+        /// <summary>
+        /// Calls the specified method and returns the output arguments.
+        /// </summary>
+        /// <param name="requestHeader">Request header for the call of the method.</param>
+        /// <param name="objectId">The NodeId of the object that provides the method.</param>
+        /// <param name="methodId">The NodeId of the method to call.</param>
+        /// <param name="args">The input arguments.</param>
+        /// <returns>The list of output argument values.</returns>
+        public IList<object> Call(RequestHeader requestHeader,NodeId objectId, NodeId methodId, params object[] args)
+        {
             VariantCollection inputArguments = new VariantCollection();
             
             if (args != null)
@@ -3241,7 +3253,7 @@ namespace Opc.Ua.Client
             DiagnosticInfoCollection diagnosticInfos;
 
             ResponseHeader responseHeader = Call(
-                null,
+                requestHeader,
                 requests,
                 out results,
                 out diagnosticInfos);
