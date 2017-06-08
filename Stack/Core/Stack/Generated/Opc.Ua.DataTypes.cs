@@ -4519,6 +4519,15 @@ namespace Opc.Ua
         }
 
         /// <summary>
+        /// A wrapper for 'ReturnDiagnostics' property in order to use symbolic names instead of magic values.
+        /// </summary>
+        public ReturnDiagnostics ReturnDiagnosticsFlags
+        {
+            get { return (ReturnDiagnostics)this.ReturnDiagnostics; }
+            set { this.ReturnDiagnostics = (uint)value; }
+        }
+
+        /// <summary>
         /// Identifies an entry in the client audit log.
         /// </summary>
         [DataMember(Name = "AuditEntryId", IsRequired = false, Order = 5)]

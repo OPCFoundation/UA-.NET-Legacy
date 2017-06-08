@@ -1531,6 +1531,39 @@ namespace Opc.Ua
     }
     #endregion
 
+    #region ReturnDiagnostics flags
+    /// <summary>
+    /// An enum providing symbolic names for ReturnDiagnostics flags (see: RequestHeader).
+    /// </summary>
+    [Flags]
+    public enum ReturnDiagnostics : UInt32
+    {
+        None = 0,
+
+        ServiceLevel_SymbolicId = 0x00000001,
+        ServiceLevel_LocalizedText = 0x00000002,
+        ServiceLevel_AdditionalInfo = 0x00000004,
+        ServiceLevel_InnerStatusCode = 0x00000008,
+        ServiceLevel_InnerDiagnostics = 0x00000010,
+        OperationLevel_SymbolicId = 0x00000020,
+        OperationLevel_LocalizedText = 0x00000040,
+        OperationLevel_AdditionalInfo = 0x00000080,
+        OperationLevel_InnerStatusCode = 0x00000100,
+        OperationLevel_InnerDiagnostics = 0x00000200,
+
+        All = ServiceLevel_SymbolicId
+            | ServiceLevel_LocalizedText
+            | ServiceLevel_AdditionalInfo
+            | ServiceLevel_InnerStatusCode
+            | ServiceLevel_InnerDiagnostics
+            | OperationLevel_SymbolicId
+            | OperationLevel_LocalizedText
+            | OperationLevel_AdditionalInfo
+            | OperationLevel_InnerStatusCode
+            | OperationLevel_InnerDiagnostics
+    }
+    #endregion
+
     #region Method Identifiers
     /// <summary>
     /// A class that declares constants for all Methods in the Model Design.
