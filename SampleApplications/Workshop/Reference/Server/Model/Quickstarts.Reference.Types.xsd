@@ -1,0 +1,75 @@
+<xs:schema
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd"
+  xmlns:tns="http://opcfoundation.org/Quickstarts/Reference"
+  targetNamespace="http://opcfoundation.org/Quickstarts/Reference"
+  elementFormDefault="qualified"
+>
+  <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd" />
+
+  <xs:complexType name="DataType1">
+    <xs:sequence>
+      <xs:element name="Int32Field" type="xs:int" minOccurs="0" />
+      <xs:element name="FloatField" type="xs:float" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataType1" type="tns:DataType1" />
+
+  <xs:complexType name="ListOfDataType1">
+    <xs:sequence>
+      <xs:element name="DataType1" type="tns:DataType1" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfDataType1" type="tns:ListOfDataType1" nillable="true"></xs:element>
+
+  <xs:complexType name="DataType2">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DataType1">
+        <xs:sequence>
+          <xs:element name="StringField" type="xs:string" minOccurs="0" nillable="true" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DataType2" type="tns:DataType2" />
+
+  <xs:complexType name="ListOfDataType2">
+    <xs:sequence>
+      <xs:element name="DataType2" type="tns:DataType2" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfDataType2" type="tns:ListOfDataType2" nillable="true"></xs:element>
+
+  <xs:complexType name="DataType3">
+    <xs:sequence>
+      <xs:element name="Int32Field" type="xs:int" minOccurs="0" />
+      <xs:element name="ByteField" type="xs:unsignedByte" minOccurs="0" />
+      <xs:element name="FloatField" type="xs:float" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataType3" type="tns:DataType3" />
+
+  <xs:complexType name="ListOfDataType3">
+    <xs:sequence>
+      <xs:element name="DataType3" type="tns:DataType3" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfDataType3" type="tns:ListOfDataType3" nillable="true"></xs:element>
+
+  <xs:complexType name="DataType4">
+    <xs:sequence>
+      <xs:element name="Int32Field" type="xs:int" minOccurs="0" />
+      <xs:element name="FloatField" type="xs:float" minOccurs="0" />
+      <xs:element name="ByteField" type="xs:unsignedByte" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DataType4" type="tns:DataType4" />
+
+  <xs:complexType name="ListOfDataType4">
+    <xs:sequence>
+      <xs:element name="DataType4" type="tns:DataType4" minOccurs="0" maxOccurs="unbounded" nillable="true" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ListOfDataType4" type="tns:ListOfDataType4" nillable="true"></xs:element>
+
+</xs:schema>

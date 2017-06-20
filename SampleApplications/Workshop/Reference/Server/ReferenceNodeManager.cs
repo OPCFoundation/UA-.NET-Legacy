@@ -55,6 +55,14 @@ namespace Quickstarts.ReferenceServer
         {
             SystemContext.NodeIdFactory = this;
 
+            // update the namespaces.
+            List<string> namespaceUris = new List<string>();
+
+            namespaceUris.Add(Namespaces.ReferenceApplications);
+            namespaceUris.Add(Quickstarts.Reference.Namespaces.Reference);
+
+            NamespaceUris = namespaceUris;
+
             // get the configuration for the node manager.
             m_configuration = configuration.ParseExtension<ReferenceServerConfiguration>();
 
@@ -103,6 +111,18 @@ namespace Quickstarts.ReferenceServer
         }
         #endregion
 
+        #region Overridden Methods
+        /// <summary>
+        /// Loads a node set from a file or resource and addes them to the set of predefined nodes.
+        /// </summary>
+        protected override NodeStateCollection LoadPredefinedNodes(ISystemContext context)
+        {
+            NodeStateCollection predefinedNodes = new NodeStateCollection();
+            predefinedNodes.LoadFromBinaryResource(context, "Quickstarts.ReferenceServer.Model.Quickstarts.Reference.PredefinedNodes.uanodes", null, true);
+            return predefinedNodes;
+        }
+        #endregion
+
         #region INodeManager Members
         /// <summary>
         /// Does any initialization required before the address space can be used.
@@ -116,6 +136,8 @@ namespace Quickstarts.ReferenceServer
         {
             lock (Lock)
             {
+                LoadPredefinedNodes(SystemContext, externalReferences);
+
                 IList<IReference> references = null;
 
                 if (!externalReferences.TryGetValue(ObjectIds.ObjectsFolder, out references))

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<opc:ModelDesign
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:opc="http://opcfoundation.org/UA/ModelDesign.xsd"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd"
+	xmlns="http://opcfoundation.org/Quickstarts/Reference"
+  TargetNamespace="http://opcfoundation.org/Quickstarts/Reference"
+>
+  <!-- 
+  This element defines the mappings between the URIs used to identify namespaces and the symbols used in code.
+  User defined design files can include other user defined design files.
+  The location of included design files is specified with the FilePath attribute (absolute or relative path without the .xml suffix).
+  -->
+  <opc:Namespaces>
+    <opc:Namespace Name="OpcUa" Prefix="Opc.Ua" XmlNamespace="http://opcfoundation.org/UA/2008/02/Types.xsd">http://opcfoundation.org/UA/</opc:Namespace>
+    <opc:Namespace Name="Reference" Prefix="Quickstarts.Reference">http://opcfoundation.org/Quickstarts/Reference</opc:Namespace>
+  </opc:Namespaces>
+
+  <!--DataTypes -->
+
+  <!--DataType1 containing numeric fields -->
+  <opc:DataType SymbolicName="DataType1" BaseType="ua:Structure">
+    <opc:Fields>
+      <opc:Field Name="Int32Field" DataType="ua:Int32" />
+      <opc:Field Name="FloatField" DataType="ua:Float" />
+    </opc:Fields>
+  </opc:DataType>
+
+  <!--DataType1 extends DataType1 adding one more field -->
+  <opc:DataType SymbolicName="DataType2" BaseType="DataType1">
+    <opc:Fields>
+      <opc:Field Name="StringField" DataType="ua:String" />
+    </opc:Fields>
+  </opc:DataType>
+
+  <!--DataType3 and DataType4 have the same fields but in different order-->
+  <opc:DataType SymbolicName="DataType3" BaseType="ua:Structure">
+    <opc:Fields>
+      <opc:Field Name="Int32Field" DataType="ua:Int32" />
+      <opc:Field Name="ByteField" DataType="ua:Byte" />
+      <opc:Field Name="FloatField" DataType="ua:Float" />
+    </opc:Fields>
+  </opc:DataType>
+
+  <!--DataType3 and DataType4 have the same fields but in different order-->
+  <opc:DataType SymbolicName="DataType4" BaseType="ua:Structure">
+    <opc:Fields>
+      <opc:Field Name="Int32Field" DataType="ua:Int32" />
+      <opc:Field Name="FloatField" DataType="ua:Float" />
+      <opc:Field Name="ByteField" DataType="ua:Byte" />
+    </opc:Fields>
+  </opc:DataType>
+
+  <!--A folder contaiing instances of variable nodes with above defined custom data types.-->
+
+  <opc:Object SymbolicName="StructuredTypeVariables" TypeDefinition="ua:FolderType" >
+    <opc:BrowseName>StructuredTypeVariables</opc:BrowseName>
+    <opc:Children>
+      <opc:Variable SymbolicName="DataType1Variable" DataType="DataType1" ValueRank="Scalar" TypeDefinition="ua:BaseDataVariableType" AccessLevel="ReadWrite">
+        <opc:Description>Instance of a variable node with DataType1 type.</opc:Description>
+      </opc:Variable>
+      <opc:Variable SymbolicName="DataType2Variable" DataType="DataType2" ValueRank="Scalar" TypeDefinition="ua:BaseDataVariableType" AccessLevel="ReadWrite">
+        <opc:Description>Instance of a variable node with DataType2 type.</opc:Description>
+      </opc:Variable>
+      <opc:Variable SymbolicName="DataType3Variable" DataType="DataType3" ValueRank="Scalar" TypeDefinition="ua:BaseDataVariableType" AccessLevel="ReadWrite">
+        <opc:Description>Instance of a variable node with DataType3 type.</opc:Description>
+      </opc:Variable>
+      <opc:Variable SymbolicName="DataType4Variable" DataType="DataType4" ValueRank="Scalar" TypeDefinition="ua:BaseDataVariableType" AccessLevel="ReadWrite">
+        <opc:Description>Instance of a variable node with DataType4 type.</opc:Description>
+      </opc:Variable>
+    </opc:Children>
+    <!-- Link the instance back to the ObjectsFolder -->
+    <opc:References>
+      <opc:Reference IsInverse="true">
+        <opc:ReferenceType>ua:Organizes</opc:ReferenceType>
+        <opc:TargetId>ua:ObjectsFolder</opc:TargetId>
+      </opc:Reference>
+    </opc:References>
+  </opc:Object>
+
+</opc:ModelDesign>

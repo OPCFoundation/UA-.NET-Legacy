@@ -82,6 +82,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Quickstarts.Reference.Classes.cs" />
+    <Compile Include="Model\Quickstarts.Reference.Constants.cs" />
+    <Compile Include="Model\Quickstarts.Reference.DataTypes.cs" />
     <Compile Include="MonitoredItemEventLogDlg.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,6 +97,7 @@
     <Compile Include="Namespaces.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Model\ModelDesign.xml" />
     <Content Include="Readme.htm" />
     <Content Include="Resources\OPCFoundation.jpg" />
     <EmbeddedResource Include="MonitoredItemEventLogDlg.resx">
@@ -118,6 +122,8 @@
     </Content>
     <None Include="app.manifest">
     </None>
+    <None Include="Model\ModelDesign.csv" />
+    <EmbeddedResource Include="Model\Quickstarts.Reference.PredefinedNodes.uanodes" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

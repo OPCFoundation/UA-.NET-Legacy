@@ -1,0 +1,34 @@
+<opc:TypeDictionary
+  xmlns:opc="http://opcfoundation.org/BinarySchema/"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ua="http://opcfoundation.org/UA/"
+  xmlns:tns="http://opcfoundation.org/Quickstarts/Reference"
+  DefaultByteOrder="LittleEndian"
+  TargetNamespace="http://opcfoundation.org/Quickstarts/Reference"
+>
+  <opc:Import Namespace="http://opcfoundation.org/UA/" Location="Opc.Ua.BinarySchema.bsd"/>
+
+  <opc:StructuredType Name="DataType1" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Int32Field" TypeName="opc:Int32" />
+    <opc:Field Name="FloatField" TypeName="opc:Float" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="DataType2" BaseType="tns:DataType1">
+    <opc:Field Name="Int32Field" TypeName="opc:Int32" SourceType="tns:DataType1" />
+    <opc:Field Name="FloatField" TypeName="opc:Float" SourceType="tns:DataType1" />
+    <opc:Field Name="StringField" TypeName="opc:String" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="DataType3" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Int32Field" TypeName="opc:Int32" />
+    <opc:Field Name="ByteField" TypeName="opc:Byte" />
+    <opc:Field Name="FloatField" TypeName="opc:Float" />
+  </opc:StructuredType>
+
+  <opc:StructuredType Name="DataType4" BaseType="ua:ExtensionObject">
+    <opc:Field Name="Int32Field" TypeName="opc:Int32" />
+    <opc:Field Name="FloatField" TypeName="opc:Float" />
+    <opc:Field Name="ByteField" TypeName="opc:Byte" />
+  </opc:StructuredType>
+
+</opc:TypeDictionary>
