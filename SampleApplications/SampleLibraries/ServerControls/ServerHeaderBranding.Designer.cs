@@ -105,7 +105,7 @@
             this.labelBuild.Name = "labelBuild";
             this.labelBuild.Size = new System.Drawing.Size(198, 84);
             this.labelBuild.TabIndex = 16;
-            this.labelBuild.Text = "UA .NET API Build: 1.03.341.0";
+            this.labelBuild.Text = "UA .NET API Build: 1.03.342.0";
             this.labelBuild.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // ServerHeaderBranding
