@@ -2,7 +2,22 @@ OPC Foundation OPC UA .NET Stack
 ====================================
 
 Current Version
+
+Version 1.03.342
 	
+	Highlights: 
+		- OPC UA 1.03 compatible.
+		- Limit the maximum nesting level for for Variant and VariantArray
+
+	Github issues resolved:
+		- Issue #66  - An exception occurs in NodeCache.FetchNode
+		- Issue #90  - Reentrancy issues with SessionReconnectHandler
+		- Issue #97  - Sha256 signature required for certificates		
+		- Issue #100 - Reference Server update to include structured types
+		- Issue #106 - Support for sending/receiving certificate chains
+		- Issue #108 - Remove SHA1 security policy from all Server samples
+		- Issue #112 - NullReferenceException when running quick start applications
+		- Issue #113 - Suspected stack overflow in publish loop
 	
 Version 1.03.341
 	
