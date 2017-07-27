@@ -62,7 +62,6 @@ namespace Opc.Ua
         protected virtual void Dispose(bool disposing)
         {
             CloseChannel();
-            DisposeChannel();
 
             m_disposed = true;
         }
@@ -155,6 +154,7 @@ namespace Opc.Ua
                     try
                     {
                         channel.Close();
+                        channel.Dispose();
                     }
                     catch (Exception)
                     {
@@ -302,10 +302,13 @@ namespace Opc.Ua
                     // ignore errors.
                 }
 
-                m_channel = null;
+                DisposeChannel();
             }
         }
 
+        /// <summary>
+        /// Disposes the channel.
+        /// </summary>
         protected void DisposeChannel()
         {
             if (m_channel != null)
