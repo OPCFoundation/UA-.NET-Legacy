@@ -29319,13 +29319,13 @@ namespace Opc.Ua
            "/wAAAAA=";
 
         private const string InitializationString =
-           "//////////8VYIEAAgAAAAAAFAAAAERhdGFJdGVtVHlwZUluc3RhbmNlAQA9CQEAPQkAGAEB/////wIA" +
-           "AAA1YIkKAgAAAAAACgAAAERlZmluaXRpb24BAD4JAwAAAABlAAAAQSB2ZW5kb3Itc3BlY2lmaWMsIGh1" +
-           "bWFuIHJlYWRhYmxlIHN0cmluZyB0aGF0IHNwZWNpZmllcyBob3cgdGhlIHZhbHVlIG9mIHRoaXMgRGF0" +
-           "YUl0ZW0gaXMgY2FsY3VsYXRlZC4ALgBEPgkAAAAM/////wEB/////wAAAAA1YIkKAgAAAAAADgAAAFZh" +
-           "bHVlUHJlY2lzaW9uAQA/CQMAAAAAcAAAAFRoZSBtYXhpbXVtIHByZWNpc2lvbiB0aGF0IHRoZSBzZXJ2" +
-           "ZXIgY2FuIG1haW50YWluIGZvciB0aGUgaXRlbSBiYXNlZCBvbiByZXN0cmljdGlvbnMgaW4gdGhlIHRh" +
-           "cmdldCBlbnZpcm9ubWVudC4ALgBEPwkAAAAL/////wEB/////wAAAAA=";
+           "//////////8VYIkAAgAAAAAAFAAAAERhdGFJdGVtVHlwZUluc3RhbmNlAQA9CQEAPQkAGP7///8BAf//" +
+           "//8CAAAANWCJCgIAAAAAAAoAAABEZWZpbml0aW9uAQA+CQMAAAAAZQAAAEEgdmVuZG9yLXNwZWNpZmlj" +
+           "LCBodW1hbiByZWFkYWJsZSBzdHJpbmcgdGhhdCBzcGVjaWZpZXMgaG93IHRoZSB2YWx1ZSBvZiB0aGlz" +
+           "IERhdGFJdGVtIGlzIGNhbGN1bGF0ZWQuAC4ARD4JAAAADP////8BAf////8AAAAANWCJCgIAAAAAAA4A" +
+           "AABWYWx1ZVByZWNpc2lvbgEAPwkDAAAAAHAAAABUaGUgbWF4aW11bSBwcmVjaXNpb24gdGhhdCB0aGUg" +
+           "c2VydmVyIGNhbiBtYWludGFpbiBmb3IgdGhlIGl0ZW0gYmFzZWQgb24gcmVzdHJpY3Rpb25zIGluIHRo" +
+           "ZSB0YXJnZXQgZW52aXJvbm1lbnQuAC4ARD8JAAAAC/////8BAf////8AAAAA";
         #endregion
         #endif
         #endregion
@@ -29604,10 +29604,10 @@ namespace Opc.Ua
            "/////wAAAAA=";
 
         private const string InitializationString =
-           "//////////8VYIEAAgAAAAAAFgAAAEFuYWxvZ0l0ZW1UeXBlSW5zdGFuY2UBAEAJAQBACQAaAQH/////" +
-           "AwAAABVgiQoCAAAAAAAPAAAASW5zdHJ1bWVudFJhbmdlAQBCCQAuAERCCQAAAQB0A/////8BAf////8A" +
-           "AAAAFWCJCgIAAAAAAAcAAABFVVJhbmdlAQBBCQAuAERBCQAAAQB0A/////8BAf////8AAAAAFWCJCgIA" +
-           "AAAAABAAAABFbmdpbmVlcmluZ1VuaXRzAQBDCQAuAERDCQAAAQB3A/////8BAf////8AAAAA";
+           "//////////8VYIkAAgAAAAAAFgAAAEFuYWxvZ0l0ZW1UeXBlSW5zdGFuY2UBAEAJAQBACQAa/v///wEB" +
+           "/////wMAAAAVYIkKAgAAAAAADwAAAEluc3RydW1lbnRSYW5nZQEAQgkALgBEQgkAAAEAdAP/////AQH/" +
+           "////AAAAABVgiQoCAAAAAAAHAAAARVVSYW5nZQEAQQkALgBEQQkAAAEAdAP/////AQH/////AAAAABVg" +
+           "iQoCAAAAAAAQAAAARW5naW5lZXJpbmdVbml0cwEAQwkALgBEQwkAAAEAdwP/////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -29916,8 +29916,8 @@ namespace Opc.Ua
 
         #region Initialization String
         private const string InitializationString =
-           "//////////8VYIEAAgAAAAAAGAAAAERpc2NyZXRlSXRlbVR5cGVJbnN0YW5jZQEARAkBAEQJABgBAf//" +
-           "//8AAAAA";
+           "//////////8VYIkAAgAAAAAAGAAAAERpc2NyZXRlSXRlbVR5cGVJbnN0YW5jZQEARAkBAEQJABj+////" +
+           "AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -30045,9 +30045,9 @@ namespace Opc.Ua
 
         #region Initialization String
         private const string InitializationString =
-           "//////////8VYIEAAgAAAAAAHAAAAFR3b1N0YXRlRGlzY3JldGVUeXBlSW5zdGFuY2UBAEUJAQBFCQAB" +
-           "AQH/////AgAAABVgiQoCAAAAAAAKAAAARmFsc2VTdGF0ZQEARgkALgBERgkAAAAV/////wEB/////wAA" +
-           "AAAVYIkKAgAAAAAACQAAAFRydWVTdGF0ZQEARwkALgBERwkAAAAV/////wEB/////wAAAAA=";
+           "//////////8VYIkAAgAAAAAAHAAAAFR3b1N0YXRlRGlzY3JldGVUeXBlSW5zdGFuY2UBAEUJAQBFCQAB" +
+           "/v///wEB/////wIAAAAVYIkKAgAAAAAACgAAAEZhbHNlU3RhdGUBAEYJAC4AREYJAAAAFf////8BAf//" +
+           "//8AAAAAFWCJCgIAAAAAAAkAAABUcnVlU3RhdGUBAEcJAC4AREcJAAAAFf////8BAf////8AAAAA";
         #endregion
         #endif
         #endregion
@@ -30258,9 +30258,9 @@ namespace Opc.Ua
 
         #region Initialization String
         private const string InitializationString =
-           "//////////8VYIEAAgAAAAAAHgAAAE11bHRpU3RhdGVEaXNjcmV0ZVR5cGVJbnN0YW5jZQEASAkBAEgJ" +
-           "ABwBAf////8BAAAAFWCJCgIAAAAAAAsAAABFbnVtU3RyaW5ncwEASQkALgBESQkAAAAVAQAAAAEB////" +
-           "/wAAAAA=";
+           "//////////8VYIkAAgAAAAAAHgAAAE11bHRpU3RhdGVEaXNjcmV0ZVR5cGVJbnN0YW5jZQEASAkBAEgJ" +
+           "ABz+////AQH/////AQAAABVgiQoCAAAAAAALAAAARW51bVN0cmluZ3MBAEkJAC4AREkJAAAAFQEAAAAB" +
+           "Af////8AAAAA";
         #endregion
         #endif
         #endregion
@@ -30388,10 +30388,10 @@ namespace Opc.Ua
 
         #region Initialization String
         private const string InitializationString =
-           "//////////8VYIEAAgAAAAAAIwAAAE11bHRpU3RhdGVWYWx1ZURpc2NyZXRlVHlwZUluc3RhbmNlAQDm" +
-           "KwEA5isAGgEB/////wIAAAAVYIkKAgAAAAAACgAAAEVudW1WYWx1ZXMBAOkrAC4AROkrAAABAKodAQAA" +
-           "AAEB/////wAAAAAVYIkKAgAAAAAACwAAAFZhbHVlQXNUZXh0AQDFLAAuAETFLAAAABX/////AQH/////" +
-           "AAAAAA==";
+           "//////////8VYIkAAgAAAAAAIwAAAE11bHRpU3RhdGVWYWx1ZURpc2NyZXRlVHlwZUluc3RhbmNlAQDm" +
+           "KwEA5isAGv7///8BAf////8CAAAAFWCJCgIAAAAAAAoAAABFbnVtVmFsdWVzAQDpKwAuAETpKwAAAQCq" +
+           "HQEAAAABAf////8AAAAAFWCJCgIAAAAAAAsAAABWYWx1ZUFzVGV4dAEAxSwALgBExSwAAAAV/////wEB" +
+           "/////wAAAAA=";
         #endregion
         #endif
         #endregion
@@ -30661,12 +30661,12 @@ namespace Opc.Ua
            "////AAAAAA==";
 
         private const string InitializationString =
-           "//////////8VYIkAAgAAAAAAFQAAAEFycmF5SXRlbVR5cGVJbnN0YW5jZQEA9S4BAPUuABgAAAAAAQH/" +
-           "////BQAAABVgiQoCAAAAAAAPAAAASW5zdHJ1bWVudFJhbmdlAQD4LgAuAET4LgAAAQB0A/////8BAf//" +
-           "//8AAAAAFWCJCgIAAAAAAAcAAABFVVJhbmdlAQD5LgAuAET5LgAAAQB0A/////8BAf////8AAAAAFWCJ" +
-           "CgIAAAAAABAAAABFbmdpbmVlcmluZ1VuaXRzAQD6LgAuAET6LgAAAQB3A/////8BAf////8AAAAAFWCJ" +
-           "CgIAAAAAAAUAAABUaXRsZQEA+y4ALgBE+y4AAAAV/////wEB/////wAAAAAVYIkKAgAAAAAADQAAAEF4" +
-           "aXNTY2FsZVR5cGUBAPwuAC4ARPwuAAABAC0v/////wEB/////wAAAAA=";
+           "//////////8VYIEAAgAAAAAAFQAAAEFycmF5SXRlbVR5cGVJbnN0YW5jZQEA9S4BAPUuABgBAf////8F" +
+           "AAAAFWCJCgIAAAAAAA8AAABJbnN0cnVtZW50UmFuZ2UBAPguAC4ARPguAAABAHQD/////wEB/////wAA" +
+           "AAAVYIkKAgAAAAAABwAAAEVVUmFuZ2UBAPkuAC4ARPkuAAABAHQD/////wEB/////wAAAAAVYIkKAgAA" +
+           "AAAAEAAAAEVuZ2luZWVyaW5nVW5pdHMBAPouAC4ARPouAAABAHcD/////wEB/////wAAAAAVYIkKAgAA" +
+           "AAAABQAAAFRpdGxlAQD7LgAuAET7LgAAABX/////AQH/////AAAAABVgiQoCAAAAAAANAAAAQXhpc1Nj" +
+           "YWxlVHlwZQEA/C4ALgBE/C4AAAEALS//////AQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -32040,12 +32040,12 @@ namespace Opc.Ua
 
         #region Initialization String
         private const string InitializationString =
-           "//////////8VYIkAAgAAAAAAHwAAAE5EaW1lbnNpb25BcnJheUl0ZW1UeXBlSW5zdGFuY2UBACQvAQAk" +
-           "LwAYAAAAAAEB/////wUAAAAVYIkKAgAAAAAABwAAAEVVUmFuZ2UBACgvAC4ARCgvAAABAHQD/////wEB" +
-           "/////wAAAAAVYIkKAgAAAAAAEAAAAEVuZ2luZWVyaW5nVW5pdHMBACkvAC4ARCkvAAABAHcD/////wEB" +
-           "/////wAAAAAVYIkKAgAAAAAABQAAAFRpdGxlAQAqLwAuAEQqLwAAABX/////AQH/////AAAAABVgiQoC" +
-           "AAAAAAANAAAAQXhpc1NjYWxlVHlwZQEAKy8ALgBEKy8AAAEALS//////AQH/////AAAAABVgiQoCAAAA" +
-           "AAAOAAAAQXhpc0RlZmluaXRpb24BACwvAC4ARCwvAAABAC8vAQAAAAEB/////wAAAAA=";
+           "//////////8VYIEAAgAAAAAAHwAAAE5EaW1lbnNpb25BcnJheUl0ZW1UeXBlSW5zdGFuY2UBACQvAQAk" +
+           "LwAYAQH/////BQAAABVgiQoCAAAAAAAHAAAARVVSYW5nZQEAKC8ALgBEKC8AAAEAdAP/////AQH/////" +
+           "AAAAABVgiQoCAAAAAAAQAAAARW5naW5lZXJpbmdVbml0cwEAKS8ALgBEKS8AAAEAdwP/////AQH/////" +
+           "AAAAABVgiQoCAAAAAAAFAAAAVGl0bGUBACovAC4ARCovAAAAFf////8BAf////8AAAAAFWCJCgIAAAAA" +
+           "AA0AAABBeGlzU2NhbGVUeXBlAQArLwAuAEQrLwAAAQAtL/////8BAf////8AAAAAFWCJCgIAAAAAAA4A" +
+           "AABBeGlzRGVmaW5pdGlvbgEALC8ALgBELC8AAAEALy8BAAAAAQH/////AAAAAA==";
         #endregion
         #endif
         #endregion
@@ -32634,9 +32634,9 @@ namespace Opc.Ua
 
         #region Initialization String
         private const string InitializationString =
-           "//////////8VYIEAAgAAAAAAHQAAAENvbmRpdGlvblZhcmlhYmxlVHlwZUluc3RhbmNlAQAqIwEAKiMA" +
-           "GAEB/////wEAAAAVYIkKAgAAAAAADwAAAFNvdXJjZVRpbWVzdGFtcAEAKyMALgBEKyMAAAEAJgH/////" +
-           "AQH/////AAAAAA==";
+           "//////////8VYIkAAgAAAAAAHQAAAENvbmRpdGlvblZhcmlhYmxlVHlwZUluc3RhbmNlAQAqIwEAKiMA" +
+           "GP7///8BAf////8BAAAAFWCJCgIAAAAAAA8AAABTb3VyY2VUaW1lc3RhbXABACsjAC4ARCsjAAABACYB" +
+           "/////wEB/////wAAAAA=";
         #endregion
         #endif
         #endregion
