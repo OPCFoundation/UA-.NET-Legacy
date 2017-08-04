@@ -35,7 +35,7 @@ namespace Opc.Ua
         /// </summary>
         protected EndpointBase()
         {
-            SupportedServices  = new SortedList<ExpandedNodeId,ServiceDefinition>();
+            SupportedServices = new Dictionary<ExpandedNodeId, ServiceDefinition>();
             
             try
             {
@@ -79,8 +79,8 @@ namespace Opc.Ua
 
             m_host = host;
             m_server = host.Server;
-            
-            SupportedServices  = new SortedList<ExpandedNodeId,ServiceDefinition>();
+
+            SupportedServices = new Dictionary<ExpandedNodeId, ServiceDefinition>();
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Opc.Ua
             m_host = null;
             m_server = server;
 
-            SupportedServices = new SortedList<ExpandedNodeId, ServiceDefinition>();
+            SupportedServices = new Dictionary<ExpandedNodeId, ServiceDefinition>();
         }
         #endregion
              
@@ -550,7 +550,7 @@ namespace Opc.Ua
         /// <summary>
         /// The types known to the server.
         /// </summary>
-        protected SortedList<ExpandedNodeId, ServiceDefinition> SupportedServices
+        protected Dictionary<ExpandedNodeId, ServiceDefinition> SupportedServices
         {
             get { return m_supportedServices; }
             set { m_supportedServices = value; }
@@ -934,7 +934,7 @@ namespace Opc.Ua
         private ServiceResult m_serverError;
         private ServiceMessageContext m_messageContext;
         private EndpointDescription m_endpointDescription;
-        private SortedList<ExpandedNodeId,ServiceDefinition> m_supportedServices;
+        private Dictionary<ExpandedNodeId, ServiceDefinition> m_supportedServices;
         private IServiceHostBase m_host;
         private IServerBase m_server;
         private int m_firstRequestReceived;

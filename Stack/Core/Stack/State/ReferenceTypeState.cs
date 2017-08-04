@@ -289,9 +289,10 @@ namespace Opc.Ua
                 {
                     LocalizedText inverseName = m_inverseName;
 
-                    if (OnReadInverseName != null)
+                    NodeAttributeEventHandler<LocalizedText> onReadInverseName = this.OnReadInverseName;
+                    if (onReadInverseName != null)
                     {
-                        result = OnReadInverseName(context, this, ref inverseName);
+                        result = onReadInverseName(context, this, ref inverseName);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -306,9 +307,10 @@ namespace Opc.Ua
                 {
                     bool symmetric = m_symmetric;
 
-                    if (OnReadSymmetric != null)
+                    NodeAttributeEventHandler<bool> onReadSymmetric = this.OnReadSymmetric;
+                    if (onReadSymmetric != null)
                     {
-                        result = OnReadSymmetric(context, this, ref symmetric);
+                        result = onReadSymmetric(context, this, ref symmetric);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -351,9 +353,10 @@ namespace Opc.Ua
                         return StatusCodes.BadNotWritable;
                     }
 
-                    if (OnWriteInverseName != null)
+                    NodeAttributeEventHandler<LocalizedText> onWriteInverseName = this.OnWriteInverseName;
+                    if (onWriteInverseName != null)
                     {
-                        result = OnWriteInverseName(context, this, ref inverseName);
+                        result = onWriteInverseName(context, this, ref inverseName);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -380,9 +383,10 @@ namespace Opc.Ua
 
                     bool symmetric = symmetricRef.Value;
 
-                    if (OnWriteSymmetric != null)
+                    NodeAttributeEventHandler<bool> onWriteSymmetric = this.OnWriteSymmetric;
+                    if (onWriteSymmetric != null)
                     {
-                        result = OnWriteSymmetric(context, this, ref symmetric);
+                        result = onWriteSymmetric(context, this, ref symmetric);
                     }
 
                     if (ServiceResult.IsGood(result))

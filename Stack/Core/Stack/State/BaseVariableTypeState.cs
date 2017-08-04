@@ -49,9 +49,10 @@ namespace Opc.Ua
                 m_valueRank = type.m_valueRank;
                 m_arrayDimensions = null;
 
-                if (type.m_arrayDimensions != null)
+                ReadOnlyList<uint> arrayDimensions = type.m_arrayDimensions;
+                if (arrayDimensions != null)
                 {
-                    m_arrayDimensions = new ReadOnlyList<uint>(type.m_arrayDimensions, true);
+                    m_arrayDimensions = new ReadOnlyList<uint>(arrayDimensions, true);
                 }
             }
 
@@ -232,9 +233,10 @@ namespace Opc.Ua
                 variableTypeNode.ValueRank = this.ValueRank;
                 variableTypeNode.ArrayDimensions = null;
 
-                if (this.ArrayDimensions != null)
+                ReadOnlyList<uint> arrayDimensions = this.ArrayDimensions;
+                if (arrayDimensions != null)
                 {
-                    variableTypeNode.ArrayDimensions = new UInt32Collection(this.ArrayDimensions);
+                    variableTypeNode.ArrayDimensions = new UInt32Collection(arrayDimensions);
                 }
             }
         }
@@ -265,9 +267,10 @@ namespace Opc.Ua
                 encoder.WriteInt32("ValueRank", ValueRank);
             }
 
-            if (ArrayDimensions != null)
+            ReadOnlyList<uint> arrayDimensions = this.ArrayDimensions;
+            if (arrayDimensions != null)
             {
-                encoder.WriteString("ArrayDimensions", BaseVariableState.ArrayDimensionsToXml(ArrayDimensions));
+                encoder.WriteString("ArrayDimensions", BaseVariableState.ArrayDimensionsToXml(arrayDimensions));
             }
 
             encoder.PopNamespace();
@@ -326,7 +329,7 @@ namespace Opc.Ua
                 attributesToSave |= AttributesToSave.DataType;
             }
 
-            if (m_valueRank != ValueRanks.Any)
+            if (m_valueRank != ValueRanks.OneOrMoreDimensions)
             {
                 attributesToSave |= AttributesToSave.ValueRank;
             }
@@ -428,9 +431,10 @@ namespace Opc.Ua
                 {
                     NodeId dataType = m_dataType;
 
-                    if (OnReadDataType != null)
+                    NodeAttributeEventHandler<NodeId> onReadDataType = this.OnReadDataType;
+                    if (onReadDataType != null)
                     {
-                        result = OnReadDataType(context, this, ref dataType);
+                        result = onReadDataType(context, this, ref dataType);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -445,9 +449,10 @@ namespace Opc.Ua
                 {
                     int valueRank = m_valueRank;
 
-                    if (OnReadValueRank != null)
+                    NodeAttributeEventHandler<int> onReadValueRank = this.OnReadValueRank;
+                    if (onReadValueRank != null)
                     {
-                        result = OnReadValueRank(context, this, ref valueRank);
+                        result = onReadValueRank(context, this, ref valueRank);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -462,9 +467,10 @@ namespace Opc.Ua
                 {
                     IList<uint> arrayDimensions = m_arrayDimensions;
 
-                    if (OnReadArrayDimensions != null)
+                    NodeAttributeEventHandler<IList<uint>> onReadArrayDimensions = this.OnReadArrayDimensions;
+                    if (onReadArrayDimensions != null)
                     {
-                        result = OnReadArrayDimensions(context, this, ref arrayDimensions);
+                        result = onReadArrayDimensions(context, this, ref arrayDimensions);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -496,9 +502,10 @@ namespace Opc.Ua
             VariableCopyPolicy copyPolicy = VariableCopyPolicy.CopyOnRead;
 
             // use default behavoir.
-            if (OnSimpleReadValue != null)
+            NodeValueSimpleEventHandler onSimpleReadValue = this.OnSimpleReadValue;
+            if (onSimpleReadValue != null)
             {
-                result = OnSimpleReadValue(
+                result = onSimpleReadValue(
                     context,
                     this,
                     ref value);
@@ -564,9 +571,10 @@ namespace Opc.Ua
                         return StatusCodes.BadNotWritable;
                     }
 
-                    if (OnWriteDataType != null)
+                    NodeAttributeEventHandler<NodeId> onWriteDataType = this.OnWriteDataType;
+                    if (onWriteDataType != null)
                     {
-                        result = OnWriteDataType(context, this, ref dataType);
+                        result = onWriteDataType(context, this, ref dataType);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -593,9 +601,10 @@ namespace Opc.Ua
 
                     int valueRank = valueRankRef.Value;
 
-                    if (OnWriteValueRank != null)
+                    NodeAttributeEventHandler<int> onWriteValueRank = this.OnWriteValueRank;
+                    if (onWriteValueRank != null)
                     {
-                        result = OnWriteValueRank(context, this, ref valueRank);
+                        result = onWriteValueRank(context, this, ref valueRank);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -615,9 +624,10 @@ namespace Opc.Ua
                         return StatusCodes.BadNotWritable;
                     }
 
-                    if (OnWriteArrayDimensions != null)
+                    NodeAttributeEventHandler<IList<uint>> onWriteArrayDimensions = this.OnWriteArrayDimensions;
+                    if (onWriteArrayDimensions != null)
                     {
-                        result = OnWriteArrayDimensions(context, this, ref arrayDimensions);
+                        result = onWriteArrayDimensions(context, this, ref arrayDimensions);
                     }
 
                     if (ServiceResult.IsGood(result))
@@ -682,9 +692,10 @@ namespace Opc.Ua
             }
 
             // check for simple write value handler.
-            if (OnSimpleWriteValue != null)
+            NodeValueSimpleEventHandler onSimpleWriteValue = this.OnSimpleWriteValue;
+            if (onSimpleWriteValue != null)
             {
-                result = OnSimpleWriteValue(
+                result = onSimpleWriteValue(
                     context,
                     this,
                     ref value);
