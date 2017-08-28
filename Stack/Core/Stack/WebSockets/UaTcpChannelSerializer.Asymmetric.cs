@@ -45,7 +45,7 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// The certificate for the server.
         /// </summary>
-        public X509Certificate2 ClientCertificate
+        public CertificateIdentifier ClientCertificate
         {
             get { return m_clientCertificate; }
         }
@@ -53,7 +53,7 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// The certificate for the server.
         /// </summary>
-        public X509Certificate2 ServerCertificate
+        public CertificateIdentifier ServerCertificate
         {
             get { return m_serverCertificate; }
         }
@@ -197,6 +197,11 @@ namespace Opc.Ua.Bindings
                     return 32;
                 }
 
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    return 64;
+                }
+
                 default:
                 case SecurityPolicies.None:
                 {
@@ -251,6 +256,11 @@ namespace Opc.Ua.Bindings
                     return Rsa_GetPlainTextBlockSize(receiverCertificate, false);
                 }
 
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    return 1;
+                }
+
                 default:
                 case SecurityPolicies.None:
                 {
@@ -274,6 +284,11 @@ namespace Opc.Ua.Bindings
                 case SecurityPolicies.Basic128Rsa15:
                 {
                     return Rsa_GetCipherTextBlockSize(receiverCertificate, false);
+                }
+
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    return 1;
                 }
 
                 default:
@@ -368,6 +383,11 @@ namespace Opc.Ua.Bindings
                 case SecurityPolicies.Basic128Rsa15:
                 {
                     return RsaPkcs15Sha1_GetSignatureLength(senderCertificate);
+                }
+
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    return 64;
                 }
 
                 default:
@@ -507,43 +527,48 @@ namespace Opc.Ua.Bindings
            
                     if (SecurityMode != MessageSecurityMode.None)
                     {
-                        if (receiverCertificate.PublicKey.Key.KeySize <= TcpMessageLimits.KeySizeExtraPadding)
+                        var rsa = receiverCertificate.GetRSAPublicKey();
+
+                        if (rsa != null)
                         {
-                            // need to reserve one byte for the padding.
-                            plainTextSize++;
-
-                            if (plainTextSize % plainTextBlockSize != 0)
+                            if (rsa.KeySize <= TcpMessageLimits.KeySizeExtraPadding)
                             {
-                                padding = plainTextBlockSize - (plainTextSize % plainTextBlockSize);
-                            }
+                                // need to reserve one byte for the padding.
+                                plainTextSize++;
 
-                            encoder.WriteByte(null, (byte)padding);
-                            for (int ii = 0; ii < padding; ii++)
-                            {
+                                if (plainTextSize % plainTextBlockSize != 0)
+                                {
+                                    padding = plainTextBlockSize - (plainTextSize % plainTextBlockSize);
+                                }
+
                                 encoder.WriteByte(null, (byte)padding);
+                                for (int ii = 0; ii < padding; ii++)
+                                {
+                                    encoder.WriteByte(null, (byte)padding);
+                                }
                             }
-                        }
-                        else
-                        {
-                            // need to reserve one byte for the padding.
-                            plainTextSize++;
-                            // need to reserve one byte for the extrapadding.
-                            plainTextSize++;
-
-                            if (plainTextSize % plainTextBlockSize != 0)
+                            else
                             {
-                                padding = plainTextBlockSize - (plainTextSize % plainTextBlockSize);
-                            }
+                                // need to reserve one byte for the padding.
+                                plainTextSize++;
+                                // need to reserve one byte for the extrapadding.
+                                plainTextSize++;
 
-                            byte paddingSize = (byte)(padding & 0xff);
-                            byte extraPaddingByte = (byte)((padding >> 8) & 0xff);
+                                if (plainTextSize % plainTextBlockSize != 0)
+                                {
+                                    padding = plainTextBlockSize - (plainTextSize % plainTextBlockSize);
+                                }
 
-                            encoder.WriteByte(null, paddingSize);
-                            for (int ii = 0; ii < padding; ii++)
-                            {
-                                encoder.WriteByte(null, (byte)paddingSize);
+                                byte paddingSize = (byte)(padding & 0xff);
+                                byte extraPaddingByte = (byte)((padding >> 8) & 0xff);
+
+                                encoder.WriteByte(null, paddingSize);
+                                for (int ii = 0; ii < padding; ii++)
+                                {
+                                    encoder.WriteByte(null, (byte)paddingSize);
+                                }
+                                encoder.WriteByte(null, extraPaddingByte);
                             }
-                            encoder.WriteByte(null, extraPaddingByte);
                         }
 
                         // update the plaintext size with the padding size.
@@ -861,30 +886,36 @@ namespace Opc.Ua.Bindings
             if (SecurityMode != MessageSecurityMode.None)
             {
                 int paddingEnd = -1;
-                if (receiverCertificate.PublicKey.Key.KeySize > TcpMessageLimits.KeySizeExtraPadding)
-                {
-                    paddingEnd = plainText.Offset + plainText.Count - signatureSize - 1;
-                    paddingCount = plainText.Array[paddingEnd - 1] + plainText.Array[paddingEnd] * 256;
+                
+                var rsa = receiverCertificate.GetRSAPublicKey();
 
-                    //parse until paddingStart-1; the last one is actually the extrapaddingsize
-                    for (int ii = paddingEnd - paddingCount; ii < paddingEnd; ii++)
+                if (rsa != null)
+                {
+                    if (receiverCertificate.PublicKey.Key.KeySize > TcpMessageLimits.KeySizeExtraPadding)
                     {
-                        if (plainText.Array[ii] != plainText.Array[paddingEnd - 1])
+                        paddingEnd = plainText.Offset + plainText.Count - signatureSize - 1;
+                        paddingCount = plainText.Array[paddingEnd - 1] + plainText.Array[paddingEnd] * 256;
+
+                        //parse until paddingStart-1; the last one is actually the extrapaddingsize
+                        for (int ii = paddingEnd - paddingCount; ii < paddingEnd; ii++)
                         {
-                            throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "Could not verify the padding in the message.");
+                            if (plainText.Array[ii] != plainText.Array[paddingEnd - 1])
+                            {
+                                throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "Could not verify the padding in the message.");
+                            }
                         }
                     }
-                }
-                else
-                {
-                    paddingEnd = plainText.Offset + plainText.Count - signatureSize - 1;
-                    paddingCount = plainText.Array[paddingEnd];
-
-                    for (int ii = paddingEnd - paddingCount; ii < paddingEnd; ii++)
+                    else
                     {
-                        if (plainText.Array[ii] != plainText.Array[paddingEnd])
+                        paddingEnd = plainText.Offset + plainText.Count - signatureSize - 1;
+                        paddingCount = plainText.Array[paddingEnd];
+
+                        for (int ii = paddingEnd - paddingCount; ii < paddingEnd; ii++)
                         {
-                            throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "Could not verify the padding in the message.");
+                            if (plainText.Array[ii] != plainText.Array[paddingEnd])
+                            {
+                                throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "Could not verify the padding in the message.");
+                            }
                         }
                     }
                 }
@@ -939,6 +970,11 @@ namespace Opc.Ua.Bindings
                 {
                     return RsaPkcs15Sha1_Sign(dataToSign, senderCertificate);
                 }
+
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    return RsaPkcs15Sha1_Sign(dataToSign, senderCertificate);
+                }
             }
         }
 
@@ -965,6 +1001,11 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic128Rsa15:
                 case SecurityPolicies.Basic256:
+                {
+                    return RsaPkcs15Sha1_Verify(dataToVerify, signature, senderCertificate);
+                }
+
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
                 {
                     return RsaPkcs15Sha1_Verify(dataToVerify, signature, senderCertificate);
                 }
@@ -1011,6 +1052,11 @@ namespace Opc.Ua.Bindings
                 {
                     return Rsa_Encrypt(dataToEncrypt, headerToCopy, receiverCertificate, false);
                 }
+
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    return Rsa_Encrypt(dataToEncrypt, headerToCopy, receiverCertificate, false);
+                }
             }
         }
 
@@ -1045,6 +1091,11 @@ namespace Opc.Ua.Bindings
                 }
 
                 case SecurityPolicies.Basic128Rsa15:
+                {
+                    return Rsa_Decrypt(dataToDecrypt, headerToCopy, receiverCertificate, false);
+                }
+
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
                 {
                     return Rsa_Decrypt(dataToDecrypt, headerToCopy, receiverCertificate, false);
                 }

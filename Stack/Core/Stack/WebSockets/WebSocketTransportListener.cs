@@ -40,7 +40,7 @@ namespace Opc.Ua.Bindings
         private ITransportListenerCallback m_callback;
         private WebSocketListener m_listener;
         private BufferManager m_bufferManager;
-        private X509Certificate2 m_serverCertificate;
+        private CertificateIdentifier m_serverCertificate;
         private Timer m_cleanupTimer;
         private long m_maxSetupTime;
         private long m_maxIdleTime;
@@ -451,8 +451,8 @@ namespace Opc.Ua.Bindings
                     m_url.ToString(),
                     channel.ChannelId.ToString(),
                     channel.Serializer.EndpointDescription,
-                    channel.Serializer.ClientCertificate,
-                    channel.Serializer.ServerCertificate,
+                    channel.Serializer.GetCertificate(channel.Serializer.ClientCertificate),
+                    channel.Serializer.GetCertificate(channel.Serializer.ServerCertificate),
                     BinaryEncodingSupport.Required);
 
                 channel.WasOpened = true;

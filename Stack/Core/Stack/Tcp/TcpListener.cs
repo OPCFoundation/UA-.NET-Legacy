@@ -42,7 +42,7 @@ namespace Opc.Ua.Bindings
 
         private BufferManager m_bufferManager;
         private TcpChannelQuotas m_quotas;
-        private X509Certificate2 m_serverCertificate;
+        private CertificateIdentifier m_serverCertificate;
 
         //private X509Certificate2Collection m_serverCertificateChain;
         private uint m_lastChannelId;

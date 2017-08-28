@@ -632,7 +632,7 @@ namespace Opc.Ua
             ITransportWaitingConnection connection,
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
-            X509Certificate2 clientCertificate,
+            CertificateIdentifier clientCertificate,
             ServiceMessageContext messageContext)
         {
             // check if the server if configured to use the ANSI C stack.
@@ -653,7 +653,7 @@ namespace Opc.Ua
 
             if (description.ServerCertificate != null && description.ServerCertificate.Length > 0)
             {
-                settings.ServerCertificate = Utils.ParseCertificateBlob(description.ServerCertificate);
+                settings.ServerCertificate = new CertificateIdentifier(Utils.ParseCertificateBlob(description.ServerCertificate));
             }
             
             #if !SILVERLIGHT
@@ -699,7 +699,7 @@ namespace Opc.Ua
             ApplicationConfiguration configuration,
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
-            X509Certificate2 clientCertificate,
+            CertificateIdentifier clientCertificate,
             ServiceMessageContext messageContext)
         {
             // check if the server if configured to use the ANSI C stack.
@@ -741,7 +741,7 @@ namespace Opc.Ua
 
             if (useHttps && clientCertificate == null && configuration != null)
             {
-                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
+                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate;
             }
 
             #if !SILVERLIGHT
@@ -798,7 +798,7 @@ namespace Opc.Ua
 
             if (description.ServerCertificate != null && description.ServerCertificate.Length > 0)
             {
-                settings.ServerCertificate = Utils.ParseCertificateBlob(description.ServerCertificate);
+                settings.ServerCertificate = new CertificateIdentifier(Utils.ParseCertificateBlob(description.ServerCertificate));
             }
             
             #if !SILVERLIGHT
@@ -976,7 +976,7 @@ namespace Opc.Ua
                     null,
                     endpoint,
                     endpointConfiguration,
-                    (X509Certificate2)null,
+                    (CertificateIdentifier)null,
                     messageContext);
 
                 return;
@@ -1060,7 +1060,7 @@ namespace Opc.Ua
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
             Binding binding,
-            X509Certificate2 clientCertificate,
+            CertificateIdentifier clientCertificate,
             string configurationName)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
@@ -1177,7 +1177,7 @@ namespace Opc.Ua
 
                 if (clientCertificate != null)
                 {
-                    credentials.ClientCertificate.Certificate = clientCertificate;
+                    credentials.ClientCertificate.Certificate = clientCertificate.Find(true);
                 }
             }
 
@@ -1196,7 +1196,7 @@ namespace Opc.Ua
             settings.Description = description;
             settings.Configuration = endpointConfiguration;
             settings.ClientCertificate = clientCertificate;
-            settings.ServerCertificate = serverCertificate;
+            settings.ServerCertificate = new CertificateIdentifier(serverCertificate);
             settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
             settings.NamespaceUris = messageContext.NamespaceUris;
             settings.Factory = messageContext.Factory;

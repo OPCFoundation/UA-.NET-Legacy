@@ -207,7 +207,7 @@ namespace Opc.Ua
 
             // set a short timeout because this is happening in the drop down event.
             EndpointConfiguration configuration = EndpointConfiguration.Create();
-            configuration.OperationTimeout = 5000;
+            configuration.OperationTimeout = 50000;
 
             using (DiscoveryClient client = DiscoveryClient.Create(application, uri, configuration))
             {

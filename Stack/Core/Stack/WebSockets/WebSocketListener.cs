@@ -33,8 +33,8 @@ namespace Opc.Ua.Bindings
     public sealed class WebSocketListener : IDisposable
     {
         private bool m_disposed;
-        private X509Certificate2 m_certificate;
-        private X509Certificate2 m_tlsCertificate;
+        private CertificateIdentifier m_certificate;
+        private CertificateIdentifier m_tlsCertificate;
         private TcpListener m_listener;
         private BufferManager m_bufferManager;
         private X509CertificateValidator m_certificateValidator;
@@ -66,7 +66,7 @@ namespace Opc.Ua.Bindings
                         // verify private key is accessible.
                         if (certificate.PrivateKey.KeySize >= 1024)
                         {
-                            m_tlsCertificate = certificate;
+                            m_tlsCertificate = new CertificateIdentifier(certificate);
                             break;
                         }
                     }
@@ -321,7 +321,7 @@ namespace Opc.Ua.Bindings
             WebSocketConnection connection = new WebSocketConnection(client, stream, m_bufferManager, true);
 
             var authenticator = new SslStreamAuthenticator() { Listener = this };
-            var tlsstream = authenticator.AuthenticateAsServer(connection.TcpClient, m_tlsCertificate);
+            var tlsstream = authenticator.AuthenticateAsServer(connection.TcpClient, m_tlsCertificate.Find(true));
             connection.Upgrade(tlsstream);
 
             var callback = ConnectionOpened;

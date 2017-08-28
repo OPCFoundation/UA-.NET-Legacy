@@ -43,7 +43,7 @@ namespace Opc.Ua
             ApplicationConfiguration configuration,
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
-            X509Certificate2 clientCertificate,
+            CertificateIdentifier clientCertificate,
             ServiceMessageContext messageContext)
         {
             ITransportChannel channel = CreateUaBinaryChannel(

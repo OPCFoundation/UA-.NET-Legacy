@@ -124,6 +124,15 @@ namespace Opc.Ua.Bindings
                     break;
                 }
 
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    m_hmacHashSize = 32;
+                    m_signatureKeySize = 32;
+                    m_encryptionKeySize = 32;
+                    m_encryptionBlockSize = 16;
+                    break;
+                }
+
                 default:
                 case SecurityPolicies.None:
                 {
@@ -157,6 +166,7 @@ namespace Opc.Ua.Bindings
             {
                 case SecurityPolicies.Basic128Rsa15:
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
                 {
                     // create encryptors.                    
                     RijndaelManaged encryptor = new RijndaelManaged();
@@ -520,6 +530,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic128Rsa15:
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
                 {
                     return SymmetricSign(token, dataToSign, useClientKeys);
                 }
@@ -545,6 +556,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic128Rsa15:
                 case SecurityPolicies.Basic256:
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
                 {
                     return SymmetricVerify(token, signature, dataToVerify, useClientKeys);
                 }
@@ -571,6 +583,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic256:
                 case SecurityPolicies.Basic128Rsa15:
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
                 {
                     SymmetricEncrypt(token, dataToEncrypt, useClientKeys);
                     break;
@@ -593,6 +606,7 @@ namespace Opc.Ua.Bindings
 
                 case SecurityPolicies.Basic256:
                 case SecurityPolicies.Basic128Rsa15:
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
                 {
                     SymmetricDecrypt(token, dataToDecrypt, useClientKeys);
                     break;

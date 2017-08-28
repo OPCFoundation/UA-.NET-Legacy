@@ -434,7 +434,7 @@ namespace Opc.Ua.Server
                     if (parsedClientCertificate != null && clientNonce != null)
                     {
                         byte[] dataToSign = Utils.Append(clientCertificate, clientNonce);
-                        serverSignature = SecurityPolicies.Sign(InstanceCertificate, context.SecurityPolicyUri, dataToSign);
+                        serverSignature = SecurityPolicies.Sign(InstanceCertificate.Find(true), context.SecurityPolicyUri, dataToSign);
                     }
                 }
 

@@ -44,7 +44,7 @@ namespace Opc.Ua
             EndpointDescription      description,
             EndpointConfiguration    endpointConfiguration,
             BindingFactory           bindingFactory,
-            X509Certificate2         instanceCertificate)
+            CertificateIdentifier    instanceCertificate)
         {
             if (configuration == null) throw new ArgumentNullException("configuration");
             if (description == null) throw new ArgumentNullException("description");
@@ -80,7 +80,7 @@ namespace Opc.Ua
             ApplicationConfiguration configuration,
             EndpointDescription description,
             EndpointConfiguration endpointConfiguration,
-            X509Certificate2 clientCertificate,
+            CertificateIdentifier clientCertificate,
             ServiceMessageContext messageContext)
         {
             // create a UA binary channel.
@@ -123,7 +123,7 @@ namespace Opc.Ua
             EndpointDescription      description,
             EndpointConfiguration    endpointConfiguration,
             Binding                  binding,
-            X509Certificate2         clientCertificate,
+            CertificateIdentifier    clientCertificate,
             string                   configurationName)
         {
             RegistrationChannel channel = new RegistrationChannel();

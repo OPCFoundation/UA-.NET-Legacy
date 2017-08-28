@@ -74,11 +74,11 @@ namespace Opc.Ua.Server
         /// <param name="certificateValidator">The certificate validator.</param>
         /// <param name="instanceCertificate">The instance certificate.</param>
         public ServerInternalData(
-            ServerProperties                     serverDescription, 
-            ApplicationConfiguration             configuration,
-            ServiceMessageContext                messageContext,
-            CertificateValidator                 certificateValidator,
-            X509Certificate2                     instanceCertificate)
+            ServerProperties          serverDescription, 
+            ApplicationConfiguration  configuration,
+            ServiceMessageContext     messageContext,
+            CertificateValidator      certificateValidator,
+            CertificateIdentifier     instanceCertificate)
         {
             m_serverDescription = serverDescription;
             m_configuration = configuration;

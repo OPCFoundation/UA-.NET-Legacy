@@ -159,7 +159,7 @@ namespace Opc.Ua
                 configuration,
                 endpoint,
                 endpointConfiguration,
-                (System.Security.Cryptography.X509Certificates.X509Certificate2)null,
+                (CertificateIdentifier)null,
                 messageContext);
 
             return channel;
@@ -188,7 +188,7 @@ namespace Opc.Ua
                 connection, 
                 endpoint,
                 endpointConfiguration,
-                (System.Security.Cryptography.X509Certificates.X509Certificate2)null,
+                (CertificateIdentifier)null,
                 messageContext);
 
             return channel;
@@ -218,7 +218,7 @@ namespace Opc.Ua
                 configuration,
                 endpoint,
                 endpointConfiguration,
-                (System.Security.Cryptography.X509Certificates.X509Certificate2)null,
+                (CertificateIdentifier)null,
                 messageContext);
 
             // create a WCF XML channel.

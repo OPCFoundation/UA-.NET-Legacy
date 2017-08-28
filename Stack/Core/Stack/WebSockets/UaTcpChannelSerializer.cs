@@ -52,8 +52,8 @@ namespace Opc.Ua.Bindings
         private BufferCollection m_partialMessageChunks;
         private TcpChannelToken m_requestedToken;
         
-        private X509Certificate2 m_serverCertificate;
-        private X509Certificate2 m_clientCertificate;
+        private CertificateIdentifier m_serverCertificate;
+        private CertificateIdentifier m_clientCertificate;
         private EndpointDescriptionCollection m_endpoints;
         private EndpointDescription m_selectedEndpoint;
         private MessageSecurityMode m_securityMode;
@@ -70,8 +70,8 @@ namespace Opc.Ua.Bindings
         public UaTcpChannelSerializer(
             BufferManager bufferManager,
             TcpChannelQuotas quotas,
-            X509Certificate2 serverCertificate,
-            X509Certificate2 clientCertificate,
+            CertificateIdentifier serverCertificate,
+            CertificateIdentifier clientCertificate,
             EndpointDescriptionCollection endpoints)
         {
             if (bufferManager == null) throw new ArgumentNullException("bufferManager");
@@ -593,6 +593,28 @@ namespace Opc.Ua.Bindings
             }
         }
 
+        /// <remarks />
+        public X509Certificate2 GetPrivateKey(CertificateIdentifier certificate)
+        {
+            if (certificate != null)
+            {
+                return certificate.Find(true);
+            }
+
+            return null;
+        }
+
+        /// <remarks />
+        public X509Certificate2 GetCertificate(CertificateIdentifier certificate)
+        {
+            if (certificate != null)
+            {
+                return certificate.Find();
+            }
+
+            return null;
+        }
+
         /// <remarks/>
         public ArraySegment<byte> ConstructOpenSecureChannelRequest(bool renew)
         {
@@ -620,8 +642,8 @@ namespace Opc.Ua.Bindings
                 chunksToSend = WriteAsymmetricMessage(
                     TcpMessageType.Open,
                     GetNewSequenceNumber(),
-                    ClientCertificate,
-                    ServerCertificate,
+                    GetPrivateKey(ClientCertificate),
+                    GetCertificate(ServerCertificate),
                     new ArraySegment<byte>(buffer, 0, buffer.Length));
 
                 // save token.
@@ -663,7 +685,7 @@ namespace Opc.Ua.Bindings
                 {
                     messageBody = ReadAsymmetricMessage(
                         buffer,
-                        ServerCertificate,
+                        GetPrivateKey(ServerCertificate),
                         out channelId,
                         out clientCertificate,
                         out requestId,
@@ -710,11 +732,11 @@ namespace Opc.Ua.Bindings
                     // must ensure the same certificate was used.
                     if (ClientCertificate != null)
                     {
-                        CompareCertificates(ClientCertificate, clientCertificate, false);
+                        CompareCertificates(GetCertificate(ClientCertificate), clientCertificate, false);
                     }
                     else
                     {
-                        m_clientCertificate = clientCertificate;
+                        m_clientCertificate = new CertificateIdentifier(clientCertificate);
                     }
 
                     // create a new token.
@@ -805,8 +827,8 @@ namespace Opc.Ua.Bindings
                 chunksToSend = WriteAsymmetricMessage(
                     TcpMessageType.Open,
                     requestId,
-                    ServerCertificate,
-                    ClientCertificate,
+                    GetPrivateKey(ServerCertificate),
+                    GetCertificate(ClientCertificate),
                     new ArraySegment<byte>(buffer, 0, buffer.Length));
 
                 var result = chunksToSend[0];
@@ -851,7 +873,7 @@ namespace Opc.Ua.Bindings
                 {
                     messageBody = ReadAsymmetricMessage(
                         buffer,
-                        ClientCertificate,
+                        GetPrivateKey(ClientCertificate),
                         out channelId,
                         out serverCertificate,
                         out requestId,
@@ -868,7 +890,7 @@ namespace Opc.Ua.Bindings
                 try
                 {
                     // verify server certificate.
-                    CompareCertificates(ServerCertificate, serverCertificate, true);
+                    CompareCertificates(ServerCertificate.Find(), serverCertificate, true);
 
                     // verify sequence number.
                     ResetSequenceNumber(sequenceNumber);

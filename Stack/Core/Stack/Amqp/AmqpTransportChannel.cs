@@ -564,8 +564,8 @@ namespace Opc.Ua.Bindings
                 m_url.ToString(),
                 ar.Serializer.ChannelId.ToString(),
                 ar.Serializer.EndpointDescription,
-                ar.Serializer.ClientCertificate,
-                ar.Serializer.ServerCertificate,
+                ar.Serializer.ClientCertificate.Find(),
+                ar.Serializer.ServerCertificate.Find(),
                 BinaryEncodingSupport.Required);
 
             var message = ar.Serializer.ConstructRequest(ar.RequestId, ar.Request);

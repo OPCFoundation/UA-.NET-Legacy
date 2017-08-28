@@ -678,11 +678,11 @@ namespace Opc.Ua
                     return certificate;
                 }
 
-                #if !SILVERLIGHT
+                #if ECC_TEMPORARY_REMOVAL
                 try
                 {
                     // ensure private key is accessible.
-                    System.Security.Cryptography.RSACryptoServiceProvider key = certificate.PrivateKey as System.Security.Cryptography.RSACryptoServiceProvider;
+                    var key = certificate.GetRSAPrivateKey();
 
                     StringBuilder rootDir = new StringBuilder();
                     rootDir.Append(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData));

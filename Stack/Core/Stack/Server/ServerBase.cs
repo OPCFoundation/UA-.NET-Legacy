@@ -649,11 +649,11 @@ namespace Opc.Ua
         /// The server's application instance certificate.
         /// </summary>
         /// <value>The instance X.509 certificate.</value>
-        protected X509Certificate2 InstanceCertificate
+        protected CertificateIdentifier InstanceCertificate
         {
             get 
             { 
-                return (X509Certificate2)m_instanceCertificate; 
+                return m_instanceCertificate; 
             }
             
             private set 
@@ -1053,7 +1053,7 @@ namespace Opc.Ua
 
                     settings.Descriptions = endpoints;
                     settings.Configuration = endpointConfiguration;
-                    settings.ServerCertificate = this.InstanceCertificate;
+                    settings.ServerCertificate = this.Configuration.SecurityConfiguration.ApplicationCertificate;
                     //settings.ServerCertificateChain = this.InstanceCertificateChain;
                     settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
                     settings.NamespaceUris = this.MessageContext.NamespaceUris;
@@ -1203,7 +1203,7 @@ namespace Opc.Ua
 
                     settings.Descriptions = endpoints;
                     settings.Configuration = endpointConfiguration;
-                    settings.ServerCertificate = this.InstanceCertificate;
+                    settings.ServerCertificate = this.Configuration.SecurityConfiguration.ApplicationCertificate;
                     settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
                     settings.NamespaceUris = this.MessageContext.NamespaceUris;
                     settings.Factory = this.MessageContext.Factory;
@@ -1366,7 +1366,7 @@ namespace Opc.Ua
 
                     settings.Descriptions = endpoints;
                     settings.Configuration = endpointConfiguration;
-                    settings.ServerCertificate = this.InstanceCertificate;
+                    settings.ServerCertificate = this.Configuration.SecurityConfiguration.ApplicationCertificate;
                     //settings.ServerCertificateChain = this.InstanceCertificateChain;
                     settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
                     settings.NamespaceUris = this.MessageContext.NamespaceUris;
@@ -1457,12 +1457,12 @@ namespace Opc.Ua
 
                     settings.Descriptions = endpoints;
                     settings.Configuration = endpointConfiguration;
-                    settings.ServerCertificate = this.InstanceCertificate;
+                    settings.ServerCertificate = this.Configuration.SecurityConfiguration.ApplicationCertificate;
                     settings.CertificateValidator = configuration.CertificateValidator.GetChannelValidator();
                     settings.NamespaceUris = this.MessageContext.NamespaceUris;
                     settings.Factory = this.MessageContext.Factory;
 
-                    ITransportListener listener = new Opc.Ua.Bindings.AmqpTransportListener(configuration, InstanceCertificate, endpoints);
+                    ITransportListener listener = new Opc.Ua.Bindings.AmqpTransportListener(configuration, Configuration.SecurityConfiguration.ApplicationCertificate, endpoints);
 
                     listener.Open(
                        uri.Uri,
@@ -1909,7 +1909,7 @@ namespace Opc.Ua
             // load the instance certificate.
             if (configuration.SecurityConfiguration.ApplicationCertificate != null)
             {
-                InstanceCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
+                InstanceCertificate = configuration.SecurityConfiguration.ApplicationCertificate;
             }
 
             if (InstanceCertificate == null)
@@ -1919,7 +1919,7 @@ namespace Opc.Ua
                     "Server does not have an instance certificate assigned.");
             }
 
-            if (!InstanceCertificate.HasPrivateKey)
+            if (InstanceCertificate.Find(true) == null)
             {
                 throw new ServiceResultException(
                     StatusCodes.BadConfigurationError,
@@ -1941,7 +1941,7 @@ namespace Opc.Ua
             // assign a unique identifier if none specified.
             if (String.IsNullOrEmpty(configuration.ApplicationUri))
             {
-                configuration.ApplicationUri = Utils.GetApplicationUriFromCertficate(InstanceCertificate);
+                configuration.ApplicationUri = Utils.GetApplicationUriFromCertficate(InstanceCertificate.Find());
                 
                 if (String.IsNullOrEmpty(configuration.ApplicationUri))
                 {
@@ -1960,7 +1960,7 @@ namespace Opc.Ua
             // assign an instance name.
             if (String.IsNullOrEmpty(configuration.ApplicationName) && InstanceCertificate != null)
             {
-                configuration.ApplicationName = InstanceCertificate.GetNameInfo(X509NameType.DnsName, false);
+                configuration.ApplicationName = InstanceCertificate.Find().GetNameInfo(X509NameType.DnsName, false);
             }
 
             // save the certificate validator.
@@ -2227,7 +2227,7 @@ namespace Opc.Ua
         private object m_messageContext;
         private object m_serverError;
         private object m_certificateValidator;
-        private object m_instanceCertificate;
+        private CertificateIdentifier m_instanceCertificate;
         //private X509Certificate2Collection m_instanceCertificateChain;
         private object m_serverProperties;
         private object m_configuration;

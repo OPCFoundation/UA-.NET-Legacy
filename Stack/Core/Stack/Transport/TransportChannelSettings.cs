@@ -51,7 +51,7 @@ namespace Opc.Ua
         /// Gets or sets the client certificate.
         /// </summary>
         /// <remarks>May be null if no security is used.</remarks>
-        public X509Certificate2 ClientCertificate
+        public CertificateIdentifier ClientCertificate
         {
             get { return m_clientCertificate; }
             set { m_clientCertificate = value; }
@@ -67,7 +67,7 @@ namespace Opc.Ua
         /// Gets or Sets the server certificate.
         /// </summary>
         /// <remarks>May be null if no security is used.</remarks>
-        public X509Certificate2 ServerCertificate
+        public CertificateIdentifier ServerCertificate
         {
             get { return m_serverCertificate; }
             set { m_serverCertificate = value; }
@@ -128,9 +128,9 @@ namespace Opc.Ua
         #region Private Fields
         private EndpointDescription m_description;
         private EndpointConfiguration m_configuration;
-        private X509Certificate2 m_clientCertificate;
+        private CertificateIdentifier m_clientCertificate;
         //private X509Certificate2Collection m_clientCertificateChain;
-        private X509Certificate2 m_serverCertificate;
+        private CertificateIdentifier m_serverCertificate;
         private X509CertificateValidator m_certificateValidator;
         private NamespaceTable m_namespaceUris;
         private EncodeableFactory m_channelFactory;

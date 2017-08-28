@@ -51,7 +51,7 @@ namespace Opc.Ua.Bindings
         private AmqpBrokerConfigurationCollection m_brokers;
         private Dictionary<string,IAmqpConnection> m_connections;
         private BufferManager m_bufferManager;
-        private X509Certificate2 m_serverCertificate;
+        private CertificateIdentifier m_serverCertificate;
         private long m_channelExpiryTime;
         private Timer m_cleanupTimer;
 
@@ -135,7 +135,7 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// Initializes a new instance of the <see cref="AmqpTransportListener"/> class.
         /// </summary>
-        public AmqpTransportListener(ApplicationConfiguration configuration, X509Certificate2 serverCertificate, EndpointDescriptionCollection endpoints)
+        public AmqpTransportListener(ApplicationConfiguration configuration, CertificateIdentifier serverCertificate, EndpointDescriptionCollection endpoints)
         {
             m_brokers = AmqpBrokerConfigurationCollection.Load(configuration);
             m_connections = new Dictionary<string, IAmqpConnection>();
@@ -487,8 +487,8 @@ namespace Opc.Ua.Bindings
                     m_url.ToString(),
                     channel.Serializer.ChannelId.ToString(),
                     channel.Serializer.EndpointDescription,
-                    channel.Serializer.ClientCertificate,
-                    channel.Serializer.ServerCertificate,
+                    channel.Serializer.ClientCertificate.Find(),
+                    channel.Serializer.ServerCertificate.Find(),
                     BinaryEncodingSupport.Required);
 
                 channel.WasOpened = true;

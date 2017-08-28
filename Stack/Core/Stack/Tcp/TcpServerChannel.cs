@@ -50,7 +50,7 @@ namespace Opc.Ua.Bindings
             UaTcpChannelListener listener,
             BufferManager bufferManager,
             TcpChannelQuotas quotas,
-            X509Certificate2 serverCertificate,
+            CertificateIdentifier serverCertificate,
             EndpointDescriptionCollection endpoints)
         :
             base(contextId, bufferManager, quotas, serverCertificate, endpoints, MessageSecurityMode.None, SecurityPolicies.None)
@@ -226,7 +226,7 @@ namespace Opc.Ua.Bindings
             lock (DataLock)
             {
                 // make sure the same client certificate is being used.     
-                CompareCertificates(ClientCertificate, clientCertificate, false);
+                CompareCertificates(GetCertificate(ClientCertificate), clientCertificate, false);
 
                 // check for replay attacks.
                 if (!VerifySequenceNumber(sequenceNumber, "Reconnect"))
@@ -694,8 +694,8 @@ namespace Opc.Ua.Bindings
                 chunksToSend = WriteAsymmetricMessage(
                     TcpMessageType.Open,
                     requestId,
-                    ServerCertificate,
-                    ClientCertificate,
+                    GetPrivateKey(ServerCertificate),
+                    GetCertificate(ClientCertificate),
                     new ArraySegment<byte>(buffer, 0, buffer.Length));
 
                 // write the message to the server.
@@ -939,7 +939,7 @@ namespace Opc.Ua.Bindings
             {
                 messageBody = ReadAsymmetricMessage(
                     messageChunk,
-                    ServerCertificate,
+                    GetPrivateKey(ServerCertificate),
                     out channelId,
                     out clientCertificate,
                     out requestId,
@@ -988,11 +988,11 @@ namespace Opc.Ua.Bindings
                 // must ensure the same certificate was used.
                 if (ClientCertificate != null)
                 {
-                    CompareCertificates(ClientCertificate, clientCertificate, false);
+                    CompareCertificates(GetCertificate(ClientCertificate), clientCertificate, false);
                 }
                 else
                 {
-                    ClientCertificate = clientCertificate;
+                    ClientCertificate = new CertificateIdentifier(clientCertificate);
                 }
 
                 // check if it is necessary to wait for more chunks.
@@ -1075,8 +1075,8 @@ namespace Opc.Ua.Bindings
                         this.m_listener.EndpointUrl.ToString(),
                         Utils.Format("{0}", this.ChannelId),
                         this.EndpointDescription,
-                        this.ClientCertificate,
-                        this.ServerCertificate,
+                        GetCertificate(ClientCertificate),
+                        GetCertificate(ServerCertificate),
                         BinaryEncodingSupport.Required);
                 }
                 else
@@ -1164,8 +1164,8 @@ namespace Opc.Ua.Bindings
                 TcpMessageType.Open,
                 requestId,
                 //ServerCertificateChain,
-                ServerCertificate,
-                ClientCertificate,
+                GetPrivateKey(ServerCertificate),
+                GetCertificate(ClientCertificate),
                 new ArraySegment<byte>(buffer, 0, buffer.Length));
 
             // write the message to the server.

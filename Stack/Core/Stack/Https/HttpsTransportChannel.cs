@@ -234,7 +234,7 @@ namespace Opc.Ua.Bindings
 
             if (m_settings.ClientCertificate != null)
             {
-                webRequest.ClientCertificates.Add(m_settings.ClientCertificate);
+                webRequest.ClientCertificates.Add(m_settings.ClientCertificate.Find(true));
             }
 
             if (m_settings.Configuration.UseBinaryEncoding)

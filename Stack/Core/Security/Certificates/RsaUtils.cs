@@ -133,6 +133,64 @@ namespace Opc.Ua
             // verify signature.
             return rsa.VerifyHash(digest, "SHA1", signature);
         }
+        
+        /// <summary>
+        /// Creates an RSA PKCS#1 v1.5 signature of a hash algorithm for the stream.
+        /// </summary>
+        public static byte[] EcdsaSha256_Sign(
+            ArraySegment<byte> dataToSign,
+            X509Certificate2 signingCertificate)
+        {
+            // extract the private key.
+            using (var ecdsa = signingCertificate.GetECDsaPrivateKey())
+            {
+                if (ecdsa == null)
+                {
+                    throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "No private key for certificate.");
+                }
+
+                // create the signature.
+                return ecdsa.SignData(dataToSign.Array, dataToSign.Offset, dataToSign.Count, HashAlgorithmName.SHA256);
+            }
+        }
+
+        /// <summary>
+        /// Verifies an RSA PKCS#1 v1.5 signature of a hash algorithm for the stream.
+        /// </summary>
+        public static bool EcdsaSha256_Verify(
+            ArraySegment<byte> dataToVerify,
+            byte[]             signature,
+            X509Certificate2   signingCertificate)
+        {
+            // extract the public key.
+            using (var ecdsa = signingCertificate.GetECDsaPublicKey())
+            {
+
+                if (ecdsa == null)
+                {
+                    throw ServiceResultException.Create(StatusCodes.BadSecurityChecksFailed, "No public key for certificate.");
+                }
+
+                // verify signature.
+                if (!ecdsa.VerifyData(dataToVerify.Array, dataToVerify.Offset, dataToVerify.Count, signature, HashAlgorithmName.SHA256))
+                {
+                    string messageType = new System.Text.UTF8Encoding().GetString(dataToVerify.Array, dataToVerify.Offset, 4);
+                    int messageLength = BitConverter.ToInt32(dataToVerify.Array, dataToVerify.Offset + 4);
+                    string actualSignature = Utils.ToHexString(signature);
+
+                    Utils.Trace(
+                        "Could not validate signature.\r\nCertificate={0}, MessageType={1}, Length={2}\r\nActualSignature={3}",
+                        signingCertificate.Subject,
+                        messageType,
+                        messageLength,
+                        actualSignature);
+
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
         /// <summary>
         /// Encrypts the data using RSA PKCS#1 v1.5 encryption.

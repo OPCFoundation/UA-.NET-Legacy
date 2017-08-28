@@ -2411,11 +2411,11 @@ namespace Opc.Ua
 	        {
                 try
                 {
-#if !SILVERLIGHT
+                    #if !SILVERLIGHT
                     certificate = CertificateFactory.Create(certificatesBytes.ToArray(), true);
-#else
+                    #else
                     certificate = new X509Certificate2(certificateData);
-#endif
+                    #endif
                 }
                 catch(Exception e)
                 {
@@ -2439,8 +2439,33 @@ namespace Opc.Ua
         public static byte[] PSHA1(byte[] secret, string label, byte[] data, int offset, int length)
         {
             if (secret == null) throw new ArgumentNullException("secret");
-            if (offset < 0)     throw new ArgumentOutOfRangeException("offset");
-            if (length < 0)     throw new ArgumentOutOfRangeException("offset");
+
+            using (HMAC hmac = new HMACSHA1(secret))
+            {
+                return PSHA(hmac, label, data, offset, length);
+            }
+        }
+
+        /// <summary>
+        /// Generates a Pseudo random sequence of bits using the P_SHA256 alhorithm.
+        /// </summary>
+        public static byte[] PSHA256(byte[] secret, string label, byte[] data, int offset, int length)
+        {
+            if (secret == null) throw new ArgumentNullException("secret");
+
+            using (HMAC hmac = new HMACSHA256(secret))
+            {
+                return PSHA(hmac, label, data, offset, length);
+            }
+        }
+
+        /// <summary>
+        /// Generates a Pseudo random sequence of bits using an HMAC alhorithm.
+        /// </summary>
+        public static byte[] PSHA(HMAC hmac, string label, byte[] data, int offset, int length)
+        {
+            if (offset < 0) throw new ArgumentOutOfRangeException("offset");
+            if (length < 0) throw new ArgumentOutOfRangeException("length");
 
             byte[] seed = null;
 
@@ -2469,12 +2494,10 @@ namespace Opc.Ua
             // check for a valid seed.
             if (seed == null)
             {
-                throw new ServiceResultException(StatusCodes.BadUnexpectedError, "The PSHA1 algorithm requires a non-null seed.");
+                throw new ServiceResultException(StatusCodes.BadUnexpectedError, "The PSHA256 algorithm requires a non-null seed.");
             }
 
             // create the hmac.
-            HMACSHA1 hmac = new HMACSHA1(secret); 
-           
             byte[] keySeed = hmac.ComputeHash(seed);
             byte[] prfSeed = new byte[hmac.HashSize/8 + seed.Length];
             Array.Copy(keySeed, prfSeed, keySeed.Length);

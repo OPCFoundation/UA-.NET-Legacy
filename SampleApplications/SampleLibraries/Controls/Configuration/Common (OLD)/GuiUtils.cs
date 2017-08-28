@@ -661,7 +661,9 @@ namespace Opc.Ua.Client.Controls
                 if (!createNewCertificate)
                 {
                     // check if key size matches.
-                    if (keySize == certificate.PublicKey.Key.KeySize)
+                    var rsa = certificate.GetRSAPublicKey();
+
+                    if (rsa != null && keySize == rsa.KeySize)
                     {
                         AddToTrustedStore(configuration, certificate);
                         return certificate;

@@ -79,7 +79,7 @@ namespace Opc.Ua.Client
             ITransportChannel        channel, 
             ApplicationConfiguration configuration,
             ConfiguredEndpoint       endpoint,
-            X509Certificate2         clientCertificate)
+            CertificateIdentifier    clientCertificate)
         :
             base(channel)
         {
@@ -91,7 +91,7 @@ namespace Opc.Ua.Client
             ITransportChannel channel,
             ApplicationConfiguration configuration,
             ConfiguredEndpoint endpoint,
-            X509Certificate2 clientCertificate,
+            CertificateIdentifier clientCertificate,
             EndpointDescriptionCollection availableEndpoints)
             :
                 base(channel)
@@ -144,7 +144,7 @@ namespace Opc.Ua.Client
             ITransportChannel        channel, 
             ApplicationConfiguration configuration, 
             ConfiguredEndpoint       endpoint,
-            X509Certificate2         clientCertificate)
+            CertificateIdentifier    clientCertificate)
         {
             Initialize();
 
@@ -170,7 +170,7 @@ namespace Opc.Ua.Client
                             "The client configuration does not specify an application instance certificate.");
                     }
 
-                    m_instanceCertificate = m_configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
+                    m_instanceCertificate = m_configuration.SecurityConfiguration.ApplicationCertificate;
                 }
 
                 // check for valid certificate.
@@ -185,13 +185,15 @@ namespace Opc.Ua.Client
                 }
 
                 // check for private key.
-                if (!m_instanceCertificate.HasPrivateKey)
+                if (m_instanceCertificate.Find(true) == null)
                 {
+                    var certificate = m_instanceCertificate.Find();
+
                     throw ServiceResultException.Create(
                         StatusCodes.BadConfigurationError,
                         "Do not have a privat key for the application instance certificate. Subject={0}, Thumbprint={1}.",
-                        m_instanceCertificate.Subject,
-                        m_instanceCertificate.Thumbprint);
+                        certificate.Subject,
+                        certificate.Thumbprint);
                 }
 
                 //load certificate chain
@@ -703,7 +705,7 @@ namespace Opc.Ua.Client
             IUserIdentity identity,
             IList<string> preferredLocales)
         {
-            X509Certificate2 clientCertificate = null;
+            CertificateIdentifier clientCertificate = null;
 
             if (endpointDescription.SecurityPolicyUri != SecurityPolicies.None)
             {
@@ -712,7 +714,7 @@ namespace Opc.Ua.Client
                     throw ServiceResultException.Create(StatusCodes.BadConfigurationError, "ApplicationCertificate must be specified.");
                 }
 
-                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find(true);
+                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate;
 
                 if (clientCertificate == null)
                 {
@@ -824,7 +826,7 @@ namespace Opc.Ua.Client
                 CheckCertificateDomain(endpoint);
             }
 
-            X509Certificate2 clientCertificate = null;
+            CertificateIdentifier clientCertificate = null;
 			//X509Certificate2Collection clientCertificateChain = null;
 
             if (endpointDescription.SecurityPolicyUri != SecurityPolicies.None)
@@ -834,7 +836,7 @@ namespace Opc.Ua.Client
                     throw ServiceResultException.Create( StatusCodes.BadConfigurationError, "ApplicationCertificate must be specified." );
                 }
 
-                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate.Find( true );
+                clientCertificate = configuration.SecurityConfiguration.ApplicationCertificate;
 
 				if( clientCertificate == null )
 				{
@@ -1004,7 +1006,7 @@ namespace Opc.Ua.Client
 
                 // create the client signature.
                 byte[] dataToSign = Utils.Append(endpoint.ServerCertificate, m_serverNonce);
-                SignatureData clientSignature = SecurityPolicies.Sign(m_instanceCertificate, endpoint.SecurityPolicyUri, dataToSign);
+                SignatureData clientSignature = SecurityPolicies.Sign(m_instanceCertificate.Find(true), endpoint.SecurityPolicyUri, dataToSign);
                 
                 // check that the user identity is supported by the endpoint.
                 UserTokenPolicy identityPolicy = endpoint.FindUserTokenPolicy(m_identity.TokenType, m_identity.IssuedTokenType);
@@ -2307,7 +2309,7 @@ namespace Opc.Ua.Client
 
 				// create the client signature.
 				dataToSign = Utils.Append( serverCertificateData, serverNonce );
-				SignatureData clientSignature = SecurityPolicies.Sign( m_instanceCertificate, securityPolicyUri, dataToSign );
+				SignatureData clientSignature = SecurityPolicies.Sign( m_instanceCertificate.Find(true), securityPolicyUri, dataToSign );
 
                 // select the security policy for the user token.
                 securityPolicyUri = identityPolicy.SecurityPolicyUri;
@@ -2449,7 +2451,7 @@ namespace Opc.Ua.Client
             }
             // create the client signature.
             byte[] dataToSign = Utils.Append(serverCertificateData, serverNonce);
-            SignatureData clientSignature = SecurityPolicies.Sign(m_instanceCertificate, securityPolicyUri, dataToSign);
+            SignatureData clientSignature = SecurityPolicies.Sign(m_instanceCertificate.Find(true), securityPolicyUri, dataToSign);
             
             // choose a default token.            
             if (identity == null)
@@ -4115,7 +4117,7 @@ namespace Opc.Ua.Client
         private NodeCache m_nodeCache;
         private ApplicationConfiguration m_configuration;
         private ConfiguredEndpoint m_endpoint;
-        private X509Certificate2 m_instanceCertificate;
+        private CertificateIdentifier m_instanceCertificate;
 		//private X509Certificate2Collection m_instanceCertificateChain;
         private List<IUserIdentity> m_identityHistory;
 

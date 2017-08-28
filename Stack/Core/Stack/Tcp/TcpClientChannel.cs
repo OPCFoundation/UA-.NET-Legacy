@@ -34,12 +34,12 @@ namespace Opc.Ua.Bindings
         /// Creates a channel for for a client.
         /// </summary>
         public TcpClientChannel(
-            string              contextId,
-            BufferManager       bufferManager, 
-            TcpChannelQuotas    quotas,
-            X509Certificate2    clientCertificate,        
-            X509Certificate2    serverCertificate,  
-            EndpointDescription endpoint)
+            string                contextId,
+            BufferManager         bufferManager, 
+            TcpChannelQuotas      quotas,
+            CertificateIdentifier clientCertificate,
+            CertificateIdentifier serverCertificate,  
+            EndpointDescription   endpoint)
         :
             base(
                 contextId,
@@ -491,8 +491,8 @@ namespace Opc.Ua.Bindings
                 TcpMessageType.Open,
                 m_handshakeOperation.RequestId,
                 //ClientCertificateChain,
-                ClientCertificate,
-                ServerCertificate,
+                GetPrivateKey(ClientCertificate),
+                GetCertificate(ServerCertificate),
                 new ArraySegment<byte>(buffer, 0, buffer.Length));
 
             // save token.
@@ -511,7 +511,7 @@ namespace Opc.Ua.Bindings
                     chunksToSend.Release(BufferManager, "SendOpenSecureChannelRequest");
                 }
             }
-        }             
+        }
 
         /// <summary>
         /// Processes an OpenSecureChannel response message.
@@ -545,7 +545,7 @@ namespace Opc.Ua.Bindings
             {
                 messageBody = ReadAsymmetricMessage(
                     messageChunk,
-                    ClientCertificate,
+                    GetPrivateKey(ClientCertificate),
                     out channelId,
                     out serverCertificate,
                     out requestId,
@@ -562,7 +562,7 @@ namespace Opc.Ua.Bindings
             try
             {                   
                 // verify server certificate.
-                CompareCertificates(ServerCertificate, serverCertificate, true);
+                CompareCertificates(GetCertificate(ServerCertificate), serverCertificate, true);
 
                 // verify sequence number.
                 ResetSequenceNumber(sequenceNumber);
@@ -593,7 +593,12 @@ namespace Opc.Ua.Bindings
                 m_requestedToken.TokenId     = response.SecurityToken.TokenId;
                 m_requestedToken.Lifetime    = (int)response.SecurityToken.RevisedLifetime;
                 m_requestedToken.ServerNonce = response.ServerNonce;
-                
+
+                if (!ValidateNonce(response.ServerNonce))
+                {
+                    throw ServiceResultException.Create(StatusCodes.BadNonceInvalid, "Server nonce is not the correct length or not random enough.");
+                }
+
                 // log security information.
                 if (State == TcpChannelState.Opening)
                 {
@@ -602,7 +607,7 @@ namespace Opc.Ua.Bindings
                         this.m_url.ToString(),
                         Utils.Format("{0}", channelId),
                         this.EndpointDescription,
-                        this.ClientCertificate,
+                        GetCertificate(ClientCertificate),
                         serverCertificate,
                         BinaryEncodingSupport.Required);
                 }

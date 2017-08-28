@@ -411,8 +411,8 @@ namespace Opc.Ua.Bindings
                     m_url.ToString(),
                     m_serializer.ChannelId.ToString(),
                     m_serializer.EndpointDescription,
-                    m_serializer.ClientCertificate,
-                    m_serializer.ServerCertificate,
+                    m_serializer.GetCertificate(m_serializer.ClientCertificate),
+                    m_serializer.GetCertificate(m_serializer.ServerCertificate),
                     BinaryEncodingSupport.Required);
 
                 if (ar != null)

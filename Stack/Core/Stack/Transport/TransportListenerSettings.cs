@@ -49,7 +49,7 @@ namespace Opc.Ua
         /// <summary>
         /// Gets or sets the server certificate.
         /// </summary>
-        public X509Certificate2 ServerCertificate
+        public CertificateIdentifier ServerCertificate
         {
             get { return m_serverCertificate; }
             set { m_serverCertificate = value; }
@@ -58,7 +58,7 @@ namespace Opc.Ua
         /// <summary>
         /// Gets or sets the TLS certificate.
         /// </summary>
-        public X509Certificate2 TlsCertificate
+        public CertificateIdentifier TlsCertificate
         {
             get { return m_tlsCertificate; }
             set { m_tlsCertificate = value; }
@@ -124,8 +124,8 @@ namespace Opc.Ua
         #region Private Fields
         private EndpointDescriptionCollection m_descriptions;
         private EndpointConfiguration m_configuration;
-        private X509Certificate2 m_serverCertificate;
-        private X509Certificate2 m_tlsCertificate;
+        private CertificateIdentifier m_serverCertificate;
+        private CertificateIdentifier m_tlsCertificate;
         //private X509Certificate2Collection m_serverCertificateChain;
         private X509CertificateValidator m_certificateValidator;
         private NamespaceTable m_namespaceUris;

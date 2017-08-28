@@ -350,7 +350,7 @@ namespace Opc.Ua.Server
 
                     return activeNode;
                 }
-
+                    
                 case ObjectTypes.PublishSubscribeType:
                 {
                     if (passiveNode is PublishSubscribeState)

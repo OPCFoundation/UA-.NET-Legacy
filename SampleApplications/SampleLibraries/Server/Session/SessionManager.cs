@@ -150,7 +150,7 @@ namespace Opc.Ua.Server
         /// </summary>
         public virtual Session CreateSession(
             OperationContext       context,
-            X509Certificate2       serverCertificate,
+            CertificateIdentifier  serverCertificate,
             string                 sessionName, 
             byte[]                 clientNonce,
             ApplicationDescription clientDescription,
@@ -489,7 +489,7 @@ namespace Opc.Ua.Server
         protected virtual Session CreateSession(
             OperationContext          context,
             IServerInternal           server,
-            X509Certificate2          serverCertificate,
+            CertificateIdentifier     serverCertificate,
             NodeId                    sessionCookie,
             byte[]                    serverNonce,
             string                    sessionName, 

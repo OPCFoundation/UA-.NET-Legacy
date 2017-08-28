@@ -1361,7 +1361,9 @@ namespace Opc.Ua.Configuration
             configuration.CertificateValidator.Validate(certificate);
 
             // check key size.
-            if (minimumKeySize > certificate.PublicKey.Key.KeySize)
+            var rsa = certificate.GetRSAPublicKey();
+
+            if (rsa != null && minimumKeySize > rsa.KeySize)
             {
                 bool valid = false;
 
@@ -1394,7 +1396,8 @@ namespace Opc.Ua.Configuration
                     return false;
                 }
             }
-
+            
+            #if ECC_TEMPORARY_REMOVAL
             // update uri.
             string applicationUri = Utils.GetApplicationUriFromCertficate(certificate);
 
@@ -1419,9 +1422,10 @@ namespace Opc.Ua.Configuration
                     return false;
                 }
             }
-            
             // update configuration.
             configuration.ApplicationUri = applicationUri;
+            #endif
+
             configuration.SecurityConfiguration.ApplicationCertificate.Certificate = certificate;
 
             return true;

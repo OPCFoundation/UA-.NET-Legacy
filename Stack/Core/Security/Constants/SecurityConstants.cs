@@ -80,6 +80,11 @@ namespace Opc.Ua
         public const string RsaSha1 = System.IdentityModel.Tokens.SecurityAlgorithms.RsaSha1Signature;
 
         /// <summary>
+        /// The ECDSA-SHA256 algorithm used to create asymmetric key signatures.
+        /// </summary>
+        public const string EcdsaSha256 = "http://www.w3.org/2001/04/xmldsig-more#ecdsa-sha256";
+
+        /// <summary>
         /// The RSA-SHA256 algorithm used to create asymmetric key signatures.
         /// </summary>
         public const string RsaSha256 = System.IdentityModel.Tokens.SecurityAlgorithms.RsaSha256Signature;

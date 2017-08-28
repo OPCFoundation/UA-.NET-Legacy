@@ -65,6 +65,11 @@ namespace Opc.Ua
         /// The URI for the Basic256Sha256 security policy.
         /// </summary>
         public const string Basic256Sha256 = BaseUri + "Basic256Sha256";
+
+        /// <summary>
+        /// The URI for the Aes256_Sha256_EccNistP256 security policy.
+        /// </summary>
+        public const string Aes256_Sha256_EccNistP256 = BaseUri + "Aes256_Sha256_EccP256";
         #endregion        
         
         #region Static Methods
@@ -316,6 +321,13 @@ namespace Opc.Ua
                     break;
                 }
 
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    signatureData.Algorithm = SecurityAlgorithms.EcdsaSha256;
+                    signatureData.Signature = RsaUtils.EcdsaSha256_Sign(new ArraySegment<byte>(dataToSign), certificate);
+                    break;
+                }
+
                 default:
                 {
                     throw ServiceResultException.Create(
@@ -354,6 +366,16 @@ namespace Opc.Ua
                     if (signature.Algorithm == SecurityAlgorithms.RsaSha1)
                     {
                         return RsaUtils.RsaPkcs15Sha1_Verify(new ArraySegment<byte>(dataToVerify), signature.Signature, certificate);
+                    }
+                        
+                    break;
+                }
+
+                case SecurityPolicies.Aes256_Sha256_EccNistP256:
+                {
+                    if (signature.Algorithm == SecurityAlgorithms.EcdsaSha256)
+                    {
+                        return RsaUtils.EcdsaSha256_Verify(new ArraySegment<byte>(dataToVerify), signature.Signature, certificate);
                     }
                         
                     break;

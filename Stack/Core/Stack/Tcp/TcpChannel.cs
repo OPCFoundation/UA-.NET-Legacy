@@ -38,7 +38,7 @@ namespace Opc.Ua.Bindings
             string                        contextId,
             BufferManager                 bufferManager, 
             TcpChannelQuotas              quotas,
-            X509Certificate2              serverCertificate,
+            CertificateIdentifier         serverCertificate,
             EndpointDescriptionCollection endpoints,
             MessageSecurityMode           securityMode,
             string                        securityPolicyUri)
@@ -182,8 +182,35 @@ namespace Opc.Ua.Bindings
                 m_StateChanged = callback; 
             }
         }
+
+        /// <remarks />
+        protected X509Certificate2 GetPrivateKey(CertificateIdentifier certificate)
+        {
+            if (certificate != null)
+            {
+                return certificate.Find(true);
+            }
+
+            return null;
+        }
+
+        /// <remarks />
+        protected X509Certificate2 GetCertificate(CertificateIdentifier certificate)
+        {
+            if (certificate != null)
+            {
+                if (certificate.Certificate == null)
+                {
+                    return certificate.Find();
+                }
+
+                return certificate.Certificate;
+            }
+
+            return null;
+        }
         #endregion
-        
+
         #region Channel State Functions
         /// <summary>
         /// Reports that the channel state has changed (in another thread).

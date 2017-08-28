@@ -68,7 +68,7 @@ namespace Opc.Ua.Server
         public Session(
             OperationContext        context,
             IServerInternal         server,
-            X509Certificate2        serverCertificate,
+            CertificateIdentifier   serverCertificate,
             NodeId                  authenticationToken,
             byte[]                  serverNonce,
             string                  sessionName, 
@@ -998,7 +998,7 @@ namespace Opc.Ua.Server
                 // decrypt the token.
                 if (m_serverCertificate == null)
                 {
-                    m_serverCertificate = CertificateFactory.Create(m_endpoint.ServerCertificate, true);
+                    m_serverCertificate = new CertificateIdentifier(CertificateFactory.Create(m_endpoint.ServerCertificate, true));
 
                     // check for valid certificate.
                     if (m_serverCertificate == null)
@@ -1009,7 +1009,7 @@ namespace Opc.Ua.Server
 
                 try
                 {
-                    token.Decrypt(m_serverCertificate, m_serverNonce, securityPolicyUri);
+                    token.Decrypt(m_serverCertificate.Find(true), m_serverNonce, securityPolicyUri);
                 }
                 catch (Exception e)
                 {
@@ -1166,7 +1166,7 @@ namespace Opc.Ua.Server
         private string m_sessionName;
         private string m_secureChannelId;
         private EndpointDescription m_endpoint;
-        private X509Certificate2 m_serverCertificate;
+        private CertificateIdentifier m_serverCertificate;
         //private byte[] m_serverCertificateChain;
 
         private string[] m_localeIds;
