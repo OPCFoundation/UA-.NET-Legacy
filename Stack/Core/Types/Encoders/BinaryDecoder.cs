@@ -466,8 +466,11 @@ namespace Opc.Ua
             XmlDocument document = new XmlDocument();
             string xmlString = new UTF8Encoding().GetString(bytes, 0, bytes.Length);
 
-            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings()
-                {DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None}))
+			using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings()
+				#if !ELBFISCH //#define ELBFISCH if you want to compile this code for Mono/.NET 3.5 (for use in Unity3D 5.5)
+				 {DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None}
+				#endif
+			))
             {
                 document.Load(reader);
             }

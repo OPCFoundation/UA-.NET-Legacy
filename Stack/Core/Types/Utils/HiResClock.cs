@@ -33,7 +33,7 @@ namespace Opc.Ua
         {
             get
             {
-                #if !SILVERLIGHT
+								#if (!SILVERLIGHT && !ELBFISCH) //#define ELBFISCH if you want to compile this code for Mono/.NET 3.5 (for use in Unity3D 5.5)
                 if (s_Default.m_disabled)
                 {
                     return DateTime.UtcNow;
@@ -41,7 +41,7 @@ namespace Opc.Ua
 
                 long counter = 0;
 
-                if (NativeMethods.QueryPerformanceCounter(out counter) == 0)
+	           		if (NativeMethods.QueryPerformanceCounter(out counter) == 0)
                 {
                     return DateTime.UtcNow;
                 }
@@ -71,12 +71,12 @@ namespace Opc.Ua
             }
         }
 
-        /// <summary>
+		/// <summary>
         /// Constructs a class.
         /// </summary>
         private HiResClock()
         {
-            #if !SILVERLIGHT
+			#if (!SILVERLIGHT && !ELBFISCH) //#define ELBFISCH if you want to compile this code for Mono/.NET 3.5 (for use in Unity3D 5.5)
             if (NativeMethods.QueryPerformanceFrequency(out m_frequency) == 0)
             {
                 m_frequency = TimeSpan.TicksPerSecond;
@@ -101,7 +101,8 @@ namespace Opc.Ua
         /// <summary>
         /// Defines the native methods used by the class.
         /// </summary>
-        private static class NativeMethods
+		#if !ELBFISCH
+		private static class NativeMethods
         {
             [DllImport("Kernel32.dll")]
             public static extern int QueryPerformanceFrequency(out long lpFrequency);
@@ -109,8 +110,9 @@ namespace Opc.Ua
             [DllImport("Kernel32.dll")]
             public static extern int QueryPerformanceCounter(out long lpFrequency);
         }
+		#endif
         
-        #if !SILVERLIGHT
+		#if !SILVERLIGHT && !ELBFISCH //#define ELBFISCH if you want to compile this code for Mono/.NET 3.5 (for use in Unity3D 5.5)
         private long m_frequency;
         private long m_baseline;
         private long m_offset;
