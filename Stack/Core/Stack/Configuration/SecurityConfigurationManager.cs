@@ -80,7 +80,7 @@ namespace Opc.Ua.Security
                         "Cannot find the configuration file for the executable: {0}",
                         filePath);
                 }
-                
+
                 if (!File.Exists(configFilePath))
                 {
                     throw ServiceResultException.Create(
@@ -92,10 +92,10 @@ namespace Opc.Ua.Security
 
             SecuredApplication application = null;
             ApplicationConfiguration applicationConfiguration = null;
-            
+
             try
             {
-                XmlTextReader reader = new XmlTextReader(File.Open(configFilePath, FileMode.Open, FileAccess.Read));
+                XmlTextReader reader = new XmlTextReader(File.Open(configFilePath, FileMode.Open, FileAccess.Read, FileShare.Read));
 
                 try
                 {
@@ -115,7 +115,7 @@ namespace Opc.Ua.Security
                     else
                     {
                         reader.Close();
-                        reader = new XmlTextReader(File.Open(configFilePath, FileMode.Open, FileAccess.Read));
+                        reader = new XmlTextReader(File.Open(configFilePath, FileMode.Open, FileAccess.Read, FileShare.Read));
                         DataContractSerializer serializer = new DataContractSerializer(typeof(ApplicationConfiguration));
                         applicationConfiguration = serializer.ReadObject(reader, false) as ApplicationConfiguration;
                     }
@@ -139,7 +139,7 @@ namespace Opc.Ua.Security
             {
                 return application;
             }
-            
+
             application = new SecuredApplication();
 
             // copy application info.
@@ -156,7 +156,7 @@ namespace Opc.Ua.Security
             if (applicationConfiguration.SecurityConfiguration != null)
             {
                 application.ApplicationCertificate = SecuredApplication.ToCertificateIdentifier(applicationConfiguration.SecurityConfiguration.ApplicationCertificate);
-                
+
                 if (applicationConfiguration.SecurityConfiguration.TrustedIssuerCertificates != null)
                 {
                     application.IssuerCertificateStore = SecuredApplication.ToCertificateStoreIdentifier(applicationConfiguration.SecurityConfiguration.TrustedIssuerCertificates);
@@ -262,7 +262,7 @@ namespace Opc.Ua.Security
                 configuration.LastExportTime = DateTime.UtcNow;
                 element.InnerXml = SetObject(typeof(SecuredApplication), configuration);
             }
-            
+
             // update application configuration.
             else
             {
