@@ -562,7 +562,7 @@ namespace Opc.Ua
             {
                 StreamWriter writer = new StreamWriter(tempFile);
 
-                writer.WriteLine("-cmd issue", storePath);
+                writer.WriteLine("-cmd issue {0}", storePath);
 
                 if (!String.IsNullOrEmpty(storePath))
                 {
@@ -751,7 +751,7 @@ namespace Opc.Ua
                 // write the arguments to a temp file.
                 StreamWriter writer = new StreamWriter(tempFile);
 
-                writer.WriteLine("-cmd revoke", storePath);
+                writer.WriteLine("-cmd revoke {0}", storePath);
 
                 if (!String.IsNullOrEmpty(storePath))
                 {
