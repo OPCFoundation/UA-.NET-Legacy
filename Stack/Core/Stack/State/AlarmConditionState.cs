@@ -348,18 +348,12 @@ namespace Opc.Ua
 
             if (!this.ConfirmedState.Id.Value)
             {
-                if (!this.ConfirmedState.Id.Value)
-                {
-                    ackState = this.ConfirmedState.Value;
-                }
+                ackState = this.ConfirmedState.Value;
             }
 
             if (!this.AckedState.Id.Value)
             {
-                if (!this.AckedState.Id.Value)
-                {
-                    ackState = this.AckedState.Value;
-                }
+               ackState = this.AckedState.Value;
             }
 
             if (ackState != null)
