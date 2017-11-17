@@ -791,7 +791,7 @@ namespace Opc.Ua
                 attributesToSave |= AttributesToSave.WriteMask;
             }
 
-            if (m_writeMask != AttributeWriteMask.None)
+            if (m_userWriteMask != AttributeWriteMask.None)
             {
                 attributesToSave |= AttributesToSave.UserAccessLevel;
             }
@@ -1291,7 +1291,7 @@ namespace Opc.Ua
                 encoder.WriteEnumerated("WriteMask", m_writeMask);
             }
 
-            if (m_writeMask != AttributeWriteMask.None)
+            if (m_userWriteMask != AttributeWriteMask.None)
             {
                 encoder.WriteEnumerated("UserWriteMask", m_userWriteMask);
             }
