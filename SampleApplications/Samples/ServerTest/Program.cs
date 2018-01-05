@@ -121,7 +121,7 @@ namespace Opc.Ua.ServerTest
 
                     using (StreamWriter logWriter = new StreamWriter(File.Open(m_logFilePath, FileMode.Create)))
                     {
-                        logWriter.WriteLine(Utils.Format("Logging Started at {0:hh:mm:ss}", DateTime.Now));
+                        logWriter.WriteLine(Utils.Format("Logging Started at {0:HH:mm:ss}", DateTime.Now));
                     }
                 }
                 catch (Exception exception)

@@ -157,7 +157,7 @@ namespace Quickstarts.DataAccessClient
                 StatusCode status = results.DataValues[ii].StatusCode;
 
                 string index = Utils.Format("[{0}]", m_index++);
-                string timestamp = results.DataValues[ii].SourceTimestamp.ToLocalTime().ToString("yyyy-MM-dd hh:mm:ss");
+                string timestamp = results.DataValues[ii].SourceTimestamp.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
                 string value = Utils.Format("{0}", results.DataValues[ii].WrappedValue);
                 string quality = Utils.Format("{0}", (StatusCode)status.CodeBits);
                 string historyInfo = Utils.Format("{0:X2}", (int)status.AggregateBits);

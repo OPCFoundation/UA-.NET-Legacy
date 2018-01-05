@@ -429,7 +429,7 @@ namespace Opc.Ua.Client.Controls
 
             if (m_StatusUpateTimeLB != null)
             {
-                m_StatusUpateTimeLB.Text = time.ToLocalTime().ToString("hh:mm:ss");
+                m_StatusUpateTimeLB.Text = time.ToLocalTime().ToString("HH:mm:ss");
                 m_StatusUpateTimeLB.ForeColor = (error) ? Color.Red : Color.Empty;
             }
         }

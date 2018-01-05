@@ -465,7 +465,7 @@ namespace Opc.Ua.Com.Server.Ae
         /// The ack has been forwarded to the target UA server but confirmation of the
         /// ack has not yet been received.  In this case we will want wait for a max
         /// period of time ('ftAckWaitTime'), just in case the ack from the target is
-        /// on its way. dateValue.ToString("hh:mm:ss.fff tt");                        
+        /// on its way. dateValue.ToString("HH:mm:ss.fff tt");                        
         /// </summary>
         /// <returns></returns>
         public bool IsAckedOrWaiting(double AckWaitTime)
@@ -482,7 +482,7 @@ namespace Opc.Ua.Com.Server.Ae
                 // Set a flag indicating that we are waiting for the ack confirmation from the server
                 m_bAckPending = true;
                 m_ftAckPendingStartTime = DateTime.Now;
-                // Utils.Trace("IsAckedOrWaiting: set bAckPending == true, AckPendingStartTime == {0}", m_ftAckPendingStartTime.ToString("hh:mm:ss.fff"));
+                // Utils.Trace("IsAckedOrWaiting: set bAckPending == true, AckPendingStartTime == {0}", m_ftAckPendingStartTime.ToString("HH:mm:ss.fff"));
                 return false;
             }
             else
@@ -492,7 +492,7 @@ namespace Opc.Ua.Com.Server.Ae
                 // Wait out the remaining "wait for ack confirmation" period
                 // If we haven't received the condition ack event from the server
                 // after this period then return false
-                Utils.Trace("IsAckedOrWaiting: bAckPending is true, waitUntil -> {0}, Now -> {1}", waitUntil.ToString("hh:mm:ss.fff"), DateTime.Now.ToString("hh:mm:ss.fff"));
+                Utils.Trace("IsAckedOrWaiting: bAckPending is true, waitUntil -> {0}, Now -> {1}", waitUntil.ToString("HH:mm:ss.fff"), DateTime.Now.ToString("HH:mm:ss.fff"));
                 while (DateTime.Now < waitUntil)
                 {
                     System.Threading.Thread.Sleep(100);
@@ -500,7 +500,7 @@ namespace Opc.Ua.Com.Server.Ae
                         break;
                 }
 
-                Utils.Trace("IsAckedOrWaiting: set bAckPending == false, Now -> {0}", DateTime.Now.ToString("hh:mm:ss.fff"));
+                Utils.Trace("IsAckedOrWaiting: set bAckPending == false, Now -> {0}", DateTime.Now.ToString("HH:mm:ss.fff"));
                 return ((m_wNewState & OpcRcw.Ae.Constants.CONDITION_ACKED) != 0);  
             }
         }

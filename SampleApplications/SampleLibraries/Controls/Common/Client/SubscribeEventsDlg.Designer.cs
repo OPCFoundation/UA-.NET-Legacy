@@ -227,7 +227,7 @@ namespace Opc.Ua.Client.Controls
             // 
             this.LastNotificationTB.Name = "LastNotificationTB";
             this.LastNotificationTB.Size = new System.Drawing.Size(75, 17);
-            this.LastNotificationTB.Text = "<hh:mm:ss>";
+            this.LastNotificationTB.Text = "<HH:mm:ss>";
             // 
             // ItemsDV
             // 
