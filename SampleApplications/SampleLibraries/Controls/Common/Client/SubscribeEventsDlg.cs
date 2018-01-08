@@ -671,7 +671,7 @@ namespace Opc.Ua.Client.Controls
                 }
 
                 SequenceNumberTB.Text = m_subscription.SequenceNumber.ToString();
-                LastNotificationTB.Text = m_subscription.LastNotificationTime.ToLocalTime().ToString("hh:mm:ss");
+                LastNotificationTB.Text = m_subscription.LastNotificationTime.ToLocalTime().ToString("HH:mm:ss");
             }
             catch (Exception exception)
             {

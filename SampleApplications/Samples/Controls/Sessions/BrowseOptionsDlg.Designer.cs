@@ -192,7 +192,7 @@ namespace Opc.Ua.Sample.Controls
             // 
             // ViewTimestampDP
             // 
-            this.ViewTimestampDP.CustomFormat = "yyyy-MM-hh HH:mm:ss";
+            this.ViewTimestampDP.CustomFormat = "yyyy-MM-dd HH:mm:ss";
             this.ViewTimestampDP.Enabled = false;
             this.ViewTimestampDP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.ViewTimestampDP.Location = new System.Drawing.Point(140, 28);

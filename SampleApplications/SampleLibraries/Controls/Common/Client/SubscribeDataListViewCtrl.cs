@@ -425,8 +425,8 @@ namespace Opc.Ua.Client.Controls
                 row[12] = (value.WrappedValue.TypeInfo != null) ? value.WrappedValue.TypeInfo.ToString() : String.Empty;
                 row[13] = value.WrappedValue;
                 row[14] = value.StatusCode;
-                row[15] = value.SourceTimestamp.ToLocalTime().ToString("hh:mm:ss.fff");
-                row[16] = value.ServerTimestamp.ToLocalTime().ToString("hh:mm:ss.fff");
+                row[15] = value.SourceTimestamp.ToLocalTime().ToString("HH:mm:ss.fff");
+                row[16] = value.ServerTimestamp.ToLocalTime().ToString("HH:mm:ss.fff");
             }
         }
 
@@ -478,7 +478,7 @@ namespace Opc.Ua.Client.Controls
                 }
 
                 SequenceNumberTB.Text = m_subscription.SequenceNumber.ToString();
-                LastNotificationTB.Text = m_subscription.LastNotificationTime.ToLocalTime().ToString("hh:mm:ss");
+                LastNotificationTB.Text = m_subscription.LastNotificationTime.ToLocalTime().ToString("HH:mm:ss");
             }
             catch (Exception exception)
             {

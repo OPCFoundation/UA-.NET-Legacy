@@ -720,7 +720,7 @@ namespace Opc.Ua.ServerTest
                     
                     /*
                     Log(
-                        "Verifying NotificationMessages={0}, RcvTime={1:hh:mm:ss}, PublishTime={2:hh:mm:ss}, ExpectedCount={3}, ActualCount={4}", 
+                        "Verifying NotificationMessages={0}, RcvTime={1:HH:mm:ss}, PublishTime={2:HH:mm:ss}, ExpectedCount={3}, ActualCount={4}", 
                         message.SequenceNumber, 
                         subscription.ReceiveTimes[ii],
                         message.PublishTime,
@@ -1896,7 +1896,7 @@ namespace Opc.Ua.ServerTest
             if (responseHeader.Timestamp > notificationMessage.PublishTime.AddMilliseconds(100))
             {
                 Log(
-                    "WARNING. Unexpected delay between PublishTime and ResponseTime. SeqNo={0}, PublishTime={1:hh:mm:ss.fff}, ResponseTime={2:hh:mm:ss.fff}",
+                    "WARNING. Unexpected delay between PublishTime and ResponseTime. SeqNo={0}, PublishTime={1:HH:mm:ss.fff}, ResponseTime={2:HH:mm:ss.fff}",
                     notificationMessage.SequenceNumber,
                     notificationMessage.PublishTime,
                     responseHeader.Timestamp);

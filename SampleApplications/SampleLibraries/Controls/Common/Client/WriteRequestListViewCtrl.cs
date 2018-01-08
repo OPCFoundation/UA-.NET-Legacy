@@ -263,8 +263,8 @@ namespace Opc.Ua.Client.Controls
             row[5] = (value.WrappedValue.TypeInfo != null) ? value.WrappedValue.TypeInfo.ToString() : String.Empty;
             row[6] = value.WrappedValue;
             row[7] = value.StatusCode;
-            row[8] = (value.SourceTimestamp != DateTime.MinValue) ? Utils.Format("{0:hh:mm:ss.fff}", value.SourceTimestamp.ToLocalTime()) : String.Empty;
-            row[9] = (value.ServerTimestamp != DateTime.MinValue) ? Utils.Format("{0:hh:mm:ss.fff}", value.ServerTimestamp.ToLocalTime()) : String.Empty;
+            row[8] = (value.SourceTimestamp != DateTime.MinValue) ? Utils.Format("{0:HH:mm:ss.fff}", value.SourceTimestamp.ToLocalTime()) : String.Empty;
+            row[9] = (value.ServerTimestamp != DateTime.MinValue) ? Utils.Format("{0:HH:mm:ss.fff}", value.ServerTimestamp.ToLocalTime()) : String.Empty;
         }
 
         /// <summary>

@@ -315,7 +315,7 @@ namespace Opc.Ua.Sample.Controls
             // 
             // EndTimeDP
             // 
-            this.EndTimeDP.CustomFormat = "hh:mm:ss yyyy-MM-dd";
+            this.EndTimeDP.CustomFormat = "HH:mm:ss yyyy-MM-dd";
             this.EndTimeDP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.EndTimeDP.Location = new System.Drawing.Point(126, 58);
             this.EndTimeDP.Name = "EndTimeDP";
@@ -333,7 +333,7 @@ namespace Opc.Ua.Sample.Controls
             // 
             // StartTimeDP
             // 
-            this.StartTimeDP.CustomFormat = "hh:mm:ss yyyy-MM-dd";
+            this.StartTimeDP.CustomFormat = "HH:mm:ss yyyy-MM-dd";
             this.StartTimeDP.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.StartTimeDP.Location = new System.Drawing.Point(126, 32);
             this.StartTimeDP.Name = "StartTimeDP";

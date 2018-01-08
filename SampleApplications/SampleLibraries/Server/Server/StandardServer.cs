@@ -1392,13 +1392,13 @@ namespace Opc.Ua.Server
                 if (DateTime.UtcNow > requestHeader.Timestamp.AddMilliseconds(100))
                 {
                     Utils.Trace(
-                        "WARNING. Unexpected delay receiving Publish request. Time={0:hh:mm:ss.fff}, ReceiveTime={1:hh:mm:ss.fff}",
+                        "WARNING. Unexpected delay receiving Publish request. Time={0:HH:mm:ss.fff}, ReceiveTime={1:HH:mm:ss.fff}",
                         DateTime.UtcNow,
                         requestHeader.Timestamp);
                 }
                 */
                 
-                // Utils.Trace("PUBLISH #{0} RECIEVED. TIME={1:hh:hh:ss.fff}", requestHeader.RequestHandle, requestHeader.Timestamp);
+                // Utils.Trace("PUBLISH #{0} RECIEVED. TIME={1:HH:mm:ss.fff}", requestHeader.RequestHandle, requestHeader.Timestamp);
                 
                 notificationMessage = ServerInternal.SubscriptionManager.Publish(
                     context,
