@@ -178,16 +178,19 @@ namespace Opc.Ua.Bindings
                 finally
                 {
                     // release the wait event.
-                    if (m_event != null)
+                    lock (m_lock)
                     {
-                        try
+                        if (m_event != null)
                         {
-                            m_event.Close();
-                            m_event = null;
-                        }
-                        catch (Exception)
-                        {
-                            // ignore 
+                            try
+                            {
+                                m_event.Close();
+                                m_event = null;
+                            }
+                            catch (Exception)
+                            {
+                                // ignore 
+                            }
                         }
                     }
                 }
