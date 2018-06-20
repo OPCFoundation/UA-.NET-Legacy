@@ -135,7 +135,13 @@ namespace Opc.Ua.Bindings
         /// <param name="owner">The owner.</param>
         /// <returns>The buffer content</returns>
         public byte[] TakeBuffer(int size, string owner)
-        {
+        {   
+						#if ELBFISCH //#define ELBFISCH if you want to compile this code for Mono/.NET 3.5 (for use in Unity3D 5.5) 
+						//a size of 65535 which is given by several owners for any reason fails at runtime
+						if (size > 65534) {
+							size = 65534;
+						}
+					  #endif
             if (size > Int32.MaxValue - 5)
             {
                 throw new ArgumentOutOfRangeException("size");

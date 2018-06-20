@@ -558,7 +558,10 @@ namespace Opc.Ua
                 xmlString = m_reader.ReadOuterXml();
 
                 using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings() 
-                    { DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None }))
+					#if !ELBFISCH //#define ELBFISCH if you want to compile this code for Mono/.NET 3.5 (for use in Unity3D 5.5)
+					{ DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None }
+					#endif
+				))
                 {
                     document.Load(reader);
                 }
@@ -585,7 +588,10 @@ namespace Opc.Ua
             xmlString = m_reader.ReadOuterXml();
 
             using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings() 
-                { DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None }))
+				#if !ELBFISCH //#define ELBFISCH if you want to compile this code for Mono/.NET 3.5 (for use in Unity3D 5.5)
+				{ DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None }
+				#endif
+			))
             {
                 document.Load(reader);
             }
