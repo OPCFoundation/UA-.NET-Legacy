@@ -337,7 +337,9 @@ namespace Opc.Ua.Bindings
             Type messageType,
             ServiceMessageContext messageContext)
         {
-            XmlReader reader = XmlReader.Create(istrm);
+            XmlReader reader = XmlReader.Create(istrm, new XmlReaderSettings()
+                { DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None });
+
             reader.MoveToContent();
             reader.ReadStartElement("Envelope", "http://www.w3.org/2003/05/soap-envelope");
             reader.MoveToContent();
