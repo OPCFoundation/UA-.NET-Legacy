@@ -466,10 +466,17 @@ namespace Opc.Ua
             XmlDocument document = new XmlDocument();
             string xmlString = new UTF8Encoding().GetString(bytes, 0, bytes.Length);
 
-            using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings()
-                {DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None}))
+            try
             {
-                document.Load(reader);
+                using (XmlReader reader = XmlReader.Create(new StringReader(xmlString), new XmlReaderSettings()
+                    { DtdProcessing = System.Xml.DtdProcessing.Prohibit, ValidationType = ValidationType.None }))
+                {
+                    document.Load(reader);
+                }
+            }
+            catch (XmlException)
+            {
+                return null;
             }
 
             return document.DocumentElement;
@@ -1482,7 +1489,7 @@ namespace Opc.Ua
                 extension.Body = ReadXmlElement(null);
 
                 // attempt to decode a known type.
-                if (systemType != null)
+                if (systemType != null && extension.Body != null)
                 {
                     XmlElement element = extension.Body as XmlElement;
                     XmlDecoder xmlDecoder = new XmlDecoder(element, this.Context);
@@ -1542,11 +1549,24 @@ namespace Opc.Ua
                 return extension;
             }
 
+            // check the nesting level for avoiding a stack overflow.
+            if (m_nestingLevel > m_context.MaxEncodingNestingLevels)
+            {
+                throw ServiceResultException.Create(
+                    StatusCodes.BadEncodingLimitsExceeded,
+                    "Maximum nesting level of {0} was exceeded",
+                    m_context.MaxEncodingNestingLevels);
+            }
+
+            m_nestingLevel++;
+
             // save the current position.
             int start = Position;
             
             // decode body.            
             encodeable.Decode(this);
+
+            m_nestingLevel--;
 
             // skip any unread data.
             int unused = length - (Position - start);
