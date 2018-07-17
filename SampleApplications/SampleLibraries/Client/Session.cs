@@ -2021,9 +2021,6 @@ namespace Opc.Ua.Client
 
             if (certificateData != null && certificateData.Length > 0 && requireEncryption)
             {
-                //serverCertificate = Utils.ParseCertificateBlob(certificateData);
-                //m_configuration.CertificateValidator.Validate(serverCertificate);
-
                 if(checkDomain)
                 {
                     CheckCertificateDomain(m_endpoint);
@@ -2034,6 +2031,7 @@ namespace Opc.Ua.Client
                 {
                     serverCertificate = certificateChain[0];
                 }
+
                 m_configuration.CertificateValidator.Validate(certificateChain);
             }
 
@@ -2472,6 +2470,14 @@ namespace Opc.Ua.Client
             if (String.IsNullOrEmpty(securityPolicyUri))
             {
                 securityPolicyUri = m_endpoint.Description.SecurityPolicyUri;
+            }
+
+            bool requireEncryption = securityPolicyUri != SecurityPolicies.None;
+
+            // validate the server certificate before encrypting tokens.
+            if (m_serverCertificate != null && requireEncryption && identity.TokenType != UserTokenType.Anonymous)
+            {
+                m_configuration.CertificateValidator.Validate(m_serverCertificate);
             }
         
             // sign data with user token.
