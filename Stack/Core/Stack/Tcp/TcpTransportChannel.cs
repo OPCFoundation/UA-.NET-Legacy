@@ -95,6 +95,14 @@ namespace Opc.Ua.Bindings
         }
 
         /// <summary>
+        ///  Gets the the channel's current security token.
+        /// </summary>
+        public TcpChannelToken CurrentToken
+        {
+            get { lock (m_lock) { return m_channel != null ? m_channel.CurrentToken : null; } }
+        }
+
+        /// <summary>
         /// Initializes a secure channel with the endpoint identified by the URL.
         /// </summary>
         /// <param name="url">The URL for the endpoint.</param>

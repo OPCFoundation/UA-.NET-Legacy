@@ -1004,7 +1004,7 @@ namespace Opc.Ua.Client
                 }
 
                 // validate server nonce and security parameters for user identity.
-                ValidateServerNonce(m_identity, m_serverNonce, securityPolicyUri);
+                ValidateServerNonce(m_identity, m_serverNonce, securityPolicyUri, m_previousServerNonce);
 
                 // sign data with user token.
                 UserIdentityToken identityToken = m_identity.GetIdentityToken();  
@@ -1071,6 +1071,7 @@ namespace Opc.Ua.Client
                 lock (SyncRoot)
                 {
                     Utils.Trace("Session RECONNECT completed successfully.");
+                    m_previousServerNonce = m_serverNonce;
                     m_serverNonce = serverNonce;
                     m_reconnecting = false;
                     publishCount = m_subscriptions.Count;
@@ -2317,8 +2318,15 @@ namespace Opc.Ua.Client
                     securityPolicyUri = m_endpoint.Description.SecurityPolicyUri;
                 }
 
+                byte[] previousServerNonce = null;
+
+                if (TransportChannel.CurrentToken != null)
+                {
+                    previousServerNonce = TransportChannel.CurrentToken.ServerNonce;
+                }
+
                 // validate server nonce and security parameters for user identity.
-                ValidateServerNonce(identity, serverNonce, securityPolicyUri);
+                ValidateServerNonce(identity, serverNonce, securityPolicyUri, previousServerNonce);
 
 				// sign data with user token.
 				SignatureData userTokenSignature = identityToken.Sign( dataToSign, securityPolicyUri );
@@ -2371,6 +2379,7 @@ namespace Opc.Ua.Client
 					// save nonces.
 					m_sessionName = sessionName;
 					m_identity = identity;
+                    m_previousServerNonce = previousServerNonce;
 					m_serverNonce = serverNonce;
 					m_serverCertificate = serverCertificate;
 
@@ -2487,7 +2496,7 @@ namespace Opc.Ua.Client
             }
 
             // validate server nonce and security parameters for user identity.
-            ValidateServerNonce(identity, serverNonce, securityPolicyUri);
+            ValidateServerNonce(identity, serverNonce, securityPolicyUri, m_previousServerNonce);
 
             // sign data with user token.
             identityToken = identity.GetIdentityToken();  
@@ -2523,6 +2532,7 @@ namespace Opc.Ua.Client
                     m_identity = identity;
                 }
 
+                m_previousServerNonce = m_serverNonce;
                 m_serverNonce      = serverNonce;
                 m_preferredLocales = preferredLocales;
 
@@ -3316,7 +3326,7 @@ namespace Opc.Ua.Client
         /// <summary>
         /// Validates the server nonce and security parameters of user identity.
         /// </summary>
-        private void ValidateServerNonce(IUserIdentity identity, byte[] serverNonce, string securityPolicyUri)
+        private void ValidateServerNonce(IUserIdentity identity, byte[] serverNonce, string securityPolicyUri, byte[] previousServerNonce)
         {
             // skip validation if server nonce is not used for encryption.
             if (String.IsNullOrEmpty(securityPolicyUri) || securityPolicyUri == SecurityPolicies.None)
@@ -3330,6 +3340,15 @@ namespace Opc.Ua.Client
                 if (!Utils.Nonce.ValidateNonce(serverNonce, MessageSecurityMode.SignAndEncrypt, m_configuration.SecurityConfiguration.NonceLength))
                 {
                     throw ServiceResultException.Create(StatusCodes.BadNonceInvalid, "Server nonce is not the correct length or not random enough.");
+                }
+
+                // check that new nonce is different from the previously returned server nonce.
+                if (previousServerNonce != null && Utils.Nonce.CompareNonce(serverNonce, previousServerNonce))
+                {
+                    if (!m_configuration.SecurityConfiguration.SuppressNonceValidationErrors)
+                    {
+                        throw ServiceResultException.Create(StatusCodes.BadNonceInvalid, "Server nonce is equal with previously returned nonce.");
+                    }
                 }
             }
         }
@@ -4159,6 +4178,7 @@ namespace Opc.Ua.Client
         private object m_handle;
         private IUserIdentity m_identity;
 		private byte[] m_serverNonce;
+        private byte[] m_previousServerNonce;
         private X509Certificate2 m_serverCertificate;
         private long m_publishCounter;
         private DateTime m_lastKeepAliveTime;

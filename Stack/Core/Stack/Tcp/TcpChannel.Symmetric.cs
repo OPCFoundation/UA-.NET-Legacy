@@ -32,7 +32,7 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// Returns the current security token.
         /// </summary>
-        protected TcpChannelToken CurrentToken
+        protected internal TcpChannelToken CurrentToken
         {
             get { return m_currentToken; }
         }

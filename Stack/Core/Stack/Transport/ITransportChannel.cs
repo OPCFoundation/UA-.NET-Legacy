@@ -14,6 +14,7 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
+using Opc.Ua.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,6 +45,11 @@ namespace Opc.Ua
         /// Gets the context used when serializing messages exchanged via the channel.
         /// </summary>
         ServiceMessageContext MessageContext { get; }
+
+        /// <summary>
+        /// Gets the the channel's current security token.
+        /// </summary>
+        TcpChannelToken CurrentToken { get; }
 
         /// <summary>
         /// Gets or sets the default timeout for requests send via the channel.

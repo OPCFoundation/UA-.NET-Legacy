@@ -868,6 +868,16 @@ namespace Opc.Ua
             get { return m_userRoleDirectory; }
             set { m_userRoleDirectory = value; }
         }
+
+        /// <summary>
+        /// Gets or sets a directory which contains files representing users roles.
+        /// </summary>
+        [DataMember(Order = 10)]
+        public bool SuppressNonceValidationErrors
+        {
+            get { return m_suppressNonceValidationErrors; }
+            set { m_suppressNonceValidationErrors = value; }
+        }
         #endregion
 
         #region Private Fields
@@ -879,6 +889,7 @@ namespace Opc.Ua
         private bool m_autoAcceptUntrustedCertificates;
         private bool m_configureFirewall;
         private string m_userRoleDirectory;
+        private bool m_suppressNonceValidationErrors;
         #endregion
     }
     #endregion
