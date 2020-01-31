@@ -2395,6 +2395,22 @@ namespace Opc.Ua
 
                 return false;
             }
+
+            /// <summary>
+            /// Compare Nonce for equality.
+            /// </summary>
+            /// <returns></returns>
+            public static bool CompareNonce(byte[] a, byte[] b)
+            {
+                if (a == null || b == null) return false;
+                if (a.Length != b.Length) return false;
+
+                byte result = 0;
+                for (int i = 0; i < a.Length; i++)
+                    result |= (byte)(a[i] ^ b[i]);
+
+                return result == 0;
+            }
         }
 
         /// <summary>

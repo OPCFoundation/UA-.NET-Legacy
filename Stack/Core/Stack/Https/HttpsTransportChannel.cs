@@ -87,6 +87,14 @@ namespace Opc.Ua.Bindings
         }
 
         /// <summary>
+        ///  Gets the the channel's current security token.
+        /// </summary>
+        public TcpChannelToken CurrentToken
+        {
+            get { return null; }
+        }
+
+        /// <summary>
         /// Gets or sets the default timeout for requests send via the channel.
         /// </summary>
         public int OperationTimeout
