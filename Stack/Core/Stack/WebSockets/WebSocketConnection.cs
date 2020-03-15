@@ -268,16 +268,22 @@ namespace Opc.Ua.Bindings
             string url = ExtractToken(message, ref ii, ' ', '\t');
             string version = ExtractToken(message, ref ii, '\n');
 
-            if (method != "GET")
+            if (version != "HTTP/1.1")
+            {
+                await SendErrorResponse(HttpStatusCode.HttpVersionNotSupported);
+                throw new WebException("HTTP version not supported.", WebExceptionStatus.ProtocolError);
+            }
+
+            if (method == "POST")
             {
                 await SendErrorResponse(HttpStatusCode.MethodNotAllowed);
                 throw new WebException("HTTP method not supported.", WebExceptionStatus.ProtocolError);
             }
 
-            if (version != "HTTP/1.1")
+            if (method != "GET")
             {
-                await SendErrorResponse(HttpStatusCode.HttpVersionNotSupported);
-                throw new WebException("HTTP version not supported.", WebExceptionStatus.ProtocolError);
+                await SendErrorResponse(HttpStatusCode.MethodNotAllowed);
+                throw new WebException("HTTP method not supported.", WebExceptionStatus.ProtocolError);
             }
 
             Dictionary<string, string> headers = new Dictionary<string, string>();

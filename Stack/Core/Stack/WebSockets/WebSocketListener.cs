@@ -59,7 +59,35 @@ namespace Opc.Ua.Bindings
 
             foreach (var certificate in store.Enumerate())
             {
-                if (certificate.Subject.Contains(endpointUrl.DnsSafeHost) && certificate.HasPrivateKey)
+                if (!certificate.HasPrivateKey)
+                {
+                    continue;
+                }
+
+                bool match = certificate.Subject.Contains(endpointUrl.DnsSafeHost);
+
+                if (!match)
+                {
+                    var domains = Utils.GetDomainsFromCertficate(certificate);
+
+                    if (domains != null)
+                    {
+                        foreach (var domain in domains)
+                        {
+                            Utils.Trace($"[WebSocketListener] Found SSL Domain ({domain}). {certificate.Subject}");
+
+                            if (String.Compare(domain, endpointUrl.DnsSafeHost, true) == 0)
+                            {
+                                match = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                Utils.Trace($"[WebSocketListener] Found SSL Certficate ({match}). {certificate.Subject} {certificate.Thumbprint}");
+
+                if (match)
                 {
                     try
                     {
@@ -67,6 +95,7 @@ namespace Opc.Ua.Bindings
                         if (certificate.PrivateKey.KeySize >= 1024)
                         {
                             m_tlsCertificate = certificate;
+                            Utils.Trace($"[WebSocketListener] SSL Certficate Selected ({endpointUrl.DnsSafeHost})");
                             break;
                         }
                     }
@@ -151,7 +180,7 @@ namespace Opc.Ua.Bindings
 
             public async Task<Stream> AuthenticateAsClient(TcpClient client, string targetHost, TlsProtocol protocol)
             {
-                SslProtocols sslProtocol = SslProtocols.Tls;
+                SslProtocols sslProtocol = SslProtocols.Default;
 
                 if (protocol == TlsProtocol.Tls12)
                 {

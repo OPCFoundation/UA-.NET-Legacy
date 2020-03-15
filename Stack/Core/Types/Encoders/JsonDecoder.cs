@@ -899,26 +899,27 @@ namespace Opc.Ua
             {
                 m_stack.Push(value);
 
-                var namespaceIndex = ReadUInt16("u");
+                var namespaceIndex = ReadUInt16("Namespace");
+                var idType = ReadInt32("IdType");
 
-                if (value.ContainsKey("i"))
+                if (idType == 0)
                 {
-                    return new NodeId(ReadUInt32("i"), namespaceIndex);
+                    return new NodeId(ReadUInt32("Id"), namespaceIndex);
                 }
 
-                if (value.ContainsKey("s"))
+                if (idType == 1)
                 {
-                    return new NodeId(ReadString("s"), namespaceIndex);
+                    return new NodeId(ReadString("Id"), namespaceIndex);
                 }
 
-                if (value.ContainsKey("g"))
+                if (idType == 2)
                 {
-                    return new NodeId(ReadGuid("g"), namespaceIndex);
+                    return new NodeId(ReadGuid("Id"), namespaceIndex);
                 }
 
-                if (value.ContainsKey("b"))
+                if (idType == 3)
                 {
-                    return new NodeId(ReadByteString("b"), namespaceIndex);
+                    return new NodeId(ReadByteString("Id"), namespaceIndex);
                 }
 
                 return new NodeId(0U, namespaceIndex);
@@ -954,11 +955,12 @@ namespace Opc.Ua
 
                 ushort namespaceIndex = 0;
                 string namespaceUri = null;
-                var serverIndex = ReadUInt32("v");
+                var serverIndex = ReadUInt32("ServerUri");
+                var idType = ReadInt32("IdType");
 
                 object ns = null;
 
-                if (value.TryGetValue("u", out ns))
+                if (value.TryGetValue("Namespace", out ns))
                 {
                     namespaceUri = ns as string;
 
@@ -971,24 +973,24 @@ namespace Opc.Ua
                     }
                 }
 
-                if (value.ContainsKey("i"))
+                if (idType == 0)
                 {
-                    return new ExpandedNodeId(ReadUInt32("i"), namespaceIndex, namespaceUri, serverIndex);
+                    return new ExpandedNodeId(ReadUInt32("Id"), namespaceIndex, namespaceUri, serverIndex);
                 }
 
-                if (value.ContainsKey("s"))
+                if (idType == 1)
                 {
-                    return new ExpandedNodeId(ReadString("s"), namespaceIndex, namespaceUri, serverIndex);
+                    return new ExpandedNodeId(ReadString("Id"), namespaceIndex, namespaceUri, serverIndex);
                 }
 
-                if (value.ContainsKey("g"))
+                if (idType == 2)
                 {
-                    return new ExpandedNodeId(ReadGuid("g"), namespaceIndex, namespaceUri, serverIndex);
+                    return new ExpandedNodeId(ReadGuid("Id"), namespaceIndex, namespaceUri, serverIndex);
                 }
 
-                if (value.ContainsKey("b"))
+                if (idType == 3)
                 {
-                    return new ExpandedNodeId(ReadByteString("b"), namespaceIndex, namespaceUri, serverIndex);
+                    return new ExpandedNodeId(ReadByteString("Id"), namespaceIndex, namespaceUri, serverIndex);
                 }
 
                 return new ExpandedNodeId(0U, namespaceIndex, namespaceUri, serverIndex);

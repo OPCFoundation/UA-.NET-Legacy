@@ -29,8 +29,11 @@ namespace SessionlessMethodCallClient
         {
             System.Net.ServicePointManager.ServerCertificateValidationCallback = HttpsCertificateValidation;
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls;
-
+            
             string hostname = System.Net.Dns.GetHostName().ToLowerInvariant();
+            string accessToken = null;
+
+            /*
             string authorizationUrl = String.Format("https://{0}:54333/connect/token", hostname);
 
             Dictionary<string, string> parameters = new Dictionary<string, string>();
@@ -49,7 +52,6 @@ namespace SessionlessMethodCallClient
             var body = JObject.Parse(json);
 
             string error = (string)body["error"];
-            string accessToken = null;
 
             if (error != null)
             {
@@ -59,30 +61,72 @@ namespace SessionlessMethodCallClient
             {
                 accessToken = (string)body["access_token"];
             }
+            */
 
             Console.WriteLine("");
             Console.WriteLine("TEST Valid Group");
-            GetSecurityKeys("Group1", accessToken);
+            CallMethod("Group1", accessToken);
 
             Console.WriteLine("");
             Console.WriteLine("TEST Valid Group - No Access");
-            GetSecurityKeys("Group2", accessToken);
+            CallMethod("Group2", accessToken);
 
             Console.WriteLine("");
             Console.WriteLine("TEST Invalid Group");
-            GetSecurityKeys("Group3", accessToken);
+            CallMethod("Group3", accessToken);
 
             Console.WriteLine("TEST COMPLETE!");
             Console.ReadKey();
         }
 
-        static JObject ToUInt32(uint value) { return JObject.Parse("{\"Type\":7,\"Body\":" + value.ToString() + "}"); }
-        static JObject ToString(string value) { return JObject.Parse("{\"Type\":12,\"Body\":\"" + value.ToString() + "\"}"); }
-        static JToken ToNodeId(uint value) { var item = new JObject(); item.Add("i", value); return item; }
+        static JObject ToVariant(uint value)
+        { 
+            return JObject.Parse("{\"Type\":7,\"Body\":" + value.ToString() + "}");
+        }
 
-        static void GetSecurityKeys(string groupName, string accessToken)
+        static JObject ToVariant(float value)
         {
-            string serverUrl = String.Format("https://{0}:58811/", System.Net.Dns.GetHostName().ToLowerInvariant());
+            return JObject.Parse("{\"Type\":10,\"Body\":" + value.ToString() + "}");
+        }
+
+        static JObject ToVariant(string value) 
+        { 
+            return JObject.Parse("{\"Type\":12,\"Body\":\"" + value.ToString() + "\"}");
+        }
+
+        static JToken ToNodeId(uint value, ushort namespaceIndex = 0)
+        {
+            var item = new JObject();
+
+            item.Add("Id", value);
+
+            if (namespaceIndex != 0)
+            {
+                item.Add("Namespace", namespaceIndex);
+            }
+
+            return item;
+        }
+
+        static JToken ToNodeId(string value, ushort namespaceIndex = 0)
+        { 
+            var item = new JObject();
+
+            item.Add("IdType", 1);
+            item.Add("Id", value); 
+
+            if (namespaceIndex != 0)
+            {
+                item.Add("Namespace", namespaceIndex);
+            }
+
+            return item; 
+        }
+
+        static void CallMethod(string groupName, string accessToken)
+        {
+            // string serverUrl = String.Format("https://{0}:58811/", System.Net.Dns.GetHostName().ToLowerInvariant());
+            string serverUrl = String.Format("https://{0}:62540/", System.Net.Dns.GetHostName().ToLowerInvariant());
 
             var request = new JObject();
             request.Add("ServiceId", 710);
@@ -90,11 +134,14 @@ namespace SessionlessMethodCallClient
             var body = new JObject();
             var list = new JArray();
             var item = new JObject();
-            item.Add("ObjectId", ToNodeId(14443));
-            item.Add("MethodId", ToNodeId(15215));
+            //item.Add("ObjectId", ToNodeId(14443));
+            //item.Add("MethodId", ToNodeId(15215));
+            item.Add("ObjectId", ToNodeId("Methods", 2));
+            item.Add("MethodId", ToNodeId("Methods_Add", 2));
             var inargs = new JArray();
-            inargs.Add(ToString(groupName));
-            inargs.Add(ToUInt32(4));
+
+            inargs.Add(ToVariant((float)3.1415));
+            inargs.Add(ToVariant(2));
             item.Add("InputArguments", inargs);
             list.Add(item);
             body.Add("MethodsToCall", list);
@@ -102,10 +149,15 @@ namespace SessionlessMethodCallClient
             request.Add("Body", body);
 
             StringContent content = new StringContent(request.ToString(Formatting.None));
-            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/opcua+uajson");
+            content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
 
             HttpClient client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+
+            if (accessToken != null)
+            {
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", accessToken);
+            }
+
             var response = client.PostAsync(serverUrl, content).Result;
             Console.WriteLine(response.ReasonPhrase);
 
@@ -129,7 +181,7 @@ namespace SessionlessMethodCallClient
 
                 if ((code & 0x80000000) != 0)
                 {
-                    Console.WriteLine("ERROR Getting SecurityKeys: " + code.ToString());
+                    Console.WriteLine("ERROR Calling Method: " + code.ToString());
                     return;
                 }
             }
@@ -142,11 +194,11 @@ namespace SessionlessMethodCallClient
 
             if (error != null)
             {
-                Console.WriteLine("ERROR Getting SecurityKeys: " + (string)error);
+                Console.WriteLine("ERROR Calling Method: " + (string)error);
             }
             else
             {
-                Console.WriteLine("SUCCESS Getting SecurityKeys");
+                Console.WriteLine("SUCCESS Calling Method");
 
                 pos = (pos != null) ? pos["OutputArguments"] : null;
 

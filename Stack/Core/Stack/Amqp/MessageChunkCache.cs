@@ -20,8 +20,6 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using System.Threading;
-using Microsoft.ServiceBus;
-using Microsoft.ServiceBus.Messaging;
 using Amqp;
 using Amqp.Framing;
 using Amqp.Types;

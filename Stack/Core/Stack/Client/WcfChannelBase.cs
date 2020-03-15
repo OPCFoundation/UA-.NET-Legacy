@@ -671,10 +671,12 @@ namespace Opc.Ua
                 channel = new TcpTransportChannel();
             }
 
+            /*
             else if (useAmqps)
             {
                 channel = new AmqpTransportChannel(configuration);
             }
+            */
 
             else if (useUaWss)
             {
@@ -821,10 +823,12 @@ namespace Opc.Ua
                 channel = new Opc.Ua.Bindings.HttpsTransportChannel();
             }
 
+            /*
             else if (useAmqps)
             {
                 channel = new AmqpTransportChannel(configuration);
             }
+            */
 
             else if (useUaWss)
             {

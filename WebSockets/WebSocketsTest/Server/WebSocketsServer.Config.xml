@@ -52,8 +52,8 @@
   
   <ServerConfiguration>
     <BaseAddresses>
-      <ua:String>opc.wss://localhost:65200/</ua:String>
-      <ua:String>opc.tcp://localhost:65201/</ua:String>
+      <ua:String>opc.wss://prototyping.opcfoundation.org:65200/</ua:String>
+      <ua:String>opc.tcp://prototyping.opcfoundation.org:65201/</ua:String>
     </BaseAddresses>
     <SecurityPolicies>
       <ServerSecurityPolicy>

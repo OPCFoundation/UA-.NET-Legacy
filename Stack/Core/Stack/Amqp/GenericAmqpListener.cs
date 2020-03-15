@@ -23,8 +23,6 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading;
-using Microsoft.ServiceBus;
-using Microsoft.ServiceBus.Messaging;
 using Amqp;
 using Amqp.Framing;
 using Amqp.Sasl;

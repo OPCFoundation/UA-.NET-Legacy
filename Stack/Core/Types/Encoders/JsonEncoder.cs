@@ -608,25 +608,28 @@ namespace Opc.Ua
             {
                 case IdType.Numeric:
                 {
-                    WriteUInt32("i", (uint)identifer);
+                    WriteUInt32("Id", (uint)identifer);
                     break;
                 }
 
                 case IdType.String:
                 {
-                    WriteString("s", (string)identifer);
+                    WriteInt32("IdType", 1);
+                    WriteString("Id", (string)identifer);
                     break;
                 }
 
                 case IdType.Guid:
                 {
-                    WriteGuid("g", (Guid)identifer);
+                    WriteInt32("IdType", 2);
+                    WriteGuid("Id", (Guid)identifer);
                     break;
                 }
 
                 case IdType.Opaque:
                 {
-                    WriteByteString("b", (byte[])identifer);
+                    WriteInt32("IdType", 3);
+                    WriteByteString("Id", (byte[])identifer);
                     break;
                 }
             }
@@ -639,12 +642,12 @@ namespace Opc.Ua
 
                     if (!String.IsNullOrEmpty(uri))
                     {
-                        WriteString("u", uri);
+                        WriteString("Namespace", uri);
                         return;
                     }
                 }
 
-                WriteUInt16("u", namespaceIndex);
+                WriteUInt16("Namespace", namespaceIndex);
             }
         }
 
@@ -694,11 +697,11 @@ namespace Opc.Ua
 
                 if (String.IsNullOrEmpty(uri))
                 {
-                    WriteUInt32("v", value.ServerIndex);
+                    WriteUInt32("ServerUri", value.ServerIndex);
                 }
                 else
                 {
-                    WriteString("v", uri);
+                    WriteString("ServerUri", uri);
                 }
             }
 

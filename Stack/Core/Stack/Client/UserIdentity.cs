@@ -24,6 +24,7 @@ using System.Security.Principal;
 using System.ServiceModel.Security;
 using System.Text;
 using System.Xml;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Opc.Ua
 {    
@@ -214,6 +215,7 @@ namespace Opc.Ua
                 return wssToken;
             }
 
+            /*
             // handle JWT token.
             JwtSecurityToken jwtToken = m_token as JwtSecurityToken;
 
@@ -226,6 +228,7 @@ namespace Opc.Ua
 
                 return issuedToken;
             }
+            */
 
             // return a WSS token by default.
             if (m_token != null)
@@ -361,6 +364,7 @@ namespace Opc.Ua
                 return;
             }
 
+            /*
             JwtSecurityToken jwtToken = token as JwtSecurityToken;
 
             if (jwtToken != null)
@@ -399,6 +403,7 @@ namespace Opc.Ua
                 m_issuedTokenType = new XmlQualifiedName("", Opc.Ua.Profiles.JwtUserToken);
                 return;
             }
+            */
 
             m_displayName = UserTokenType.IssuedToken.ToString();
             m_tokenType   = UserTokenType.IssuedToken;
@@ -434,6 +439,7 @@ namespace Opc.Ua
 
             if (issuedToken != null)
             {
+                /*
                 if ((policy != null && policy.IssuedTokenType == "http://opcfoundation.org/UA/UserToken#JWT") || issuedToken.IssuedTokenType == Ua.IssuedTokenType.JWT)
                 {
                     if (issuedToken.DecryptedTokenData == null || issuedToken.DecryptedTokenData.Length == 0)
@@ -446,6 +452,7 @@ namespace Opc.Ua
                     Initialize(jwtToken);
                     return;
                 }
+                */
             
                 Initialize(issuedToken, WSSecurityTokenSerializer.DefaultInstance, null);                
                 return;

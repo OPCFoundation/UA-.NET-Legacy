@@ -1450,6 +1450,7 @@ namespace Opc.Ua
                     endpoints.Add(description);
                 }
 
+                /*
                 // create the stack listener.
                 try
                 {
@@ -1478,6 +1479,7 @@ namespace Opc.Ua
                     Utils.Trace(e, "Could not load AMQPS Stack Listener.");
                     throw;
                 }
+                */
             }
 
             return endpoints;

@@ -65,7 +65,8 @@ namespace WebSocketsTestClient
             this.Icon = ClientUtils.GetAppIcon();
 
             ConnectServerCTRL.Configuration = m_configuration = configuration;
-            ConnectServerCTRL.ServerUrl = "opc.wss://localhost:65200/";
+            // ConnectServerCTRL.ServerUrl = "opc.wss://prototyping.opcfoundation.org:65200/";
+            ConnectServerCTRL.ServerUrl = "opc.wss://blackice:65200/";
             this.Text = m_configuration.ApplicationName;
         }
         #endregion

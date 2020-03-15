@@ -40,6 +40,7 @@ namespace Opc.Ua
         /// <remark />
         public static async Task<IUserIdentity> ValidateTokenAsync(Uri authorityUrl, X509Certificate2 authorityCertificate, string issuerUri, string audiance, string jwt)
         {
+            /*
             JwtSecurityToken token = new JwtSecurityToken(jwt);
 
             SecurityToken validatedToken = new JwtSecurityToken();
@@ -73,6 +74,9 @@ namespace Opc.Ua
             }
 
             return new UserIdentity(validatedToken);
+            */
+
+            throw new NotSupportedException();
         }
 
         /// <remark />
