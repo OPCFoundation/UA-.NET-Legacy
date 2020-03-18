@@ -2531,9 +2531,9 @@ namespace Opc.Ua
             ref ushort lifetimeInMonths)
         {
             // enforce minimum keysize.
-            if (keySize < 1024)
+            if (keySize < 2048)
             {
-                keySize = 1024;
+                keySize = 2048;
             }
 
             if (keySize%1024 != 0)

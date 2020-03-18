@@ -8,12 +8,42 @@
 </div>
 
 <div>
+    <p class="font-weight-bolder text-danger border-danger">
+        The site is still being worked on so it will not function properly at times.
+    </p>
     <p>
         This page uses JavaScript to construct a JSON call request and HTTPS to POST it to the
-        OPC UA Server. The same methods can be called by any OPC UA Client using TCP and the binary
+        OPC UA ReferenceServer. The same methods can be called by any OPC UA Client using TCP and the binary
         data encoding. The parameters in the Call requests and responses are defined
         <a href='https://reference.opcfoundation.org/v104/Core/docs/Part4/5.11.2/'>here</a>.
     </p>
+
+    <p>
+        The following figure illustrates the interactions between the website and the OPC UA ReferenceServer:
+    </p>
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header bg-transparent" id="heading">
+                <p class="mb-0">
+                    <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#image" aria-expanded="false" aria-controls="image">
+                        Call Sequence Diagram
+                    </button>
+                </p>
+            </div>
+
+            <div id="image" class="collapse" aria-labelledby="heading" data-parent="#accordion">
+                <div class="card-body">
+                    <img src="~/images/call.png" alt="Call Sequence Diagram">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        Restrictions on cross-site scripting require the web server to forward requests to the
+        HTTP endpoint exposed by the OPC UA ReferenceServer.
+    </p>
+
 </div>
 
 <br />
@@ -112,7 +142,13 @@
             $.ajax("/Home/Invoke/", {
                 type: "POST",
                 data: data,
-                contentType: "application/json; charset=utf-8"
+                contentType: "application/json; charset=utf-8",
+                beforeSend: function (xhr) {
+                    var accessToken = "@ViewData["AccessToken"]";
+                    if (accessToken) {
+                        xhr.setRequestHeader ("Authorization", "Bearer " + accessToken);
+                    }
+                }
             })
                 .done(function (response, textStatus, jqXHR) {
 
@@ -127,9 +163,15 @@
                                 target.val(results[0].OutputArguments[0].Body);
                             }
                             else {
-                                target.val("Server Error: " + results[0].StatusCode.toString(16));
+                                target.val(getErrorString(results[0].StatusCode));
                             }
                         }
+                    }
+                    else if (response.ServiceId === ServiceFaultId) {
+                        target.val(getErrorString(response.Body.ResponseHeader.ServiceResult));
+                    }
+                    else {
+                        target.val("Unknown ResponseType: " + response.ServiceId);
                     }
                 })
                 .fail(function (jqxhr, settings, ex) {
@@ -156,6 +198,7 @@
                 request.Body.RequestHeader.Timestamp = new Date().toISOString();
                 request.Body.RequestHeader.RequestHandle = ++nextRequestId;
                 request.Body.RequestHeader.TimeoutHint = 30000;
+                request.Body.RequestHeader.ReturnDiagnostics = 2; // return text associated with service level errors.
                 request.Body.RequestHeader.AuthenticationToken = null;
 
                 var methodToCall = {};

@@ -16,6 +16,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
@@ -25,13 +26,29 @@ namespace SessionlessMethodCallClient
 {
     class Program
     {
+        static async Task GetAccessToken()
+        {
+            string authorizationUrl = "https://wptest.opcfoundation.org/oauth/authorize/";
+
+            authorizationUrl += "?client_id=eG3ccss3l2rWdTslcPFuXekKsBtj0Zme8X7pWuUw&response_type=code&redirect_uri=https://prototyping.opcfoundation.org/";
+
+            HttpClient client = new HttpClient();
+            var json = await client.GetStringAsync(authorizationUrl);
+
+            int x = 0;
+            Console.WriteLine(json);
+        }
+
         static void Main(string[] args)
         {
             System.Net.ServicePointManager.ServerCertificateValidationCallback = HttpsCertificateValidation;
             System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls12 | System.Net.SecurityProtocolType.Tls;
             
             string hostname = System.Net.Dns.GetHostName().ToLowerInvariant();
-            string accessToken = null;
+
+            GetAccessToken().Wait();
+
+            Console.ReadLine();
 
             /*
             string authorizationUrl = String.Format("https://{0}:54333/connect/token", hostname);
@@ -61,7 +78,6 @@ namespace SessionlessMethodCallClient
             {
                 accessToken = (string)body["access_token"];
             }
-            */
 
             Console.WriteLine("");
             Console.WriteLine("TEST Valid Group");
@@ -77,6 +93,7 @@ namespace SessionlessMethodCallClient
 
             Console.WriteLine("TEST COMPLETE!");
             Console.ReadKey();
+            */
         }
 
         static JObject ToVariant(uint value)

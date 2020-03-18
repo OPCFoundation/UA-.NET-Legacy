@@ -9,6 +9,7 @@ const WriteRequestId = 671;
 const WriteResponseId = 674;
 const CallRequestId = 710;
 const CallResponseId = 713;
+const ServiceFaultId = 395;
 
 const ValueAttributeId = 13;
 const DataTypeAttributeId = 14;
@@ -29,6 +30,7 @@ function createRequest(typeId) {
     request.Body.RequestHeader.Timestamp = new Date().toISOString();
     request.Body.RequestHeader.RequestHandle = ++nextRequestId;
     request.Body.RequestHeader.TimeoutHint = 30000;
+    request.Body.RequestHeader.ReturnDiagnostics = 2; // return text associated with service level errors.
     request.Body.RequestHeader.AuthenticationToken = authenticationToken;
 
     return request;
@@ -88,7 +90,7 @@ function parseNodeId(nodeId) {
 }
 
 // reads the specified attribute from the server.
-function readAttribute(nodeId,attributeId,callback) {
+function readAttribute(nodeId, attributeId, accessToken, callback) {
 
     // construct the JSON that will be sent as the call request.
     var request = {};
@@ -99,6 +101,7 @@ function readAttribute(nodeId,attributeId,callback) {
     request.Body.RequestHeader.Timestamp = new Date().toISOString();
     request.Body.RequestHeader.RequestHandle = ++nextRequestId;
     request.Body.RequestHeader.TimeoutHint = 30000;
+    request.Body.RequestHeader.ReturnDiagnostics = 2; // return text associated with service level errors.
     request.Body.RequestHeader.AuthenticationToken = null;
 
     request.Body.MaxAge = 0; // read from device always
@@ -125,7 +128,12 @@ function readAttribute(nodeId,attributeId,callback) {
     $.ajax("/Home/Invoke/", {
         type: "POST",
         data: data,
-        contentType: "application/json; charset=utf-8"
+        contentType: "application/json; charset=utf-8",
+        beforeSend: function (xhr) {
+            if (accessToken) {
+                xhr.setRequestHeader("Authorization", "Bearer " + accessToken);
+            }
+        }
     })
     .done(function (response, textStatus, jqXHR) {
 
@@ -138,11 +146,19 @@ function readAttribute(nodeId,attributeId,callback) {
                     return;
                 }
                 else {
-                    console.log("[Read Error] 0x" + results[0].StatusCode.toString(16));
+                    console.log("[Read Error] " + getErrorString(results[0].StatusCode));
                     callback(undefined);
                     return;
                 }
             }
+        }
+        else if (response.ServiceId === ServiceFaultId) {
+            console.log("[Read Error] " + getErrorString(response.Body.ResponseHeader.ServiceResult));
+            callback(undefined);
+        }
+        else {
+            target.val("Unknown ResponseType: " + response.ServiceId);
+            callback(undefined);
         }
     })
     .fail(function (jqxhr, settings, error) {
@@ -151,4 +167,19 @@ function readAttribute(nodeId,attributeId,callback) {
         callback(undefined);
         return;
     });
+}
+
+function getErrorString(result) {
+
+    if (result || result === 0) {
+        switch (result) {
+            case 0: { return "Good"; }
+            case 2155085824: { return "BadTypeMismatch"; }
+            case 2149646336: { return "BadIdentityTokenRejected"; }
+            default: { return "0x" + result.toString(16); }
+        }
+    }
+    else {
+        return "Unknown Error";
+    }
 }

@@ -8,17 +8,42 @@
 </div>
 
 <div>
+    <p class="font-weight-bolder text-danger border-danger">
+        The site is still being worked on so it will not function properly at times.
+    </p>
     <p>
         This page uses JavaScript to construct JSON messeges needed to create a session and a subscription
-        with an OPC UA Server. The parameters in the CreateSession, ActivateSession and CreateSubscription requests and responses
+        with an OPC UA ReferenceServer. The parameters in the CreateSession, ActivateSession and CreateSubscription requests and responses
         are defined in <a href='https://reference.opcfoundation.org/v104/Core/docs/Part4/5.10.2/'>Part 4</a>.
     </p>
+
+    <p>
+        The following figure illustrates the interactions between the website and the OPC UA ReferenceServer:
+    </p>
+
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header bg-transparent" id="heading">
+                <p class="mb-0">
+                    <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#image" aria-expanded="false" aria-controls="image">
+                        Subscribe Sequence Diagram
+                    </button>
+                </p>
+            </div>
+
+            <div id="image" class="collapse" aria-labelledby="heading" data-parent="#accordion">
+                <div class="card-body">
+                    <img src="~/images/subscribe.png" alt="Subscribe Sequence Diagram">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br />
     <p>
         The syntax used to specify NodeIds is defined in <a href="https://reference.opcfoundation.org/v104/Core/docs/Part6/5.3.1/#5.3.1.10">Part 6</a>.
     </p>
-    <p class="text-info">
-        Note that this example may not work in FireFox due to an HTTPS incompatibility between FireFox and the current .NET server implemention.
-    </p>
+
 </div>
 
 <br />
@@ -114,13 +139,13 @@
             var sessionId;
             var subscriptionId;
             var monitoredItemId;
-            
-            function logRequest(json) {                
+
+            function logRequest(json) {
                 var log = $('#request').find('pre');
                 log.text(JSON.stringify(json, null, 4));
             }
 
-            function logResponse(json) {                
+            function logResponse(json) {
                 var log = $('#response').find('pre');
                 log.text(JSON.stringify(json, null, 4));
             }
@@ -134,10 +159,10 @@
                     log.append('.&#13;&#10;');
                 }
                 else {
-                    log.append(time + ": " +message + '.&#13;&#10;');
+                    log.append(time + ": " + message + '.&#13;&#10;');
                 }
             }
-            
+
             $(document).on('click', ':submit', function (e) {
 
                 e.preventDefault();

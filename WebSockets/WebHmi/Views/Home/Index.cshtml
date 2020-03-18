@@ -8,6 +8,11 @@
 </div>
 
 <div>
+
+    <p class="font-weight-bolder text-danger border-danger">
+        The site is still being worked on so it will not function properly at times.
+    </p>
+
     <p>
         OPC UA has a layered architecture that is designed to be independent of the implementation
         technology. Many of the OPC UA stacks have been designed with pluggable apis that make it
@@ -27,10 +32,16 @@
     </p>
 
     <p>
-        This website does not use any authentication since it is intended as a publically avaialable
-        tutorial. A real application would include a <a href='https://jwt.io/'>JSON Web Token</a> in
-        the HTTPS requests which would allow the OPC UA server to determine what access should be granted.
-        This demonstration only has access the access granted to an anonymous user.
+        This website uses OAuth2 server associated with a WordPress <a href="https://wptest.opcfoundation.org/">instance</a>. All HTTP requests will fail
+        with the BadUserIdentityTokenRejected error until the web application acquires an authorization token from the OAuth server. 
+        This happens when the use clicks the 'Login' button at the top right. Logging requires a user with access to the WordPress intance. 
+        Two test accounts have been created with the password 'password':
+
+        <ul class="list-group">
+            <li class="list-group-item">Alice</li>
+            <li class="list-group-item">Bob</li>
+        </ul>
+        More information about OPC UA support for OAuth2 can be found <a href="https://reference.opcfoundation.org/v104/Core/docs/Part6/6.5.3/">here</a>.
     </p>
 
     <p>

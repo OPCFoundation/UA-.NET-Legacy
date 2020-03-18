@@ -14,7 +14,7 @@
                 <a class="navbar-brand" href="https://opcfoundation.org">
                     <img src="~/images/opclogo.png" height="40" alt="">
                 </a>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <div class="navbar-collapse collapse d-sm-inline-flex">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -31,6 +31,29 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Subscribe">Subscribe</a>
                         </li>
+                    </ul>
+                </div>
+                <div class="navbar d-sm-inline-flex flex-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+
+                        @if (ViewData["UserName"] != null)
+                        {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                @ViewData["UserName"]
+                            </a>
+                            <div class="dropdown-menu bg-dark">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </div>
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item">
+                            <a class="nav-link text-light float-right text-sm-right" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                        </li>
+                        }
+
                     </ul>
                 </div>
             </div>

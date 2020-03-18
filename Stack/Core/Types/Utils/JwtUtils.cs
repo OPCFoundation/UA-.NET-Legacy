@@ -32,15 +32,19 @@ namespace Opc.Ua
         /// <remark />
         public static IUserIdentity ValidateToken(Uri authorityUrl, X509Certificate2 authorityCertificate, string issuerUri, string audiance, string jwt)
         {
+            throw new NotImplementedException();
+
+            /*
             var task = ValidateTokenAsync(authorityUrl, authorityCertificate, issuerUri, audiance, jwt);
             task.Wait();
             return task.Result;
+            */
         }
-
+        
+        /*
         /// <remark />
         public static async Task<IUserIdentity> ValidateTokenAsync(Uri authorityUrl, X509Certificate2 authorityCertificate, string issuerUri, string audiance, string jwt)
         {
-            /*
             JwtSecurityToken token = new JwtSecurityToken(jwt);
 
             SecurityToken validatedToken = new JwtSecurityToken();
@@ -74,10 +78,10 @@ namespace Opc.Ua
             }
 
             return new UserIdentity(validatedToken);
-            */
 
             throw new NotSupportedException();
         }
+        */
 
         /// <remark />
         public static OpenIdConnectConfiguration Discover(Uri authorityUrl)
