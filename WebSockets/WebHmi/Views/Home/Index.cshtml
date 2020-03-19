@@ -32,9 +32,31 @@
     </p>
 
     <p>
-        This website uses OAuth2 server associated with a WordPress <a href="https://wptest.opcfoundation.org/">instance</a>. All HTTP requests will fail
-        with the BadUserIdentityTokenRejected error until the web application acquires an authorization token from the OAuth server. 
-        This happens when the use clicks the 'Login' button at the top right. Logging requires a user with access to the WordPress intance. 
+        This website uses an OAuth2 server associated with a WordPress <a href="https://wptest.opcfoundation.org/">instance</a>. All HTTP requests will fail
+        with the BadUserIdentityTokenRejected error until the web application acquires an authorization token from the OAuth server.
+        This happens when the use clicks the 'Login' button at the top right. The following figure illustrates the process:
+    </p>
+
+    <div id="accordion">
+        <div class="card">
+            <div class="card-header bg-transparent" id="heading">
+                <p class="mb-0">
+                    <button class="btn btn-link btn-sm" data-toggle="collapse" data-target="#image" aria-expanded="false" aria-controls="image">
+                        Login Sequence Diagram
+                    </button>
+                </p>
+            </div>
+
+            <div id="image" class="collapse" aria-labelledby="heading" data-parent="#accordion">
+                <div class="card-body">
+                    <img src="~/images/oauth.png" alt="Login Sequence Diagram">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        Logging requires a user with access to the WordPress intance.
         Two test accounts have been created with the password 'password':
 
         <ul class="list-group">
