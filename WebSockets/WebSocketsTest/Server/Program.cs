@@ -83,7 +83,7 @@ namespace WebSocketsTestServer
                 application.LoadApplicationConfiguration(false);
 
                 // check the application certificate.
-                application.CheckApplicationInstanceCertificate(false, 0);
+                application.CheckApplicationInstanceCertificate(false, 2048);
 
                 // start the server.
                 var server = new WebSocketsServer();

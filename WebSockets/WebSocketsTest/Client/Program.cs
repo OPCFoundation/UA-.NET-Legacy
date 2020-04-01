@@ -65,7 +65,7 @@ namespace WebSocketsTestClient
                 application.LoadApplicationConfiguration(false);
 
                 // check the application certificate.
-                application.CheckApplicationInstanceCertificate(false, 0);
+                application.CheckApplicationInstanceCertificate(false, 2048);
 
                 // run the application interactively.
                 Application.Run(new MainForm(application.ApplicationConfiguration));
