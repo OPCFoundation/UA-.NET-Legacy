@@ -245,11 +245,6 @@ namespace Opc.Ua
                     return false;
                 }
 
-                if (this.m_serverTimestamp != value.m_serverTimestamp)
-                {
-                    return false;
-                }
-
                 return Utils.IsEqual(this.m_value.Value, value.m_value.Value);
             }
             
