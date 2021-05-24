@@ -598,20 +598,6 @@ namespace Opc.Ua
                 }
             }
             
-            // A ByteString is equivalent to an Array of Bytes.
-            if (typeInfo.BuiltInType == BuiltInType.ByteString && typeInfo.ValueRank == ValueRanks.Scalar)
-            {
-                if (expectedValueRank == ValueRanks.OneOrMoreDimensions || expectedValueRank == ValueRanks.OneDimension)
-                {
-                    if (typeTree.IsTypeOf(expectedDataTypeId, DataTypes.Byte))
-                    {
-                        return typeInfo;
-                    }
-
-                    return null;
-                }
-            }
-
             // check the value rank.
             if (!ValueRanks.IsValid(typeInfo.ValueRank, expectedValueRank))
             {
