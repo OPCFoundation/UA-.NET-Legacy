@@ -81,6 +81,9 @@
     <Reference Include="System.ServiceModel.Web">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -115,10 +118,14 @@
     <Compile Include="Security\Certificates\CertificateStoreIdentifier.cs" />
     <Compile Include="Security\Certificates\CertificateTrustList.cs" />
     <Compile Include="Security\Certificates\CertificateValidator.cs" />
+    <Compile Include="Security\Certificates\Common\AsnUtils.cs" />
+    <Compile Include="Security\Certificates\Common\HashAlgorithmName.cs" />
+    <Compile Include="Security\Certificates\Common\Oids.cs" />
     <Compile Include="Security\Certificates\DirectoryCertificateStore.cs" />
     <Compile Include="Security\Certificates\EncryptedData.cs" />
     <Compile Include="Security\Certificates\ICertificate.cs" />
     <Compile Include="Security\Certificates\ICertificateStore.cs" />
+    <Compile Include="Security\Certificates\ICertificateValidator.cs" />
     <Compile Include="Security\Certificates\RsaUtils.cs" />
     <Compile Include="Security\Certificates\SecurityConfiguration.cs">
       <SubType>Code</SubType>
@@ -128,9 +135,12 @@
     <Compile Include="Security\Certificates\WindowsCertificateStore.cs" />
     <Compile Include="Security\Certificates\X509AuthorityKeyIdentifierExtension.cs" />
     <Compile Include="Security\Certificates\X509CRL.cs" />
+    <Compile Include="Security\Certificates\X509Crl\X509Signature.cs" />
     <Compile Include="Security\Certificates\X509SubjectAltNameExtension.cs" />
+    <Compile Include="Security\Certificates\X509Utils.cs" />
     <Compile Include="Security\Constants\SecurityConstants.cs" />
     <Compile Include="Security\Constants\SecurityPolicies.cs" />
+    <Compile Include="Security\Certificates\Extensions\X509Extensions.cs" />
     <Compile Include="SilverlightDefs.cs" />
     <Compile Include="Stack\Configuration\ApplicationConfiguration.cs">
       <SubType>Code</SubType>
@@ -344,6 +354,7 @@
     <EmbeddedResource Include="Types\Schemas\BuiltInTypes.xml" />
     <EmbeddedResource Include="Types\Schemas\BuiltInTypes.bsd" />
     <EmbeddedResource Include="Stack\Generated\Opc.Ua.PredefinedNodes.uanodes" />
+    <None Include="packages.config" />
     <None Include="Types\Schemas\OPCBinarySchema.xsd">
       <SubType>
       </SubType>
@@ -365,6 +376,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

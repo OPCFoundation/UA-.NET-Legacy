@@ -77,6 +77,7 @@ namespace Opc.Ua
 
             return new CertificateTrustList();
         }
+
         #endregion
     }
     #endregion

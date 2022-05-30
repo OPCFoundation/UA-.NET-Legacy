@@ -29,6 +29,27 @@ namespace Opc.Ua
     /// </summary>
     public class CertificateFactory
     {
+        #region Public Constants
+        /// <summary>
+        /// The default key size for RSA certificates in bits.
+        /// </summary>
+        /// <remarks>
+        /// Supported values are 1024(deprecated), 2048, 3072 or 4096.
+        /// </remarks>
+        public static readonly ushort DefaultKeySize = 2048;
+        /// <summary>
+        /// The default hash size for RSA certificates in bits.
+        /// </summary>
+        /// <remarks>
+        /// Supported values are 160 for SHA-1(deprecated) or 256, 384 and 512 for SHA-2.
+        /// </remarks>
+        public static readonly ushort DefaultHashSize = 256;
+        /// <summary>
+        /// The default lifetime of certificates in months.
+        /// </summary>
+        public static readonly ushort DefaultLifeTime = 12;
+        #endregion
+
         #region Public Methods
         /// <summary>
         /// Creates a certificate from a buffer with DER encoded certificate.

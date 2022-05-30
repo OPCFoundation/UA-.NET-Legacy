@@ -35,6 +35,13 @@ namespace Opc.Ua
         {
             return MemberwiseClone();
         }
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        public new object MemberwiseClone()
+        {
+            return base.MemberwiseClone();
+        }
         #endregion
 
         #region IFormattable Members
