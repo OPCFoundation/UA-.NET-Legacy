@@ -44,10 +44,6 @@ namespace Opc.Ua
         /// Supported values are 160 for SHA-1(deprecated) or 256, 384 and 512 for SHA-2.
         /// </remarks>
         public static readonly ushort DefaultHashSize = 256;
-        /// <summary>
-        /// The default lifetime of certificates in months.
-        /// </summary>
-        public static readonly ushort DefaultLifeTime = 12;
         #endregion
 
         #region Public Methods
