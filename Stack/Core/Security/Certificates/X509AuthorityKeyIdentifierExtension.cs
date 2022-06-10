@@ -1,4 +1,4 @@
-/* Copyright (c) 1996-2017, OPC Foundation. All rights reserved.
+﻿/* Copyright (c) 1996-2017, OPC Foundation. All rights reserved.
 
    The source code in this file is covered under a dual-license scenario:
      - RCL: for OPC Foundation members in good-standing
@@ -14,17 +14,28 @@
    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
+using Opc.Ua.Security.Certificates;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using X509Extension = System.Security.Cryptography.X509Certificates.X509Extension;
 
 namespace Opc.Ua
 {
     /// <summary>
     /// Stores the authority key identifier extension.
     /// </summary>
+    /// <remarks>
+    ///     id-ce-authorityKeyIdentifier OBJECT IDENTIFIER ::=  { id-ce 35 }
+    ///     AuthorityKeyIdentifier ::= SEQUENCE {
+    ///         keyIdentifier[0] KeyIdentifier           OPTIONAL,
+    ///         authorityCertIssuer[1] GeneralNames            OPTIONAL,
+    ///         authorityCertSerialNumber[2] CertificateSerialNumber OPTIONAL
+    ///         }
+    ///     KeyIdentifier::= OCTET STRING
+    /// </remarks>
     public class X509AuthorityKeyIdentifierExtension : X509Extension
     {
         #region Constructors
@@ -49,7 +60,7 @@ namespace Opc.Ua
         /// </summary>
         public X509AuthorityKeyIdentifierExtension(string oid, byte[] rawData, bool critical)
         :
-            this(new Oid(oid, s_FriendlyName), rawData, critical)
+            this(new Oid(oid, kFriendlyName), rawData, critical)
         {
         }
 
@@ -60,25 +71,25 @@ namespace Opc.Ua
         :
             base(oid, rawData, critical)
         {
-            Parse(rawData);
+            Decode(rawData);
         }
         #endregion
 
         #region Overridden Methods
         /// <summary>
-        /// Returns a formatted version of the Abstract Syntax Notation One (ASN.1)-encoded data as a string.
+        /// Returns a formatted version of the Authority Key Identifier as a string.
         /// </summary>
         public override string Format(bool multiLine)
         {
             StringBuilder buffer = new StringBuilder();
 
-            if (m_keyId != null && m_keyId.Length >  0)
+            if (m_keyIdentifier != null && m_keyIdentifier.Length > 0)
             {
                 if (buffer.Length > 0)
                 {
                     if (multiLine)
                     {
-                        buffer.Append("\r\n");
+                        buffer.AppendLine();
                     }
                     else
                     {
@@ -86,50 +97,45 @@ namespace Opc.Ua
                     }
                 }
 
-                buffer.Append("KeyID=");
-                buffer.Append(m_keyId);
+                buffer.Append(kKeyIdentifier);
+                buffer.Append('=');
+                buffer.Append(m_keyIdentifier.ToHexString());
             }
 
-            if (m_authorityNames != null)
+            if (m_issuer != null)
             {
-                for (int ii = 0; ii < m_authorityNames.Length; ii++)
+                if (multiLine)
                 {
-                    if (buffer.Length > 0)
-                    {
-                        if (multiLine)
-                        {
-                            buffer.Append("\r\n");
-                        }
-                        else
-                        {
-                            buffer.Append(", ");
-                        }
-                    }
-
-                    buffer.Append(m_authorityNames[ii]);
+                    buffer.AppendLine();
                 }
+                else
+                {
+                    buffer.Append(", ");
+                }
+
+                buffer.Append(kIssuer);
+                buffer.Append('=');
+                buffer.Append(m_issuer.Format(true));
             }
-            
-            if (m_serialNumber != null && m_serialNumber.Length >  0)
+
+            if (m_serialNumber != null && m_serialNumber.Length > 0)
             {
                 if (buffer.Length > 0)
                 {
-                    if (multiLine)
-                    {
-                        buffer.Append("\r\n");
-                    }
-                    else
+                    if (!multiLine)
                     {
                         buffer.Append(", ");
                     }
                 }
 
-                buffer.Append("SerialNumber=");
+                buffer.Append(kSerialNumber);
+                buffer.Append('=');
                 buffer.Append(m_serialNumber);
             }
-
             return buffer.ToString();
+
         }
+
 
         /// <summary>
         /// Initializes the extension from ASN.1 encoded data.
@@ -138,7 +144,7 @@ namespace Opc.Ua
         {
             if (asnEncodedData == null) throw new ArgumentNullException("asnEncodedData");
             this.Oid = asnEncodedData.Oid;
-            Parse(asnEncodedData.RawData);
+            Decode(asnEncodedData.RawData);
         }
         #endregion
 
@@ -153,6 +159,24 @@ namespace Opc.Ua
         /// </summary>
         public const string AuthorityKeyIdentifier2Oid = "2.5.29.35";
 
+        /// <summary>
+        /// The identifier for the key as a little endian hexadecimal string.
+        /// </summary>
+        public string KeyIdentifier => m_keyIdentifier.ToHexString();
+
+        /// <summary>
+        /// The identifier for the key as a byte array.
+        /// </summary>
+        public byte[] GetKeyIdentifier() => m_keyIdentifier;
+
+        /// <summary>
+        /// A list of distinguished names for the issuer.
+        /// </summary>
+        public X500DistinguishedName Issuer => m_issuer;
+
+        /// <summary>
+        /// A list of distinguished names for the issuer.
+        /// </summary>
         /// <summary>
         /// The identifier for the key.
         /// </summary>
@@ -179,51 +203,95 @@ namespace Opc.Ua
         #endregion
 
         #region Private Methods
-        private void Parse(byte[] data)
+
+        private void Decode(byte[] data)
         {
-            byte[] keyId;
-            byte[] serialNumber;
-
-            if (base.Oid.Value == AuthorityKeyIdentifierOid)
+            if (base.Oid.Value == AuthorityKeyIdentifierOid ||
+                base.Oid.Value == AuthorityKeyIdentifier2Oid)
             {
-                CertificateFactory.ParseAuthorityKeyIdentifierExtension(
-                    data,
-                    out keyId,
-                    out m_authorityNames,
-                    out serialNumber);
-            }
-            else
-            {
-                CertificateFactory.ParseAuthorityKeyIdentifierExtension2(
-                    data,
-                    out keyId,
-                    out m_authorityNames,
-                    out serialNumber);
-            }
-            
-            m_keyId = Utils.ToHexString(keyId);
-            m_serialNumber = null;
-
-            // the serial number is a little endian integer so must convert to string in reverse order. 
-            if (serialNumber != null)
-            {
-                StringBuilder builder = new StringBuilder(serialNumber.Length*2);
-
-                for (int ii = serialNumber.Length-1; ii >=  0; ii--)
+                try
                 {
-                    builder.AppendFormat("{0:X2}", serialNumber[ii]);
-                }
+                    #region Legacy Property holders
+                    byte[] keyId;
+                    byte[] serialNumber;
 
-                m_serialNumber = builder.ToString();
+                    if (base.Oid.Value == AuthorityKeyIdentifierOid)
+                    {
+                        CertificateFactory.ParseAuthorityKeyIdentifierExtension(
+                            data,
+                            out keyId,
+                            out m_authorityNames,
+                            out serialNumber);
+                    }
+                    else
+                    {
+                        CertificateFactory.ParseAuthorityKeyIdentifierExtension2(
+                            data,
+                            out keyId,
+                            out m_authorityNames,
+                            out serialNumber);
+                    }
+
+                    m_keyId = Utils.ToHexString(keyId);
+                    m_serialNumber = null;
+
+
+                    // the serial number is a little endian integer so must convert to string in reverse order. 
+                    if (serialNumber != null)
+                    {
+                        StringBuilder builder = new StringBuilder(serialNumber.Length * 2);
+
+                        for (int ii = serialNumber.Length - 1; ii >= 0; ii--)
+                        {
+                            builder.AppendFormat("{0:X2}", serialNumber[ii]);
+                        }
+
+                        m_serialNumber = builder.ToString();
+                    }
+
+                    #endregion
+                    m_keyIdentifier = keyId;
+
+                    if (m_authorityNames != null)
+                    {
+                        StringBuilder builder = new StringBuilder();
+
+                        for (int ii = m_authorityNames.Length - 1; ii >= 0; ii--)
+                        {
+                            builder.Append(m_authorityNames[ii]);
+                        }
+
+                        m_issuer = new X500DistinguishedName(builder.ToString());
+                    }
+
+                    return;
+                }
+                catch (Exception ace)
+                {
+                    throw new CryptographicException("Failed to decode the AuthorityKeyIdentifier extension.", ace);
+                }
             }
+            throw new CryptographicException("Failed to decode the AuthorityKeyIdentifier extention; No valid data");
         }
         #endregion
 
         #region Private Fields
-        private const string s_FriendlyName = "Authority Key Identifier";
+        /// <summary>
+        /// Authority Key Identifier extension string
+        /// definitions see RFC 5280 4.2.1.1
+        /// </summary>
+
+        #region Legacy
         private string m_keyId;
         private string[] m_authorityNames;
         private string m_serialNumber;
         #endregion
+        private const string kKeyIdentifier = "KeyID";
+        private const string kIssuer = "Issuer";
+        private const string kSerialNumber = "SerialNumber";
+        private const string kFriendlyName = "Authority Key Identifier";
+        private byte[] m_keyIdentifier;
+        private X500DistinguishedName m_issuer;
+        #endregion  
     }
 }

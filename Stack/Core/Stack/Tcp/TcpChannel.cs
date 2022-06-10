@@ -114,7 +114,10 @@ namespace Opc.Ua.Bindings
 
             m_maxRequestMessageSize  = quotas.MaxMessageSize;
             m_maxResponseMessageSize = quotas.MaxMessageSize;
-            
+
+            m_maxRequestChunkCount = CalculateChunkCount(m_maxRequestMessageSize, m_sendBufferSize);
+            m_maxResponseChunkCount = CalculateChunkCount(m_maxResponseMessageSize, m_receiveBufferSize);
+
             m_WriteComplete = new AsyncCallback(OnWriteComplete);
             m_ChannelStateChanged = new WaitCallback(OnChannelStateChanged);
 
@@ -252,14 +255,16 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// Saves an intermediate chunk for an incoming message.
         /// </summary>
-        protected void SaveIntermediateChunk(uint requestId, ArraySegment<byte> chunk)
+        protected void SaveIntermediateChunk(uint requestId, ArraySegment<byte> chunk, bool isServerContext)
         {
             if (m_partialMessageChunks == null)
             {
                 m_partialMessageChunks = new BufferCollection();
             }
 
-            if (m_partialRequestId != requestId)
+            bool chunkOrSizeLimitsExceeded = MessageLimitsExceeded(isServerContext, m_partialMessageChunks.TotalSize, m_partialMessageChunks.Count);
+
+            if ((m_partialRequestId != requestId) || chunkOrSizeLimitsExceeded)
             {
                 if (m_partialMessageChunks.Count > 0)
                 {
@@ -267,6 +272,12 @@ namespace Opc.Ua.Bindings
                 }
 
                 m_partialMessageChunks.Release(BufferManager, "SaveIntermediateChunk");
+            }
+
+            if (chunkOrSizeLimitsExceeded)
+            {
+                DoMessageLimitsExceeded();
+                return;
             }
 
             if (requestId != 0)
@@ -279,15 +290,24 @@ namespace Opc.Ua.Bindings
         /// <summary>
         /// Returns the chunks saved for message.
         /// </summary>
-        protected BufferCollection GetSavedChunks(uint requestId, ArraySegment<byte> chunk)
+        protected BufferCollection GetSavedChunks(uint requestId, ArraySegment<byte> chunk, bool isServerContext)
         {
-            SaveIntermediateChunk(requestId, chunk);
+            SaveIntermediateChunk(requestId, chunk, isServerContext);
             BufferCollection savedChunks = m_partialMessageChunks;
             m_partialMessageChunks = null;
             return savedChunks;
-        }   
+        }
+
+        /// <summary>
+        /// Code executed when the 
+        /// </summary>
+        protected virtual void DoMessageLimitsExceeded()
+        {
+            Utils.Trace("ChannelId {0}: - Message limits exceeded while building up message. Channel will be closed", ChannelId);
+        }
+
         #endregion
-        
+
         #region IMessageSink Members
         /// <summary>
         /// Processes an incoming message.
@@ -495,7 +515,7 @@ namespace Opc.Ua.Bindings
         {
             if (isRequest)
             {
-                if (this.MaxRequestChunkCount > 0 && this.MaxRequestChunkCount <= chunkCount)
+                if (this.MaxRequestChunkCount > 0 && this.MaxRequestChunkCount < chunkCount)
                 {
                     return true;
                 }
@@ -507,7 +527,7 @@ namespace Opc.Ua.Bindings
             }
             else
             {
-                if (this.MaxResponseChunkCount > 0 && this.MaxResponseChunkCount <= chunkCount)
+                if (this.MaxResponseChunkCount > 0 && this.MaxResponseChunkCount < chunkCount)
                 {
                     return true;
                 }
@@ -718,7 +738,30 @@ namespace Opc.Ua.Bindings
             #endregion
         }
         #endregion
-        
+
+        #region Protected Methods
+        /// <summary>
+        /// Calculate the chunk count which can be used for messages based on buffer size. 
+        /// </summary>
+        /// <param name="messageSize">The message size to be used.</param>
+        /// <param name="bufferSize">The buffer available for a message.</param>
+        /// <returns>The chunk count.</returns>
+        protected static int CalculateChunkCount(int messageSize, int bufferSize)
+        {
+            if (bufferSize > 0)
+            {
+                int chunkCount = messageSize / bufferSize;
+                if (chunkCount * bufferSize < messageSize)
+                {
+                    chunkCount++;
+                }
+                return chunkCount;
+            }
+            return 1;
+        }
+        #endregion
+
+
         #region Private Fields
         private object m_lock = new object();        
         private TcpMessageSocket m_socket;

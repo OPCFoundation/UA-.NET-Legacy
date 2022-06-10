@@ -1594,7 +1594,7 @@ namespace Opc.Ua
             if ((encodingByte & (byte)VariantArrayEncodingBits.Array) != 0)
             {
                 // read the array length.
-                int length = m_reader.ReadInt32();
+                int length = ReadArrayLength();
 
                 if (length < 0)
                 {

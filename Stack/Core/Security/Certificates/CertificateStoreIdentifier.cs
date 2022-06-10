@@ -22,7 +22,7 @@ namespace Opc.Ua
     /// <summary>
     /// Describes a certificate store.
     /// </summary>
-    public partial class CertificateStoreIdentifier : ICloneable, IFormattable
+    public partial class CertificateStoreIdentifier :ICloneable, IFormattable
     {
         #region ICloneable Members
         /// <summary>
@@ -34,6 +34,14 @@ namespace Opc.Ua
         public object Clone()
         {
             return MemberwiseClone();
+        }
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        public new object MemberwiseClone()
+        {
+            return base.MemberwiseClone();
         }
         #endregion
 

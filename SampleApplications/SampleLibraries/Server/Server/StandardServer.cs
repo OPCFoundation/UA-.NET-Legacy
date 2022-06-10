@@ -975,7 +975,13 @@ namespace Opc.Ua.Server
                 {
                     throw new ServiceResultException(StatusCodes.BadNothingToDo);
                 }
-
+                foreach (BrowsePath bp in browsePaths)
+                {
+                    if (bp.RelativePath.Elements.Count > 0 && kMaxOperations > bp.RelativePath.Elements.Count)
+                    {
+                        throw new ServiceResultException(StatusCodes.BadTooManyOperations);
+                    }
+                }
                 m_serverInternal.NodeManager.TranslateBrowsePathsToNodeIds(
                     context,
                     browsePaths,
@@ -3138,6 +3144,8 @@ namespace Opc.Ua.Server
         private int m_lastRegistrationInterval;
         private int m_minNonceLength;
         private BindingFactory m_bindingFactory;
+
+        private const int kMaxOperations = 1000;
         #endregion
     }
 }

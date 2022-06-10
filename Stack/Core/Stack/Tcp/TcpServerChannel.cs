@@ -685,11 +685,16 @@ namespace Opc.Ua.Bindings
                 }
 
                 // update the max chunk count.
+                MaxResponseChunkCount = CalculateChunkCount(MaxResponseMessageSize, SendBufferSize);
+
+                // update the max chunk count.
                 if (maxChunkCount > 0 && maxChunkCount < MaxResponseChunkCount)
                 {
                     MaxResponseChunkCount = (int)maxChunkCount;
                 }
-                
+
+                MaxRequestChunkCount = CalculateChunkCount(MaxRequestMessageSize, ReceiveBufferSize);
+
                 // send acknowledge.
                 byte[] buffer = BufferManager.TakeBuffer(SendBufferSize, "ProcessHelloMessage");
                 
@@ -814,7 +819,7 @@ namespace Opc.Ua.Bindings
                 // check if it is necessary to wait for more chunks.
                 if (!TcpMessageType.IsFinal(messageType))
                 {
-                    SaveIntermediateChunk(requestId, messageBody);
+                    SaveIntermediateChunk(requestId, messageBody, true);
                     return false;
                 }
                 
@@ -825,7 +830,7 @@ namespace Opc.Ua.Bindings
                 token.ServerNonce = CreateNonce();
                 
                 // get the chunks to process.
-                chunksToProcess = GetSavedChunks(requestId, messageBody);
+                chunksToProcess = GetSavedChunks(requestId, messageBody, true);
 
                 OpenSecureChannelRequest request = (OpenSecureChannelRequest)BinaryDecoder.DecodeMessage(
                     new ArraySegmentStream(chunksToProcess), 
@@ -900,7 +905,7 @@ namespace Opc.Ua.Bindings
                         return false;
                     }
 
-                    throw ServiceResultException.Create(StatusCodes.BadRequestTypeInvalid, "Cannot request to rewew a token for a channel that has not been opened.");
+                    throw ServiceResultException.Create(StatusCodes.BadRequestTypeInvalid, "Cannot request to renew a token for a channel that has not been opened.");
                 }
 
                 // check the channel id.
@@ -1048,12 +1053,12 @@ namespace Opc.Ua.Bindings
                 // check if it is necessary to wait for more chunks.
                 if (!TcpMessageType.IsFinal(messageType))
                 {
-                    SaveIntermediateChunk(requestId, messageBody);
+                    SaveIntermediateChunk(requestId, messageBody, true);
                     return false;
                 }
                 
                 // get the chunks to process.
-                chunksToProcess = GetSavedChunks(requestId, messageBody);
+                chunksToProcess = GetSavedChunks(requestId, messageBody, true);
 
                 CloseSecureChannelRequest request = BinaryDecoder.DecodeMessage(
                     new ArraySegmentStream(chunksToProcess), 
@@ -1143,21 +1148,21 @@ namespace Opc.Ua.Bindings
                 if (TcpMessageType.IsAbort(messageType))
                 {
                     Utils.Trace("Request was aborted.");
-                    chunksToProcess = GetSavedChunks(requestId, messageBody);
+                    chunksToProcess = GetSavedChunks(requestId, messageBody, true);
                     return true;
                 }                
                 
                 // check if it is necessary to wait for more chunks.
                 if (!TcpMessageType.IsFinal(messageType))
                 {
-                    SaveIntermediateChunk(requestId, messageBody);
+                    SaveIntermediateChunk(requestId, messageBody, true);
                     return true;
                 }
 
                 // Utils.Trace("Channel {0}: ProcessRequestMessage {1}", ChannelId, requestId);
                 
                 // get the chunks to process.
-                chunksToProcess = GetSavedChunks(requestId, messageBody);
+                chunksToProcess = GetSavedChunks(requestId, messageBody, true);
 
                 // decode the request.
                 IServiceRequest request = BinaryDecoder.DecodeMessage(new ArraySegmentStream(chunksToProcess), null, Quotas.MessageContext) as IServiceRequest;
@@ -1199,6 +1204,15 @@ namespace Opc.Ua.Bindings
                     chunksToProcess.Release(BufferManager, "ProcessRequestMessage");
                 }
             }
+        }
+
+        /// <summary>
+        /// Closes the channel in case the message limits have been exceeded
+        /// </summary>
+        protected override void DoMessageLimitsExceeded()
+        {
+            base.DoMessageLimitsExceeded();
+            ChannelClosed();
         }
         #endregion
 
