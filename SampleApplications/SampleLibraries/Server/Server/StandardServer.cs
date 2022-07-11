@@ -977,7 +977,7 @@ namespace Opc.Ua.Server
                 }
                 foreach (BrowsePath bp in browsePaths)
                 {
-                    if (bp.RelativePath.Elements.Count > 0 && kMaxOperations > bp.RelativePath.Elements.Count)
+                    if (bp.RelativePath.Elements.Count > 0 && kMaxOperations < bp.RelativePath.Elements.Count)
                     {
                         throw new ServiceResultException(StatusCodes.BadTooManyOperations);
                     }

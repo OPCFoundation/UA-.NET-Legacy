@@ -30,7 +30,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
@@ -58,7 +57,7 @@ namespace Opc.Ua.Security.Certificates
         /// <param name="extensions">The extensions to search.</param>
         public static T FindExtension<T>(this X509ExtensionCollection extensions) where T : X509Extension
         {
-            if (extensions == null) throw new ArgumentNullException(nameof(extensions));
+            if (extensions == null) throw new ArgumentNullException("extensions");
             lock (extensions.SyncRoot)
             {
                 // search known custom extensions

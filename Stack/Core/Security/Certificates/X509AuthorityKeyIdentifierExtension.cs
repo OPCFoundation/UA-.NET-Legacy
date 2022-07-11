@@ -162,17 +162,31 @@ namespace Opc.Ua
         /// <summary>
         /// The identifier for the key as a little endian hexadecimal string.
         /// </summary>
-        public string KeyIdentifier => m_keyIdentifier.ToHexString();
+        public string KeyIdentifier
+        {
+            get
+            {
+                return m_keyIdentifier.ToHexString();
+            }
+        }
 
         /// <summary>
         /// The identifier for the key as a byte array.
         /// </summary>
-        public byte[] GetKeyIdentifier() => m_keyIdentifier;
-
+        public byte[] GetKeyIdentifier()
+        {
+            return m_keyIdentifier;
+        }
         /// <summary>
         /// A list of distinguished names for the issuer.
         /// </summary>
-        public X500DistinguishedName Issuer => m_issuer;
+        public X500DistinguishedName Issuer
+        {
+            get
+            {
+                return m_issuer;
+            }
+        }
 
         /// <summary>
         /// A list of distinguished names for the issuer.

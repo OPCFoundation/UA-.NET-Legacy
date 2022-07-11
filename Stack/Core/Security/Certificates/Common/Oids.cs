@@ -151,7 +151,7 @@ namespace Opc.Ua.Security.Certificates
                 case Oids.RsaPkcs1Sha512:
                     return HashAlgorithmName.SHA512;
             }
-            throw new NotSupportedException($"Hash algorithm {oid} is not supported. ");
+            throw new NotSupportedException(string.Format("Hash algorithm {0} is not supported. ", oid));
         }
 
     }
