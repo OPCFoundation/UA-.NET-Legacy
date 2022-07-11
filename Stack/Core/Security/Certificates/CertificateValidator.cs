@@ -95,7 +95,7 @@ namespace Opc.Ua
         {
             if (configuration == null)
             {
-                throw new ArgumentNullException(nameof(configuration));
+                throw new ArgumentNullException("configuration");
             }
 
             Update(configuration.SecurityConfiguration);
@@ -165,7 +165,7 @@ namespace Opc.Ua
         {
             if (configuration == null)
             {
-                throw new ArgumentNullException(nameof(configuration));
+                throw new ArgumentNullException("configuration");
             }
 
             lock (m_lock)
@@ -209,7 +209,10 @@ namespace Opc.Ua
         /// </summary>
         public bool AutoAcceptUntrustedCertificates
         {
-            get => m_autoAcceptUntrustedCertificates;
+            get
+            {
+                return m_autoAcceptUntrustedCertificates;
+            }
             set
             {
                 lock (m_lock)
@@ -229,7 +232,10 @@ namespace Opc.Ua
         /// </summary>
         public bool RejectSHA1SignedCertificates
         {
-            get => m_rejectSHA1SignedCertificates;
+            get
+            {
+                return m_rejectSHA1SignedCertificates;
+            }
             set
             {
                 lock (m_lock)
@@ -249,7 +255,10 @@ namespace Opc.Ua
         /// </summary>
         public bool RejectUnknownRevocationStatus
         {
-            get => m_rejectUnknownRevocationStatus;
+            get
+            {
+                return m_rejectUnknownRevocationStatus;
+            }
             set
             {
                 lock (m_lock)
@@ -269,7 +278,10 @@ namespace Opc.Ua
         /// </summary>
         public ushort MinimumCertificateKeySize
         {
-            get => m_minimumCertificateKeySize;
+            get
+            {
+                return m_minimumCertificateKeySize;
+            }
             set
             {
                 lock (m_lock)
@@ -581,7 +593,7 @@ namespace Opc.Ua
         /// Returns the issuers for the certificates.
         /// </summary>
         public bool GetIssuersNoExceptionsOnGetIssuer(X509Certificate2Collection certificates,
-            List<CertificateIdentifier> issuers, Dictionary<X509Certificate2, ServiceResultException> validationErrors)
+     List<CertificateIdentifier> issuers, Dictionary<X509Certificate2, ServiceResultException> validationErrors)
         {
             bool isTrusted = false;
             CertificateIdentifier issuer = null;
@@ -596,6 +608,8 @@ namespace Opc.Ua
 
             do
             {
+                Tuple<CertificateIdentifier, ServiceResultException> issuerRevocationStatus;
+
                 // check for root.
                 if (X509Utils.IsSelfSigned(certificate))
                 {
@@ -604,7 +618,9 @@ namespace Opc.Ua
 
                 if (validationErrors != null)
                 {
-                    (issuer, revocationStatus) = GetIssuerNoException(certificate, m_trustedCertificateList, m_trustedCertificateStore, true);
+                    issuerRevocationStatus = GetIssuerNoException(certificate, m_trustedCertificateList, m_trustedCertificateStore, true);
+                    issuer = issuerRevocationStatus.Item1;
+                    revocationStatus = issuerRevocationStatus.Item2;
                 }
                 else
                 {
@@ -615,7 +631,9 @@ namespace Opc.Ua
                 {
                     if (validationErrors != null)
                     {
-                        (issuer, revocationStatus) = GetIssuerNoException(certificate, m_issuerCertificateList, m_issuerCertificateStore, true);
+                        issuerRevocationStatus = GetIssuerNoException(certificate, m_issuerCertificateList, m_issuerCertificateStore, true);
+                        issuer = issuerRevocationStatus.Item1;
+                        revocationStatus = issuerRevocationStatus.Item2;
                     }
                     else
                     {
@@ -626,7 +644,9 @@ namespace Opc.Ua
                     {
                         if (validationErrors != null)
                         {
-                            (issuer, revocationStatus) = GetIssuerNoException(certificate, untrustedCollection, null, true);
+                            issuerRevocationStatus = GetIssuerNoException(certificate, untrustedCollection, null, true);
+                            issuer = issuerRevocationStatus.Item1;
+                            revocationStatus = issuerRevocationStatus.Item2;
                         }
                         else
                         {
@@ -775,11 +795,11 @@ namespace Opc.Ua
         /// <summary>
         /// Returns the certificate information for a trusted issuer certificate.
         /// </summary>
-        private (CertificateIdentifier, ServiceResultException) GetIssuerNoException(
-            X509Certificate2 certificate,
-            CertificateIdentifierCollection explicitList,
-            CertificateStoreIdentifier certificateStore,
-            bool checkRecovationStatus)
+        private Tuple<CertificateIdentifier, ServiceResultException> GetIssuerNoException(
+                    X509Certificate2 certificate,
+                    CertificateIdentifierCollection explicitList,
+                    CertificateStoreIdentifier certificateStore,
+                    bool checkRecovationStatus)
         {
             ServiceResultException serviceResult = null;
 
@@ -817,7 +837,7 @@ namespace Opc.Ua
                         if (Match(issuer, subjectName, serialNumber, keyId))
                         {
                             // can't check revocation.
-                            return (new CertificateIdentifier(issuer, CertificateValidationOptions.SuppressRevocationStatusUnknown), null);
+                            return (new Tuple<CertificateIdentifier, ServiceResultException>(new CertificateIdentifier(issuer, CertificateValidationOptions.SuppressRevocationStatusUnknown), null));
                         }
                     }
                 }
@@ -878,8 +898,8 @@ namespace Opc.Ua
                                         }
                                     }
                                 }
-
-                                return (new CertificateIdentifier(issuer, options), serviceResult);
+                                return new Tuple<CertificateIdentifier, ServiceResultException>(
+                                    new CertificateIdentifier(issuer, options), serviceResult);
                             }
                         }
                     }
@@ -891,7 +911,7 @@ namespace Opc.Ua
             }
 
             // not a trusted issuer.
-            return (null, null);
+            return new Tuple<CertificateIdentifier, ServiceResultException>(null, null);
         }
 
         /// <summary>
@@ -908,10 +928,10 @@ namespace Opc.Ua
             {
                 return null;
             }
-
-            (CertificateIdentifier result, ServiceResultException srex) =
-                GetIssuerNoException(certificate, explicitList, certificateStore, checkRecovationStatus
-                );
+            Tuple<CertificateIdentifier, ServiceResultException> issuerRevocationStatus =
+                GetIssuerNoException(certificate, explicitList, certificateStore, checkRecovationStatus);
+            CertificateIdentifier result = issuerRevocationStatus.Item1;
+            ServiceResultException srex = issuerRevocationStatus.Item2;
             if (srex != null)
             {
                 throw srex;
@@ -1364,7 +1384,8 @@ namespace Opc.Ua
             {
                 sresult = new ServiceResult(StatusCodes.BadCertificateInvalid,
                     null, null,
-                    $"Certificate doesn't meet minimum key length requirement. ({keySize}<{m_minimumCertificateKeySize})",
+                    string.Format("Certificate doesn't meet minimum key length requirement. ({0}<{1})",
+                        keySize, m_minimumCertificateKeySize),
                     null, sresult);
             }
 
@@ -1852,12 +1873,24 @@ namespace Opc.Ua
         /// <summary>
         /// The error that occurred.
         /// </summary>
-        public ServiceResult Error => m_error;
+        public ServiceResult Error
+        {
+            get
+            {
+                return m_error;
+            }
+        }
 
         /// <summary>
         /// The certificate.
         /// </summary>
-        public X509Certificate2 Certificate => m_certificate;
+        public X509Certificate2 Certificate
+        {
+            get
+            {
+                return m_certificate;
+            }
+        }
 
         /// <summary>
         /// Whether the current error reported for
@@ -1865,8 +1898,14 @@ namespace Opc.Ua
         /// </summary>
         public bool Accept
         {
-            get => m_accept;
-            set => m_accept = value;
+            get
+            {
+                return m_accept;
+            }
+            set
+            {
+                m_accept = value;
+            }
         }
 
         /// <summary>
@@ -1875,8 +1914,14 @@ namespace Opc.Ua
         /// </summary>
         public bool AcceptAll
         {
-            get => m_acceptAll;
-            set => m_acceptAll = value;
+            get
+            {
+                return m_acceptAll;
+            }
+            set
+            {
+                m_acceptAll = value;
+            }
         }
         #endregion
 
