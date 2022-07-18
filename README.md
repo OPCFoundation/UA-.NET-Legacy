@@ -6,4 +6,4 @@ The official Unified Architecture .NET Stack maintained by OPC Foundation will b
 
 Only critical security updates will be provided for this repository.
 
-**The end of life for this codebase is 2022-12-32. All users should migrate to [UA-.NETStandard](https://github.com/OPCFoundation/UA-.NETStandard) before then.**
+**The end of life for this codebase is 2022-12-31. All users should migrate to [UA-.NETStandard](https://github.com/OPCFoundation/UA-.NETStandard) before then.**
