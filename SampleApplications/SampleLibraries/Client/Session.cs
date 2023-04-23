@@ -3424,21 +3424,18 @@ namespace Opc.Ua.Client
             lock (m_outstandingRequests)
             {
                 // check if the request completed asynchronously.
-                AsyncRequestState state = RemoveRequest(result, requestId, typeId);
-                
-                // add a new request.
-                if (state == null)
-                {
-                    state = new AsyncRequestState();
+                if (result.IsCompleted)
+                    return;
 
-                    state.Defunct = false;
-                    state.RequestId  = requestId;
-                    state.RequestTypeId = typeId;
-                    state.Result = result;
-                    state.Timestamp = DateTime.UtcNow;
+                // add request
+                AsyncRequestState state = new AsyncRequestState();
+                state.Defunct = false;
+                state.RequestId = requestId;
+                state.RequestTypeId = typeId;
+                state.Result = result;
+                state.Timestamp = DateTime.UtcNow;
 
-                    m_outstandingRequests.AddLast(state);
-                }
+                m_outstandingRequests.AddLast(state);
             }
         }
 
@@ -3451,33 +3448,20 @@ namespace Opc.Ua.Client
             {
                 // remove the request.
                 AsyncRequestState state = RemoveRequest(result, requestId, typeId);
-                
-                if (state != null)
-                {
-                    // mark any old requests as default (i.e. the should have returned before this request).
-                    DateTime maxAge = state.Timestamp.AddSeconds(-1);
 
-                    for (LinkedListNode<AsyncRequestState> ii = m_outstandingRequests.First; ii != null; ii = ii.Next)
-                    {
-                        if (ii.Value.RequestTypeId == typeId && ii.Value.Timestamp < maxAge)
-                        {
-                            ii.Value.Defunct = true;
-                        }
-                    }
-                }
-
-                // add a dummy placeholder since the begin request has not completed yet.
+                // if request was completed before registering in AsyncRequestStarted
                 if (state == null)
+                    return;
+
+                // mark any old requests as default (i.e. the should have returned before this request).
+                DateTime maxAge = state.Timestamp.AddSeconds(-1);
+
+                for (LinkedListNode<AsyncRequestState> ii = m_outstandingRequests.First; ii != null; ii = ii.Next)
                 {
-                    state = new AsyncRequestState();
-
-                    state.Defunct = true;
-                    state.RequestId  = requestId;
-                    state.RequestTypeId = typeId;
-                    state.Result = result;
-                    state.Timestamp = DateTime.UtcNow;
-
-                    m_outstandingRequests.AddLast(state);
+                    if (ii.Value.RequestTypeId == typeId && ii.Value.Timestamp < maxAge)
+                    {
+                        ii.Value.Defunct = true;
+                    }
                 }
             }
         }
