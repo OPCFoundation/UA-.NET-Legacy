@@ -68,6 +68,10 @@ static bool InstallService(
             GOTOFINALLY();
         }
 
+        //append the double quotes - Registery Image Path (Security)
+        COpcString binaryPath = tsFilePath;
+        binaryPath = "\"" + binaryPath + "\"";
+	    
         // create service.
         hService = CreateService(
 		    hSCM, 
@@ -77,7 +81,7 @@ static bool InstallService(
             SERVICE_WIN32_OWN_PROCESS,
 		    SERVICE_DEMAND_START, 
             SERVICE_ERROR_NORMAL,
-            tsFilePath, 
+            binaryPath, 
             NULL, 
             NULL, 
             _T("RPCSS\0"), 
